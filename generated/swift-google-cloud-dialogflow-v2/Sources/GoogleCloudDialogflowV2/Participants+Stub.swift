@@ -17,66 +17,66 @@
 #if Participants
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ParticipantsStub: Sendable {
       func createParticipant(
-        request: CreateParticipantRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateParticipantRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Participant
 
       func getParticipant(
-        request: GetParticipantRequest, options: GoogleCloudGax.RequestOptions
+        request: GetParticipantRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Participant
 
       func listParticipants(
-        request: ListParticipantsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListParticipantsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListParticipantsResponse
 
       func updateParticipant(
-        request: UpdateParticipantRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateParticipantRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Participant
 
       func analyzeContent(
-        request: AnalyzeContentRequest, options: GoogleCloudGax.RequestOptions
+        request: AnalyzeContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.AnalyzeContentResponse
 
       func suggestArticles(
-        request: SuggestArticlesRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestArticlesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestArticlesResponse
 
       func suggestFaqAnswers(
-        request: SuggestFaqAnswersRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestFaqAnswersRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestFaqAnswersResponse
 
       func suggestSmartReplies(
-        request: SuggestSmartRepliesRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestSmartRepliesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestSmartRepliesResponse
 
       func suggestKnowledgeAssist(
-        request: SuggestKnowledgeAssistRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestKnowledgeAssistRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestKnowledgeAssistResponse
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

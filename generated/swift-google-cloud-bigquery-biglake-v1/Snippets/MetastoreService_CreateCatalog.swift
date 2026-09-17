@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleBigQueryBigLakeV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: MetastoreServiceClient, parent: String) async throws {
   let response = try await client.createCatalog(

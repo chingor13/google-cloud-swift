@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudVideoStitcherV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: VideoStitcherServiceClient, projectId: String, locationId: String, cdnKeyId: String
@@ -31,7 +31,7 @@ func sample(
         $0.cdnKey = CdnKey().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/cdnKeys/\(cdnKeyId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

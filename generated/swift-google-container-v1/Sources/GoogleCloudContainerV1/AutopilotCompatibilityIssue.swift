@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AutopilotCompatibilityIssue contains information about a specific
 /// compatibility issue with Autopilot mode.
-public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The last time when this issue was observed.
-  public var lastObservation: GoogleCloudWKT.Timestamp? = nil
+  public var lastObservation: GoogleWKT.Timestamp? = nil
 
   /// The constraint type of the issue.
   public var constraintType: Swift.String = Swift.String()
@@ -41,7 +41,7 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWKT._A
   /// The description of the issue.
   public var description: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutopilotCompatibilityIssue`.
   public init() {}
@@ -85,7 +85,7 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWKT._A
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.lastObservation = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastObservation)
+      GoogleWKT.Timestamp.self, forKey: .lastObservation)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .constraintType) {
       self.constraintType = value
     }
@@ -105,7 +105,7 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWKT._A
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -241,10 +241,10 @@ public struct AutopilotCompatibilityIssue: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.AutopilotCompatibilityIssue"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

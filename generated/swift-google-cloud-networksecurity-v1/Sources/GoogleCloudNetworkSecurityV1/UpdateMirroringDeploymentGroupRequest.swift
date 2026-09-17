@@ -15,11 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for UpdateMirroringDeploymentGroup.
-public struct UpdateMirroringDeploymentGroupRequest: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct UpdateMirroringDeploymentGroupRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The list of fields to update.
@@ -27,7 +26,7 @@ public struct UpdateMirroringDeploymentGroupRequest: Codable, Equatable, GoogleC
   /// (e.g. `description`; *not*
   /// `mirroring_deployment_group.description`). See
   /// https://google.aip.dev/161 for more details.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The deployment group to update.
   public var mirroringDeploymentGroup: MirroringDeploymentGroup? = nil
@@ -37,7 +36,7 @@ public struct UpdateMirroringDeploymentGroupRequest: Codable, Equatable, GoogleC
   /// See https://google.aip.dev/155 for more details.
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateMirroringDeploymentGroupRequest`.
   public init() {}
@@ -74,8 +73,7 @@ public struct UpdateMirroringDeploymentGroupRequest: Codable, Equatable, GoogleC
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.mirroringDeploymentGroup = try container.decodeIfPresent(
       MirroringDeploymentGroup.self, forKey: .mirroringDeploymentGroup)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
@@ -83,7 +81,7 @@ public struct UpdateMirroringDeploymentGroupRequest: Codable, Equatable, GoogleC
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +99,10 @@ public struct UpdateMirroringDeploymentGroupRequest: Codable, Equatable, GoogleC
     return
       "type.googleapis.com/google.cloud.networksecurity.v1.UpdateMirroringDeploymentGroupRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

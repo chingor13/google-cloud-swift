@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [EkmService.UpdateEkmConnection][google.cloud.kms.v1.EkmService.UpdateEkmConnection].
 ///
 /// [google.cloud.kms.v1.EkmService.UpdateEkmConnection]: <doc:EkmServiceClient/updateEkmConnection(request:options:)>
-public struct UpdateEkmConnectionRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateEkmConnectionRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. [EkmConnection][google.cloud.kms.v1.EkmConnection] with updated
@@ -31,9 +31,9 @@ public struct UpdateEkmConnectionRequest: Codable, Equatable, GoogleCloudWKT._An
   public var ekmConnection: EkmConnection? = nil
 
   /// Required. List of fields to be updated in this request.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateEkmConnectionRequest`.
   public init() {}
@@ -69,11 +69,10 @@ public struct UpdateEkmConnectionRequest: Codable, Equatable, GoogleCloudWKT._An
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.ekmConnection = try container.decodeIfPresent(EkmConnection.self, forKey: .ekmConnection)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,10 +88,10 @@ public struct UpdateEkmConnectionRequest: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.UpdateEkmConnectionRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

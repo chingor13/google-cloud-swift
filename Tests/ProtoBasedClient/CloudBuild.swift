@@ -14,7 +14,7 @@
 
 import Foundation
 import GoogleCloudBuildV1
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudTestHelpers
 import Logging
 import Testing

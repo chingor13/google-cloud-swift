@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for the `dnsKeys` resource.
 ///
@@ -28,7 +28,7 @@ public final class DnsKeysClient: Clients.DnsKeysProtocol, Sendable {
   let inner: any Clients.DnsKeysStub
 
   /// Creates a new `DnsKeysClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DnsKeysStub = try Clients.DnsKeysTransport(options)
     inner = Clients.DnsKeysRetry(inner, options: options)
     if let logger = options.logger {
@@ -41,7 +41,7 @@ public final class DnsKeysClient: Clients.DnsKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "dnsKeys_get")
   public func `get`(
-    request: DnsKeysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: DnsKeysClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> DnsKey {
     try await self.inner.`get`(request: request, options: options)
   }
@@ -50,7 +50,7 @@ public final class DnsKeysClient: Clients.DnsKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "dnsKeys_list")
   public func list(
-    request: DnsKeysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: DnsKeysClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> DnsKeysListResponse {
     try await self.inner.list(request: request, options: options)
   }
@@ -59,14 +59,14 @@ public final class DnsKeysClient: Clients.DnsKeysProtocol, Sendable {
   ///
   /// @Snippet(path: "dnsKeys_list")
   public func list(
-    byItem: DnsKeysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: DnsKeysClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DnsKey, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> DnsKeysListResponse in
       var request = byItem
       request.pageToken = token
       return try await self.list(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -103,17 +103,17 @@ extension Clients {
 
     /// See `DnsKeysClient.`get``.
     func `get`(
-      request: DnsKeysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: DnsKeysClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> DnsKey
 
     /// See `DnsKeysClient.list`.
     func list(
-      request: DnsKeysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: DnsKeysClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> DnsKeysListResponse
 
     /// See `DnsKeysClient.list`.
     func list(
-      byItem: DnsKeysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: DnsKeysClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DnsKey, Swift.Error>
   }
 }
@@ -125,9 +125,9 @@ extension Clients.DnsKeysProtocol {
   }
 
   public func `get`(
-    request: DnsKeysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: DnsKeysClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> DnsKey {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func `get`(
@@ -148,9 +148,9 @@ extension Clients.DnsKeysProtocol {
   }
 
   public func list(
-    request: DnsKeysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: DnsKeysClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> DnsKeysListResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func list(
@@ -160,12 +160,12 @@ extension Clients.DnsKeysProtocol {
   }
 
   public func list(
-    byItem: DnsKeysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: DnsKeysClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DnsKey, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> DnsKeysListResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func list(

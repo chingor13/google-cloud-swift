@@ -16,11 +16,11 @@
 
 #if Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleType
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents the parameters of a conversational query.
-  public struct QueryParameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QueryParameters: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The time zone of this conversational query from the [time zone
@@ -50,7 +50,7 @@
     ///  }
     /// }
     /// ```
-    public var payload: GoogleCloudWKT.Struct? = nil
+    public var payload: GoogleWKT.Struct? = nil
 
     /// Additional parameters to be put into [session
     /// parameters][SessionInfo.parameters]. To remove a
@@ -74,7 +74,7 @@
     /// use parameter value.
     ///
     /// [SessionInfo.parameters]: <doc:SessionInfo/parameters>
-    public var parameters: GoogleCloudWKT.Struct? = nil
+    public var parameters: GoogleWKT.Struct? = nil
 
     /// Scope for the parameters. If not specified, parameters will be treated as
     /// session parameters. Parameters with custom scope will not be put into
@@ -169,7 +169,7 @@
     /// By default, a Dialogflow session remains active and its data is stored for
     /// 30 minutes after the last request is sent for the session.
     /// This value should be no longer than 1 day.
-    public var sessionTtl: GoogleCloudWKT.Duration? = nil
+    public var sessionTtl: GoogleWKT.Duration? = nil
 
     /// Optional. Information about the end-user to improve the relevance and
     /// accuracy of generative answers.
@@ -188,7 +188,7 @@
     ///   ]
     /// }
     /// ```
-    public var endUserMetadata: GoogleCloudWKT.Struct? = nil
+    public var endUserMetadata: GoogleWKT.Struct? = nil
 
     /// Optional. Search configuration for UCS search queries.
     public var searchConfig: SearchConfig? = nil
@@ -200,7 +200,7 @@
     @available(*, deprecated)
     public var populateDataStoreConnectionSignals: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QueryParameters`.
     public init() {}
@@ -277,9 +277,8 @@
       {
         self.sessionEntityTypes = value
       }
-      self.payload = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .payload)
-      self.parameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .parameters)
+      self.payload = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .payload)
+      self.parameters = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .parameters)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .parameterScope) {
         self.parameterScope = value
       }
@@ -310,10 +309,9 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .channel) {
         self.channel = value
       }
-      self.sessionTtl = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .sessionTtl)
+      self.sessionTtl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .sessionTtl)
       self.endUserMetadata = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .endUserMetadata)
+        GoogleWKT.Struct.self, forKey: .endUserMetadata)
       self.searchConfig = try container.decodeIfPresent(SearchConfig.self, forKey: .searchConfig)
       if let value = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .populateDataStoreConnectionSignals)
@@ -322,7 +320,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -355,11 +353,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.QueryParameters"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

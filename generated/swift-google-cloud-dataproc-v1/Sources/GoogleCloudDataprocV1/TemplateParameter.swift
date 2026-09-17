@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A configurable parameter that replaces one or more fields in the template.
 /// Parameterizable fields:
@@ -26,7 +26,7 @@ import Foundation
 /// - Script variables
 /// - Main class (in HadoopJob and SparkJob)
 /// - Zone (in ClusterSelector)
-public struct TemplateParameter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TemplateParameter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Parameter name.
@@ -83,7 +83,7 @@ public struct TemplateParameter: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// - placement.clusterSelector.clusterLabels
   /// - jobs['step-id'].sparkJob.args
   ///
-  /// [google.protobuf.FieldMask]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.FieldMask
+  /// [google.protobuf.FieldMask]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.FieldMask
   public var fields: [Swift.String] = []
 
   /// Optional. Brief description of the parameter.
@@ -93,7 +93,7 @@ public struct TemplateParameter: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Optional. Validation rules to be applied to this parameter's value.
   public var validation: ParameterValidation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TemplateParameter`.
   public init() {}
@@ -144,7 +144,7 @@ public struct TemplateParameter: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.validation = try container.decodeIfPresent(ParameterValidation.self, forKey: .validation)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -162,10 +162,10 @@ public struct TemplateParameter: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.TemplateParameter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

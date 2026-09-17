@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The message that represents the data type of a packet.
-public struct PacketType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PacketType: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The type class of the packet. Its possible values are:
@@ -28,7 +28,7 @@ public struct PacketType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The type descriptor.
   public var typeDescriptor: PacketType.TypeDescriptor? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PacketType`.
   public init() {}
@@ -70,7 +70,7 @@ public struct PacketType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       PacketType.TypeDescriptor.self, forKey: .typeDescriptor)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -84,7 +84,7 @@ public struct PacketType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The message that fully specifies the type of the packet.
-  public struct TypeDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TypeDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The type of the packet. Its possible values is codec dependent.
@@ -105,7 +105,7 @@ public struct PacketType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// type string alone is not enough to disambiguate the specific type.
     public var typeDetails: OneOf_TypeDetails? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TypeDescriptor`.
     public init() {}
@@ -169,7 +169,7 @@ public struct PacketType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.typeDetails = typeDetails
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -204,21 +204,21 @@ public struct PacketType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.PacketType.TypeDescriptor"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.PacketType"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

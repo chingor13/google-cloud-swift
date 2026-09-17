@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ServiceControllerStub: Sendable {
     func check(
-      request: CheckRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV1.CheckResponse
 
     func report(
-      request: ReportRequest, options: GoogleCloudGax.RequestOptions
+      request: ReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV1.ReportResponse
   }
 }

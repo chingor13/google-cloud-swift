@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Pseudonymization method that generates surrogates via cryptographic hashing.
 /// Uses SHA-256.
@@ -26,13 +26,13 @@ import Foundation
 /// See
 /// https://docs.cloud.google.com/sensitive-data-protection/docs/pseudonymization
 /// to learn more.
-public struct CryptoHashConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CryptoHashConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The key used by the hash function.
   public var cryptoKey: CryptoKey? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CryptoHashConfig`.
   public init() {}
@@ -68,7 +68,7 @@ public struct CryptoHashConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.cryptoKey = try container.decodeIfPresent(CryptoKey.self, forKey: .cryptoKey)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -83,10 +83,10 @@ public struct CryptoHashConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.CryptoHashConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

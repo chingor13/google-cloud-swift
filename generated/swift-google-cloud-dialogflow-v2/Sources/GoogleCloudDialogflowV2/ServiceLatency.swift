@@ -16,16 +16,16 @@
 
 #if Conversations || Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Message to represent the latency of the service.
-  public struct ServiceLatency: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ServiceLatency: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of internal service latencies.
     public var internalServiceLatencies: [ServiceLatency.InternalServiceLatency] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ServiceLatency`.
     public init() {}
@@ -65,7 +65,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -78,7 +78,7 @@
     }
 
     /// Message to represent the latency of an internal service.
-    public struct InternalServiceLatency: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InternalServiceLatency: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the internal service.
@@ -88,12 +88,12 @@
       public var latencyMs: Swift.Float = Swift.Float()
 
       /// The start time of the internal service.
-      public var startTime: GoogleCloudWKT.Timestamp? = nil
+      public var startTime: GoogleWKT.Timestamp? = nil
 
       /// The completion time of the internal service.
-      public var completeTime: GoogleCloudWKT.Timestamp? = nil
+      public var completeTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InternalServiceLatency`.
       public init() {}
@@ -138,13 +138,12 @@
         if let value = try container.decodeIfPresent(Swift.Float.self, forKey: .latencyMs) {
           self.latencyMs = value
         }
-        self.startTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+        self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
         self.completeTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .completeTime)
+          GoogleWKT.Timestamp.self, forKey: .completeTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -163,22 +162,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.ServiceLatency.InternalServiceLatency"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.ServiceLatency"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

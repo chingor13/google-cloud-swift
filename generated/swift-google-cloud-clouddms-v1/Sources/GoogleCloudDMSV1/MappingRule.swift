@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Definition of a transformation that is to be applied to a group of entities
 /// in the source schema. Several such transformations can be applied to an
 /// entity sequentially to define the corresponding entity in the target schema.
-public struct MappingRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MappingRule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Full name of the mapping rule resource, in the form of:
@@ -49,12 +49,12 @@ public struct MappingRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var revisionId: Swift.String = Swift.String()
 
   /// Output only. The timestamp that the revision was created.
-  public var revisionCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var revisionCreateTime: GoogleWKT.Timestamp? = nil
 
   /// The rule specific details.
   public var details: OneOf_Details? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MappingRule`.
   public init() {}
@@ -143,7 +143,7 @@ public struct MappingRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.revisionId = value
     }
     self.revisionCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .revisionCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .revisionCreateTime)
 
     var details: OneOf_Details? = nil
     let detailsCheckAndSet = {
@@ -211,7 +211,7 @@ public struct MappingRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.details = details
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -405,10 +405,10 @@ public struct MappingRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.MappingRule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

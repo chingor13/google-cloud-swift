@@ -14,7 +14,7 @@
 
 // [START storage_control_update_anywhere_cache]
 import GoogleCloudStorage
-import GoogleCloudWKT
+import GoogleWKT
 
 public func updateAnywhereCache(
   client: StorageControlClient, bucketId: String, cacheId: String

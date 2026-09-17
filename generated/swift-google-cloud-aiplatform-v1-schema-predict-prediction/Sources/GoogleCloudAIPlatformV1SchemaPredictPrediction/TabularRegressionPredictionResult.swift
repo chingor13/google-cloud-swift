@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Tabular Regression.
-public struct TabularRegressionPredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TabularRegressionPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The regression value.
@@ -30,7 +30,7 @@ public struct TabularRegressionPredictionResult: Codable, Equatable, GoogleCloud
   /// The upper bound of the prediction interval.
   public var upperBound: Swift.Float = Swift.Float()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TabularRegressionPredictionResult`.
   public init() {}
@@ -78,7 +78,7 @@ public struct TabularRegressionPredictionResult: Codable, Equatable, GoogleCloud
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +96,10 @@ public struct TabularRegressionPredictionResult: Codable, Equatable, GoogleCloud
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.prediction.TabularRegressionPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

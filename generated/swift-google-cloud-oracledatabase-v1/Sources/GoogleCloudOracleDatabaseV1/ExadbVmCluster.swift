@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ExadbVmCluster represents a cluster of VMs that are used to run Exadata
 /// workloads.
 /// https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/ExadbVmCluster/
-public struct ExadbVmCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExadbVmCluster: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the ExadbVmCluster resource in the following
@@ -62,7 +62,7 @@ public struct ExadbVmCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var displayName: Swift.String = Swift.String()
 
   /// Output only. The date and time that the ExadbVmCluster was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The ID of the subscription entitlement associated with the
   /// ExadbVmCluster.
@@ -72,7 +72,7 @@ public struct ExadbVmCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// securely access the resources in the customer project.
   public var identityConnector: IdentityConnector? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExadbVmCluster`.
   public init() {}
@@ -149,8 +149,7 @@ public struct ExadbVmCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .entitlementId) {
       self.entitlementId = value
     }
@@ -158,7 +157,7 @@ public struct ExadbVmCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       IdentityConnector.self, forKey: .identityConnector)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -183,10 +182,10 @@ public struct ExadbVmCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.ExadbVmCluster"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

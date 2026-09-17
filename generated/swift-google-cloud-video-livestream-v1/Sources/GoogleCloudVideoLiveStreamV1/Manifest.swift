@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Manifest configuration.
-public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Manifest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the generated file. The default is `manifest` with the
@@ -63,7 +63,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// is used and segment_keep_duration is ignored.
   ///
   /// [google.cloud.video.livestream.v1.RetentionConfig.retention_window_duration]: <doc:RetentionConfig/retentionWindowDuration>
-  public var segmentKeepDuration: GoogleCloudWKT.Duration? = nil
+  public var segmentKeepDuration: GoogleWKT.Duration? = nil
 
   /// Whether to use the timecode, as specified in timecode config, when setting:
   ///
@@ -77,7 +77,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. A unique key for this manifest.
   public var key: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Manifest`.
   public init() {}
@@ -135,7 +135,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.maxSegmentCount = value
     }
     self.segmentKeepDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .segmentKeepDuration)
+      GoogleWKT.Duration.self, forKey: .segmentKeepDuration)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .useTimecodeAsTimeline) {
       self.useTimecodeAsTimeline = value
     }
@@ -144,7 +144,7 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -270,10 +270,10 @@ public struct Manifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.Manifest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

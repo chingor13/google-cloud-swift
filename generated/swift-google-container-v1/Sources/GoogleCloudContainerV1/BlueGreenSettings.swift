@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings for blue-green upgrade.
-public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BlueGreenSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Time needed after draining entire blue pool. After this period, blue pool
   /// will be cleaned up.
-  public var nodePoolSoakDuration: GoogleCloudWKT.Duration? = nil
+  public var nodePoolSoakDuration: GoogleWKT.Duration? = nil
 
   /// The rollout policy controls the general rollout progress of blue-green.
   public var rolloutPolicy: OneOf_RolloutPolicy? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BlueGreenSettings`.
   public init() {}
@@ -66,7 +66,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.nodePoolSoakDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .nodePoolSoakDuration)
+      GoogleWKT.Duration.self, forKey: .nodePoolSoakDuration)
 
     var rolloutPolicy: OneOf_RolloutPolicy? = nil
     let rolloutPolicyCheckAndSet = {
@@ -91,7 +91,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.rolloutPolicy = rolloutPolicy
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,16 +113,16 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Standard rollout policy is the default policy for blue-green.
-  public struct StandardRolloutPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StandardRolloutPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Soak time after each batch gets drained. Default to zero.
-    public var batchSoakDuration: GoogleCloudWKT.Duration? = nil
+    public var batchSoakDuration: GoogleWKT.Duration? = nil
 
     /// Blue pool size to drain in a batch.
     public var updateBatchSize: OneOf_UpdateBatchSize? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StandardRolloutPolicy`.
     public init() {}
@@ -160,7 +160,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.batchSoakDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .batchSoakDuration)
+        GoogleWKT.Duration.self, forKey: .batchSoakDuration)
 
       var updateBatchSize: OneOf_UpdateBatchSize? = nil
       let updateBatchSizeCheckAndSet = {
@@ -185,7 +185,7 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.updateBatchSize = updateBatchSize
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -218,25 +218,25 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.BlueGreenSettings.StandardRolloutPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Autoscaled rollout policy utilizes the cluster autoscaler during
   /// blue-green upgrade to scale both the blue and green pools.
-  public struct AutoscaledRolloutPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutoscaledRolloutPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Time to wait after cordoning the blue pool before draining the
     /// nodes. Defaults to 3 days. The value can be set between 0 and 7 days,
     /// inclusive.
-    public var waitForDrainDuration: GoogleCloudWKT.Duration? = nil
+    public var waitForDrainDuration: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutoscaledRolloutPolicy`.
     public init() {}
@@ -270,10 +270,10 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.waitForDrainDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .waitForDrainDuration)
+        GoogleWKT.Duration.self, forKey: .waitForDrainDuration)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -288,11 +288,11 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.BlueGreenSettings.AutoscaledRolloutPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -307,10 +307,10 @@ public struct BlueGreenSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.BlueGreenSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

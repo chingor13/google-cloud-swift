@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudAssetV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AssetServiceClient, projectId: String, feedId: String) async throws {
   let response = try await client.updateFeed(
@@ -29,7 +29,7 @@ func sample(client: AssetServiceClient, projectId: String, feedId: String) async
         $0.feed = Feed().with {
           $0.name = "projects/\(projectId)/feeds/\(feedId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

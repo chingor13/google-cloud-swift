@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Config that controls the output of documents. All documents will be written
 /// as a JSON file.
-public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DocumentOutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The destination of the results.
   public var destination: OneOf_Destination? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DocumentOutputConfig`.
   public init() {}
@@ -77,7 +77,7 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.destination = destination
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// The configuration used when outputting documents.
-  public struct GcsOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcsOutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Cloud Storage uri (a directory) of the output.
@@ -105,12 +105,12 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Specifies which fields to include in the output documents.
     /// Only supports top level document and pages field so it must be in the
     /// form of `{document_field_name}` or `pages.{page_field_name}`.
-    public var fieldMask: GoogleCloudWKT.FieldMask? = nil
+    public var fieldMask: GoogleWKT.FieldMask? = nil
 
     /// Specifies the sharding config for the output document.
     public var shardingConfig: DocumentOutputConfig.GcsOutputConfig.ShardingConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcsOutputConfig`.
     public init() {}
@@ -150,13 +150,12 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .gcsUri) {
         self.gcsUri = value
       }
-      self.fieldMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .fieldMask)
+      self.fieldMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .fieldMask)
       self.shardingConfig = try container.decodeIfPresent(
         DocumentOutputConfig.GcsOutputConfig.ShardingConfig.self, forKey: .shardingConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -171,7 +170,7 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
 
     /// The sharding config for the output document.
-    public struct ShardingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ShardingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The number of pages per shard.
@@ -180,7 +179,7 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
       /// The number of overlapping pages between consecutive shards.
       public var pagesOverlap: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ShardingConfig`.
       public init() {}
@@ -223,7 +222,7 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -240,22 +239,22 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
         return
           "type.googleapis.com/google.cloud.documentai.v1.DocumentOutputConfig.GcsOutputConfig.ShardingConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.DocumentOutputConfig.GcsOutputConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -268,10 +267,10 @@ public struct DocumentOutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.documentai.v1.DocumentOutputConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,10 +16,10 @@
 
 #if Routers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Next free: 15
-  public struct BfdStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BfdStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The BFD session initialization mode for this BGP peer.
@@ -60,7 +60,7 @@
     /// Session uptime in milliseconds. Value will be 0 if session is not up.
     public var uptimeMs: Swift.Int64? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BfdStatus`.
     public init() {}
@@ -136,7 +136,7 @@
       self.uptimeMs = try container.decodeIfPresent(Swift.Int64.self, forKey: .uptimeMs)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -532,11 +532,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BfdStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

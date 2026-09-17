@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The source configuration for the standby Autonomous Database.
-public struct SourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SourceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The name of the primary Autonomous Database that is used to
@@ -50,7 +50,7 @@ public struct SourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. The date and time that auto-refreshing will begin for an
   /// Autonomous Database refreshable clone. This value controls only the start
   /// time for the first refresh operation.
-  public var autoRefreshStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var autoRefreshStartTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The name of the Autonomous Database Backup resource with the
   /// format:
@@ -62,13 +62,13 @@ public struct SourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Autonomous Database. This field is only applicable
   /// in case of BACKUP_FROM_TIMESTAMP source type and when
   /// use_latest_available_backup is false.
-  public var backupTime: GoogleCloudWKT.Timestamp? = nil
+  public var backupTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Clone from latest available backup timestamp. This field is only
   /// applicable in case of BACKUP_FROM_TIMESTAMP source type.
   public var useLatestAvailableBackup: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SourceConfig`.
   public init() {}
@@ -150,21 +150,20 @@ public struct SourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.autoRefreshPointLagSeconds = try container.decodeIfPresent(
       Swift.Int32.self, forKey: .autoRefreshPointLagSeconds)
     self.autoRefreshStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .autoRefreshStartTime)
+      GoogleWKT.Timestamp.self, forKey: .autoRefreshStartTime)
     if let value = try container.decodeIfPresent(
       Swift.String.self, forKey: .autonomousDatabaseBackup)
     {
       self.autonomousDatabaseBackup = value
     }
-    self.backupTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .backupTime)
+    self.backupTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .backupTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .useLatestAvailableBackup)
     {
       self.useLatestAvailableBackup = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -536,10 +535,10 @@ public struct SourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.SourceConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

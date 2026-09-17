@@ -15,10 +15,9 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct ManagedZonePeeringConfigTargetNetwork: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct ManagedZonePeeringConfigTargetNetwork: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The time at which the zone was deactivated, in RFC 3339 date-time format. An empty string indicates that the peering connection is active. The producer network can deactivate a zone. The zone is automatically deactivated if the producer network that the zone targeted is deleted. Output only.
@@ -29,7 +28,7 @@ public struct ManagedZonePeeringConfigTargetNetwork: Codable, Equatable, GoogleC
   /// The fully qualified URL of the VPC network to forward queries to. This should be formatted like `https://www.googleapis.com/compute/v1/projects/{project}/global/networks/{network}`
   public var networkUrl: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ManagedZonePeeringConfigTargetNetwork`.
   public init() {}
@@ -71,7 +70,7 @@ public struct ManagedZonePeeringConfigTargetNetwork: Codable, Equatable, GoogleC
     self.networkUrl = try container.decodeIfPresent(Swift.String.self, forKey: .networkUrl)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -88,10 +87,10 @@ public struct ManagedZonePeeringConfigTargetNetwork: Codable, Equatable, GoogleC
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.ManagedZonePeeringConfigTargetNetwork"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

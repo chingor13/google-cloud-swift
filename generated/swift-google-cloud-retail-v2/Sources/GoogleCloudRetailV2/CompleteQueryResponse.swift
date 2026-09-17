@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response of the autocomplete query.
-public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CompleteQueryResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Results of the matching suggestions. The result list is ordered and the
@@ -71,7 +71,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// * `categories`
   public var attributeResults: [Swift.String: CompleteQueryResponse.AttributeResult] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CompleteQueryResponse`.
   public init() {}
@@ -130,7 +130,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -146,7 +146,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// Resource that represents completion results.
-  public struct CompletionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CompletionResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The suggestion for the query.
@@ -165,7 +165,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// [google.cloud.retail.v2.UserEvent.product_details]: <doc:UserEvent/productDetails>
     public var attributes: [Swift.String: CustomAttribute] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CompletionResult`.
     public init() {}
@@ -210,7 +210,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -226,23 +226,23 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.CompleteQueryResponse.CompletionResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Deprecated: Recent search of this user.
   @available(*, deprecated)
-  public struct RecentSearchResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RecentSearchResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The recent search query.
     public var recentSearch: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RecentSearchResult`.
     public init() {}
@@ -280,7 +280,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -295,22 +295,22 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.CompleteQueryResponse.RecentSearchResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Resource that represents attribute results.
-  public struct AttributeResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AttributeResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The list of suggestions for the attribute.
     public var suggestions: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AttributeResult`.
     public init() {}
@@ -348,7 +348,7 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -363,21 +363,21 @@ public struct CompleteQueryResponse: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.CompleteQueryResponse.AttributeResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.CompleteQueryResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

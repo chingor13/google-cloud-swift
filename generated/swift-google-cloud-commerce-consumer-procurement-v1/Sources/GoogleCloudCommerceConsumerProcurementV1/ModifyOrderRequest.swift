@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [ConsumerProcurementService.ModifyOrder][google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.ModifyOrder].
 ///
 /// [google.cloud.commerce.consumer.procurement.v1.ConsumerProcurementService.ModifyOrder]: <doc:ConsumerProcurementServiceClient/modifyOrder(request:options:)>
-public struct ModifyOrderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ModifyOrderRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the order to update.
@@ -41,7 +41,7 @@ public struct ModifyOrderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// if the invoker supplies this field.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ModifyOrderRequest`.
   public init() {}
@@ -96,7 +96,7 @@ public struct ModifyOrderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -112,7 +112,7 @@ public struct ModifyOrderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// Modifications to make on the order.
-  public struct Modification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Modification: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. ID of the existing line item to make change to.
@@ -136,7 +136,7 @@ public struct ModifyOrderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// config when this field is not specified.
     public var autoRenewalBehavior: AutoRenewalBehavior = AutoRenewalBehavior()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Modification`.
     public init() {}
@@ -190,7 +190,7 @@ public struct ModifyOrderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -209,21 +209,21 @@ public struct ModifyOrderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       return
         "type.googleapis.com/google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest.Modification"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.commerce.consumer.procurement.v1.ModifyOrderRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request object for `UpdateCustomTargetType`.
-public struct UpdateCustomTargetTypeRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateCustomTargetTypeRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Field mask is used to specify the fields to be overwritten by the
@@ -26,7 +26,7 @@ public struct UpdateCustomTargetTypeRequest: Codable, Equatable, GoogleCloudWKT.
   /// update_mask are relative to the resource, not the full request. A field
   /// will be overwritten if it's in the mask. If the user doesn't provide a mask
   /// then all fields are overwritten.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The `CustomTargetType` to update.
   public var customTargetType: CustomTargetType? = nil
@@ -54,7 +54,7 @@ public struct UpdateCustomTargetTypeRequest: Codable, Equatable, GoogleCloudWKT.
   /// with an expected result, but no actual change is made.
   public var validateOnly: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateCustomTargetTypeRequest`.
   public init() {}
@@ -95,8 +95,7 @@ public struct UpdateCustomTargetTypeRequest: Codable, Equatable, GoogleCloudWKT.
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.customTargetType = try container.decodeIfPresent(
       CustomTargetType.self, forKey: .customTargetType)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
@@ -110,7 +109,7 @@ public struct UpdateCustomTargetTypeRequest: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -129,10 +128,10 @@ public struct UpdateCustomTargetTypeRequest: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.UpdateCustomTargetTypeRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

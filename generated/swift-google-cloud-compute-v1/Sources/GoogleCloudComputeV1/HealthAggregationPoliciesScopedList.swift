@@ -16,10 +16,9 @@
 
 #if RegionHealthAggregationPolicies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct HealthAggregationPoliciesScopedList: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct HealthAggregationPoliciesScopedList: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of HealthAggregationPolicys contained in this scope.
@@ -29,7 +28,7 @@
     /// policies when the list is empty.
     public var warning: HealthAggregationPoliciesScopedList.Warning? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HealthAggregationPoliciesScopedList`.
     public init() {}
@@ -73,7 +72,7 @@
         HealthAggregationPoliciesScopedList.Warning.self, forKey: .warning)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -89,7 +88,7 @@
     /// The message type for the [warning][google.cloud.compute.v1.HealthAggregationPoliciesScopedList.warning] field.
     ///
     /// [google.cloud.compute.v1.HealthAggregationPoliciesScopedList.warning]: <doc:HealthAggregationPoliciesScopedList/Warning>
-    public struct Warning: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Warning: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// [Output Only] A warning code, if applicable. For example, Compute
@@ -110,7 +109,7 @@
       /// [Output Only] A human-readable description of the warning code.
       public var message: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Warning`.
       public init() {}
@@ -157,7 +156,7 @@
         self.message = try container.decodeIfPresent(Swift.String.self, forKey: .message)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -174,7 +173,7 @@
       /// The message type for the [data][google.cloud.compute.v1.HealthAggregationPoliciesScopedList.warning.data] field.
       ///
       /// [google.cloud.compute.v1.HealthAggregationPoliciesScopedList.warning.data]: <doc:HealthAggregationPoliciesScopedList/Warning/Data>
-      public struct Data: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Data: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// [Output Only] A key that provides more detail on the warning being
@@ -189,8 +188,7 @@
         /// [Output Only] A warning data value corresponding to the key.
         public var value: Swift.String? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Data`.
         public init() {}
@@ -229,7 +227,7 @@
           self.value = try container.decodeIfPresent(Swift.String.self, forKey: .value)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -246,11 +244,11 @@
           return
             "type.googleapis.com/google.cloud.compute.v1.HealthAggregationPoliciesScopedList.warning.data"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -576,22 +574,22 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.HealthAggregationPoliciesScopedList.warning"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.HealthAggregationPoliciesScopedList"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

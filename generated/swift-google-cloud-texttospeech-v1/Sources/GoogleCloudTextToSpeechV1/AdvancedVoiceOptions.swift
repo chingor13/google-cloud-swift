@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Used for advanced voice options.
-public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AdvancedVoiceOptions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Only for Journey voices. If false, the synthesis is context aware
@@ -40,7 +40,7 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// enabled by default. Only applies for Gemini TTS.
   public var enableTextnorm: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AdvancedVoiceOptions`.
   public init() {}
@@ -89,7 +89,7 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.enableTextnorm = try container.decodeIfPresent(Swift.Bool.self, forKey: .enableTextnorm)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,7 +106,7 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Safety setting for a single harm category.
-  public struct SafetySetting: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SafetySetting: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The harm category to apply the safety setting to.
@@ -116,7 +116,7 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public var threshold: AdvancedVoiceOptions.HarmBlockThreshold =
       AdvancedVoiceOptions.HarmBlockThreshold()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SafetySetting`.
     public init() {}
@@ -163,7 +163,7 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -179,22 +179,22 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySetting"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Safety settings for the request.
-  public struct SafetySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SafetySettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The safety settings for the request.
     public var settings: [AdvancedVoiceOptions.SafetySetting] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SafetySettings`.
     public init() {}
@@ -234,7 +234,7 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -249,11 +249,11 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.texttospeech.v1.AdvancedVoiceOptions.SafetySettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -506,10 +506,10 @@ public struct AdvancedVoiceOptions: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.texttospeech.v1.AdvancedVoiceOptions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,13 +16,13 @@
 
 #if OrganizationSecurityPolicies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   extension OrganizationSecurityPoliciesClient {
     /// Synthetic request message for the [addAssociation()][google.cloud.compute.v1.organizationSecurityPolicies.addAssociation] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.addAssociation]: <doc:OrganizationSecurityPoliciesClient/addAssociation(request:options:)>
-    public struct AddAssociationRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AddAssociationRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Indicates whether or not to replace it if an association of the attachment
@@ -53,7 +53,7 @@
       /// [google.cloud.compute.v1.organizationSecurityPolicies.addAssociation]: <doc:OrganizationSecurityPoliciesClient/addAssociation(request:options:)>
       public var body: SecurityPolicyAssociation? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AddAssociationRequest`.
       public init() {}
@@ -102,7 +102,7 @@
         self.body = try container.decodeIfPresent(SecurityPolicyAssociation.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -122,18 +122,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.addAssociationRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [addRule()][google.cloud.compute.v1.organizationSecurityPolicies.addRule] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.addRule]: <doc:OrganizationSecurityPoliciesClient/addRule(request:options:)>
-    public struct AddRuleRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AddRuleRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// An optional request ID to identify requests. Specify a unique request ID so
@@ -159,7 +159,7 @@
       /// [google.cloud.compute.v1.organizationSecurityPolicies.addRule]: <doc:OrganizationSecurityPoliciesClient/addRule(request:options:)>
       public var body: SecurityPolicyRule? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AddRuleRequest`.
       public init() {}
@@ -203,7 +203,7 @@
         self.body = try container.decodeIfPresent(SecurityPolicyRule.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -221,18 +221,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.addRuleRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [copyRules()][google.cloud.compute.v1.organizationSecurityPolicies.copyRules] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.copyRules]: <doc:OrganizationSecurityPoliciesClient/copyRules(request:options:)>
-    public struct CopyRulesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CopyRulesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// An optional request ID to identify requests. Specify a unique request ID so
@@ -256,7 +256,7 @@
       /// The security policy from which to copy rules.
       public var sourceSecurityPolicy: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CopyRulesRequest`.
       public init() {}
@@ -301,7 +301,7 @@
           Swift.String.self, forKey: .sourceSecurityPolicy)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -319,18 +319,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.copyRulesRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [delete()][google.cloud.compute.v1.organizationSecurityPolicies.delete] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.delete]: <doc:OrganizationSecurityPoliciesClient/delete(request:options:)>
-    public struct DeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// An optional request ID to identify requests. Specify a unique request ID so
@@ -351,7 +351,7 @@
       /// Name of the security policy to delete.
       public var securityPolicy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteRequest`.
       public init() {}
@@ -392,7 +392,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -409,24 +409,24 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.deleteRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [get()][google.cloud.compute.v1.organizationSecurityPolicies.get] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.get]: <doc:OrganizationSecurityPoliciesClient/`get`(request:options:)>
-    public struct GetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of the security policy to get.
       public var securityPolicy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetRequest`.
       public init() {}
@@ -464,7 +464,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -479,18 +479,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.getRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [getAssociation()][google.cloud.compute.v1.organizationSecurityPolicies.getAssociation] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.getAssociation]: <doc:OrganizationSecurityPoliciesClient/getAssociation(request:options:)>
-    public struct GetAssociationRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetAssociationRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the association to get from the security policy.
@@ -499,7 +499,7 @@
       /// Name of the security policy to which the queried rule belongs.
       public var securityPolicy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetAssociationRequest`.
       public init() {}
@@ -540,7 +540,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -557,18 +557,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.getAssociationRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [getRule()][google.cloud.compute.v1.organizationSecurityPolicies.getRule] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.getRule]: <doc:OrganizationSecurityPoliciesClient/getRule(request:options:)>
-    public struct GetRuleRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GetRuleRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The priority of the rule to get from the security policy.
@@ -577,7 +577,7 @@
       /// Name of the security policy to which the queried rule belongs.
       public var securityPolicy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GetRuleRequest`.
       public init() {}
@@ -618,7 +618,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -635,18 +635,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.getRuleRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [insert()][google.cloud.compute.v1.organizationSecurityPolicies.insert] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.insert]: <doc:OrganizationSecurityPoliciesClient/insert(request:options:)>
-    public struct InsertRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InsertRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Parent ID for this request. The ID can be either be "folders/[FOLDER_ID]"
@@ -674,7 +674,7 @@
       /// [google.cloud.compute.v1.organizationSecurityPolicies.insert]: <doc:OrganizationSecurityPoliciesClient/insert(request:options:)>
       public var body: SecurityPolicy? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InsertRequest`.
       public init() {}
@@ -716,7 +716,7 @@
         self.body = try container.decodeIfPresent(SecurityPolicy.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -734,18 +734,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.insertRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [list()][google.cloud.compute.v1.organizationSecurityPolicies.list] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.list]: <doc:OrganizationSecurityPoliciesClient/list(request:options:)>
-    public struct ListRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A filter expression that filters resources listed in the response. Most
@@ -844,7 +844,7 @@
       /// with an error code.
       public var returnPartialSuccess: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListRequest`.
       public init() {}
@@ -896,7 +896,7 @@
           Swift.Bool.self, forKey: .returnPartialSuccess)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -917,25 +917,25 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.listRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [listAssociations()][google.cloud.compute.v1.organizationSecurityPolicies.listAssociations] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.listAssociations]: <doc:OrganizationSecurityPoliciesClient/listAssociations(request:options:)>
-    public struct ListAssociationsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ListAssociationsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The target resource to list associations. It is an organization, or a
       /// folder.
       public var targetResource: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListAssociationsRequest`.
       public init() {}
@@ -972,7 +972,7 @@
           Swift.String.self, forKey: .targetResource)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -988,18 +988,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.listAssociationsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [listPreconfiguredExpressionSets()][google.cloud.compute.v1.organizationSecurityPolicies.listPreconfiguredExpressionSets] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.listPreconfiguredExpressionSets]: <doc:OrganizationSecurityPoliciesClient/listPreconfiguredExpressionSets(request:options:)>
-    public struct ListPreconfiguredExpressionSetsRequest: Codable, Equatable, GoogleCloudWKT
+    public struct ListPreconfiguredExpressionSetsRequest: Codable, Equatable, GoogleWKT
         ._AnyPackable,
       Sendable
     {
@@ -1099,7 +1099,7 @@
       /// with an error code.
       public var returnPartialSuccess: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ListPreconfiguredExpressionSetsRequest`.
       public init() {}
@@ -1151,7 +1151,7 @@
           Swift.Bool.self, forKey: .returnPartialSuccess)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1172,18 +1172,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.listPreconfiguredExpressionSetsRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [move()][google.cloud.compute.v1.organizationSecurityPolicies.move] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.move]: <doc:OrganizationSecurityPoliciesClient/move(request:options:)>
-    public struct MoveRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MoveRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The new parent of the security policy.
@@ -1207,7 +1207,7 @@
       /// Name of the security policy to update.
       public var securityPolicy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MoveRequest`.
       public init() {}
@@ -1251,7 +1251,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1269,18 +1269,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.moveRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [patch()][google.cloud.compute.v1.organizationSecurityPolicies.patch] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.patch]: <doc:OrganizationSecurityPoliciesClient/patch(request:options:)>
-    public struct PatchRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PatchRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// An optional request ID to identify requests. Specify a unique request ID so
@@ -1306,7 +1306,7 @@
       /// [google.cloud.compute.v1.organizationSecurityPolicies.patch]: <doc:OrganizationSecurityPoliciesClient/patch(request:options:)>
       public var body: SecurityPolicy? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PatchRequest`.
       public init() {}
@@ -1350,7 +1350,7 @@
         self.body = try container.decodeIfPresent(SecurityPolicy.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1368,18 +1368,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.patchRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [patchRule()][google.cloud.compute.v1.organizationSecurityPolicies.patchRule] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.patchRule]: <doc:OrganizationSecurityPoliciesClient/patchRule(request:options:)>
-    public struct PatchRuleRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PatchRuleRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The priority of the rule to patch.
@@ -1408,7 +1408,7 @@
       /// [google.cloud.compute.v1.organizationSecurityPolicies.patchRule]: <doc:OrganizationSecurityPoliciesClient/patchRule(request:options:)>
       public var body: SecurityPolicyRule? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PatchRuleRequest`.
       public init() {}
@@ -1455,7 +1455,7 @@
         self.body = try container.decodeIfPresent(SecurityPolicyRule.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1474,18 +1474,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.patchRuleRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [removeAssociation()][google.cloud.compute.v1.organizationSecurityPolicies.removeAssociation] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.removeAssociation]: <doc:OrganizationSecurityPoliciesClient/removeAssociation(request:options:)>
-    public struct RemoveAssociationRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RemoveAssociationRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name for the attachment that will be removed.
@@ -1509,7 +1509,7 @@
       /// Name of the security policy to update.
       public var securityPolicy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RemoveAssociationRequest`.
       public init() {}
@@ -1553,7 +1553,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1571,18 +1571,18 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.removeAssociationRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Synthetic request message for the [removeRule()][google.cloud.compute.v1.organizationSecurityPolicies.removeRule] method.
     ///
     /// [google.cloud.compute.v1.organizationSecurityPolicies.removeRule]: <doc:OrganizationSecurityPoliciesClient/removeRule(request:options:)>
-    public struct RemoveRuleRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RemoveRuleRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The priority of the rule to remove from the security policy.
@@ -1606,7 +1606,7 @@
       /// Name of the security policy to update.
       public var securityPolicy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RemoveRuleRequest`.
       public init() {}
@@ -1650,7 +1650,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1668,11 +1668,11 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.organizationSecurityPolicies.removeRuleRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
   }

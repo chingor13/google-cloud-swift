@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AzureVmDetails describes a VM in Azure.
-public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AzureVmDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The VM full path in Azure.
@@ -63,7 +63,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The CPU architecture.
   public var architecture: AzureVmDetails.VmArchitecture = AzureVmDetails.VmArchitecture()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AzureVmDetails`.
   public init() {}
@@ -169,7 +169,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -195,7 +195,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A message describing the OS disk.
-  public struct OSDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OSDisk: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The disk's type.
@@ -207,7 +207,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The disk's size in GB.
     public var sizeGb: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OSDisk`.
     public init() {}
@@ -255,7 +255,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -272,16 +272,16 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vmmigration.v1.AzureVmDetails.OSDisk"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A message describing a data disk.
-  public struct Disk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Disk: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The disk name.
@@ -293,7 +293,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The disk's Logical Unit Number (LUN).
     public var lun: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Disk`.
     public init() {}
@@ -341,7 +341,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -358,17 +358,17 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vmmigration.v1.AzureVmDetails.Disk"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A message describing the VM's OS. Including OS, Publisher, Offer and Plan
   /// if applicable.
-  public struct OSDescription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OSDescription: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// OS type.
@@ -383,7 +383,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// OS plan.
     public var plan: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OSDescription`.
     public init() {}
@@ -436,7 +436,7 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -454,11 +454,11 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vmmigration.v1.AzureVmDetails.OSDescription"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -815,10 +815,10 @@ public struct AzureVmDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.AzureVmDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

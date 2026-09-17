@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleIAMAdminV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(projectId: String, serviceAccountId: String, ) async throws {
   let client = try GoogleIAMAdminV1.IAMClient()

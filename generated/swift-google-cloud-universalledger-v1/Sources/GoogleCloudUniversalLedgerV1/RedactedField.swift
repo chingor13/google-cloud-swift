@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Information about a redacted field in the response.
-public struct RedactedField: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RedactedField: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The fully qualified field paths that were redacted from the
   /// payload.
-  public var redactedPath: GoogleCloudWKT.FieldMask? = nil
+  public var redactedPath: GoogleWKT.FieldMask? = nil
 
   /// Output only. A human-readable explanation of why the fields were redacted.
   public var reason: Swift.String = Swift.String()
@@ -32,7 +32,7 @@ public struct RedactedField: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. A machine readable code for why the fields were redacted.
   public var reasonCode: GoogleRpc.Code = GoogleRpc.Code()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RedactedField`.
   public init() {}
@@ -70,7 +70,7 @@ public struct RedactedField: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.redactedPath = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .redactedPath)
+      GoogleWKT.FieldMask.self, forKey: .redactedPath)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .reason) {
       self.reason = value
     }
@@ -79,7 +79,7 @@ public struct RedactedField: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +96,10 @@ public struct RedactedField: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.RedactedField"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

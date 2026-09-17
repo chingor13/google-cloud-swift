@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 ///
 /// Request message for 'CreateServiceRollout'
-public struct CreateServiceRolloutRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateServiceRolloutRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the service.  See the
@@ -30,7 +30,7 @@ public struct CreateServiceRolloutRequest: Codable, Equatable, GoogleCloudWKT._A
   /// Required. The rollout resource. The `service_name` field is output only.
   public var rollout: Rollout? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateServiceRolloutRequest`.
   public init() {}
@@ -71,7 +71,7 @@ public struct CreateServiceRolloutRequest: Codable, Equatable, GoogleCloudWKT._A
     self.rollout = try container.decodeIfPresent(Rollout.self, forKey: .rollout)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,10 +87,10 @@ public struct CreateServiceRolloutRequest: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicemanagement.v1.CreateServiceRolloutRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEHubV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: GkeHubClient, projectId: String, locationId: String, scopeId: String,

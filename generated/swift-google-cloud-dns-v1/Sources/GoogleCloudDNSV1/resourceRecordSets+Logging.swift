@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func create(
-      request: ResourceRecordSetsClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet {
       try await self._intercept(
         request: request,
         options: options,
         name: "create",
         action: {
-          (r: ResourceRecordSetsClient.CreateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ResourceRecordSetsClient.CreateRequest, o: GoogleGax.RequestOptions) async throws
             -> ResourceRecordSet
           in
           return try await self.inner.create(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func delete(
-      request: ResourceRecordSetsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSetsDeleteResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "delete",
         action: {
-          (r: ResourceRecordSetsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ResourceRecordSetsClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
             -> ResourceRecordSetsDeleteResponse
           in
           return try await self.inner.delete(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func `get`(
-      request: ResourceRecordSetsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet {
       try await self._intercept(
         request: request,
         options: options,
         name: "`get`",
         action: {
-          (r: ResourceRecordSetsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ResourceRecordSetsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
             -> ResourceRecordSet
           in
           return try await self.inner.`get`(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func list(
-      request: ResourceRecordSetsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSetsListResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "list",
         action: {
-          (r: ResourceRecordSetsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ResourceRecordSetsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
             -> ResourceRecordSetsListResponse
           in
           return try await self.inner.list(request: r, options: o)
@@ -117,14 +117,14 @@ extension Clients {
     }
 
     public func patch(
-      request: ResourceRecordSetsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet {
       try await self._intercept(
         request: request,
         options: options,
         name: "patch",
         action: {
-          (r: ResourceRecordSetsClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ResourceRecordSetsClient.PatchRequest, o: GoogleGax.RequestOptions) async throws
             -> ResourceRecordSet
           in
           return try await self.inner.patch(request: r, options: o)

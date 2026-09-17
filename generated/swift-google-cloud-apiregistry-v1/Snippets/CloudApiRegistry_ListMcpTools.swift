@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudApiRegistryV1
 import GoogleCloudLocation
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(
   client: CloudApiRegistryClient, projectId: String, locationId: String, apiNamespaceId: String,

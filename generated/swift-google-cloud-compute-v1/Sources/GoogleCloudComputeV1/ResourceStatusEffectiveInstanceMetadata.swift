@@ -16,11 +16,10 @@
 
 #if Instances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Effective values of predefined metadata keys for an instance.
-  public struct ResourceStatusEffectiveInstanceMetadata: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct ResourceStatusEffectiveInstanceMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Effective block-project-ssh-keys value at Instance level.
@@ -50,7 +49,7 @@
     /// Effective VM DNS setting at Instance level.
     public var vmDnsSettingMetadataValue: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourceStatusEffectiveInstanceMetadata`.
     public init() {}
@@ -126,7 +125,7 @@
         Swift.String.self, forKey: .vmDnsSettingMetadataValue)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -158,11 +157,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ResourceStatusEffectiveInstanceMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

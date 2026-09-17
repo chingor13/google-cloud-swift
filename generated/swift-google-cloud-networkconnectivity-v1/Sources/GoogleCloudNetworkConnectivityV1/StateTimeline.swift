@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The timeline of the pending states for a resource.
-public struct StateTimeline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StateTimeline: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The state and activation time details of the resource state.
   public var states: [StateTimeline.StateMetadata] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StateTimeline`.
   public init() {}
@@ -64,7 +64,7 @@ public struct StateTimeline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -77,7 +77,7 @@ public struct StateTimeline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The state and activation time details of the resource state.
-  public struct StateMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StateMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The state of the resource.
@@ -88,9 +88,9 @@ public struct StateTimeline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the transient state of the resource will be effective. For instance, if
     /// the state is `ADDING`, this field shows the time when the resource state
     /// transitions to `ACTIVE`.
-    public var effectiveTime: GoogleCloudWKT.Timestamp? = nil
+    public var effectiveTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StateMetadata`.
     public init() {}
@@ -131,10 +131,10 @@ public struct StateTimeline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.state = value
       }
       self.effectiveTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .effectiveTime)
+        GoogleWKT.Timestamp.self, forKey: .effectiveTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -276,21 +276,21 @@ public struct StateTimeline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkconnectivity.v1.StateTimeline.StateMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkconnectivity.v1.StateTimeline"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

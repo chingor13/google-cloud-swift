@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Autoscaling settings define the rules used by VMware Engine to
 /// automatically scale-out and scale-in the clusters in a private cloud.
-public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutoscalingSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The map with autoscaling policies applied to the cluster.
@@ -49,9 +49,9 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// It starts once addition or removal of nodes is fully completed.
   /// Defaults to 30 minutes if not specified. Cool down period must be in whole
   /// minutes (for example, 30, 31, 50, 180 minutes).
-  public var coolDownPeriod: GoogleCloudWKT.Duration? = nil
+  public var coolDownPeriod: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutoscalingSettings`.
   public init() {}
@@ -102,10 +102,10 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
       self.maxClusterNodeCount = value
     }
     self.coolDownPeriod = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .coolDownPeriod)
+      GoogleWKT.Duration.self, forKey: .coolDownPeriod)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -122,7 +122,7 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   /// Thresholds define the utilization of resources triggering
   /// scale-out and scale-in operations.
-  public struct Thresholds: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Thresholds: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The utilization triggering the scale-out operation in percent.
@@ -131,7 +131,7 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// Required. The utilization triggering the scale-in operation in percent.
     public var scaleIn: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Thresholds`.
     public init() {}
@@ -174,7 +174,7 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -190,11 +190,11 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vmwareengine.v1.AutoscalingSettings.Thresholds"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -204,7 +204,7 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// exceeds ANY of the respective thresholds.
   /// The scale-in operation is initiated if the utilization
   /// is below ALL of the respective thresholds.
-  public struct AutoscalingPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutoscalingPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The canonical identifier of the node type to add or remove.
@@ -230,7 +230,7 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// storage.
     public var storageThresholds: AutoscalingSettings.Thresholds? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutoscalingPolicy`.
     public init() {}
@@ -289,7 +289,7 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
         AutoscalingSettings.Thresholds.self, forKey: .storageThresholds)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -311,21 +311,21 @@ public struct AutoscalingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackab
       return
         "type.googleapis.com/google.cloud.vmwareengine.v1.AutoscalingSettings.AutoscalingPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmwareengine.v1.AutoscalingSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

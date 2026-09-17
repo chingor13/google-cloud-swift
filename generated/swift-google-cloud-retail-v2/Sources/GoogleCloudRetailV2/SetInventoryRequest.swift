@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [ProductService.SetInventory][google.cloud.retail.v2.ProductService.SetInventory]
 /// method.
 ///
 /// [google.cloud.retail.v2.ProductService.SetInventory]: <doc:ProductServiceClient/setInventory(request:options:)>
-public struct SetInventoryRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SetInventoryRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The inventory information to update. The allowable fields to
@@ -105,12 +105,12 @@ public struct SetInventoryRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// is returned and the entire update will be ignored.
   ///
   /// [google.cloud.retail.v2.Product]: <doc:Product>
-  public var setMask: GoogleCloudWKT.FieldMask? = nil
+  public var setMask: GoogleWKT.FieldMask? = nil
 
   /// The time when the request is issued, used to prevent
   /// out-of-order updates on inventory fields with the last update time
   /// recorded. If not provided, the internal system time will be used.
-  public var setTime: GoogleCloudWKT.Timestamp? = nil
+  public var setTime: GoogleWKT.Timestamp? = nil
 
   /// If set to true, and the [Product][google.cloud.retail.v2.Product] with name
   /// [Product.name][google.cloud.retail.v2.Product.name] is not found, the
@@ -123,7 +123,7 @@ public struct SetInventoryRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// [google.cloud.retail.v2.Product.name]: <doc:Product/name>
   public var allowMissing: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SetInventoryRequest`.
   public init() {}
@@ -163,14 +163,14 @@ public struct SetInventoryRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.inventory = try container.decodeIfPresent(Product.self, forKey: .inventory)
-    self.setMask = try container.decodeIfPresent(GoogleCloudWKT.FieldMask.self, forKey: .setMask)
-    self.setTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .setTime)
+    self.setMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .setMask)
+    self.setTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .setTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .allowMissing) {
       self.allowMissing = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -188,10 +188,10 @@ public struct SetInventoryRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.SetInventoryRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

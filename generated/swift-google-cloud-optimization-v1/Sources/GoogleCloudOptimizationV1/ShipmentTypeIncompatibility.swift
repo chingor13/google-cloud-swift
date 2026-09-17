@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Specifies incompatibilties between shipments depending on their
 /// shipment_type. The appearance of incompatible shipments on the same route is
 /// restricted based on the incompatibility mode.
-public struct ShipmentTypeIncompatibility: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ShipmentTypeIncompatibility: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// List of incompatible types. Two shipments having different `shipment_types`
@@ -31,7 +31,7 @@ public struct ShipmentTypeIncompatibility: Codable, Equatable, GoogleCloudWKT._A
   public var incompatibilityMode: ShipmentTypeIncompatibility.IncompatibilityMode =
     ShipmentTypeIncompatibility.IncompatibilityMode()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ShipmentTypeIncompatibility`.
   public init() {}
@@ -76,7 +76,7 @@ public struct ShipmentTypeIncompatibility: Codable, Equatable, GoogleCloudWKT._A
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -207,10 +207,10 @@ public struct ShipmentTypeIncompatibility: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.optimization.v1.ShipmentTypeIncompatibility"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

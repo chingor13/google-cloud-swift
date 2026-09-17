@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The Network Security API for DNS Threat Detectors.
 ///
@@ -33,7 +33,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   let inner: any Clients.DnsThreatDetectorServiceStub
 
   /// Creates a new `DnsThreatDetectorServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DnsThreatDetectorServiceStub =
       try Clients.DnsThreatDetectorServiceTransport(options)
     inner = Clients.DnsThreatDetectorServiceRetry(inner, options: options)
@@ -47,7 +47,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_ListDnsThreatDetectors")
   public func listDnsThreatDetectors(
-    request: ListDnsThreatDetectorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDnsThreatDetectorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.ListDnsThreatDetectorsResponse {
     try await self.inner.listDnsThreatDetectors(request: request, options: options)
   }
@@ -56,7 +56,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_ListDnsThreatDetectors")
   public func listDnsThreatDetectors(
-    byItem: ListDnsThreatDetectorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDnsThreatDetectorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DnsThreatDetector, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -65,14 +65,14 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
       request.pageToken = token
       return try await self.listDnsThreatDetectors(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a single DnsThreatDetector.
   ///
   /// @Snippet(path: "DnsThreatDetectorService_GetDnsThreatDetector")
   public func getDnsThreatDetector(
-    request: GetDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector {
     try await self.inner.getDnsThreatDetector(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_CreateDnsThreatDetector")
   public func createDnsThreatDetector(
-    request: CreateDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector {
     try await self.inner.createDnsThreatDetector(request: request, options: options)
   }
@@ -90,7 +90,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_UpdateDnsThreatDetector")
   public func updateDnsThreatDetector(
-    request: UpdateDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector {
     try await self.inner.updateDnsThreatDetector(request: request, options: options)
   }
@@ -99,7 +99,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_DeleteDnsThreatDetector")
   public func deleteDnsThreatDetector(
-    request: DeleteDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDnsThreatDetector(request: request, options: options)
   }
@@ -125,7 +125,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -151,7 +151,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -159,14 +159,14 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "DnsThreatDetectorService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -179,7 +179,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -189,7 +189,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -204,7 +204,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -215,7 +215,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -226,7 +226,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -234,7 +234,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -243,7 +243,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -254,7 +254,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -265,7 +265,7 @@ public final class DnsThreatDetectorServiceClient: Clients.DnsThreatDetectorServ
   ///
   /// @Snippet(path: "DnsThreatDetectorService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -319,7 +319,7 @@ extension Clients {
     /// See `DnsThreatDetectorServiceClient.updateDnsThreatDetector`.
     func updateDnsThreatDetector(
       dnsThreatDetector: DnsThreatDetector?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector
 
     /// See `DnsThreatDetectorServiceClient.deleteDnsThreatDetector`.
@@ -386,82 +386,82 @@ extension Clients {
 
     /// See `DnsThreatDetectorServiceClient.listDnsThreatDetectors`.
     func listDnsThreatDetectors(
-      request: ListDnsThreatDetectorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDnsThreatDetectorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListDnsThreatDetectorsResponse
 
     /// See `DnsThreatDetectorServiceClient.listDnsThreatDetectors`.
     func listDnsThreatDetectors(
-      byItem: ListDnsThreatDetectorsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDnsThreatDetectorsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DnsThreatDetector, Swift.Error>
 
     /// See `DnsThreatDetectorServiceClient.getDnsThreatDetector`.
     func getDnsThreatDetector(
-      request: GetDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector
 
     /// See `DnsThreatDetectorServiceClient.createDnsThreatDetector`.
     func createDnsThreatDetector(
-      request: CreateDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector
 
     /// See `DnsThreatDetectorServiceClient.updateDnsThreatDetector`.
     func updateDnsThreatDetector(
-      request: UpdateDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector
 
     /// See `DnsThreatDetectorServiceClient.deleteDnsThreatDetector`.
     func deleteDnsThreatDetector(
-      request: DeleteDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DnsThreatDetectorServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `DnsThreatDetectorServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `DnsThreatDetectorServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `DnsThreatDetectorServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `DnsThreatDetectorServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `DnsThreatDetectorServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `DnsThreatDetectorServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DnsThreatDetectorServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DnsThreatDetectorServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DnsThreatDetectorServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -475,9 +475,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func listDnsThreatDetectors(
-    request: ListDnsThreatDetectorsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDnsThreatDetectorsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.ListDnsThreatDetectorsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDnsThreatDetectors(
@@ -487,14 +487,14 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func listDnsThreatDetectors(
-    byItem: ListDnsThreatDetectorsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDnsThreatDetectorsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DnsThreatDetector, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudNetworkSecurityV1.ListDnsThreatDetectorsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDnsThreatDetectors(
@@ -513,9 +513,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func getDnsThreatDetector(
-    request: GetDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDnsThreatDetector(
@@ -534,9 +534,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func createDnsThreatDetector(
-    request: CreateDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDnsThreatDetector(
@@ -559,14 +559,14 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func updateDnsThreatDetector(
-    request: UpdateDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDnsThreatDetector(
     dnsThreatDetector: DnsThreatDetector?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudNetworkSecurityV1.DnsThreatDetector {
     let request = UpdateDnsThreatDetectorRequest().with {
       $0.dnsThreatDetector = dnsThreatDetector
@@ -580,9 +580,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func deleteDnsThreatDetector(
-    request: DeleteDnsThreatDetectorRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDnsThreatDetectorRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDnsThreatDetector(
@@ -601,9 +601,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -613,13 +613,13 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -629,9 +629,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -641,9 +641,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -653,9 +653,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -665,9 +665,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -677,9 +677,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -689,13 +689,13 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -716,9 +716,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -735,9 +735,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -754,9 +754,9 @@ extension Clients.DnsThreatDetectorServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

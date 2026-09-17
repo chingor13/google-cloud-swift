@@ -16,83 +16,83 @@
 
 #if SiteSearchEngineService
   import Foundation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SiteSearchEngineServiceStub: Sendable {
       func getSiteSearchEngine(
-        request: GetSiteSearchEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: GetSiteSearchEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.SiteSearchEngine
 
       func createTargetSite(
-        request: CreateTargetSiteRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTargetSiteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchCreateTargetSites(
-        request: BatchCreateTargetSitesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchCreateTargetSitesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getTargetSite(
-        request: GetTargetSiteRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTargetSiteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.TargetSite
 
       func updateTargetSite(
-        request: UpdateTargetSiteRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateTargetSiteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteTargetSite(
-        request: DeleteTargetSiteRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteTargetSiteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func listTargetSites(
-        request: ListTargetSitesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTargetSitesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListTargetSitesResponse
 
       func createSitemap(
-        request: CreateSitemapRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateSitemapRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteSitemap(
-        request: DeleteSitemapRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSitemapRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func fetchSitemaps(
-        request: FetchSitemapsRequest, options: GoogleCloudGax.RequestOptions
+        request: FetchSitemapsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.FetchSitemapsResponse
 
       func enableAdvancedSiteSearch(
-        request: EnableAdvancedSiteSearchRequest, options: GoogleCloudGax.RequestOptions
+        request: EnableAdvancedSiteSearchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func disableAdvancedSiteSearch(
-        request: DisableAdvancedSiteSearchRequest, options: GoogleCloudGax.RequestOptions
+        request: DisableAdvancedSiteSearchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func recrawlUris(
-        request: RecrawlUrisRequest, options: GoogleCloudGax.RequestOptions
+        request: RecrawlUrisRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchVerifyTargetSites(
-        request: BatchVerifyTargetSitesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchVerifyTargetSitesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func fetchDomainVerificationStatus(
-        request: FetchDomainVerificationStatusRequest, options: GoogleCloudGax.RequestOptions
+        request: FetchDomainVerificationStatusRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.FetchDomainVerificationStatusResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

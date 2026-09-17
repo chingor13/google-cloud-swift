@@ -16,13 +16,13 @@
 
 #if TensorboardService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [TensorboardService.UpdateTensorboardRun][google.cloud.aiplatform.v1.TensorboardService.UpdateTensorboardRun].
   ///
   /// [google.cloud.aiplatform.v1.TensorboardService.UpdateTensorboardRun]: <doc:TensorboardServiceClient/updateTensorboardRun(request:options:)>
-  public struct UpdateTensorboardRunRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UpdateTensorboardRunRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Field mask is used to specify the fields to be overwritten in the
@@ -31,14 +31,14 @@
     /// the full request. A field is overwritten if it's in the mask. If the
     /// user does not provide a mask then all fields are overwritten if new
     /// values are specified.
-    public var updateMask: GoogleCloudWKT.FieldMask? = nil
+    public var updateMask: GoogleWKT.FieldMask? = nil
 
     /// Required. The TensorboardRun's `name` field is used to identify the
     /// TensorboardRun to be updated. Format:
     /// `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
     public var tensorboardRun: TensorboardRun? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpdateTensorboardRunRequest`.
     public init() {}
@@ -73,13 +73,12 @@
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.updateMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+      self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
       self.tensorboardRun = try container.decodeIfPresent(
         TensorboardRun.self, forKey: .tensorboardRun)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -95,11 +94,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.UpdateTensorboardRunRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

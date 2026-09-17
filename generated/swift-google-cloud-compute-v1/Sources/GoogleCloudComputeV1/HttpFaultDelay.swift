@@ -16,11 +16,11 @@
 
 #if RegionUrlMaps || UrlMaps
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Specifies the delay introduced by the load balancer before forwarding the
   /// request to the backend service as part of fault injection.
-  public struct HttpFaultDelay: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HttpFaultDelay: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies the value of the fixed delay interval.
@@ -32,7 +32,7 @@
     /// The value must be from 0.0 to 100.0 inclusive.
     public var percentage: Swift.Double? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HttpFaultDelay`.
     public init() {}
@@ -71,7 +71,7 @@
       self.percentage = try container.decodeIfPresent(Swift.Double.self, forKey: .percentage)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -87,11 +87,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.HttpFaultDelay"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

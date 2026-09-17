@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service provides methods for various operations related to a
 /// [Dependency][google.cloud.apihub.v1.Dependency] in the API hub.
@@ -33,7 +33,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   let inner: any Clients.ApiHubDependenciesStub
 
   /// Creates a new `ApiHubDependenciesClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ApiHubDependenciesStub = try Clients.ApiHubDependenciesTransport(options)
     inner = Clients.ApiHubDependenciesRetry(inner, options: options)
     if let logger = options.logger {
@@ -46,7 +46,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_CreateDependency")
   public func createDependency(
-    request: CreateDependencyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDependencyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Dependency {
     try await self.inner.createDependency(request: request, options: options)
   }
@@ -55,7 +55,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_GetDependency")
   public func getDependency(
-    request: GetDependencyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDependencyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Dependency {
     try await self.inner.getDependency(request: request, options: options)
   }
@@ -74,7 +74,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_UpdateDependency")
   public func updateDependency(
-    request: UpdateDependencyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDependencyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Dependency {
     try await self.inner.updateDependency(request: request, options: options)
   }
@@ -83,7 +83,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_DeleteDependency")
   public func deleteDependency(
-    request: DeleteDependencyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDependencyRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDependency(request: request, options: options)
   }
@@ -92,7 +92,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_ListDependencies")
   public func listDependencies(
-    request: ListDependenciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDependenciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListDependenciesResponse {
     try await self.inner.listDependencies(request: request, options: options)
   }
@@ -101,7 +101,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_ListDependencies")
   public func listDependencies(
-    byItem: ListDependenciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDependenciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Dependency, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiHubV1.ListDependenciesResponse in
@@ -109,14 +109,14 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
       request.pageToken = token
       return try await self.listDependencies(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "ApiHubDependencies_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -125,7 +125,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -133,14 +133,14 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "ApiHubDependencies_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -151,7 +151,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -162,7 +162,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -170,7 +170,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -179,7 +179,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -190,7 +190,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -201,7 +201,7 @@ public final class ApiHubDependenciesClient: Clients.ApiHubDependenciesProtocol,
   ///
   /// @Snippet(path: "ApiHubDependencies_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -240,7 +240,7 @@ extension Clients {
     /// See `ApiHubDependenciesClient.updateDependency`.
     func updateDependency(
       dependency: Dependency?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudApiHubV1.Dependency
 
     /// See `ApiHubDependenciesClient.deleteDependency`.
@@ -311,67 +311,67 @@ extension Clients {
 
     /// See `ApiHubDependenciesClient.createDependency`.
     func createDependency(
-      request: CreateDependencyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDependencyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Dependency
 
     /// See `ApiHubDependenciesClient.getDependency`.
     func getDependency(
-      request: GetDependencyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDependencyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Dependency
 
     /// See `ApiHubDependenciesClient.updateDependency`.
     func updateDependency(
-      request: UpdateDependencyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDependencyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.Dependency
 
     /// See `ApiHubDependenciesClient.deleteDependency`.
     func deleteDependency(
-      request: DeleteDependencyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDependencyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ApiHubDependenciesClient.listDependencies`.
     func listDependencies(
-      request: ListDependenciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDependenciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.ListDependenciesResponse
 
     /// See `ApiHubDependenciesClient.listDependencies`.
     func listDependencies(
-      byItem: ListDependenciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDependenciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Dependency, Swift.Error>
 
     /// See `ApiHubDependenciesClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `ApiHubDependenciesClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `ApiHubDependenciesClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `ApiHubDependenciesClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ApiHubDependenciesClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ApiHubDependenciesClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ApiHubDependenciesClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -385,9 +385,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func createDependency(
-    request: CreateDependencyRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDependencyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Dependency {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDependency(
@@ -410,9 +410,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func getDependency(
-    request: GetDependencyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDependencyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Dependency {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDependency(
@@ -431,14 +431,14 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func updateDependency(
-    request: UpdateDependencyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDependencyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.Dependency {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDependency(
     dependency: Dependency?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudApiHubV1.Dependency {
     let request = UpdateDependencyRequest().with {
       $0.dependency = dependency
@@ -452,9 +452,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func deleteDependency(
-    request: DeleteDependencyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDependencyRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDependency(
@@ -473,9 +473,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func listDependencies(
-    request: ListDependenciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDependenciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListDependenciesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDependencies(
@@ -485,13 +485,13 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func listDependencies(
-    byItem: ListDependenciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDependenciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Dependency, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiHubV1.ListDependenciesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDependencies(
@@ -510,9 +510,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -522,13 +522,13 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -538,9 +538,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -550,9 +550,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -562,13 +562,13 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -589,9 +589,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -608,9 +608,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -627,9 +627,9 @@ extension Clients.ApiHubDependenciesProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

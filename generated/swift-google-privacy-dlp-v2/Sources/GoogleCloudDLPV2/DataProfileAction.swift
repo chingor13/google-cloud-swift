@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A task to execute when a data profile has been generated.
-public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataProfileAction: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Type of action to execute when a profile is generated.
   public var action: OneOf_Action? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataProfileAction`.
   public init() {}
@@ -111,7 +111,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.action = action
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -141,7 +141,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
   /// If set, the detailed data profiles will be persisted to the location
   /// of your choice whenever updated.
-  public struct Export: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Export: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Store all profiles to BigQuery.
@@ -183,7 +183,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// [google.privacy.dlp.v2.DataProfileFinding]: <doc:DataProfileFinding>
     public var sampleFindingsTable: BigQueryTable? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Export`.
     public init() {}
@@ -223,7 +223,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
         BigQueryTable.self, forKey: .sampleFindingsTable)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -239,18 +239,18 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.Export"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Send a Pub/Sub message into the given Pub/Sub topic to connect other
   /// systems to data profile generation. The message payload data will
   /// be the byte serialization of `DataProfilePubSubMessage`.
-  public struct PubSubNotification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PubSubNotification: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Cloud Pub/Sub topic to send notifications to.
@@ -271,7 +271,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public var detailOfMessage: DataProfileAction.PubSubNotification.DetailLevel = DataProfileAction
       .PubSubNotification.DetailLevel()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PubSubNotification`.
     public init() {}
@@ -326,7 +326,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -456,19 +456,19 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.PubSubNotification"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Message expressing intention to publish to Google Security Operations.
-  public struct PublishToChronicle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PublishToChronicle: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PublishToChronicle`.
     public init() {}
@@ -499,7 +499,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -513,20 +513,20 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.PublishToChronicle"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// If set, a summary finding will be created or updated in Security Command
   /// Center for each profile.
-  public struct PublishToSecurityCommandCenter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PublishToSecurityCommandCenter: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PublishToSecurityCommandCenter`.
     public init() {}
@@ -557,7 +557,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -572,11 +572,11 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.PublishToSecurityCommandCenter"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -584,7 +584,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// aspect type Sensitive Data Protection Profile. To learn more about aspects,
   /// see
   /// https://docs.cloud.google.com/sensitive-data-protection/docs/add-aspects.
-  public struct PublishToDataplexCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PublishToDataplexCatalog: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Whether creating a Dataplex Universal Catalog aspect for a profiled
@@ -595,7 +595,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// profiles.
     public var lowerDataRiskToLow: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PublishToDataplexCatalog`.
     public init() {}
@@ -633,7 +633,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -648,11 +648,11 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.PublishToDataplexCatalog"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -662,7 +662,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// control](https://docs.cloud.google.com/iam/docs/tags-access-control). You
   /// can conditionally grant or deny access to a resource based on whether the
   /// resource has a specific tag.
-  public struct TagResources: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TagResources: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The tags to associate with different conditions.
@@ -686,7 +686,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// constituent column data profiles.
     public var lowerDataRiskToLow: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TagResources`.
     public init() {}
@@ -738,7 +738,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -754,7 +754,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
     /// The tag to attach to profiles matching the condition. At most one
     /// `TagCondition` can be specified per sensitivity level.
-    public struct TagCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TagCondition: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The tag value to attach to resources.
@@ -763,7 +763,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       /// The type of condition on which attaching the tag will be predicated.
       public var type: OneOf_Type? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TagCondition`.
       public init() {}
@@ -819,7 +819,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
         self.type = type
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -849,22 +849,22 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
         return
           "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.TagResources.TagCondition"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// A value of a tag.
-    public struct TagValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TagValue: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The format of the tag value.
       public var format: OneOf_Format? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TagValue`.
       public init() {}
@@ -916,7 +916,7 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
         self.format = format
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -946,22 +946,22 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.TagResources.TagValue"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction.TagResources"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1109,10 +1109,10 @@ public struct DataProfileAction: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DataProfileAction"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

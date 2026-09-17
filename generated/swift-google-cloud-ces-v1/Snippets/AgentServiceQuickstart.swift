@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudCESV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, appId: String, ) async throws {
   let client = try GoogleCloudCESV1.AgentServiceClient()

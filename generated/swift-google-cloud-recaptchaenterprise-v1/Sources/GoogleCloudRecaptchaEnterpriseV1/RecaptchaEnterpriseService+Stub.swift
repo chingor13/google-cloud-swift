@@ -15,105 +15,105 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol RecaptchaEnterpriseServiceStub: Sendable {
     func createAssessment(
-      request: CreateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssessmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Assessment
 
     func annotateAssessment(
-      request: AnnotateAssessmentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnnotateAssessmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AnnotateAssessmentResponse
 
     func createKey(
-      request: CreateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     func listKeys(
-      request: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListKeysResponse
 
     func retrieveLegacySecretKey(
-      request: RetrieveLegacySecretKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: RetrieveLegacySecretKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RetrieveLegacySecretKeyResponse
 
     func getKey(
-      request: GetKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     func updateKey(
-      request: UpdateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     func deleteKey(
-      request: DeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteKeyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func migrateKey(
-      request: MigrateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: MigrateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Key
 
     func addIpOverride(
-      request: AddIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+      request: AddIpOverrideRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.AddIpOverrideResponse
 
     func removeIpOverride(
-      request: RemoveIpOverrideRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveIpOverrideRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.RemoveIpOverrideResponse
 
     func listIpOverrides(
-      request: ListIpOverridesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIpOverridesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListIpOverridesResponse
 
     func getMetrics(
-      request: GetMetricsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetricsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Metrics
 
     func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy
 
     func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.Policy
 
     func createFirewallPolicy(
-      request: CreateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
 
     func listFirewallPolicies(
-      request: ListFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFirewallPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListFirewallPoliciesResponse
 
     func getFirewallPolicy(
-      request: GetFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
 
     func updateFirewallPolicy(
-      request: UpdateFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.FirewallPolicy
 
     func deleteFirewallPolicy(
-      request: DeleteFirewallPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFirewallPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func reorderFirewallPolicies(
-      request: ReorderFirewallPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ReorderFirewallPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ReorderFirewallPoliciesResponse
 
     func listRelatedAccountGroups(
-      request: ListRelatedAccountGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRelatedAccountGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupsResponse
 
     func listRelatedAccountGroupMemberships(
-      request: ListRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.ListRelatedAccountGroupMembershipsResponse
 
     func searchRelatedAccountGroupMemberships(
-      request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRelatedAccountGroupMembershipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRecaptchaEnterpriseV1.SearchRelatedAccountGroupMembershipsResponse
   }
 }

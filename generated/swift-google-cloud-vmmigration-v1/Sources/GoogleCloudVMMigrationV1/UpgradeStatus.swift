@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// UpgradeStatus contains information about upgradeAppliance operation.
-public struct UpgradeStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpgradeStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The version to upgrade to.
@@ -33,12 +33,12 @@ public struct UpgradeStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var error: GoogleRpc.Status? = nil
 
   /// The time the operation was started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The version from which we upgraded.
   public var previousVersion: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpgradeStatus`.
   public init() {}
@@ -86,14 +86,13 @@ public struct UpgradeStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.state = value
     }
     self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .previousVersion) {
       self.previousVersion = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -224,10 +223,10 @@ public struct UpgradeStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.UpgradeStatus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

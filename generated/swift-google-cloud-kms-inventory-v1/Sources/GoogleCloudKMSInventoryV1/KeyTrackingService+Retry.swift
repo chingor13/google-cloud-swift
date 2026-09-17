@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class KeyTrackingServiceRetry: KeyTrackingServiceStub {
     let inner: any KeyTrackingServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any KeyTrackingServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any KeyTrackingServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func getProtectedResourcesSummary(
-      request: GetProtectedResourcesSummaryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProtectedResourcesSummaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSInventoryV1.ProtectedResourcesSummary {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetProtectedResourcesSummaryRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetProtectedResourcesSummaryRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSInventoryV1.ProtectedResourcesSummary
           in
           return try await self.inner.getProtectedResourcesSummary(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func searchProtectedResources(
-      request: SearchProtectedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchProtectedResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSInventoryV1.SearchProtectedResourcesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: SearchProtectedResourcesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchProtectedResourcesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudKMSInventoryV1.SearchProtectedResourcesResponse
           in
           return try await self.inner.searchProtectedResources(request: r, options: o)

@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudDeviceStreamingV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: DirectAccessServiceClient, parent: String) async throws {
   let response = try await client.createDeviceSession(

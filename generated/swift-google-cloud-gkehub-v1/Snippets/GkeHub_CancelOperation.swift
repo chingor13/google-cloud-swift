@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEHubV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: GkeHubClient) async throws {
   try await client.cancelOperation(

@@ -15,37 +15,37 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol UniversalLedgerStub: Sendable {
     func submitTransaction(
-      request: SubmitTransactionRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitTransactionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.SubmitTransactionResponse
 
     func listEndpoints(
-      request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEndpointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.ListEndpointsResponse
 
     func getEndpoint(
-      request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.Endpoint
 
     func submitOperationalTransaction(
-      request: SubmitOperationalTransactionRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitOperationalTransactionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.SubmitOperationalTransactionResponse
 
     func queryTransactionState(
-      request: QueryTransactionStateRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryTransactionStateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryTransactionStateResponse
 
     func queryAccount(
-      request: QueryAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryAccountResponse
 
     func queryData(
-      request: QueryDataRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryDataResponse
   }
 }

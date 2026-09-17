@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The rule to exclude findings based on a hotword. For record inspection of
 /// tables, column names are considered hotwords. An example of this is to
 /// exclude a finding if it belongs to a BigQuery column that matches a specific
 /// pattern.
-public struct ExcludeByHotword: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExcludeByHotword: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Regular expression pattern defining what qualifies as a hotword.
@@ -33,7 +33,7 @@ public struct ExcludeByHotword: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// needs to be included in a column header.
   public var proximity: CustomInfoType.DetectionRule.Proximity? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExcludeByHotword`.
   public init() {}
@@ -74,7 +74,7 @@ public struct ExcludeByHotword: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       CustomInfoType.DetectionRule.Proximity.self, forKey: .proximity)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -90,10 +90,10 @@ public struct ExcludeByHotword: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ExcludeByHotword"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

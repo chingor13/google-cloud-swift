@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// ReferenceListService provides an interface for managing reference lists.
 ///
@@ -29,7 +29,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   let inner: any Clients.ReferenceListServiceStub
 
   /// Creates a new `ReferenceListServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ReferenceListServiceStub = try Clients.ReferenceListServiceTransport(
       options)
     inner = Clients.ReferenceListServiceRetry(inner, options: options)
@@ -43,7 +43,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_GetReferenceList")
   public func getReferenceList(
-    request: GetReferenceListRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReferenceListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ReferenceList {
     try await self.inner.getReferenceList(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_ListReferenceLists")
   public func listReferenceLists(
-    request: ListReferenceListsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReferenceListsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ListReferenceListsResponse {
     try await self.inner.listReferenceLists(request: request, options: options)
   }
@@ -61,7 +61,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_ListReferenceLists")
   public func listReferenceLists(
-    byItem: ListReferenceListsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReferenceListsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ReferenceList, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChronicleV1.ListReferenceListsResponse in
@@ -69,14 +69,14 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
       request.pageToken = token
       return try await self.listReferenceLists(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a new reference list.
   ///
   /// @Snippet(path: "ReferenceListService_CreateReferenceList")
   public func createReferenceList(
-    request: CreateReferenceListRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReferenceListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ReferenceList {
     try await self.inner.createReferenceList(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_UpdateReferenceList")
   public func updateReferenceList(
-    request: UpdateReferenceListRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateReferenceListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ReferenceList {
     try await self.inner.updateReferenceList(request: request, options: options)
   }
@@ -94,7 +94,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_VerifyReferenceList")
   public func verifyReferenceList(
-    request: VerifyReferenceListRequest, options: GoogleCloudGax.RequestOptions
+    request: VerifyReferenceListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.VerifyReferenceListResponse {
     try await self.inner.verifyReferenceList(request: request, options: options)
   }
@@ -105,7 +105,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -124,7 +124,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -133,7 +133,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -144,7 +144,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -155,7 +155,7 @@ public final class ReferenceListServiceClient: Clients.ReferenceListServiceProto
   ///
   /// @Snippet(path: "ReferenceListService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -209,7 +209,7 @@ extension Clients {
     /// See `ReferenceListServiceClient.updateReferenceList`.
     func updateReferenceList(
       referenceList: ReferenceList?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudChronicleV1.ReferenceList
 
     /// See `ReferenceListServiceClient.verifyReferenceList`.
@@ -249,52 +249,52 @@ extension Clients {
 
     /// See `ReferenceListServiceClient.getReferenceList`.
     func getReferenceList(
-      request: GetReferenceListRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReferenceListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ReferenceList
 
     /// See `ReferenceListServiceClient.listReferenceLists`.
     func listReferenceLists(
-      request: ListReferenceListsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReferenceListsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListReferenceListsResponse
 
     /// See `ReferenceListServiceClient.listReferenceLists`.
     func listReferenceLists(
-      byItem: ListReferenceListsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListReferenceListsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ReferenceList, Swift.Error>
 
     /// See `ReferenceListServiceClient.createReferenceList`.
     func createReferenceList(
-      request: CreateReferenceListRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReferenceListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ReferenceList
 
     /// See `ReferenceListServiceClient.updateReferenceList`.
     func updateReferenceList(
-      request: UpdateReferenceListRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReferenceListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ReferenceList
 
     /// See `ReferenceListServiceClient.verifyReferenceList`.
     func verifyReferenceList(
-      request: VerifyReferenceListRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyReferenceListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.VerifyReferenceListResponse
 
     /// See `ReferenceListServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ReferenceListServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ReferenceListServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ReferenceListServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -308,9 +308,9 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func getReferenceList(
-    request: GetReferenceListRequest, options: GoogleCloudGax.RequestOptions
+    request: GetReferenceListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ReferenceList {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getReferenceList(
@@ -329,9 +329,9 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func listReferenceLists(
-    request: ListReferenceListsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListReferenceListsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ListReferenceListsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listReferenceLists(
@@ -341,13 +341,13 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func listReferenceLists(
-    byItem: ListReferenceListsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListReferenceListsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ReferenceList, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChronicleV1.ListReferenceListsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listReferenceLists(
@@ -366,9 +366,9 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func createReferenceList(
-    request: CreateReferenceListRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateReferenceListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ReferenceList {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createReferenceList(
@@ -391,14 +391,14 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func updateReferenceList(
-    request: UpdateReferenceListRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateReferenceListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ReferenceList {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateReferenceList(
     referenceList: ReferenceList?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudChronicleV1.ReferenceList {
     let request = UpdateReferenceListRequest().with {
       $0.referenceList = referenceList
@@ -414,9 +414,9 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func verifyReferenceList(
-    request: VerifyReferenceListRequest, options: GoogleCloudGax.RequestOptions
+    request: VerifyReferenceListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.VerifyReferenceListResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -426,9 +426,9 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -438,13 +438,13 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -465,9 +465,9 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -484,9 +484,9 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -503,9 +503,9 @@ extension Clients.ReferenceListServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

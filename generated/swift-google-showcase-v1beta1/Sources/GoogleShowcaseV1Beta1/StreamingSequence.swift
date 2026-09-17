@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A sequence of responses to be returned in order at the delay specified
 /// as part of the server streaming call
-public struct StreamingSequence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StreamingSequence: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the streaming sequence.
@@ -34,7 +34,7 @@ public struct StreamingSequence: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// default response is an immediate OK.
   public var responses: [StreamingSequence.Response] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StreamingSequence`.
   public init() {}
@@ -84,7 +84,7 @@ public struct StreamingSequence: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,19 +99,19 @@ public struct StreamingSequence: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// A server response to an RPC Attempt in a sequence.
-  public struct Response: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Response: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The status to return for an individual attempt.
     public var status: GoogleRpc.Status? = nil
 
     /// The amount of time to delay sending the response.
-    public var delay: GoogleCloudWKT.Duration? = nil
+    public var delay: GoogleWKT.Duration? = nil
 
     /// The index that the status should be sent at
     public var responseIndex: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Response`.
     public init() {}
@@ -149,13 +149,13 @@ public struct StreamingSequence: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
-      self.delay = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .delay)
+      self.delay = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .delay)
       if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .responseIndex) {
         self.responseIndex = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -172,21 +172,21 @@ public struct StreamingSequence: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.showcase.v1beta1.StreamingSequence.Response"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.showcase.v1beta1.StreamingSequence"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

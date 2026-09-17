@@ -15,120 +15,120 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AccessContextManagerStub: Sendable {
     func listAccessPolicies(
-      request: ListAccessPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAccessPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ListAccessPoliciesResponse
 
     func getAccessPolicy(
-      request: GetAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.AccessPolicy
 
     func createAccessPolicy(
-      request: AccessPolicy, options: GoogleCloudGax.RequestOptions
+      request: AccessPolicy, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAccessPolicy(
-      request: UpdateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAccessPolicy(
-      request: DeleteAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAccessLevels(
-      request: ListAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAccessLevelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ListAccessLevelsResponse
 
     func getAccessLevel(
-      request: GetAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAccessLevelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.AccessLevel
 
     func createAccessLevel(
-      request: CreateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAccessLevelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAccessLevel(
-      request: UpdateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAccessLevelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAccessLevel(
-      request: DeleteAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAccessLevelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func replaceAccessLevels(
-      request: ReplaceAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceAccessLevelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listServicePerimeters(
-      request: ListServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicePerimetersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ListServicePerimetersResponse
 
     func getServicePerimeter(
-      request: GetServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServicePerimeterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ServicePerimeter
 
     func createServicePerimeter(
-      request: CreateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServicePerimeterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateServicePerimeter(
-      request: UpdateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServicePerimeterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteServicePerimeter(
-      request: DeleteServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServicePerimeterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func replaceServicePerimeters(
-      request: ReplaceServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceServicePerimetersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func commitServicePerimeters(
-      request: CommitServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+      request: CommitServicePerimetersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGcpUserAccessBindings(
-      request: ListGcpUserAccessBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGcpUserAccessBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ListGcpUserAccessBindingsResponse
 
     func getGcpUserAccessBinding(
-      request: GetGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.GcpUserAccessBinding
 
     func createGcpUserAccessBinding(
-      request: CreateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateGcpUserAccessBinding(
-      request: UpdateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGcpUserAccessBinding(
-      request: DeleteGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

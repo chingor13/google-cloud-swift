@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes an API diff request.
-public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The threat list to update. Only a single ThreatType should be
@@ -36,7 +36,7 @@ public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleCloudWKT._
   /// Required. The constraints associated with this request.
   public var constraints: ComputeThreatListDiffRequest.Constraints? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ComputeThreatListDiffRequest`.
   public init() {}
@@ -83,7 +83,7 @@ public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleCloudWKT._
       ComputeThreatListDiffRequest.Constraints.self, forKey: .constraints)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,7 +98,7 @@ public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleCloudWKT._
   }
 
   /// The constraints for this diff.
-  public struct Constraints: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Constraints: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The maximum size in number of entries. The diff will not contain more
@@ -114,7 +114,7 @@ public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleCloudWKT._
     /// The compression types supported by the client.
     public var supportedCompressions: [CompressionType] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Constraints`.
     public init() {}
@@ -164,7 +164,7 @@ public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleCloudWKT._
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -181,21 +181,21 @@ public struct ComputeThreatListDiffRequest: Codable, Equatable, GoogleCloudWKT._
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.webrisk.v1.ComputeThreatListDiffRequest.Constraints"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.webrisk.v1.ComputeThreatListDiffRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message storing the graph of the application.
-public struct ApplicationConfigs: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ApplicationConfigs: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A list of nodes  in the application graph.
@@ -27,7 +27,7 @@ public struct ApplicationConfigs: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Event-related configuration for this application.
   public var eventDeliveryConfig: ApplicationConfigs.EventDeliveryConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ApplicationConfigs`.
   public init() {}
@@ -69,7 +69,7 @@ public struct ApplicationConfigs: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       ApplicationConfigs.EventDeliveryConfig.self, forKey: .eventDeliveryConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -83,7 +83,7 @@ public struct ApplicationConfigs: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// message storing the config for event delivery
-  public struct EventDeliveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EventDeliveryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The delivery channel for the event notification, only pub/sub topic is
@@ -96,9 +96,9 @@ public struct ApplicationConfigs: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// be notified multiple times during this internal event that it is
     /// happening multiple times during the period of time.The same event is
     /// identified by <event_id, app_platform_metadata>.
-    public var minimalDeliveryInterval: GoogleCloudWKT.Duration? = nil
+    public var minimalDeliveryInterval: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EventDeliveryConfig`.
     public init() {}
@@ -137,10 +137,10 @@ public struct ApplicationConfigs: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         self.channel = value
       }
       self.minimalDeliveryInterval = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .minimalDeliveryInterval)
+        GoogleWKT.Duration.self, forKey: .minimalDeliveryInterval)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -156,21 +156,21 @@ public struct ApplicationConfigs: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.ApplicationConfigs.EventDeliveryConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.ApplicationConfigs"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

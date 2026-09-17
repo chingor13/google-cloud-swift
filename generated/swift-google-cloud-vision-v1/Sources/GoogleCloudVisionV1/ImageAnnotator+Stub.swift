@@ -15,31 +15,31 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ImageAnnotatorStub: Sendable {
     func batchAnnotateImages(
-      request: BatchAnnotateImagesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchAnnotateImagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.BatchAnnotateImagesResponse
 
     func batchAnnotateFiles(
-      request: BatchAnnotateFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchAnnotateFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.BatchAnnotateFilesResponse
 
     func asyncBatchAnnotateImages(
-      request: AsyncBatchAnnotateImagesRequest, options: GoogleCloudGax.RequestOptions
+      request: AsyncBatchAnnotateImagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func asyncBatchAnnotateFiles(
-      request: AsyncBatchAnnotateFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: AsyncBatchAnnotateFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

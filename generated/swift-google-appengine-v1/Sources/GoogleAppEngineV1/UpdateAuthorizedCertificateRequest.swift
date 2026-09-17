@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for `AuthorizedCertificates.UpdateAuthorizedCertificate`.
-public struct UpdateAuthorizedCertificateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateAuthorizedCertificateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the resource to update. Example:
@@ -31,9 +31,9 @@ public struct UpdateAuthorizedCertificateRequest: Codable, Equatable, GoogleClou
 
   /// Standard field mask for the set of fields to be updated. Updates are only
   /// supported on the `certificate_raw_data` and `display_name` fields.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateAuthorizedCertificateRequest`.
   public init() {}
@@ -75,11 +75,10 @@ public struct UpdateAuthorizedCertificateRequest: Codable, Equatable, GoogleClou
     }
     self.certificate = try container.decodeIfPresent(
       AuthorizedCertificate.self, forKey: .certificate)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +95,10 @@ public struct UpdateAuthorizedCertificateRequest: Codable, Equatable, GoogleClou
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.UpdateAuthorizedCertificateRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

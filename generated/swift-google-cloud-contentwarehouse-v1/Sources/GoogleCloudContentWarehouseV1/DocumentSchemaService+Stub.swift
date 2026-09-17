@@ -15,34 +15,34 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DocumentSchemaServiceStub: Sendable {
     func createDocumentSchema(
-      request: CreateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema
 
     func updateDocumentSchema(
-      request: UpdateDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema
 
     func getDocumentSchema(
-      request: GetDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.DocumentSchema
 
     func deleteDocumentSchema(
-      request: DeleteDocumentSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listDocumentSchemas(
-      request: ListDocumentSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDocumentSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListDocumentSchemasResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

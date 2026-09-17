@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Vertex AI-related information associated with the finding.
-public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VertexAi: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Datasets associated with the finding.
@@ -27,7 +27,7 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Pipelines associated with the finding.
   public var pipelines: [VertexAi.Pipeline] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VertexAi`.
   public init() {}
@@ -70,7 +70,7 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -84,7 +84,7 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Vertex AI dataset associated with the finding.
-  public struct Dataset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Dataset: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Resource name of the dataset, e.g.
@@ -98,7 +98,7 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// bq://scc-nexus-test.AIPPtest.gsod
     public var source: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Dataset`.
     public init() {}
@@ -146,7 +146,7 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -163,16 +163,16 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.VertexAi.Dataset"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Vertex AI training pipeline associated with the finding.
-  public struct Pipeline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Pipeline: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Resource name of the pipeline, e.g.
@@ -182,7 +182,7 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The user-defined display name of pipeline, e.g. plants-classification
     public var displayName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Pipeline`.
     public init() {}
@@ -225,7 +225,7 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -241,21 +241,21 @@ public struct VertexAi: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.VertexAi.Pipeline"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.VertexAi"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

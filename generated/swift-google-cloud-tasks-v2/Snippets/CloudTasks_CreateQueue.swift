@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudTasksV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: CloudTasksClient, projectId: String, locationId: String) async throws {
   let response = try await client.createQueue(

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes list of buckets and their objects to be transformed.
-public struct BucketList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BucketList: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. List of buckets and their objects to be transformed. Currently,
@@ -26,7 +26,7 @@ public struct BucketList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// specified, an error will be returned.
   public var buckets: [BucketList.Bucket] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BucketList`.
   public init() {}
@@ -64,7 +64,7 @@ public struct BucketList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -78,7 +78,7 @@ public struct BucketList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Describes configuration of a single bucket and its objects to be
   /// transformed.
-  public struct Bucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Bucket: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Bucket name for the objects to be transformed.
@@ -87,7 +87,7 @@ public struct BucketList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Specifies objects to be transformed.
     public var objectConfiguration: OneOf_ObjectConfiguration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Bucket`.
     public init() {}
@@ -147,7 +147,7 @@ public struct BucketList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.objectConfiguration = objectConfiguration
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -179,21 +179,21 @@ public struct BucketList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.storagebatchoperations.v1.BucketList.Bucket"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.storagebatchoperations.v1.BucketList"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

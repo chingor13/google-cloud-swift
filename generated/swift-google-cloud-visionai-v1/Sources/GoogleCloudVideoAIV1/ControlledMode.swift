@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The options for receiver under the controlled mode.
-public struct ControlledMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ControlledMode: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// This is the logical starting point to fallback upon should the
@@ -34,7 +34,7 @@ public struct ControlledMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// This is the offset from which to start receiveing.
   public var startingOffset: OneOf_StartingOffset? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ControlledMode`.
   public init() {}
@@ -92,7 +92,7 @@ public struct ControlledMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.startingOffset = startingOffset
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -130,10 +130,10 @@ public struct ControlledMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.ControlledMode"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

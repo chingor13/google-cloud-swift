@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Retrieves the Google Cloud Console billing accounts and associates them with
 /// projects.
@@ -30,7 +30,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   let inner: any Clients.CloudBillingStub
 
   /// Creates a new `CloudBillingClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CloudBillingStub = try Clients.CloudBillingTransport(options)
     inner = Clients.CloudBillingRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_GetBillingAccount")
   public func getBillingAccount(
-    request: GetBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBillingAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.BillingAccount {
     try await self.inner.getBillingAccount(request: request, options: options)
   }
@@ -56,7 +56,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_ListBillingAccounts")
   public func listBillingAccounts(
-    request: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBillingAccountsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse {
     try await self.inner.listBillingAccounts(request: request, options: options)
   }
@@ -67,7 +67,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_ListBillingAccounts")
   public func listBillingAccounts(
-    byItem: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBillingAccountsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<BillingAccount, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse in
@@ -75,7 +75,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
       request.pageToken = token
       return try await self.listBillingAccounts(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a billing account's fields.
@@ -87,7 +87,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_UpdateBillingAccount")
   public func updateBillingAccount(
-    request: UpdateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBillingAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.BillingAccount {
     try await self.inner.updateBillingAccount(request: request, options: options)
   }
@@ -110,7 +110,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_CreateBillingAccount")
   public func createBillingAccount(
-    request: CreateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBillingAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.BillingAccount {
     try await self.inner.createBillingAccount(request: request, options: options)
   }
@@ -122,7 +122,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_ListProjectBillingInfo")
   public func listProjectBillingInfo(
-    request: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProjectBillingInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse {
     try await self.inner.listProjectBillingInfo(request: request, options: options)
   }
@@ -134,7 +134,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_ListProjectBillingInfo")
   public func listProjectBillingInfo(
-    byItem: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProjectBillingInfoRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ProjectBillingInfo, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse in
@@ -142,7 +142,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
       request.pageToken = token
       return try await self.listProjectBillingInfo(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the billing information for a project. The current authenticated user
@@ -153,7 +153,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_GetProjectBillingInfo")
   public func getProjectBillingInfo(
-    request: GetProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProjectBillingInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo {
     try await self.inner.getProjectBillingInfo(request: request, options: options)
   }
@@ -193,7 +193,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_UpdateProjectBillingInfo")
   public func updateProjectBillingInfo(
-    request: UpdateProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateProjectBillingInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo {
     try await self.inner.updateProjectBillingInfo(request: request, options: options)
   }
@@ -205,7 +205,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -218,7 +218,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -229,7 +229,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -238,7 +238,7 @@ public final class CloudBillingClient: Clients.CloudBillingProtocol, Sendable {
   ///
   /// @Snippet(path: "CloudBilling_MoveBillingAccount")
   public func moveBillingAccount(
-    request: MoveBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: MoveBillingAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.BillingAccount {
     try await self.inner.moveBillingAccount(request: request, options: options)
   }
@@ -365,67 +365,67 @@ extension Clients {
 
     /// See `CloudBillingClient.getBillingAccount`.
     func getBillingAccount(
-      request: GetBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount
 
     /// See `CloudBillingClient.listBillingAccounts`.
     func listBillingAccounts(
-      request: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBillingAccountsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse
 
     /// See `CloudBillingClient.listBillingAccounts`.
     func listBillingAccounts(
-      byItem: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBillingAccountsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BillingAccount, Swift.Error>
 
     /// See `CloudBillingClient.updateBillingAccount`.
     func updateBillingAccount(
-      request: UpdateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount
 
     /// See `CloudBillingClient.createBillingAccount`.
     func createBillingAccount(
-      request: CreateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount
 
     /// See `CloudBillingClient.listProjectBillingInfo`.
     func listProjectBillingInfo(
-      request: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse
 
     /// See `CloudBillingClient.listProjectBillingInfo`.
     func listProjectBillingInfo(
-      byItem: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ProjectBillingInfo, Swift.Error>
 
     /// See `CloudBillingClient.getProjectBillingInfo`.
     func getProjectBillingInfo(
-      request: GetProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo
 
     /// See `CloudBillingClient.updateProjectBillingInfo`.
     func updateProjectBillingInfo(
-      request: UpdateProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo
 
     /// See `CloudBillingClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `CloudBillingClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `CloudBillingClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `CloudBillingClient.moveBillingAccount`.
     func moveBillingAccount(
-      request: MoveBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount
   }
 }
@@ -439,9 +439,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func getBillingAccount(
-    request: GetBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBillingAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.BillingAccount {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBillingAccount(
@@ -460,9 +460,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func listBillingAccounts(
-    request: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBillingAccountsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listBillingAccounts(
@@ -472,13 +472,13 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func listBillingAccounts(
-    byItem: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBillingAccountsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<BillingAccount, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listBillingAccounts(
@@ -497,9 +497,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func updateBillingAccount(
-    request: UpdateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBillingAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.BillingAccount {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateBillingAccount(
@@ -520,9 +520,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func createBillingAccount(
-    request: CreateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBillingAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.BillingAccount {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createBillingAccount(
@@ -552,9 +552,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func listProjectBillingInfo(
-    request: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProjectBillingInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProjectBillingInfo(
@@ -564,13 +564,13 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func listProjectBillingInfo(
-    byItem: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProjectBillingInfoRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ProjectBillingInfo, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProjectBillingInfo(
@@ -589,9 +589,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func getProjectBillingInfo(
-    request: GetProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProjectBillingInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getProjectBillingInfo(
@@ -610,9 +610,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func updateProjectBillingInfo(
-    request: UpdateProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateProjectBillingInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateProjectBillingInfo(
@@ -633,9 +633,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -654,9 +654,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -677,9 +677,9 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(
@@ -700,8 +700,8 @@ extension Clients.CloudBillingProtocol {
   }
 
   public func moveBillingAccount(
-    request: MoveBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: MoveBillingAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingV1.BillingAccount {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

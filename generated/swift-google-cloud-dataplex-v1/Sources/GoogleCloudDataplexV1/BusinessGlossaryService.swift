@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// BusinessGlossaryService provides APIs for managing business glossary
 /// resources for enterprise customers.
@@ -36,11 +36,11 @@ import GoogleCloudGax
 public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServiceProtocol, Sendable
 {
   let inner: any Clients.BusinessGlossaryServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `BusinessGlossaryServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.BusinessGlossaryServiceStub =
       try Clients.BusinessGlossaryServiceTransport(options)
     inner = Clients.BusinessGlossaryServiceRetry(inner, options: options)
@@ -56,7 +56,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_CreateGlossary")
   public func createGlossary(
-    request: CreateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGlossaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createGlossary(request: request, options: options)
   }
@@ -65,21 +65,21 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_CreateGlossary")
   public func createGlossary(
-    withPolling: CreateGlossaryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Glossary> {
+    withPolling: CreateGlossaryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Glossary> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Glossary>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Glossary>.State
+      in
       return try op._extractStatus(Glossary.self)
     }
     let rawOp = try await self.createGlossary(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Glossary>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Glossary>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -91,7 +91,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_UpdateGlossary")
   public func updateGlossary(
-    request: UpdateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGlossaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateGlossary(request: request, options: options)
   }
@@ -100,21 +100,21 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_UpdateGlossary")
   public func updateGlossary(
-    withPolling: UpdateGlossaryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Glossary> {
+    withPolling: UpdateGlossaryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Glossary> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Glossary>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Glossary>.State
+      in
       return try op._extractStatus(Glossary.self)
     }
     let rawOp = try await self.updateGlossary(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Glossary>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Glossary>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -127,7 +127,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_DeleteGlossary")
   public func deleteGlossary(
-    request: DeleteGlossaryRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGlossaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteGlossary(request: request, options: options)
   }
@@ -137,21 +137,21 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_DeleteGlossary")
   public func deleteGlossary(
-    withPolling: DeleteGlossaryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteGlossaryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteGlossary(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -163,7 +163,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_GetGlossary")
   public func getGlossary(
-    request: GetGlossaryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGlossaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Glossary {
     try await self.inner.getGlossary(request: request, options: options)
   }
@@ -172,7 +172,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListGlossaries")
   public func listGlossaries(
-    request: ListGlossariesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGlossariesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListGlossariesResponse {
     try await self.inner.listGlossaries(request: request, options: options)
   }
@@ -181,7 +181,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListGlossaries")
   public func listGlossaries(
-    byItem: ListGlossariesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGlossariesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Glossary, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListGlossariesResponse in
@@ -189,14 +189,14 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
       request.pageToken = token
       return try await self.listGlossaries(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a new GlossaryCategory resource.
   ///
   /// @Snippet(path: "BusinessGlossaryService_CreateGlossaryCategory")
   public func createGlossaryCategory(
-    request: CreateGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGlossaryCategoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryCategory {
     try await self.inner.createGlossaryCategory(request: request, options: options)
   }
@@ -205,7 +205,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_UpdateGlossaryCategory")
   public func updateGlossaryCategory(
-    request: UpdateGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGlossaryCategoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryCategory {
     try await self.inner.updateGlossaryCategory(request: request, options: options)
   }
@@ -216,7 +216,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_DeleteGlossaryCategory")
   public func deleteGlossaryCategory(
-    request: DeleteGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGlossaryCategoryRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteGlossaryCategory(request: request, options: options)
   }
@@ -225,7 +225,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_GetGlossaryCategory")
   public func getGlossaryCategory(
-    request: GetGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGlossaryCategoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryCategory {
     try await self.inner.getGlossaryCategory(request: request, options: options)
   }
@@ -234,7 +234,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListGlossaryCategories")
   public func listGlossaryCategories(
-    request: ListGlossaryCategoriesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGlossaryCategoriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListGlossaryCategoriesResponse {
     try await self.inner.listGlossaryCategories(request: request, options: options)
   }
@@ -243,7 +243,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListGlossaryCategories")
   public func listGlossaryCategories(
-    byItem: ListGlossaryCategoriesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGlossaryCategoriesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GlossaryCategory, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListGlossaryCategoriesResponse in
@@ -251,14 +251,14 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
       request.pageToken = token
       return try await self.listGlossaryCategories(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a new GlossaryTerm resource.
   ///
   /// @Snippet(path: "BusinessGlossaryService_CreateGlossaryTerm")
   public func createGlossaryTerm(
-    request: CreateGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGlossaryTermRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryTerm {
     try await self.inner.createGlossaryTerm(request: request, options: options)
   }
@@ -267,7 +267,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_UpdateGlossaryTerm")
   public func updateGlossaryTerm(
-    request: UpdateGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGlossaryTermRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryTerm {
     try await self.inner.updateGlossaryTerm(request: request, options: options)
   }
@@ -276,7 +276,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_DeleteGlossaryTerm")
   public func deleteGlossaryTerm(
-    request: DeleteGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGlossaryTermRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteGlossaryTerm(request: request, options: options)
   }
@@ -285,7 +285,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_GetGlossaryTerm")
   public func getGlossaryTerm(
-    request: GetGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGlossaryTermRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryTerm {
     try await self.inner.getGlossaryTerm(request: request, options: options)
   }
@@ -294,7 +294,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListGlossaryTerms")
   public func listGlossaryTerms(
-    request: ListGlossaryTermsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGlossaryTermsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListGlossaryTermsResponse {
     try await self.inner.listGlossaryTerms(request: request, options: options)
   }
@@ -303,7 +303,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListGlossaryTerms")
   public func listGlossaryTerms(
-    byItem: ListGlossaryTermsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGlossaryTermsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GlossaryTerm, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListGlossaryTermsResponse in
@@ -311,7 +311,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
       request.pageToken = token
       return try await self.listGlossaryTerms(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
@@ -335,7 +335,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -361,7 +361,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -369,14 +369,14 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "BusinessGlossaryService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -389,7 +389,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -399,7 +399,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -414,7 +414,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -425,7 +425,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -436,7 +436,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -444,7 +444,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -453,7 +453,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -464,7 +464,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -475,7 +475,7 @@ public final class BusinessGlossaryServiceClient: Clients.BusinessGlossaryServic
   ///
   /// @Snippet(path: "BusinessGlossaryService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -492,7 +492,7 @@ extension Clients {
     func createGlossary(request: CreateGlossaryRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BusinessGlossaryServiceClient.createGlossary`.
-    func createGlossary(withPolling: CreateGlossaryRequest) async throws -> any GoogleCloudGax
+    func createGlossary(withPolling: CreateGlossaryRequest) async throws -> any GoogleGax
       .PollableOperation<Glossary>
 
     /// See `BusinessGlossaryServiceClient.createGlossary`.
@@ -500,32 +500,32 @@ extension Clients {
       parent: Swift.String,
       glossary: Glossary?,
       glossaryId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Glossary>
+    ) async throws -> any GoogleGax.PollableOperation<Glossary>
 
     /// See `BusinessGlossaryServiceClient.updateGlossary`.
     func updateGlossary(request: UpdateGlossaryRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BusinessGlossaryServiceClient.updateGlossary`.
-    func updateGlossary(withPolling: UpdateGlossaryRequest) async throws -> any GoogleCloudGax
+    func updateGlossary(withPolling: UpdateGlossaryRequest) async throws -> any GoogleGax
       .PollableOperation<Glossary>
 
     /// See `BusinessGlossaryServiceClient.updateGlossary`.
     func updateGlossary(
       glossary: Glossary?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Glossary>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Glossary>
 
     /// See `BusinessGlossaryServiceClient.deleteGlossary`.
     func deleteGlossary(request: DeleteGlossaryRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `BusinessGlossaryServiceClient.deleteGlossary`.
-    func deleteGlossary(withPolling: DeleteGlossaryRequest) async throws -> any GoogleCloudGax
+    func deleteGlossary(withPolling: DeleteGlossaryRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `BusinessGlossaryServiceClient.deleteGlossary`.
     func deleteGlossary(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `BusinessGlossaryServiceClient.getGlossary`.
     func getGlossary(request: GetGlossaryRequest) async throws -> GoogleCloudDataplexV1.Glossary
@@ -567,7 +567,7 @@ extension Clients {
     /// See `BusinessGlossaryServiceClient.updateGlossaryCategory`.
     func updateGlossaryCategory(
       category: GlossaryCategory?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDataplexV1.GlossaryCategory
 
     /// See `BusinessGlossaryServiceClient.deleteGlossaryCategory`.
@@ -619,7 +619,7 @@ extension Clients {
     /// See `BusinessGlossaryServiceClient.updateGlossaryTerm`.
     func updateGlossaryTerm(
       term: GlossaryTerm?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDataplexV1.GlossaryTerm
 
     /// See `BusinessGlossaryServiceClient.deleteGlossaryTerm`.
@@ -709,157 +709,157 @@ extension Clients {
 
     /// See `BusinessGlossaryServiceClient.createGlossary`.
     func createGlossary(
-      request: CreateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BusinessGlossaryServiceClient.createGlossary`.
     func createGlossary(
-      withPolling: CreateGlossaryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Glossary>
+      withPolling: CreateGlossaryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Glossary>
 
     /// See `BusinessGlossaryServiceClient.updateGlossary`.
     func updateGlossary(
-      request: UpdateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BusinessGlossaryServiceClient.updateGlossary`.
     func updateGlossary(
-      withPolling: UpdateGlossaryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Glossary>
+      withPolling: UpdateGlossaryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Glossary>
 
     /// See `BusinessGlossaryServiceClient.deleteGlossary`.
     func deleteGlossary(
-      request: DeleteGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `BusinessGlossaryServiceClient.deleteGlossary`.
     func deleteGlossary(
-      withPolling: DeleteGlossaryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteGlossaryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `BusinessGlossaryServiceClient.getGlossary`.
     func getGlossary(
-      request: GetGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Glossary
 
     /// See `BusinessGlossaryServiceClient.listGlossaries`.
     func listGlossaries(
-      request: ListGlossariesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGlossariesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListGlossariesResponse
 
     /// See `BusinessGlossaryServiceClient.listGlossaries`.
     func listGlossaries(
-      byItem: ListGlossariesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGlossariesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Glossary, Swift.Error>
 
     /// See `BusinessGlossaryServiceClient.createGlossaryCategory`.
     func createGlossaryCategory(
-      request: CreateGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGlossaryCategoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryCategory
 
     /// See `BusinessGlossaryServiceClient.updateGlossaryCategory`.
     func updateGlossaryCategory(
-      request: UpdateGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGlossaryCategoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryCategory
 
     /// See `BusinessGlossaryServiceClient.deleteGlossaryCategory`.
     func deleteGlossaryCategory(
-      request: DeleteGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGlossaryCategoryRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BusinessGlossaryServiceClient.getGlossaryCategory`.
     func getGlossaryCategory(
-      request: GetGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlossaryCategoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryCategory
 
     /// See `BusinessGlossaryServiceClient.listGlossaryCategories`.
     func listGlossaryCategories(
-      request: ListGlossaryCategoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGlossaryCategoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListGlossaryCategoriesResponse
 
     /// See `BusinessGlossaryServiceClient.listGlossaryCategories`.
     func listGlossaryCategories(
-      byItem: ListGlossaryCategoriesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGlossaryCategoriesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GlossaryCategory, Swift.Error>
 
     /// See `BusinessGlossaryServiceClient.createGlossaryTerm`.
     func createGlossaryTerm(
-      request: CreateGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGlossaryTermRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryTerm
 
     /// See `BusinessGlossaryServiceClient.updateGlossaryTerm`.
     func updateGlossaryTerm(
-      request: UpdateGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGlossaryTermRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryTerm
 
     /// See `BusinessGlossaryServiceClient.deleteGlossaryTerm`.
     func deleteGlossaryTerm(
-      request: DeleteGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGlossaryTermRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BusinessGlossaryServiceClient.getGlossaryTerm`.
     func getGlossaryTerm(
-      request: GetGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlossaryTermRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GlossaryTerm
 
     /// See `BusinessGlossaryServiceClient.listGlossaryTerms`.
     func listGlossaryTerms(
-      request: ListGlossaryTermsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGlossaryTermsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListGlossaryTermsResponse
 
     /// See `BusinessGlossaryServiceClient.listGlossaryTerms`.
     func listGlossaryTerms(
-      byItem: ListGlossaryTermsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGlossaryTermsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GlossaryTerm, Swift.Error>
 
     /// See `BusinessGlossaryServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `BusinessGlossaryServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `BusinessGlossaryServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `BusinessGlossaryServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `BusinessGlossaryServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `BusinessGlossaryServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `BusinessGlossaryServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `BusinessGlossaryServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `BusinessGlossaryServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BusinessGlossaryServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -873,24 +873,24 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func createGlossary(
-    request: CreateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGlossaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createGlossary(withPolling: CreateGlossaryRequest) async throws -> any GoogleCloudGax
+  public func createGlossary(withPolling: CreateGlossaryRequest) async throws -> any GoogleGax
     .PollableOperation<Glossary>
   {
     try await self.createGlossary(withPolling: withPolling, options: .init())
   }
 
   public func createGlossary(
-    withPolling: CreateGlossaryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Glossary> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Glossary>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateGlossaryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Glossary> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Glossary>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -898,7 +898,7 @@ extension Clients.BusinessGlossaryServiceProtocol {
     parent: Swift.String,
     glossary: Glossary?,
     glossaryId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Glossary> {
+  ) async throws -> any GoogleGax.PollableOperation<Glossary> {
     let request = CreateGlossaryRequest().with {
       $0.parent = parent
       $0.glossary = glossary
@@ -914,31 +914,31 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func updateGlossary(
-    request: UpdateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGlossaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateGlossary(withPolling: UpdateGlossaryRequest) async throws -> any GoogleCloudGax
+  public func updateGlossary(withPolling: UpdateGlossaryRequest) async throws -> any GoogleGax
     .PollableOperation<Glossary>
   {
     try await self.updateGlossary(withPolling: withPolling, options: .init())
   }
 
   public func updateGlossary(
-    withPolling: UpdateGlossaryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Glossary> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Glossary>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateGlossaryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Glossary> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Glossary>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateGlossary(
     glossary: Glossary?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Glossary> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Glossary> {
     let request = UpdateGlossaryRequest().with {
       $0.glossary = glossary
       $0.updateMask = updateMask
@@ -953,30 +953,30 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func deleteGlossary(
-    request: DeleteGlossaryRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGlossaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteGlossary(withPolling: DeleteGlossaryRequest) async throws -> any GoogleCloudGax
+  public func deleteGlossary(withPolling: DeleteGlossaryRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteGlossary(withPolling: withPolling, options: .init())
   }
 
   public func deleteGlossary(
-    withPolling: DeleteGlossaryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteGlossaryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteGlossary(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteGlossaryRequest().with {
       $0.name = name
     }
@@ -990,9 +990,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func getGlossary(
-    request: GetGlossaryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGlossaryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.Glossary {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getGlossary(
@@ -1011,9 +1011,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listGlossaries(
-    request: ListGlossariesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGlossariesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListGlossariesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listGlossaries(
@@ -1023,13 +1023,13 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listGlossaries(
-    byItem: ListGlossariesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGlossariesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Glossary, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListGlossariesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listGlossaries(
@@ -1048,9 +1048,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func createGlossaryCategory(
-    request: CreateGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGlossaryCategoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryCategory {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createGlossaryCategory(
@@ -1073,14 +1073,14 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func updateGlossaryCategory(
-    request: UpdateGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGlossaryCategoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryCategory {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateGlossaryCategory(
     category: GlossaryCategory?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudDataplexV1.GlossaryCategory {
     let request = UpdateGlossaryCategoryRequest().with {
       $0.category = category
@@ -1094,9 +1094,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func deleteGlossaryCategory(
-    request: DeleteGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGlossaryCategoryRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteGlossaryCategory(
@@ -1115,9 +1115,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func getGlossaryCategory(
-    request: GetGlossaryCategoryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGlossaryCategoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryCategory {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getGlossaryCategory(
@@ -1136,9 +1136,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listGlossaryCategories(
-    request: ListGlossaryCategoriesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGlossaryCategoriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListGlossaryCategoriesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listGlossaryCategories(
@@ -1148,13 +1148,13 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listGlossaryCategories(
-    byItem: ListGlossaryCategoriesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGlossaryCategoriesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GlossaryCategory, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListGlossaryCategoriesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listGlossaryCategories(
@@ -1173,9 +1173,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func createGlossaryTerm(
-    request: CreateGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGlossaryTermRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryTerm {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createGlossaryTerm(
@@ -1198,14 +1198,14 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func updateGlossaryTerm(
-    request: UpdateGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGlossaryTermRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryTerm {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateGlossaryTerm(
     term: GlossaryTerm?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudDataplexV1.GlossaryTerm {
     let request = UpdateGlossaryTermRequest().with {
       $0.term = term
@@ -1219,9 +1219,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func deleteGlossaryTerm(
-    request: DeleteGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGlossaryTermRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteGlossaryTerm(
@@ -1240,9 +1240,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func getGlossaryTerm(
-    request: GetGlossaryTermRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGlossaryTermRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GlossaryTerm {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getGlossaryTerm(
@@ -1261,9 +1261,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listGlossaryTerms(
-    request: ListGlossaryTermsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGlossaryTermsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListGlossaryTermsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listGlossaryTerms(
@@ -1273,13 +1273,13 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listGlossaryTerms(
-    byItem: ListGlossaryTermsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGlossaryTermsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GlossaryTerm, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListGlossaryTermsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listGlossaryTerms(
@@ -1298,9 +1298,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1310,13 +1310,13 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1326,9 +1326,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -1338,9 +1338,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -1350,9 +1350,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -1362,9 +1362,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1374,9 +1374,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1386,13 +1386,13 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1413,9 +1413,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1432,9 +1432,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1451,9 +1451,9 @@ extension Clients.BusinessGlossaryServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

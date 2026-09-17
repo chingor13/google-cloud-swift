@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An NFS share.
-public struct NfsShare: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NfsShare: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. The name of the NFS share.
@@ -51,7 +51,7 @@ public struct NfsShare: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Immutable. The storage type of the underlying volume.
   public var storageType: NfsShare.StorageType = NfsShare.StorageType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NfsShare`.
   public init() {}
@@ -132,7 +132,7 @@ public struct NfsShare: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -153,7 +153,7 @@ public struct NfsShare: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Represents an 'access point' for the share.
-  public struct AllowedClient: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AllowedClient: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The network the access point sits on.
@@ -185,7 +185,7 @@ public struct NfsShare: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// example like "10.0.0.0:/g123456789-nfs001"
     public var nfsPath: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AllowedClient`.
     public init() {}
@@ -260,7 +260,7 @@ public struct NfsShare: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -282,11 +282,11 @@ public struct NfsShare: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.baremetalsolution.v2.NfsShare.AllowedClient"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -622,10 +622,10 @@ public struct NfsShare: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.baremetalsolution.v2.NfsShare"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

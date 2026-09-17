@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudDatastreamV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DatastreamClient, projectId: String, locationId: String, streamId: String)
   async throws
@@ -32,7 +32,7 @@ func sample(client: DatastreamClient, projectId: String, locationId: String, str
         $0.stream = Stream().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/streams/\(streamId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

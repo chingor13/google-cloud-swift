@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration of the persistence functionality.
-public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ClusterPersistenceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The mode of persistence.
@@ -31,7 +31,7 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Optional. AOF configuration. This field will be ignored if mode is not AOF.
   public var aofConfig: ClusterPersistenceConfig.AOFConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ClusterPersistenceConfig`.
   public init() {}
@@ -79,7 +79,7 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
       ClusterPersistenceConfig.AOFConfig.self, forKey: .aofConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,7 +94,7 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
   }
 
   /// Configuration of the RDB based persistence.
-  public struct RDBConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RDBConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Period between RDB snapshots.
@@ -104,9 +104,9 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
     /// Optional. The time that the first snapshot was/will be attempted, and to
     /// which future snapshots will be aligned. If not provided, the current time
     /// will be used.
-    public var rdbSnapshotStartTime: GoogleCloudWKT.Timestamp? = nil
+    public var rdbSnapshotStartTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RDBConfig`.
     public init() {}
@@ -147,10 +147,10 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
         self.rdbSnapshotPeriod = value
       }
       self.rdbSnapshotStartTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .rdbSnapshotStartTime)
+        GoogleWKT.Timestamp.self, forKey: .rdbSnapshotStartTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -285,23 +285,23 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.redis.cluster.v1.ClusterPersistenceConfig.RDBConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration of the AOF based persistence.
-  public struct AOFConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AOFConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. fsync configuration.
     public var appendFsync: ClusterPersistenceConfig.AOFConfig.AppendFsync =
       ClusterPersistenceConfig.AOFConfig.AppendFsync()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AOFConfig`.
     public init() {}
@@ -341,7 +341,7 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -471,11 +471,11 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.redis.cluster.v1.ClusterPersistenceConfig.AOFConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -594,10 +594,10 @@ public struct ClusterPersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.redis.cluster.v1.ClusterPersistenceConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

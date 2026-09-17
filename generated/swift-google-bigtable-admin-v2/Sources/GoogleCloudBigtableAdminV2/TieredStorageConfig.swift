@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Config for tiered storage.
 /// A valid config must have a valid TieredStorageRule. Otherwise the whole
 /// TieredStorageConfig must be unset.
 /// By default all data is stored in the SSD tier (only SSD instances can
 /// configure tiered storage).
-public struct TieredStorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TieredStorageConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Rule to specify what data is stored in the infrequent access(IA) tier.
   /// The IA tier allows storing more data per node with reduced performance.
   public var infrequentAccess: TieredStorageRule? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TieredStorageConfig`.
   public init() {}
@@ -66,7 +66,7 @@ public struct TieredStorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       TieredStorageRule.self, forKey: .infrequentAccess)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,10 +81,10 @@ public struct TieredStorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.TieredStorageConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

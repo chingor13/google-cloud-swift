@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ServerTlsPolicy is a resource that specifies how a server should authenticate
 /// incoming requests. This resource itself does not affect configuration unless
@@ -26,7 +26,7 @@ import Foundation
 /// or `INTERNAL_MANAGED` load balancing scheme. Traffic Director compatible
 /// ServerTlsPolicies can be attached to EndpointPolicy and TargetHttpsProxy with
 /// Traffic Director `INTERNAL_SELF_MANAGED` load balancing scheme.
-public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ServerTlsPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the ServerTlsPolicy resource. It matches the pattern
@@ -37,10 +37,10 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Set of label tags associated with the resource.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -77,7 +77,7 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// text and mTLS connections.
   public var mtlsPolicy: ServerTlsPolicy.MTLSPolicy? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ServerTlsPolicy`.
   public init() {}
@@ -130,10 +130,8 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -147,7 +145,7 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ServerTlsPolicy.MTLSPolicy.self, forKey: .mtlsPolicy)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -167,7 +165,7 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Specification of the MTLSPolicy.
-  public struct MTLSPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MTLSPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// When the client presents an invalid certificate or no certificate to the
@@ -196,7 +194,7 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Balancers.
     public var clientValidationTrustConfig: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MTLSPolicy`.
     public init() {}
@@ -250,7 +248,7 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -383,21 +381,21 @@ public struct ServerTlsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networksecurity.v1.ServerTlsPolicy.MTLSPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.ServerTlsPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

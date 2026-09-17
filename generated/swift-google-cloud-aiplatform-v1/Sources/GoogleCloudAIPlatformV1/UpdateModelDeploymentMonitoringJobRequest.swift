@@ -16,13 +16,13 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [JobService.UpdateModelDeploymentMonitoringJob][google.cloud.aiplatform.v1.JobService.UpdateModelDeploymentMonitoringJob].
   ///
   /// [google.cloud.aiplatform.v1.JobService.UpdateModelDeploymentMonitoringJob]: <doc:JobServiceClient/updateModelDeploymentMonitoringJob(request:options:)>
-  public struct UpdateModelDeploymentMonitoringJobRequest: Codable, Equatable, GoogleCloudWKT
+  public struct UpdateModelDeploymentMonitoringJobRequest: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -56,9 +56,9 @@
     ///   * `model_deployment_monitoring_objective_configs.objective_config.training_dataset`
     ///   * `model_deployment_monitoring_objective_configs.objective_config.training_prediction_skew_detection_config`
     ///   * `model_deployment_monitoring_objective_configs.objective_config.prediction_drift_detection_config`
-    public var updateMask: GoogleCloudWKT.FieldMask? = nil
+    public var updateMask: GoogleWKT.FieldMask? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpdateModelDeploymentMonitoringJobRequest`.
     public init() {}
@@ -96,11 +96,10 @@
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.modelDeploymentMonitoringJob = try container.decodeIfPresent(
         ModelDeploymentMonitoringJob.self, forKey: .modelDeploymentMonitoringJob)
-      self.updateMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+      self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -118,11 +117,11 @@
       return
         "type.googleapis.com/google.cloud.aiplatform.v1.UpdateModelDeploymentMonitoringJobRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

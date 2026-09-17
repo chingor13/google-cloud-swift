@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The Request body of the `SearchJobs` call.
-public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchJobsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the tenant to search within.
@@ -361,7 +361,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var relevanceThreshold: SearchJobsRequest.RelevanceThreshold =
     SearchJobsRequest.RelevanceThreshold()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchJobsRequest`.
   public init() {}
@@ -478,7 +478,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -509,7 +509,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// [SearchJobsRequest][google.cloud.talent.v4.SearchJobsRequest].
   ///
   /// [google.cloud.talent.v4.SearchJobsRequest]: <doc:SearchJobsRequest>
-  public struct CustomRankingInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CustomRankingInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Controls over how important the score of
@@ -549,7 +549,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// [google.cloud.talent.v4.Job.custom_attributes]: <doc:Job/customAttributes>
     public var rankingExpression: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CustomRankingInfo`.
     public init() {}
@@ -594,7 +594,7 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -758,11 +758,11 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1311,10 +1311,10 @@ public struct SearchJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.SearchJobsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

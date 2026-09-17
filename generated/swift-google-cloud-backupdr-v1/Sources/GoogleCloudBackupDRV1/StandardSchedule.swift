@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `StandardSchedule` defines a schedule that run within the confines of a
 /// defined window of days. We can define recurrence type for schedule as
 /// HOURLY, DAILY, WEEKLY, MONTHLY or YEARLY.
-public struct StandardSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StandardSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Specifies the `RecurrenceType` for the schedule.
@@ -86,7 +86,7 @@ public struct StandardSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// list of valid timezone names. For e.g., Europe/Paris.
   public var timeZone: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StandardSchedule`.
   public init() {}
@@ -158,7 +158,7 @@ public struct StandardSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -306,10 +306,10 @@ public struct StandardSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.StandardSchedule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

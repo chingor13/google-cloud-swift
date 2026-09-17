@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Service resource is a logical component of an application that can share
 /// state and communicate in a secure fashion with other services.
@@ -24,7 +24,7 @@ import Foundation
 /// analysis or API requests from mobile devices. Each service has a
 /// collection of versions that define a specific set of code used to
 /// implement the functionality of that service.
-public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Full path to the Service resource in the API.
@@ -59,7 +59,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Ingress settings for this service. Will apply to all versions.
   public var networkSettings: NetworkSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Service`.
   public init() {}
@@ -115,7 +115,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       NetworkSettings.self, forKey: .networkSettings)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,10 +134,10 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.Service"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,92 +16,92 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataProductServiceStub: Sendable {
     func createDataProduct(
-      request: CreateDataProductRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteDataProduct(
-      request: DeleteDataProductRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getDataProduct(
-      request: GetDataProductRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.DataProduct
 
     func listDataProducts(
-      request: ListDataProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListDataProductsResponse
 
     func updateDataProduct(
-      request: UpdateDataProductRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func requestDataProductAccess(
-      request: RequestDataProductAccessRequest, options: GoogleCloudGax.RequestOptions
+      request: RequestDataProductAccessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.RequestDataProductAccessResponse
 
     func createDataAsset(
-      request: CreateDataAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateDataAsset(
-      request: UpdateDataAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteDataAsset(
-      request: DeleteDataAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getDataAsset(
-      request: GetDataAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.DataAsset
 
     func listDataAssets(
-      request: ListDataAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListDataAssetsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

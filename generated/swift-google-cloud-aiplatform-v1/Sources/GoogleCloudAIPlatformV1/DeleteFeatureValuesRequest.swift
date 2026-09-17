@@ -16,14 +16,14 @@
 
 #if FeaturestoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleType
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [FeaturestoreService.DeleteFeatureValues][google.cloud.aiplatform.v1.FeaturestoreService.DeleteFeatureValues].
   ///
   /// [google.cloud.aiplatform.v1.FeaturestoreService.DeleteFeatureValues]: <doc:FeaturestoreServiceClient/deleteFeatureValues(request:options:)>
-  public struct DeleteFeatureValuesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeleteFeatureValuesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the EntityType grouping the Features for
@@ -34,7 +34,7 @@
     /// Defines options to select feature values to be deleted.
     public var deleteOption: OneOf_DeleteOption? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeleteFeatureValuesRequest`.
     public init() {}
@@ -99,7 +99,7 @@
       self.deleteOption = deleteOption
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -123,14 +123,14 @@
     /// Message to select entity.
     /// If an entity id is selected, all the feature values corresponding to the
     /// entity id will be deleted, including the entityId.
-    public struct SelectEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SelectEntity: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Selectors choosing feature values of which entity id to be
       /// deleted from the EntityType.
       public var entityIdSelector: EntityIdSelector? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SelectEntity`.
       public init() {}
@@ -167,7 +167,7 @@
           EntityIdSelector.self, forKey: .entityIdSelector)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -183,11 +183,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectEntity"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -197,7 +197,7 @@
     /// from the specified feature IDs within the specified time range.
     /// This might include data from the online storage. If you want to retain
     /// any deleted historical data in the online storage, you must re-ingest it.
-    public struct SelectTimeRangeAndFeature: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SelectTimeRangeAndFeature: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Select feature generated within a half-inclusive time range.
@@ -213,7 +213,7 @@
       /// be true will make the deletion have no impact on online serving.
       public var skipOnlineStorageDelete: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SelectTimeRangeAndFeature`.
       public init() {}
@@ -260,7 +260,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -278,11 +278,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.DeleteFeatureValuesRequest.SelectTimeRangeAndFeature"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -298,11 +298,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DeleteFeatureValuesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

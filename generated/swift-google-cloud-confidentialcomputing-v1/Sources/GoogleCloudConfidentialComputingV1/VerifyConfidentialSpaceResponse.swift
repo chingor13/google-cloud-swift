@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// VerifyConfidentialSpaceResponse is returned once a Confidential Space
 /// attestation has been successfully verified, containing a signed token.
-public struct VerifyConfidentialSpaceResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VerifyConfidentialSpaceResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The attestation token issued by this service. It contains
@@ -35,7 +35,7 @@ public struct VerifyConfidentialSpaceResponse: Codable, Equatable, GoogleCloudWK
   /// image signatures.
   public var partialErrors: [GoogleRpc.Status] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VerifyConfidentialSpaceResponse`.
   public init() {}
@@ -78,7 +78,7 @@ public struct VerifyConfidentialSpaceResponse: Codable, Equatable, GoogleCloudWK
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,10 +95,10 @@ public struct VerifyConfidentialSpaceResponse: Codable, Equatable, GoogleCloudWK
     return
       "type.googleapis.com/google.cloud.confidentialcomputing.v1.VerifyConfidentialSpaceResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

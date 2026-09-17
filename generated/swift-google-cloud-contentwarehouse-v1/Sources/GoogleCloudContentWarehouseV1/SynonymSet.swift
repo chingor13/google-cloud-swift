@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a list of synonyms for a given context.
 /// For example a context "sales" could contain:
@@ -23,7 +23,7 @@ import Foundation
 /// Synonym 2: money, credit, finance, payment
 /// Synonym 3: shipping, freight, transport
 /// Each SynonymSets should be disjoint
-public struct SynonymSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SynonymSet: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the SynonymSet
@@ -40,7 +40,7 @@ public struct SynonymSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// List of Synonyms for the context.
   public var synonyms: [SynonymSet.Synonym] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SynonymSet`.
   public init() {}
@@ -88,7 +88,7 @@ public struct SynonymSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,13 +104,13 @@ public struct SynonymSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Represents a list of words given by the customer
   /// All these words are synonyms of each other.
-  public struct Synonym: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Synonym: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// For example: sale, invoice, bill, order
     public var words: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Synonym`.
     public init() {}
@@ -148,7 +148,7 @@ public struct SynonymSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -163,21 +163,21 @@ public struct SynonymSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.contentwarehouse.v1.SynonymSet.Synonym"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contentwarehouse.v1.SynonymSet"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

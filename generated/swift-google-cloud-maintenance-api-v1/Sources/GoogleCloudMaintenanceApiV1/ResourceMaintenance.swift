@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ResourceMaintenance is a resource that represents a maintenance operation
 /// on a resource.
-public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResourceMaintenance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the resource_maintenance resource.
@@ -37,27 +37,27 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var state: ResourceMaintenance.State = ResourceMaintenance.State()
 
   /// Output only. The create time of the resource maintenance.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The update time of the resource maintenance.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the resource maintenance has started.
-  public var maintenanceStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var maintenanceStartTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the resource maintenance has completed.
-  public var maintenanceEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var maintenanceEndTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the resource maintenance was cancelled.
-  public var maintenanceCancelTime: GoogleCloudWKT.Timestamp? = nil
+  public var maintenanceCancelTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the maintenance on the resource was scheduled to
   /// start.
-  public var maintenanceScheduledStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var maintenanceScheduledStartTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the maintenance on the resource was scheduled to
   /// end.
-  public var maintenanceScheduledEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var maintenanceScheduledEndTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Indicates whether the user has some control over that
   /// maintenance, either proactively before maintenance was scheduled with
@@ -92,7 +92,7 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// and server agree on the ordering of a resource being written.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResourceMaintenance`.
   public init() {}
@@ -168,20 +168,18 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(ResourceMaintenance.State.self, forKey: .state) {
       self.state = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.maintenanceStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .maintenanceStartTime)
+      GoogleWKT.Timestamp.self, forKey: .maintenanceStartTime)
     self.maintenanceEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .maintenanceEndTime)
+      GoogleWKT.Timestamp.self, forKey: .maintenanceEndTime)
     self.maintenanceCancelTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .maintenanceCancelTime)
+      GoogleWKT.Timestamp.self, forKey: .maintenanceCancelTime)
     self.maintenanceScheduledStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .maintenanceScheduledStartTime)
+      GoogleWKT.Timestamp.self, forKey: .maintenanceScheduledStartTime)
     self.maintenanceScheduledEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .maintenanceScheduledEndTime)
+      GoogleWKT.Timestamp.self, forKey: .maintenanceScheduledEndTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .userControllable) {
       self.userControllable = value
     }
@@ -205,7 +203,7 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -236,7 +234,7 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
   }
 
   /// Resource contains information about the resource affected by maintenance.
-  public struct Resource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Resource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Name is the reference to the consumer resource affected by
@@ -256,7 +254,7 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// reported.
     public var type: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Resource`.
     public init() {}
@@ -304,7 +302,7 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -321,16 +319,16 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.maintenance.api.v1.ResourceMaintenance.Resource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Maintenance is the maintenance details of a resource's maintenance.
-  public struct Maintenance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Maintenance: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Maintenance is the name of the corresponding maintenance resource
@@ -346,7 +344,7 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// Output only. The category of the maintenance.
     public var category: MaintenanceCategory = MaintenanceCategory()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Maintenance`.
     public init() {}
@@ -399,7 +397,7 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -417,11 +415,11 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.maintenance.api.v1.ResourceMaintenance.Maintenance"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -550,10 +548,10 @@ public struct ResourceMaintenance: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.maintenance.api.v1.ResourceMaintenance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

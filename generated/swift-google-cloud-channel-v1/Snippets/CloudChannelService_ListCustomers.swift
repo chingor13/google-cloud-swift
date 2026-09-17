@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudChannelV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudChannelServiceClient, parent: String) async throws {
   let items = try client.listCustomers(

@@ -19,30 +19,29 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class InstancesTransport: InstancesStub {
-      let inner: GoogleCloudGax._HTTPClient
+      let inner: GoogleGax._HTTPClient
 
-      public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
-        self.inner = try GoogleCloudGax._HTTPClient(
+      public init(_ options: GoogleGax.ClientOptions = .init()) throws {
+        self.inner = try GoogleGax._HTTPClient(
           from: options,
           withDefaultEndpoint: "https://compute.googleapis.com",
         )
       }
 
       public func addAccessConfig(
-        request: InstancesClient.AddAccessConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddAccessConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -50,7 +49,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -58,7 +57,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -70,7 +69,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(request.networkInterface, prefix: "networkInterface"))
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
@@ -78,9 +77,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -101,12 +100,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -116,15 +115,14 @@
       }
 
       public func addNetworkInterface(
-        request: InstancesClient.AddNetworkInterfaceRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddNetworkInterfaceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -132,7 +130,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -140,7 +138,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -152,15 +150,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -181,12 +179,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -196,15 +194,14 @@
       }
 
       public func addResourcePolicies(
-        request: InstancesClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AddResourcePoliciesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -212,7 +209,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -220,7 +217,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -232,15 +229,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -261,12 +258,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -276,15 +273,14 @@
       }
 
       public func aggregatedList(
-        request: InstancesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceAggregatedList {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -295,7 +291,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
             query.append(
               contentsOf: try encoder.encode(request.includeAllScopes, prefix: "includeAllScopes"))
@@ -312,9 +308,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -323,27 +319,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.InstanceAggregatedList.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func attachDisk(
-        request: InstancesClient.AttachDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.AttachDiskRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -351,7 +346,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -359,7 +354,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -371,16 +366,16 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.forceAttach, prefix: "forceAttach"))
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -401,12 +396,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -416,15 +411,14 @@
       }
 
       public func bulkInsert(
-        request: InstancesClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.BulkInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -432,7 +426,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -444,15 +438,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -467,12 +461,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -482,15 +476,14 @@
       }
 
       public func delete(
-        request: InstancesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -498,7 +491,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -506,7 +499,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -518,7 +511,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(
                 request.noGracefulShutdown, prefix: "noGracefulShutdown"))
@@ -527,9 +520,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.DELETE) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -550,27 +543,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func deleteAccessConfig(
-        request: InstancesClient.DeleteAccessConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DeleteAccessConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -578,7 +570,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -586,7 +578,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -598,7 +590,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(request.accessConfig, prefix: "accessConfig"))
             query.append(
@@ -608,9 +600,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -631,28 +623,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func deleteNetworkInterface(
-        request: InstancesClient.DeleteNetworkInterfaceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DeleteNetworkInterfaceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -660,7 +650,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -668,7 +658,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -680,7 +670,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(
                 request.networkInterfaceName, prefix: "networkInterfaceName"))
@@ -689,9 +679,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -712,27 +702,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func detachDisk(
-        request: InstancesClient.DetachDiskRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.DetachDiskRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -740,7 +729,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -748,7 +737,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -760,16 +749,16 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.deviceName, prefix: "deviceName"))
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -790,27 +779,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func `get`(
-        request: InstancesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Instance {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -818,7 +806,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -826,7 +814,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -842,9 +830,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -865,28 +853,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Instance.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func getEffectiveFirewalls(
-        request: InstancesClient.GetEffectiveFirewallsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetEffectiveFirewallsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstancesGetEffectiveFirewallsResponse {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -894,7 +880,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -902,7 +888,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -914,16 +900,16 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(request.networkInterface, prefix: "networkInterface"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -944,12 +930,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.InstancesGetEffectiveFirewallsResponse.self,
           timeout: options.attemptTimeout
@@ -957,15 +943,14 @@
       }
 
       public func getGuestAttributes(
-        request: InstancesClient.GetGuestAttributesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetGuestAttributesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.GuestAttributes {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -973,7 +958,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -981,7 +966,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -993,16 +978,16 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.queryPath, prefix: "queryPath"))
             query.append(contentsOf: try encoder.encode(request.variableKey, prefix: "variableKey"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1023,27 +1008,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.GuestAttributes.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func getIamPolicy(
-        request: InstancesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1051,7 +1035,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1059,7 +1043,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.resource as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "resource")
@@ -1071,7 +1055,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(
                 request.optionsRequestedPolicyVersion, prefix: "optionsRequestedPolicyVersion"))
@@ -1079,9 +1063,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1102,27 +1086,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Policy.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func getScreenshot(
-        request: InstancesClient.GetScreenshotRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetScreenshotRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Screenshot {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1130,7 +1113,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1138,7 +1121,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1154,9 +1137,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1177,27 +1160,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Screenshot.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func getSerialPortOutput(
-        request: InstancesClient.GetSerialPortOutputRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.GetSerialPortOutputRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SerialPortOutput {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1205,7 +1187,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1213,7 +1195,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1225,16 +1207,16 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.port, prefix: "port"))
             query.append(contentsOf: try encoder.encode(request.start, prefix: "start"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1255,12 +1237,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.SerialPortOutput.self, timeout: options.attemptTimeout
         ).get()
@@ -1268,15 +1250,14 @@
 
       public func getShieldedInstanceIdentity(
         request: InstancesClient.GetShieldedInstanceIdentityRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ShieldedInstanceIdentity {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1284,7 +1265,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1292,7 +1273,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1308,9 +1289,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1331,27 +1312,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.ShieldedInstanceIdentity.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func insert(
-        request: InstancesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1359,7 +1339,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1370,7 +1350,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             query.append(
               contentsOf: try encoder.encode(
@@ -1382,9 +1362,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1399,12 +1379,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -1414,15 +1394,14 @@
       }
 
       public func list(
-        request: InstancesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceList {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1430,7 +1409,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1441,7 +1420,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
             query.append(contentsOf: try encoder.encode(request.maxResults, prefix: "maxResults"))
             query.append(contentsOf: try encoder.encode(request.orderBy, prefix: "orderBy"))
@@ -1453,9 +1432,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1470,27 +1449,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.InstanceList.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func listReferrers(
-        request: InstancesClient.ListReferrersRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ListReferrersRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceListReferrers {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1498,7 +1476,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1506,7 +1484,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1518,7 +1496,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.filter, prefix: "filter"))
             query.append(contentsOf: try encoder.encode(request.maxResults, prefix: "maxResults"))
             query.append(contentsOf: try encoder.encode(request.orderBy, prefix: "orderBy"))
@@ -1530,9 +1508,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1553,27 +1531,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.InstanceListReferrers.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func performMaintenance(
-        request: InstancesClient.PerformMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.PerformMaintenanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1581,7 +1558,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1589,7 +1566,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1601,15 +1578,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1630,28 +1607,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func removeResourcePolicies(
-        request: InstancesClient.RemoveResourcePoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.RemoveResourcePoliciesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1659,7 +1634,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1667,7 +1642,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1679,15 +1654,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1708,12 +1683,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -1723,15 +1698,14 @@
       }
 
       public func reportHostAsFaulty(
-        request: InstancesClient.ReportHostAsFaultyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ReportHostAsFaultyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1739,7 +1713,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1747,7 +1721,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1759,15 +1733,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1788,12 +1762,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -1803,15 +1777,14 @@
       }
 
       public func reset(
-        request: InstancesClient.ResetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ResetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1819,7 +1792,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1827,7 +1800,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1839,15 +1812,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1868,27 +1841,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func resume(
-        request: InstancesClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.ResumeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1896,7 +1868,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1904,7 +1876,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1916,15 +1888,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -1945,28 +1917,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func sendDiagnosticInterrupt(
-        request: InstancesClient.SendDiagnosticInterruptRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SendDiagnosticInterruptRequest, options: GoogleGax.RequestOptions
       ) async throws {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -1974,7 +1944,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -1982,7 +1952,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -1998,9 +1968,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2021,28 +1991,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         _ = try await req.rpc(
-          GoogleCloudWKT.Empty.self, timeout: options.attemptTimeout
+          GoogleWKT.Empty.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func setDeletionProtection(
-        request: InstancesClient.SetDeletionProtectionRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetDeletionProtectionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2050,7 +2018,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2058,7 +2026,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.resource as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "resource")
@@ -2070,7 +2038,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(
                 request.deletionProtection, prefix: "deletionProtection"))
@@ -2079,9 +2047,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2102,27 +2070,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func setDiskAutoDelete(
-        request: InstancesClient.SetDiskAutoDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetDiskAutoDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2130,7 +2097,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2138,7 +2105,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2150,7 +2117,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.autoDelete, prefix: "autoDelete"))
             query.append(contentsOf: try encoder.encode(request.deviceName, prefix: "deviceName"))
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
@@ -2158,9 +2125,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2181,27 +2148,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func setIamPolicy(
-        request: InstancesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2209,7 +2175,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2217,7 +2183,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.resource as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "resource")
@@ -2233,9 +2199,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2256,12 +2222,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2271,15 +2237,14 @@
       }
 
       public func setLabels(
-        request: InstancesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2287,7 +2252,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2295,7 +2260,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2307,15 +2272,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2336,12 +2301,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2351,15 +2316,14 @@
       }
 
       public func setMachineResources(
-        request: InstancesClient.SetMachineResourcesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMachineResourcesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2367,7 +2331,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2375,7 +2339,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2387,15 +2351,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2416,12 +2380,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2431,15 +2395,14 @@
       }
 
       public func setMachineType(
-        request: InstancesClient.SetMachineTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMachineTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2447,7 +2410,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2455,7 +2418,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2467,15 +2430,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2496,12 +2459,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2511,15 +2474,14 @@
       }
 
       public func setMetadata(
-        request: InstancesClient.SetMetadataRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMetadataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2527,7 +2489,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2535,7 +2497,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2547,15 +2509,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2576,12 +2538,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2591,15 +2553,14 @@
       }
 
       public func setMinCpuPlatform(
-        request: InstancesClient.SetMinCpuPlatformRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetMinCpuPlatformRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2607,7 +2568,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2615,7 +2576,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2627,15 +2588,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2656,12 +2617,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2671,15 +2632,14 @@
       }
 
       public func setName(
-        request: InstancesClient.SetNameRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetNameRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2687,7 +2647,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2695,7 +2655,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2707,15 +2667,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2736,12 +2696,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2751,15 +2711,14 @@
       }
 
       public func setScheduling(
-        request: InstancesClient.SetSchedulingRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetSchedulingRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2767,7 +2726,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2775,7 +2734,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2787,15 +2746,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2816,12 +2775,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2831,15 +2790,14 @@
       }
 
       public func setSecurityPolicy(
-        request: InstancesClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetSecurityPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2847,7 +2805,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2855,7 +2813,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2867,15 +2825,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2896,12 +2854,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2911,15 +2869,14 @@
       }
 
       public func setServiceAccount(
-        request: InstancesClient.SetServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetServiceAccountRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -2927,7 +2884,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -2935,7 +2892,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -2947,15 +2904,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -2976,12 +2933,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -2992,15 +2949,14 @@
 
       public func setShieldedInstanceIntegrityPolicy(
         request: InstancesClient.SetShieldedInstanceIntegrityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3008,7 +2964,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3016,7 +2972,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3028,15 +2984,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.PATCH) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3057,12 +3013,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -3072,15 +3028,14 @@
       }
 
       public func setTags(
-        request: InstancesClient.SetTagsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SetTagsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3088,7 +3043,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3096,7 +3051,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3108,15 +3063,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3137,12 +3092,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -3152,16 +3107,14 @@
       }
 
       public func simulateMaintenanceEvent(
-        request: InstancesClient.SimulateMaintenanceEventRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SimulateMaintenanceEventRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3169,7 +3122,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3177,7 +3130,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3189,7 +3142,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             query.append(
               contentsOf: try encoder.encode(
@@ -3198,9 +3151,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3221,27 +3174,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func start(
-        request: InstancesClient.StartRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.StartRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3249,7 +3201,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3257,7 +3209,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3269,15 +3221,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3298,28 +3250,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func startWithEncryptionKey(
-        request: InstancesClient.StartWithEncryptionKeyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.StartWithEncryptionKeyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3327,7 +3277,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3335,7 +3285,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3347,15 +3297,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3376,12 +3326,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -3391,15 +3341,14 @@
       }
 
       public func stop(
-        request: InstancesClient.StopRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.StopRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3407,7 +3356,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3415,7 +3364,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3427,7 +3376,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(request.discardLocalSsd, prefix: "discardLocalSsd"))
             query.append(
@@ -3438,9 +3387,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3461,27 +3410,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func suspend(
-        request: InstancesClient.SuspendRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.SuspendRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3489,7 +3437,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3497,7 +3445,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3509,7 +3457,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(request.discardLocalSsd, prefix: "discardLocalSsd"))
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
@@ -3517,9 +3465,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3540,27 +3488,26 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()
       }
 
       public func testIamPermissions(
-        request: InstancesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3568,7 +3515,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3576,7 +3523,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.resource as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "resource")
@@ -3592,9 +3539,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3615,12 +3562,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -3630,15 +3577,14 @@
       }
 
       public func update(
-        request: InstancesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3646,7 +3592,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3654,7 +3600,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3666,7 +3612,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(request.discardLocalSsd, prefix: "discardLocalSsd"))
             query.append(
@@ -3679,9 +3625,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.PUT) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3702,12 +3648,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -3717,15 +3663,14 @@
       }
 
       public func updateAccessConfig(
-        request: InstancesClient.UpdateAccessConfigRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateAccessConfigRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3733,7 +3678,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3741,7 +3686,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3753,7 +3698,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(request.networkInterface, prefix: "networkInterface"))
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
@@ -3761,9 +3706,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.POST) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3784,12 +3729,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -3799,15 +3744,14 @@
       }
 
       public func updateDisplayDevice(
-        request: InstancesClient.UpdateDisplayDeviceRequest, options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateDisplayDeviceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3815,7 +3759,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3823,7 +3767,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3835,15 +3779,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.PATCH) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3864,12 +3808,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -3879,16 +3823,14 @@
       }
 
       public func updateNetworkInterface(
-        request: InstancesClient.UpdateNetworkInterfaceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstancesClient.UpdateNetworkInterfaceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3896,7 +3838,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3904,7 +3846,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3916,7 +3858,7 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(
               contentsOf: try encoder.encode(request.networkInterface, prefix: "networkInterface"))
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
@@ -3924,9 +3866,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.PATCH) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -3947,12 +3889,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -3963,15 +3905,14 @@
 
       public func updateShieldedInstanceConfig(
         request: InstancesClient.UpdateShieldedInstanceConfigRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -3979,7 +3920,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -3987,7 +3928,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.instance as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "instance")
@@ -3999,15 +3940,15 @@
             var query = [
               URLQueryItem(name: "$alt", value: "json")
             ]
-            let encoder = GoogleCloudGax._QueryParameterEncoder()
+            let encoder = GoogleGax._QueryParameterEncoder()
             query.append(contentsOf: try encoder.encode(request.requestId, prefix: "requestId"))
             return (path, query)
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.PATCH) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -4028,12 +3969,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         if let body = request.body {
           try req.setBody(json: body)
         }
@@ -4043,15 +3984,14 @@
       }
 
       public func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         let (path, query, configure) = try {
-          () throws -> (
-            Swift.String, [URLQueryItem], (inout GoogleCloudGax._HTTPClientRequest) -> Void
-          ) in
+          () throws -> (Swift.String, [URLQueryItem], (inout GoogleGax._HTTPClientRequest) -> Void)
+          in
           if let candidate = try { () throws -> (Swift.String, [URLQueryItem])? in
             guard
-              let pathVariable0 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable0 = try GoogleGax._RoutingMatcher.pathValue(
                 request.project as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "project")
@@ -4059,7 +3999,7 @@
               return nil
             }
             guard
-              let pathVariable1 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable1 = try GoogleGax._RoutingMatcher.pathValue(
                 request.zone as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "zone")
@@ -4067,7 +4007,7 @@
               return nil
             }
             guard
-              let pathVariable2 = try GoogleCloudGax._RoutingMatcher.pathValue(
+              let pathVariable2 = try GoogleGax._RoutingMatcher.pathValue(
                 request.operation as Swift.String?,
                 matching: [.singleWildcard],
                 fieldName: "operation")
@@ -4083,9 +4023,9 @@
           }() {
             return (candidate.0, candidate.1, { $0.setMethod(.GET) })
           }
-          var paths: [GoogleCloudGax.PathMismatch] = []
+          var paths: [GoogleGax.PathMismatch] = []
           do {
-            var builder = GoogleCloudGax._PathMismatchBuilder()
+            var builder = GoogleGax._PathMismatchBuilder()
             builder.maybeAdd(
               request.project as Swift.String?,
               matching: [.singleWildcard],
@@ -4106,12 +4046,12 @@
             )
             paths.append(builder.build())
           }
-          throw GoogleCloudGax.RequestError.binding(GoogleCloudGax.BindingError(paths: paths))
+          throw GoogleGax.RequestError.binding(GoogleGax.BindingError(paths: paths))
         }()
         var req = try await self.inner.newRequest(
           percentEncodedPath: path, query: query, options: options)
         configure(&req)
-        req.addHeader(name: GoogleCloudGax._HeaderNames.apiClient, value: Clients.clientHeader)
+        req.addHeader(name: GoogleGax._HeaderNames.apiClient, value: Clients.clientHeader)
         return try await req.rpc(
           GoogleCloudComputeV1.Operation.self, timeout: options.attemptTimeout
         ).get()

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction input format for Text Extraction.
-public struct TextExtractionPredictionInstance: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TextExtractionPredictionInstance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The text snippet to make the predictions on.
@@ -36,7 +36,7 @@ public struct TextExtractionPredictionInstance: Codable, Equatable, GoogleCloudW
   /// caller to ensure the keys are unique.
   public var key: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TextExtractionPredictionInstance`.
   public init() {}
@@ -84,7 +84,7 @@ public struct TextExtractionPredictionInstance: Codable, Equatable, GoogleCloudW
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +102,10 @@ public struct TextExtractionPredictionInstance: Codable, Equatable, GoogleCloudW
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.instance.TextExtractionPredictionInstance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

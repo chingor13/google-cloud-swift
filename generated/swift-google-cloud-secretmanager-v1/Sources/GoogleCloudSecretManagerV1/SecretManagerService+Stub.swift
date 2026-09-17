@@ -16,86 +16,86 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SecretManagerServiceStub: Sendable {
     func listSecrets(
-      request: ListSecretsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecretsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.ListSecretsResponse
 
     func createSecret(
-      request: CreateSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.Secret
 
     func addSecretVersion(
-      request: AddSecretVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: AddSecretVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.SecretVersion
 
     func getSecret(
-      request: GetSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.Secret
 
     func updateSecret(
-      request: UpdateSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.Secret
 
     func deleteSecret(
-      request: DeleteSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSecretRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listSecretVersions(
-      request: ListSecretVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecretVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.ListSecretVersionsResponse
 
     func getSecretVersion(
-      request: GetSecretVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecretVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.SecretVersion
 
     func accessSecretVersion(
-      request: AccessSecretVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: AccessSecretVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.AccessSecretVersionResponse
 
     func disableSecretVersion(
-      request: DisableSecretVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableSecretVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.SecretVersion
 
     func enableSecretVersion(
-      request: EnableSecretVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableSecretVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.SecretVersion
 
     func destroySecretVersion(
-      request: DestroySecretVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DestroySecretVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.SecretVersion
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func enableManagedRotation(
-      request: EnableManagedRotationRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableManagedRotationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.SecretVersion
 
     func rotateSecret(
-      request: RotateSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: RotateSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecretManagerV1.SecretVersion
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

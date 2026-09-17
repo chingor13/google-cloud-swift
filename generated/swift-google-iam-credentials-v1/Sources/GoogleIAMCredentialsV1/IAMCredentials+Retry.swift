@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class IAMCredentialsRetry: IAMCredentialsStub {
     let inner: any IAMCredentialsStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any IAMCredentialsStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any IAMCredentialsStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func generateAccessToken(
-      request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.GenerateAccessTokenResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GenerateAccessTokenRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GenerateAccessTokenRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMCredentialsV1.GenerateAccessTokenResponse
           in
           return try await self.inner.generateAccessToken(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func generateIdToken(
-      request: GenerateIdTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateIdTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.GenerateIdTokenResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GenerateIdTokenRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GenerateIdTokenRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMCredentialsV1.GenerateIdTokenResponse
           in
           return try await self.inner.generateIdToken(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func signBlob(
-      request: SignBlobRequest, options: GoogleCloudGax.RequestOptions
+      request: SignBlobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.SignBlobResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SignBlobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SignBlobRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMCredentialsV1.SignBlobResponse
           in
           return try await self.inner.signBlob(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func signJwt(
-      request: SignJwtRequest, options: GoogleCloudGax.RequestOptions
+      request: SignJwtRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.SignJwtResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SignJwtRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SignJwtRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMCredentialsV1.SignJwtResponse
           in
           return try await self.inner.signJwt(request: r, options: o)

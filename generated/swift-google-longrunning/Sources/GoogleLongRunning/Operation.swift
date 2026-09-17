@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// This resource represents a long-running operation that is the result of a
 /// network API call.
-public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The server-assigned name, which is only unique within the same service that
@@ -32,7 +32,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// contains progress information and common metadata such as create time.
   /// Some services might not provide such metadata.  Any method that returns a
   /// long-running operation should document the metadata type, if any.
-  public var metadata: GoogleCloudWKT.`Any`? = nil
+  public var metadata: GoogleWKT.`Any`? = nil
 
   /// If the value is `false`, it means the operation is still in progress.
   /// If `true`, the operation is completed, and either `error` or `response` is
@@ -45,7 +45,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Some services might not provide the result.
   public var result: OneOf_Result? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Operation`.
   public init() {}
@@ -89,7 +89,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.metadata = try container.decodeIfPresent(GoogleCloudWKT.`Any`.self, forKey: .metadata)
+    self.metadata = try container.decodeIfPresent(GoogleWKT.`Any`.self, forKey: .metadata)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .done) {
       self.done = value
     }
@@ -107,13 +107,13 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let error = try container.decodeIfPresent(GoogleRpc.Status?.self, forKey: .error) {
       try resultCheckAndSet(.error(error))
     }
-    if let response = try container.decodeIfPresent(GoogleCloudWKT.`Any`?.self, forKey: .response) {
+    if let response = try container.decodeIfPresent(GoogleWKT.`Any`?.self, forKey: .response) {
       try resultCheckAndSet(.response(response))
     }
     self.result = result
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -151,16 +151,16 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// is the original method name.  For example, if the original method name
     /// is `TakeSnapshot()`, the inferred response type is
     /// `TakeSnapshotResponse`.
-    indirect case response(GoogleCloudWKT.`Any`?)
+    indirect case response(GoogleWKT.`Any`?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.longrunning.Operation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

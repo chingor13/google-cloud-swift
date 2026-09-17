@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// CustomCanaryDeployment represents the custom canary deployment
 /// configuration.
-public struct CustomCanaryDeployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CustomCanaryDeployment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Configuration for each phase in the canary deployment in the
   /// order executed.
   public var phaseConfigs: [CustomCanaryDeployment.PhaseConfig] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CustomCanaryDeployment`.
   public init() {}
@@ -66,7 +66,7 @@ public struct CustomCanaryDeployment: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -80,7 +80,7 @@ public struct CustomCanaryDeployment: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   /// PhaseConfig represents the configuration for a phase in the custom
   /// canary deployment.
-  public struct PhaseConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PhaseConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The ID to assign to the `Rollout` phase.
@@ -110,7 +110,7 @@ public struct CustomCanaryDeployment: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// not configured, there will be no postdeploy job for this phase.
     public var postdeploy: Postdeploy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PhaseConfig`.
     public init() {}
@@ -169,7 +169,7 @@ public struct CustomCanaryDeployment: Codable, Equatable, GoogleCloudWKT._AnyPac
       self.postdeploy = try container.decodeIfPresent(Postdeploy.self, forKey: .postdeploy)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -189,21 +189,21 @@ public struct CustomCanaryDeployment: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.deploy.v1.CustomCanaryDeployment.PhaseConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.CustomCanaryDeployment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for collecting and viewing traces and spans within a trace.
 ///
@@ -34,7 +34,7 @@ public final class TraceServiceClient: Clients.TraceServiceProtocol, Sendable {
   let inner: any Clients.TraceServiceStub
 
   /// Creates a new `TraceServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.TraceServiceStub = try Clients.TraceServiceTransport(options)
     inner = Clients.TraceServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -48,7 +48,7 @@ public final class TraceServiceClient: Clients.TraceServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "TraceService_BatchWriteSpans")
   public func batchWriteSpans(
-    request: BatchWriteSpansRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchWriteSpansRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.batchWriteSpans(request: request, options: options)
   }
@@ -57,7 +57,7 @@ public final class TraceServiceClient: Clients.TraceServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "TraceService_CreateSpan")
   public func createSpan(
-    request: Span, options: GoogleCloudGax.RequestOptions
+    request: Span, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTraceV2.Span {
     try await self.inner.createSpan(request: request, options: options)
   }
@@ -84,12 +84,12 @@ extension Clients {
 
     /// See `TraceServiceClient.batchWriteSpans`.
     func batchWriteSpans(
-      request: BatchWriteSpansRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchWriteSpansRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `TraceServiceClient.createSpan`.
     func createSpan(
-      request: Span, options: GoogleCloudGax.RequestOptions
+      request: Span, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV2.Span
   }
 }
@@ -101,9 +101,9 @@ extension Clients.TraceServiceProtocol {
   }
 
   public func batchWriteSpans(
-    request: BatchWriteSpansRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchWriteSpansRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchWriteSpans(
@@ -122,8 +122,8 @@ extension Clients.TraceServiceProtocol {
   }
 
   public func createSpan(
-    request: Span, options: GoogleCloudGax.RequestOptions
+    request: Span, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTraceV2.Span {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

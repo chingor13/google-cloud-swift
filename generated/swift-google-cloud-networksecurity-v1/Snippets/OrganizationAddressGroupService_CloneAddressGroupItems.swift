@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudNetworkSecurityV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: OrganizationAddressGroupServiceClient) async throws {
   let poller = try await client.cloneAddressGroupItems(

@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudTranslateV3
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: TranslationServiceClient) async throws {
   let response = try await client.translateText(

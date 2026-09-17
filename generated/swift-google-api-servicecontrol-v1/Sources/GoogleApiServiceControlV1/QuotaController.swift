@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// [Google Quota Control API](https://cloud.google.com/service-control/overview)
 ///
@@ -31,7 +31,7 @@ public final class QuotaControllerClient: Clients.QuotaControllerProtocol, Senda
   let inner: any Clients.QuotaControllerStub
 
   /// Creates a new `QuotaControllerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.QuotaControllerStub = try Clients.QuotaControllerTransport(options)
     inner = Clients.QuotaControllerRetry(inner, options: options)
     if let logger = options.logger {
@@ -54,7 +54,7 @@ public final class QuotaControllerClient: Clients.QuotaControllerProtocol, Senda
   ///
   /// @Snippet(path: "QuotaController_AllocateQuota")
   public func allocateQuota(
-    request: AllocateQuotaRequest, options: GoogleCloudGax.RequestOptions
+    request: AllocateQuotaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceControlV1.AllocateQuotaResponse {
     try await self.inner.allocateQuota(request: request, options: options)
   }
@@ -73,7 +73,7 @@ extension Clients {
 
     /// See `QuotaControllerClient.allocateQuota`.
     func allocateQuota(
-      request: AllocateQuotaRequest, options: GoogleCloudGax.RequestOptions
+      request: AllocateQuotaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV1.AllocateQuotaResponse
   }
 }
@@ -87,8 +87,8 @@ extension Clients.QuotaControllerProtocol {
   }
 
   public func allocateQuota(
-    request: AllocateQuotaRequest, options: GoogleCloudGax.RequestOptions
+    request: AllocateQuotaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleApiServiceControlV1.AllocateQuotaResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

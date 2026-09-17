@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func createScanConfig(
-      request: CreateScanConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateScanConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "createScanConfig",
         action: {
-          (r: CreateScanConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateScanConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ScanConfig
           in
           return try await self.inner.createScanConfig(request: r, options: o)
@@ -72,27 +72,26 @@ extension Clients {
     }
 
     public func deleteScanConfig(
-      request: DeleteScanConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteScanConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteScanConfig",
-        action: {
-          (r: DeleteScanConfigRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteScanConfigRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteScanConfig(request: r, options: o)
         })
     }
 
     public func getScanConfig(
-      request: GetScanConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetScanConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getScanConfig",
         action: {
-          (r: GetScanConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetScanConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ScanConfig
           in
           return try await self.inner.getScanConfig(request: r, options: o)
@@ -100,14 +99,14 @@ extension Clients {
     }
 
     public func listScanConfigs(
-      request: ListScanConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListScanConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListScanConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listScanConfigs",
         action: {
-          (r: ListScanConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListScanConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ListScanConfigsResponse
           in
           return try await self.inner.listScanConfigs(request: r, options: o)
@@ -115,14 +114,14 @@ extension Clients {
     }
 
     public func updateScanConfig(
-      request: UpdateScanConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateScanConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateScanConfig",
         action: {
-          (r: UpdateScanConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateScanConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ScanConfig
           in
           return try await self.inner.updateScanConfig(request: r, options: o)
@@ -130,14 +129,14 @@ extension Clients {
     }
 
     public func startScanRun(
-      request: StartScanRunRequest, options: GoogleCloudGax.RequestOptions
+      request: StartScanRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanRun {
       try await self._intercept(
         request: request,
         options: options,
         name: "startScanRun",
         action: {
-          (r: StartScanRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StartScanRunRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ScanRun
           in
           return try await self.inner.startScanRun(request: r, options: o)
@@ -145,14 +144,14 @@ extension Clients {
     }
 
     public func getScanRun(
-      request: GetScanRunRequest, options: GoogleCloudGax.RequestOptions
+      request: GetScanRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanRun {
       try await self._intercept(
         request: request,
         options: options,
         name: "getScanRun",
         action: {
-          (r: GetScanRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetScanRunRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ScanRun
           in
           return try await self.inner.getScanRun(request: r, options: o)
@@ -160,14 +159,14 @@ extension Clients {
     }
 
     public func listScanRuns(
-      request: ListScanRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListScanRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListScanRunsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listScanRuns",
         action: {
-          (r: ListScanRunsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListScanRunsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ListScanRunsResponse
           in
           return try await self.inner.listScanRuns(request: r, options: o)
@@ -175,14 +174,14 @@ extension Clients {
     }
 
     public func stopScanRun(
-      request: StopScanRunRequest, options: GoogleCloudGax.RequestOptions
+      request: StopScanRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanRun {
       try await self._intercept(
         request: request,
         options: options,
         name: "stopScanRun",
         action: {
-          (r: StopScanRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StopScanRunRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ScanRun
           in
           return try await self.inner.stopScanRun(request: r, options: o)
@@ -190,14 +189,14 @@ extension Clients {
     }
 
     public func listCrawledUrls(
-      request: ListCrawledUrlsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCrawledUrlsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListCrawledUrlsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCrawledUrls",
         action: {
-          (r: ListCrawledUrlsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCrawledUrlsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ListCrawledUrlsResponse
           in
           return try await self.inner.listCrawledUrls(request: r, options: o)
@@ -205,14 +204,14 @@ extension Clients {
     }
 
     public func getFinding(
-      request: GetFindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.Finding {
       try await self._intercept(
         request: request,
         options: options,
         name: "getFinding",
         action: {
-          (r: GetFindingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetFindingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.Finding
           in
           return try await self.inner.getFinding(request: r, options: o)
@@ -220,14 +219,14 @@ extension Clients {
     }
 
     public func listFindings(
-      request: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListFindingsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listFindings",
         action: {
-          (r: ListFindingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListFindingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ListFindingsResponse
           in
           return try await self.inner.listFindings(request: r, options: o)
@@ -235,14 +234,14 @@ extension Clients {
     }
 
     public func listFindingTypeStats(
-      request: ListFindingTypeStatsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFindingTypeStatsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListFindingTypeStatsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listFindingTypeStats",
         action: {
-          (r: ListFindingTypeStatsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListFindingTypeStatsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebSecurityScannerV1.ListFindingTypeStatsResponse
           in
           return try await self.inner.listFindingTypeStats(request: r, options: o)

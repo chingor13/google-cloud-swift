@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleAppEngineV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DomainMappingsClient) async throws {
   let response = try await client.getDomainMapping(

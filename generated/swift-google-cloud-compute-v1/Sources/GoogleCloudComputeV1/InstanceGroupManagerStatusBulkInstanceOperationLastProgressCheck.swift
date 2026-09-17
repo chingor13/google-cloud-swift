@@ -16,10 +16,10 @@
 
 #if InstanceGroupManagers || RegionInstanceGroupManagers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   public struct InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck: Codable,
-    Equatable, GoogleCloudWKT._AnyPackable,
+    Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Errors encountered during bulk instance operation.
@@ -27,9 +27,9 @@
 
     /// Output only. Timestamp of the last progress check of bulk instance
     /// operation. Timestamp is in RFC3339 text format.
-    public var timestamp: GoogleCloudWKT.Timestamp? = nil
+    public var timestamp: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck`.
     public init() {}
@@ -66,11 +66,10 @@
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.error = try container.decodeIfPresent(
         InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.Error.self, forKey: .error)
-      self.timestamp = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .timestamp)
+      self.timestamp = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .timestamp)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -86,7 +85,7 @@
     /// The message type for the [error][google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error] field.
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error]: <doc:InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck/Error>
-    public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Error: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// [Output Only] The array of errors encountered while processing this
@@ -94,7 +93,7 @@
       public var errors:
         [InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.Error.Errors] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Error`.
       public init() {}
@@ -135,7 +134,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -150,7 +149,7 @@
       /// The message type for the [errors][google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error.errors] field.
       ///
       /// [google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error.errors]: <doc:InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck/Error/Errors>
-      public struct Errors: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Errors: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// [Output Only] The error type identifier for this error.
@@ -172,8 +171,7 @@
         /// [Output Only] An optional, human-readable error message.
         public var message: Swift.String? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Errors`.
         public init() {}
@@ -225,7 +223,7 @@
           self.message = try container.decodeIfPresent(Swift.String.self, forKey: .message)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -243,7 +241,7 @@
         /// The message type for the [errorDetails][google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error.errors.errorDetails] field.
         ///
         /// [google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error.errors.errorDetails]: <doc:InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck/Error/Errors/ErrorDetails>
-        public struct ErrorDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct ErrorDetails: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Error information containing structured domain, reason, and metadata.
@@ -258,8 +256,7 @@
           /// Details about quota limits and metrics when a quota is exceeded.
           public var quotaInfo: QuotaExceededInfo? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `ErrorDetails`.
           public init() {}
@@ -306,7 +303,7 @@
               QuotaExceededInfo.self, forKey: .quotaInfo)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -325,11 +322,11 @@
             return
               "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error.errors.errorDetails"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -337,11 +334,11 @@
           return
             "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error.errors"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -349,11 +346,11 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck.error"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -361,11 +358,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerStatusBulkInstanceOperationLastProgressCheck"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

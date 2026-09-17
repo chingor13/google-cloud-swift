@@ -15,223 +15,223 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudChannelServiceStub: Sendable {
     func listCustomers(
-      request: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListCustomersResponse
 
     func getCustomer(
-      request: GetCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer
 
     func checkCloudIdentityAccountsExist(
-      request: CheckCloudIdentityAccountsExistRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckCloudIdentityAccountsExistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CheckCloudIdentityAccountsExistResponse
 
     func createCustomer(
-      request: CreateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer
 
     func updateCustomer(
-      request: UpdateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer
 
     func deleteCustomer(
-      request: DeleteCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func importCustomer(
-      request: ImportCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer
 
     func provisionCloudIdentity(
-      request: ProvisionCloudIdentityRequest, options: GoogleCloudGax.RequestOptions
+      request: ProvisionCloudIdentityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listEntitlements(
-      request: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListEntitlementsResponse
 
     func listTransferableSkus(
-      request: ListTransferableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListTransferableSkusResponse
 
     func listTransferableOffers(
-      request: ListTransferableOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferableOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListTransferableOffersResponse
 
     func getEntitlement(
-      request: GetEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Entitlement
 
     func createEntitlement(
-      request: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func changeParameters(
-      request: ChangeParametersRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeParametersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func changeRenewalSettings(
-      request: ChangeRenewalSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeRenewalSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func changeOffer(
-      request: ChangeOfferRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeOfferRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func startPaidService(
-      request: StartPaidServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: StartPaidServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func suspendEntitlement(
-      request: SuspendEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: SuspendEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelEntitlement(
-      request: CancelEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func activateEntitlement(
-      request: ActivateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: ActivateEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func transferEntitlements(
-      request: TransferEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: TransferEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func transferEntitlementsToGoogle(
-      request: TransferEntitlementsToGoogleRequest, options: GoogleCloudGax.RequestOptions
+      request: TransferEntitlementsToGoogleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listChannelPartnerLinks(
-      request: ListChannelPartnerLinksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelPartnerLinksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListChannelPartnerLinksResponse
 
     func getChannelPartnerLink(
-      request: GetChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink
 
     func createChannelPartnerLink(
-      request: CreateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink
 
     func updateChannelPartnerLink(
-      request: UpdateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink
 
     func getCustomerRepricingConfig(
-      request: GetCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig
 
     func listCustomerRepricingConfigs(
-      request: ListCustomerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomerRepricingConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListCustomerRepricingConfigsResponse
 
     func createCustomerRepricingConfig(
-      request: CreateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig
 
     func updateCustomerRepricingConfig(
-      request: UpdateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig
 
     func deleteCustomerRepricingConfig(
-      request: DeleteCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getChannelPartnerRepricingConfig(
-      request: GetChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
 
     func listChannelPartnerRepricingConfigs(
-      request: ListChannelPartnerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelPartnerRepricingConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListChannelPartnerRepricingConfigsResponse
 
     func createChannelPartnerRepricingConfig(
-      request: CreateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
 
     func updateChannelPartnerRepricingConfig(
-      request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
 
     func deleteChannelPartnerRepricingConfig(
-      request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listSkuGroups(
-      request: ListSkuGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkuGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkuGroupsResponse
 
     func listSkuGroupBillableSkus(
-      request: ListSkuGroupBillableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkuGroupBillableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkuGroupBillableSkusResponse
 
     func lookupOffer(
-      request: LookupOfferRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupOfferRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Offer
 
     func listProducts(
-      request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListProductsResponse
 
     func listSkus(
-      request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkusResponse
 
     func listOffers(
-      request: ListOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListOffersResponse
 
     func listPurchasableSkus(
-      request: ListPurchasableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPurchasableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListPurchasableSkusResponse
 
     func listPurchasableOffers(
-      request: ListPurchasableOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPurchasableOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListPurchasableOffersResponse
 
     func queryEligibleBillingAccounts(
-      request: QueryEligibleBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryEligibleBillingAccountsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.QueryEligibleBillingAccountsResponse
 
     func registerSubscriber(
-      request: RegisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+      request: RegisterSubscriberRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.RegisterSubscriberResponse
 
     func unregisterSubscriber(
-      request: UnregisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+      request: UnregisterSubscriberRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.UnregisterSubscriberResponse
 
     func listSubscribers(
-      request: ListSubscribersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubscribersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSubscribersResponse
 
     func listEntitlementChanges(
-      request: ListEntitlementChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListEntitlementChangesResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Execution log of a background job.
-public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackgroundJobLogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The background job log entry ID.
@@ -28,10 +28,10 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
   public var jobType: BackgroundJobType = BackgroundJobType()
 
   /// The timestamp when the background job was started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The timestamp when the background job was finished.
-  public var finishTime: GoogleCloudWKT.Timestamp? = nil
+  public var finishTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Job completion state, i.e. the final state after the job
   /// completed.
@@ -48,7 +48,7 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
 
   public var jobDetails: OneOf_JobDetails? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackgroundJobLogEntry`.
   public init() {}
@@ -107,10 +107,8 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
     if let value = try container.decodeIfPresent(BackgroundJobType.self, forKey: .jobType) {
       self.jobType = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.finishTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .finishTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.finishTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .finishTime)
     if let value = try container.decodeIfPresent(
       BackgroundJobLogEntry.JobCompletionState.self, forKey: .completionState)
     {
@@ -156,7 +154,7 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
     self.jobDetails = jobDetails
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -188,13 +186,13 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// Details regarding a Seed background job.
-  public struct SeedJobDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SeedJobDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The connection profile which was used for the seed job.
     public var connectionProfile: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SeedJobDetails`.
     public init() {}
@@ -232,7 +230,7 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -247,16 +245,16 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.BackgroundJobLogEntry.SeedJobDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details regarding an Import Rules background job.
-  public struct ImportRulesJobDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ImportRulesJobDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. File names used for the import rules job.
@@ -265,7 +263,7 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// Output only. The requested file format.
     public var fileFormat: ImportRulesFileFormat = ImportRulesFileFormat()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ImportRulesJobDetails`.
     public init() {}
@@ -309,7 +307,7 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -326,22 +324,22 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
       return
         "type.googleapis.com/google.cloud.clouddms.v1.BackgroundJobLogEntry.ImportRulesJobDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details regarding a Convert background job.
-  public struct ConvertJobDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConvertJobDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. AIP-160 based filter used to specify the entities to convert
     public var filter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConvertJobDetails`.
     public init() {}
@@ -379,7 +377,7 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -394,16 +392,16 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.BackgroundJobLogEntry.ConvertJobDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details regarding an Apply background job.
-  public struct ApplyJobDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ApplyJobDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The connection profile which was used for the apply job.
@@ -412,7 +410,7 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// Output only. AIP-160 based filter used to specify the entities to apply
     public var filter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ApplyJobDetails`.
     public init() {}
@@ -455,7 +453,7 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -471,11 +469,11 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.BackgroundJobLogEntry.ApplyJobDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -599,10 +597,10 @@ public struct BackgroundJobLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.BackgroundJobLogEntry"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

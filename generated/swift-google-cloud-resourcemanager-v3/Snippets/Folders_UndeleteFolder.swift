@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudResourceManagerV3
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: FoldersClient, folderId: String) async throws {
   let poller = try await client.undeleteFolder(

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A description of the execution of a transfer.
-public struct TransferOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransferOperation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A globally unique ID assigned by the system.
@@ -37,10 +37,10 @@ public struct TransferOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var loggingConfig: LoggingConfig? = nil
 
   /// Start time of this transfer execution.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// End time of this transfer execution.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Status of the transfer operation.
   public var status: TransferOperation.Status = TransferOperation.Status()
@@ -54,7 +54,7 @@ public struct TransferOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The name of the transfer job that triggers this transfer operation.
   public var transferJobName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransferOperation`.
   public init() {}
@@ -117,9 +117,8 @@ public struct TransferOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.notificationConfig = try container.decodeIfPresent(
       NotificationConfig.self, forKey: .notificationConfig)
     self.loggingConfig = try container.decodeIfPresent(LoggingConfig.self, forKey: .loggingConfig)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(TransferOperation.Status.self, forKey: .status) {
       self.status = value
     }
@@ -132,7 +131,7 @@ public struct TransferOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -297,10 +296,10 @@ public struct TransferOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.TransferOperation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

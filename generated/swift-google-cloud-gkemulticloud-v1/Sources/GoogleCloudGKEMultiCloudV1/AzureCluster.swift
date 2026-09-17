@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An Anthos cluster running on Azure.
 @available(*, deprecated)
-public struct AzureCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AzureCluster: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of this resource.
@@ -96,10 +96,10 @@ public struct AzureCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var reconciling: Swift.Bool = Swift.Bool()
 
   /// Output only. The time at which this cluster was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which this cluster was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Allows clients to perform consistent read-modify-writes
   /// through optimistic concurrency control.
@@ -140,7 +140,7 @@ public struct AzureCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Monitoring configuration for this cluster.
   public var monitoringConfig: MonitoringConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AzureCluster`.
   public init() {}
@@ -253,10 +253,8 @@ public struct AzureCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .reconciling) {
       self.reconciling = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
@@ -281,7 +279,7 @@ public struct AzureCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       MonitoringConfig.self, forKey: .monitoringConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -457,10 +455,10 @@ public struct AzureCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkemulticloud.v1.AzureCluster"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,198 +16,196 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol BackupDRStub: Sendable {
     func listManagementServers(
-      request: ListManagementServersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListManagementServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ListManagementServersResponse
 
     func getManagementServer(
-      request: GetManagementServerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetManagementServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ManagementServer
 
     func createManagementServer(
-      request: CreateManagementServerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateManagementServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteManagementServer(
-      request: DeleteManagementServerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteManagementServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createBackupVault(
-      request: CreateBackupVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBackupVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listBackupVaults(
-      request: ListBackupVaultsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupVaultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ListBackupVaultsResponse
 
     func fetchUsableBackupVaults(
-      request: FetchUsableBackupVaultsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchUsableBackupVaultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.FetchUsableBackupVaultsResponse
 
     func getBackupVault(
-      request: GetBackupVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.BackupVault
 
     func updateBackupVault(
-      request: UpdateBackupVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackupVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteBackupVault(
-      request: DeleteBackupVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listDataSources(
-      request: ListDataSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ListDataSourcesResponse
 
     func getDataSource(
-      request: GetDataSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.DataSource
 
     func updateDataSource(
-      request: UpdateDataSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listBackups(
-      request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ListBackupsResponse
 
     func fetchBackupsForResourceType(
-      request: FetchBackupsForResourceTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchBackupsForResourceTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.FetchBackupsForResourceTypeResponse
 
     func getBackup(
-      request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.Backup
 
     func updateBackup(
-      request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteBackup(
-      request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func restoreBackup(
-      request: RestoreBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createBackupPlan(
-      request: CreateBackupPlanRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBackupPlanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateBackupPlan(
-      request: UpdateBackupPlanRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackupPlanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getBackupPlan(
-      request: GetBackupPlanRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupPlanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.BackupPlan
 
     func listBackupPlans(
-      request: ListBackupPlansRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupPlansRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ListBackupPlansResponse
 
     func deleteBackupPlan(
-      request: DeleteBackupPlanRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupPlanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getBackupPlanRevision(
-      request: GetBackupPlanRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupPlanRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.BackupPlanRevision
 
     func listBackupPlanRevisions(
-      request: ListBackupPlanRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupPlanRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ListBackupPlanRevisionsResponse
 
     func createBackupPlanAssociation(
-      request: CreateBackupPlanAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBackupPlanAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateBackupPlanAssociation(
-      request: UpdateBackupPlanAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackupPlanAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getBackupPlanAssociation(
-      request: GetBackupPlanAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupPlanAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.BackupPlanAssociation
 
     func listBackupPlanAssociations(
-      request: ListBackupPlanAssociationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupPlanAssociationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ListBackupPlanAssociationsResponse
 
     func fetchBackupPlanAssociationsForResourceType(
-      request: FetchBackupPlanAssociationsForResourceTypeRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: FetchBackupPlanAssociationsForResourceTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.FetchBackupPlanAssociationsForResourceTypeResponse
 
     func deleteBackupPlanAssociation(
-      request: DeleteBackupPlanAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupPlanAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func triggerBackup(
-      request: TriggerBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: TriggerBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getDataSourceReference(
-      request: GetDataSourceReferenceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataSourceReferenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.DataSourceReference
 
     func listDataSourceReferences(
-      request: ListDataSourceReferencesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataSourceReferencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.ListDataSourceReferencesResponse
 
     func fetchDataSourceReferencesForResourceType(
-      request: FetchDataSourceReferencesForResourceTypeRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: FetchDataSourceReferencesForResourceTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBackupDRV1.FetchDataSourceReferencesForResourceTypeResponse
 
     func initializeService(
-      request: InitializeServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: InitializeServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -20,22 +20,22 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// A service for creating and managing Vertex AI's jobs.
   ///
   /// @Snippet(path: "JobServiceQuickstart")
   public final class JobServiceClient: Clients.JobServiceProtocol, Sendable {
     let inner: any Clients.JobServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `JobServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.JobServiceStub = try Clients.JobServiceTransport(options)
       inner = Clients.JobServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "JobService_CreateCustomJob")
     public func createCustomJob(
-      request: CreateCustomJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.CustomJob {
       try await self.inner.createCustomJob(request: request, options: options)
     }
@@ -60,7 +60,7 @@
     ///
     /// @Snippet(path: "JobService_GetCustomJob")
     public func getCustomJob(
-      request: GetCustomJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.CustomJob {
       try await self.inner.getCustomJob(request: request, options: options)
     }
@@ -69,7 +69,7 @@
     ///
     /// @Snippet(path: "JobService_ListCustomJobs")
     public func listCustomJobs(
-      request: ListCustomJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListCustomJobsResponse {
       try await self.inner.listCustomJobs(request: request, options: options)
     }
@@ -78,7 +78,7 @@
     ///
     /// @Snippet(path: "JobService_ListCustomJobs")
     public func listCustomJobs(
-      byItem: ListCustomJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCustomJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CustomJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListCustomJobsResponse in
@@ -86,14 +86,14 @@
         request.pageToken = token
         return try await self.listCustomJobs(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a CustomJob.
     ///
     /// @Snippet(path: "JobService_DeleteCustomJob")
     public func deleteCustomJob(
-      request: DeleteCustomJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteCustomJob(request: request, options: options)
     }
@@ -102,21 +102,21 @@
     ///
     /// @Snippet(path: "JobService_DeleteCustomJob")
     public func deleteCustomJob(
-      withPolling: DeleteCustomJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteCustomJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteCustomJob(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -145,7 +145,7 @@
     ///
     /// @Snippet(path: "JobService_CancelCustomJob")
     public func cancelCustomJob(
-      request: CancelCustomJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelCustomJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelCustomJob(request: request, options: options)
     }
@@ -154,7 +154,7 @@
     ///
     /// @Snippet(path: "JobService_CreateDataLabelingJob")
     public func createDataLabelingJob(
-      request: CreateDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataLabelingJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob {
       try await self.inner.createDataLabelingJob(request: request, options: options)
     }
@@ -163,7 +163,7 @@
     ///
     /// @Snippet(path: "JobService_GetDataLabelingJob")
     public func getDataLabelingJob(
-      request: GetDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataLabelingJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob {
       try await self.inner.getDataLabelingJob(request: request, options: options)
     }
@@ -172,7 +172,7 @@
     ///
     /// @Snippet(path: "JobService_ListDataLabelingJobs")
     public func listDataLabelingJobs(
-      request: ListDataLabelingJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataLabelingJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDataLabelingJobsResponse {
       try await self.inner.listDataLabelingJobs(request: request, options: options)
     }
@@ -181,7 +181,7 @@
     ///
     /// @Snippet(path: "JobService_ListDataLabelingJobs")
     public func listDataLabelingJobs(
-      byItem: ListDataLabelingJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataLabelingJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataLabelingJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListDataLabelingJobsResponse
@@ -190,14 +190,14 @@
         request.pageToken = token
         return try await self.listDataLabelingJobs(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a DataLabelingJob.
     ///
     /// @Snippet(path: "JobService_DeleteDataLabelingJob")
     public func deleteDataLabelingJob(
-      request: DeleteDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataLabelingJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteDataLabelingJob(request: request, options: options)
     }
@@ -206,21 +206,21 @@
     ///
     /// @Snippet(path: "JobService_DeleteDataLabelingJob")
     public func deleteDataLabelingJob(
-      withPolling: DeleteDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteDataLabelingJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteDataLabelingJob(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -232,7 +232,7 @@
     ///
     /// @Snippet(path: "JobService_CancelDataLabelingJob")
     public func cancelDataLabelingJob(
-      request: CancelDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelDataLabelingJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelDataLabelingJob(request: request, options: options)
     }
@@ -241,7 +241,7 @@
     ///
     /// @Snippet(path: "JobService_CreateHyperparameterTuningJob")
     public func createHyperparameterTuningJob(
-      request: CreateHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob {
       try await self.inner.createHyperparameterTuningJob(request: request, options: options)
     }
@@ -250,7 +250,7 @@
     ///
     /// @Snippet(path: "JobService_GetHyperparameterTuningJob")
     public func getHyperparameterTuningJob(
-      request: GetHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob {
       try await self.inner.getHyperparameterTuningJob(request: request, options: options)
     }
@@ -259,7 +259,7 @@
     ///
     /// @Snippet(path: "JobService_ListHyperparameterTuningJobs")
     public func listHyperparameterTuningJobs(
-      request: ListHyperparameterTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHyperparameterTuningJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListHyperparameterTuningJobsResponse {
       try await self.inner.listHyperparameterTuningJobs(request: request, options: options)
     }
@@ -268,7 +268,7 @@
     ///
     /// @Snippet(path: "JobService_ListHyperparameterTuningJobs")
     public func listHyperparameterTuningJobs(
-      byItem: ListHyperparameterTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListHyperparameterTuningJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<HyperparameterTuningJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -277,14 +277,14 @@
         request.pageToken = token
         return try await self.listHyperparameterTuningJobs(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a HyperparameterTuningJob.
     ///
     /// @Snippet(path: "JobService_DeleteHyperparameterTuningJob")
     public func deleteHyperparameterTuningJob(
-      request: DeleteHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteHyperparameterTuningJob(request: request, options: options)
     }
@@ -293,22 +293,22 @@
     ///
     /// @Snippet(path: "JobService_DeleteHyperparameterTuningJob")
     public func deleteHyperparameterTuningJob(
-      withPolling: DeleteHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteHyperparameterTuningJob(
         request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -338,7 +338,7 @@
     ///
     /// @Snippet(path: "JobService_CancelHyperparameterTuningJob")
     public func cancelHyperparameterTuningJob(
-      request: CancelHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelHyperparameterTuningJob(request: request, options: options)
     }
@@ -347,7 +347,7 @@
     ///
     /// @Snippet(path: "JobService_CreateNasJob")
     public func createNasJob(
-      request: CreateNasJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNasJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.NasJob {
       try await self.inner.createNasJob(request: request, options: options)
     }
@@ -356,7 +356,7 @@
     ///
     /// @Snippet(path: "JobService_GetNasJob")
     public func getNasJob(
-      request: GetNasJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNasJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.NasJob {
       try await self.inner.getNasJob(request: request, options: options)
     }
@@ -365,7 +365,7 @@
     ///
     /// @Snippet(path: "JobService_ListNasJobs")
     public func listNasJobs(
-      request: ListNasJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNasJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListNasJobsResponse {
       try await self.inner.listNasJobs(request: request, options: options)
     }
@@ -374,7 +374,7 @@
     ///
     /// @Snippet(path: "JobService_ListNasJobs")
     public func listNasJobs(
-      byItem: ListNasJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListNasJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NasJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListNasJobsResponse in
@@ -382,14 +382,14 @@
         request.pageToken = token
         return try await self.listNasJobs(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a NasJob.
     ///
     /// @Snippet(path: "JobService_DeleteNasJob")
     public func deleteNasJob(
-      request: DeleteNasJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNasJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteNasJob(request: request, options: options)
     }
@@ -398,21 +398,21 @@
     ///
     /// @Snippet(path: "JobService_DeleteNasJob")
     public func deleteNasJob(
-      withPolling: DeleteNasJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteNasJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteNasJob(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -441,7 +441,7 @@
     ///
     /// @Snippet(path: "JobService_CancelNasJob")
     public func cancelNasJob(
-      request: CancelNasJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelNasJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelNasJob(request: request, options: options)
     }
@@ -450,7 +450,7 @@
     ///
     /// @Snippet(path: "JobService_GetNasTrialDetail")
     public func getNasTrialDetail(
-      request: GetNasTrialDetailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNasTrialDetailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.NasTrialDetail {
       try await self.inner.getNasTrialDetail(request: request, options: options)
     }
@@ -459,7 +459,7 @@
     ///
     /// @Snippet(path: "JobService_ListNasTrialDetails")
     public func listNasTrialDetails(
-      request: ListNasTrialDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNasTrialDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListNasTrialDetailsResponse {
       try await self.inner.listNasTrialDetails(request: request, options: options)
     }
@@ -468,7 +468,7 @@
     ///
     /// @Snippet(path: "JobService_ListNasTrialDetails")
     public func listNasTrialDetails(
-      byItem: ListNasTrialDetailsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListNasTrialDetailsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NasTrialDetail, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListNasTrialDetailsResponse in
@@ -476,7 +476,7 @@
         request.pageToken = token
         return try await self.listNasTrialDetails(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Creates a BatchPredictionJob. A BatchPredictionJob once created will
@@ -484,7 +484,7 @@
     ///
     /// @Snippet(path: "JobService_CreateBatchPredictionJob")
     public func createBatchPredictionJob(
-      request: CreateBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBatchPredictionJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob {
       try await self.inner.createBatchPredictionJob(request: request, options: options)
     }
@@ -493,7 +493,7 @@
     ///
     /// @Snippet(path: "JobService_GetBatchPredictionJob")
     public func getBatchPredictionJob(
-      request: GetBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBatchPredictionJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob {
       try await self.inner.getBatchPredictionJob(request: request, options: options)
     }
@@ -502,7 +502,7 @@
     ///
     /// @Snippet(path: "JobService_ListBatchPredictionJobs")
     public func listBatchPredictionJobs(
-      request: ListBatchPredictionJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBatchPredictionJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListBatchPredictionJobsResponse {
       try await self.inner.listBatchPredictionJobs(request: request, options: options)
     }
@@ -511,7 +511,7 @@
     ///
     /// @Snippet(path: "JobService_ListBatchPredictionJobs")
     public func listBatchPredictionJobs(
-      byItem: ListBatchPredictionJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBatchPredictionJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BatchPredictionJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -520,7 +520,7 @@
         request.pageToken = token
         return try await self.listBatchPredictionJobs(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a BatchPredictionJob. Can only be called on jobs that already
@@ -528,7 +528,7 @@
     ///
     /// @Snippet(path: "JobService_DeleteBatchPredictionJob")
     public func deleteBatchPredictionJob(
-      request: DeleteBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBatchPredictionJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteBatchPredictionJob(request: request, options: options)
     }
@@ -538,21 +538,21 @@
     ///
     /// @Snippet(path: "JobService_DeleteBatchPredictionJob")
     public func deleteBatchPredictionJob(
-      withPolling: DeleteBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteBatchPredictionJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteBatchPredictionJob(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -578,7 +578,7 @@
     ///
     /// @Snippet(path: "JobService_CancelBatchPredictionJob")
     public func cancelBatchPredictionJob(
-      request: CancelBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelBatchPredictionJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelBatchPredictionJob(request: request, options: options)
     }
@@ -588,7 +588,7 @@
     ///
     /// @Snippet(path: "JobService_CreateModelDeploymentMonitoringJob")
     public func createModelDeploymentMonitoringJob(
-      request: CreateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob {
       try await self.inner.createModelDeploymentMonitoringJob(request: request, options: options)
     }
@@ -598,7 +598,7 @@
     /// @Snippet(path: "JobService_SearchModelDeploymentMonitoringStatsAnomalies")
     public func searchModelDeploymentMonitoringStatsAnomalies(
       request: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SearchModelDeploymentMonitoringStatsAnomaliesResponse
     {
       try await self.inner.searchModelDeploymentMonitoringStatsAnomalies(
@@ -610,7 +610,7 @@
     /// @Snippet(path: "JobService_SearchModelDeploymentMonitoringStatsAnomalies")
     public func searchModelDeploymentMonitoringStatsAnomalies(
       byItem: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ModelMonitoringStatsAnomalies, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -620,14 +620,14 @@
         return try await self.searchModelDeploymentMonitoringStatsAnomalies(
           request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets a ModelDeploymentMonitoringJob.
     ///
     /// @Snippet(path: "JobService_GetModelDeploymentMonitoringJob")
     public func getModelDeploymentMonitoringJob(
-      request: GetModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob {
       try await self.inner.getModelDeploymentMonitoringJob(request: request, options: options)
     }
@@ -636,7 +636,7 @@
     ///
     /// @Snippet(path: "JobService_ListModelDeploymentMonitoringJobs")
     public func listModelDeploymentMonitoringJobs(
-      request: ListModelDeploymentMonitoringJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListModelDeploymentMonitoringJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListModelDeploymentMonitoringJobsResponse {
       try await self.inner.listModelDeploymentMonitoringJobs(request: request, options: options)
     }
@@ -645,7 +645,7 @@
     ///
     /// @Snippet(path: "JobService_ListModelDeploymentMonitoringJobs")
     public func listModelDeploymentMonitoringJobs(
-      byItem: ListModelDeploymentMonitoringJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListModelDeploymentMonitoringJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ModelDeploymentMonitoringJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -654,14 +654,14 @@
         request.pageToken = token
         return try await self.listModelDeploymentMonitoringJobs(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates a ModelDeploymentMonitoringJob.
     ///
     /// @Snippet(path: "JobService_UpdateModelDeploymentMonitoringJob")
     public func updateModelDeploymentMonitoringJob(
-      request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.updateModelDeploymentMonitoringJob(request: request, options: options)
     }
@@ -670,24 +670,23 @@
     ///
     /// @Snippet(path: "JobService_UpdateModelDeploymentMonitoringJob")
     public func updateModelDeploymentMonitoringJob(
-      withPolling: UpdateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ModelDeploymentMonitoringJob> {
+      withPolling: UpdateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ModelDeploymentMonitoringJob> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ModelDeploymentMonitoringJob>.State in
+          -> GoogleGax._PollableOperationImpl<ModelDeploymentMonitoringJob>.State in
         return try op._extractStatus(ModelDeploymentMonitoringJob.self)
       }
       let rawOp = try await self.updateModelDeploymentMonitoringJob(
         request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ModelDeploymentMonitoringJob>.State
-        in
+        () async throws -> GoogleGax._PollableOperationImpl<ModelDeploymentMonitoringJob>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -699,7 +698,7 @@
     ///
     /// @Snippet(path: "JobService_DeleteModelDeploymentMonitoringJob")
     public func deleteModelDeploymentMonitoringJob(
-      request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteModelDeploymentMonitoringJob(request: request, options: options)
     }
@@ -708,22 +707,22 @@
     ///
     /// @Snippet(path: "JobService_DeleteModelDeploymentMonitoringJob")
     public func deleteModelDeploymentMonitoringJob(
-      withPolling: DeleteModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteModelDeploymentMonitoringJob(
         request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -740,7 +739,7 @@
     ///
     /// @Snippet(path: "JobService_PauseModelDeploymentMonitoringJob")
     public func pauseModelDeploymentMonitoringJob(
-      request: PauseModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: PauseModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.pauseModelDeploymentMonitoringJob(request: request, options: options)
     }
@@ -751,7 +750,7 @@
     ///
     /// @Snippet(path: "JobService_ResumeModelDeploymentMonitoringJob")
     public func resumeModelDeploymentMonitoringJob(
-      request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.resumeModelDeploymentMonitoringJob(request: request, options: options)
     }
@@ -760,7 +759,7 @@
     ///
     /// @Snippet(path: "JobService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -769,7 +768,7 @@
     ///
     /// @Snippet(path: "JobService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -777,14 +776,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "JobService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -797,7 +796,7 @@
     ///
     /// @Snippet(path: "JobService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -807,7 +806,7 @@
     ///
     /// @Snippet(path: "JobService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -822,7 +821,7 @@
     ///
     /// @Snippet(path: "JobService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -833,7 +832,7 @@
     ///
     /// @Snippet(path: "JobService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -844,7 +843,7 @@
     ///
     /// @Snippet(path: "JobService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -852,7 +851,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -861,7 +860,7 @@
     ///
     /// @Snippet(path: "JobService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -872,7 +871,7 @@
     ///
     /// @Snippet(path: "JobService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -883,7 +882,7 @@
     ///
     /// @Snippet(path: "JobService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -894,7 +893,7 @@
     ///
     /// @Snippet(path: "JobService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -945,13 +944,13 @@
         -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.deleteCustomJob`.
-      func deleteCustomJob(withPolling: DeleteCustomJobRequest) async throws -> any GoogleCloudGax
+      func deleteCustomJob(withPolling: DeleteCustomJobRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.deleteCustomJob`.
       func deleteCustomJob(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelCustomJob`.
       func cancelCustomJob(request: CancelCustomJobRequest) async throws
@@ -1000,12 +999,12 @@
 
       /// See `JobServiceClient.deleteDataLabelingJob`.
       func deleteDataLabelingJob(withPolling: DeleteDataLabelingJobRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.deleteDataLabelingJob`.
       func deleteDataLabelingJob(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelDataLabelingJob`.
       func cancelDataLabelingJob(request: CancelDataLabelingJobRequest) async throws
@@ -1054,12 +1053,12 @@
 
       /// See `JobServiceClient.deleteHyperparameterTuningJob`.
       func deleteHyperparameterTuningJob(withPolling: DeleteHyperparameterTuningJobRequest)
-        async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.deleteHyperparameterTuningJob`.
       func deleteHyperparameterTuningJob(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelHyperparameterTuningJob`.
       func cancelHyperparameterTuningJob(request: CancelHyperparameterTuningJobRequest) async throws
@@ -1104,13 +1103,13 @@
       func deleteNasJob(request: DeleteNasJobRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.deleteNasJob`.
-      func deleteNasJob(withPolling: DeleteNasJobRequest) async throws -> any GoogleCloudGax
+      func deleteNasJob(withPolling: DeleteNasJobRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.deleteNasJob`.
       func deleteNasJob(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelNasJob`.
       func cancelNasJob(request: CancelNasJobRequest) async throws
@@ -1182,12 +1181,12 @@
 
       /// See `JobServiceClient.deleteBatchPredictionJob`.
       func deleteBatchPredictionJob(withPolling: DeleteBatchPredictionJobRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.deleteBatchPredictionJob`.
       func deleteBatchPredictionJob(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelBatchPredictionJob`.
       func cancelBatchPredictionJob(request: CancelBatchPredictionJobRequest) async throws
@@ -1254,13 +1253,13 @@
       /// See `JobServiceClient.updateModelDeploymentMonitoringJob`.
       func updateModelDeploymentMonitoringJob(
         withPolling: UpdateModelDeploymentMonitoringJobRequest
-      ) async throws -> any GoogleCloudGax.PollableOperation<ModelDeploymentMonitoringJob>
+      ) async throws -> any GoogleGax.PollableOperation<ModelDeploymentMonitoringJob>
 
       /// See `JobServiceClient.updateModelDeploymentMonitoringJob`.
       func updateModelDeploymentMonitoringJob(
         modelDeploymentMonitoringJob: ModelDeploymentMonitoringJob?,
-        updateMask: GoogleCloudWKT.FieldMask?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<ModelDeploymentMonitoringJob>
+        updateMask: GoogleWKT.FieldMask?,
+      ) async throws -> any GoogleGax.PollableOperation<ModelDeploymentMonitoringJob>
 
       /// See `JobServiceClient.deleteModelDeploymentMonitoringJob`.
       func deleteModelDeploymentMonitoringJob(request: DeleteModelDeploymentMonitoringJobRequest)
@@ -1269,12 +1268,12 @@
       /// See `JobServiceClient.deleteModelDeploymentMonitoringJob`.
       func deleteModelDeploymentMonitoringJob(
         withPolling: DeleteModelDeploymentMonitoringJobRequest
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.deleteModelDeploymentMonitoringJob`.
       func deleteModelDeploymentMonitoringJob(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.pauseModelDeploymentMonitoringJob`.
       func pauseModelDeploymentMonitoringJob(request: PauseModelDeploymentMonitoringJobRequest)
@@ -1354,312 +1353,310 @@
 
       /// See `JobServiceClient.createCustomJob`.
       func createCustomJob(
-        request: CreateCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.CustomJob
 
       /// See `JobServiceClient.getCustomJob`.
       func getCustomJob(
-        request: GetCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.CustomJob
 
       /// See `JobServiceClient.listCustomJobs`.
       func listCustomJobs(
-        request: ListCustomJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListCustomJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListCustomJobsResponse
 
       /// See `JobServiceClient.listCustomJobs`.
       func listCustomJobs(
-        byItem: ListCustomJobsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListCustomJobsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<CustomJob, Swift.Error>
 
       /// See `JobServiceClient.deleteCustomJob`.
       func deleteCustomJob(
-        request: DeleteCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.deleteCustomJob`.
       func deleteCustomJob(
-        withPolling: DeleteCustomJobRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteCustomJobRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelCustomJob`.
       func cancelCustomJob(
-        request: CancelCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.createDataLabelingJob`.
       func createDataLabelingJob(
-        request: CreateDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob
 
       /// See `JobServiceClient.getDataLabelingJob`.
       func getDataLabelingJob(
-        request: GetDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob
 
       /// See `JobServiceClient.listDataLabelingJobs`.
       func listDataLabelingJobs(
-        request: ListDataLabelingJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDataLabelingJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListDataLabelingJobsResponse
 
       /// See `JobServiceClient.listDataLabelingJobs`.
       func listDataLabelingJobs(
-        byItem: ListDataLabelingJobsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListDataLabelingJobsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<DataLabelingJob, Swift.Error>
 
       /// See `JobServiceClient.deleteDataLabelingJob`.
       func deleteDataLabelingJob(
-        request: DeleteDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.deleteDataLabelingJob`.
       func deleteDataLabelingJob(
-        withPolling: DeleteDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteDataLabelingJobRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelDataLabelingJob`.
       func cancelDataLabelingJob(
-        request: CancelDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.createHyperparameterTuningJob`.
       func createHyperparameterTuningJob(
-        request: CreateHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob
 
       /// See `JobServiceClient.getHyperparameterTuningJob`.
       func getHyperparameterTuningJob(
-        request: GetHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob
 
       /// See `JobServiceClient.listHyperparameterTuningJobs`.
       func listHyperparameterTuningJobs(
-        request: ListHyperparameterTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListHyperparameterTuningJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListHyperparameterTuningJobsResponse
 
       /// See `JobServiceClient.listHyperparameterTuningJobs`.
       func listHyperparameterTuningJobs(
-        byItem: ListHyperparameterTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListHyperparameterTuningJobsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<HyperparameterTuningJob, Swift.Error>
 
       /// See `JobServiceClient.deleteHyperparameterTuningJob`.
       func deleteHyperparameterTuningJob(
-        request: DeleteHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.deleteHyperparameterTuningJob`.
       func deleteHyperparameterTuningJob(
-        withPolling: DeleteHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelHyperparameterTuningJob`.
       func cancelHyperparameterTuningJob(
-        request: CancelHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.createNasJob`.
       func createNasJob(
-        request: CreateNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasJob
 
       /// See `JobServiceClient.getNasJob`.
       func getNasJob(
-        request: GetNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasJob
 
       /// See `JobServiceClient.listNasJobs`.
       func listNasJobs(
-        request: ListNasJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNasJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNasJobsResponse
 
       /// See `JobServiceClient.listNasJobs`.
       func listNasJobs(
-        byItem: ListNasJobsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListNasJobsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<NasJob, Swift.Error>
 
       /// See `JobServiceClient.deleteNasJob`.
       func deleteNasJob(
-        request: DeleteNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.deleteNasJob`.
       func deleteNasJob(
-        withPolling: DeleteNasJobRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteNasJobRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelNasJob`.
       func cancelNasJob(
-        request: CancelNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.getNasTrialDetail`.
       func getNasTrialDetail(
-        request: GetNasTrialDetailRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNasTrialDetailRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasTrialDetail
 
       /// See `JobServiceClient.listNasTrialDetails`.
       func listNasTrialDetails(
-        request: ListNasTrialDetailsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNasTrialDetailsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNasTrialDetailsResponse
 
       /// See `JobServiceClient.listNasTrialDetails`.
       func listNasTrialDetails(
-        byItem: ListNasTrialDetailsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListNasTrialDetailsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<NasTrialDetail, Swift.Error>
 
       /// See `JobServiceClient.createBatchPredictionJob`.
       func createBatchPredictionJob(
-        request: CreateBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob
 
       /// See `JobServiceClient.getBatchPredictionJob`.
       func getBatchPredictionJob(
-        request: GetBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob
 
       /// See `JobServiceClient.listBatchPredictionJobs`.
       func listBatchPredictionJobs(
-        request: ListBatchPredictionJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListBatchPredictionJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListBatchPredictionJobsResponse
 
       /// See `JobServiceClient.listBatchPredictionJobs`.
       func listBatchPredictionJobs(
-        byItem: ListBatchPredictionJobsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListBatchPredictionJobsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<BatchPredictionJob, Swift.Error>
 
       /// See `JobServiceClient.deleteBatchPredictionJob`.
       func deleteBatchPredictionJob(
-        request: DeleteBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.deleteBatchPredictionJob`.
       func deleteBatchPredictionJob(
-        withPolling: DeleteBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteBatchPredictionJobRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.cancelBatchPredictionJob`.
       func cancelBatchPredictionJob(
-        request: CancelBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.createModelDeploymentMonitoringJob`.
       func createModelDeploymentMonitoringJob(
-        request: CreateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob
 
       /// See `JobServiceClient.searchModelDeploymentMonitoringStatsAnomalies`.
       func searchModelDeploymentMonitoringStatsAnomalies(
         request: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws
         -> GoogleCloudAIPlatformV1.SearchModelDeploymentMonitoringStatsAnomaliesResponse
 
       /// See `JobServiceClient.searchModelDeploymentMonitoringStatsAnomalies`.
       func searchModelDeploymentMonitoringStatsAnomalies(
         byItem: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<ModelMonitoringStatsAnomalies, Swift.Error>
 
       /// See `JobServiceClient.getModelDeploymentMonitoringJob`.
       func getModelDeploymentMonitoringJob(
-        request: GetModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob
 
       /// See `JobServiceClient.listModelDeploymentMonitoringJobs`.
       func listModelDeploymentMonitoringJobs(
-        request: ListModelDeploymentMonitoringJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelDeploymentMonitoringJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelDeploymentMonitoringJobsResponse
 
       /// See `JobServiceClient.listModelDeploymentMonitoringJobs`.
       func listModelDeploymentMonitoringJobs(
-        byItem: ListModelDeploymentMonitoringJobsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListModelDeploymentMonitoringJobsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<ModelDeploymentMonitoringJob, Swift.Error>
 
       /// See `JobServiceClient.updateModelDeploymentMonitoringJob`.
       func updateModelDeploymentMonitoringJob(
-        request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.updateModelDeploymentMonitoringJob`.
       func updateModelDeploymentMonitoringJob(
-        withPolling: UpdateModelDeploymentMonitoringJobRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ModelDeploymentMonitoringJob>
+        withPolling: UpdateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ModelDeploymentMonitoringJob>
 
       /// See `JobServiceClient.deleteModelDeploymentMonitoringJob`.
       func deleteModelDeploymentMonitoringJob(
-        request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `JobServiceClient.deleteModelDeploymentMonitoringJob`.
       func deleteModelDeploymentMonitoringJob(
-        withPolling: DeleteModelDeploymentMonitoringJobRequest,
-        options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `JobServiceClient.pauseModelDeploymentMonitoringJob`.
       func pauseModelDeploymentMonitoringJob(
-        request: PauseModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: PauseModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.resumeModelDeploymentMonitoringJob`.
       func resumeModelDeploymentMonitoringJob(
-        request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `JobServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `JobServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `JobServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `JobServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `JobServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `JobServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `JobServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `JobServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `JobServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -1673,9 +1670,9 @@
     }
 
     public func createCustomJob(
-      request: CreateCustomJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.CustomJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createCustomJob(
@@ -1696,9 +1693,9 @@
     }
 
     public func getCustomJob(
-      request: GetCustomJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.CustomJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getCustomJob(
@@ -1717,9 +1714,9 @@
     }
 
     public func listCustomJobs(
-      request: ListCustomJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListCustomJobsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listCustomJobs(
@@ -1729,13 +1726,13 @@
     }
 
     public func listCustomJobs(
-      byItem: ListCustomJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCustomJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CustomJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListCustomJobsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listCustomJobs(
@@ -1754,30 +1751,30 @@
     }
 
     public func deleteCustomJob(
-      request: DeleteCustomJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteCustomJob(withPolling: DeleteCustomJobRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    public func deleteCustomJob(withPolling: DeleteCustomJobRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
     {
       try await self.deleteCustomJob(withPolling: withPolling, options: .init())
     }
 
     public func deleteCustomJob(
-      withPolling: DeleteCustomJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteCustomJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteCustomJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteCustomJobRequest().with {
         $0.name = name
       }
@@ -1789,9 +1786,9 @@
     }
 
     public func cancelCustomJob(
-      request: CancelCustomJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelCustomJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelCustomJob(
@@ -1810,9 +1807,9 @@
     }
 
     public func createDataLabelingJob(
-      request: CreateDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataLabelingJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createDataLabelingJob(
@@ -1833,9 +1830,9 @@
     }
 
     public func getDataLabelingJob(
-      request: GetDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataLabelingJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getDataLabelingJob(
@@ -1854,9 +1851,9 @@
     }
 
     public func listDataLabelingJobs(
-      request: ListDataLabelingJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataLabelingJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDataLabelingJobsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listDataLabelingJobs(
@@ -1866,14 +1863,14 @@
     }
 
     public func listDataLabelingJobs(
-      byItem: ListDataLabelingJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataLabelingJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataLabelingJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListDataLabelingJobsResponse
         in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listDataLabelingJobs(
@@ -1892,30 +1889,30 @@
     }
 
     public func deleteDataLabelingJob(
-      request: DeleteDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataLabelingJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteDataLabelingJob(withPolling: DeleteDataLabelingJobRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteDataLabelingJob(withPolling: withPolling, options: .init())
     }
 
     public func deleteDataLabelingJob(
-      withPolling: DeleteDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteDataLabelingJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteDataLabelingJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteDataLabelingJobRequest().with {
         $0.name = name
       }
@@ -1927,9 +1924,9 @@
     }
 
     public func cancelDataLabelingJob(
-      request: CancelDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelDataLabelingJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelDataLabelingJob(
@@ -1948,9 +1945,9 @@
     }
 
     public func createHyperparameterTuningJob(
-      request: CreateHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createHyperparameterTuningJob(
@@ -1971,9 +1968,9 @@
     }
 
     public func getHyperparameterTuningJob(
-      request: GetHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getHyperparameterTuningJob(
@@ -1992,9 +1989,9 @@
     }
 
     public func listHyperparameterTuningJobs(
-      request: ListHyperparameterTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHyperparameterTuningJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListHyperparameterTuningJobsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listHyperparameterTuningJobs(
@@ -2004,14 +2001,14 @@
     }
 
     public func listHyperparameterTuningJobs(
-      byItem: ListHyperparameterTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListHyperparameterTuningJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<HyperparameterTuningJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudAIPlatformV1.ListHyperparameterTuningJobsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listHyperparameterTuningJobs(
@@ -2030,30 +2027,30 @@
     }
 
     public func deleteHyperparameterTuningJob(
-      request: DeleteHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteHyperparameterTuningJob(withPolling: DeleteHyperparameterTuningJobRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      async throws -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteHyperparameterTuningJob(withPolling: withPolling, options: .init())
     }
 
     public func deleteHyperparameterTuningJob(
-      withPolling: DeleteHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteHyperparameterTuningJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteHyperparameterTuningJobRequest().with {
         $0.name = name
       }
@@ -2067,9 +2064,9 @@
     }
 
     public func cancelHyperparameterTuningJob(
-      request: CancelHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelHyperparameterTuningJob(
@@ -2088,9 +2085,9 @@
     }
 
     public func createNasJob(
-      request: CreateNasJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNasJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.NasJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createNasJob(
@@ -2110,9 +2107,9 @@
     }
 
     public func getNasJob(
-      request: GetNasJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNasJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.NasJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getNasJob(
@@ -2131,9 +2128,9 @@
     }
 
     public func listNasJobs(
-      request: ListNasJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNasJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListNasJobsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listNasJobs(
@@ -2143,13 +2140,13 @@
     }
 
     public func listNasJobs(
-      byItem: ListNasJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListNasJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NasJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListNasJobsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listNasJobs(
@@ -2168,30 +2165,30 @@
     }
 
     public func deleteNasJob(
-      request: DeleteNasJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNasJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteNasJob(withPolling: DeleteNasJobRequest) async throws -> any GoogleCloudGax
+    public func deleteNasJob(withPolling: DeleteNasJobRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.deleteNasJob(withPolling: withPolling, options: .init())
     }
 
     public func deleteNasJob(
-      withPolling: DeleteNasJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteNasJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteNasJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteNasJobRequest().with {
         $0.name = name
       }
@@ -2203,9 +2200,9 @@
     }
 
     public func cancelNasJob(
-      request: CancelNasJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelNasJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelNasJob(
@@ -2224,9 +2221,9 @@
     }
 
     public func getNasTrialDetail(
-      request: GetNasTrialDetailRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNasTrialDetailRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.NasTrialDetail {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getNasTrialDetail(
@@ -2245,9 +2242,9 @@
     }
 
     public func listNasTrialDetails(
-      request: ListNasTrialDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNasTrialDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListNasTrialDetailsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listNasTrialDetails(
@@ -2257,13 +2254,13 @@
     }
 
     public func listNasTrialDetails(
-      byItem: ListNasTrialDetailsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListNasTrialDetailsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NasTrialDetail, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListNasTrialDetailsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listNasTrialDetails(
@@ -2282,9 +2279,9 @@
     }
 
     public func createBatchPredictionJob(
-      request: CreateBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBatchPredictionJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createBatchPredictionJob(
@@ -2305,9 +2302,9 @@
     }
 
     public func getBatchPredictionJob(
-      request: GetBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBatchPredictionJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getBatchPredictionJob(
@@ -2326,9 +2323,9 @@
     }
 
     public func listBatchPredictionJobs(
-      request: ListBatchPredictionJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBatchPredictionJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListBatchPredictionJobsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listBatchPredictionJobs(
@@ -2338,14 +2335,14 @@
     }
 
     public func listBatchPredictionJobs(
-      byItem: ListBatchPredictionJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBatchPredictionJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BatchPredictionJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudAIPlatformV1.ListBatchPredictionJobsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listBatchPredictionJobs(
@@ -2364,30 +2361,30 @@
     }
 
     public func deleteBatchPredictionJob(
-      request: DeleteBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBatchPredictionJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteBatchPredictionJob(withPolling: DeleteBatchPredictionJobRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteBatchPredictionJob(withPolling: withPolling, options: .init())
     }
 
     public func deleteBatchPredictionJob(
-      withPolling: DeleteBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteBatchPredictionJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteBatchPredictionJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteBatchPredictionJobRequest().with {
         $0.name = name
       }
@@ -2399,9 +2396,9 @@
     }
 
     public func cancelBatchPredictionJob(
-      request: CancelBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelBatchPredictionJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelBatchPredictionJob(
@@ -2420,9 +2417,9 @@
     }
 
     public func createModelDeploymentMonitoringJob(
-      request: CreateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createModelDeploymentMonitoringJob(
@@ -2446,10 +2443,10 @@
 
     public func searchModelDeploymentMonitoringStatsAnomalies(
       request: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SearchModelDeploymentMonitoringStatsAnomaliesResponse
     {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func searchModelDeploymentMonitoringStatsAnomalies(
@@ -2460,14 +2457,14 @@
 
     public func searchModelDeploymentMonitoringStatsAnomalies(
       byItem: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ModelMonitoringStatsAnomalies, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudAIPlatformV1.SearchModelDeploymentMonitoringStatsAnomaliesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func searchModelDeploymentMonitoringStatsAnomalies(
@@ -2488,9 +2485,9 @@
     }
 
     public func getModelDeploymentMonitoringJob(
-      request: GetModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getModelDeploymentMonitoringJob(
@@ -2509,9 +2506,9 @@
     }
 
     public func listModelDeploymentMonitoringJobs(
-      request: ListModelDeploymentMonitoringJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListModelDeploymentMonitoringJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListModelDeploymentMonitoringJobsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listModelDeploymentMonitoringJobs(
@@ -2521,14 +2518,14 @@
     }
 
     public func listModelDeploymentMonitoringJobs(
-      byItem: ListModelDeploymentMonitoringJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListModelDeploymentMonitoringJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ModelDeploymentMonitoringJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudAIPlatformV1.ListModelDeploymentMonitoringJobsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listModelDeploymentMonitoringJobs(
@@ -2547,33 +2544,32 @@
     }
 
     public func updateModelDeploymentMonitoringJob(
-      request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateModelDeploymentMonitoringJob(
       withPolling: UpdateModelDeploymentMonitoringJobRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<ModelDeploymentMonitoringJob> {
+    ) async throws -> any GoogleGax.PollableOperation<ModelDeploymentMonitoringJob> {
       try await self.updateModelDeploymentMonitoringJob(withPolling: withPolling, options: .init())
     }
 
     public func updateModelDeploymentMonitoringJob(
-      withPolling: UpdateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ModelDeploymentMonitoringJob> {
+      withPolling: UpdateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ModelDeploymentMonitoringJob> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ModelDeploymentMonitoringJob>.State
-        in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ModelDeploymentMonitoringJob>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func updateModelDeploymentMonitoringJob(
       modelDeploymentMonitoringJob: ModelDeploymentMonitoringJob?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ModelDeploymentMonitoringJob> {
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<ModelDeploymentMonitoringJob> {
       let request = UpdateModelDeploymentMonitoringJobRequest().with {
         $0.modelDeploymentMonitoringJob = modelDeploymentMonitoringJob
         $0.updateMask = updateMask
@@ -2588,30 +2584,30 @@
     }
 
     public func deleteModelDeploymentMonitoringJob(
-      request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteModelDeploymentMonitoringJob(
       withPolling: DeleteModelDeploymentMonitoringJobRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       try await self.deleteModelDeploymentMonitoringJob(withPolling: withPolling, options: .init())
     }
 
     public func deleteModelDeploymentMonitoringJob(
-      withPolling: DeleteModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteModelDeploymentMonitoringJob(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteModelDeploymentMonitoringJobRequest().with {
         $0.name = name
       }
@@ -2625,9 +2621,9 @@
     }
 
     public func pauseModelDeploymentMonitoringJob(
-      request: PauseModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: PauseModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func pauseModelDeploymentMonitoringJob(
@@ -2646,9 +2642,9 @@
     }
 
     public func resumeModelDeploymentMonitoringJob(
-      request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func resumeModelDeploymentMonitoringJob(
@@ -2667,9 +2663,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -2679,13 +2675,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -2695,9 +2691,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -2707,9 +2703,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -2719,9 +2715,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -2731,9 +2727,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -2743,9 +2739,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -2755,13 +2751,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -2782,9 +2778,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -2801,9 +2797,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -2820,9 +2816,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -2841,9 +2837,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

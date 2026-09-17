@@ -16,10 +16,10 @@
 
 #if ConversationModels
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents evaluation result of a conversation model.
-  public struct ConversationModelEvaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConversationModelEvaluation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The resource name of the evaluation. Format:
@@ -34,7 +34,7 @@
     public var evaluationConfig: EvaluationConfig? = nil
 
     /// Output only. Creation time of this model.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Human eval template in csv format.
     /// It takes real-world conversations provided through input dataset, generates
@@ -56,7 +56,7 @@
     /// Metrics details.
     public var metrics: OneOf_Metrics? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConversationModelEvaluation`.
     public init() {}
@@ -107,8 +107,7 @@
       }
       self.evaluationConfig = try container.decodeIfPresent(
         EvaluationConfig.self, forKey: .evaluationConfig)
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       if let value = try container.decodeIfPresent(
         Swift.String.self, forKey: .rawHumanEvalTemplateCsv)
       {
@@ -133,7 +132,7 @@
       self.metrics = metrics
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -165,11 +164,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.ConversationModelEvaluation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -33,7 +33,7 @@ let package = Package(
       name: "GoogleCloudRecommenderLoggingV1",
       dependencies: [
         .product(name: "GoogleCloudRecommenderV1", package: "swift-google-cloud-recommender-v1"),
-        .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
+        .product(name: "GoogleWKT", package: "swift-google-wkt"),
       ],
     )
   ]

@@ -15,99 +15,99 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol LineageStub: Sendable {
     func processOpenLineageRunEvent(
-      request: ProcessOpenLineageRunEventRequest, options: GoogleCloudGax.RequestOptions
+      request: ProcessOpenLineageRunEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.ProcessOpenLineageRunEventResponse
 
     func createProcess(
-      request: CreateProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Process
 
     func updateProcess(
-      request: UpdateProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Process
 
     func getProcess(
-      request: GetProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Process
 
     func listProcesses(
-      request: ListProcessesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.ListProcessesResponse
 
     func deleteProcess(
-      request: DeleteProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createRun(
-      request: CreateRunRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Run
 
     func updateRun(
-      request: UpdateRunRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Run
 
     func getRun(
-      request: GetRunRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Run
 
     func listRuns(
-      request: ListRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.ListRunsResponse
 
     func deleteRun(
-      request: DeleteRunRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createLineageEvent(
-      request: CreateLineageEventRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLineageEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.LineageEvent
 
     func getLineageEvent(
-      request: GetLineageEventRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLineageEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.LineageEvent
 
     func listLineageEvents(
-      request: ListLineageEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLineageEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.ListLineageEventsResponse
 
     func deleteLineageEvent(
-      request: DeleteLineageEventRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLineageEventRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func searchLinks(
-      request: SearchLinksRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchLinksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.SearchLinksResponse
 
     func batchSearchLinkProcesses(
-      request: BatchSearchLinkProcessesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchSearchLinkProcessesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.BatchSearchLinkProcessesResponse
 
     func searchLineageStreaming(
-      request: SearchLineageStreamingRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchLineageStreamingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.SearchLineageStreamingResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

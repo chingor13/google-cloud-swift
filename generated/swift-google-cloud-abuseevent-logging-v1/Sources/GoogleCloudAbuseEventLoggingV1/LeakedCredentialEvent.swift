@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Information about the leaked client credentials observed on the monitored
 /// resource.
-public struct LeakedCredentialEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LeakedCredentialEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// URI where the client credentials were found.
@@ -28,7 +28,7 @@ public struct LeakedCredentialEvent: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// Indicates the type of credential leaked.
   public var credentialType: OneOf_CredentialType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LeakedCredentialEvent`.
   public init() {}
@@ -92,7 +92,7 @@ public struct LeakedCredentialEvent: Codable, Equatable, GoogleCloudWKT._AnyPack
     self.credentialType = credentialType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -124,10 +124,10 @@ public struct LeakedCredentialEvent: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.abuseevent.logging.v1.LeakedCredentialEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

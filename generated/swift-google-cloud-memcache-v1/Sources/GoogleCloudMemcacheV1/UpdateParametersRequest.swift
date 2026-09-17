@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for [UpdateParameters][google.cloud.memcache.v1.CloudMemcache.UpdateParameters].
 ///
 /// [google.cloud.memcache.v1.CloudMemcache.UpdateParameters]: <doc:CloudMemcacheClient/updateParameters(request:options:)>
-public struct UpdateParametersRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateParametersRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Resource name of the Memcached instance for which the parameters should be
@@ -28,12 +28,12 @@ public struct UpdateParametersRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public var name: Swift.String = Swift.String()
 
   /// Required. Mask of fields to update.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// The parameters to apply to the instance.
   public var parameters: MemcacheParameters? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateParametersRequest`.
   public init() {}
@@ -73,12 +73,11 @@ public struct UpdateParametersRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.parameters = try container.decodeIfPresent(MemcacheParameters.self, forKey: .parameters)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,10 +94,10 @@ public struct UpdateParametersRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.memcache.v1.UpdateParametersRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

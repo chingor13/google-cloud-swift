@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A parameter used to define custom fields in a data source definition.
-public struct DataSourceParameter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataSourceParameter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Parameter identifier.
@@ -46,10 +46,10 @@ public struct DataSourceParameter: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var allowedValues: [Swift.String] = []
 
   /// For integer and double values specifies minimum allowed value.
-  public var minValue: GoogleCloudWKT.DoubleValue? = nil
+  public var minValue: GoogleWKT.DoubleValue? = nil
 
   /// For integer and double values specifies maximum allowed value.
-  public var maxValue: GoogleCloudWKT.DoubleValue? = nil
+  public var maxValue: GoogleWKT.DoubleValue? = nil
 
   /// Deprecated. This field has no effect.
   public var fields: [DataSourceParameter] = []
@@ -71,7 +71,7 @@ public struct DataSourceParameter: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// visible to users.
   public var deprecated: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataSourceParameter`.
   public init() {}
@@ -158,10 +158,8 @@ public struct DataSourceParameter: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .allowedValues) {
       self.allowedValues = value
     }
-    self.minValue = try container.decodeIfPresent(
-      GoogleCloudWKT.DoubleValue.self, forKey: .minValue)
-    self.maxValue = try container.decodeIfPresent(
-      GoogleCloudWKT.DoubleValue.self, forKey: .maxValue)
+    self.minValue = try container.decodeIfPresent(GoogleWKT.DoubleValue.self, forKey: .minValue)
+    self.maxValue = try container.decodeIfPresent(GoogleWKT.DoubleValue.self, forKey: .maxValue)
     if let value = try container.decodeIfPresent([DataSourceParameter].self, forKey: .fields) {
       self.fields = value
     }
@@ -183,7 +181,7 @@ public struct DataSourceParameter: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -354,10 +352,10 @@ public struct DataSourceParameter: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.datatransfer.v1.DataSourceParameter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

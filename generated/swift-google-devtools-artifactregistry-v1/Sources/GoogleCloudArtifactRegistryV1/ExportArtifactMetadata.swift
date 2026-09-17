@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The LRO metadata for exporting an artifact.
-public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExportArtifactMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The exported artifact files.
   public var exportedFiles: [ExportArtifactMetadata.ExportedFile] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExportArtifactMetadata`.
   public init() {}
@@ -64,7 +64,7 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -77,7 +77,7 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
   }
 
   /// The exported artifact file.
-  public struct ExportedFile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExportedFile: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Name of the exported artifact file.
@@ -90,7 +90,7 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// The destination the file was exported to.
     public var destination: OneOf_Destination? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExportedFile`.
     public init() {}
@@ -152,7 +152,7 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
       self.destination = destination
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -183,21 +183,21 @@ public struct ExportArtifactMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.ExportArtifactMetadata.ExportedFile"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.ExportArtifactMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

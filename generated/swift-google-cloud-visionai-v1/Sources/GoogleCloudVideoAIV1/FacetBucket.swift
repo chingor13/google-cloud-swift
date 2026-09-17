@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Holds the facet value, selections state, and metadata.
-public struct FacetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FacetBucket: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Whether one facet bucket is selected. This field represents user's facet
@@ -30,7 +30,7 @@ public struct FacetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// brady", "drew brees", etc.
   public var bucketValue: OneOf_BucketValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FacetBucket`.
   public init() {}
@@ -90,7 +90,7 @@ public struct FacetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.bucketValue = bucketValue
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -112,7 +112,7 @@ public struct FacetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The range of values [start, end) for which faceting is applied.
-  public struct Range: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Range: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Start of the range. Non-existence indicates some bound (e.g. -inf).
@@ -121,7 +121,7 @@ public struct FacetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// End of the range. Non-existence indicates some bound (e.g. inf).
     public var end: FacetValue? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Range`.
     public init() {}
@@ -160,7 +160,7 @@ public struct FacetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.end = try container.decodeIfPresent(FacetValue.self, forKey: .end)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -176,11 +176,11 @@ public struct FacetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.FacetBucket.Range"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -197,10 +197,10 @@ public struct FacetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.FacetBucket"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

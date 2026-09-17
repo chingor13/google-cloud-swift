@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service to manage database flags for Cloud SQL instances.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlFlagsServiceStub
 
     /// Creates a new `SqlFlagsServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlFlagsServiceStub = try Clients.SqlFlagsServiceTransport(options)
       inner = Clients.SqlFlagsServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -42,7 +42,7 @@
     ///
     /// @Snippet(path: "SqlFlagsService_List")
     public func list(
-      request: SqlFlagsListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlFlagsListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.FlagsListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -60,7 +60,7 @@
 
       /// See `SqlFlagsServiceClient.list`.
       func list(
-        request: SqlFlagsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlFlagsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.FlagsListResponse
     }
   }
@@ -74,9 +74,9 @@
     }
 
     public func list(
-      request: SqlFlagsListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlFlagsListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.FlagsListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

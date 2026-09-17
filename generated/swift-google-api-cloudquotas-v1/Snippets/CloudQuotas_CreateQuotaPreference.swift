@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleApiCloudQuotasV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: CloudQuotasClient, projectId: String, locationId: String) async throws {
   let response = try await client.createQuotaPreference(

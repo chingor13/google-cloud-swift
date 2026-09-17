@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class PublisherRetry: PublisherStub {
     let inner: any PublisherStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any PublisherStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any PublisherStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func publishChannelConnectionEvents(
-      request: PublishChannelConnectionEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: PublishChannelConnectionEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcPublishingV1.PublishChannelConnectionEventsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: PublishChannelConnectionEventsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: PublishChannelConnectionEventsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEventarcPublishingV1.PublishChannelConnectionEventsResponse
           in
           return try await self.inner.publishChannelConnectionEvents(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func publishEvents(
-      request: PublishEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: PublishEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcPublishingV1.PublishEventsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: PublishEventsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: PublishEventsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEventarcPublishingV1.PublishEventsResponse
           in
           return try await self.inner.publishEvents(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func publish(
-      request: PublishRequest, options: GoogleCloudGax.RequestOptions
+      request: PublishRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcPublishingV1.PublishResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: PublishRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: PublishRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEventarcPublishingV1.PublishResponse
           in
           return try await self.inner.publish(request: r, options: o)

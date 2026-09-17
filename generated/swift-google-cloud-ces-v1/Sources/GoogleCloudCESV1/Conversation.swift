@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A conversation represents an interaction between an end user and the CES app.
-public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Conversation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The unique identifier of the conversation.
@@ -27,10 +27,10 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Timestamp when the conversation was created.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp when the conversation was completed.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Required. The turns in the conversation.
   public var turns: [Conversation.Turn] = []
@@ -73,7 +73,7 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   @available(*, deprecated)
   public var messages: [Message] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Conversation`.
   public init() {}
@@ -133,9 +133,8 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent([Conversation.Turn].self, forKey: .turns) {
       self.turns = value
     }
@@ -171,7 +170,7 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -196,7 +195,7 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// All information about a single turn in the conversation.
-  public struct Turn: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Turn: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. List of messages in the conversation turn, including user
@@ -206,7 +205,7 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The root span of the action processing.
     public var rootSpan: Span? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Turn`.
     public init() {}
@@ -247,7 +246,7 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.rootSpan = try container.decodeIfPresent(Span.self, forKey: .rootSpan)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -263,11 +262,11 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.Conversation.Turn"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -649,10 +648,10 @@ public struct Conversation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.Conversation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

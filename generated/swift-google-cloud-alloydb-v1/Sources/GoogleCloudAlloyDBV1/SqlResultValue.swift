@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A single value in a row from a sql result.
-public struct SqlResultValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SqlResultValue: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The cell value represented in string format.
@@ -28,7 +28,7 @@ public struct SqlResultValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Set to true if cell value is null.
   public var nullValue: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SqlResultValue`.
   public init() {}
@@ -67,7 +67,7 @@ public struct SqlResultValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.nullValue = try container.decodeIfPresent(Swift.Bool.self, forKey: .nullValue)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -83,10 +83,10 @@ public struct SqlResultValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.SqlResultValue"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,7 +19,7 @@
   // snippet.show
   import Foundation
   import GoogleCloudComputeV1
-  import GoogleCloudWKT
+  import GoogleWKT
 
   func sample(client: HttpHealthChecksClient) async throws {
     let poller = try await client.patch(

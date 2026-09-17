@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Results for a product search request.
-public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProductSearchResults: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Timestamp of the index which provided these results. Products added to the
   /// product set and products removed from the product set after this time are
   /// not reflected in the current results.
-  public var indexTime: GoogleCloudWKT.Timestamp? = nil
+  public var indexTime: GoogleWKT.Timestamp? = nil
 
   /// List of results, one for each product match.
   public var results: [ProductSearchResults.Result] = []
@@ -35,7 +35,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// matches in the union of all the per-product results.
   public var productGroupedResults: [ProductSearchResults.GroupedResult] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProductSearchResults`.
   public init() {}
@@ -72,8 +72,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.indexTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .indexTime)
+    self.indexTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .indexTime)
     if let value = try container.decodeIfPresent(
       [ProductSearchResults.Result].self, forKey: .results)
     {
@@ -86,7 +85,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,7 +100,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Information about a product.
-  public struct Result: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Result: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Product.
@@ -115,7 +114,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// to the query.
     public var image: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Result`.
     public init() {}
@@ -161,7 +160,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -178,16 +177,16 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.ProductSearchResults.Result"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Prediction for what the object in the bounding box is.
-  public struct ObjectAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ObjectAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Object ID that should align with EntityAnnotation mid.
@@ -204,7 +203,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Score of the result. Range [0, 1].
     public var score: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ObjectAnnotation`.
     public init() {}
@@ -257,7 +256,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -275,17 +274,17 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.ProductSearchResults.ObjectAnnotation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Information about the products similar to a single product in a query
   /// image.
-  public struct GroupedResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GroupedResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The bounding polygon around the product detected in the query image.
@@ -297,7 +296,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// List of generic predictions for the object in the bounding box.
     public var objectAnnotations: [ProductSearchResults.ObjectAnnotation] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GroupedResult`.
     public init() {}
@@ -347,7 +346,7 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -364,21 +363,21 @@ public struct ProductSearchResults: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.ProductSearchResults.GroupedResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.ProductSearchResults"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

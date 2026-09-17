@@ -15,40 +15,39 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol PrincipalAccessBoundaryPoliciesStub: Sendable {
     func createPrincipalAccessBoundaryPolicy(
-      request: CreatePrincipalAccessBoundaryPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePrincipalAccessBoundaryPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getPrincipalAccessBoundaryPolicy(
-      request: GetPrincipalAccessBoundaryPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPrincipalAccessBoundaryPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.PrincipalAccessBoundaryPolicy
 
     func updatePrincipalAccessBoundaryPolicy(
-      request: UpdatePrincipalAccessBoundaryPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePrincipalAccessBoundaryPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePrincipalAccessBoundaryPolicy(
-      request: DeletePrincipalAccessBoundaryPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePrincipalAccessBoundaryPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPrincipalAccessBoundaryPolicies(
-      request: ListPrincipalAccessBoundaryPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPrincipalAccessBoundaryPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.ListPrincipalAccessBoundaryPoliciesResponse
 
     func searchPrincipalAccessBoundaryPolicyBindings(
-      request: SearchPrincipalAccessBoundaryPolicyBindingsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SearchPrincipalAccessBoundaryPolicyBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.SearchPrincipalAccessBoundaryPolicyBindingsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

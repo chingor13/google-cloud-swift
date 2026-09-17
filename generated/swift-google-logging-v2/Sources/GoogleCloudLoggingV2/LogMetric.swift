@@ -16,7 +16,7 @@
 
 import Foundation
 import GoogleApi
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes a logs-based metric. The value of the metric is the number of log
 /// entries that match a logs filter in a given time interval.
@@ -25,7 +25,7 @@ import GoogleApi
 /// distribution of the values. The distribution records the statistics of the
 /// extracted values along with an optional histogram of the values as specified
 /// by the bucket options.
-public struct LogMetric: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LogMetric: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The client-assigned metric identifier.
@@ -140,19 +140,19 @@ public struct LogMetric: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The creation timestamp of the metric.
   ///
   /// This field may not be present for older metrics.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last update timestamp of the metric.
   ///
   /// This field may not be present for older metrics.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Deprecated. The API version that created or updated this metric.
   /// The v2 format is used by default and cannot be changed.
   @available(*, deprecated)
   public var version: LogMetric.ApiVersion = LogMetric.ApiVersion()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LogMetric`.
   public init() {}
@@ -234,16 +234,14 @@ public struct LogMetric: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.bucketOptions = try container.decodeIfPresent(
       GoogleApi.Distribution.BucketOptions.self, forKey: .bucketOptions)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(LogMetric.ApiVersion.self, forKey: .version) {
       self.version = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -367,10 +365,10 @@ public struct LogMetric: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.logging.v2.LogMetric"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

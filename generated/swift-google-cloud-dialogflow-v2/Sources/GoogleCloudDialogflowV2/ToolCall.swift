@@ -16,10 +16,10 @@
 
 #if AnswerRecords || Conversations || GeneratorEvaluations || Generators || Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a call of a specific tool's action with the specified inputs.
-  public struct ToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ToolCall: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. A human readable short name of the tool, to be shown on the UI.
@@ -32,10 +32,10 @@
     public var action: Swift.String = Swift.String()
 
     /// Optional. The action's input parameters.
-    public var inputParameters: GoogleCloudWKT.Struct? = nil
+    public var inputParameters: GoogleWKT.Struct? = nil
 
     /// Output only. Create time of the tool call.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. The answer record associated with this tool call.
     public var answerRecord: Swift.String = Swift.String()
@@ -46,7 +46,7 @@
     /// Specifies the source of this tool call.
     public var source: OneOf_Source? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ToolCall`.
     public init() {}
@@ -109,9 +109,8 @@
         self.action = value
       }
       self.inputParameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .inputParameters)
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+        GoogleWKT.Struct.self, forKey: .inputParameters)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .answerRecord) {
         self.answerRecord = value
       }
@@ -144,7 +143,7 @@
       self.source = source
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -305,11 +304,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.ToolCall"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

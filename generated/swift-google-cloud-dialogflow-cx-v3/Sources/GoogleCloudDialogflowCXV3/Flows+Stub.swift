@@ -17,71 +17,71 @@
 #if Flows
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol FlowsStub: Sendable {
       func createFlow(
-        request: CreateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow
 
       func deleteFlow(
-        request: DeleteFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteFlowRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func listFlows(
-        request: ListFlowsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListFlowsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListFlowsResponse
 
       func getFlow(
-        request: GetFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow
 
       func updateFlow(
-        request: UpdateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Flow
 
       func trainFlow(
-        request: TrainFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: TrainFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func validateFlow(
-        request: ValidateFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ValidateFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult
 
       func getFlowValidationResult(
-        request: GetFlowValidationResultRequest, options: GoogleCloudGax.RequestOptions
+        request: GetFlowValidationResultRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.FlowValidationResult
 
       func importFlow(
-        request: ImportFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func exportFlow(
-        request: ExportFlowRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportFlowRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

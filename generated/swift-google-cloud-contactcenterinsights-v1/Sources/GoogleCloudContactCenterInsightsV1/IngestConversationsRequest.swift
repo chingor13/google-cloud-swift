@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request to ingest conversations.
-public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IngestConversationsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The parent resource for new conversations.
@@ -48,7 +48,7 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
   /// Configuration for converting individual `source` objects to conversations.
   public var objectConfig: OneOf_ObjectConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IngestConversationsRequest`.
   public init() {}
@@ -138,7 +138,7 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
     self.objectConfig = objectConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -169,7 +169,7 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
   }
 
   /// Configuration for Cloud Storage bucket sources.
-  public struct GcsSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcsSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The Cloud Storage bucket containing source objects.
@@ -194,7 +194,7 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
     /// ignored. Note that there is a limit of 100 labels per conversation.
     public var customMetadataKeys: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcsSource`.
     public init() {}
@@ -249,7 +249,7 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -372,22 +372,22 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.IngestConversationsRequest.GcsSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for processing transcript objects.
-  public struct TranscriptObjectConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TranscriptObjectConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The medium transcript objects represent.
     public var medium: Conversation.Medium = Conversation.Medium()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TranscriptObjectConfig`.
     public init() {}
@@ -425,7 +425,7 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -441,16 +441,16 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.IngestConversationsRequest.TranscriptObjectConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration that applies to all conversations.
-  public struct ConversationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConversationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. An opaque, user-specified string representing a human agent who
@@ -469,7 +469,7 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
     /// analyzed.
     public var customerChannel: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConversationConfig`.
     public init() {}
@@ -517,7 +517,7 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -535,11 +535,11 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.IngestConversationsRequest.ConversationConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -560,10 +560,10 @@ public struct IngestConversationsRequest: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.IngestConversationsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

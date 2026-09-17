@@ -16,17 +16,17 @@
 
 #if SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Reschedule options for maintenance windows.
-  public struct SqlInstancesRescheduleMaintenanceRequestBody: Codable, Equatable, GoogleCloudWKT
+  public struct SqlInstancesRescheduleMaintenanceRequestBody: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
     /// Required. The type of the reschedule the user wants.
     public var reschedule: SqlInstancesRescheduleMaintenanceRequestBody.Reschedule? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SqlInstancesRescheduleMaintenanceRequestBody`.
     public init() {}
@@ -63,7 +63,7 @@
         SqlInstancesRescheduleMaintenanceRequestBody.Reschedule.self, forKey: .reschedule)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -75,7 +75,7 @@
       }
     }
 
-    public struct Reschedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Reschedule: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The type of the reschedule.
@@ -86,9 +86,9 @@
       /// reschedule_type=SPECIFIC_TIME, in
       /// [RFC 3339](https://tools.ietf.org/html/rfc3339) format, for example
       /// `2012-11-15T16:19:00.094Z`.
-      public var scheduleTime: GoogleCloudWKT.Timestamp? = nil
+      public var scheduleTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Reschedule`.
       public init() {}
@@ -129,10 +129,10 @@
           self.rescheduleType = value
         }
         self.scheduleTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .scheduleTime)
+          GoogleWKT.Timestamp.self, forKey: .scheduleTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -149,11 +149,11 @@
         return
           "type.googleapis.com/google.cloud.sql.v1.SqlInstancesRescheduleMaintenanceRequestBody.Reschedule"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -271,11 +271,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SqlInstancesRescheduleMaintenanceRequestBody"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

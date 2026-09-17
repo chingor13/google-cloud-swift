@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response of the ImportUserEventsRequest. If the long running
 /// operation was successful, then this message is returned by the
 /// google.longrunning.Operations.response field if the operation was successful.
-public struct ImportUserEventsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImportUserEventsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A sample of errors encountered while processing the request.
@@ -34,7 +34,7 @@ public struct ImportUserEventsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Aggregated statistics of user event import status.
   public var importSummary: UserEventImportSummary? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImportUserEventsResponse`.
   public init() {}
@@ -80,7 +80,7 @@ public struct ImportUserEventsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
       UserEventImportSummary.self, forKey: .importSummary)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -97,10 +97,10 @@ public struct ImportUserEventsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ImportUserEventsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

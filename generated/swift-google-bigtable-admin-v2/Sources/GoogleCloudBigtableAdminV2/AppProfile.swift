@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A configuration object describing how Cloud Bigtable should treat traffic
 /// from a particular end user application.
-public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AppProfile: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique name of the app profile. Values are of the form
@@ -46,7 +46,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Options for isolating this app profile's traffic from other use cases.
   public var isolation: OneOf_Isolation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AppProfile`.
   public init() {}
@@ -151,7 +151,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.isolation = isolation
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -190,7 +190,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// transient errors or delays. Clusters in a region are considered
   /// equidistant. Choosing this option sacrifices read-your-writes consistency
   /// to improve availability.
-  public struct MultiClusterRoutingUseAny: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MultiClusterRoutingUseAny: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The set of clusters to route to. The order is ignored; clusters will be
@@ -207,7 +207,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// in the event of errors or latency.
     public var affinity: OneOf_Affinity? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MultiClusterRoutingUseAny`.
     public init() {}
@@ -264,7 +264,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.affinity = affinity
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -292,10 +292,10 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// cluster group will not be routed to, and routing will be unaffected by
     /// the new cluster. Moreover, clusters specified in the cluster group cannot
     /// be deleted unless removed from the cluster group.
-    public struct RowAffinity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RowAffinity: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RowAffinity`.
       public init() {}
@@ -326,7 +326,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -341,11 +341,11 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny.RowAffinity"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -366,18 +366,18 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Unconditionally routes all read/write requests to a specific cluster.
   /// This option preserves read-your-writes consistency but does not improve
   /// availability.
-  public struct SingleClusterRouting: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SingleClusterRouting: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The cluster to which read/write requests should be routed.
@@ -388,7 +388,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the same table/row/column in multiple clusters.
     public var allowTransactionalWrites: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SingleClusterRouting`.
     public init() {}
@@ -433,7 +433,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -449,23 +449,23 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.AppProfile.SingleClusterRouting"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Standard options for isolating this app profile's traffic from other use
   /// cases.
-  public struct StandardIsolation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StandardIsolation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The priority of requests sent using this app profile.
     public var priority: AppProfile.Priority = AppProfile.Priority()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StandardIsolation`.
     public init() {}
@@ -503,7 +503,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -518,11 +518,11 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.AppProfile.StandardIsolation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -531,13 +531,13 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// impacting the performance of the clusters that handle your application
   /// traffic. Data Boost supports read-only use cases with single-cluster
   /// routing.
-  public struct DataBoostIsolationReadOnly: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataBoostIsolationReadOnly: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Compute Billing Owner for this Data Boost App Profile.
     public var computeBillingOwner: AppProfile.DataBoostIsolationReadOnly.ComputeBillingOwner? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataBoostIsolationReadOnly`.
     public init() {}
@@ -575,7 +575,7 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       )
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -691,11 +691,11 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.AppProfile.DataBoostIsolationReadOnly"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -838,10 +838,10 @@ public struct AppProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.AppProfile"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

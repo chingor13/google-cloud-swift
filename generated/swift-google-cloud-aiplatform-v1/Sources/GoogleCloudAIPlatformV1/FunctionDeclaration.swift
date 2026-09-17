@@ -16,14 +16,14 @@
 
 #if GenAiCacheService || LlmUtilityService || PredictionService || VertexRagService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Structured representation of a function declaration as defined by the
   /// [OpenAPI 3.0 specification](https://spec.openapis.org/oas/v3.0.3). Included
   /// in this declaration are the function name, description, parameters and
   /// response type. This FunctionDeclaration is a representation of a block of
   /// code that can be used as a `Tool` by the model and executed by the client.
-  public struct FunctionDeclaration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FunctionDeclaration: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the function to call.
@@ -70,7 +70,7 @@
     /// ```
     ///
     /// This field is mutually exclusive with `parameters`.
-    public var parametersJsonSchema: GoogleCloudWKT.Value? = nil
+    public var parametersJsonSchema: GoogleWKT.Value? = nil
 
     /// Optional. Describes the output from this function in JSON Schema format.
     /// Reflects the Open API 3.03 Response Object. The Schema defines the type
@@ -81,9 +81,9 @@
     /// The value specified by the schema is the response value of the function.
     ///
     /// This field is mutually exclusive with `response`.
-    public var responseJsonSchema: GoogleCloudWKT.Value? = nil
+    public var responseJsonSchema: GoogleWKT.Value? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FunctionDeclaration`.
     public init() {}
@@ -134,13 +134,13 @@
       }
       self.parameters = try container.decodeIfPresent(Schema.self, forKey: .parameters)
       self.parametersJsonSchema = try container.decodeIfPresent(
-        GoogleCloudWKT.Value.self, forKey: .parametersJsonSchema)
+        GoogleWKT.Value.self, forKey: .parametersJsonSchema)
       self.response = try container.decodeIfPresent(Schema.self, forKey: .response)
       self.responseJsonSchema = try container.decodeIfPresent(
-        GoogleCloudWKT.Value.self, forKey: .responseJsonSchema)
+        GoogleWKT.Value.self, forKey: .responseJsonSchema)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -160,11 +160,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FunctionDeclaration"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudBareMetalSolutionV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: BareMetalSolutionClient) async throws {
   let response = try await client.renameVolume(

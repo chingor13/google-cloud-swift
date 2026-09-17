@@ -15,79 +15,79 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol StorageTransferServiceStub: Sendable {
     func getGoogleServiceAccount(
-      request: GetGoogleServiceAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoogleServiceAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.GoogleServiceAccount
 
     func createTransferJob(
-      request: CreateTransferJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTransferJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.TransferJob
 
     func updateTransferJob(
-      request: UpdateTransferJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTransferJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.TransferJob
 
     func getTransferJob(
-      request: GetTransferJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTransferJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.TransferJob
 
     func listTransferJobs(
-      request: ListTransferJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.ListTransferJobsResponse
 
     func pauseTransferOperation(
-      request: PauseTransferOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: PauseTransferOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func resumeTransferOperation(
-      request: ResumeTransferOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumeTransferOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func runTransferJob(
-      request: RunTransferJobRequest, options: GoogleCloudGax.RequestOptions
+      request: RunTransferJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteTransferJob(
-      request: DeleteTransferJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTransferJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createAgentPool(
-      request: CreateAgentPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAgentPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.AgentPool
 
     func updateAgentPool(
-      request: UpdateAgentPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAgentPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.AgentPool
 
     func getAgentPool(
-      request: GetAgentPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAgentPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.AgentPool
 
     func listAgentPools(
-      request: ListAgentPoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAgentPoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleStorageTransferV1.ListAgentPoolsResponse
 
     func deleteAgentPool(
-      request: DeleteAgentPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAgentPoolRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

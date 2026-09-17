@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Parameters that describe the nodes in a cluster.
 ///
@@ -25,7 +25,7 @@ import Foundation
 /// instead.
 ///
 /// [google.container.v1.AutoprovisioningNodePoolDefaults]: <doc:AutoprovisioningNodePoolDefaults>
-public struct NodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of a Google Compute Engine [machine
@@ -269,7 +269,7 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The maximum duration for the nodes to exist.
   /// If unspecified, the nodes can exist indefinitely.
-  public var maxRunDuration: GoogleCloudWKT.Duration? = nil
+  public var maxRunDuration: GoogleWKT.Duration? = nil
 
   /// Specifies which method should be used for encrypting the
   /// Local SSDs attached to the node.
@@ -290,12 +290,12 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Consolidation delay defines duration after which the Cluster Autoscaler can
   /// scale down underutilized nodes. If not set, nodes are scaled down by
   /// default behavior, i.e. according to the chosen autoscaling profile.
-  public var consolidationDelay: GoogleCloudWKT.Duration? = nil
+  public var consolidationDelay: GoogleWKT.Duration? = nil
 
   /// Optional. The taint configuration for the node pool.
   public var taintConfig: TaintConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NodeConfig`.
   public init() {}
@@ -537,7 +537,7 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.gpuDirectConfig = try container.decodeIfPresent(
       GPUDirectConfig.self, forKey: .gpuDirectConfig)
     self.maxRunDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxRunDuration)
+      GoogleWKT.Duration.self, forKey: .maxRunDuration)
     self.localSsdEncryptionMode = try container.decodeIfPresent(
       NodeConfig.LocalSsdEncryptionMode.self, forKey: .localSsdEncryptionMode)
     if let value = try container.decodeIfPresent(
@@ -548,11 +548,11 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.flexStart = try container.decodeIfPresent(Swift.Bool.self, forKey: .flexStart)
     self.bootDisk = try container.decodeIfPresent(BootDisk.self, forKey: .bootDisk)
     self.consolidationDelay = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .consolidationDelay)
+      GoogleWKT.Duration.self, forKey: .consolidationDelay)
     self.taintConfig = try container.decodeIfPresent(TaintConfig.self, forKey: .taintConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -838,10 +838,10 @@ public struct NodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.NodeConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

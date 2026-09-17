@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Summarizes information about the spokes associated with a hub.
 /// The summary includes a count of spokes according to type
 /// and according to state. If any spokes are inactive,
 /// the summary also lists the reasons they are inactive,
 /// including a count for each reason.
-public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SpokeSummary: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Counts the number of spokes of each type that are
@@ -37,7 +37,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// possible reason and associated with a given hub.
   public var spokeStateReasonCounts: [SpokeSummary.SpokeStateReasonCount] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SpokeSummary`.
   public init() {}
@@ -91,7 +91,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -108,7 +108,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The number of spokes of a given type that are associated
   /// with a specific hub. The type indicates what kind of
   /// resource is associated with the spoke.
-  public struct SpokeTypeCount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SpokeTypeCount: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The type of the spokes.
@@ -118,7 +118,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// associated with the hub.
     public var count: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SpokeTypeCount`.
     public init() {}
@@ -161,7 +161,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -177,17 +177,17 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkconnectivity.v1.SpokeSummary.SpokeTypeCount"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The number of spokes that are in a particular state
   /// and associated with a given hub.
-  public struct SpokeStateCount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SpokeStateCount: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The state of the spokes.
@@ -197,7 +197,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// and associated with a given hub.
     public var count: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SpokeStateCount`.
     public init() {}
@@ -240,7 +240,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -256,16 +256,16 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateCount"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The number of spokes in the hub that are inactive for this reason.
-  public struct SpokeStateReasonCount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SpokeStateReasonCount: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The reason that a spoke is inactive.
@@ -275,7 +275,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// particular reason and associated with a given hub.
     public var count: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SpokeStateReasonCount`.
     public init() {}
@@ -320,7 +320,7 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -337,21 +337,21 @@ public struct SpokeSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkconnectivity.v1.SpokeSummary.SpokeStateReasonCount"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkconnectivity.v1.SpokeSummary"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

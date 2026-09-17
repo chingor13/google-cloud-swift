@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudFinancialServicesV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: AMLClient, projectNumId: String, locationId: String, instanceId: String, modelId: String

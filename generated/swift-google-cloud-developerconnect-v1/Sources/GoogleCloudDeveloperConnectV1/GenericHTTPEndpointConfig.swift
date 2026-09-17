@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines the configuration for connections to an HTTP service provider.
-public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Immutable. The service provider's https endpoint.
@@ -39,7 +39,7 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
   /// provider.
   public var authentication: OneOf_Authentication? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GenericHTTPEndpointConfig`.
   public init() {}
@@ -112,7 +112,7 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
     self.authentication = authentication
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -136,7 +136,7 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
   }
 
   /// Basic authentication with username and password.
-  public struct BasicAuthentication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BasicAuthentication: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The username to authenticate as.
@@ -145,7 +145,7 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
     /// The password to authenticate as.
     public var password: OneOf_Password? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BasicAuthentication`.
     public init() {}
@@ -202,7 +202,7 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
       self.password = password
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -231,22 +231,22 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BasicAuthentication"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Bearer token authentication with a token.
-  public struct BearerTokenAuthentication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BearerTokenAuthentication: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The token to authenticate as.
     public var token: OneOf_Token? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BearerTokenAuthentication`.
     public init() {}
@@ -298,7 +298,7 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
       self.token = token
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -326,11 +326,11 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.developerconnect.v1.GenericHTTPEndpointConfig.BearerTokenAuthentication"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -346,10 +346,10 @@ public struct GenericHTTPEndpointConfig: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.developerconnect.v1.GenericHTTPEndpointConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

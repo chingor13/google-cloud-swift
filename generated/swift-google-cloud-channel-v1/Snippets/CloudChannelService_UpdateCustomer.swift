@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudChannelV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudChannelServiceClient, accountId: String, customerId: String) async throws {
   let response = try await client.updateCustomer(
@@ -29,7 +29,7 @@ func sample(client: CloudChannelServiceClient, accountId: String, customerId: St
         $0.customer = Customer().with {
           $0.name = "accounts/\(accountId)/customers/\(customerId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

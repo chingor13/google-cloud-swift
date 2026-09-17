@@ -16,33 +16,33 @@
 
 #if Routes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RoutesStub: Sendable {
       func delete(
-        request: RoutesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RoutesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Route
 
       func insert(
-        request: RoutesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RoutesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouteList
 
       func testIamPermissions(
-        request: RoutesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

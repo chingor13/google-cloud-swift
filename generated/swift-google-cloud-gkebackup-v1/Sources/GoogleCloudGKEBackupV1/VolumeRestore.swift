@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents the operation of restoring a volume from a VolumeBackup.
-public struct VolumeRestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VolumeRestore: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Full name of the VolumeRestore resource.
@@ -31,11 +31,11 @@ public struct VolumeRestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The timestamp when this VolumeRestore resource was
   /// created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when this VolumeRestore resource was last
   /// updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The full name of the VolumeBackup from which the volume will
   /// be restored. Format:
@@ -54,7 +54,7 @@ public struct VolumeRestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The timestamp when the associated underlying volume
   /// restoration completed.
-  public var completeTime: GoogleCloudWKT.Timestamp? = nil
+  public var completeTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The current state of this VolumeRestore.
   public var state: VolumeRestore.State = VolumeRestore.State()
@@ -70,7 +70,7 @@ public struct VolumeRestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// race conditions.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VolumeRestore`.
   public init() {}
@@ -131,10 +131,8 @@ public struct VolumeRestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .volumeBackup) {
       self.volumeBackup = value
     }
@@ -147,7 +145,7 @@ public struct VolumeRestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.volumeType = value
     }
     self.completeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .completeTime)
+      GoogleWKT.Timestamp.self, forKey: .completeTime)
     if let value = try container.decodeIfPresent(VolumeRestore.State.self, forKey: .state) {
       self.state = value
     }
@@ -159,7 +157,7 @@ public struct VolumeRestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -410,10 +408,10 @@ public struct VolumeRestore: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkebackup.v1.VolumeRestore"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

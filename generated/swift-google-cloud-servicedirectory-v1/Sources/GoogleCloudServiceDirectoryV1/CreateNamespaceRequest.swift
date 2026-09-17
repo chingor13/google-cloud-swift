@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request message for
 /// [RegistrationService.CreateNamespace][google.cloud.servicedirectory.v1.RegistrationService.CreateNamespace].
 ///
 /// [google.cloud.servicedirectory.v1.RegistrationService.CreateNamespace]: <doc:RegistrationServiceClient/createNamespace(request:options:)>
-public struct CreateNamespaceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateNamespaceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the project and location the namespace
@@ -40,7 +40,7 @@ public struct CreateNamespaceRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Required. A namespace with initial fields set.
   public var namespace: Namespace? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateNamespaceRequest`.
   public init() {}
@@ -86,7 +86,7 @@ public struct CreateNamespaceRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.namespace = try container.decodeIfPresent(Namespace.self, forKey: .namespace)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +103,10 @@ public struct CreateNamespaceRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.servicedirectory.v1.CreateNamespaceRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

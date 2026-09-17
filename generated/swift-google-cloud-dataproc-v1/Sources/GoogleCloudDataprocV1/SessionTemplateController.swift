@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The SessionTemplateController provides methods to manage session templates.
 ///
@@ -32,7 +32,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   let inner: any Clients.SessionTemplateControllerStub
 
   /// Creates a new `SessionTemplateControllerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SessionTemplateControllerStub =
       try Clients.SessionTemplateControllerTransport(options)
     inner = Clients.SessionTemplateControllerRetry(inner, options: options)
@@ -46,7 +46,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_CreateSessionTemplate")
   public func createSessionTemplate(
-    request: CreateSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSessionTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.SessionTemplate {
     try await self.inner.createSessionTemplate(request: request, options: options)
   }
@@ -55,7 +55,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_UpdateSessionTemplate")
   public func updateSessionTemplate(
-    request: UpdateSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSessionTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.SessionTemplate {
     try await self.inner.updateSessionTemplate(request: request, options: options)
   }
@@ -64,7 +64,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_GetSessionTemplate")
   public func getSessionTemplate(
-    request: GetSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSessionTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.SessionTemplate {
     try await self.inner.getSessionTemplate(request: request, options: options)
   }
@@ -73,7 +73,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_ListSessionTemplates")
   public func listSessionTemplates(
-    request: ListSessionTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSessionTemplatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.ListSessionTemplatesResponse {
     try await self.inner.listSessionTemplates(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_ListSessionTemplates")
   public func listSessionTemplates(
-    byItem: ListSessionTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSessionTemplatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SessionTemplate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataprocV1.ListSessionTemplatesResponse in
@@ -90,14 +90,14 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
       request.pageToken = token
       return try await self.listSessionTemplates(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a session template.
   ///
   /// @Snippet(path: "SessionTemplateController_DeleteSessionTemplate")
   public func deleteSessionTemplate(
-    request: DeleteSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSessionTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteSessionTemplate(request: request, options: options)
   }
@@ -110,7 +110,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -120,7 +120,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -135,7 +135,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -146,7 +146,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -157,7 +157,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -165,7 +165,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -174,7 +174,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -185,7 +185,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -196,7 +196,7 @@ public final class SessionTemplateControllerClient: Clients.SessionTemplateContr
   ///
   /// @Snippet(path: "SessionTemplateController_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -302,67 +302,67 @@ extension Clients {
 
     /// See `SessionTemplateControllerClient.createSessionTemplate`.
     func createSessionTemplate(
-      request: CreateSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSessionTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.SessionTemplate
 
     /// See `SessionTemplateControllerClient.updateSessionTemplate`.
     func updateSessionTemplate(
-      request: UpdateSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSessionTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.SessionTemplate
 
     /// See `SessionTemplateControllerClient.getSessionTemplate`.
     func getSessionTemplate(
-      request: GetSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSessionTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.SessionTemplate
 
     /// See `SessionTemplateControllerClient.listSessionTemplates`.
     func listSessionTemplates(
-      request: ListSessionTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSessionTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.ListSessionTemplatesResponse
 
     /// See `SessionTemplateControllerClient.listSessionTemplates`.
     func listSessionTemplates(
-      byItem: ListSessionTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSessionTemplatesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SessionTemplate, Swift.Error>
 
     /// See `SessionTemplateControllerClient.deleteSessionTemplate`.
     func deleteSessionTemplate(
-      request: DeleteSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSessionTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SessionTemplateControllerClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SessionTemplateControllerClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SessionTemplateControllerClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `SessionTemplateControllerClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `SessionTemplateControllerClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `SessionTemplateControllerClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SessionTemplateControllerClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -376,9 +376,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func createSessionTemplate(
-    request: CreateSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSessionTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.SessionTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSessionTemplate(
@@ -399,9 +399,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func updateSessionTemplate(
-    request: UpdateSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSessionTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.SessionTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSessionTemplate(
@@ -420,9 +420,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func getSessionTemplate(
-    request: GetSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSessionTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.SessionTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSessionTemplate(
@@ -441,9 +441,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func listSessionTemplates(
-    request: ListSessionTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSessionTemplatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataprocV1.ListSessionTemplatesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSessionTemplates(
@@ -453,13 +453,13 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func listSessionTemplates(
-    byItem: ListSessionTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSessionTemplatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SessionTemplate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataprocV1.ListSessionTemplatesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSessionTemplates(
@@ -476,9 +476,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func deleteSessionTemplate(
-    request: DeleteSessionTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteSessionTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteSessionTemplate(
@@ -497,9 +497,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -509,9 +509,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -521,9 +521,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -533,9 +533,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -545,13 +545,13 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -572,9 +572,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -591,9 +591,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -610,9 +610,9 @@ extension Clients.SessionTemplateControllerProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

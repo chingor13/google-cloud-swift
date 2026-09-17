@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A ScanRun is a output-only resource representing an actual run of the scan.
 /// Next id: 12
-public struct ScanRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ScanRun: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the ScanRun. The name follows the format of
@@ -35,11 +35,11 @@ public struct ScanRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var resultState: ScanRun.ResultState = ScanRun.ResultState()
 
   /// Output only. The time at which the ScanRun started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the ScanRun reached termination state - that the ScanRun
   /// is either finished or stopped by user.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The number of URLs crawled during this ScanRun. If the scan is in progress,
   /// the value represents the number of URLs crawled up to now.
@@ -67,7 +67,7 @@ public struct ScanRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. A list of warnings, if such are encountered during this scan run.
   public var warningTraces: [ScanRunWarningTrace] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ScanRun`.
   public init() {}
@@ -131,9 +131,8 @@ public struct ScanRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(ScanRun.ResultState.self, forKey: .resultState) {
       self.resultState = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .urlsCrawledCount) {
       self.urlsCrawledCount = value
     }
@@ -153,7 +152,7 @@ public struct ScanRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -404,10 +403,10 @@ public struct ScanRun: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.websecurityscanner.v1.ScanRun"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

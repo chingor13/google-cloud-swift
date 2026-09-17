@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleIAMV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: IAMPolicyClient) async throws {
   let response = try await client.setIamPolicy(

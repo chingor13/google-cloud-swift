@@ -15,33 +15,33 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudQuotasStub: Sendable {
     func listQuotaInfos(
-      request: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQuotaInfosRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse
 
     func getQuotaInfo(
-      request: GetQuotaInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQuotaInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo
 
     func listQuotaPreferences(
-      request: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQuotaPreferencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse
 
     func getQuotaPreference(
-      request: GetQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQuotaPreferenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     func createQuotaPreference(
-      request: CreateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQuotaPreferenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
 
     func updateQuotaPreference(
-      request: UpdateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQuotaPreferenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference
   }
 }

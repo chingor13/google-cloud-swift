@@ -16,108 +16,108 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol FirewallActivationStub: Sendable {
     func listFirewallEndpoints(
-      request: ListFirewallEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFirewallEndpointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListFirewallEndpointsResponse
 
     func listProjectFirewallEndpoints(
-      request: ListFirewallEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFirewallEndpointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListFirewallEndpointsResponse
 
     func getFirewallEndpoint(
-      request: GetFirewallEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFirewallEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.FirewallEndpoint
 
     func getProjectFirewallEndpoint(
-      request: GetFirewallEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFirewallEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.FirewallEndpoint
 
     func createFirewallEndpoint(
-      request: CreateFirewallEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFirewallEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createProjectFirewallEndpoint(
-      request: CreateFirewallEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFirewallEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteFirewallEndpoint(
-      request: DeleteFirewallEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFirewallEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteProjectFirewallEndpoint(
-      request: DeleteFirewallEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFirewallEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateFirewallEndpoint(
-      request: UpdateFirewallEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFirewallEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateProjectFirewallEndpoint(
-      request: UpdateFirewallEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFirewallEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listFirewallEndpointAssociations(
-      request: ListFirewallEndpointAssociationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFirewallEndpointAssociationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListFirewallEndpointAssociationsResponse
 
     func getFirewallEndpointAssociation(
-      request: GetFirewallEndpointAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFirewallEndpointAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.FirewallEndpointAssociation
 
     func createFirewallEndpointAssociation(
-      request: CreateFirewallEndpointAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFirewallEndpointAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteFirewallEndpointAssociation(
-      request: DeleteFirewallEndpointAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFirewallEndpointAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateFirewallEndpointAssociation(
-      request: UpdateFirewallEndpointAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFirewallEndpointAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

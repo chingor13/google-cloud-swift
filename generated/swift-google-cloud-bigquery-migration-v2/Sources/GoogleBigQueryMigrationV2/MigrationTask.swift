@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A single task for a migration which has details about the configuration of
 /// the task.
-public struct MigrationTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MigrationTask: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Immutable. The unique identifier for the migration task. The
@@ -53,10 +53,10 @@ public struct MigrationTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var processingError: GoogleRpc.ErrorInfo? = nil
 
   /// Output only. Time when the task was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time when the task was last updated.
-  public var lastUpdateTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastUpdateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Provides details to errors and issues encountered while
   /// processing the task. Presence of error details does not mean that the task
@@ -86,7 +86,7 @@ public struct MigrationTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The details of the task.
   public var taskDetails: OneOf_TaskDetails? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MigrationTask`.
   public init() {}
@@ -158,10 +158,9 @@ public struct MigrationTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.processingError = try container.decodeIfPresent(
       GoogleRpc.ErrorInfo.self, forKey: .processingError)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.lastUpdateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastUpdateTime)
+      GoogleWKT.Timestamp.self, forKey: .lastUpdateTime)
     if let value = try container.decodeIfPresent(
       [ResourceErrorDetail].self, forKey: .resourceErrorDetails)
     {
@@ -212,7 +211,7 @@ public struct MigrationTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.taskDetails = taskDetails
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -393,10 +392,10 @@ public struct MigrationTask: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.migration.v2.MigrationTask"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

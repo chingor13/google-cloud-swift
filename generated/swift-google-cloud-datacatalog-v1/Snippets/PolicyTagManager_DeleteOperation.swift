@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataCatalogV1
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: PolicyTagManagerClient) async throws {
   try await client.deleteOperation(

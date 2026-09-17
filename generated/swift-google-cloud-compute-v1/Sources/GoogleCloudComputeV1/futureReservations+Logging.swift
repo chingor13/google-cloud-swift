@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,15 +58,14 @@
       }
 
       public func aggregatedList(
-        request: FutureReservationsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservationsAggregatedListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "aggregatedList",
           action: {
-            (r: FutureReservationsClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: FutureReservationsClient.AggregatedListRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.FutureReservationsAggregatedListResponse
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -74,44 +73,44 @@
       }
 
       public func cancel(
-        request: FutureReservationsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.CancelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "cancel",
           action: {
-            (r: FutureReservationsClient.CancelRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: FutureReservationsClient.CancelRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.cancel(request: r, options: o)
           })
       }
 
       public func delete(
-        request: FutureReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: FutureReservationsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: FutureReservationsClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: FutureReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservation {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: FutureReservationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: FutureReservationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.FutureReservation
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -119,29 +118,29 @@
       }
 
       public func insert(
-        request: FutureReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: FutureReservationsClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: FutureReservationsClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: FutureReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.FutureReservationsListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: FutureReservationsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: FutureReservationsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.FutureReservationsListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -149,29 +148,29 @@
       }
 
       public func update(
-        request: FutureReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: FutureReservationsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "update",
           action: {
-            (r: FutureReservationsClient.UpdateRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: FutureReservationsClient.UpdateRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: ZoneOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

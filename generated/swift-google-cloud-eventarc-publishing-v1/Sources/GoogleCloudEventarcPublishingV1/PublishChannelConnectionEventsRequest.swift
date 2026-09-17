@@ -15,11 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request message for the PublishChannelConnectionEvents method.
-public struct PublishChannelConnectionEventsRequest: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct PublishChannelConnectionEventsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The channel_connection that the events are published from. For example:
@@ -28,7 +27,7 @@ public struct PublishChannelConnectionEventsRequest: Codable, Equatable, GoogleC
 
   /// The CloudEvents v1.0 events to publish. No other types are allowed.
   /// If this field is set, then the `text_events` fields must not be set.
-  public var events: [GoogleCloudWKT.`Any`] = []
+  public var events: [GoogleWKT.`Any`] = []
 
   /// The text representation of events to publish.
   /// CloudEvent v1.0 in JSON format is the only allowed type. Refer to
@@ -37,7 +36,7 @@ public struct PublishChannelConnectionEventsRequest: Codable, Equatable, GoogleC
   /// If this field is set, then the `events` fields must not be set.
   public var textEvents: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PublishChannelConnectionEventsRequest`.
   public init() {}
@@ -77,7 +76,7 @@ public struct PublishChannelConnectionEventsRequest: Codable, Equatable, GoogleC
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .channelConnection) {
       self.channelConnection = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.`Any`].self, forKey: .events) {
+    if let value = try container.decodeIfPresent([GoogleWKT.`Any`].self, forKey: .events) {
       self.events = value
     }
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .textEvents) {
@@ -85,7 +84,7 @@ public struct PublishChannelConnectionEventsRequest: Codable, Equatable, GoogleC
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +102,10 @@ public struct PublishChannelConnectionEventsRequest: Codable, Equatable, GoogleC
     return
       "type.googleapis.com/google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

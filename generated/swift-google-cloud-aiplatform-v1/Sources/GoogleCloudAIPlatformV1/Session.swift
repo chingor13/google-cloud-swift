@@ -16,10 +16,10 @@
 
 #if SessionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A session contains a set of actions between users and Vertex agents.
-  public struct Session: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Session: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Identifier. The resource name of the session.
@@ -28,10 +28,10 @@
     public var name: Swift.String = Swift.String()
 
     /// Output only. Timestamp when the session was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when the session was updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. The display name of the session.
     public var displayName: Swift.String = Swift.String()
@@ -46,7 +46,7 @@
     public var labels: [Swift.String: Swift.String] = [:]
 
     /// Optional. Session specific memory which stores key conversation points.
-    public var sessionState: GoogleCloudWKT.Struct? = nil
+    public var sessionState: GoogleWKT.Struct? = nil
 
     /// Required. Immutable. String id provided by the user
     public var userId: Swift.String = Swift.String()
@@ -54,7 +54,7 @@
     /// The expiration of the session.
     public var expiration: OneOf_Expiration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Session`.
     public init() {}
@@ -106,10 +106,8 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
         self.name = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
         self.displayName = value
       }
@@ -119,7 +117,7 @@
         self.labels = value
       }
       self.sessionState = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .sessionState)
+        GoogleWKT.Struct.self, forKey: .sessionState)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .userId) {
         self.userId = value
       }
@@ -135,17 +133,17 @@
         expiration = $0
       }
       if let expireTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp?.self, forKey: .expireTime)
+        GoogleWKT.Timestamp?.self, forKey: .expireTime)
       {
         try expirationCheckAndSet(.expireTime(expireTime))
       }
-      if let ttl = try container.decodeIfPresent(GoogleCloudWKT.Duration?.self, forKey: .ttl) {
+      if let ttl = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .ttl) {
         try expirationCheckAndSet(.ttl(ttl))
       }
       self.expiration = expiration
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -178,20 +176,20 @@
       /// This is *always* provided on output, regardless of what was sent
       /// on input.
       /// The minimum value is 24 hours from the time of creation.
-      indirect case expireTime(GoogleCloudWKT.Timestamp?)
+      indirect case expireTime(GoogleWKT.Timestamp?)
       /// Optional. Input only. The TTL for this session.
       /// The minimum value is 24 hours.
-      indirect case ttl(GoogleCloudWKT.Duration?)
+      indirect case ttl(GoogleWKT.Duration?)
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Session"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Detailed product information associated with a user event.
-public struct ProductDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProductDetail: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. [Product][google.cloud.retail.v2.Product] information.
@@ -49,9 +49,9 @@ public struct ProductDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// For example, this field will be 2 if two products are added to the shopping
   /// cart for `purchase-complete` event. Required for `add-to-cart` and
   /// `purchase-complete` event types.
-  public var quantity: GoogleCloudWKT.Int32Value? = nil
+  public var quantity: GoogleWKT.Int32Value? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProductDetail`.
   public init() {}
@@ -87,10 +87,10 @@ public struct ProductDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.product = try container.decodeIfPresent(Product.self, forKey: .product)
-    self.quantity = try container.decodeIfPresent(GoogleCloudWKT.Int32Value.self, forKey: .quantity)
+    self.quantity = try container.decodeIfPresent(GoogleWKT.Int32Value.self, forKey: .quantity)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,10 +106,10 @@ public struct ProductDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.ProductDetail"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

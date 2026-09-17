@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The results of an inspect DataSource job.
-public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InspectDataSourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The configuration used for this job.
@@ -27,7 +27,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Output only. A summary of the outcome of this inspection job.
   public var result: InspectDataSourceDetails.Result? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InspectDataSourceDetails`.
   public init() {}
@@ -68,7 +68,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
       InspectDataSourceDetails.Result.self, forKey: .result)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -82,7 +82,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
   }
 
   /// Snapshot of the inspection configuration.
-  public struct RequestedOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RequestedOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. If run with an InspectTemplate, a snapshot of its state at
@@ -92,7 +92,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
     /// Inspect config.
     public var jobConfig: InspectJobConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RequestedOptions`.
     public init() {}
@@ -132,7 +132,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
       self.jobConfig = try container.decodeIfPresent(InspectJobConfig.self, forKey: .jobConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -148,16 +148,16 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.InspectDataSourceDetails.RequestedOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// All Result fields are updated while the job is processing.
-  public struct Result: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Result: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Total size in bytes that were processed.
@@ -177,7 +177,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
     /// Statistics related to the processing of hybrid inspect.
     public var hybridStats: HybridInspectStatistics? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Result`.
     public init() {}
@@ -234,7 +234,7 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
         HybridInspectStatistics.self, forKey: .hybridStats)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -253,21 +253,21 @@ public struct InspectDataSourceDetails: Codable, Equatable, GoogleCloudWKT._AnyP
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.InspectDataSourceDetails.Result"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.InspectDataSourceDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

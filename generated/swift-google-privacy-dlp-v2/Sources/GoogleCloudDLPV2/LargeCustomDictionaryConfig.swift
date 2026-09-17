@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for a custom dictionary created from a data source of any size
 /// up to the maximum size defined in the
@@ -23,7 +23,7 @@ import Foundation
 /// page. The artifacts of dictionary creation are stored in the specified Cloud
 /// Storage location. Consider using `CustomInfoType.Dictionary` for smaller
 /// dictionaries that satisfy the size requirements.
-public struct LargeCustomDictionaryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LargeCustomDictionaryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Location to store dictionary artifacts in Cloud Storage. These files
@@ -35,7 +35,7 @@ public struct LargeCustomDictionaryConfig: Codable, Equatable, GoogleCloudWKT._A
   /// Source of the dictionary.
   public var source: OneOf_Source? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LargeCustomDictionaryConfig`.
   public init() {}
@@ -97,7 +97,7 @@ public struct LargeCustomDictionaryConfig: Codable, Equatable, GoogleCloudWKT._A
     self.source = source
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -129,10 +129,10 @@ public struct LargeCustomDictionaryConfig: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.LargeCustomDictionaryConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudRunV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: WorkerPoolsClient) async throws {
   try await client.deleteOperation(

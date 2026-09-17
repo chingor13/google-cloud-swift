@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func allocateQuota(
-      request: AllocateQuotaRequest, options: GoogleCloudGax.RequestOptions
+      request: AllocateQuotaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV1.AllocateQuotaResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "allocateQuota",
         action: {
-          (r: AllocateQuotaRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AllocateQuotaRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiServiceControlV1.AllocateQuotaResponse
           in
           return try await self.inner.allocateQuota(request: r, options: o)

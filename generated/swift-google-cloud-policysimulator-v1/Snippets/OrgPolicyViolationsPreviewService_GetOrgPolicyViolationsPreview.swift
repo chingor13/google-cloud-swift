@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudPolicySimulatorV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: OrgPolicyViolationsPreviewServiceClient, organizationId: String, locationId: String,

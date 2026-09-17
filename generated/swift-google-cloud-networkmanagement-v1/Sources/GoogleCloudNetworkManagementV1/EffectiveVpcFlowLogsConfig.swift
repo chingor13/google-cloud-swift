@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A configuration to generate a response for GetEffectiveVpcFlowLogsConfig
 /// request.
-public struct EffectiveVpcFlowLogsConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EffectiveVpcFlowLogsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Unique name of the configuration. The name can have one of the following
@@ -76,7 +76,7 @@ public struct EffectiveVpcFlowLogsConfig: Codable, Equatable, GoogleCloudWKT._An
   /// This field is not supported for organization level configurations.
   public var targetResource: OneOf_TargetResource? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EffectiveVpcFlowLogsConfig`.
   public init() {}
@@ -178,7 +178,7 @@ public struct EffectiveVpcFlowLogsConfig: Codable, Equatable, GoogleCloudWKT._An
     self.targetResource = targetResource
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -369,10 +369,10 @@ public struct EffectiveVpcFlowLogsConfig: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkmanagement.v1.EffectiveVpcFlowLogsConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The GatewaySecurityPolicyRule resource is in a nested collection within a
 /// GatewaySecurityPolicy and represents a traffic matching condition and
 /// associated action to perform.
-public struct GatewaySecurityPolicyRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GatewaySecurityPolicyRule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Immutable. Name of the resource. ame is the full resource name so
@@ -30,10 +30,10 @@ public struct GatewaySecurityPolicyRule: Codable, Equatable, GoogleCloudWKT._Any
   public var name: Swift.String = Swift.String()
 
   /// Output only. Time when the rule was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time when the rule was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Required. Whether the rule is enforced.
   public var enabled: Swift.Bool = Swift.Bool()
@@ -58,7 +58,7 @@ public struct GatewaySecurityPolicyRule: Codable, Equatable, GoogleCloudWKT._Any
 
   public var profile: OneOf_Profile? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GatewaySecurityPolicyRule`.
   public init() {}
@@ -112,10 +112,8 @@ public struct GatewaySecurityPolicyRule: Codable, Equatable, GoogleCloudWKT._Any
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .enabled) {
       self.enabled = value
     }
@@ -153,7 +151,7 @@ public struct GatewaySecurityPolicyRule: Codable, Equatable, GoogleCloudWKT._Any
     self.profile = profile
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -293,10 +291,10 @@ public struct GatewaySecurityPolicyRule: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.GatewaySecurityPolicyRule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

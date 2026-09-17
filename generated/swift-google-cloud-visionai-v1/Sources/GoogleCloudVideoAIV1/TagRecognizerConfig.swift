@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message describing TagRecognizerConfig.
-public struct TagRecognizerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TagRecognizerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Confidence threshold to filter detection results. If not set, a system
@@ -28,7 +28,7 @@ public struct TagRecognizerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Configuration to customize how tags are parsed.
   public var tagParsingConfig: TagParsingConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TagRecognizerConfig`.
   public init() {}
@@ -73,7 +73,7 @@ public struct TagRecognizerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       TagParsingConfig.self, forKey: .tagParsingConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -90,10 +90,10 @@ public struct TagRecognizerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.TagRecognizerConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

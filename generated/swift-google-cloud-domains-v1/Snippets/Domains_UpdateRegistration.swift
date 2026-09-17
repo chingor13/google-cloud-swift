@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudDomainsV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
 import GoogleType
+import GoogleWKT
 
 func sample(client: DomainsClient, projectId: String, locationId: String, registrationId: String)
   async throws
@@ -32,7 +32,7 @@ func sample(client: DomainsClient, projectId: String, locationId: String, regist
         $0.registration = Registration().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/registrations/\(registrationId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

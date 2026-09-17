@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudRetailV2
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ProductServiceClient, parent: String) async throws {
   let response = try await client.createProduct(

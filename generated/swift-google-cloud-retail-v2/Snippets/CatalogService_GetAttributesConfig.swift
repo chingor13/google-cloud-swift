@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudRetailV2
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: CatalogServiceClient, projectId: String, locationId: String, catalogId: String)
   async throws

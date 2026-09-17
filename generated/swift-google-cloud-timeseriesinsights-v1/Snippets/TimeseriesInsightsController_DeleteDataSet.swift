@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudTimeseriesInsightsV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: TimeseriesInsightsControllerClient, projectId: String, datasetId: String)
   async throws

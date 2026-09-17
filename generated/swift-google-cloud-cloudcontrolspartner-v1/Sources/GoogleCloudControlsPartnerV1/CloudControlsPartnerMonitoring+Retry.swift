@@ -18,28 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class CloudControlsPartnerMonitoringRetry: CloudControlsPartnerMonitoringStub {
     let inner: any CloudControlsPartnerMonitoringStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(
-      _ inner: any CloudControlsPartnerMonitoringStub, options: GoogleCloudGax.ClientOptions
-    ) {
+    public init(_ inner: any CloudControlsPartnerMonitoringStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +49,14 @@ extension Clients {
     }
 
     public func listViolations(
-      request: ListViolationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListViolationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListViolationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListViolationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListViolationsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.ListViolationsResponse
           in
           return try await self.inner.listViolations(request: r, options: o)
@@ -66,14 +64,14 @@ extension Clients {
     }
 
     public func getViolation(
-      request: GetViolationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetViolationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Violation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetViolationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetViolationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudControlsPartnerV1.Violation
           in
           return try await self.inner.getViolation(request: r, options: o)

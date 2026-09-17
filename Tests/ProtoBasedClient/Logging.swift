@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudLocation
 import GoogleCloudSecretManagerV1
 import GoogleCloudTestHelpers
@@ -43,7 +43,7 @@ public enum Logging {
       "\(handler.entries)")
     checkMetadata(event: success)
 
-    await #expect(throws: GoogleCloudGax.RequestError.self) {
+    await #expect(throws: GoogleGax.RequestError.self) {
       _ = try await client.listLocations(
         request: .init().with { $0.name = "" })
     }

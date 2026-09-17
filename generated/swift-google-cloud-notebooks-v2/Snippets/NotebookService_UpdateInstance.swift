@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudNotebooksV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: NotebookServiceClient, projectId: String, locationId: String, instanceId: String
@@ -33,7 +33,7 @@ func sample(
         $0.instance = Instance().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

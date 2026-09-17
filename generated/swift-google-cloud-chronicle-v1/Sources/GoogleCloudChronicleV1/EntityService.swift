@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// EntityService contains apis for finding entities.
 ///
@@ -29,7 +29,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   let inner: any Clients.EntityServiceStub
 
   /// Creates a new `EntityServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.EntityServiceStub = try Clients.EntityServiceTransport(options)
     inner = Clients.EntityServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -42,7 +42,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_GetWatchlist")
   public func getWatchlist(
-    request: GetWatchlistRequest, options: GoogleCloudGax.RequestOptions
+    request: GetWatchlistRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.Watchlist {
     try await self.inner.getWatchlist(request: request, options: options)
   }
@@ -51,7 +51,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_ListWatchlists")
   public func listWatchlists(
-    request: ListWatchlistsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListWatchlistsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ListWatchlistsResponse {
     try await self.inner.listWatchlists(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_ListWatchlists")
   public func listWatchlists(
-    byItem: ListWatchlistsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListWatchlistsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Watchlist, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChronicleV1.ListWatchlistsResponse in
@@ -68,7 +68,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
       request.pageToken = token
       return try await self.listWatchlists(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a watchlist for the given instance.
@@ -76,7 +76,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_CreateWatchlist")
   public func createWatchlist(
-    request: CreateWatchlistRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateWatchlistRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.Watchlist {
     try await self.inner.createWatchlist(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_UpdateWatchlist")
   public func updateWatchlist(
-    request: UpdateWatchlistRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateWatchlistRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.Watchlist {
     try await self.inner.updateWatchlist(request: request, options: options)
   }
@@ -94,7 +94,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_DeleteWatchlist")
   public func deleteWatchlist(
-    request: DeleteWatchlistRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteWatchlistRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteWatchlist(request: request, options: options)
   }
@@ -105,7 +105,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -124,7 +124,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -133,7 +133,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -144,7 +144,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -155,7 +155,7 @@ public final class EntityServiceClient: Clients.EntityServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "EntityService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -208,7 +208,7 @@ extension Clients {
     /// See `EntityServiceClient.updateWatchlist`.
     func updateWatchlist(
       watchlist: Watchlist?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudChronicleV1.Watchlist
 
     /// See `EntityServiceClient.deleteWatchlist`.
@@ -253,52 +253,52 @@ extension Clients {
 
     /// See `EntityServiceClient.getWatchlist`.
     func getWatchlist(
-      request: GetWatchlistRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWatchlistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Watchlist
 
     /// See `EntityServiceClient.listWatchlists`.
     func listWatchlists(
-      request: ListWatchlistsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWatchlistsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListWatchlistsResponse
 
     /// See `EntityServiceClient.listWatchlists`.
     func listWatchlists(
-      byItem: ListWatchlistsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListWatchlistsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Watchlist, Swift.Error>
 
     /// See `EntityServiceClient.createWatchlist`.
     func createWatchlist(
-      request: CreateWatchlistRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWatchlistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Watchlist
 
     /// See `EntityServiceClient.updateWatchlist`.
     func updateWatchlist(
-      request: UpdateWatchlistRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWatchlistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Watchlist
 
     /// See `EntityServiceClient.deleteWatchlist`.
     func deleteWatchlist(
-      request: DeleteWatchlistRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWatchlistRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `EntityServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `EntityServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `EntityServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `EntityServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -312,9 +312,9 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func getWatchlist(
-    request: GetWatchlistRequest, options: GoogleCloudGax.RequestOptions
+    request: GetWatchlistRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.Watchlist {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getWatchlist(
@@ -333,9 +333,9 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func listWatchlists(
-    request: ListWatchlistsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListWatchlistsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.ListWatchlistsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listWatchlists(
@@ -345,13 +345,13 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func listWatchlists(
-    byItem: ListWatchlistsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListWatchlistsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Watchlist, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChronicleV1.ListWatchlistsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listWatchlists(
@@ -370,9 +370,9 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func createWatchlist(
-    request: CreateWatchlistRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateWatchlistRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.Watchlist {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createWatchlist(
@@ -395,14 +395,14 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func updateWatchlist(
-    request: UpdateWatchlistRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateWatchlistRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.Watchlist {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateWatchlist(
     watchlist: Watchlist?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudChronicleV1.Watchlist {
     let request = UpdateWatchlistRequest().with {
       $0.watchlist = watchlist
@@ -416,9 +416,9 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func deleteWatchlist(
-    request: DeleteWatchlistRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteWatchlistRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteWatchlist(
@@ -439,9 +439,9 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -451,13 +451,13 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -478,9 +478,9 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -497,9 +497,9 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -516,9 +516,9 @@ extension Clients.EntityServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

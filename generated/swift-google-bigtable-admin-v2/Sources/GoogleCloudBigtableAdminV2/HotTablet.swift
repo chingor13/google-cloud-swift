@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A tablet is a defined by a start and end key and is explained in
 /// https://cloud.google.com/bigtable/docs/overview#architecture and
 /// https://cloud.google.com/bigtable/docs/performance#optimization.
 /// A Hot tablet is a tablet that exhibits high average cpu usage during the time
 /// interval from start time to end time.
-public struct HotTablet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct HotTablet: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique name of the hot tablet. Values are of the form
@@ -34,10 +34,10 @@ public struct HotTablet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var tableName: Swift.String = Swift.String()
 
   /// Output only. The start time of the hot tablet.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The end time of the hot tablet.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Tablet Start Key (inclusive).
   public var startKey: Swift.String = Swift.String()
@@ -51,7 +51,7 @@ public struct HotTablet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// to 100% (the node spent all cycles serving the hot tablet).
   public var nodeCpuUsagePercent: Swift.Float = Swift.Float()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `HotTablet`.
   public init() {}
@@ -102,9 +102,8 @@ public struct HotTablet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .tableName) {
       self.tableName = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .startKey) {
       self.startKey = value
     }
@@ -116,7 +115,7 @@ public struct HotTablet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -137,10 +136,10 @@ public struct HotTablet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.HotTablet"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

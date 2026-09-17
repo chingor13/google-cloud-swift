@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service for managing Google Workspace add-ons deployments.
 ///
@@ -55,7 +55,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   let inner: any Clients.GSuiteAddOnsStub
 
   /// Creates a new `GSuiteAddOnsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.GSuiteAddOnsStub = try Clients.GSuiteAddOnsTransport(options)
     inner = Clients.GSuiteAddOnsRetry(inner, options: options)
     if let logger = options.logger {
@@ -68,7 +68,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_GetAuthorization")
   public func getAuthorization(
-    request: GetAuthorizationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuthorizationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.Authorization {
     try await self.inner.getAuthorization(request: request, options: options)
   }
@@ -77,7 +77,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_CreateDeployment")
   public func createDeployment(
-    request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment {
     try await self.inner.createDeployment(request: request, options: options)
   }
@@ -86,7 +86,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_ReplaceDeployment")
   public func replaceDeployment(
-    request: ReplaceDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: ReplaceDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment {
     try await self.inner.replaceDeployment(request: request, options: options)
   }
@@ -95,7 +95,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_GetDeployment")
   public func getDeployment(
-    request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment {
     try await self.inner.getDeployment(request: request, options: options)
   }
@@ -104,7 +104,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_ListDeployments")
   public func listDeployments(
-    request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.ListDeploymentsResponse {
     try await self.inner.listDeployments(request: request, options: options)
   }
@@ -113,7 +113,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_ListDeployments")
   public func listDeployments(
-    byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Deployment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudGSuiteAddOnsV1.ListDeploymentsResponse in
@@ -121,14 +121,14 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
       request.pageToken = token
       return try await self.listDeployments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes the deployment with the given name.
   ///
   /// @Snippet(path: "GSuiteAddOns_DeleteDeployment")
   public func deleteDeployment(
-    request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDeployment(request: request, options: options)
   }
@@ -139,7 +139,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_InstallDeployment")
   public func installDeployment(
-    request: InstallDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: InstallDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.installDeployment(request: request, options: options)
   }
@@ -150,7 +150,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_UninstallDeployment")
   public func uninstallDeployment(
-    request: UninstallDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: UninstallDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.uninstallDeployment(request: request, options: options)
   }
@@ -159,7 +159,7 @@ public final class GSuiteAddOnsClient: Clients.GSuiteAddOnsProtocol, Sendable {
   ///
   /// @Snippet(path: "GSuiteAddOns_GetInstallStatus")
   public func getInstallStatus(
-    request: GetInstallStatusRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstallStatusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.InstallStatus {
     try await self.inner.getInstallStatus(request: request, options: options)
   }
@@ -259,52 +259,52 @@ extension Clients {
 
     /// See `GSuiteAddOnsClient.getAuthorization`.
     func getAuthorization(
-      request: GetAuthorizationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthorizationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.Authorization
 
     /// See `GSuiteAddOnsClient.createDeployment`.
     func createDeployment(
-      request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment
 
     /// See `GSuiteAddOnsClient.replaceDeployment`.
     func replaceDeployment(
-      request: ReplaceDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment
 
     /// See `GSuiteAddOnsClient.getDeployment`.
     func getDeployment(
-      request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment
 
     /// See `GSuiteAddOnsClient.listDeployments`.
     func listDeployments(
-      request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.ListDeploymentsResponse
 
     /// See `GSuiteAddOnsClient.listDeployments`.
     func listDeployments(
-      byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Deployment, Swift.Error>
 
     /// See `GSuiteAddOnsClient.deleteDeployment`.
     func deleteDeployment(
-      request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `GSuiteAddOnsClient.installDeployment`.
     func installDeployment(
-      request: InstallDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: InstallDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `GSuiteAddOnsClient.uninstallDeployment`.
     func uninstallDeployment(
-      request: UninstallDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UninstallDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `GSuiteAddOnsClient.getInstallStatus`.
     func getInstallStatus(
-      request: GetInstallStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstallStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.InstallStatus
   }
 }
@@ -318,9 +318,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func getAuthorization(
-    request: GetAuthorizationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAuthorizationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.Authorization {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAuthorization(
@@ -339,9 +339,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func createDeployment(
-    request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDeployment(
@@ -364,9 +364,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func replaceDeployment(
-    request: ReplaceDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: ReplaceDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func replaceDeployment(
@@ -385,9 +385,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func getDeployment(
-    request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDeployment(
@@ -406,9 +406,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func listDeployments(
-    request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.ListDeploymentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDeployments(
@@ -418,13 +418,13 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func listDeployments(
-    byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Deployment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudGSuiteAddOnsV1.ListDeploymentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDeployments(
@@ -441,9 +441,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func deleteDeployment(
-    request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDeployment(
@@ -460,9 +460,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func installDeployment(
-    request: InstallDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: InstallDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func installDeployment(
@@ -479,9 +479,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func uninstallDeployment(
-    request: UninstallDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: UninstallDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func uninstallDeployment(
@@ -500,9 +500,9 @@ extension Clients.GSuiteAddOnsProtocol {
   }
 
   public func getInstallStatus(
-    request: GetInstallStatusRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstallStatusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGSuiteAddOnsV1.InstallStatus {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getInstallStatus(

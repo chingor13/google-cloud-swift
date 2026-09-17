@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Creates a new GlossaryTerm under the specified Glossary.
-public struct CreateGlossaryTermRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateGlossaryTermRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The parent resource where the GlossaryTerm will be created.
@@ -33,7 +33,7 @@ public struct CreateGlossaryTermRequest: Codable, Equatable, GoogleCloudWKT._Any
   /// Required. The GlossaryTerm to create.
   public var term: GlossaryTerm? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateGlossaryTermRequest`.
   public init() {}
@@ -79,7 +79,7 @@ public struct CreateGlossaryTermRequest: Codable, Equatable, GoogleCloudWKT._Any
     self.term = try container.decodeIfPresent(GlossaryTerm.self, forKey: .term)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +96,10 @@ public struct CreateGlossaryTermRequest: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.CreateGlossaryTermRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `regionInstantSnapshotGroups` resource.
   ///
@@ -29,11 +29,11 @@
     Sendable
   {
     let inner: any Clients.RegionInstantSnapshotGroupsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `RegionInstantSnapshotGroupsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.RegionInstantSnapshotGroupsStub =
         try Clients.RegionInstantSnapshotGroupsTransport(options)
       inner = Clients.RegionInstantSnapshotGroupsRetry(inner, options: options)
@@ -49,8 +49,7 @@
     ///
     /// @Snippet(path: "regionInstantSnapshotGroups_delete")
     public func delete(
-      request: RegionInstantSnapshotGroupsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -60,18 +59,18 @@
     /// @Snippet(path: "regionInstantSnapshotGroups_delete")
     public func delete(
       withPolling: RegionInstantSnapshotGroupsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -79,8 +78,7 @@
       let rawOp = try await self.delete(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -89,7 +87,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -102,7 +100,7 @@
     ///
     /// @Snippet(path: "regionInstantSnapshotGroups_get")
     public func `get`(
-      request: RegionInstantSnapshotGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotGroupsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstantSnapshotGroup {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -113,7 +111,7 @@
     /// @Snippet(path: "regionInstantSnapshotGroups_getIamPolicy")
     public func getIamPolicy(
       request: RegionInstantSnapshotGroupsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -122,8 +120,7 @@
     ///
     /// @Snippet(path: "regionInstantSnapshotGroups_insert")
     public func insert(
-      request: RegionInstantSnapshotGroupsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -133,18 +130,18 @@
     /// @Snippet(path: "regionInstantSnapshotGroups_insert")
     public func insert(
       withPolling: RegionInstantSnapshotGroupsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -152,8 +149,7 @@
       let rawOp = try await self.insert(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -162,7 +158,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -175,7 +171,7 @@
     ///
     /// @Snippet(path: "regionInstantSnapshotGroups_list")
     public func list(
-      request: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups {
       try await self.inner.list(request: request, options: options)
     }
@@ -185,7 +181,7 @@
     ///
     /// @Snippet(path: "regionInstantSnapshotGroups_list")
     public func list(
-      byItem: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InstantSnapshotGroup, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups in
@@ -193,7 +189,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Sets the access control policy on the specified resource.
@@ -202,7 +198,7 @@
     /// @Snippet(path: "regionInstantSnapshotGroups_setIamPolicy")
     public func setIamPolicy(
       request: RegionInstantSnapshotGroupsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -212,7 +208,7 @@
     /// @Snippet(path: "regionInstantSnapshotGroups_testIamPermissions")
     public func testIamPermissions(
       request: RegionInstantSnapshotGroupsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -221,7 +217,7 @@
     ///
     /// @Snippet(path: "regionInstantSnapshotGroups_getOperation")
     func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -305,50 +301,45 @@
 
       /// See `RegionInstantSnapshotGroupsClient.delete`.
       func delete(
-        request: RegionInstantSnapshotGroupsClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionInstantSnapshotGroupsClient.`get``.
       func `get`(
-        request: RegionInstantSnapshotGroupsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstantSnapshotGroup
 
       /// See `RegionInstantSnapshotGroupsClient.getIamPolicy`.
       func getIamPolicy(
         request: RegionInstantSnapshotGroupsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       /// See `RegionInstantSnapshotGroupsClient.insert`.
       func insert(
-        request: RegionInstantSnapshotGroupsClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `RegionInstantSnapshotGroupsClient.list`.
       func list(
-        request: RegionInstantSnapshotGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups
 
       /// See `RegionInstantSnapshotGroupsClient.list`.
       func list(
-        byItem: RegionInstantSnapshotGroupsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        byItem: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<InstantSnapshotGroup, Swift.Error>
 
       /// See `RegionInstantSnapshotGroupsClient.setIamPolicy`.
       func setIamPolicy(
         request: RegionInstantSnapshotGroupsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       /// See `RegionInstantSnapshotGroupsClient.testIamPermissions`.
       func testIamPermissions(
         request: RegionInstantSnapshotGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
@@ -362,28 +353,26 @@
     }
 
     public func delete(
-      request: RegionInstantSnapshotGroupsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
       withPolling: RegionInstantSnapshotGroupsClient.DeleteRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
     }
 
     public func delete(
       withPolling: RegionInstantSnapshotGroupsClient.DeleteRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -391,7 +380,7 @@
       project: Swift.String,
       region: Swift.String,
       instantSnapshotGroup: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RegionInstantSnapshotGroupsClient.DeleteRequest().with {
         $0.project = project
         $0.region = region
@@ -407,9 +396,9 @@
     }
 
     public func `get`(
-      request: RegionInstantSnapshotGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotGroupsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstantSnapshotGroup {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -433,9 +422,9 @@
 
     public func getIamPolicy(
       request: RegionInstantSnapshotGroupsClient.GetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(
@@ -458,28 +447,26 @@
     }
 
     public func insert(
-      request: RegionInstantSnapshotGroupsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(
       withPolling: RegionInstantSnapshotGroupsClient.InsertRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
     }
 
     public func insert(
       withPolling: RegionInstantSnapshotGroupsClient.InsertRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -487,7 +474,7 @@
       project: Swift.String,
       region: Swift.String,
       body: InstantSnapshotGroup?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = RegionInstantSnapshotGroupsClient.InsertRequest().with {
         $0.project = project
         $0.region = region
@@ -503,9 +490,9 @@
     }
 
     public func list(
-      request: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -515,13 +502,13 @@
     }
 
     public func list(
-      byItem: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionInstantSnapshotGroupsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InstantSnapshotGroup, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.ListInstantSnapshotGroups in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -543,9 +530,9 @@
 
     public func setIamPolicy(
       request: RegionInstantSnapshotGroupsClient.SetIamPolicyRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(
@@ -571,9 +558,9 @@
 
     public func testIamPermissions(
       request: RegionInstantSnapshotGroupsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(
@@ -598,9 +585,9 @@
     }
 
     public func getOperation(
-      request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

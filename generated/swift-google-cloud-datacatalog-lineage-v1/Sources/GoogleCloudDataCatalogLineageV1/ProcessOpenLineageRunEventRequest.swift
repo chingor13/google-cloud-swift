@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [ProcessOpenLineageRunEvent][google.cloud.datacatalog.lineage.v1.Lineage.ProcessOpenLineageRunEvent].
 ///
 /// [google.cloud.datacatalog.lineage.v1.Lineage.ProcessOpenLineageRunEvent]: <doc:LineageClient/processOpenLineageRunEvent(request:options:)>
-public struct ProcessOpenLineageRunEventRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProcessOpenLineageRunEventRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the project and its location that should own the
@@ -30,14 +30,14 @@ public struct ProcessOpenLineageRunEventRequest: Codable, Equatable, GoogleCloud
 
   /// Required. OpenLineage message following OpenLineage format:
   /// https://github.com/OpenLineage/OpenLineage/blob/main/spec/OpenLineage.json
-  public var openLineage: GoogleCloudWKT.Struct? = nil
+  public var openLineage: GoogleWKT.Struct? = nil
 
   /// Optional. A unique identifier for this request. Restricted to 36 ASCII
   /// characters. A random UUID is recommended. This request is idempotent only
   /// if a `request_id` is provided.
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProcessOpenLineageRunEventRequest`.
   public init() {}
@@ -77,14 +77,13 @@ public struct ProcessOpenLineageRunEventRequest: Codable, Equatable, GoogleCloud
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .parent) {
       self.parent = value
     }
-    self.openLineage = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .openLineage)
+    self.openLineage = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .openLineage)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
       self.requestId = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +101,10 @@ public struct ProcessOpenLineageRunEventRequest: Codable, Equatable, GoogleCloud
     return
       "type.googleapis.com/google.cloud.datacatalog.lineage.v1.ProcessOpenLineageRunEventRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

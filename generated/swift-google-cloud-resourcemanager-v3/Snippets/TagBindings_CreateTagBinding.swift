@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudResourceManagerV3
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: TagBindingsClient) async throws {
   let poller = try await client.createTagBinding(

@@ -16,13 +16,13 @@
 
 #if BackendServices || RegionBackendServices
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Contains the configurations necessary to generate a signature for access to
   /// private storage buckets that support Signature Version 4 for authentication.
   /// The service name for generating the authentication header will always default
   /// to 's3'.
-  public struct AWSV4Signature: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AWSV4Signature: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The access key used for s3 bucket authentication. Required for updating or
@@ -45,7 +45,7 @@
     /// "us-east-1" for AWS or "us-ashburn-1" for OCI.
     public var originRegion: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AWSV4Signature`.
     public init() {}
@@ -91,7 +91,7 @@
       self.originRegion = try container.decodeIfPresent(Swift.String.self, forKey: .originRegion)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -109,11 +109,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.AWSV4Signature"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

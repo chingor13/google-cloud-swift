@@ -19,10 +19,10 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [DataStore][google.cloud.discoveryengine.v1.DataStore]
   /// configuration.
@@ -32,11 +32,11 @@
   /// @Snippet(path: "DataStoreServiceQuickstart")
   public final class DataStoreServiceClient: Clients.DataStoreServiceProtocol, Sendable {
     let inner: any Clients.DataStoreServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `DataStoreServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.DataStoreServiceStub = try Clients.DataStoreServiceTransport(options)
       inner = Clients.DataStoreServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -61,7 +61,7 @@
     ///
     /// @Snippet(path: "DataStoreService_CreateDataStore")
     public func createDataStore(
-      request: CreateDataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createDataStore(request: request, options: options)
     }
@@ -80,21 +80,21 @@
     ///
     /// @Snippet(path: "DataStoreService_CreateDataStore")
     public func createDataStore(
-      withPolling: CreateDataStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataStore> {
+      withPolling: CreateDataStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataStore> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<DataStore>.State in
+          -> GoogleGax._PollableOperationImpl<DataStore>.State in
         return try op._extractStatus(DataStore.self)
       }
       let rawOp = try await self.createDataStore(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataStore>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataStore>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -108,7 +108,7 @@
     ///
     /// @Snippet(path: "DataStoreService_GetDataStore")
     public func getDataStore(
-      request: GetDataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.DataStore {
       try await self.inner.getDataStore(request: request, options: options)
     }
@@ -120,7 +120,7 @@
     ///
     /// @Snippet(path: "DataStoreService_ListDataStores")
     public func listDataStores(
-      request: ListDataStoresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataStoresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListDataStoresResponse {
       try await self.inner.listDataStores(request: request, options: options)
     }
@@ -132,7 +132,7 @@
     ///
     /// @Snippet(path: "DataStoreService_ListDataStores")
     public func listDataStores(
-      byItem: ListDataStoresRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataStoresRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataStore, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListDataStoresResponse in
@@ -140,7 +140,7 @@
         request.pageToken = token
         return try await self.listDataStores(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a [DataStore][google.cloud.discoveryengine.v1.DataStore].
@@ -149,7 +149,7 @@
     ///
     /// @Snippet(path: "DataStoreService_DeleteDataStore")
     public func deleteDataStore(
-      request: DeleteDataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteDataStore(request: request, options: options)
     }
@@ -160,21 +160,21 @@
     ///
     /// @Snippet(path: "DataStoreService_DeleteDataStore")
     public func deleteDataStore(
-      withPolling: DeleteDataStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteDataStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteDataStore(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -188,7 +188,7 @@
     ///
     /// @Snippet(path: "DataStoreService_UpdateDataStore")
     public func updateDataStore(
-      request: UpdateDataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.DataStore {
       try await self.inner.updateDataStore(request: request, options: options)
     }
@@ -199,7 +199,7 @@
     ///
     /// @Snippet(path: "DataStoreService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -210,7 +210,7 @@
     ///
     /// @Snippet(path: "DataStoreService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -218,7 +218,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -227,7 +227,7 @@
     ///
     /// @Snippet(path: "DataStoreService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -238,7 +238,7 @@
     ///
     /// @Snippet(path: "DataStoreService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -256,7 +256,7 @@
         -> GoogleLongRunning.Operation
 
       /// See `DataStoreServiceClient.createDataStore`.
-      func createDataStore(withPolling: CreateDataStoreRequest) async throws -> any GoogleCloudGax
+      func createDataStore(withPolling: CreateDataStoreRequest) async throws -> any GoogleGax
         .PollableOperation<DataStore>
 
       /// See `DataStoreServiceClient.createDataStore`.
@@ -264,7 +264,7 @@
         parent: Swift.String,
         dataStore: DataStore?,
         dataStoreId: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<DataStore>
+      ) async throws -> any GoogleGax.PollableOperation<DataStore>
 
       /// See `DataStoreServiceClient.getDataStore`.
       func getDataStore(request: GetDataStoreRequest) async throws
@@ -294,13 +294,13 @@
         -> GoogleLongRunning.Operation
 
       /// See `DataStoreServiceClient.deleteDataStore`.
-      func deleteDataStore(withPolling: DeleteDataStoreRequest) async throws -> any GoogleCloudGax
+      func deleteDataStore(withPolling: DeleteDataStoreRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `DataStoreServiceClient.deleteDataStore`.
       func deleteDataStore(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DataStoreServiceClient.updateDataStore`.
       func updateDataStore(request: UpdateDataStoreRequest) async throws
@@ -309,7 +309,7 @@
       /// See `DataStoreServiceClient.updateDataStore`.
       func updateDataStore(
         dataStore: DataStore?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDiscoveryEngineV1.DataStore
 
       /// See `DataStoreServiceClient.listOperations`.
@@ -337,57 +337,57 @@
 
       /// See `DataStoreServiceClient.createDataStore`.
       func createDataStore(
-        request: CreateDataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DataStoreServiceClient.createDataStore`.
       func createDataStore(
-        withPolling: CreateDataStoreRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<DataStore>
+        withPolling: CreateDataStoreRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<DataStore>
 
       /// See `DataStoreServiceClient.getDataStore`.
       func getDataStore(
-        request: GetDataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.DataStore
 
       /// See `DataStoreServiceClient.listDataStores`.
       func listDataStores(
-        request: ListDataStoresRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDataStoresRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListDataStoresResponse
 
       /// See `DataStoreServiceClient.listDataStores`.
       func listDataStores(
-        byItem: ListDataStoresRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListDataStoresRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<DataStore, Swift.Error>
 
       /// See `DataStoreServiceClient.deleteDataStore`.
       func deleteDataStore(
-        request: DeleteDataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DataStoreServiceClient.deleteDataStore`.
       func deleteDataStore(
-        withPolling: DeleteDataStoreRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteDataStoreRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DataStoreServiceClient.updateDataStore`.
       func updateDataStore(
-        request: UpdateDataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateDataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.DataStore
 
       /// See `DataStoreServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `DataStoreServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `DataStoreServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -401,24 +401,24 @@
     }
 
     public func createDataStore(
-      request: CreateDataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func createDataStore(withPolling: CreateDataStoreRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DataStore>
+    public func createDataStore(withPolling: CreateDataStoreRequest) async throws -> any GoogleGax
+      .PollableOperation<DataStore>
     {
       try await self.createDataStore(withPolling: withPolling, options: .init())
     }
 
     public func createDataStore(
-      withPolling: CreateDataStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataStore> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataStore>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateDataStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataStore> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataStore>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -426,7 +426,7 @@
       parent: Swift.String,
       dataStore: DataStore?,
       dataStoreId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataStore> {
+    ) async throws -> any GoogleGax.PollableOperation<DataStore> {
       let request = CreateDataStoreRequest().with {
         $0.parent = parent
         $0.dataStore = dataStore
@@ -442,9 +442,9 @@
     }
 
     public func getDataStore(
-      request: GetDataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.DataStore {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getDataStore(
@@ -463,9 +463,9 @@
     }
 
     public func listDataStores(
-      request: ListDataStoresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataStoresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListDataStoresResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listDataStores(
@@ -475,13 +475,13 @@
     }
 
     public func listDataStores(
-      byItem: ListDataStoresRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataStoresRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataStore, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListDataStoresResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listDataStores(
@@ -500,30 +500,30 @@
     }
 
     public func deleteDataStore(
-      request: DeleteDataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteDataStore(withPolling: DeleteDataStoreRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    public func deleteDataStore(withPolling: DeleteDataStoreRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
     {
       try await self.deleteDataStore(withPolling: withPolling, options: .init())
     }
 
     public func deleteDataStore(
-      withPolling: DeleteDataStoreRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteDataStoreRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteDataStore(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteDataStoreRequest().with {
         $0.name = name
       }
@@ -537,14 +537,14 @@
     }
 
     public func updateDataStore(
-      request: UpdateDataStoreRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataStoreRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.DataStore {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateDataStore(
       dataStore: DataStore?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDiscoveryEngineV1.DataStore {
       let request = UpdateDataStoreRequest().with {
         $0.dataStore = dataStore
@@ -560,9 +560,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -572,13 +572,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -599,9 +599,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -618,9 +618,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

@@ -14,7 +14,7 @@
 
 import Foundation
 import GoogleCloudStorage
-import GoogleCloudGax
+import GoogleGax
 
 fileprivate let integrationTestMark = "integration-test"
 fileprivate let hour = 3600

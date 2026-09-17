@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message to edit chart in a dashboard.
-public struct EditChartRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EditChartRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The dashboard name to edit chart in.
@@ -44,12 +44,12 @@ public struct EditChartRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Supported paths in query are -
   /// dashboard_query.query
   /// dashboard_query.input
-  public var editMask: GoogleCloudWKT.FieldMask? = nil
+  public var editMask: GoogleWKT.FieldMask? = nil
 
   /// Optional. Language Features present in the query.
   public var languageFeatures: [LanguageFeature] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EditChartRequest`.
   public init() {}
@@ -97,14 +97,14 @@ public struct EditChartRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       DashboardQuery.self, forKey: .dashboardQuery)
     self.dashboardChart = try container.decodeIfPresent(
       DashboardChart.self, forKey: .dashboardChart)
-    self.editMask = try container.decodeIfPresent(GoogleCloudWKT.FieldMask.self, forKey: .editMask)
+    self.editMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .editMask)
     if let value = try container.decodeIfPresent([LanguageFeature].self, forKey: .languageFeatures)
     {
       self.languageFeatures = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -123,10 +123,10 @@ public struct EditChartRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.EditChartRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

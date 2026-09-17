@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response of fetching github installations.
-public struct FetchGitHubInstallationsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FetchGitHubInstallationsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// List of installations available to the OAuth user (for github.com)
   /// or all the installations (for GitHub enterprise).
   public var installations: [FetchGitHubInstallationsResponse.Installation] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FetchGitHubInstallationsResponse`.
   public init() {}
@@ -65,7 +65,7 @@ public struct FetchGitHubInstallationsResponse: Codable, Equatable, GoogleCloudW
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -78,7 +78,7 @@ public struct FetchGitHubInstallationsResponse: Codable, Equatable, GoogleCloudW
   }
 
   /// Represents an installation of the GitHub App.
-  public struct Installation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Installation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// ID of the installation in GitHub.
@@ -90,7 +90,7 @@ public struct FetchGitHubInstallationsResponse: Codable, Equatable, GoogleCloudW
     /// Either "user" or "organization".
     public var type: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Installation`.
     public init() {}
@@ -138,7 +138,7 @@ public struct FetchGitHubInstallationsResponse: Codable, Equatable, GoogleCloudW
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -156,21 +156,21 @@ public struct FetchGitHubInstallationsResponse: Codable, Equatable, GoogleCloudW
       return
         "type.googleapis.com/google.cloud.developerconnect.v1.FetchGitHubInstallationsResponse.Installation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.developerconnect.v1.FetchGitHubInstallationsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class AccessApprovalRetry: AccessApprovalStub {
     let inner: any AccessApprovalStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any AccessApprovalStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any AccessApprovalStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func listApprovalRequests(
-      request: ListApprovalRequestsMessage, options: GoogleCloudGax.RequestOptions
+      request: ListApprovalRequestsMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ListApprovalRequestsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListApprovalRequestsMessage, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListApprovalRequestsMessage, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudAccessApprovalV1.ListApprovalRequestsResponse
           in
           return try await self.inner.listApprovalRequests(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func getApprovalRequest(
-      request: GetApprovalRequestMessage, options: GoogleCloudGax.RequestOptions
+      request: GetApprovalRequestMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ApprovalRequest {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetApprovalRequestMessage, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetApprovalRequestMessage, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudAccessApprovalV1.ApprovalRequest
           in
           return try await self.inner.getApprovalRequest(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func approveApprovalRequest(
-      request: ApproveApprovalRequestMessage, options: GoogleCloudGax.RequestOptions
+      request: ApproveApprovalRequestMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ApprovalRequest {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ApproveApprovalRequestMessage, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ApproveApprovalRequestMessage, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudAccessApprovalV1.ApprovalRequest
           in
           return try await self.inner.approveApprovalRequest(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func dismissApprovalRequest(
-      request: DismissApprovalRequestMessage, options: GoogleCloudGax.RequestOptions
+      request: DismissApprovalRequestMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ApprovalRequest {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DismissApprovalRequestMessage, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DismissApprovalRequestMessage, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudAccessApprovalV1.ApprovalRequest
           in
           return try await self.inner.dismissApprovalRequest(request: r, options: o)
@@ -109,14 +109,14 @@ extension Clients {
     }
 
     public func invalidateApprovalRequest(
-      request: InvalidateApprovalRequestMessage, options: GoogleCloudGax.RequestOptions
+      request: InvalidateApprovalRequestMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.ApprovalRequest {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: InvalidateApprovalRequestMessage, o: GoogleCloudGax.RequestOptions) async throws
+          (r: InvalidateApprovalRequestMessage, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudAccessApprovalV1.ApprovalRequest
           in
           return try await self.inner.invalidateApprovalRequest(request: r, options: o)
@@ -124,14 +124,14 @@ extension Clients {
     }
 
     public func getAccessApprovalSettings(
-      request: GetAccessApprovalSettingsMessage, options: GoogleCloudGax.RequestOptions
+      request: GetAccessApprovalSettingsMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.AccessApprovalSettings {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetAccessApprovalSettingsMessage, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAccessApprovalSettingsMessage, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudAccessApprovalV1.AccessApprovalSettings
           in
           return try await self.inner.getAccessApprovalSettings(request: r, options: o)
@@ -139,14 +139,14 @@ extension Clients {
     }
 
     public func updateAccessApprovalSettings(
-      request: UpdateAccessApprovalSettingsMessage, options: GoogleCloudGax.RequestOptions
+      request: UpdateAccessApprovalSettingsMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.AccessApprovalSettings {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateAccessApprovalSettingsMessage, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAccessApprovalSettingsMessage, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudAccessApprovalV1.AccessApprovalSettings
           in
           return try await self.inner.updateAccessApprovalSettings(request: r, options: o)
@@ -154,28 +154,28 @@ extension Clients {
     }
 
     public func deleteAccessApprovalSettings(
-      request: DeleteAccessApprovalSettingsMessage, options: GoogleCloudGax.RequestOptions
+      request: DeleteAccessApprovalSettingsMessage, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteAccessApprovalSettingsMessage, o: GoogleCloudGax.RequestOptions) async throws
-            -> Void in
+          (r: DeleteAccessApprovalSettingsMessage, o: GoogleGax.RequestOptions) async throws -> Void
+          in
           return try await self.inner.deleteAccessApprovalSettings(request: r, options: o)
         })
     }
 
     public func getAccessApprovalServiceAccount(
-      request: GetAccessApprovalServiceAccountMessage, options: GoogleCloudGax.RequestOptions
+      request: GetAccessApprovalServiceAccountMessage, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAccessApprovalV1.AccessApprovalServiceAccount {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetAccessApprovalServiceAccountMessage, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAccessApprovalServiceAccountMessage, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudAccessApprovalV1.AccessApprovalServiceAccount
           in
           return try await self.inner.getAccessApprovalServiceAccount(request: r, options: o)

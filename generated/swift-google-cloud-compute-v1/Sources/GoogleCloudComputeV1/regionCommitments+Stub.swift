@@ -16,34 +16,33 @@
 
 #if RegionCommitments
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionCommitmentsStub: Sendable {
       func aggregatedList(
-        request: RegionCommitmentsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CommitmentAggregatedList
 
       func `get`(
-        request: RegionCommitmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Commitment
 
       func insert(
-        request: RegionCommitmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionCommitmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CommitmentList
 
       func update(
-        request: RegionCommitmentsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionCommitmentsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

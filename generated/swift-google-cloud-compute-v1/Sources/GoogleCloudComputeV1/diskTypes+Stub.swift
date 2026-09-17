@@ -16,21 +16,21 @@
 
 #if DiskTypes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol DiskTypesStub: Sendable {
       func aggregatedList(
-        request: DiskTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeAggregatedList
 
       func `get`(
-        request: DiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType
 
       func list(
-        request: DiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: DiskTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskTypeList
     }
   }

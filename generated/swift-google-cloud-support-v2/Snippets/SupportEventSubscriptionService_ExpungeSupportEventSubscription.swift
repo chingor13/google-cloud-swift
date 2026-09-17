@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudSupportV2
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: SupportEventSubscriptionServiceClient) async throws {
   try await client.expungeSupportEventSubscription(

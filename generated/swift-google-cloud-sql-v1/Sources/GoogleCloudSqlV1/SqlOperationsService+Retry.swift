@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class SqlOperationsServiceRetry: SqlOperationsServiceStub {
       let inner: any SqlOperationsServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any SqlOperationsServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any SqlOperationsServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func `get`(
-        request: SqlOperationsGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlOperationsGetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlOperationsGetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -65,14 +65,14 @@
       }
 
       public func list(
-        request: SqlOperationsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.OperationsListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlOperationsListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlOperationsListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.OperationsListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -80,15 +80,14 @@
       }
 
       public func cancel(
-        request: SqlOperationsCancelRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlOperationsCancelRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlOperationsCancelRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-            in
+            (r: SqlOperationsCancelRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.cancel(request: r, options: o)
           })
       }

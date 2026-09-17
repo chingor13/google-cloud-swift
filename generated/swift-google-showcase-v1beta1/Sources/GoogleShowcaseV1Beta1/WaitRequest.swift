@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request for Wait method.
-public struct WaitRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WaitRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var end: OneOf_End? = nil
 
   public var response: OneOf_Response? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WaitRequest`.
   public init() {}
@@ -76,11 +76,10 @@ public struct WaitRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       end = $0
     }
-    if let endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp?.self, forKey: .endTime)
-    {
+    if let endTime = try container.decodeIfPresent(GoogleWKT.Timestamp?.self, forKey: .endTime) {
       try endCheckAndSet(.endTime(endTime))
     }
-    if let ttl = try container.decodeIfPresent(GoogleCloudWKT.Duration?.self, forKey: .ttl) {
+    if let ttl = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .ttl) {
       try endCheckAndSet(.ttl(ttl))
     }
     self.end = end
@@ -104,7 +103,7 @@ public struct WaitRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.response = response
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -135,9 +134,9 @@ public struct WaitRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public enum OneOf_End: Codable, Equatable, Sendable {
     /// The time that this operation will complete.
-    indirect case endTime(GoogleCloudWKT.Timestamp?)
+    indirect case endTime(GoogleWKT.Timestamp?)
     /// The duration of this operation.
-    indirect case ttl(GoogleCloudWKT.Duration?)
+    indirect case ttl(GoogleWKT.Duration?)
   }
 
   public enum OneOf_Response: Codable, Equatable, Sendable {
@@ -151,10 +150,10 @@ public struct WaitRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.showcase.v1beta1.WaitRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

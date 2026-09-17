@@ -16,11 +16,10 @@
 
 #if IndexService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Runtime operation metadata with regard to Matching Engine Index.
-  public struct NearestNeighborSearchOperationMetadata: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct NearestNeighborSearchOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The validation stats of the content (per file) to be inserted or
@@ -37,7 +36,7 @@
     /// The ingested data size in bytes.
     public var dataBytesCount: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NearestNeighborSearchOperationMetadata`.
     public init() {}
@@ -83,7 +82,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -96,7 +95,7 @@
       }
     }
 
-    public struct RecordError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RecordError: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The error type of this record.
@@ -117,7 +116,7 @@
       /// The original content of this record.
       public var rawRecord: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RecordError`.
       public init() {}
@@ -178,7 +177,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -409,15 +408,15 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata.RecordError"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
-    public struct ContentValidationStats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ContentValidationStats: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Cloud Storage URI pointing to the original file in user's bucket.
@@ -440,7 +439,7 @@
       /// Number of sparse records in this file we skipped due to validate errors.
       public var invalidSparseRecordCount: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ContentValidationStats`.
       public init() {}
@@ -510,7 +509,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -531,22 +530,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata.ContentValidationStats"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

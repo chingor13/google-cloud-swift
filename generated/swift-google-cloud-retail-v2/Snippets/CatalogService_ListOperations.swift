@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudRetailV2
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: CatalogServiceClient) async throws {
   let items = try client.listOperations(

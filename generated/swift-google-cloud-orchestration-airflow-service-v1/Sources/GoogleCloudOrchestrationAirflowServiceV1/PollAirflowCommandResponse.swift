@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response to PollAirflowCommandRequest.
-public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PollAirflowCommandResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output from the command execution. It may not contain the full output
@@ -31,7 +31,7 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
   /// The result exit status of the command.
   public var exitInfo: PollAirflowCommandResponse.ExitInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PollAirflowCommandResponse`.
   public init() {}
@@ -80,7 +80,7 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
       PollAirflowCommandResponse.ExitInfo.self, forKey: .exitInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,7 +95,7 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
   }
 
   /// Contains information about a single line from logs.
-  public struct Line: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Line: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Number of the line.
@@ -104,7 +104,7 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
     /// Text content of the log line.
     public var content: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Line`.
     public init() {}
@@ -147,7 +147,7 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -164,16 +164,16 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse.Line"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Information about how a command ended.
-  public struct ExitInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExitInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The exit code from the command execution.
@@ -182,7 +182,7 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
     /// Error message. Empty if there was no error.
     public var error: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExitInfo`.
     public init() {}
@@ -225,7 +225,7 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -242,11 +242,11 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse.ExitInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -254,10 +254,10 @@ public struct PollAirflowCommandResponse: Codable, Equatable, GoogleCloudWKT._An
     return
       "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.PollAirflowCommandResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

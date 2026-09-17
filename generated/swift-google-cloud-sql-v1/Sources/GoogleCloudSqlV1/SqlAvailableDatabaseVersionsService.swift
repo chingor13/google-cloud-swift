@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service that exposes Cloud SQL database versions information. This
   /// service is only used internally.
@@ -32,7 +32,7 @@
     let inner: any Clients.SqlAvailableDatabaseVersionsServiceStub
 
     /// Creates a new `SqlAvailableDatabaseVersionsServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlAvailableDatabaseVersionsServiceStub =
         try Clients.SqlAvailableDatabaseVersionsServiceTransport(options)
       inner = Clients.SqlAvailableDatabaseVersionsServiceRetry(inner, options: options)

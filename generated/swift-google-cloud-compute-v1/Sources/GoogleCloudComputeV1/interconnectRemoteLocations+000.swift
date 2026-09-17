@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `interconnectRemoteLocations` resource.
   ///
@@ -31,7 +31,7 @@
     let inner: any Clients.InterconnectRemoteLocationsStub
 
     /// Creates a new `InterconnectRemoteLocationsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.InterconnectRemoteLocationsStub =
         try Clients.InterconnectRemoteLocationsTransport(options)
       inner = Clients.InterconnectRemoteLocationsRetry(inner, options: options)
@@ -46,7 +46,7 @@
     ///
     /// @Snippet(path: "interconnectRemoteLocations_get")
     public func `get`(
-      request: InterconnectRemoteLocationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: InterconnectRemoteLocationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocation {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -56,7 +56,7 @@
     ///
     /// @Snippet(path: "interconnectRemoteLocations_list")
     public func list(
-      request: InterconnectRemoteLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: InterconnectRemoteLocationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocationList {
       try await self.inner.list(request: request, options: options)
     }
@@ -66,7 +66,7 @@
     ///
     /// @Snippet(path: "interconnectRemoteLocations_list")
     public func list(
-      byItem: InterconnectRemoteLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InterconnectRemoteLocationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InterconnectRemoteLocation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocationList in
@@ -74,7 +74,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -111,20 +111,17 @@
 
       /// See `InterconnectRemoteLocationsClient.`get``.
       func `get`(
-        request: InterconnectRemoteLocationsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectRemoteLocationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocation
 
       /// See `InterconnectRemoteLocationsClient.list`.
       func list(
-        request: InterconnectRemoteLocationsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectRemoteLocationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocationList
 
       /// See `InterconnectRemoteLocationsClient.list`.
       func list(
-        byItem: InterconnectRemoteLocationsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        byItem: InterconnectRemoteLocationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<InterconnectRemoteLocation, Swift.Error>
     }
   }
@@ -138,9 +135,9 @@
     }
 
     public func `get`(
-      request: InterconnectRemoteLocationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: InterconnectRemoteLocationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -161,9 +158,9 @@
     }
 
     public func list(
-      request: InterconnectRemoteLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: InterconnectRemoteLocationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocationList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -173,13 +170,13 @@
     }
 
     public func list(
-      byItem: InterconnectRemoteLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InterconnectRemoteLocationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InterconnectRemoteLocation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocationList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

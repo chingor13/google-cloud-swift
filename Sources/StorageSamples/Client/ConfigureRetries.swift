@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // [START storage_configure_retries]
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudStorage
 
 public func configureRetries(bucketId: String) async throws {

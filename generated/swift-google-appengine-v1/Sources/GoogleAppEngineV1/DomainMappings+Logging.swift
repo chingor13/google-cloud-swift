@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func listDomainMappings(
-      request: ListDomainMappingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDomainMappingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.ListDomainMappingsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDomainMappings",
         action: {
-          (r: ListDomainMappingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDomainMappingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.ListDomainMappingsResponse
           in
           return try await self.inner.listDomainMappings(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func getDomainMapping(
-      request: GetDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.DomainMapping {
       try await self._intercept(
         request: request,
         options: options,
         name: "getDomainMapping",
         action: {
-          (r: GetDomainMappingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDomainMappingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleAppEngineV1.DomainMapping
           in
           return try await self.inner.getDomainMapping(request: r, options: o)
@@ -89,14 +89,14 @@ extension Clients {
     }
 
     public func createDomainMapping(
-      request: CreateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createDomainMapping",
         action: {
-          (r: CreateDomainMappingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDomainMappingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createDomainMapping(request: r, options: o)
@@ -104,14 +104,14 @@ extension Clients {
     }
 
     public func updateDomainMapping(
-      request: UpdateDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateDomainMapping",
         action: {
-          (r: UpdateDomainMappingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateDomainMappingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateDomainMapping(request: r, options: o)
@@ -119,14 +119,14 @@ extension Clients {
     }
 
     public func deleteDomainMapping(
-      request: DeleteDomainMappingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDomainMappingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteDomainMapping",
         action: {
-          (r: DeleteDomainMappingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteDomainMappingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteDomainMapping(request: r, options: o)
@@ -134,29 +134,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

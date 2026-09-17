@@ -16,11 +16,11 @@
 
 #if PipelineService || ScheduleService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The runtime detail of a task execution.
-  public struct PipelineTaskDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PipelineTaskDetail: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The system generated ID of the task.
@@ -37,13 +37,13 @@
     public var taskName: Swift.String = Swift.String()
 
     /// Output only. Task create time.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Task start time.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Task end time.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The detailed execution info.
     public var executorDetail: PipelineTaskExecutorDetail? = nil
@@ -78,7 +78,7 @@
     /// "parent_task_2.parent_task_1.child_task".
     public var taskUniqueName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PipelineTaskDetail`.
     public init() {}
@@ -146,11 +146,9 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .taskName) {
         self.taskName = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
       self.executorDetail = try container.decodeIfPresent(
         PipelineTaskExecutorDetail.self, forKey: .executorDetail)
       if let value = try container.decodeIfPresent(PipelineTaskDetail.State.self, forKey: .state) {
@@ -178,7 +176,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -204,11 +202,11 @@
     }
 
     /// A single record of the task status.
-    public struct PipelineTaskStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PipelineTaskStatus: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Update time of this status.
-      public var updateTime: GoogleCloudWKT.Timestamp? = nil
+      public var updateTime: GoogleWKT.Timestamp? = nil
 
       /// Output only. The state of the task.
       public var state: PipelineTaskDetail.State = PipelineTaskDetail.State()
@@ -220,7 +218,7 @@
       /// indicates a system-error being retried.
       public var error: GoogleRpc.Status? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PipelineTaskStatus`.
       public init() {}
@@ -258,7 +256,7 @@
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.updateTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+          GoogleWKT.Timestamp.self, forKey: .updateTime)
         if let value = try container.decodeIfPresent(PipelineTaskDetail.State.self, forKey: .state)
         {
           self.state = value
@@ -266,7 +264,7 @@
         self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -284,22 +282,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskDetail.PipelineTaskStatus"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// A list of artifact metadata.
-    public struct ArtifactList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ArtifactList: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. A list of artifact metadata.
       public var artifacts: [Artifact] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ArtifactList`.
       public init() {}
@@ -337,7 +335,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -352,11 +350,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskDetail.ArtifactList"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -522,11 +520,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.PipelineTaskDetail"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

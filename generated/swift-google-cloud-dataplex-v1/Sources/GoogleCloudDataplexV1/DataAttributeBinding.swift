@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DataAttributeBinding represents binding of attributes to resources. Eg: Bind
 /// 'CustomerInfo' entity with 'PII' attribute.
 @available(*, deprecated)
-public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataAttributeBinding: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The relative resource name of the Data Attribute Binding, of
@@ -34,10 +34,10 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public var uid: Swift.String = Swift.String()
 
   /// Output only. The time when the DataAttributeBinding was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the DataAttributeBinding was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Description of the DataAttributeBinding.
   public var description: Swift.String = Swift.String()
@@ -68,7 +68,7 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// the query to match resources and associate attributes.
   public var resourceReference: OneOf_ResourceReference? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataAttributeBinding`.
   public init() {}
@@ -127,10 +127,8 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -167,7 +165,7 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.resourceReference = resourceReference
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -198,7 +196,7 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Represents a subresource of the given resource, and associated bindings
   /// with it. Currently supported subresources are column and partition schema
   /// fields within a table.
-  public struct Path: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Path: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name identifier of the path.
@@ -210,7 +208,7 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// projects/{project}/locations/{location}/dataTaxonomies/{dataTaxonomy}/attributes/{data_attribute_id}
     public var attributes: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Path`.
     public init() {}
@@ -253,7 +251,7 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -269,11 +267,11 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataAttributeBinding.Path"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -291,10 +289,10 @@ public struct DataAttributeBinding: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataAttributeBinding"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

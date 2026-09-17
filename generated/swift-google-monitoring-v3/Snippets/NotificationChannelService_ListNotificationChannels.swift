@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudMonitoringV3
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: NotificationChannelServiceClient, projectId: String) async throws {
   let items = try client.listNotificationChannels(

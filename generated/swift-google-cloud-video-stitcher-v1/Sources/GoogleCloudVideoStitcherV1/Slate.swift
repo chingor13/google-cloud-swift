@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Slate object
-public struct Slate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Slate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The name of the slate, in the form of
@@ -32,7 +32,7 @@ public struct Slate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// gam_slate has all the GAM-related attributes of slates.
   public var gamSlate: Slate.GamSlate? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Slate`.
   public init() {}
@@ -78,7 +78,7 @@ public struct Slate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.gamSlate = try container.decodeIfPresent(Slate.GamSlate.self, forKey: .gamSlate)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,7 +94,7 @@ public struct Slate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// GamSlate object has Google Ad Manager (GAM) related properties for the
   /// slate.
-  public struct GamSlate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GamSlate: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Ad Manager network code to associate with the live config.
@@ -103,7 +103,7 @@ public struct Slate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. The identifier generated for the slate by GAM.
     public var gamSlateId: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GamSlate`.
     public init() {}
@@ -146,7 +146,7 @@ public struct Slate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -162,21 +162,21 @@ public struct Slate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.stitcher.v1.Slate.GamSlate"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.stitcher.v1.Slate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

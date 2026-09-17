@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Properties of GoldengateDeployment.
-public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. OCID of the GoldengateDeployment.
@@ -75,7 +75,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
   public var deploymentBackupId: Swift.String = Swift.String()
 
   /// Output only. The time the GoldengateDeployment was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The lifecycle details of the GoldengateDeployment.
   public var lifecycleDetails: Swift.String = Swift.String()
@@ -108,7 +108,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
   public var isLatestVersion: Swift.Bool = Swift.Bool()
 
   /// Output only. The time upgrade required of the GoldengateDeployment.
-  public var upgradeRequiredTime: GoogleCloudWKT.Timestamp? = nil
+  public var upgradeRequiredTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The storage utilization in bytes of the GoldengateDeployment.
   public var storageUtilizationBytes: Swift.Int64 = Swift.Int64()
@@ -124,7 +124,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
   public var backupSchedule: GoldengateBackupSchedule? = nil
 
   /// Output only. The time of next maintenance of the GoldengateDeployment.
-  public var nextMaintenanceTime: GoogleCloudWKT.Timestamp? = nil
+  public var nextMaintenanceTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The next maintenance action type of the GoldengateDeployment.
   public var nextMaintenanceActionType: GoldengateDeploymentProperties.NextMaintenanceActionType =
@@ -135,7 +135,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
 
   /// Output only. The time ogg version supported until of the
   /// GoldengateDeployment.
-  public var oggVersionSupportEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var oggVersionSupportEndTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The ingress ips of the GoldengateDeployment.
   public var ingressIps: [IngressIp] = []
@@ -145,14 +145,14 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
     GoldengateDeploymentProperties.GoldengateDeploymentRoleType()
 
   /// Output only. The time last backup scheduled of the GoldengateDeployment.
-  public var lastBackupScheduleTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastBackupScheduleTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time next backup scheduled of the GoldengateDeployment.
-  public var nextBackupScheduleTime: GoogleCloudWKT.Timestamp? = nil
+  public var nextBackupScheduleTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the role of the GoldengateDeployment was
   /// changed.
-  public var roleChangeTime: GoogleCloudWKT.Timestamp? = nil
+  public var roleChangeTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The locks of the GoldengateDeployment.
   public var locks: [GoldengateDeploymentLock] = []
@@ -160,7 +160,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
   /// Output only. The placements of the GoldengateDeployment.
   public var placements: [GoldengatePlacement] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GoldengateDeploymentProperties`.
   public init() {}
@@ -327,8 +327,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .deploymentBackupId) {
       self.deploymentBackupId = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .lifecycleDetails) {
       self.lifecycleDetails = value
     }
@@ -360,7 +359,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
       self.isLatestVersion = value
     }
     self.upgradeRequiredTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .upgradeRequiredTime)
+      GoogleWKT.Timestamp.self, forKey: .upgradeRequiredTime)
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .storageUtilizationBytes)
     {
       self.storageUtilizationBytes = value
@@ -375,7 +374,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
     self.backupSchedule = try container.decodeIfPresent(
       GoldengateBackupSchedule.self, forKey: .backupSchedule)
     self.nextMaintenanceTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .nextMaintenanceTime)
+      GoogleWKT.Timestamp.self, forKey: .nextMaintenanceTime)
     if let value = try container.decodeIfPresent(
       GoldengateDeploymentProperties.NextMaintenanceActionType.self,
       forKey: .nextMaintenanceActionType)
@@ -388,7 +387,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
       self.nextMaintenanceDescription = value
     }
     self.oggVersionSupportEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .oggVersionSupportEndTime)
+      GoogleWKT.Timestamp.self, forKey: .oggVersionSupportEndTime)
     if let value = try container.decodeIfPresent([IngressIp].self, forKey: .ingressIps) {
       self.ingressIps = value
     }
@@ -398,11 +397,11 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
       self.deploymentRole = value
     }
     self.lastBackupScheduleTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastBackupScheduleTime)
+      GoogleWKT.Timestamp.self, forKey: .lastBackupScheduleTime)
     self.nextBackupScheduleTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .nextBackupScheduleTime)
+      GoogleWKT.Timestamp.self, forKey: .nextBackupScheduleTime)
     self.roleChangeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .roleChangeTime)
+      GoogleWKT.Timestamp.self, forKey: .roleChangeTime)
     if let value = try container.decodeIfPresent([GoldengateDeploymentLock].self, forKey: .locks) {
       self.locks = value
     }
@@ -411,7 +410,7 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -1212,10 +1211,10 @@ public struct GoldengateDeploymentProperties: Codable, Equatable, GoogleCloudWKT
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.GoldengateDeploymentProperties"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

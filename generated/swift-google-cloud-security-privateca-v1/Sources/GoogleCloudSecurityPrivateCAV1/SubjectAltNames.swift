@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// [SubjectAltNames][google.cloud.security.privateca.v1.SubjectAltNames]
 /// corresponds to a more modern way of listing what the asserted identity is in
@@ -23,7 +23,7 @@ import Foundation
 /// name).
 ///
 /// [google.cloud.security.privateca.v1.SubjectAltNames]: <doc:SubjectAltNames>
-public struct SubjectAltNames: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SubjectAltNames: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Contains only valid, fully-qualified host names.
@@ -43,7 +43,7 @@ public struct SubjectAltNames: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// UTF8String.
   public var customSans: [X509Extension] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SubjectAltNames`.
   public init() {}
@@ -101,7 +101,7 @@ public struct SubjectAltNames: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -120,10 +120,10 @@ public struct SubjectAltNames: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.SubjectAltNames"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

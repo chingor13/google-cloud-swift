@@ -14,7 +14,7 @@
 
 import ArgumentParser
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudSecretManagerV1
 
 private let tooManyErrors: UInt64 = 100

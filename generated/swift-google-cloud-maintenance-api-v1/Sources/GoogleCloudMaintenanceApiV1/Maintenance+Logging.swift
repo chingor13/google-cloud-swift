@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func summarizeMaintenances(
-      request: SummarizeMaintenancesRequest, options: GoogleCloudGax.RequestOptions
+      request: SummarizeMaintenancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMaintenanceApiV1.SummarizeMaintenancesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "summarizeMaintenances",
         action: {
-          (r: SummarizeMaintenancesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SummarizeMaintenancesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMaintenanceApiV1.SummarizeMaintenancesResponse
           in
           return try await self.inner.summarizeMaintenances(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func listResourceMaintenances(
-      request: ListResourceMaintenancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceMaintenancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMaintenanceApiV1.ListResourceMaintenancesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listResourceMaintenances",
         action: {
-          (r: ListResourceMaintenancesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListResourceMaintenancesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMaintenanceApiV1.ListResourceMaintenancesResponse
           in
           return try await self.inner.listResourceMaintenances(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func getResourceMaintenance(
-      request: GetResourceMaintenanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceMaintenanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMaintenanceApiV1.ResourceMaintenance {
       try await self._intercept(
         request: request,
         options: options,
         name: "getResourceMaintenance",
         action: {
-          (r: GetResourceMaintenanceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetResourceMaintenanceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMaintenanceApiV1.ResourceMaintenance
           in
           return try await self.inner.getResourceMaintenance(request: r, options: o)
@@ -103,29 +103,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

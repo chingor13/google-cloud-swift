@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// User-defined authentication requirements, including support for
 /// [JSON Web Token
 /// (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
-public struct AuthRequirement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AuthRequirement: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// [id][google.api.AuthProvider.id] from authentication provider.
@@ -50,10 +50,10 @@ public struct AuthRequirement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///                bookstore_web.apps.googleusercontent.com
   ///
   /// [google.api.Service.name]: <doc:Service/name>
-  /// [google.protobuf.Api.name]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.Api/name
+  /// [google.protobuf.Api.name]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.Api/name
   public var audiences: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AuthRequirement`.
   public init() {}
@@ -96,7 +96,7 @@ public struct AuthRequirement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -112,10 +112,10 @@ public struct AuthRequirement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.AuthRequirement"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

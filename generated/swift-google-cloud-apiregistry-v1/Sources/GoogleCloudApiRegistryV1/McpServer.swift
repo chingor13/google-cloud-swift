@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents an MCP Server. MCP Servers act as endpoints that expose a
 /// collection of tools that can be invoked by agents.
-public struct McpServer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct McpServer: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the MCP Server.
@@ -44,12 +44,12 @@ public struct McpServer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The capabilities that a server may support. Known capabilities defined in
   /// https://modelcontextprotocol.io/specification/2025-06-18/schema#servercapabilities
   /// and additional capabilities defined by the servers.
-  public var capabilities: GoogleCloudWKT.Struct? = nil
+  public var capabilities: GoogleWKT.Struct? = nil
 
   /// Output only. The state of the MCP Server.
   public var state: State = State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `McpServer`.
   public init() {}
@@ -104,14 +104,13 @@ public struct McpServer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .urls) {
       self.urls = value
     }
-    self.capabilities = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .capabilities)
+    self.capabilities = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .capabilities)
     if let value = try container.decodeIfPresent(State.self, forKey: .state) {
       self.state = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -131,10 +130,10 @@ public struct McpServer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apiregistry.v1.McpServer"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

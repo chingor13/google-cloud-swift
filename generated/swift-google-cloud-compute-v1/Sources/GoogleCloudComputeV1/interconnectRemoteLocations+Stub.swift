@@ -16,19 +16,17 @@
 
 #if InterconnectRemoteLocations
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol InterconnectRemoteLocationsStub: Sendable {
       func `get`(
-        request: InterconnectRemoteLocationsClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectRemoteLocationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocation
 
       func list(
-        request: InterconnectRemoteLocationsClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InterconnectRemoteLocationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectRemoteLocationList
     }
   }

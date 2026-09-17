@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudTpuV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: TpuClient, projectId: String, locationId: String, nodeId: String) async throws {
   let poller = try await client.deleteNode(

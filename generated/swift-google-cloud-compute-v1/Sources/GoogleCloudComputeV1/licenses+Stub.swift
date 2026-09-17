@@ -16,45 +16,45 @@
 
 #if Licenses
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol LicensesStub: Sendable {
       func delete(
-        request: LicensesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: LicensesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.License
 
       func getIamPolicy(
-        request: LicensesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: LicensesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: LicensesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicensesListResponse
 
       func setIamPolicy(
-        request: LicensesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: LicensesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: LicensesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: LicensesClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

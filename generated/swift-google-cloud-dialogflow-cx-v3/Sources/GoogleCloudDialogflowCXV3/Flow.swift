@@ -16,7 +16,7 @@
 
 #if Flows || Sessions || TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Flows represents the conversation flows when you build your chatbot agent.
   ///
@@ -32,7 +32,7 @@
   /// routes. However, when the followed transition route moves the conversation
   /// session into a different flow, the matched intent can be carried over and to
   /// be consumed in the target flow.
-  public struct Flow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Flow: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier of the flow.
@@ -125,7 +125,7 @@
     /// modifications to the flow will be rejected.
     public var locked: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Flow`.
     public init() {}
@@ -226,7 +226,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -252,7 +252,7 @@
     }
 
     /// Settings for multi-lingual agents.
-    public struct MultiLanguageSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MultiLanguageSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Enable multi-language detection for this flow. This can be set
@@ -275,7 +275,7 @@
       /// [google.cloud.dialogflow.cx.v3.Flow.MultiLanguageSettings.enable_multi_language_detection]: <doc:Flow/MultiLanguageSettings/enableMultiLanguageDetection>
       public var supportedResponseLanguageCodes: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MultiLanguageSettings`.
       public init() {}
@@ -324,7 +324,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -342,22 +342,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Flow.MultiLanguageSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Flow"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

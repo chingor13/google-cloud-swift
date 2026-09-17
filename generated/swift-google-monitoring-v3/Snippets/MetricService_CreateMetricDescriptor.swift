@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudMonitoringV3
 import GoogleApi
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: MetricServiceClient) async throws {
   let response = try await client.createMetricDescriptor(

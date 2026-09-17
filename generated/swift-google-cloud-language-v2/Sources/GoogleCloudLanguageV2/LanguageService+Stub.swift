@@ -15,29 +15,29 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol LanguageServiceStub: Sendable {
     func analyzeSentiment(
-      request: AnalyzeSentimentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeSentimentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnalyzeSentimentResponse
 
     func analyzeEntities(
-      request: AnalyzeEntitiesRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeEntitiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnalyzeEntitiesResponse
 
     func classifyText(
-      request: ClassifyTextRequest, options: GoogleCloudGax.RequestOptions
+      request: ClassifyTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.ClassifyTextResponse
 
     func moderateText(
-      request: ModerateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: ModerateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.ModerateTextResponse
 
     func annotateText(
-      request: AnnotateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: AnnotateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLanguageV2.AnnotateTextResponse
   }
 }

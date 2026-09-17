@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for an automated build in response to source repository
 /// changes.
-public struct BuildTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BuildTrigger: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The `Trigger` name with format:
@@ -68,7 +68,7 @@ public struct BuildTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var webhookConfig: WebhookConfig? = nil
 
   /// Output only. Time when the trigger was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// If true, the trigger will never automatically execute a build.
   public var disabled: Swift.Bool = Swift.Bool()
@@ -125,7 +125,7 @@ public struct BuildTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// At least one of the template fields must be provided.
   public var buildTemplate: OneOf_BuildTemplate? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BuildTrigger`.
   public init() {}
@@ -219,8 +219,7 @@ public struct BuildTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.github = try container.decodeIfPresent(GitHubEventsConfig.self, forKey: .github)
     self.pubsubConfig = try container.decodeIfPresent(PubsubConfig.self, forKey: .pubsubConfig)
     self.webhookConfig = try container.decodeIfPresent(WebhookConfig.self, forKey: .webhookConfig)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .disabled) {
       self.disabled = value
     }
@@ -272,7 +271,7 @@ public struct BuildTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.buildTemplate = buildTemplate
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -339,10 +338,10 @@ public struct BuildTrigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.BuildTrigger"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

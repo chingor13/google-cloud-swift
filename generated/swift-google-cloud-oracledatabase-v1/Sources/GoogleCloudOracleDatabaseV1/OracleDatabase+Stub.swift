@@ -16,356 +16,355 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol OracleDatabaseStub: Sendable {
     func listCloudExadataInfrastructures(
-      request: ListCloudExadataInfrastructuresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCloudExadataInfrastructuresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListCloudExadataInfrastructuresResponse
 
     func getCloudExadataInfrastructure(
-      request: GetCloudExadataInfrastructureRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCloudExadataInfrastructureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.CloudExadataInfrastructure
 
     func createCloudExadataInfrastructure(
-      request: CreateCloudExadataInfrastructureRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCloudExadataInfrastructureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCloudExadataInfrastructure(
-      request: DeleteCloudExadataInfrastructureRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCloudExadataInfrastructureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func configureExascaleCloudExadataInfrastructure(
-      request: ConfigureExascaleCloudExadataInfrastructureRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ConfigureExascaleCloudExadataInfrastructureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listCloudVmClusters(
-      request: ListCloudVmClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCloudVmClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListCloudVmClustersResponse
 
     func getCloudVmCluster(
-      request: GetCloudVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCloudVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.CloudVmCluster
 
     func createCloudVmCluster(
-      request: CreateCloudVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCloudVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCloudVmCluster(
-      request: DeleteCloudVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCloudVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listEntitlements(
-      request: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListEntitlementsResponse
 
     func listDbServers(
-      request: ListDbServersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbServersResponse
 
     func listDbNodes(
-      request: ListDbNodesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbNodesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbNodesResponse
 
     func listGiVersions(
-      request: ListGiVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGiVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGiVersionsResponse
 
     func listMinorVersions(
-      request: ListMinorVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMinorVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListMinorVersionsResponse
 
     func listDbSystemShapes(
-      request: ListDbSystemShapesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbSystemShapesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbSystemShapesResponse
 
     func listAutonomousDatabases(
-      request: ListAutonomousDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutonomousDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabasesResponse
 
     func getAutonomousDatabase(
-      request: GetAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.AutonomousDatabase
 
     func createAutonomousDatabase(
-      request: CreateAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAutonomousDatabase(
-      request: UpdateAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAutonomousDatabase(
-      request: DeleteAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func restoreAutonomousDatabase(
-      request: RestoreAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateAutonomousDatabaseWallet(
-      request: GenerateAutonomousDatabaseWalletRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAutonomousDatabaseWalletRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.GenerateAutonomousDatabaseWalletResponse
 
     func listAutonomousDbVersions(
-      request: ListAutonomousDbVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutonomousDbVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDbVersionsResponse
 
     func listAutonomousDatabaseCharacterSets(
-      request: ListAutonomousDatabaseCharacterSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutonomousDatabaseCharacterSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabaseCharacterSetsResponse
 
     func listAutonomousDatabaseBackups(
-      request: ListAutonomousDatabaseBackupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutonomousDatabaseBackupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabaseBackupsResponse
 
     func stopAutonomousDatabase(
-      request: StopAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: StopAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func startAutonomousDatabase(
-      request: StartAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: StartAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func restartAutonomousDatabase(
-      request: RestartAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RestartAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func switchoverAutonomousDatabase(
-      request: SwitchoverAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: SwitchoverAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func failoverAutonomousDatabase(
-      request: FailoverAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: FailoverAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func refreshAutonomousDatabase(
-      request: RefreshAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RefreshAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAutonomousDatabaseRefreshableClones(
-      request: GetAutonomousDatabaseRefreshableClonesRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutonomousDatabaseRefreshableClonesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.AutonomousDatabaseRefreshableClones
 
     func listOdbNetworks(
-      request: ListOdbNetworksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOdbNetworksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListOdbNetworksResponse
 
     func getOdbNetwork(
-      request: GetOdbNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOdbNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.OdbNetwork
 
     func createOdbNetwork(
-      request: CreateOdbNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOdbNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOdbNetwork(
-      request: DeleteOdbNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOdbNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOdbSubnets(
-      request: ListOdbSubnetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOdbSubnetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListOdbSubnetsResponse
 
     func getOdbSubnet(
-      request: GetOdbSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOdbSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.OdbSubnet
 
     func createOdbSubnet(
-      request: CreateOdbSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOdbSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOdbSubnet(
-      request: DeleteOdbSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOdbSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listExadbVmClusters(
-      request: ListExadbVmClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExadbVmClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListExadbVmClustersResponse
 
     func getExadbVmCluster(
-      request: GetExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ExadbVmCluster
 
     func createExadbVmCluster(
-      request: CreateExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteExadbVmCluster(
-      request: DeleteExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateExadbVmCluster(
-      request: UpdateExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func removeVirtualMachineExadbVmCluster(
-      request: RemoveVirtualMachineExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveVirtualMachineExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listExascaleDbStorageVaults(
-      request: ListExascaleDbStorageVaultsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExascaleDbStorageVaultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListExascaleDbStorageVaultsResponse
 
     func getExascaleDbStorageVault(
-      request: GetExascaleDbStorageVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExascaleDbStorageVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ExascaleDbStorageVault
 
     func createExascaleDbStorageVault(
-      request: CreateExascaleDbStorageVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExascaleDbStorageVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteExascaleDbStorageVault(
-      request: DeleteExascaleDbStorageVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExascaleDbStorageVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listDbSystemInitialStorageSizes(
-      request: ListDbSystemInitialStorageSizesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbSystemInitialStorageSizesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbSystemInitialStorageSizesResponse
 
     func listDatabases(
-      request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDatabasesResponse
 
     func getDatabase(
-      request: GetDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.Database
 
     func listPluggableDatabases(
-      request: ListPluggableDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPluggableDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListPluggableDatabasesResponse
 
     func getPluggableDatabase(
-      request: GetPluggableDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPluggableDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.PluggableDatabase
 
     func listDbSystems(
-      request: ListDbSystemsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbSystemsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbSystemsResponse
 
     func getDbSystem(
-      request: GetDbSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDbSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.DbSystem
 
     func createDbSystem(
-      request: CreateDbSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDbSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteDbSystem(
-      request: DeleteDbSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDbSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGoldengateDeployments(
-      request: ListGoldengateDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentsResponse
 
     func getGoldengateDeployment(
-      request: GetGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.GoldengateDeployment
 
     func createGoldengateDeployment(
-      request: CreateGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGoldengateDeployment(
-      request: DeleteGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func stopGoldengateDeployment(
-      request: StopGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: StopGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func startGoldengateDeployment(
-      request: StartGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: StartGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGoldengateConnections(
-      request: ListGoldengateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionsResponse
 
     func getGoldengateConnection(
-      request: GetGoldengateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoldengateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.GoldengateConnection
 
     func createGoldengateConnection(
-      request: CreateGoldengateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGoldengateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGoldengateConnection(
-      request: DeleteGoldengateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGoldengateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGoldengateDeploymentVersions(
-      request: ListGoldengateDeploymentVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateDeploymentVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentVersionsResponse
 
     func listGoldengateDeploymentTypes(
-      request: ListGoldengateDeploymentTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateDeploymentTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentTypesResponse
 
     func listGoldengateDeploymentEnvironments(
-      request: ListGoldengateDeploymentEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateDeploymentEnvironmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentEnvironmentsResponse
 
     func listGoldengateConnectionTypes(
-      request: ListGoldengateConnectionTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateConnectionTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionTypesResponse
 
     func listDbVersions(
-      request: ListDbVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbVersionsResponse
 
     func listDatabaseCharacterSets(
-      request: ListDatabaseCharacterSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatabaseCharacterSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDatabaseCharacterSetsResponse
 
     func listGoldengateConnectionAssignments(
-      request: ListGoldengateConnectionAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateConnectionAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionAssignmentsResponse
 
     func getGoldengateConnectionAssignment(
-      request: GetGoldengateConnectionAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoldengateConnectionAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.GoldengateConnectionAssignment
 
     func createGoldengateConnectionAssignment(
-      request: CreateGoldengateConnectionAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGoldengateConnectionAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteGoldengateConnectionAssignment(
-      request: DeleteGoldengateConnectionAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGoldengateConnectionAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func testGoldengateConnectionAssignment(
-      request: TestGoldengateConnectionAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: TestGoldengateConnectionAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.TestGoldengateConnectionAssignmentResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

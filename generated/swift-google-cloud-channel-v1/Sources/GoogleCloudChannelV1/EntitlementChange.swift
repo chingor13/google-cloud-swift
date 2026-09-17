@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Change event entry for Entitlement order history
-public struct EntitlementChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EntitlementChange: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Resource name of an entitlement in the form:
@@ -36,7 +36,7 @@ public struct EntitlementChange: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var changeType: EntitlementChange.ChangeType = EntitlementChange.ChangeType()
 
   /// The submitted time of the change.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Operator type responsible for the change.
   public var operatorType: EntitlementChange.OperatorType = EntitlementChange.OperatorType()
@@ -55,7 +55,7 @@ public struct EntitlementChange: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The reason the change was made
   public var changeReason: OneOf_ChangeReason? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EntitlementChange`.
   public init() {}
@@ -123,8 +123,7 @@ public struct EntitlementChange: Codable, Equatable, GoogleCloudWKT._AnyPackable
     {
       self.changeType = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(
       EntitlementChange.OperatorType.self, forKey: .operatorType)
     {
@@ -170,7 +169,7 @@ public struct EntitlementChange: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.changeReason = changeReason
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -765,10 +764,10 @@ public struct EntitlementChange: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.channel.v1.EntitlementChange"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

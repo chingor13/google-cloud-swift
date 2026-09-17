@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A representation of a batch workload in the service.
-public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Batch: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the batch.
@@ -29,7 +29,7 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uuid: Swift.String = Swift.String()
 
   /// Output only. The time when the batch was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Runtime information about batch execution.
   public var runtimeInfo: RuntimeInfo? = nil
@@ -42,7 +42,7 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var stateMessage: Swift.String = Swift.String()
 
   /// Output only. The time when the batch entered a current state.
-  public var stateTime: GoogleCloudWKT.Timestamp? = nil
+  public var stateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The email address of the user who created the batch.
   public var creator: Swift.String = Swift.String()
@@ -71,7 +71,7 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The application/framework-specific portion of the batch configuration.
   public var batchConfig: OneOf_BatchConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Batch`.
   public init() {}
@@ -144,8 +144,7 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uuid) {
       self.uuid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.runtimeInfo = try container.decodeIfPresent(RuntimeInfo.self, forKey: .runtimeInfo)
     if let value = try container.decodeIfPresent(Batch.State.self, forKey: .state) {
       self.state = value
@@ -153,8 +152,7 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .stateMessage) {
       self.stateMessage = value
     }
-    self.stateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .stateTime)
+    self.stateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .stateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .creator) {
       self.creator = value
     }
@@ -204,7 +202,7 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.batchConfig = batchConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -244,7 +242,7 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Historical state information.
-  public struct StateHistory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StateHistory: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The state of the batch at this point in history.
@@ -254,9 +252,9 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var stateMessage: Swift.String = Swift.String()
 
     /// Output only. The time when the batch entered the historical state.
-    public var stateStartTime: GoogleCloudWKT.Timestamp? = nil
+    public var stateStartTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StateHistory`.
     public init() {}
@@ -300,10 +298,10 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.stateMessage = value
       }
       self.stateStartTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .stateStartTime)
+        GoogleWKT.Timestamp.self, forKey: .stateStartTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -320,11 +318,11 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataproc.v1.Batch.StateHistory"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -478,10 +476,10 @@ public struct Batch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.Batch"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

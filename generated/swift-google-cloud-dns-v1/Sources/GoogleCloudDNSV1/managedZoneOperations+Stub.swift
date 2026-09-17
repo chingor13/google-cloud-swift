@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ManagedZoneOperationsStub: Sendable {
     func `get`(
-      request: ManagedZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Operation
 
     func list(
-      request: ManagedZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZoneOperationsListResponse
   }
 }

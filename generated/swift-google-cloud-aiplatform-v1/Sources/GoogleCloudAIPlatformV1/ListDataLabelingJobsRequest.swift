@@ -16,13 +16,13 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [JobService.ListDataLabelingJobs][google.cloud.aiplatform.v1.JobService.ListDataLabelingJobs].
   ///
   /// [google.cloud.aiplatform.v1.JobService.ListDataLabelingJobs]: <doc:JobServiceClient/listDataLabelingJobs(request:options:)>
-  public struct ListDataLabelingJobsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ListDataLabelingJobsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The parent of the DataLabelingJob.
@@ -61,14 +61,14 @@
     /// symbolic field paths. For example, the mask can be `paths: "name"`. The
     /// "name" here is a field in DataLabelingJob.
     /// If this field is not set, all fields of the DataLabelingJob are returned.
-    public var readMask: GoogleCloudWKT.FieldMask? = nil
+    public var readMask: GoogleWKT.FieldMask? = nil
 
     /// A comma-separated list of fields to order by, sorted in ascending order by
     /// default.
     /// Use `desc` after a field name for descending.
     public var orderBy: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListDataLabelingJobsRequest`.
     public init() {}
@@ -123,14 +123,13 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .pageToken) {
         self.pageToken = value
       }
-      self.readMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .readMask)
+      self.readMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .readMask)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .orderBy) {
         self.orderBy = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -150,11 +149,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ListDataLabelingJobsRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

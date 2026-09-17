@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudVideoStitcherV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: VideoStitcherServiceClient, projectId: String, locationId: String, vodSessionId: String,

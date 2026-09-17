@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A
 /// [KeyAccessJustificationsPolicy][google.cloud.kms.v1.KeyAccessJustificationsPolicy]
@@ -28,7 +28,7 @@ import Foundation
 /// [google.cloud.kms.v1.AccessReason]: <doc:AccessReason>
 /// [google.cloud.kms.v1.CryptoKey]: <doc:CryptoKey>
 /// [google.cloud.kms.v1.KeyAccessJustificationsPolicy]: <doc:KeyAccessJustificationsPolicy>
-public struct KeyAccessJustificationsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct KeyAccessJustificationsPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The list of allowed reasons for access to a
@@ -42,7 +42,7 @@ public struct KeyAccessJustificationsPolicy: Codable, Equatable, GoogleCloudWKT.
   /// [google.cloud.kms.v1.CryptoKey]: <doc:CryptoKey>
   public var allowedAccessReasons: [AccessReason] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `KeyAccessJustificationsPolicy`.
   public init() {}
@@ -81,7 +81,7 @@ public struct KeyAccessJustificationsPolicy: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +96,10 @@ public struct KeyAccessJustificationsPolicy: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.KeyAccessJustificationsPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configure processing location for discovery and inspection. For example,
 /// image OCR is only provided in limited regions but configuring
 /// ProcessingLocation will redirect OCR to a location where OCR is provided.
-public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProcessingLocation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Image processing falls back using this configuration.
@@ -29,7 +29,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Document processing falls back using this configuration.
   public var documentFallbackLocation: ProcessingLocation.DocumentFallbackLocation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProcessingLocation`.
   public init() {}
@@ -70,7 +70,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       ProcessingLocation.DocumentFallbackLocation.self, forKey: .documentFallbackLocation)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,10 +85,10 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
 
   /// Processing occurs in a multi-region that contains the current region
   /// if available.
-  public struct MultiRegionProcessing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MultiRegionProcessing: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MultiRegionProcessing`.
     public init() {}
@@ -119,7 +119,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -133,19 +133,19 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation.MultiRegionProcessing"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Processing occurs in the global region.
-  public struct GlobalProcessing: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GlobalProcessing: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GlobalProcessing`.
     public init() {}
@@ -176,7 +176,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -190,18 +190,18 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation.GlobalProcessing"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configure image processing to fall back to any of the following processing
   /// options if image processing is unavailable in the original request
   /// location.
-  public struct ImageFallbackLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ImageFallbackLocation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Processing occurs in a multi-region that contains the current region
@@ -211,7 +211,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// Processing occurs in the global region.
     public var globalProcessing: ProcessingLocation.GlobalProcessing? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ImageFallbackLocation`.
     public init() {}
@@ -252,7 +252,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         ProcessingLocation.GlobalProcessing.self, forKey: .globalProcessing)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -268,18 +268,18 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation.ImageFallbackLocation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configure document processing to fall back to any of the following
   /// processing options if document processing is unavailable in the original
   /// request location.
-  public struct DocumentFallbackLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DocumentFallbackLocation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Processing occurs in a multi-region that contains the current region
@@ -289,7 +289,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// Processing occurs in the global region.
     public var globalProcessing: ProcessingLocation.GlobalProcessing? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DocumentFallbackLocation`.
     public init() {}
@@ -330,7 +330,7 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         ProcessingLocation.GlobalProcessing.self, forKey: .globalProcessing)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -346,21 +346,21 @@ public struct ProcessingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation.DocumentFallbackLocation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ProcessingLocation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,21 +16,21 @@
 
 #if MachineTypes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol MachineTypesStub: Sendable {
       func aggregatedList(
-        request: MachineTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeAggregatedList
 
       func `get`(
-        request: MachineTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineType
 
       func list(
-        request: MachineTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineTypeList
     }
   }

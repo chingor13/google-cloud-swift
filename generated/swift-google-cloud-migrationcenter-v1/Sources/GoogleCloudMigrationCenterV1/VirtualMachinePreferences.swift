@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// VirtualMachinePreferences enables you to create sets of assumptions, for
 /// example, a geographical location and pricing track, for your migrated virtual
 /// machines. The set of preferences influence recommendations for migrating
 /// virtual machine assets.
-public struct VirtualMachinePreferences: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VirtualMachinePreferences: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Target product for assets using this preference set.
@@ -58,7 +58,7 @@ public struct VirtualMachinePreferences: Codable, Equatable, GoogleCloudWKT._Any
   /// Preferences concerning Sole Tenant nodes and virtual machines.
   public var soleTenancyPreferences: SoleTenancyPreferences? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VirtualMachinePreferences`.
   public init() {}
@@ -126,7 +126,7 @@ public struct VirtualMachinePreferences: Codable, Equatable, GoogleCloudWKT._Any
       SoleTenancyPreferences.self, forKey: .soleTenancyPreferences)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,10 +147,10 @@ public struct VirtualMachinePreferences: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.migrationcenter.v1.VirtualMachinePreferences"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

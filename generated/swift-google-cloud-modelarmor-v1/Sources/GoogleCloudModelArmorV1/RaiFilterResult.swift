@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Responsible AI Result.
-public struct RaiFilterResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RaiFilterResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Reports whether the RAI filter was successfully executed or
@@ -41,7 +41,7 @@ public struct RaiFilterResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// "sexually_suggestive".
   public var raiFilterTypeResults: [Swift.String: RaiFilterResult.RaiFilterTypeResult] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RaiFilterResult`.
   public init() {}
@@ -97,7 +97,7 @@ public struct RaiFilterResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,7 +113,7 @@ public struct RaiFilterResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Detailed Filter result for each of the responsible AI Filter Types.
-  public struct RaiFilterTypeResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RaiFilterTypeResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Type of responsible AI filter.
@@ -125,7 +125,7 @@ public struct RaiFilterResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. Match state for this RAI filter.
     public var matchState: FilterMatchState = FilterMatchState()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RaiFilterTypeResult`.
     public init() {}
@@ -175,7 +175,7 @@ public struct RaiFilterResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -192,21 +192,21 @@ public struct RaiFilterResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.modelarmor.v1.RaiFilterResult.RaiFilterTypeResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.modelarmor.v1.RaiFilterResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Container for customer onboarding information
-public struct CustomerOnboardingStep: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CustomerOnboardingStep: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The onboarding step
   public var step: CustomerOnboardingStep.Step = CustomerOnboardingStep.Step()
 
   /// The starting time of the onboarding step
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The completion time of the onboarding step
-  public var completionTime: GoogleCloudWKT.Timestamp? = nil
+  public var completionTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Current state of the step
   public var completionState: CompletionState = CompletionState()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CustomerOnboardingStep`.
   public init() {}
@@ -75,16 +75,15 @@ public struct CustomerOnboardingStep: Codable, Equatable, GoogleCloudWKT._AnyPac
     if let value = try container.decodeIfPresent(CustomerOnboardingStep.Step.self, forKey: .step) {
       self.step = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
     self.completionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .completionTime)
+      GoogleWKT.Timestamp.self, forKey: .completionTime)
     if let value = try container.decodeIfPresent(CompletionState.self, forKey: .completionState) {
       self.completionState = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -207,10 +206,10 @@ public struct CustomerOnboardingStep: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.cloudcontrolspartner.v1.CustomerOnboardingStep"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

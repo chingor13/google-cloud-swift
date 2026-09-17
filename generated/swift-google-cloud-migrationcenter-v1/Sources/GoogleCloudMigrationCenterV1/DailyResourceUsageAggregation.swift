@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Usage data aggregation for a single day.
-public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Aggregation date. Day boundaries are at midnight UTC.
@@ -37,7 +37,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
   /// Disk usage.
   public var disk: DailyResourceUsageAggregation.Disk? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DailyResourceUsageAggregation`.
   public init() {}
@@ -88,7 +88,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
       DailyResourceUsageAggregation.Disk.self, forKey: .disk)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -105,7 +105,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
   }
 
   /// Statistical aggregation of samples for a single resource usage.
-  public struct Stats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Stats: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Average usage value.
@@ -120,7 +120,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
     /// Peak usage value.
     public var peak: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Stats`.
     public init() {}
@@ -174,7 +174,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -193,22 +193,22 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.migrationcenter.v1.DailyResourceUsageAggregation.Stats"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Statistical aggregation of CPU usage.
-  public struct CPU: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CPU: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// CPU utilization percentage.
     public var utilizationPercentage: DailyResourceUsageAggregation.Stats? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CPU`.
     public init() {}
@@ -245,7 +245,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
         DailyResourceUsageAggregation.Stats.self, forKey: .utilizationPercentage)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -260,22 +260,22 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.migrationcenter.v1.DailyResourceUsageAggregation.CPU"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Statistical aggregation of memory usage.
-  public struct Memory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Memory: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Memory utilization percentage.
     public var utilizationPercentage: DailyResourceUsageAggregation.Stats? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Memory`.
     public init() {}
@@ -312,7 +312,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
         DailyResourceUsageAggregation.Stats.self, forKey: .utilizationPercentage)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -328,16 +328,16 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.migrationcenter.v1.DailyResourceUsageAggregation.Memory"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Statistical aggregation of network usage.
-  public struct Network: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Network: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Network ingress in B/s.
@@ -346,7 +346,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
     /// Network egress in B/s.
     public var egressBps: DailyResourceUsageAggregation.Stats? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Network`.
     public init() {}
@@ -387,7 +387,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
         DailyResourceUsageAggregation.Stats.self, forKey: .egressBps)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -404,22 +404,22 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.migrationcenter.v1.DailyResourceUsageAggregation.Network"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Statistical aggregation of disk usage.
-  public struct Disk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Disk: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Disk I/O operations per second.
     public var iops: DailyResourceUsageAggregation.Stats? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Disk`.
     public init() {}
@@ -456,7 +456,7 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
         DailyResourceUsageAggregation.Stats.self, forKey: .iops)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -472,21 +472,21 @@ public struct DailyResourceUsageAggregation: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.migrationcenter.v1.DailyResourceUsageAggregation.Disk"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.migrationcenter.v1.DailyResourceUsageAggregation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

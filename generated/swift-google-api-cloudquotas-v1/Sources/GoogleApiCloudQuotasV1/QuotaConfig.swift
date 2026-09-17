@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The preferred quota configuration.
-public struct QuotaConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QuotaConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The preferred value. Must be greater than or equal to -1. If set
@@ -29,7 +29,7 @@ public struct QuotaConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var stateDetail: Swift.String = Swift.String()
 
   /// Output only. Granted quota value.
-  public var grantedValue: GoogleCloudWKT.Int64Value? = nil
+  public var grantedValue: GoogleWKT.Int64Value? = nil
 
   /// Output only. The trace id that the Google Cloud uses to provision the
   /// requested quota. This trace id may be used by the client to contact Cloud
@@ -46,7 +46,7 @@ public struct QuotaConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The origin of the quota preference request.
   public var requestOrigin: QuotaConfig.Origin = QuotaConfig.Origin()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QuotaConfig`.
   public init() {}
@@ -96,7 +96,7 @@ public struct QuotaConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.stateDetail = value
     }
     self.grantedValue = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .grantedValue)
+      GoogleWKT.Int64Value.self, forKey: .grantedValue)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .traceId) {
       self.traceId = value
     }
@@ -110,7 +110,7 @@ public struct QuotaConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -235,10 +235,10 @@ public struct QuotaConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.cloudquotas.v1.QuotaConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

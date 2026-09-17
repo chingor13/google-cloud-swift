@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for
 /// [RescheduleMaintenance][google.cloud.redis.v1.CloudRedis.RescheduleMaintenance].
 ///
 /// [google.cloud.redis.v1.CloudRedis.RescheduleMaintenance]: <doc:CloudRedisClient/rescheduleMaintenance(request:options:)>
-public struct RescheduleMaintenanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RescheduleMaintenanceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Redis instance resource name using the form:
@@ -37,9 +37,9 @@ public struct RescheduleMaintenanceRequest: Codable, Equatable, GoogleCloudWKT._
   /// Optional. Timestamp when the maintenance shall be rescheduled to if
   /// reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
   /// example `2012-11-15T16:19:00.094Z`.
-  public var scheduleTime: GoogleCloudWKT.Timestamp? = nil
+  public var scheduleTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RescheduleMaintenanceRequest`.
   public init() {}
@@ -85,10 +85,10 @@ public struct RescheduleMaintenanceRequest: Codable, Equatable, GoogleCloudWKT._
       self.rescheduleType = value
     }
     self.scheduleTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .scheduleTime)
+      GoogleWKT.Timestamp.self, forKey: .scheduleTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -218,10 +218,10 @@ public struct RescheduleMaintenanceRequest: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.redis.v1.RescheduleMaintenanceRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

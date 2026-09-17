@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleIdentityAccessContextManagerV1
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleIdentityAccessContextManagerV1.AccessContextManagerClient()

@@ -15,11 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configures a RRSetRoutingPolicy such that all queries are responded with the primary_targets if they are healthy. And if all of them are unhealthy, then we fallback to a geo localized policy.
-public struct RRSetRoutingPolicyPrimaryBackupPolicy: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct RRSetRoutingPolicyPrimaryBackupPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Backup targets provide a regional failover policy for the otherwise global primary targets. If serving state is set to `BACKUP`, this policy essentially becomes a geo routing policy.
@@ -33,7 +32,7 @@ public struct RRSetRoutingPolicyPrimaryBackupPolicy: Codable, Equatable, GoogleC
   /// When serving state is `PRIMARY`, this field provides the option of sending a small percentage of the traffic to the backup targets.
   public var trickleTraffic: Swift.Double? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RRSetRoutingPolicyPrimaryBackupPolicy`.
   public init() {}
@@ -80,7 +79,7 @@ public struct RRSetRoutingPolicyPrimaryBackupPolicy: Codable, Equatable, GoogleC
     self.trickleTraffic = try container.decodeIfPresent(Swift.Double.self, forKey: .trickleTraffic)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +97,10 @@ public struct RRSetRoutingPolicyPrimaryBackupPolicy: Codable, Equatable, GoogleC
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.RRSetRoutingPolicyPrimaryBackupPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

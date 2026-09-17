@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `CommitRepositoryChanges` request message.
-public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The repository's name.
@@ -36,7 +36,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
   /// full file path including filename, from repository root.
   public var fileOperations: [Swift.String: CommitRepositoryChangesRequest.FileOperation] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CommitRepositoryChangesRequest`.
   public init() {}
@@ -91,7 +91,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -107,13 +107,13 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
   }
 
   /// Represents a single file operation to the repository.
-  public struct FileOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FileOperation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The operation to perform on the file.
     public var operation: OneOf_Operation? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FileOperation`.
     public init() {}
@@ -172,7 +172,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
       self.operation = operation
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -193,13 +193,13 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
     }
 
     /// Represents the write file operation (for files added or modified).
-    public struct WriteFile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct WriteFile: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The file's contents.
       public var contents: Foundation.Data = Foundation.Data()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `WriteFile`.
       public init() {}
@@ -237,7 +237,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -253,19 +253,19 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
         return
           "type.googleapis.com/google.cloud.dataform.v1.CommitRepositoryChangesRequest.FileOperation.WriteFile"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents the delete file operation.
-    public struct DeleteFile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeleteFile: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeleteFile`.
       public init() {}
@@ -296,7 +296,7 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -311,11 +311,11 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
         return
           "type.googleapis.com/google.cloud.dataform.v1.CommitRepositoryChangesRequest.FileOperation.DeleteFile"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -331,21 +331,21 @@ public struct CommitRepositoryChangesRequest: Codable, Equatable, GoogleCloudWKT
       return
         "type.googleapis.com/google.cloud.dataform.v1.CommitRepositoryChangesRequest.FileOperation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.CommitRepositoryChangesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

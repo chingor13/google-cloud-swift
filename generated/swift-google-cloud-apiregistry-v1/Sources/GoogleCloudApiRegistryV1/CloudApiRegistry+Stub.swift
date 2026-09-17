@@ -16,33 +16,33 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudApiRegistryStub: Sendable {
     func getMcpServer(
-      request: GetMcpServerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMcpServerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiRegistryV1.McpServer
 
     func listMcpServers(
-      request: ListMcpServersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMcpServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiRegistryV1.ListMcpServersResponse
 
     func getMcpTool(
-      request: GetMcpToolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMcpToolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiRegistryV1.McpTool
 
     func listMcpTools(
-      request: ListMcpToolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMcpToolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiRegistryV1.ListMcpToolsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata for the response of an ad request.
-public struct ResponseMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResponseMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Error message received when making the ad request.
   public var error: Swift.String = Swift.String()
 
   /// Headers from the response.
-  public var headers: GoogleCloudWKT.Struct? = nil
+  public var headers: GoogleWKT.Struct? = nil
 
   /// Status code for the response.
   public var statusCode: Swift.String = Swift.String()
@@ -34,12 +34,12 @@ public struct ResponseMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var sizeBytes: Swift.Int32 = Swift.Int32()
 
   /// Total time elapsed for the response.
-  public var duration: GoogleCloudWKT.Duration? = nil
+  public var duration: GoogleWKT.Duration? = nil
 
   /// The body of the response.
   public var body: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResponseMetadata`.
   public init() {}
@@ -85,20 +85,20 @@ public struct ResponseMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .error) {
       self.error = value
     }
-    self.headers = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .headers)
+    self.headers = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .headers)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .statusCode) {
       self.statusCode = value
     }
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .sizeBytes) {
       self.sizeBytes = value
     }
-    self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+    self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .body) {
       self.body = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +118,10 @@ public struct ResponseMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.stitcher.v1.ResponseMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

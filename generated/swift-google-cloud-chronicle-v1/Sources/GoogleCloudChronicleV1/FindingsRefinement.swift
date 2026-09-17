@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a set of logic conditions used to refine various types of
 /// findings such as curated rule detections.
-public struct FindingsRefinement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FindingsRefinement: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Full resource name for the findings refinement.
@@ -34,11 +34,11 @@ public struct FindingsRefinement: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public var type: FindingsRefinementType = FindingsRefinementType()
 
   /// Output only. The timestamp of when the findings refinement was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp of when the findings refinement was last
   /// updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The query for the findings refinement. Works in conjunction with the type
   /// field to determine the findings refinement behavior. The syntax of this
@@ -53,7 +53,7 @@ public struct FindingsRefinement: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// refinement.
   public var outcomeFilters: [OutcomeFilter] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FindingsRefinement`.
   public init() {}
@@ -107,10 +107,8 @@ public struct FindingsRefinement: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let value = try container.decodeIfPresent(FindingsRefinementType.self, forKey: .type) {
       self.type = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .query) {
       self.query = value
     }
@@ -119,7 +117,7 @@ public struct FindingsRefinement: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -140,10 +138,10 @@ public struct FindingsRefinement: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.FindingsRefinement"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -29,9 +29,9 @@ clean_flags=(
     --warnings-as-errors
 )
 clean_targets=(
-    GoogleCloudWKT
+    GoogleWKT
     GoogleAuth
-    GoogleCloudGax
+    GoogleGax
     GoogleCloudStorage
     GoogleCloudSecretManagerV1
     GoogleCloudWorkflowsV1

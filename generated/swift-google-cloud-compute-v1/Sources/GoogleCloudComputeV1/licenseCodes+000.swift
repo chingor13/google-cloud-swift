@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `licenseCodes` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.LicenseCodesStub
 
     /// Creates a new `LicenseCodesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.LicenseCodesStub = try Clients.LicenseCodesTransport(options)
       inner = Clients.LicenseCodesRetry(inner, options: options)
       if let logger = options.logger {
@@ -46,7 +46,7 @@
     ///
     /// @Snippet(path: "licenseCodes_get")
     public func `get`(
-      request: LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: LicenseCodesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.LicenseCode {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -59,7 +59,7 @@
     ///
     /// @Snippet(path: "licenseCodes_getIamPolicy")
     public func getIamPolicy(
-      request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -72,7 +72,7 @@
     ///
     /// @Snippet(path: "licenseCodes_setIamPolicy")
     public func setIamPolicy(
-      request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -84,7 +84,7 @@
     ///
     /// @Snippet(path: "licenseCodes_testIamPermissions")
     public func testIamPermissions(
-      request: LicenseCodesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: LicenseCodesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -141,23 +141,22 @@
 
       /// See `LicenseCodesClient.`get``.
       func `get`(
-        request: LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.LicenseCode
 
       /// See `LicenseCodesClient.getIamPolicy`.
       func getIamPolicy(
-        request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       /// See `LicenseCodesClient.setIamPolicy`.
       func setIamPolicy(
-        request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       /// See `LicenseCodesClient.testIamPermissions`.
       func testIamPermissions(
-        request: LicenseCodesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: LicenseCodesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
@@ -171,9 +170,9 @@
     }
 
     public func `get`(
-      request: LicenseCodesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: LicenseCodesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.LicenseCode {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -194,9 +193,9 @@
     }
 
     public func getIamPolicy(
-      request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: LicenseCodesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(
@@ -217,9 +216,9 @@
     }
 
     public func setIamPolicy(
-      request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: LicenseCodesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(
@@ -242,9 +241,9 @@
     }
 
     public func testIamPermissions(
-      request: LicenseCodesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: LicenseCodesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(

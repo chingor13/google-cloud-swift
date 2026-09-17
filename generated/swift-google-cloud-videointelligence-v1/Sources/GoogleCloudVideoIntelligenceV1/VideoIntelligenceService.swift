@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service that implements the Video Intelligence API.
 ///
@@ -30,11 +30,11 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
   Sendable
 {
   let inner: any Clients.VideoIntelligenceServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `VideoIntelligenceServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.VideoIntelligenceServiceStub =
       try Clients.VideoIntelligenceServiceTransport(options)
     inner = Clients.VideoIntelligenceServiceRetry(inner, options: options)
@@ -53,7 +53,7 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
   ///
   /// @Snippet(path: "VideoIntelligenceService_AnnotateVideo")
   public func annotateVideo(
-    request: AnnotateVideoRequest, options: GoogleCloudGax.RequestOptions
+    request: AnnotateVideoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.annotateVideo(request: request, options: options)
   }
@@ -65,22 +65,21 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
   ///
   /// @Snippet(path: "VideoIntelligenceService_AnnotateVideo")
   public func annotateVideo(
-    withPolling: AnnotateVideoRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AnnotateVideoResponse> {
+    withPolling: AnnotateVideoRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AnnotateVideoResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AnnotateVideoResponse>.State in
+        -> GoogleGax._PollableOperationImpl<AnnotateVideoResponse>.State in
       return try op._extractStatus(AnnotateVideoResponse.self)
     }
     let rawOp = try await self.annotateVideo(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AnnotateVideoResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AnnotateVideoResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -94,7 +93,7 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
   ///
   /// @Snippet(path: "VideoIntelligenceService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -105,7 +104,7 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
   ///
   /// @Snippet(path: "VideoIntelligenceService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -113,7 +112,7 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -122,7 +121,7 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
   ///
   /// @Snippet(path: "VideoIntelligenceService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -133,7 +132,7 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
   ///
   /// @Snippet(path: "VideoIntelligenceService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -144,7 +143,7 @@ public final class VideoIntelligenceServiceClient: Clients.VideoIntelligenceServ
   ///
   /// @Snippet(path: "VideoIntelligenceService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -161,14 +160,14 @@ extension Clients {
     func annotateVideo(request: AnnotateVideoRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoIntelligenceServiceClient.annotateVideo`.
-    func annotateVideo(withPolling: AnnotateVideoRequest) async throws -> any GoogleCloudGax
+    func annotateVideo(withPolling: AnnotateVideoRequest) async throws -> any GoogleGax
       .PollableOperation<AnnotateVideoResponse>
 
     /// See `VideoIntelligenceServiceClient.annotateVideo`.
     func annotateVideo(
       inputUri: Swift.String,
       features: [Feature],
-    ) async throws -> any GoogleCloudGax.PollableOperation<AnnotateVideoResponse>
+    ) async throws -> any GoogleGax.PollableOperation<AnnotateVideoResponse>
 
     /// See `VideoIntelligenceServiceClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -203,32 +202,32 @@ extension Clients {
 
     /// See `VideoIntelligenceServiceClient.annotateVideo`.
     func annotateVideo(
-      request: AnnotateVideoRequest, options: GoogleCloudGax.RequestOptions
+      request: AnnotateVideoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `VideoIntelligenceServiceClient.annotateVideo`.
     func annotateVideo(
-      withPolling: AnnotateVideoRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AnnotateVideoResponse>
+      withPolling: AnnotateVideoRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AnnotateVideoResponse>
 
     /// See `VideoIntelligenceServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `VideoIntelligenceServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `VideoIntelligenceServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `VideoIntelligenceServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -242,32 +241,31 @@ extension Clients.VideoIntelligenceServiceProtocol {
   }
 
   public func annotateVideo(
-    request: AnnotateVideoRequest, options: GoogleCloudGax.RequestOptions
+    request: AnnotateVideoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func annotateVideo(withPolling: AnnotateVideoRequest) async throws -> any GoogleCloudGax
+  public func annotateVideo(withPolling: AnnotateVideoRequest) async throws -> any GoogleGax
     .PollableOperation<AnnotateVideoResponse>
   {
     try await self.annotateVideo(withPolling: withPolling, options: .init())
   }
 
   public func annotateVideo(
-    withPolling: AnnotateVideoRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AnnotateVideoResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AnnotateVideoResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: AnnotateVideoRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AnnotateVideoResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AnnotateVideoResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func annotateVideo(
     inputUri: Swift.String,
     features: [Feature],
-  ) async throws -> any GoogleCloudGax.PollableOperation<AnnotateVideoResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<AnnotateVideoResponse> {
     let request = AnnotateVideoRequest().with {
       $0.inputUri = inputUri
       $0.features = features
@@ -282,9 +280,9 @@ extension Clients.VideoIntelligenceServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -294,13 +292,13 @@ extension Clients.VideoIntelligenceServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -321,9 +319,9 @@ extension Clients.VideoIntelligenceServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -340,9 +338,9 @@ extension Clients.VideoIntelligenceServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -359,9 +357,9 @@ extension Clients.VideoIntelligenceServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

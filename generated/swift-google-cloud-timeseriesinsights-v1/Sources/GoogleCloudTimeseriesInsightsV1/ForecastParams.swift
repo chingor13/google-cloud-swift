@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Parameters that control the sensitivity and other options for the time series
 /// forecast.
-public struct ForecastParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ForecastParams: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Penalize variations between the actual and forecasted values smaller than
@@ -70,9 +70,9 @@ public struct ForecastParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [EvaluatedSlice.forecast]: <doc:EvaluatedSlice/forecast>
   /// [google.cloud.timeseriesinsights.v1.QueryDataSetRequest.detection_time]: <doc:QueryDataSetRequest/detectionTime>
   /// [google.cloud.timeseriesinsights.v1.TimeseriesParams.granularity]: <doc:TimeseriesParams/granularity>
-  public var horizonDuration: GoogleCloudWKT.Duration? = nil
+  public var horizonDuration: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ForecastParams`.
   public init() {}
@@ -116,10 +116,10 @@ public struct ForecastParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.seasonalityHint = value
     }
     self.horizonDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .horizonDuration)
+      GoogleWKT.Duration.self, forKey: .horizonDuration)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -262,10 +262,10 @@ public struct ForecastParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.timeseriesinsights.v1.ForecastParams"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

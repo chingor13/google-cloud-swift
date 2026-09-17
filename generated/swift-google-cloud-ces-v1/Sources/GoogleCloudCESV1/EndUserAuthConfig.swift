@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// End-user authentication configuration used for Connection calls.
 /// The field values must be the names of context variables in the format
 /// `$context.variables.<name_of_variable>`.
-public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EndUserAuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The auth configuration.
   public var authConfig: OneOf_AuthConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EndUserAuthConfig`.
   public init() {}
@@ -85,7 +85,7 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.authConfig = authConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,14 +106,14 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Oauth 2.0 Authorization Code authentication configuration.
-  public struct Oauth2AuthCodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Oauth2AuthCodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Oauth token parameter name to pass through.
     /// Must be in the format `$context.variables.<name_of_variable>`.
     public var oauthToken: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Oauth2AuthCodeConfig`.
     public init() {}
@@ -151,7 +151,7 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -166,16 +166,16 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.EndUserAuthConfig.Oauth2AuthCodeConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// JWT Profile Oauth 2.0 Authorization Grant authentication configuration.
-  public struct Oauth2JwtBearerConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Oauth2JwtBearerConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Issuer parameter name to pass through.
@@ -190,7 +190,7 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// Must be in the format `$context.variables.<name_of_variable>`.
     public var clientKey: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Oauth2JwtBearerConfig`.
     public init() {}
@@ -238,7 +238,7 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -255,11 +255,11 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.EndUserAuthConfig.Oauth2JwtBearerConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -274,10 +274,10 @@ public struct EndUserAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.EndUserAuthConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

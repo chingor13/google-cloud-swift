@@ -20,9 +20,9 @@
   import Foundation
   import GoogleCloudDialogflowCXV3
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(
     client: EnvironmentsClient, projectId: String, locationId: String, agentId: String,

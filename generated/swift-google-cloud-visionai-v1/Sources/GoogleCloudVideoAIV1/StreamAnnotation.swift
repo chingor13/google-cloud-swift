@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// message about annotations about Vision AI stream resource.
-public struct StreamAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StreamAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// ID of the annotation. It must be unique when used in the certain context.
@@ -37,7 +37,7 @@ public struct StreamAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var annotationPayload: OneOf_AnnotationPayload? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StreamAnnotation`.
   public init() {}
@@ -115,7 +115,7 @@ public struct StreamAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.annotationPayload = annotationPayload
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -149,10 +149,10 @@ public struct StreamAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.StreamAnnotation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,10 +16,10 @@
 
 #if Conversations
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Debug information related to SearchKnowledge feature.
-  public struct SearchKnowledgeDebugInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SearchKnowledgeDebugInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Response reason from datastore which indicates data serving status or
@@ -36,9 +36,9 @@
     public var serviceLatency: ServiceLatency? = nil
 
     /// Optional. Debug info from the Customer Engagement Suite (CES) execution.
-    public var cesDebugInfo: GoogleCloudWKT.Struct? = nil
+    public var cesDebugInfo: GoogleWKT.Struct? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SearchKnowledgeDebugInfo`.
     public init() {}
@@ -92,10 +92,10 @@
       self.serviceLatency = try container.decodeIfPresent(
         ServiceLatency.self, forKey: .serviceLatency)
       self.cesDebugInfo = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .cesDebugInfo)
+        GoogleWKT.Struct.self, forKey: .cesDebugInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -113,7 +113,7 @@
     }
 
     /// Configured behaviors for SearchKnowledge.
-    public struct SearchKnowledgeBehavior: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SearchKnowledgeBehavior: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Whether data store agent rewriter was turned on for the request.
@@ -127,7 +127,7 @@
       /// allowlisted for connectors.
       public var thirdPartyConnectorAllowed: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SearchKnowledgeBehavior`.
       public init() {}
@@ -183,7 +183,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -201,22 +201,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeDebugInfo.SearchKnowledgeBehavior"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SearchKnowledgeDebugInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

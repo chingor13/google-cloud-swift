@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A filter to target VM instances for patching. The targeted
 /// VMs must meet all criteria specified. So if both labels and zones are
 /// specified, the patch job targets only VMs with those labels and in those
 /// zones.
-public struct PatchInstanceFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PatchInstanceFilter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Target all VM instances in the project. If true, no other criteria is
@@ -47,7 +47,7 @@ public struct PatchInstanceFilter: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// example prefix="prod-".
   public var instanceNamePrefixes: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PatchInstanceFilter`.
   public init() {}
@@ -108,7 +108,7 @@ public struct PatchInstanceFilter: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -132,14 +132,14 @@ public struct PatchInstanceFilter: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// For example, a patch job can target VMs that have the following
   /// `GroupLabel`: `{"env":"test", "app":"web"}`. This means that the patch job
   /// is applied to VMs that have both the labels `env=test` and `app=web`.
-  public struct GroupLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GroupLabel: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Compute Engine instance labels that must be present for a VM
     /// instance to be targeted by this filter.
     public var labels: [Swift.String: Swift.String] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GroupLabel`.
     public init() {}
@@ -179,7 +179,7 @@ public struct PatchInstanceFilter: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -194,21 +194,21 @@ public struct PatchInstanceFilter: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.PatchInstanceFilter.GroupLabel"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.osconfig.v1.PatchInstanceFilter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

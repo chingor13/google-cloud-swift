@@ -15,66 +15,66 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataAccessControlServiceStub: Sendable {
     func createDataAccessLabel(
-      request: CreateDataAccessLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataAccessLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataAccessLabel
 
     func getDataAccessLabel(
-      request: GetDataAccessLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataAccessLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataAccessLabel
 
     func listDataAccessLabels(
-      request: ListDataAccessLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataAccessLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListDataAccessLabelsResponse
 
     func updateDataAccessLabel(
-      request: UpdateDataAccessLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataAccessLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataAccessLabel
 
     func deleteDataAccessLabel(
-      request: DeleteDataAccessLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataAccessLabelRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createDataAccessScope(
-      request: CreateDataAccessScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataAccessScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataAccessScope
 
     func getDataAccessScope(
-      request: GetDataAccessScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataAccessScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataAccessScope
 
     func listDataAccessScopes(
-      request: ListDataAccessScopesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataAccessScopesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListDataAccessScopesResponse
 
     func updateDataAccessScope(
-      request: UpdateDataAccessScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataAccessScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DataAccessScope
 
     func deleteDataAccessScope(
-      request: DeleteDataAccessScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataAccessScopeRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

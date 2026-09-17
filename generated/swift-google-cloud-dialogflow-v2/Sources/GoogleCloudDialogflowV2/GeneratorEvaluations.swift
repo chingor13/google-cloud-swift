@@ -20,21 +20,21 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing generator evaluations.
   ///
   /// @Snippet(path: "GeneratorEvaluationsQuickstart")
   public final class GeneratorEvaluationsClient: Clients.GeneratorEvaluationsProtocol, Sendable {
     let inner: any Clients.GeneratorEvaluationsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `GeneratorEvaluationsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.GeneratorEvaluationsStub = try Clients.GeneratorEvaluationsTransport(
         options)
       inner = Clients.GeneratorEvaluationsRetry(inner, options: options)
@@ -50,7 +50,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_CreateGeneratorEvaluation")
     public func createGeneratorEvaluation(
-      request: CreateGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createGeneratorEvaluation(request: request, options: options)
     }
@@ -59,22 +59,21 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_CreateGeneratorEvaluation")
     public func createGeneratorEvaluation(
-      withPolling: CreateGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GeneratorEvaluation> {
+      withPolling: CreateGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GeneratorEvaluation> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GeneratorEvaluation>.State in
+          -> GoogleGax._PollableOperationImpl<GeneratorEvaluation>.State in
         return try op._extractStatus(GeneratorEvaluation.self)
       }
       let rawOp = try await self.createGeneratorEvaluation(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<GeneratorEvaluation>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<GeneratorEvaluation>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -86,7 +85,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_GetGeneratorEvaluation")
     public func getGeneratorEvaluation(
-      request: GetGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.GeneratorEvaluation {
       try await self.inner.getGeneratorEvaluation(request: request, options: options)
     }
@@ -95,7 +94,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_ListGeneratorEvaluations")
     public func listGeneratorEvaluations(
-      request: ListGeneratorEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGeneratorEvaluationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListGeneratorEvaluationsResponse {
       try await self.inner.listGeneratorEvaluations(request: request, options: options)
     }
@@ -104,7 +103,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_ListGeneratorEvaluations")
     public func listGeneratorEvaluations(
-      byItem: ListGeneratorEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGeneratorEvaluationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GeneratorEvaluation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -113,14 +112,14 @@
         request.pageToken = token
         return try await self.listGeneratorEvaluations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes an evaluation of generator.
     ///
     /// @Snippet(path: "GeneratorEvaluations_DeleteGeneratorEvaluation")
     public func deleteGeneratorEvaluation(
-      request: DeleteGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteGeneratorEvaluation(request: request, options: options)
     }
@@ -146,7 +145,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -172,7 +171,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -180,14 +179,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "GeneratorEvaluations_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -198,7 +197,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -209,7 +208,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -217,7 +216,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -226,7 +225,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -237,7 +236,7 @@
     ///
     /// @Snippet(path: "GeneratorEvaluations_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -256,13 +255,13 @@
 
       /// See `GeneratorEvaluationsClient.createGeneratorEvaluation`.
       func createGeneratorEvaluation(withPolling: CreateGeneratorEvaluationRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<GeneratorEvaluation>
+        -> any GoogleGax.PollableOperation<GeneratorEvaluation>
 
       /// See `GeneratorEvaluationsClient.createGeneratorEvaluation`.
       func createGeneratorEvaluation(
         parent: Swift.String,
         generatorEvaluation: GeneratorEvaluation?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<GeneratorEvaluation>
+      ) async throws -> any GoogleGax.PollableOperation<GeneratorEvaluation>
 
       /// See `GeneratorEvaluationsClient.getGeneratorEvaluation`.
       func getGeneratorEvaluation(request: GetGeneratorEvaluationRequest) async throws
@@ -333,62 +332,62 @@
 
       /// See `GeneratorEvaluationsClient.createGeneratorEvaluation`.
       func createGeneratorEvaluation(
-        request: CreateGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `GeneratorEvaluationsClient.createGeneratorEvaluation`.
       func createGeneratorEvaluation(
-        withPolling: CreateGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<GeneratorEvaluation>
+        withPolling: CreateGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<GeneratorEvaluation>
 
       /// See `GeneratorEvaluationsClient.getGeneratorEvaluation`.
       func getGeneratorEvaluation(
-        request: GetGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: GetGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.GeneratorEvaluation
 
       /// See `GeneratorEvaluationsClient.listGeneratorEvaluations`.
       func listGeneratorEvaluations(
-        request: ListGeneratorEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListGeneratorEvaluationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListGeneratorEvaluationsResponse
 
       /// See `GeneratorEvaluationsClient.listGeneratorEvaluations`.
       func listGeneratorEvaluations(
-        byItem: ListGeneratorEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListGeneratorEvaluationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GeneratorEvaluation, Swift.Error>
 
       /// See `GeneratorEvaluationsClient.deleteGeneratorEvaluation`.
       func deleteGeneratorEvaluation(
-        request: DeleteGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `GeneratorEvaluationsClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `GeneratorEvaluationsClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `GeneratorEvaluationsClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `GeneratorEvaluationsClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `GeneratorEvaluationsClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `GeneratorEvaluationsClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -402,32 +401,31 @@
     }
 
     public func createGeneratorEvaluation(
-      request: CreateGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createGeneratorEvaluation(withPolling: CreateGeneratorEvaluationRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<GeneratorEvaluation>
+      async throws -> any GoogleGax.PollableOperation<GeneratorEvaluation>
     {
       try await self.createGeneratorEvaluation(withPolling: withPolling, options: .init())
     }
 
     public func createGeneratorEvaluation(
-      withPolling: CreateGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GeneratorEvaluation> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<GeneratorEvaluation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GeneratorEvaluation> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<GeneratorEvaluation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createGeneratorEvaluation(
       parent: Swift.String,
       generatorEvaluation: GeneratorEvaluation?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GeneratorEvaluation> {
+    ) async throws -> any GoogleGax.PollableOperation<GeneratorEvaluation> {
       let request = CreateGeneratorEvaluationRequest().with {
         $0.parent = parent
         $0.generatorEvaluation = generatorEvaluation
@@ -442,9 +440,9 @@
     }
 
     public func getGeneratorEvaluation(
-      request: GetGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.GeneratorEvaluation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getGeneratorEvaluation(
@@ -463,9 +461,9 @@
     }
 
     public func listGeneratorEvaluations(
-      request: ListGeneratorEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGeneratorEvaluationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListGeneratorEvaluationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listGeneratorEvaluations(
@@ -475,14 +473,14 @@
     }
 
     public func listGeneratorEvaluations(
-      byItem: ListGeneratorEvaluationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGeneratorEvaluationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GeneratorEvaluation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudDialogflowV2.ListGeneratorEvaluationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listGeneratorEvaluations(
@@ -499,9 +497,9 @@
     }
 
     public func deleteGeneratorEvaluation(
-      request: DeleteGeneratorEvaluationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGeneratorEvaluationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteGeneratorEvaluation(
@@ -520,9 +518,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -532,13 +530,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -548,9 +546,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -560,9 +558,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -572,13 +570,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -599,9 +597,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -618,9 +616,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

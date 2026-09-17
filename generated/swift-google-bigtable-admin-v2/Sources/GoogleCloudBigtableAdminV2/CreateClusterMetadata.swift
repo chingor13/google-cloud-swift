@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The metadata for the Operation returned by CreateCluster.
-public struct CreateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateClusterMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The request that prompted the initiation of this CreateCluster operation.
   public var originalRequest: CreateClusterRequest? = nil
 
   /// The time at which the original request was received.
-  public var requestTime: GoogleCloudWKT.Timestamp? = nil
+  public var requestTime: GoogleWKT.Timestamp? = nil
 
   /// The time at which the operation failed or was completed successfully.
-  public var finishTime: GoogleCloudWKT.Timestamp? = nil
+  public var finishTime: GoogleWKT.Timestamp? = nil
 
   /// Keys: the full `name` of each table that existed in the instance when
   /// CreateCluster was first called, i.e.
@@ -40,7 +40,7 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// newly-created cluster so far.
   public var tables: [Swift.String: CreateClusterMetadata.TableProgress] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateClusterMetadata`.
   public init() {}
@@ -81,10 +81,8 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.originalRequest = try container.decodeIfPresent(
       CreateClusterRequest.self, forKey: .originalRequest)
-    self.requestTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .requestTime)
-    self.finishTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .finishTime)
+    self.requestTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .requestTime)
+    self.finishTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .finishTime)
     if let value = try container.decodeIfPresent(
       [Swift.String: CreateClusterMetadata.TableProgress].self, forKey: .tables)
     {
@@ -92,7 +90,7 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -108,7 +106,7 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// Progress info for copying a table's data to the new cluster.
-  public struct TableProgress: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TableProgress: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Estimate of the size of the table to be copied.
@@ -122,7 +120,7 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
     public var state: CreateClusterMetadata.TableProgress.State = CreateClusterMetadata
       .TableProgress.State()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TableProgress`.
     public init() {}
@@ -173,7 +171,7 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -309,21 +307,21 @@ public struct CreateClusterMetadata: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.CreateClusterMetadata.TableProgress"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.CreateClusterMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

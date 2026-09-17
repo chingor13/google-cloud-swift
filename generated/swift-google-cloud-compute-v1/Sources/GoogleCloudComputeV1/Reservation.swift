@@ -16,13 +16,13 @@
 
 #if RegionCommitments || Reservations
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a reservation resource.  A reservation ensures that capacity is
   /// held in a specific zone even if the reserved VMs are not running. For more
   /// information, read  Reserving zonal
   /// resources.
-  public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Reservation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Advanced control for cluster management, applicable only to DENSE
@@ -153,7 +153,7 @@
     /// reservation is created within a commitment.
     public var zone: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Reservation`.
     public init() {}
@@ -296,7 +296,7 @@
       self.zone = try container.decodeIfPresent(Swift.String.self, forKey: .zone)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1000,11 +1000,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Reservation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

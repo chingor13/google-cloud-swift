@@ -16,116 +16,116 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ConnectorsStub: Sendable {
     func listConnections(
-      request: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.ListConnectionsResponse
 
     func getConnection(
-      request: GetConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.Connection
 
     func createConnection(
-      request: CreateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateConnection(
-      request: UpdateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteConnection(
-      request: DeleteConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listProviders(
-      request: ListProvidersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProvidersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.ListProvidersResponse
 
     func getProvider(
-      request: GetProviderRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProviderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.Provider
 
     func listConnectors(
-      request: ListConnectorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.ListConnectorsResponse
 
     func getConnector(
-      request: GetConnectorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.Connector
 
     func listConnectorVersions(
-      request: ListConnectorVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectorVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.ListConnectorVersionsResponse
 
     func getConnectorVersion(
-      request: GetConnectorVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectorVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.ConnectorVersion
 
     func getConnectionSchemaMetadata(
-      request: GetConnectionSchemaMetadataRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionSchemaMetadataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.ConnectionSchemaMetadata
 
     func refreshConnectionSchemaMetadata(
-      request: RefreshConnectionSchemaMetadataRequest, options: GoogleCloudGax.RequestOptions
+      request: RefreshConnectionSchemaMetadataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listRuntimeEntitySchemas(
-      request: ListRuntimeEntitySchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuntimeEntitySchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.ListRuntimeEntitySchemasResponse
 
     func listRuntimeActionSchemas(
-      request: ListRuntimeActionSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuntimeActionSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.ListRuntimeActionSchemasResponse
 
     func getRuntimeConfig(
-      request: GetRuntimeConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRuntimeConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.RuntimeConfig
 
     func getGlobalSettings(
-      request: GetGlobalSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlobalSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConnectorsV1.Settings
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEMultiCloudV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AwsClustersClient, projectId: String, locationId: String, awsClusterId: String)
   async throws

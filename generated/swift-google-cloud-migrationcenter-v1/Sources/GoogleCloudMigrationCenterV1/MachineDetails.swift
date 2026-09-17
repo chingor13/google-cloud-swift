@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details of a machine.
-public struct MachineDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MachineDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Machine unique identifier.
@@ -28,7 +28,7 @@ public struct MachineDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var machineName: Swift.String = Swift.String()
 
   /// Machine creation time.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Number of CPU cores in the machine. Must be non-negative.
   public var coreCount: Swift.Int32 = Swift.Int32()
@@ -54,7 +54,7 @@ public struct MachineDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Platform specific information.
   public var platform: PlatformDetails? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MachineDetails`.
   public init() {}
@@ -113,8 +113,7 @@ public struct MachineDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .machineName) {
       self.machineName = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .coreCount) {
       self.coreCount = value
     }
@@ -134,7 +133,7 @@ public struct MachineDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.platform = try container.decodeIfPresent(PlatformDetails.self, forKey: .platform)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -294,10 +293,10 @@ public struct MachineDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.migrationcenter.v1.MachineDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

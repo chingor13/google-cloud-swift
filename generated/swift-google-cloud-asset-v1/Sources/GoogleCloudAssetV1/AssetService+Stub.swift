@@ -15,107 +15,107 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AssetServiceStub: Sendable {
     func exportAssets(
-      request: ExportAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAssets(
-      request: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.ListAssetsResponse
 
     func batchGetAssetsHistory(
-      request: BatchGetAssetsHistoryRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchGetAssetsHistoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.BatchGetAssetsHistoryResponse
 
     func createFeed(
-      request: CreateFeedRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFeedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.Feed
 
     func getFeed(
-      request: GetFeedRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.Feed
 
     func listFeeds(
-      request: ListFeedsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeedsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.ListFeedsResponse
 
     func updateFeed(
-      request: UpdateFeedRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFeedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.Feed
 
     func deleteFeed(
-      request: DeleteFeedRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFeedRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func searchAllResources(
-      request: SearchAllResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAllResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.SearchAllResourcesResponse
 
     func searchAllIamPolicies(
-      request: SearchAllIamPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAllIamPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.SearchAllIamPoliciesResponse
 
     func analyzeIamPolicy(
-      request: AnalyzeIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.AnalyzeIamPolicyResponse
 
     func analyzeIamPolicyLongrunning(
-      request: AnalyzeIamPolicyLongrunningRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeIamPolicyLongrunningRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func analyzeMove(
-      request: AnalyzeMoveRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeMoveRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.AnalyzeMoveResponse
 
     func queryAssets(
-      request: QueryAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.QueryAssetsResponse
 
     func createSavedQuery(
-      request: CreateSavedQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSavedQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.SavedQuery
 
     func getSavedQuery(
-      request: GetSavedQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSavedQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.SavedQuery
 
     func listSavedQueries(
-      request: ListSavedQueriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSavedQueriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.ListSavedQueriesResponse
 
     func updateSavedQuery(
-      request: UpdateSavedQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSavedQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.SavedQuery
 
     func deleteSavedQuery(
-      request: DeleteSavedQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSavedQueryRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func batchGetEffectiveIamPolicies(
-      request: BatchGetEffectiveIamPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchGetEffectiveIamPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.BatchGetEffectiveIamPoliciesResponse
 
     func analyzeOrgPolicies(
-      request: AnalyzeOrgPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeOrgPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.AnalyzeOrgPoliciesResponse
 
     func analyzeOrgPolicyGovernedContainers(
-      request: AnalyzeOrgPolicyGovernedContainersRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeOrgPolicyGovernedContainersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.AnalyzeOrgPolicyGovernedContainersResponse
 
     func analyzeOrgPolicyGovernedAssets(
-      request: AnalyzeOrgPolicyGovernedAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeOrgPolicyGovernedAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAssetV1.AnalyzeOrgPolicyGovernedAssetsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

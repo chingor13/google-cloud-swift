@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A point in a conversation that marks the start or the end of an annotation.
-public struct AnnotationBoundary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AnnotationBoundary: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The index in the sequence of transcribed pieces of the conversation where
@@ -28,7 +28,7 @@ public struct AnnotationBoundary: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// A detailed boundary, which describes a more specific point.
   public var detailedBoundary: OneOf_DetailedBoundary? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AnnotationBoundary`.
   public init() {}
@@ -83,7 +83,7 @@ public struct AnnotationBoundary: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.detailedBoundary = detailedBoundary
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -112,10 +112,10 @@ public struct AnnotationBoundary: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.AnnotationBoundary"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func listCatalogs(
-      request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCatalogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListCatalogsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCatalogs",
         action: {
-          (r: ListCatalogsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCatalogsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.ListCatalogsResponse
           in
           return try await self.inner.listCatalogs(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func updateCatalog(
-      request: UpdateCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Catalog {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCatalog",
         action: {
-          (r: UpdateCatalogRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCatalogRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.Catalog
           in
           return try await self.inner.updateCatalog(request: r, options: o)
@@ -88,27 +88,26 @@ extension Clients {
     }
 
     public func setDefaultBranch(
-      request: SetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+      request: SetDefaultBranchRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "setDefaultBranch",
-        action: {
-          (r: SetDefaultBranchRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: SetDefaultBranchRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.setDefaultBranch(request: r, options: o)
         })
     }
 
     public func getDefaultBranch(
-      request: GetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDefaultBranchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GetDefaultBranchResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "getDefaultBranch",
         action: {
-          (r: GetDefaultBranchRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDefaultBranchRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.GetDefaultBranchResponse
           in
           return try await self.inner.getDefaultBranch(request: r, options: o)
@@ -116,14 +115,14 @@ extension Clients {
     }
 
     public func getCompletionConfig(
-      request: GetCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCompletionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.CompletionConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCompletionConfig",
         action: {
-          (r: GetCompletionConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCompletionConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.CompletionConfig
           in
           return try await self.inner.getCompletionConfig(request: r, options: o)
@@ -131,14 +130,14 @@ extension Clients {
     }
 
     public func updateCompletionConfig(
-      request: UpdateCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCompletionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.CompletionConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCompletionConfig",
         action: {
-          (r: UpdateCompletionConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCompletionConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.CompletionConfig
           in
           return try await self.inner.updateCompletionConfig(request: r, options: o)
@@ -146,14 +145,14 @@ extension Clients {
     }
 
     public func getAttributesConfig(
-      request: GetAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttributesConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "getAttributesConfig",
         action: {
-          (r: GetAttributesConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAttributesConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.AttributesConfig
           in
           return try await self.inner.getAttributesConfig(request: r, options: o)
@@ -161,14 +160,14 @@ extension Clients {
     }
 
     public func updateAttributesConfig(
-      request: UpdateAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAttributesConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateAttributesConfig",
         action: {
-          (r: UpdateAttributesConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAttributesConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.AttributesConfig
           in
           return try await self.inner.updateAttributesConfig(request: r, options: o)
@@ -176,14 +175,14 @@ extension Clients {
     }
 
     public func addCatalogAttribute(
-      request: AddCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: AddCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "addCatalogAttribute",
         action: {
-          (r: AddCatalogAttributeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AddCatalogAttributeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.AttributesConfig
           in
           return try await self.inner.addCatalogAttribute(request: r, options: o)
@@ -191,14 +190,14 @@ extension Clients {
     }
 
     public func removeCatalogAttribute(
-      request: RemoveCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "removeCatalogAttribute",
         action: {
-          (r: RemoveCatalogAttributeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RemoveCatalogAttributeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.AttributesConfig
           in
           return try await self.inner.removeCatalogAttribute(request: r, options: o)
@@ -206,14 +205,14 @@ extension Clients {
     }
 
     public func replaceCatalogAttribute(
-      request: ReplaceCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig {
       try await self._intercept(
         request: request,
         options: options,
         name: "replaceCatalogAttribute",
         action: {
-          (r: ReplaceCatalogAttributeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ReplaceCatalogAttributeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.AttributesConfig
           in
           return try await self.inner.replaceCatalogAttribute(request: r, options: o)
@@ -221,29 +220,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

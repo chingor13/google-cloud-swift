@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ChangesRetry: ChangesStub {
     let inner: any ChangesStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ChangesStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ChangesStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,42 +49,42 @@ extension Clients {
     }
 
     public func create(
-      request: ChangesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> Change {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ChangesClient.CreateRequest, o: GoogleCloudGax.RequestOptions) async throws -> Change
+          (r: ChangesClient.CreateRequest, o: GoogleGax.RequestOptions) async throws -> Change
           in
           return try await self.inner.create(request: r, options: o)
         })
     }
 
     public func `get`(
-      request: ChangesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Change {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ChangesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws -> Change
+          (r: ChangesClient.GetRequest, o: GoogleGax.RequestOptions) async throws -> Change
           in
           return try await self.inner.`get`(request: r, options: o)
         })
     }
 
     public func list(
-      request: ChangesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ChangesListResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ChangesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ChangesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
             -> ChangesListResponse
           in
           return try await self.inner.list(request: r, options: o)

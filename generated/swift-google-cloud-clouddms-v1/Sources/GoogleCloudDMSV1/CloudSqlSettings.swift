@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings for creating a Cloud SQL database instance.
-public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CloudSqlSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The database engine type and version.
@@ -42,7 +42,7 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The maximum size to which storage capacity can be automatically increased.
   /// The default value is 0, which specifies that there is no limit.
-  public var storageAutoResizeLimit: GoogleCloudWKT.Int64Value? = nil
+  public var storageAutoResizeLimit: GoogleWKT.Int64Value? = nil
 
   /// The activation policy specifies when the instance is activated; it is
   /// applicable only when the instance state is 'RUNNABLE'. Valid values:
@@ -65,7 +65,7 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// size, Cloud SQL automatically adds additional storage capacity. If the
   /// available storage repeatedly falls below the threshold size, Cloud SQL
   /// continues to add storage until it reaches the maximum of 30 TB.
-  public var autoStorageIncrease: GoogleCloudWKT.BoolValue? = nil
+  public var autoStorageIncrease: GoogleWKT.BoolValue? = nil
 
   /// The database flags passed to the Cloud SQL instance at startup.
   /// An object containing a list of "key": value pairs.
@@ -77,7 +77,7 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The storage capacity available to the database, in GB.
   /// The minimum (and default) size is 10GB.
-  public var dataDiskSizeGb: GoogleCloudWKT.Int64Value? = nil
+  public var dataDiskSizeGb: GoogleWKT.Int64Value? = nil
 
   /// The Google Cloud Platform zone where your Cloud SQL database instance is
   /// located.
@@ -116,7 +116,7 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. The edition of the given Cloud SQL instance.
   public var edition: CloudSqlSettings.Edition = CloudSqlSettings.Edition()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CloudSqlSettings`.
   public init() {}
@@ -199,7 +199,7 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.tier = value
     }
     self.storageAutoResizeLimit = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .storageAutoResizeLimit)
+      GoogleWKT.Int64Value.self, forKey: .storageAutoResizeLimit)
     if let value = try container.decodeIfPresent(
       CloudSqlSettings.SqlActivationPolicy.self, forKey: .activationPolicy)
     {
@@ -207,7 +207,7 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.ipConfig = try container.decodeIfPresent(SqlIpConfig.self, forKey: .ipConfig)
     self.autoStorageIncrease = try container.decodeIfPresent(
-      GoogleCloudWKT.BoolValue.self, forKey: .autoStorageIncrease)
+      GoogleWKT.BoolValue.self, forKey: .autoStorageIncrease)
     if let value = try container.decodeIfPresent(
       [Swift.String: Swift.String].self, forKey: .databaseFlags)
     {
@@ -219,7 +219,7 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.dataDiskType = value
     }
     self.dataDiskSizeGb = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .dataDiskSizeGb)
+      GoogleWKT.Int64Value.self, forKey: .dataDiskSizeGb)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .zone) {
       self.zone = value
     }
@@ -251,7 +251,7 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -866,10 +866,10 @@ public struct CloudSqlSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.CloudSqlSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

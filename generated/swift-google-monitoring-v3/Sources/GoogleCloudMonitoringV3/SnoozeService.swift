@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The SnoozeService API is used to temporarily prevent an alert policy from
 /// generating alerts. A Snooze is a description of the criteria under which one
@@ -30,7 +30,7 @@ public final class SnoozeServiceClient: Clients.SnoozeServiceProtocol, Sendable 
   let inner: any Clients.SnoozeServiceStub
 
   /// Creates a new `SnoozeServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SnoozeServiceStub = try Clients.SnoozeServiceTransport(options)
     inner = Clients.SnoozeServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class SnoozeServiceClient: Clients.SnoozeServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "SnoozeService_CreateSnooze")
   public func createSnooze(
-    request: CreateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSnoozeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.Snooze {
     try await self.inner.createSnooze(request: request, options: options)
   }
@@ -55,7 +55,7 @@ public final class SnoozeServiceClient: Clients.SnoozeServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "SnoozeService_ListSnoozes")
   public func listSnoozes(
-    request: ListSnoozesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSnoozesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListSnoozesResponse {
     try await self.inner.listSnoozes(request: request, options: options)
   }
@@ -65,7 +65,7 @@ public final class SnoozeServiceClient: Clients.SnoozeServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "SnoozeService_ListSnoozes")
   public func listSnoozes(
-    byItem: ListSnoozesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSnoozesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Snooze, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListSnoozesResponse in
@@ -73,14 +73,14 @@ public final class SnoozeServiceClient: Clients.SnoozeServiceProtocol, Sendable 
       request.pageToken = token
       return try await self.listSnoozes(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Retrieves a `Snooze` by `name`.
   ///
   /// @Snippet(path: "SnoozeService_GetSnooze")
   public func getSnooze(
-    request: GetSnoozeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSnoozeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.Snooze {
     try await self.inner.getSnooze(request: request, options: options)
   }
@@ -90,7 +90,7 @@ public final class SnoozeServiceClient: Clients.SnoozeServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "SnoozeService_UpdateSnooze")
   public func updateSnooze(
-    request: UpdateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSnoozeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.Snooze {
     try await self.inner.updateSnooze(request: request, options: options)
   }
@@ -140,32 +140,32 @@ extension Clients {
     /// See `SnoozeServiceClient.updateSnooze`.
     func updateSnooze(
       snooze: Snooze?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudMonitoringV3.Snooze
 
     /// See `SnoozeServiceClient.createSnooze`.
     func createSnooze(
-      request: CreateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze
 
     /// See `SnoozeServiceClient.listSnoozes`.
     func listSnoozes(
-      request: ListSnoozesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSnoozesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListSnoozesResponse
 
     /// See `SnoozeServiceClient.listSnoozes`.
     func listSnoozes(
-      byItem: ListSnoozesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSnoozesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Snooze, Swift.Error>
 
     /// See `SnoozeServiceClient.getSnooze`.
     func getSnooze(
-      request: GetSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze
 
     /// See `SnoozeServiceClient.updateSnooze`.
     func updateSnooze(
-      request: UpdateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze
   }
 }
@@ -179,9 +179,9 @@ extension Clients.SnoozeServiceProtocol {
   }
 
   public func createSnooze(
-    request: CreateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSnoozeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.Snooze {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSnooze(
@@ -202,9 +202,9 @@ extension Clients.SnoozeServiceProtocol {
   }
 
   public func listSnoozes(
-    request: ListSnoozesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSnoozesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.ListSnoozesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSnoozes(
@@ -214,13 +214,13 @@ extension Clients.SnoozeServiceProtocol {
   }
 
   public func listSnoozes(
-    byItem: ListSnoozesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSnoozesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Snooze, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.ListSnoozesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSnoozes(
@@ -237,9 +237,9 @@ extension Clients.SnoozeServiceProtocol {
   }
 
   public func getSnooze(
-    request: GetSnoozeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSnoozeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.Snooze {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSnooze(
@@ -258,14 +258,14 @@ extension Clients.SnoozeServiceProtocol {
   }
 
   public func updateSnooze(
-    request: UpdateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSnoozeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.Snooze {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSnooze(
     snooze: Snooze?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudMonitoringV3.Snooze {
     let request = UpdateSnoozeRequest().with {
       $0.snooze = snooze

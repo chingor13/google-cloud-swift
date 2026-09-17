@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class NetworkProfilesRetry: NetworkProfilesStub {
       let inner: any NetworkProfilesStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any NetworkProfilesStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any NetworkProfilesStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func `get`(
-        request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfile {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: NetworkProfilesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NetworkProfilesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.NetworkProfile
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -65,14 +65,14 @@
       }
 
       public func list(
-        request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: NetworkProfilesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: NetworkProfilesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.NetworkProfilesListResponse
             in
             return try await self.inner.list(request: r, options: o)

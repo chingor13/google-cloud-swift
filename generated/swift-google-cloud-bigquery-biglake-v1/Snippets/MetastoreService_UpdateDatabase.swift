@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleBigQueryBigLakeV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(
   client: MetastoreServiceClient, projectId: String, locationId: String, catalogId: String,
@@ -31,7 +31,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/catalogs/\(catalogId)/databases/\(databaseId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

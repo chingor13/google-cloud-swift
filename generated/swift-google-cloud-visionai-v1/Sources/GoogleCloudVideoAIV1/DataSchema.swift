@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Data schema indicates how the user specified annotation is interpreted in the
 /// system.
-public struct DataSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataSchema: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Resource name of the data schema in the form of:
@@ -36,7 +36,7 @@ public struct DataSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The schema details mapping to the key.
   public var schemaDetails: DataSchemaDetails? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataSchema`.
   public init() {}
@@ -83,7 +83,7 @@ public struct DataSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       DataSchemaDetails.self, forKey: .schemaDetails)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +100,10 @@ public struct DataSchema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.DataSchema"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

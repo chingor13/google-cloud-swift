@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service that exposes Cloud SQL region information. This service is only used
   /// internally and does not follow the same patterns as the other v1 RPCs.
@@ -30,7 +30,7 @@
     let inner: any Clients.SqlRegionsServiceStub
 
     /// Creates a new `SqlRegionsServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlRegionsServiceStub = try Clients.SqlRegionsServiceTransport(options)
       inner = Clients.SqlRegionsServiceRetry(inner, options: options)
       if let logger = options.logger {

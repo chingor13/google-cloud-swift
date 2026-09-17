@@ -16,12 +16,12 @@
 
 #if ConversationalSearchService || DocumentService || RecommendationService || SearchService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Document captures all raw metadata information of items to be recommended or
   /// searched.
-  public struct Document: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Document: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. The full resource name of the document.
@@ -54,7 +54,7 @@
 
     /// Output only. This field is OUTPUT_ONLY.
     /// It contains derived data that are not in the original input document.
-    public var derivedStructData: GoogleCloudWKT.Struct? = nil
+    public var derivedStructData: GoogleWKT.Struct? = nil
 
     /// Access control information for the document.
     public var aclInfo: Document.AclInfo? = nil
@@ -64,7 +64,7 @@
     ///
     /// This field is OUTPUT_ONLY. If this field is not populated, it means the
     /// document has never been indexed.
-    public var indexTime: GoogleCloudWKT.Timestamp? = nil
+    public var indexTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The index status of the document.
     ///
@@ -84,7 +84,7 @@
     /// [google.cloud.discoveryengine.v1.Document.struct_data]: <doc:Document/OneOf_Data/structData(_:)>
     public var data: OneOf_Data? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Document`.
     public init() {}
@@ -151,10 +151,9 @@
         self.parentDocumentId = value
       }
       self.derivedStructData = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .derivedStructData)
+        GoogleWKT.Struct.self, forKey: .derivedStructData)
       self.aclInfo = try container.decodeIfPresent(Document.AclInfo.self, forKey: .aclInfo)
-      self.indexTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .indexTime)
+      self.indexTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .indexTime)
       self.indexStatus = try container.decodeIfPresent(
         Document.IndexStatus.self, forKey: .indexStatus)
 
@@ -168,8 +167,7 @@
         }
         data = $0
       }
-      if let structData = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct?.self, forKey: .structData)
+      if let structData = try container.decodeIfPresent(GoogleWKT.Struct?.self, forKey: .structData)
       {
         try dataCheckAndSet(.structData(structData))
       }
@@ -179,7 +177,7 @@
       self.data = data
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -209,7 +207,7 @@
     }
 
     /// Unstructured data linked to this document.
-    public struct Content: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Content: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The MIME type of the content. Supported types:
@@ -240,7 +238,7 @@
       /// The content of the unstructured document.
       public var content: OneOf_Content? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Content`.
       public init() {}
@@ -300,7 +298,7 @@
         self.content = content
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -341,22 +339,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Document.Content"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// ACL Information of the Document.
-    public struct AclInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AclInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Readers of the document.
       public var readers: [Document.AclInfo.AccessRestriction] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AclInfo`.
       public init() {}
@@ -396,7 +394,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -467,7 +465,7 @@
       ///     ]
       ///   }
       /// }
-      public struct AccessRestriction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct AccessRestriction: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// List of principals.
@@ -476,8 +474,7 @@
         /// All users within the Identity Provider.
         public var idpWide: Swift.Bool = Swift.Bool()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `AccessRestriction`.
         public init() {}
@@ -520,7 +517,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -537,32 +534,32 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.Document.AclInfo.AccessRestriction"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Document.AclInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Index status of the document.
-    public struct IndexStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct IndexStatus: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The time when the document was indexed.
       /// If this field is populated, it means the document has been indexed.
-      public var indexTime: GoogleCloudWKT.Timestamp? = nil
+      public var indexTime: GoogleWKT.Timestamp? = nil
 
       /// A sample of errors encountered while indexing the document.
       /// If this field is populated, the document is not indexed due to errors.
@@ -572,7 +569,7 @@
       /// If this field is populated, the document index is pending.
       public var pendingMessage: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `IndexStatus`.
       public init() {}
@@ -609,8 +606,7 @@
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.indexTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .indexTime)
+        self.indexTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .indexTime)
         if let value = try container.decodeIfPresent([GoogleRpc.Status].self, forKey: .errorSamples)
         {
           self.errorSamples = value
@@ -620,7 +616,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -637,11 +633,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Document.IndexStatus"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -658,7 +654,7 @@
       /// `INVALID_ARGUMENT` error is thrown.
       ///
       /// [google.cloud.discoveryengine.v1.Schema]: <doc:Schema>
-      indirect case structData(GoogleCloudWKT.Struct?)
+      indirect case structData(GoogleWKT.Struct?)
       /// The JSON string representation of the document. It should conform to the
       /// registered [Schema][google.cloud.discoveryengine.v1.Schema] or an
       /// `INVALID_ARGUMENT` error is thrown.
@@ -670,11 +666,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.Document"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

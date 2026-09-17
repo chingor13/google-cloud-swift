@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request for `AutonomousDatabase.Restore`.
-public struct RestoreAutonomousDatabaseRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RestoreAutonomousDatabaseRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the Autonomous Database in the following format:
@@ -26,9 +26,9 @@ public struct RestoreAutonomousDatabaseRequest: Codable, Equatable, GoogleCloudW
   public var name: Swift.String = Swift.String()
 
   /// Required. The time and date to restore the database to.
-  public var restoreTime: GoogleCloudWKT.Timestamp? = nil
+  public var restoreTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RestoreAutonomousDatabaseRequest`.
   public init() {}
@@ -66,11 +66,10 @@ public struct RestoreAutonomousDatabaseRequest: Codable, Equatable, GoogleCloudW
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.restoreTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .restoreTime)
+    self.restoreTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .restoreTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +85,10 @@ public struct RestoreAutonomousDatabaseRequest: Codable, Equatable, GoogleCloudW
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.RestoreAutonomousDatabaseRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

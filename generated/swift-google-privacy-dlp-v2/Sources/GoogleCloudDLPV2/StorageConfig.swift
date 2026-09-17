@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Shared message indicating Cloud storage type.
-public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StorageConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Configuration of the timespan of the items to include in scanning.
@@ -27,7 +27,7 @@ public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Type of storage system to inspect.
   public var type: OneOf_Type? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StorageConfig`.
   public init() {}
@@ -104,7 +104,7 @@ public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.type = type
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -131,16 +131,16 @@ public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Configuration of the timespan of the items to include in scanning.
   /// Currently only supported when inspecting Cloud Storage and BigQuery.
-  public struct TimespanConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TimespanConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Exclude files, tables, or rows older than this value.
     /// If not set, no lower time limit is applied.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// Exclude files, tables, or rows newer than this value.
     /// If not set, no upper time limit is applied.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
     /// Specification of the field containing the timestamp of scanned items.
     /// Used for data sources like Datastore and BigQuery.
@@ -195,7 +195,7 @@ public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// related to this operation.
     public var enableAutoPopulationOfTimespanConfig: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TimespanConfig`.
     public init() {}
@@ -235,9 +235,8 @@ public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
       self.timestampField = try container.decodeIfPresent(FieldId.self, forKey: .timestampField)
       if let value = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .enableAutoPopulationOfTimespanConfig)
@@ -246,7 +245,7 @@ public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -265,11 +264,11 @@ public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.StorageConfig.TimespanConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -288,10 +287,10 @@ public struct StorageConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.StorageConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

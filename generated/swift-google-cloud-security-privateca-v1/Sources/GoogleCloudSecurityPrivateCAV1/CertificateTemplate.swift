@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A
 /// [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate]
 /// refers to a managed template for certificate issuance.
 ///
 /// [google.cloud.security.privateca.v1.CertificateTemplate]: <doc:CertificateTemplate>
-public struct CertificateTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CertificateTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name for this
@@ -53,7 +53,7 @@ public struct CertificateTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// [google.cloud.security.privateca.v1.CaPool.IssuancePolicy.maximum_lifetime]: <doc:CaPool/IssuancePolicy/maximumLifetime>
   /// [google.cloud.security.privateca.v1.Certificate]: <doc:Certificate>
   /// [google.cloud.security.privateca.v1.CertificateAuthority]: <doc:CertificateAuthority>
-  public var maximumLifetime: GoogleCloudWKT.Duration? = nil
+  public var maximumLifetime: GoogleWKT.Duration? = nil
 
   /// Optional. A set of X.509 values that will be applied to all issued
   /// certificates that use this template. If the certificate request includes
@@ -114,19 +114,19 @@ public struct CertificateTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// was created.
   ///
   /// [google.cloud.security.privateca.v1.CertificateTemplate]: <doc:CertificateTemplate>
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which this
   /// [CertificateTemplate][google.cloud.security.privateca.v1.CertificateTemplate]
   /// was updated.
   ///
   /// [google.cloud.security.privateca.v1.CertificateTemplate]: <doc:CertificateTemplate>
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Labels with user-defined metadata.
   public var labels: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CertificateTemplate`.
   public init() {}
@@ -179,7 +179,7 @@ public struct CertificateTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackab
       self.name = value
     }
     self.maximumLifetime = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maximumLifetime)
+      GoogleWKT.Duration.self, forKey: .maximumLifetime)
     self.predefinedValues = try container.decodeIfPresent(
       X509Parameters.self, forKey: .predefinedValues)
     self.identityConstraints = try container.decodeIfPresent(
@@ -189,17 +189,15 @@ public struct CertificateTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -222,10 +220,10 @@ public struct CertificateTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.CertificateTemplate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

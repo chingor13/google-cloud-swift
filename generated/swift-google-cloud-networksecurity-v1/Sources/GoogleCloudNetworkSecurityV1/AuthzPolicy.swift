@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `AuthzPolicy` is a resource that allows to forward traffic to a
 /// callout backend designed to scan the traffic for security purposes.
-public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AuthzPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Identifier. Name of the `AuthzPolicy` resource in the following
@@ -28,10 +28,10 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. A human-readable description of the resource.
   public var description: Swift.String = Swift.String()
@@ -97,7 +97,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// once AuthzPolicy is created.
   public var policyProfile: AuthzPolicy.PolicyProfile = AuthzPolicy.PolicyProfile()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AuthzPolicy`.
   public init() {}
@@ -153,10 +153,8 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -185,7 +183,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -208,7 +206,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Specifies the set of targets to which this policy should be applied to.
-  public struct Target: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Target: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. All gateways and forwarding rules referenced by this policy and
@@ -226,7 +224,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Gateways, or Agent Gateways on which this policy will be applied.
     public var resources: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Target`.
     public init() {}
@@ -271,7 +269,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -287,16 +285,16 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.Target"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Conditions to match against the incoming request.
-  public struct AuthzRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AuthzRule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Describes properties of a source of a request.
@@ -311,7 +309,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// attributes.
     public var when: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AuthzRule`.
     public init() {}
@@ -355,7 +353,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -370,7 +368,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Determines how a string value should be matched.
-    public struct StringMatch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StringMatch: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// If true, indicates the exact/prefix/suffix/contains matching should be
@@ -380,7 +378,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
       public var matchPattern: OneOf_MatchPattern? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StringMatch`.
       public init() {}
@@ -450,7 +448,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.matchPattern = matchPattern
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -509,16 +507,16 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.StringMatch"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents a range of IP Addresses.
-    public struct IpBlock: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct IpBlock: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The address prefix.
@@ -527,7 +525,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Required. The length of the address range.
       public var length: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `IpBlock`.
       public init() {}
@@ -570,7 +568,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -586,17 +584,17 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.IpBlock"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describes the properties of a client VM resource accessing the internal
     /// application load balancers.
-    public struct RequestResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RequestResource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. A list of resource tag value permanent IDs to match against
@@ -608,7 +606,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// service account of the VM sending the request.
       public var iamServiceAccount: AuthzPolicy.AuthzRule.StringMatch? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RequestResource`.
       public init() {}
@@ -649,7 +647,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           AuthzPolicy.AuthzRule.StringMatch.self, forKey: .iamServiceAccount)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -665,7 +663,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Describes a set of resource tag value permanent IDs to match against
       /// the resource manager tags value associated with the source VM of a
       /// request.
-      public struct TagValueIdSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct TagValueIdSet: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. A list of resource tag value permanent IDs to match against
@@ -674,8 +672,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         /// the ids must match. Limited to 5 ids in the Tag value id set.
         public var ids: [Swift.Int64] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `TagValueIdSet`.
         public init() {}
@@ -713,7 +710,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -729,11 +726,11 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.RequestResource.TagValueIdSet"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -741,16 +738,16 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.RequestResource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Determines how a HTTP header should be matched.
-    public struct HeaderMatch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct HeaderMatch: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Specifies the name of the header in the request.
@@ -759,7 +756,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Optional. Specifies how the header match will be performed.
       public var value: AuthzPolicy.AuthzRule.StringMatch? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `HeaderMatch`.
       public init() {}
@@ -801,7 +798,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           AuthzPolicy.AuthzRule.StringMatch.self, forKey: .value)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -818,16 +815,16 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.HeaderMatch"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describes the properties of a principal to be matched against.
-    public struct Principal: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Principal: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. An enum to decide what principal value the principal rule
@@ -842,7 +839,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// CLIENT_CERT_COMMON_NAME selectors.
       public var principal: AuthzPolicy.AuthzRule.StringMatch? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Principal`.
       public init() {}
@@ -886,7 +883,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           AuthzPolicy.AuthzRule.StringMatch.self, forKey: .principal)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1033,16 +1030,16 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.Principal"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describes properties of one or more sources of a request.
-    public struct From: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct From: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Describes the properties of a request's sources. At least one
@@ -1058,7 +1055,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// field. At least one of sources or notSources must be specified.
       public var notSources: [AuthzPolicy.AuthzRule.From.RequestSource] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `From`.
       public init() {}
@@ -1105,7 +1102,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1119,7 +1116,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
 
       /// Describes the properties of a single source.
-      public struct RequestSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct RequestSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. A list of identities derived from the client's certificate.
@@ -1146,8 +1143,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         /// Policy.
         public var resources: [AuthzPolicy.AuthzRule.RequestResource] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `RequestSource`.
         public init() {}
@@ -1201,7 +1197,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1219,27 +1215,27 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.From.RequestSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.From"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describes properties of one or more targets of a request.
-    public struct To: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct To: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Describes properties of one or more targets of a request. At
@@ -1257,7 +1253,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// must be specified.
       public var notOperations: [AuthzPolicy.AuthzRule.To.RequestOperation] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `To`.
       public init() {}
@@ -1304,7 +1300,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1318,7 +1314,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
 
       /// Describes properties of one or more targets of a request.
-      public struct RequestOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct RequestOperation: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. A list of headers to match against in http header.
@@ -1358,8 +1354,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         /// Limited to 10 SNIs per Authorization Policy.
         public var snis: [AuthzPolicy.AuthzRule.StringMatch] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `RequestOperation`.
         public init() {}
@@ -1426,7 +1421,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -1444,7 +1439,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
 
         /// Describes a set of HTTP headers to match against.
-        public struct HeaderSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct HeaderSet: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Required. A list of headers to match against in http header.
@@ -1455,8 +1450,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           /// Policy.
           public var headers: [AuthzPolicy.AuthzRule.HeaderMatch] = []
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `HeaderSet`.
           public init() {}
@@ -1496,7 +1490,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -1512,16 +1506,16 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
             return
               "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.HeaderSet"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         /// Describes a set of MCP methods to match against.
-        public struct MCPMethod: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct MCPMethod: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Required. The MCP method to match against. Allowed values are as
@@ -1541,8 +1535,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           /// set. Limited to 10 MCP method parameters per Authorization Policy.
           public var params: [AuthzPolicy.AuthzRule.StringMatch] = []
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `MCPMethod`.
           public init() {}
@@ -1587,7 +1580,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -1604,17 +1597,17 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
             return
               "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.MCPMethod"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         /// Describes a set of MCP protocol attributes to match against for a
         /// given MCP request.
-        public struct MCP: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct MCP: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Optional. If specified, matches on the MCP protocol’s non-access
@@ -1637,8 +1630,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           /// Limited to 10 MCP methods per Authorization Policy.
           public var methods: [AuthzPolicy.AuthzRule.To.RequestOperation.MCPMethod] = []
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `MCP`.
           public init() {}
@@ -1687,7 +1679,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -1704,11 +1696,11 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
             return
               "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation.MCP"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -1823,39 +1815,39 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To.RequestOperation"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule.To"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.AuthzRule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Allows delegating authorization decisions to Cloud IAP or to
   /// Service Extensions.
-  public struct CustomProvider: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CustomProvider: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Delegates authorization decisions to Cloud IAP. Applicable
@@ -1870,7 +1862,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Extension. Only one of cloudIap or authzExtension can be specified.
     public var authzExtension: AuthzPolicy.CustomProvider.AuthzExtension? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CustomProvider`.
     public init() {}
@@ -1911,7 +1903,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         AuthzPolicy.CustomProvider.AuthzExtension.self, forKey: .authzExtension)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1930,10 +1922,10 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Enabling IAP in both places will result in request failure. Ensure that
     /// IAP is enabled in either the AuthzPolicy or the BackendService but not in
     /// both places.
-    public struct CloudIap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CloudIap: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CloudIap`.
       public init() {}
@@ -1964,7 +1956,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1979,17 +1971,17 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.CustomProvider.CloudIap"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Optional. Delegate authorization decision to user authored extension.
     /// Only one of cloudIap or authzExtension can be specified.
-    public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AuthzExtension: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. A list of references to authorization
@@ -1997,7 +1989,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Limited to 1 custom provider.
       public var resources: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AuthzExtension`.
       public init() {}
@@ -2035,7 +2027,7 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -2051,22 +2043,22 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.CustomProvider.AuthzExtension"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy.CustomProvider"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -2418,10 +2410,10 @@ public struct AuthzPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.AuthzPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

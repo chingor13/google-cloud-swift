@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudStorageInsightsV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: StorageInsightsClient, projectId: String, locationId: String, reportConfigId: String
@@ -32,7 +32,7 @@ func sample(
         $0.reportConfig = ReportConfig().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/reportConfigs/\(reportConfigId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

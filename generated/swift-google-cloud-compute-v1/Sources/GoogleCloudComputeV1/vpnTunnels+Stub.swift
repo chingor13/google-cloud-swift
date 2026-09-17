@@ -16,37 +16,37 @@
 
 #if VpnTunnels
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol VpnTunnelsStub: Sendable {
       func aggregatedList(
-        request: VpnTunnelsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnelAggregatedList
 
       func delete(
-        request: VpnTunnelsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: VpnTunnelsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnel
 
       func insert(
-        request: VpnTunnelsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: VpnTunnelsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnTunnelList
 
       func setLabels(
-        request: VpnTunnelsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnTunnelsClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

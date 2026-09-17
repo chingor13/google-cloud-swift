@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Specifies required connection parameters, and the parameters
 /// required to create an AlloyDB destination cluster.
-public struct AlloyDbConnectionProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AlloyDbConnectionProfile: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The AlloyDB cluster ID that this connection profile is associated
@@ -29,7 +29,7 @@ public struct AlloyDbConnectionProfile: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Immutable. Metadata used to create the destination AlloyDB cluster.
   public var settings: AlloyDbSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AlloyDbConnectionProfile`.
   public init() {}
@@ -70,7 +70,7 @@ public struct AlloyDbConnectionProfile: Codable, Equatable, GoogleCloudWKT._AnyP
     self.settings = try container.decodeIfPresent(AlloyDbSettings.self, forKey: .settings)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +86,10 @@ public struct AlloyDbConnectionProfile: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.AlloyDbConnectionProfile"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

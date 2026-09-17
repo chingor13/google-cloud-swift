@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message for a date time object.
 /// e.g. 2018-01-01, 5th August.
-public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DateTime: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// One or more of the following must be set.
@@ -36,7 +36,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Time zone
   public var timeZone: DateTime.TimeZone? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DateTime`.
   public init() {}
@@ -83,7 +83,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.timeZone = try container.decodeIfPresent(DateTime.TimeZone.self, forKey: .timeZone)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,14 +99,14 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Time zone of the date time object.
-  public struct TimeZone: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TimeZone: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Set only if the offset can be determined. Positive for time ahead of UTC.
     /// E.g. For "UTC-9", this value is -540.
     public var offsetMinutes: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TimeZone`.
     public init() {}
@@ -144,7 +144,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -159,21 +159,21 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DateTime.TimeZone"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DateTime"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

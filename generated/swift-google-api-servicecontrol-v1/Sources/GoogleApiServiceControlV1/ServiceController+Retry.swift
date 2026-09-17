@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ServiceControllerRetry: ServiceControllerStub {
     let inner: any ServiceControllerStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ServiceControllerStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ServiceControllerStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func check(
-      request: CheckRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV1.CheckResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CheckRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CheckRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiServiceControlV1.CheckResponse
           in
           return try await self.inner.check(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func report(
-      request: ReportRequest, options: GoogleCloudGax.RequestOptions
+      request: ReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV1.ReportResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ReportRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ReportRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiServiceControlV1.ReportResponse
           in
           return try await self.inner.report(request: r, options: o)

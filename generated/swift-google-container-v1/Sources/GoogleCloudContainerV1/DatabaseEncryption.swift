@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration of etcd encryption.
-public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DatabaseEncryption: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of CloudKMS key to use for the encryption of secrets in etcd.
@@ -41,7 +41,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// operations.
   public var lastOperationErrors: [DatabaseEncryption.OperationError] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DatabaseEncryption`.
   public init() {}
@@ -100,7 +100,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,7 +118,7 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWKT._AnyPackabl
 
   /// OperationError records errors seen from CloudKMS keys
   /// encountered during updates to DatabaseEncryption configuration.
-  public struct OperationError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OperationError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// CloudKMS key resource that had the error.
@@ -128,9 +128,9 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public var errorMessage: Swift.String = Swift.String()
 
     /// Time when the CloudKMS error was seen.
-    public var timestamp: GoogleCloudWKT.Timestamp? = nil
+    public var timestamp: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OperationError`.
     public init() {}
@@ -173,11 +173,10 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .errorMessage) {
         self.errorMessage = value
       }
-      self.timestamp = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .timestamp)
+      self.timestamp = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .timestamp)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -194,11 +193,11 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.DatabaseEncryption.OperationError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -483,10 +482,10 @@ public struct DatabaseEncryption: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.DatabaseEncryption"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

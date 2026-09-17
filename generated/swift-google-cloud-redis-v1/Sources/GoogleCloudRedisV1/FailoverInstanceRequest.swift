@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for [Failover][google.cloud.redis.v1.CloudRedis.FailoverInstance].
 ///
 /// [google.cloud.redis.v1.CloudRedis.FailoverInstance]: <doc:CloudRedisClient/failoverInstance(request:options:)>
-public struct FailoverInstanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FailoverInstanceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Redis instance resource name using the form:
@@ -33,7 +33,7 @@ public struct FailoverInstanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public var dataProtectionMode: FailoverInstanceRequest.DataProtectionMode =
     FailoverInstanceRequest.DataProtectionMode()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FailoverInstanceRequest`.
   public init() {}
@@ -78,7 +78,7 @@ public struct FailoverInstanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -203,10 +203,10 @@ public struct FailoverInstanceRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.redis.v1.FailoverInstanceRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

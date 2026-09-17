@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Indices map key to value. For example, `keys[0]` key maps to `values[0]`.
-public struct DictValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DictValue: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Each key can be exactly one kind.
@@ -27,7 +27,7 @@ public struct DictValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Each value can be exactly one kind.
   public var values: OneOf_Values? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DictValue`.
   public init() {}
@@ -126,7 +126,7 @@ public struct DictValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.values = values
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -190,10 +190,10 @@ public struct DictValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.DictValue"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

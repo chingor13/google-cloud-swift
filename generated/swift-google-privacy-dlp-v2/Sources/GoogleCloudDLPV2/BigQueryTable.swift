@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message defining the location of a BigQuery table. A table is uniquely
 /// identified  by its project_id, dataset_id, and table_name. Within a query
 /// a table is often referenced with a string in the format of:
 /// `<project_id>:<dataset_id>.<table_id>` or
 /// `<project_id>.<dataset_id>.<table_id>`.
-public struct BigQueryTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BigQueryTable: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The Google Cloud project ID of the project containing the table.
@@ -35,7 +35,7 @@ public struct BigQueryTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Name of the table.
   public var tableId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BigQueryTable`.
   public init() {}
@@ -83,7 +83,7 @@ public struct BigQueryTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +100,10 @@ public struct BigQueryTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.BigQueryTable"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

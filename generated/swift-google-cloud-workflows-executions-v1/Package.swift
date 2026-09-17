@@ -35,8 +35,8 @@ let package = Package(
       name: "GoogleCloudWorkflowsExecutionsV1",
       dependencies: [
         .product(name: "GoogleAuth", package: "swift-google-auth"),
-        .product(name: "GoogleCloudGax", package: "swift-google-gax"),
-        .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
+        .product(name: "GoogleGax", package: "swift-google-gax"),
+        .product(name: "GoogleWKT", package: "swift-google-wkt"),
         .product(name: "Logging", package: "swift-log"),
       ],
     )

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for controlling how IPs are allocated in the
 /// GKE cluster running the Apache Airflow software.
-public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IPAllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Whether or not to enable Alias IPs in the GKE cluster.
@@ -36,7 +36,7 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Configuration of allocating IP addresses for services in the GKE cluster.
   public var servicesIpAllocation: OneOf_ServicesIpAllocation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IPAllocationPolicy`.
   public init() {}
@@ -126,7 +126,7 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.servicesIpAllocation = servicesIpAllocation
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -213,10 +213,10 @@ public struct IPAllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.IPAllocationPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

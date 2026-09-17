@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudTalentV4
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, tenantId: String, ) async throws {
   let client = try GoogleCloudTalentV4.JobServiceClient()

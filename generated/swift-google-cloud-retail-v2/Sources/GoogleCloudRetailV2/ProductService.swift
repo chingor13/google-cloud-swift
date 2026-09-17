@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for ingesting [Product][google.cloud.retail.v2.Product] information
 /// of the customer's website.
@@ -31,11 +31,11 @@ import GoogleCloudGax
 /// @Snippet(path: "ProductServiceQuickstart")
 public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendable {
   let inner: any Clients.ProductServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ProductServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ProductServiceStub = try Clients.ProductServiceTransport(options)
     inner = Clients.ProductServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -52,7 +52,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_CreateProduct")
   public func createProduct(
-    request: CreateProductRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.Product {
     try await self.inner.createProduct(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_GetProduct")
   public func getProduct(
-    request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.Product {
     try await self.inner.getProduct(request: request, options: options)
   }
@@ -74,7 +74,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_ListProducts")
   public func listProducts(
-    request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.ListProductsResponse {
     try await self.inner.listProducts(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_ListProducts")
   public func listProducts(
-    byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudRetailV2.ListProductsResponse in
@@ -93,7 +93,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
       request.pageToken = token
       return try await self.listProducts(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a [Product][google.cloud.retail.v2.Product].
@@ -102,7 +102,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_UpdateProduct")
   public func updateProduct(
-    request: UpdateProductRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.Product {
     try await self.inner.updateProduct(request: request, options: options)
   }
@@ -113,7 +113,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_DeleteProduct")
   public func deleteProduct(
-    request: DeleteProductRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProductRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteProduct(request: request, options: options)
   }
@@ -143,7 +143,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_PurgeProducts")
   public func purgeProducts(
-    request: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: PurgeProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.purgeProducts(request: request, options: options)
   }
@@ -173,22 +173,21 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_PurgeProducts")
   public func purgeProducts(
-    withPolling: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PurgeProductsResponse> {
+    withPolling: PurgeProductsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PurgeProductsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PurgeProductsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<PurgeProductsResponse>.State in
       return try op._extractStatus(PurgeProductsResponse.self)
     }
     let rawOp = try await self.purgeProducts(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeProductsResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PurgeProductsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -208,7 +207,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_ImportProducts")
   public func importProducts(
-    request: ImportProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.importProducts(request: request, options: options)
   }
@@ -225,22 +224,22 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_ImportProducts")
   public func importProducts(
-    withPolling: ImportProductsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportProductsResponse> {
+    withPolling: ImportProductsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportProductsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportProductsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ImportProductsResponse>.State in
       return try op._extractStatus(ImportProductsResponse.self)
     }
     let rawOp = try await self.importProducts(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportProductsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ImportProductsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -313,7 +312,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_SetInventory")
   public func setInventory(
-    request: SetInventoryRequest, options: GoogleCloudGax.RequestOptions
+    request: SetInventoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.setInventory(request: request, options: options)
   }
@@ -383,22 +382,21 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_SetInventory")
   public func setInventory(
-    withPolling: SetInventoryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SetInventoryResponse> {
+    withPolling: SetInventoryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SetInventoryResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SetInventoryResponse>.State in
+        -> GoogleGax._PollableOperationImpl<SetInventoryResponse>.State in
       return try op._extractStatus(SetInventoryResponse.self)
     }
     let rawOp = try await self.setInventory(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SetInventoryResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SetInventoryResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -448,7 +446,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_AddFulfillmentPlaces")
   public func addFulfillmentPlaces(
-    request: AddFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
+    request: AddFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.addFulfillmentPlaces(request: request, options: options)
   }
@@ -495,23 +493,22 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_AddFulfillmentPlaces")
   public func addFulfillmentPlaces(
-    withPolling: AddFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AddFulfillmentPlacesResponse> {
+    withPolling: AddFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AddFulfillmentPlacesResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AddFulfillmentPlacesResponse>.State in
+        -> GoogleGax._PollableOperationImpl<AddFulfillmentPlacesResponse>.State in
       return try op._extractStatus(AddFulfillmentPlacesResponse.self)
     }
     let rawOp = try await self.addFulfillmentPlaces(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AddFulfillmentPlacesResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<AddFulfillmentPlacesResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -561,7 +558,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_RemoveFulfillmentPlaces")
   public func removeFulfillmentPlaces(
-    request: RemoveFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.removeFulfillmentPlaces(request: request, options: options)
   }
@@ -608,23 +605,22 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_RemoveFulfillmentPlaces")
   public func removeFulfillmentPlaces(
-    withPolling: RemoveFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RemoveFulfillmentPlacesResponse> {
+    withPolling: RemoveFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RemoveFulfillmentPlacesResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<RemoveFulfillmentPlacesResponse>.State in
+        -> GoogleGax._PollableOperationImpl<RemoveFulfillmentPlacesResponse>.State in
       return try op._extractStatus(RemoveFulfillmentPlacesResponse.self)
     }
     let rawOp = try await self.removeFulfillmentPlaces(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<RemoveFulfillmentPlacesResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<RemoveFulfillmentPlacesResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -671,7 +667,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_AddLocalInventories")
   public func addLocalInventories(
-    request: AddLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
+    request: AddLocalInventoriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.addLocalInventories(request: request, options: options)
   }
@@ -715,22 +711,22 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_AddLocalInventories")
   public func addLocalInventories(
-    withPolling: AddLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AddLocalInventoriesResponse> {
+    withPolling: AddLocalInventoriesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AddLocalInventoriesResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AddLocalInventoriesResponse>.State in
+        -> GoogleGax._PollableOperationImpl<AddLocalInventoriesResponse>.State in
       return try op._extractStatus(AddLocalInventoriesResponse.self)
     }
     let rawOp = try await self.addLocalInventories(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AddLocalInventoriesResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<AddLocalInventoriesResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -775,7 +771,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_RemoveLocalInventories")
   public func removeLocalInventories(
-    request: RemoveLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveLocalInventoriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.removeLocalInventories(request: request, options: options)
   }
@@ -817,23 +813,22 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_RemoveLocalInventories")
   public func removeLocalInventories(
-    withPolling: RemoveLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RemoveLocalInventoriesResponse> {
+    withPolling: RemoveLocalInventoriesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RemoveLocalInventoriesResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<RemoveLocalInventoriesResponse>.State in
+        -> GoogleGax._PollableOperationImpl<RemoveLocalInventoriesResponse>.State in
       return try op._extractStatus(RemoveLocalInventoriesResponse.self)
     }
     let rawOp = try await self.removeLocalInventories(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RemoveLocalInventoriesResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<RemoveLocalInventoriesResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -847,7 +842,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -858,7 +853,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -866,7 +861,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -875,7 +870,7 @@ public final class ProductServiceClient: Clients.ProductServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "ProductService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -926,7 +921,7 @@ extension Clients {
     /// See `ProductServiceClient.updateProduct`.
     func updateProduct(
       product: Product?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudRetailV2.Product
 
     /// See `ProductServiceClient.deleteProduct`.
@@ -941,28 +936,28 @@ extension Clients {
     func purgeProducts(request: PurgeProductsRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.purgeProducts`.
-    func purgeProducts(withPolling: PurgeProductsRequest) async throws -> any GoogleCloudGax
+    func purgeProducts(withPolling: PurgeProductsRequest) async throws -> any GoogleGax
       .PollableOperation<PurgeProductsResponse>
 
     /// See `ProductServiceClient.importProducts`.
     func importProducts(request: ImportProductsRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.importProducts`.
-    func importProducts(withPolling: ImportProductsRequest) async throws -> any GoogleCloudGax
+    func importProducts(withPolling: ImportProductsRequest) async throws -> any GoogleGax
       .PollableOperation<ImportProductsResponse>
 
     /// See `ProductServiceClient.setInventory`.
     func setInventory(request: SetInventoryRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.setInventory`.
-    func setInventory(withPolling: SetInventoryRequest) async throws -> any GoogleCloudGax
+    func setInventory(withPolling: SetInventoryRequest) async throws -> any GoogleGax
       .PollableOperation<SetInventoryResponse>
 
     /// See `ProductServiceClient.setInventory`.
     func setInventory(
       inventory: Product?,
-      setMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SetInventoryResponse>
+      setMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<SetInventoryResponse>
 
     /// See `ProductServiceClient.addFulfillmentPlaces`.
     func addFulfillmentPlaces(request: AddFulfillmentPlacesRequest) async throws
@@ -970,12 +965,12 @@ extension Clients {
 
     /// See `ProductServiceClient.addFulfillmentPlaces`.
     func addFulfillmentPlaces(withPolling: AddFulfillmentPlacesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AddFulfillmentPlacesResponse>
+      -> any GoogleGax.PollableOperation<AddFulfillmentPlacesResponse>
 
     /// See `ProductServiceClient.addFulfillmentPlaces`.
     func addFulfillmentPlaces(
       product: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AddFulfillmentPlacesResponse>
+    ) async throws -> any GoogleGax.PollableOperation<AddFulfillmentPlacesResponse>
 
     /// See `ProductServiceClient.removeFulfillmentPlaces`.
     func removeFulfillmentPlaces(request: RemoveFulfillmentPlacesRequest) async throws
@@ -983,25 +978,25 @@ extension Clients {
 
     /// See `ProductServiceClient.removeFulfillmentPlaces`.
     func removeFulfillmentPlaces(withPolling: RemoveFulfillmentPlacesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<RemoveFulfillmentPlacesResponse>
+      -> any GoogleGax.PollableOperation<RemoveFulfillmentPlacesResponse>
 
     /// See `ProductServiceClient.removeFulfillmentPlaces`.
     func removeFulfillmentPlaces(
       product: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<RemoveFulfillmentPlacesResponse>
+    ) async throws -> any GoogleGax.PollableOperation<RemoveFulfillmentPlacesResponse>
 
     /// See `ProductServiceClient.addLocalInventories`.
     func addLocalInventories(request: AddLocalInventoriesRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.addLocalInventories`.
-    func addLocalInventories(withPolling: AddLocalInventoriesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AddLocalInventoriesResponse>
+    func addLocalInventories(withPolling: AddLocalInventoriesRequest) async throws -> any GoogleGax
+      .PollableOperation<AddLocalInventoriesResponse>
 
     /// See `ProductServiceClient.addLocalInventories`.
     func addLocalInventories(
       product: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AddLocalInventoriesResponse>
+    ) async throws -> any GoogleGax.PollableOperation<AddLocalInventoriesResponse>
 
     /// See `ProductServiceClient.removeLocalInventories`.
     func removeLocalInventories(request: RemoveLocalInventoriesRequest) async throws
@@ -1009,12 +1004,12 @@ extension Clients {
 
     /// See `ProductServiceClient.removeLocalInventories`.
     func removeLocalInventories(withPolling: RemoveLocalInventoriesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<RemoveLocalInventoriesResponse>
+      -> any GoogleGax.PollableOperation<RemoveLocalInventoriesResponse>
 
     /// See `ProductServiceClient.removeLocalInventories`.
     func removeLocalInventories(
       product: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<RemoveLocalInventoriesResponse>
+    ) async throws -> any GoogleGax.PollableOperation<RemoveLocalInventoriesResponse>
 
     /// See `ProductServiceClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1033,112 +1028,112 @@ extension Clients {
 
     /// See `ProductServiceClient.createProduct`.
     func createProduct(
-      request: CreateProductRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Product
 
     /// See `ProductServiceClient.getProduct`.
     func getProduct(
-      request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Product
 
     /// See `ProductServiceClient.listProducts`.
     func listProducts(
-      request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListProductsResponse
 
     /// See `ProductServiceClient.listProducts`.
     func listProducts(
-      byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProductsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Product, Swift.Error>
 
     /// See `ProductServiceClient.updateProduct`.
     func updateProduct(
-      request: UpdateProductRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Product
 
     /// See `ProductServiceClient.deleteProduct`.
     func deleteProduct(
-      request: DeleteProductRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProductRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ProductServiceClient.purgeProducts`.
     func purgeProducts(
-      request: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.purgeProducts`.
     func purgeProducts(
-      withPolling: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PurgeProductsResponse>
+      withPolling: PurgeProductsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PurgeProductsResponse>
 
     /// See `ProductServiceClient.importProducts`.
     func importProducts(
-      request: ImportProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.importProducts`.
     func importProducts(
-      withPolling: ImportProductsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportProductsResponse>
+      withPolling: ImportProductsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportProductsResponse>
 
     /// See `ProductServiceClient.setInventory`.
     func setInventory(
-      request: SetInventoryRequest, options: GoogleCloudGax.RequestOptions
+      request: SetInventoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.setInventory`.
     func setInventory(
-      withPolling: SetInventoryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SetInventoryResponse>
+      withPolling: SetInventoryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SetInventoryResponse>
 
     /// See `ProductServiceClient.addFulfillmentPlaces`.
     func addFulfillmentPlaces(
-      request: AddFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
+      request: AddFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.addFulfillmentPlaces`.
     func addFulfillmentPlaces(
-      withPolling: AddFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AddFulfillmentPlacesResponse>
+      withPolling: AddFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AddFulfillmentPlacesResponse>
 
     /// See `ProductServiceClient.removeFulfillmentPlaces`.
     func removeFulfillmentPlaces(
-      request: RemoveFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.removeFulfillmentPlaces`.
     func removeFulfillmentPlaces(
-      withPolling: RemoveFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RemoveFulfillmentPlacesResponse>
+      withPolling: RemoveFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RemoveFulfillmentPlacesResponse>
 
     /// See `ProductServiceClient.addLocalInventories`.
     func addLocalInventories(
-      request: AddLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: AddLocalInventoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.addLocalInventories`.
     func addLocalInventories(
-      withPolling: AddLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AddLocalInventoriesResponse>
+      withPolling: AddLocalInventoriesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AddLocalInventoriesResponse>
 
     /// See `ProductServiceClient.removeLocalInventories`.
     func removeLocalInventories(
-      request: RemoveLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveLocalInventoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ProductServiceClient.removeLocalInventories`.
     func removeLocalInventories(
-      withPolling: RemoveLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RemoveLocalInventoriesResponse>
+      withPolling: RemoveLocalInventoriesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RemoveLocalInventoriesResponse>
 
     /// See `ProductServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ProductServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -1152,9 +1147,9 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func createProduct(
-    request: CreateProductRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.Product {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createProduct(
@@ -1175,9 +1170,9 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func getProduct(
-    request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+    request: GetProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.Product {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getProduct(
@@ -1196,9 +1191,9 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func listProducts(
-    request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.ListProductsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProducts(
@@ -1208,13 +1203,13 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func listProducts(
-    byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudRetailV2.ListProductsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listProducts(
@@ -1233,14 +1228,14 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func updateProduct(
-    request: UpdateProductRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateProductRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.Product {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateProduct(
     product: Product?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudRetailV2.Product {
     let request = UpdateProductRequest().with {
       $0.product = product
@@ -1254,9 +1249,9 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func deleteProduct(
-    request: DeleteProductRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteProductRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteProduct(
@@ -1275,25 +1270,24 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func purgeProducts(
-    request: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: PurgeProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func purgeProducts(withPolling: PurgeProductsRequest) async throws -> any GoogleCloudGax
+  public func purgeProducts(withPolling: PurgeProductsRequest) async throws -> any GoogleGax
     .PollableOperation<PurgeProductsResponse>
   {
     try await self.purgeProducts(withPolling: withPolling, options: .init())
   }
 
   public func purgeProducts(
-    withPolling: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PurgeProductsResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<PurgeProductsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: PurgeProductsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PurgeProductsResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PurgeProductsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1304,25 +1298,25 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func importProducts(
-    request: ImportProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func importProducts(withPolling: ImportProductsRequest) async throws -> any GoogleCloudGax
+  public func importProducts(withPolling: ImportProductsRequest) async throws -> any GoogleGax
     .PollableOperation<ImportProductsResponse>
   {
     try await self.importProducts(withPolling: withPolling, options: .init())
   }
 
   public func importProducts(
-    withPolling: ImportProductsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportProductsResponse> {
+    withPolling: ImportProductsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportProductsResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportProductsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ImportProductsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1332,32 +1326,31 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func setInventory(
-    request: SetInventoryRequest, options: GoogleCloudGax.RequestOptions
+    request: SetInventoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func setInventory(withPolling: SetInventoryRequest) async throws -> any GoogleCloudGax
+  public func setInventory(withPolling: SetInventoryRequest) async throws -> any GoogleGax
     .PollableOperation<SetInventoryResponse>
   {
     try await self.setInventory(withPolling: withPolling, options: .init())
   }
 
   public func setInventory(
-    withPolling: SetInventoryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SetInventoryResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SetInventoryResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: SetInventoryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SetInventoryResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SetInventoryResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func setInventory(
     inventory: Product?,
-    setMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SetInventoryResponse> {
+    setMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<SetInventoryResponse> {
     let request = SetInventoryRequest().with {
       $0.inventory = inventory
       $0.setMask = setMask
@@ -1372,32 +1365,31 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func addFulfillmentPlaces(
-    request: AddFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
+    request: AddFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func addFulfillmentPlaces(withPolling: AddFulfillmentPlacesRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AddFulfillmentPlacesResponse>
+    -> any GoogleGax.PollableOperation<AddFulfillmentPlacesResponse>
   {
     try await self.addFulfillmentPlaces(withPolling: withPolling, options: .init())
   }
 
   public func addFulfillmentPlaces(
-    withPolling: AddFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AddFulfillmentPlacesResponse> {
+    withPolling: AddFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AddFulfillmentPlacesResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AddFulfillmentPlacesResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<AddFulfillmentPlacesResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func addFulfillmentPlaces(
     product: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AddFulfillmentPlacesResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<AddFulfillmentPlacesResponse> {
     let request = AddFulfillmentPlacesRequest().with {
       $0.product = product
     }
@@ -1411,32 +1403,31 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func removeFulfillmentPlaces(
-    request: RemoveFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func removeFulfillmentPlaces(withPolling: RemoveFulfillmentPlacesRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<RemoveFulfillmentPlacesResponse>
+    -> any GoogleGax.PollableOperation<RemoveFulfillmentPlacesResponse>
   {
     try await self.removeFulfillmentPlaces(withPolling: withPolling, options: .init())
   }
 
   public func removeFulfillmentPlaces(
-    withPolling: RemoveFulfillmentPlacesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RemoveFulfillmentPlacesResponse> {
+    withPolling: RemoveFulfillmentPlacesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RemoveFulfillmentPlacesResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<RemoveFulfillmentPlacesResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<RemoveFulfillmentPlacesResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func removeFulfillmentPlaces(
     product: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<RemoveFulfillmentPlacesResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<RemoveFulfillmentPlacesResponse> {
     let request = RemoveFulfillmentPlacesRequest().with {
       $0.product = product
     }
@@ -1450,31 +1441,31 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func addLocalInventories(
-    request: AddLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
+    request: AddLocalInventoriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func addLocalInventories(withPolling: AddLocalInventoriesRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AddLocalInventoriesResponse>
+    -> any GoogleGax.PollableOperation<AddLocalInventoriesResponse>
   {
     try await self.addLocalInventories(withPolling: withPolling, options: .init())
   }
 
   public func addLocalInventories(
-    withPolling: AddLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AddLocalInventoriesResponse> {
+    withPolling: AddLocalInventoriesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AddLocalInventoriesResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AddLocalInventoriesResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<AddLocalInventoriesResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func addLocalInventories(
     product: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AddLocalInventoriesResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<AddLocalInventoriesResponse> {
     let request = AddLocalInventoriesRequest().with {
       $0.product = product
     }
@@ -1488,32 +1479,31 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func removeLocalInventories(
-    request: RemoveLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveLocalInventoriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func removeLocalInventories(withPolling: RemoveLocalInventoriesRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<RemoveLocalInventoriesResponse>
+    -> any GoogleGax.PollableOperation<RemoveLocalInventoriesResponse>
   {
     try await self.removeLocalInventories(withPolling: withPolling, options: .init())
   }
 
   public func removeLocalInventories(
-    withPolling: RemoveLocalInventoriesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RemoveLocalInventoriesResponse> {
+    withPolling: RemoveLocalInventoriesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RemoveLocalInventoriesResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RemoveLocalInventoriesResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<RemoveLocalInventoriesResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func removeLocalInventories(
     product: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<RemoveLocalInventoriesResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<RemoveLocalInventoriesResponse> {
     let request = RemoveLocalInventoriesRequest().with {
       $0.product = product
     }
@@ -1527,9 +1517,9 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1539,13 +1529,13 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1566,9 +1556,9 @@ extension Clients.ProductServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

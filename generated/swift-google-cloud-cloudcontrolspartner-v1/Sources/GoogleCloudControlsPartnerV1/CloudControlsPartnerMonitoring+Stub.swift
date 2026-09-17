@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudControlsPartnerMonitoringStub: Sendable {
     func listViolations(
-      request: ListViolationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListViolationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListViolationsResponse
 
     func getViolation(
-      request: GetViolationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetViolationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Violation
   }
 }

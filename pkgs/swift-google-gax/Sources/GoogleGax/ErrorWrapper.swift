@@ -1,0 +1,67 @@
+// Copyright 2026 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import Foundation
+import struct AsyncHTTPClient.HTTPClientResponse
+#if canImport(FoundationNetworking)
+  import FoundationNetworking
+#endif
+@_spi(GoogleCloudInternal) import GoogleWKT
+import GoogleRpc
+
+/// The services send errors using this structure.
+@_spi(GoogleCloudInternal) public struct _ErrorWrapper: Decodable {
+  public init?(data: Data) {
+    let decoder = GoogleWKT._ProtoJSONDecoder()
+    guard let w = try? decoder.decode(Self.self, from: data) else {
+      return nil
+    }
+    self = w
+  }
+
+  let error: WrappedStatus
+
+  struct WrappedStatus: Decodable {
+    /// The HTTP status code.
+    let code: Int32
+    /// The gRPC status code in string form.
+    let status: String?
+    /// The error message, if any.
+    let message: String
+    /// The sequence of error details, wrapped as anys.
+    ///
+    /// Always use `_ProtoJSONDecoder` as the ProtoJSON encoding  may omit this field when empty.
+    let details: [GoogleWKT.`Any`]
+  }
+}
+
+@_spi(GoogleCloudInternal) extension ServiceError {
+  /// Create a new `ServiceError` from an `_ErrorWrapper`.
+  public init(
+    wrapper: _ErrorWrapper,
+    httpStatusCode: Int? = nil,
+  ) {
+    let resolvedHttpStatus = wrapper.error.code != 0 ? Int(wrapper.error.code) : httpStatusCode
+    if let s = wrapper.error.status {
+      self.code = GoogleRpc.Code.init(stringValue: s)
+    } else if let status = resolvedHttpStatus {
+      self.code = GoogleRpc.Code(httpStatusCode: status)
+    } else {
+      self.code = .unknown
+    }
+    self.message = wrapper.error.message
+    self.details = wrapper.error.details.map { StatusDetail(from: $0) }
+    self.httpStatusCode = resolvedHttpStatus
+  }
+}

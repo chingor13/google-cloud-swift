@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol QuotaControllerStub: Sendable {
     func allocateQuota(
-      request: AllocateQuotaRequest, options: GoogleCloudGax.RequestOptions
+      request: AllocateQuotaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV1.AllocateQuotaResponse
   }
 }

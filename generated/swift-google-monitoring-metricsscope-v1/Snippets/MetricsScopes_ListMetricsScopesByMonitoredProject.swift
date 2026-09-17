@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudMonitoringMetricsScopeV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: MetricsScopesClient) async throws {
   let response = try await client.listMetricsScopesByMonitoredProject(

@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudDLPV2
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(
   client: DlpServiceClient, projectId: String, locationId: String, discoveryConfigId: String

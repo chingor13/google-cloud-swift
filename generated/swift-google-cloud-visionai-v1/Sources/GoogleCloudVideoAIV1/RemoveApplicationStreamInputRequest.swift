@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message for removing stream input from an Application.
-public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. the name of the application to retrieve.
@@ -44,7 +44,7 @@ public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleClo
   /// not supported (00000000-0000-0000-0000-000000000000).
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RemoveApplicationStreamInputRequest`.
   public init() {}
@@ -94,7 +94,7 @@ public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleClo
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,12 +109,12 @@ public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleClo
   }
 
   /// Message about target streamInput to remove.
-  public struct TargetStreamInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TargetStreamInput: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var stream: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TargetStreamInput`.
     public init() {}
@@ -152,7 +152,7 @@ public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleClo
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -168,21 +168,21 @@ public struct RemoveApplicationStreamInputRequest: Codable, Equatable, GoogleClo
       return
         "type.googleapis.com/google.cloud.visionai.v1.RemoveApplicationStreamInputRequest.TargetStreamInput"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.RemoveApplicationStreamInputRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

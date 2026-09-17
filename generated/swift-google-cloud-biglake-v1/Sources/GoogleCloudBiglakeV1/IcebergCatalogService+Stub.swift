@@ -16,89 +16,89 @@
 
 import Foundation
 import GoogleApi
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol IcebergCatalogServiceStub: Sendable {
     func getIcebergCatalogConfig(
-      request: GetIcebergCatalogConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIcebergCatalogConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergCatalogConfig
 
     func listIcebergNamespaces(
-      request: ListIcebergNamespacesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIcebergNamespacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.ListIcebergNamespacesResponse
 
     func getIcebergNamespace(
-      request: GetIcebergNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIcebergNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergNamespace
 
     func createIcebergNamespace(
-      request: CreateIcebergNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIcebergNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergNamespace
 
     func deleteIcebergNamespace(
-      request: DeleteIcebergNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIcebergNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateIcebergNamespace(
-      request: UpdateIcebergNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIcebergNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.UpdateIcebergNamespaceResponse
 
     func listIcebergTableIdentifiers(
-      request: ListIcebergTableIdentifiersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIcebergTableIdentifiersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.ListIcebergTableIdentifiersResponse
 
     func createIcebergTable(
-      request: CreateIcebergTableRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIcebergTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func deleteIcebergTable(
-      request: DeleteIcebergTableRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIcebergTableRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getIcebergTable(
-      request: GetIcebergTableRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIcebergTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func loadIcebergTableCredentials(
-      request: GetIcebergTableRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIcebergTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.LoadIcebergTableCredentialsResponse
 
     func updateIcebergTable(
-      request: UpdateIcebergTableRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIcebergTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func registerIcebergTable(
-      request: RegisterIcebergTableRequest, options: GoogleCloudGax.RequestOptions
+      request: RegisterIcebergTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func reportIcebergTableMetrics(
-      request: ReportIcebergTableMetricsRequest, options: GoogleCloudGax.RequestOptions
+      request: ReportIcebergTableMetricsRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getIcebergCatalog(
-      request: GetIcebergCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIcebergCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog
 
     func listIcebergCatalogs(
-      request: ListIcebergCatalogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIcebergCatalogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.ListIcebergCatalogsResponse
 
     func deleteIcebergCatalog(
-      request: DeleteIcebergCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIcebergCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateIcebergCatalog(
-      request: UpdateIcebergCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIcebergCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog
 
     func createIcebergCatalog(
-      request: CreateIcebergCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIcebergCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.IcebergCatalog
 
     func failoverIcebergCatalog(
-      request: FailoverIcebergCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: FailoverIcebergCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBiglakeV1.FailoverIcebergCatalogResponse
   }
 }

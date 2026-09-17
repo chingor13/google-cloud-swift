@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Autocomplete service for retail.
 ///
@@ -31,11 +31,11 @@ import GoogleCloudGax
 /// @Snippet(path: "CompletionServiceQuickstart")
 public final class CompletionServiceClient: Clients.CompletionServiceProtocol, Sendable {
   let inner: any Clients.CompletionServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `CompletionServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CompletionServiceStub = try Clients.CompletionServiceTransport(options)
     inner = Clients.CompletionServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -53,7 +53,7 @@ public final class CompletionServiceClient: Clients.CompletionServiceProtocol, S
   ///
   /// @Snippet(path: "CompletionService_CompleteQuery")
   public func completeQuery(
-    request: CompleteQueryRequest, options: GoogleCloudGax.RequestOptions
+    request: CompleteQueryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.CompleteQueryResponse {
     try await self.inner.completeQuery(request: request, options: options)
   }
@@ -70,7 +70,7 @@ public final class CompletionServiceClient: Clients.CompletionServiceProtocol, S
   ///
   /// @Snippet(path: "CompletionService_ImportCompletionData")
   public func importCompletionData(
-    request: ImportCompletionDataRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportCompletionDataRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.importCompletionData(request: request, options: options)
   }
@@ -87,23 +87,22 @@ public final class CompletionServiceClient: Clients.CompletionServiceProtocol, S
   ///
   /// @Snippet(path: "CompletionService_ImportCompletionData")
   public func importCompletionData(
-    withPolling: ImportCompletionDataRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportCompletionDataResponse> {
+    withPolling: ImportCompletionDataRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportCompletionDataResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportCompletionDataResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ImportCompletionDataResponse>.State in
       return try op._extractStatus(ImportCompletionDataResponse.self)
     }
     let rawOp = try await self.importCompletionData(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportCompletionDataResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<ImportCompletionDataResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -117,7 +116,7 @@ public final class CompletionServiceClient: Clients.CompletionServiceProtocol, S
   ///
   /// @Snippet(path: "CompletionService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -128,7 +127,7 @@ public final class CompletionServiceClient: Clients.CompletionServiceProtocol, S
   ///
   /// @Snippet(path: "CompletionService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -136,7 +135,7 @@ public final class CompletionServiceClient: Clients.CompletionServiceProtocol, S
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -145,7 +144,7 @@ public final class CompletionServiceClient: Clients.CompletionServiceProtocol, S
   ///
   /// @Snippet(path: "CompletionService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -168,7 +167,7 @@ extension Clients {
 
     /// See `CompletionServiceClient.importCompletionData`.
     func importCompletionData(withPolling: ImportCompletionDataRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ImportCompletionDataResponse>
+      -> any GoogleGax.PollableOperation<ImportCompletionDataResponse>
 
     /// See `CompletionServiceClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -187,27 +186,27 @@ extension Clients {
 
     /// See `CompletionServiceClient.completeQuery`.
     func completeQuery(
-      request: CompleteQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: CompleteQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.CompleteQueryResponse
 
     /// See `CompletionServiceClient.importCompletionData`.
     func importCompletionData(
-      request: ImportCompletionDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportCompletionDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CompletionServiceClient.importCompletionData`.
     func importCompletionData(
-      withPolling: ImportCompletionDataRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportCompletionDataResponse>
+      withPolling: ImportCompletionDataRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportCompletionDataResponse>
 
     /// See `CompletionServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `CompletionServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -221,9 +220,9 @@ extension Clients.CompletionServiceProtocol {
   }
 
   public func completeQuery(
-    request: CompleteQueryRequest, options: GoogleCloudGax.RequestOptions
+    request: CompleteQueryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.CompleteQueryResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func importCompletionData(request: ImportCompletionDataRequest) async throws
@@ -233,26 +232,25 @@ extension Clients.CompletionServiceProtocol {
   }
 
   public func importCompletionData(
-    request: ImportCompletionDataRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportCompletionDataRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func importCompletionData(withPolling: ImportCompletionDataRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ImportCompletionDataResponse>
+    -> any GoogleGax.PollableOperation<ImportCompletionDataResponse>
   {
     try await self.importCompletionData(withPolling: withPolling, options: .init())
   }
 
   public func importCompletionData(
-    withPolling: ImportCompletionDataRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportCompletionDataResponse> {
+    withPolling: ImportCompletionDataRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportCompletionDataResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportCompletionDataResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ImportCompletionDataResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -263,9 +261,9 @@ extension Clients.CompletionServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -275,13 +273,13 @@ extension Clients.CompletionServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -302,9 +300,9 @@ extension Clients.CompletionServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

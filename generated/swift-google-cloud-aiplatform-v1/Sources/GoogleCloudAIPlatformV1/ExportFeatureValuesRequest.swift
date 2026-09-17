@@ -16,13 +16,13 @@
 
 #if FeaturestoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [FeaturestoreService.ExportFeatureValues][google.cloud.aiplatform.v1.FeaturestoreService.ExportFeatureValues].
   ///
   /// [google.cloud.aiplatform.v1.FeaturestoreService.ExportFeatureValues]: <doc:FeaturestoreServiceClient/exportFeatureValues(request:options:)>
-  public struct ExportFeatureValuesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExportFeatureValuesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the EntityType from which to export Feature
@@ -42,7 +42,7 @@
     /// Required. The mode in which Feature values are exported.
     public var mode: OneOf_Mode? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExportFeatureValuesRequest`.
     public init() {}
@@ -121,7 +121,7 @@
       self.mode = mode
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -147,20 +147,20 @@
 
     /// Describes exporting the latest Feature values of all entities of the
     /// EntityType between [start_time, snapshot_time].
-    public struct SnapshotExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SnapshotExport: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Exports Feature values as of this timestamp. If not set,
       /// retrieve values as of now. Timestamp, if present, must not have higher
       /// than millisecond precision.
-      public var snapshotTime: GoogleCloudWKT.Timestamp? = nil
+      public var snapshotTime: GoogleWKT.Timestamp? = nil
 
       /// Excludes Feature values with feature generation timestamp before this
       /// timestamp. If not set, retrieve oldest values kept in Feature Store.
       /// Timestamp, if present, must not have higher than millisecond precision.
-      public var startTime: GoogleCloudWKT.Timestamp? = nil
+      public var startTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SnapshotExport`.
       public init() {}
@@ -196,12 +196,11 @@
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.snapshotTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .snapshotTime)
-        self.startTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+          GoogleWKT.Timestamp.self, forKey: .snapshotTime)
+        self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -218,30 +217,30 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ExportFeatureValuesRequest.SnapshotExport"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Describes exporting all historical Feature values of all entities of the
     /// EntityType between [start_time, end_time].
-    public struct FullExport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FullExport: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Excludes Feature values with feature generation timestamp before this
       /// timestamp. If not set, retrieve oldest values kept in Feature Store.
       /// Timestamp, if present, must not have higher than millisecond precision.
-      public var startTime: GoogleCloudWKT.Timestamp? = nil
+      public var startTime: GoogleWKT.Timestamp? = nil
 
       /// Exports Feature values as of this timestamp. If not set,
       /// retrieve values as of now. Timestamp, if present, must not have higher
       /// than millisecond precision.
-      public var endTime: GoogleCloudWKT.Timestamp? = nil
+      public var endTime: GoogleWKT.Timestamp? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FullExport`.
       public init() {}
@@ -276,13 +275,11 @@
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.startTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-        self.endTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+        self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+        self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -299,11 +296,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ExportFeatureValuesRequest.FullExport"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -320,11 +317,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ExportFeatureValuesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

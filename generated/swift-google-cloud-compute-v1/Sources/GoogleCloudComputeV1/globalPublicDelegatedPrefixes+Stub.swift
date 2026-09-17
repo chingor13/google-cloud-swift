@@ -16,38 +16,35 @@
 
 #if GlobalPublicDelegatedPrefixes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol GlobalPublicDelegatedPrefixesStub: Sendable {
       func delete(
         request: GlobalPublicDelegatedPrefixesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: GlobalPublicDelegatedPrefixesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalPublicDelegatedPrefixesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefix
 
       func insert(
         request: GlobalPublicDelegatedPrefixesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: GlobalPublicDelegatedPrefixesClient.ListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalPublicDelegatedPrefixesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PublicDelegatedPrefixList
 
       func patch(
-        request: GlobalPublicDelegatedPrefixesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: GlobalPublicDelegatedPrefixesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

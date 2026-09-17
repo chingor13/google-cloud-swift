@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata for a create analysis operation.
-public struct CreateAnalysisOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateAnalysisOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The time the operation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the operation finished running.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The Conversation that this Analysis Operation belongs to.
   public var conversation: Swift.String = Swift.String()
@@ -33,7 +33,7 @@ public struct CreateAnalysisOperationMetadata: Codable, Equatable, GoogleCloudWK
   /// Output only. The annotator selector used for the analysis (if any).
   public var annotatorSelector: AnnotatorSelector? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateAnalysisOperationMetadata`.
   public init() {}
@@ -72,9 +72,8 @@ public struct CreateAnalysisOperationMetadata: Codable, Equatable, GoogleCloudWK
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .conversation) {
       self.conversation = value
     }
@@ -82,7 +81,7 @@ public struct CreateAnalysisOperationMetadata: Codable, Equatable, GoogleCloudWK
       AnnotatorSelector.self, forKey: .annotatorSelector)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +100,10 @@ public struct CreateAnalysisOperationMetadata: Codable, Equatable, GoogleCloudWK
     return
       "type.googleapis.com/google.cloud.contactcenterinsights.v1.CreateAnalysisOperationMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

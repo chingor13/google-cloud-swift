@@ -16,53 +16,50 @@
 
 #if RegionBackendBuckets
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionBackendBucketsStub: Sendable {
       func delete(
-        request: RegionBackendBucketsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionBackendBucketsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucket
 
       func getIamPolicy(
-        request: RegionBackendBucketsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: RegionBackendBucketsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionBackendBucketsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucketList
 
       func listUsable(
-        request: RegionBackendBucketsClient.ListUsableRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.ListUsableRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendBucketListUsable
 
       func patch(
-        request: RegionBackendBucketsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: RegionBackendBucketsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionBackendBucketsClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
         request: RegionBackendBucketsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

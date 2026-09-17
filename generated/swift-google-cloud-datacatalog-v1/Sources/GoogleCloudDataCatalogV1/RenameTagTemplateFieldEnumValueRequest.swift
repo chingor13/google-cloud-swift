@@ -15,14 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [RenameTagTemplateFieldEnumValue][google.cloud.datacatalog.v1.DataCatalog.RenameTagTemplateFieldEnumValue].
 ///
 /// [google.cloud.datacatalog.v1.DataCatalog.RenameTagTemplateFieldEnumValue]: <doc:DataCatalogClient/renameTagTemplateFieldEnumValue(request:options:)>
-public struct RenameTagTemplateFieldEnumValueRequest: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct RenameTagTemplateFieldEnumValueRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the enum field value.
@@ -32,7 +31,7 @@ public struct RenameTagTemplateFieldEnumValueRequest: Codable, Equatable, Google
   /// `my_new_enum_value`.
   public var newEnumValueDisplayName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RenameTagTemplateFieldEnumValueRequest`.
   public init() {}
@@ -77,7 +76,7 @@ public struct RenameTagTemplateFieldEnumValueRequest: Codable, Equatable, Google
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,10 +92,10 @@ public struct RenameTagTemplateFieldEnumValueRequest: Codable, Equatable, Google
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.RenameTagTemplateFieldEnumValueRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,12 +16,12 @@
 
 #if RegionZones || Zones
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The periodic partial maintenance schedule includes 52 weeks worth of
   /// maintenance windows.
   /// LINT.IfChange(PeriodicPartialMaintenanceSchedule)
-  public struct PeriodicPartialMaintenanceSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PeriodicPartialMaintenanceSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The maintenance type in which the zone is during the given window.
@@ -41,7 +41,7 @@
     /// This contains a time zone.
     public var windowStartTime: DateTime? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PeriodicPartialMaintenanceSchedule`.
     public init() {}
@@ -92,7 +92,7 @@
       self.windowStartTime = try container.decodeIfPresent(DateTime.self, forKey: .windowStartTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -339,11 +339,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.PeriodicPartialMaintenanceSchedule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

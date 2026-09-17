@@ -16,10 +16,10 @@
 
 #if DatasetService || ModelService || PipelineService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A trained machine learning Model.
-  public struct Model: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Model: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The resource name of the Model.
@@ -43,10 +43,10 @@
     public var versionAliases: [Swift.String] = []
 
     /// Output only. Timestamp when this version was created.
-    public var versionCreateTime: GoogleCloudWKT.Timestamp? = nil
+    public var versionCreateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this version was most recently updated.
-    public var versionUpdateTime: GoogleCloudWKT.Timestamp? = nil
+    public var versionUpdateTime: GoogleWKT.Timestamp? = nil
 
     /// Required. The display name of the Model.
     /// The name can be up to 128 characters long and can consist of any UTF-8
@@ -90,7 +90,7 @@
     /// Unset if the Model does not have any additional information.
     ///
     /// [google.cloud.aiplatform.v1.Model.metadata_schema_uri]: <doc:Model/metadataSchemaUri>
-    public var metadata: GoogleCloudWKT.Value? = nil
+    public var metadata: GoogleWKT.Value? = nil
 
     /// Output only. The formats in which this Model may be exported. If empty,
     /// this Model is not available for export.
@@ -253,10 +253,10 @@
     public var supportedOutputStorageFormats: [Swift.String] = []
 
     /// Output only. Timestamp when this Model was uploaded into Vertex AI.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this Model was most recently updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The pointers to DeployedModels created from this Model. Note
     /// that Model could have been deployed to Endpoints in different Locations.
@@ -356,7 +356,7 @@
     /// Optional. Output only. The checkpoints of the model.
     public var checkpoints: [Checkpoint] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Model`.
     public init() {}
@@ -470,9 +470,9 @@
         self.versionAliases = value
       }
       self.versionCreateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .versionCreateTime)
+        GoogleWKT.Timestamp.self, forKey: .versionCreateTime)
       self.versionUpdateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .versionUpdateTime)
+        GoogleWKT.Timestamp.self, forKey: .versionUpdateTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
         self.displayName = value
       }
@@ -491,7 +491,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .metadataSchemaUri) {
         self.metadataSchemaUri = value
       }
-      self.metadata = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .metadata)
+      self.metadata = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .metadata)
       if let value = try container.decodeIfPresent(
         [Model.ExportFormat].self, forKey: .supportedExportFormats)
       {
@@ -523,10 +523,8 @@
       {
         self.supportedOutputStorageFormats = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent([DeployedModelRef].self, forKey: .deployedModels)
       {
         self.deployedModels = value
@@ -564,7 +562,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -614,7 +612,7 @@
 
     /// Represents export format supported by the Model.
     /// All formats export to Google Cloud Storage.
-    public struct ExportFormat: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ExportFormat: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The ID of the export format.
@@ -643,7 +641,7 @@
       /// Output only. The content of this Model that may be exported.
       public var exportableContents: [Model.ExportFormat.ExportableContent] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ExportFormat`.
       public init() {}
@@ -688,7 +686,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -820,16 +818,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Model.ExportFormat"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Stats of data used for train or evaluate the Model.
-    public struct DataStats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DataStats: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Number of DataItems that were used for training this Model.
@@ -858,7 +856,7 @@
       /// the number is 0.
       public var testAnnotationsCount: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DataStats`.
       public init() {}
@@ -933,7 +931,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -953,16 +951,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Model.DataStats"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Contains information about the original Model if this Model is a copy.
-    public struct OriginalModelInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OriginalModelInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The resource name of the Model this Model is a copy of,
@@ -970,7 +968,7 @@
       /// `projects/{project}/locations/{location}/models/{model_id}@{version_id}`
       public var model: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OriginalModelInfo`.
       public init() {}
@@ -1008,7 +1006,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1023,22 +1021,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Model.OriginalModelInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// User input field to specify the base model source. Currently it only
     /// supports specifing the Model Garden models and Genie models.
-    public struct BaseModelSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BaseModelSource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       public var source: OneOf_Source? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BaseModelSource`.
       public init() {}
@@ -1096,7 +1094,7 @@
         self.source = source
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1126,11 +1124,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Model.BaseModelSource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1261,11 +1259,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Model"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

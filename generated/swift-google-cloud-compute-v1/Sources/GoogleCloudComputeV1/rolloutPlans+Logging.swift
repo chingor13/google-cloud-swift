@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func delete(
-        request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: RolloutPlansClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RolloutPlansClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -73,14 +73,14 @@
       }
 
       public func `get`(
-        request: RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlan {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: RolloutPlansClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RolloutPlansClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.RolloutPlan
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -88,14 +88,14 @@
       }
 
       public func insert(
-        request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: RolloutPlansClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RolloutPlansClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -103,14 +103,14 @@
       }
 
       public func list(
-        request: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: RolloutPlansClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RolloutPlansClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.RolloutPlansListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -118,14 +118,14 @@
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

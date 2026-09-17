@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata type for the long-running operation used to track the progress
 /// of optimizations performed on a newly restored table. This long-running
 /// operation is automatically created by the system after the successful
 /// completion of a table restore, and cannot be cancelled.
-public struct OptimizeRestoredTableMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OptimizeRestoredTableMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the restored table being optimized.
@@ -30,7 +30,7 @@ public struct OptimizeRestoredTableMetadata: Codable, Equatable, GoogleCloudWKT.
   /// The progress of the post-restore optimizations.
   public var progress: OperationProgress? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OptimizeRestoredTableMetadata`.
   public init() {}
@@ -71,7 +71,7 @@ public struct OptimizeRestoredTableMetadata: Codable, Equatable, GoogleCloudWKT.
     self.progress = try container.decodeIfPresent(OperationProgress.self, forKey: .progress)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,10 +87,10 @@ public struct OptimizeRestoredTableMetadata: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.OptimizeRestoredTableMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

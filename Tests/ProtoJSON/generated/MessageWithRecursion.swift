@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A test message for FieldMask.
-public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MessageWithRecursion: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A singular field.
-  public var singular: GoogleCloudWKT.Recursive<MessageWithRecursion.Level0>? = nil
+  public var singular: GoogleWKT.Recursive<MessageWithRecursion.Level0>? = nil
 
   /// An optional field.
-  public var `optional`: GoogleCloudWKT.Recursive<MessageWithRecursion.Level0>? = nil
+  public var `optional`: GoogleWKT.Recursive<MessageWithRecursion.Level0>? = nil
 
   /// A repeated field.
   public var repeated: [MessageWithRecursion.Level0] = []
@@ -33,7 +33,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// A map field, messages cannot be keys.
   public var map: [Swift.String: MessageWithRecursion.Level0] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MessageWithRecursion`.
   public init() {}
@@ -73,9 +73,9 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.singular = try container.decodeIfPresent(
-      GoogleCloudWKT.Recursive<MessageWithRecursion.Level0>.self, forKey: .singular)
+      GoogleWKT.Recursive<MessageWithRecursion.Level0>.self, forKey: .singular)
     self.`optional` = try container.decodeIfPresent(
-      GoogleCloudWKT.Recursive<MessageWithRecursion.Level0>.self, forKey: .`optional`)
+      GoogleWKT.Recursive<MessageWithRecursion.Level0>.self, forKey: .`optional`)
     if let value = try container.decodeIfPresent(
       [MessageWithRecursion.Level0].self, forKey: .repeated)
     {
@@ -88,7 +88,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,14 +103,14 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
   }
 
-  public struct Level0: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Level0: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    public var level1: GoogleCloudWKT.Recursive<MessageWithRecursion.Level1>? = nil
+    public var level1: GoogleWKT.Recursive<MessageWithRecursion.Level1>? = nil
 
     public var side: MessageWithRecursion.NonRecursive? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Level0`.
     public init() {}
@@ -146,12 +146,12 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.level1 = try container.decodeIfPresent(
-        GoogleCloudWKT.Recursive<MessageWithRecursion.Level1>.self, forKey: .level1)
+        GoogleWKT.Recursive<MessageWithRecursion.Level1>.self, forKey: .level1)
       self.side = try container.decodeIfPresent(
         MessageWithRecursion.NonRecursive.self, forKey: .side)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -167,20 +167,20 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.swift.sdk.test.MessageWithRecursion.Level0"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct Level1: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Level1: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    public var recurse: GoogleCloudWKT.Recursive<MessageWithRecursion>? = nil
+    public var recurse: GoogleWKT.Recursive<MessageWithRecursion>? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Level1`.
     public init() {}
@@ -214,10 +214,10 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.recurse = try container.decodeIfPresent(
-        GoogleCloudWKT.Recursive<MessageWithRecursion>.self, forKey: .recurse)
+        GoogleWKT.Recursive<MessageWithRecursion>.self, forKey: .recurse)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -232,20 +232,20 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.swift.sdk.test.MessageWithRecursion.Level1"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct NonRecursive: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NonRecursive: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var value: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NonRecursive`.
     public init() {}
@@ -283,7 +283,7 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -298,21 +298,21 @@ public struct MessageWithRecursion: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.swift.sdk.test.MessageWithRecursion.NonRecursive"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.swift.sdk.test.MessageWithRecursion"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

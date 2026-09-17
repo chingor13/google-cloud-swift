@@ -16,22 +16,21 @@
 
 #if AcceleratorTypes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol AcceleratorTypesStub: Sendable {
       func aggregatedList(
-        request: AcceleratorTypesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorTypeAggregatedList
 
       func `get`(
-        request: AcceleratorTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorType
 
       func list(
-        request: AcceleratorTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: AcceleratorTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AcceleratorTypeList
     }
   }

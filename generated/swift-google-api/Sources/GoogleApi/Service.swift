@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `Service` is the root object of Google API service configuration (service
 /// config). It describes the basic information about a logical service,
@@ -50,7 +50,7 @@ import Foundation
 ///       - selector: "*"
 ///         requirements:
 ///           provider_id: google_calendar_auth
-public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Service: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The service name, which is a DNS-like logical identifier for the
@@ -78,8 +78,8 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// IDL during the normalization process. It is an error to specify an API
   /// interface here which cannot be resolved against the associated IDL files.
   ///
-  /// [google.protobuf.Api]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.Api
-  public var apis: [GoogleCloudWKT.Api] = []
+  /// [google.protobuf.Api]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.Api
+  public var apis: [GoogleWKT.Api] = []
 
   /// A list of all proto message types included in this API service.
   /// Types referenced directly or indirectly by the `apis` are automatically
@@ -89,7 +89,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   ///     types:
   ///     - name: google.protobuf.Int32
-  public var types: [GoogleCloudWKT.Type_] = []
+  public var types: [GoogleWKT.Type_] = []
 
   /// A list of all enum types included in this API service.  Enums referenced
   /// directly or indirectly by the `apis` are automatically included.  Enums
@@ -98,7 +98,7 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   ///     enums:
   ///     - name: google.someapi.v1.SomeEnum
-  public var enums: [GoogleCloudWKT.Enum] = []
+  public var enums: [GoogleWKT.Enum] = []
 
   /// Additional API documentation.
   public var documentation: Documentation? = nil
@@ -163,9 +163,9 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// This field has no semantic meaning. The service config compiler always
   /// sets this field to `3`.
-  public var configVersion: GoogleCloudWKT.UInt32Value? = nil
+  public var configVersion: GoogleWKT.UInt32Value? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Service`.
   public init() {}
@@ -260,13 +260,13 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .id) {
       self.id = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.Api].self, forKey: .apis) {
+    if let value = try container.decodeIfPresent([GoogleWKT.Api].self, forKey: .apis) {
       self.apis = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.Type_].self, forKey: .types) {
+    if let value = try container.decodeIfPresent([GoogleWKT.Type_].self, forKey: .types) {
       self.types = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.Enum].self, forKey: .enums) {
+    if let value = try container.decodeIfPresent([GoogleWKT.Enum].self, forKey: .enums) {
       self.enums = value
     }
     self.documentation = try container.decodeIfPresent(Documentation.self, forKey: .documentation)
@@ -300,10 +300,10 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.sourceInfo = try container.decodeIfPresent(SourceInfo.self, forKey: .sourceInfo)
     self.publishing = try container.decodeIfPresent(Publishing.self, forKey: .publishing)
     self.configVersion = try container.decodeIfPresent(
-      GoogleCloudWKT.UInt32Value.self, forKey: .configVersion)
+      GoogleWKT.UInt32Value.self, forKey: .configVersion)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -343,10 +343,10 @@ public struct Service: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.Service"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

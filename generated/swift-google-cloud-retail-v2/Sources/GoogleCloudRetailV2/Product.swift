@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Product captures all metadata information of items to be recommended or
 /// searched.
-public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Product: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. Full resource name of the product, such as
@@ -270,7 +270,7 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.retail.v2.Product.Type.PRIMARY]: <doc:Product/Type_/primary>
   /// [google.cloud.retail.v2.Product.Type.VARIANT]: <doc:Product/Type_/variant>
   /// [google.cloud.retail.v2.SearchService.Search]: <doc:SearchServiceClient/search(request:options:)>
-  public var availableTime: GoogleCloudWKT.Timestamp? = nil
+  public var availableTime: GoogleWKT.Timestamp? = nil
 
   /// The online availability of the [Product][google.cloud.retail.v2.Product].
   /// Default to
@@ -295,7 +295,7 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var availability: Product.Availability = Product.Availability()
 
   /// The available quantity of the item.
-  public var availableQuantity: GoogleCloudWKT.Int32Value? = nil
+  public var availableQuantity: GoogleWKT.Int32Value? = nil
 
   /// Fulfillment information, such as the store IDs for in-store pickup or
   /// region IDs for different shipping methods.
@@ -422,7 +422,7 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// search and recommendation.
   ///
   /// [google.cloud.retail.v2.Product.available_time]: <doc:Product/availableTime>
-  public var publishTime: GoogleCloudWKT.Timestamp? = nil
+  public var publishTime: GoogleWKT.Timestamp? = nil
 
   /// Indicates which fields in the [Product][google.cloud.retail.v2.Product]s
   /// are returned in [SearchResponse][google.cloud.retail.v2.SearchResponse].
@@ -506,7 +506,7 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.retail.v2.Product.uri]: <doc:Product/uri>
   /// [google.cloud.retail.v2.SearchResponse]: <doc:SearchResponse>
   @available(*, deprecated)
-  public var retrievableFields: GoogleCloudWKT.FieldMask? = nil
+  public var retrievableFields: GoogleWKT.FieldMask? = nil
 
   /// Output only. Product variants grouped together on primary product which
   /// share similar product attributes. It's automatically grouped by
@@ -539,7 +539,7 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var expiration: OneOf_Expiration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Product`.
   public init() {}
@@ -683,12 +683,12 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.priceInfo = try container.decodeIfPresent(PriceInfo.self, forKey: .priceInfo)
     self.rating = try container.decodeIfPresent(Rating.self, forKey: .rating)
     self.availableTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .availableTime)
+      GoogleWKT.Timestamp.self, forKey: .availableTime)
     if let value = try container.decodeIfPresent(Product.Availability.self, forKey: .availability) {
       self.availability = value
     }
     self.availableQuantity = try container.decodeIfPresent(
-      GoogleCloudWKT.Int32Value.self, forKey: .availableQuantity)
+      GoogleWKT.Int32Value.self, forKey: .availableQuantity)
     if let value = try container.decodeIfPresent([FulfillmentInfo].self, forKey: .fulfillmentInfo) {
       self.fulfillmentInfo = value
     }
@@ -715,10 +715,9 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([Promotion].self, forKey: .promotions) {
       self.promotions = value
     }
-    self.publishTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .publishTime)
+    self.publishTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .publishTime)
     self.retrievableFields = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .retrievableFields)
+      GoogleWKT.FieldMask.self, forKey: .retrievableFields)
     if let value = try container.decodeIfPresent([Product].self, forKey: .variants) {
       self.variants = value
     }
@@ -737,17 +736,17 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       expiration = $0
     }
     if let expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp?.self, forKey: .expireTime)
+      GoogleWKT.Timestamp?.self, forKey: .expireTime)
     {
       try expirationCheckAndSet(.expireTime(expireTime))
     }
-    if let ttl = try container.decodeIfPresent(GoogleCloudWKT.Duration?.self, forKey: .ttl) {
+    if let ttl = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .ttl) {
       try expirationCheckAndSet(.ttl(ttl))
     }
     self.expiration = expiration
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -1102,7 +1101,7 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.retail.v2.Product.available_time]: <doc:Product/availableTime>
     /// [google.cloud.retail.v2.Product.expire_time]: <doc:Product/OneOf_Expiration/expireTime(_:)>
     /// [google.cloud.retail.v2.Product.publish_time]: <doc:Product/publishTime>
-    indirect case expireTime(GoogleCloudWKT.Timestamp?)
+    indirect case expireTime(GoogleWKT.Timestamp?)
     /// Input only. The TTL (time to live) of the product. Note that this is only
     /// applicable to [Type.PRIMARY][google.cloud.retail.v2.Product.Type.PRIMARY]
     /// and [Type.COLLECTION][google.cloud.retail.v2.Product.Type.COLLECTION],
@@ -1135,16 +1134,16 @@ public struct Product: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.retail.v2.ProductService.GetProduct]: <doc:ProductServiceClient/getProduct(request:options:)>
     /// [google.cloud.retail.v2.ProductService.ListProducts]: <doc:ProductServiceClient/listProducts(request:options:)>
     /// [google.cloud.retail.v2.SearchService.Search]: <doc:SearchServiceClient/search(request:options:)>
-    indirect case ttl(GoogleCloudWKT.Duration?)
+    indirect case ttl(GoogleWKT.Duration?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.Product"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

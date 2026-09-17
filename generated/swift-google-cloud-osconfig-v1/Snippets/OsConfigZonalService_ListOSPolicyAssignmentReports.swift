@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudOSConfigV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: OsConfigZonalServiceClient, parent: String) async throws {
   let items = try client.listOspolicyAssignmentReports(

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message to list the services in your project that are eligible for
 /// Data Transfer Essentials configuration.
-public struct ListMulticloudDataTransferSupportedServicesRequest: Codable, Equatable, GoogleCloudWKT
+public struct ListMulticloudDataTransferSupportedServicesRequest: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -32,7 +32,7 @@ public struct ListMulticloudDataTransferSupportedServicesRequest: Codable, Equat
   /// Optional. The page token.
   public var pageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListMulticloudDataTransferSupportedServicesRequest`.
   public init() {}
@@ -80,7 +80,7 @@ public struct ListMulticloudDataTransferSupportedServicesRequest: Codable, Equat
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +98,10 @@ public struct ListMulticloudDataTransferSupportedServicesRequest: Codable, Equat
     return
       "type.googleapis.com/google.cloud.networkconnectivity.v1.ListMulticloudDataTransferSupportedServicesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

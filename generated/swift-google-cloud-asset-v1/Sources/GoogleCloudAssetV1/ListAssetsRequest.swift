@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ListAssets request.
-public struct ListAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListAssetsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of the organization, folder, or project the assets belong
@@ -33,7 +33,7 @@ public struct ListAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// If not specified, the current time will be used. Due to delays in resource
   /// data collection and indexing, there is a volatile window during which
   /// running the same query may get different results.
-  public var readTime: GoogleCloudWKT.Timestamp? = nil
+  public var readTime: GoogleWKT.Timestamp? = nil
 
   /// A list of asset types to take a snapshot for. For example:
   /// "compute.googleapis.com/Disk".
@@ -85,7 +85,7 @@ public struct ListAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// for all supported asset types and relationship types.
   public var relationshipTypes: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListAssetsRequest`.
   public init() {}
@@ -133,7 +133,7 @@ public struct ListAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .parent) {
       self.parent = value
     }
-    self.readTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .readTime)
+    self.readTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .readTime)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .assetTypes) {
       self.assetTypes = value
     }
@@ -151,7 +151,7 @@ public struct ListAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -172,10 +172,10 @@ public struct ListAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.ListAssetsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

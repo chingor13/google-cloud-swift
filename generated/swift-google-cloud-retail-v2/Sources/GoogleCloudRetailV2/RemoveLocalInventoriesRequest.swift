@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [ProductService.RemoveLocalInventories][google.cloud.retail.v2.ProductService.RemoveLocalInventories]
 /// method.
 ///
 /// [google.cloud.retail.v2.ProductService.RemoveLocalInventories]: <doc:ProductServiceClient/removeLocalInventories(request:options:)>
-public struct RemoveLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RemoveLocalInventoriesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Full resource name of [Product][google.cloud.retail.v2.Product],
@@ -43,7 +43,7 @@ public struct RemoveLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT.
   /// The time when the inventory deletions are issued. Used to prevent
   /// out-of-order updates and deletions on local inventory fields. If not
   /// provided, the internal system time will be used.
-  public var removeTime: GoogleCloudWKT.Timestamp? = nil
+  public var removeTime: GoogleWKT.Timestamp? = nil
 
   /// If set to true, and the [Product][google.cloud.retail.v2.Product] is not
   /// found, the local inventory removal request will still be processed and
@@ -55,7 +55,7 @@ public struct RemoveLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT.
   /// [google.cloud.retail.v2.Product]: <doc:Product>
   public var allowMissing: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RemoveLocalInventoriesRequest`.
   public init() {}
@@ -100,14 +100,13 @@ public struct RemoveLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT.
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .placeIds) {
       self.placeIds = value
     }
-    self.removeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .removeTime)
+    self.removeTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .removeTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .allowMissing) {
       self.allowMissing = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -125,10 +124,10 @@ public struct RemoveLocalInventoriesRequest: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.RemoveLocalInventoriesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

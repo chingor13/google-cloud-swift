@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A call stack appearing in a trace.
-public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StackTrace: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Stack frames in this stack trace. A maximum of 128 frames are allowed.
@@ -35,7 +35,7 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// to that stack trace by only setting `stackTraceHashId`.
   public var stackTraceHashId: Swift.Int64 = Swift.Int64()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StackTrace`.
   public init() {}
@@ -77,7 +77,7 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -91,7 +91,7 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Represents a single stack frame in a stack trace.
-  public struct StackFrame: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StackFrame: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The fully-qualified name that uniquely identifies the function or
@@ -121,7 +121,7 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The version of the deployed source code (up to 128 bytes).
     public var sourceVersion: TruncatableString? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StackFrame`.
     public init() {}
@@ -182,7 +182,7 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         TruncatableString.self, forKey: .sourceVersion)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -203,16 +203,16 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudtrace.v2.StackTrace.StackFrame"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A collection of stack frames, which can be truncated.
-  public struct StackFrames: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StackFrames: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Stack frames in this call stack.
@@ -223,7 +223,7 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// If this value is 0, then no stack frames were dropped.
     public var droppedFramesCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StackFrames`.
     public init() {}
@@ -266,7 +266,7 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -282,21 +282,21 @@ public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudtrace.v2.StackTrace.StackFrames"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudtrace.v2.StackTrace"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

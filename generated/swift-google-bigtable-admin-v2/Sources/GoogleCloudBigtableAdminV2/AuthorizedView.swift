@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AuthorizedViews represent subsets of a particular Cloud Bigtable table. Users
 /// can configure access to each Authorized View independently from the table and
 /// use the existing Data APIs to access the subset of data.
-public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AuthorizedView: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of this AuthorizedView.
@@ -41,7 +41,7 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The type of this AuthorizedView.
   public var authorizedView: OneOf_AuthorizedView? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AuthorizedView`.
   public init() {}
@@ -108,7 +108,7 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.authorizedView = authorizedView
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -130,7 +130,7 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Subsets of a column family that are included in this AuthorizedView.
-  public struct FamilySubsets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FamilySubsets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Individual exact column qualifiers to be included in the AuthorizedView.
@@ -143,7 +143,7 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// ("").
     public var qualifierPrefixes: [Foundation.Data] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FamilySubsets`.
     public init() {}
@@ -188,7 +188,7 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -204,16 +204,16 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.AuthorizedView.FamilySubsets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines a simple AuthorizedView that is a subset of the underlying Table.
-  public struct SubsetView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SubsetView: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Row prefixes to be included in the AuthorizedView.
@@ -224,7 +224,7 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// in the AuthorizedView.
     public var familySubsets: [Swift.String: AuthorizedView.FamilySubsets] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SubsetView`.
     public init() {}
@@ -269,7 +269,7 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -285,11 +285,11 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.AuthorizedView.SubsetView"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -415,10 +415,10 @@ public struct AuthorizedView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.AuthorizedView"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

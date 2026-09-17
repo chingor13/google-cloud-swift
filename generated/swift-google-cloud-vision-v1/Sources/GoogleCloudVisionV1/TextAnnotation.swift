@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// TextAnnotation contains a structured representation of OCR extracted text.
 /// The hierarchy of an OCR extracted text structure is like this:
@@ -27,7 +27,7 @@ import Foundation
 /// message definition below for more detail.
 ///
 /// [google.cloud.vision.v1.TextAnnotation.TextProperty]: <doc:TextAnnotation/TextProperty>
-public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TextAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// List of pages detected by OCR.
@@ -36,7 +36,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// UTF-8 text detected on the pages.
   public var text: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TextAnnotation`.
   public init() {}
@@ -79,7 +79,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,7 +93,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Detected language for a structural component.
-  public struct DetectedLanguage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DetectedLanguage: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The BCP-47 language code, such as "en-US" or "sr-Latn". For more
@@ -104,7 +104,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Confidence of detected language. Range [0, 1].
     public var confidence: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DetectedLanguage`.
     public init() {}
@@ -147,7 +147,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -163,16 +163,16 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.TextAnnotation.DetectedLanguage"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Detected start or end of a structural component.
-  public struct DetectedBreak: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DetectedBreak: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Detected break type.
@@ -182,7 +182,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// True if break prepends the element.
     public var isPrefix: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DetectedBreak`.
     public init() {}
@@ -227,7 +227,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -370,16 +370,16 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.TextAnnotation.DetectedBreak"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Additional information detected on the structural component.
-  public struct TextProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TextProperty: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of detected languages together with confidence.
@@ -388,7 +388,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Detected start or end of a text segment.
     public var detectedBreak: TextAnnotation.DetectedBreak? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TextProperty`.
     public init() {}
@@ -432,7 +432,7 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         TextAnnotation.DetectedBreak.self, forKey: .detectedBreak)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -448,21 +448,21 @@ public struct TextAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vision.v1.TextAnnotation.TextProperty"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vision.v1.TextAnnotation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

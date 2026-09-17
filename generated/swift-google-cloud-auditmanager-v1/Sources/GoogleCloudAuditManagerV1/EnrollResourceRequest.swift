@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [EnrollResource][google.cloud.auditmanager.v1.AuditManager.EnrollResource].
 ///
 /// [google.cloud.auditmanager.v1.AuditManager.EnrollResource]: <doc:AuditManagerClient/enrollResource(request:options:)>
-public struct EnrollResourceRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EnrollResourceRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Organization, folder, or project to enroll in Audit Manager, in
@@ -42,7 +42,7 @@ public struct EnrollResourceRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// available.
   public var destinations: [EnrollResourceRequest.EligibleDestination] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EnrollResourceRequest`.
   public init() {}
@@ -87,7 +87,7 @@ public struct EnrollResourceRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,13 +101,13 @@ public struct EnrollResourceRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// Details about the bucket where you want to upload the audit report.
-  public struct EligibleDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EligibleDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Available Cloud Storage buckets.
     public var eligibleDestinations: OneOf_EligibleDestinations? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EligibleDestination`.
     public init() {}
@@ -159,7 +159,7 @@ public struct EnrollResourceRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
       self.eligibleDestinations = eligibleDestinations
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -192,21 +192,21 @@ public struct EnrollResourceRequest: Codable, Equatable, GoogleCloudWKT._AnyPack
       return
         "type.googleapis.com/google.cloud.auditmanager.v1.EnrollResourceRequest.EligibleDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.auditmanager.v1.EnrollResourceRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

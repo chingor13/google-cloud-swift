@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudCESV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: AgentServiceClient, projectId: String, locationId: String, appId: String, agentId: String

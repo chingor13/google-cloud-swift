@@ -16,10 +16,10 @@
 
 #if BackendBuckets || RegionBackendBuckets
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Specify CDN TTLs for response error codes.
-  public struct BackendBucketCdnPolicyNegativeCachingPolicy: Codable, Equatable, GoogleCloudWKT
+  public struct BackendBucketCdnPolicyNegativeCachingPolicy: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -36,7 +36,7 @@
     /// defined TTL.
     public var ttl: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackendBucketCdnPolicyNegativeCachingPolicy`.
     public init() {}
@@ -75,7 +75,7 @@
       self.ttl = try container.decodeIfPresent(Swift.Int32.self, forKey: .ttl)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -92,11 +92,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.BackendBucketCdnPolicyNegativeCachingPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// BackupConfigInfo has information about how the resource is configured
 /// for Backup and about the most recent backup to this vault.
-public struct BackupConfigInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackupConfigInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The status of the last backup to this BackupVault
@@ -28,7 +28,7 @@ public struct BackupConfigInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. If the last backup were successful, this field has the
   /// consistency date.
-  public var lastSuccessfulBackupConsistencyTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastSuccessfulBackupConsistencyTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. If the last backup failed, this field has the error message.
   public var lastBackupError: GoogleRpc.Status? = nil
@@ -36,7 +36,7 @@ public struct BackupConfigInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Configuration Info has the resource format-specific configuration.
   public var backupConfig: OneOf_BackupConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackupConfigInfo`.
   public init() {}
@@ -84,7 +84,7 @@ public struct BackupConfigInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.lastBackupState = value
     }
     self.lastSuccessfulBackupConsistencyTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastSuccessfulBackupConsistencyTime)
+      GoogleWKT.Timestamp.self, forKey: .lastSuccessfulBackupConsistencyTime)
     self.lastBackupError = try container.decodeIfPresent(
       GoogleRpc.Status.self, forKey: .lastBackupError)
 
@@ -111,7 +111,7 @@ public struct BackupConfigInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.backupConfig = backupConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -267,10 +267,10 @@ public struct BackupConfigInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.BackupConfigInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

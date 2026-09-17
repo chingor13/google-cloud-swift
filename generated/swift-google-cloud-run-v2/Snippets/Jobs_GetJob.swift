@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudRunV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: JobsClient, projectId: String, locationId: String, jobId: String) async throws {
   let response = try await client.getJob(

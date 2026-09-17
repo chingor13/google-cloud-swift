@@ -15,7 +15,7 @@
 import Foundation
 import NIOCore
 import GoogleAuth
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudStorage
 
 /// Orchestrates the execution of the W1R3 benchmark across concurrent worker tasks.

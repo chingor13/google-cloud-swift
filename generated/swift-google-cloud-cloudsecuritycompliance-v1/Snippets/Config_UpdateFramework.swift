@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudSecurityComplianceV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: ConfigClient, organizationId: String, locationId: String, frameworkId: String)
   async throws
@@ -32,7 +32,7 @@ func sample(client: ConfigClient, organizationId: String, locationId: String, fr
           $0.name =
             "organizations/\(organizationId)/locations/\(locationId)/frameworks/\(frameworkId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

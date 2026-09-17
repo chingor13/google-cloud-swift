@@ -16,7 +16,7 @@
 
 #if Flows || Pages || Playbooks || Sessions || TestCases || TransitionRouteGroups
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A fulfillment can do one or more of the following actions at the same time:
   ///
@@ -39,7 +39,7 @@
   /// [google.cloud.dialogflow.cx.v3.Form]: <doc:Form>
   /// [google.cloud.dialogflow.cx.v3.Page]: <doc:Page>
   /// [google.cloud.dialogflow.cx.v3.QueryResult]: <doc:QueryResult>
-  public struct Fulfillment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Fulfillment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The list of rich message responses to present to the user.
@@ -94,7 +94,7 @@
     /// A list of Generators to be called during this fulfillment.
     public var generators: [Fulfillment.GeneratorSettings] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Fulfillment`.
     public init() {}
@@ -180,7 +180,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -201,16 +201,16 @@
     }
 
     /// Setting a parameter value.
-    public struct SetParameterAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SetParameterAction: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Display name of the parameter.
       public var parameter: Swift.String = Swift.String()
 
       /// The new value of the parameter. A null value clears the parameter.
-      public var value: GoogleCloudWKT.Value? = nil
+      public var value: GoogleWKT.Value? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SetParameterAction`.
       public init() {}
@@ -248,10 +248,10 @@
         if let value = try container.decodeIfPresent(Swift.String.self, forKey: .parameter) {
           self.parameter = value
         }
-        self.value = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .value)
+        self.value = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .value)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -267,23 +267,23 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.SetParameterAction"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// A list of cascading if-else conditions. Cases are mutually exclusive.
     /// The first one with a matching condition is selected, all the rest ignored.
-    public struct ConditionalCases: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ConditionalCases: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A list of cascading if-else conditions.
       public var cases: [Fulfillment.ConditionalCases.Case] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ConditionalCases`.
       public init() {}
@@ -323,7 +323,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -337,7 +337,7 @@
 
       /// Each case has a Boolean condition. When it is evaluated to be True, the
       /// corresponding messages will be selected and evaluated recursively.
-      public struct Case: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Case: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The condition to activate and select this case. Empty means the
@@ -355,8 +355,7 @@
         /// A list of case content.
         public var caseContent: [Fulfillment.ConditionalCases.Case.CaseContent] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Case`.
         public init() {}
@@ -401,7 +400,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -415,14 +414,13 @@
         }
 
         /// The list of messages or conditional cases to activate for this case.
-        public struct CaseContent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct CaseContent: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Either a message is returned or additional cases to be evaluated.
           public var casesOrMessage: OneOf_CasesOrMessage? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `CaseContent`.
           public init() {}
@@ -480,7 +478,7 @@
             self.casesOrMessage = casesOrMessage
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -512,11 +510,11 @@
             return
               "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.ConditionalCases.Case.CaseContent"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -524,27 +522,27 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.ConditionalCases.Case"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.ConditionalCases"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Generator settings used by the LLM to generate a text response.
-    public struct GeneratorSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GeneratorSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The generator to call.
@@ -569,7 +567,7 @@
       /// Required. Output parameter which should contain the generator response.
       public var outputParameter: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GeneratorSettings`.
       public init() {}
@@ -619,7 +617,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -636,22 +634,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment.GeneratorSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Fulfillment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

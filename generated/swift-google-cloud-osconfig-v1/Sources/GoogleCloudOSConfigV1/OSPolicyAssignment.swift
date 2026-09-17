@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// OS policy assignment is an API resource that is used to
 /// apply a set of OS policies to a dynamically targeted group of Compute Engine
@@ -28,7 +28,7 @@ import Foundation
 ///
 /// For more information, see [OS policy and OS policy
 /// assignment](https://cloud.google.com/compute/docs/os-configuration-management/working-with-os-policies).
-public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OSPolicyAssignment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Resource name.
@@ -65,7 +65,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public var revisionId: Swift.String = Swift.String()
 
   /// Output only. The timestamp that the revision was created.
-  public var revisionCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var revisionCreateTime: GoogleWKT.Timestamp? = nil
 
   /// The etag for this OS policy assignment.
   /// If this is provided on update, it must match the server's etag.
@@ -94,7 +94,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// resource.
   public var uid: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OSPolicyAssignment`.
   public init() {}
@@ -167,7 +167,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.revisionId = value
     }
     self.revisionCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .revisionCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .revisionCreateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
@@ -190,7 +190,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -223,7 +223,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// * Example: A LabelSet with 2 labels: `env=prod` and `type=webserver` will
   ///            only be applicable for those VMs with both labels
   ///            present.
-  public struct LabelSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LabelSet: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Labels are identified by key/value pairs in this map.
@@ -231,7 +231,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// map to be selected.
     public var labels: [Swift.String: Swift.String] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LabelSet`.
     public init() {}
@@ -271,7 +271,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -286,11 +286,11 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.OSPolicyAssignment.LabelSet"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -298,7 +298,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   ///
   /// If more than one filter criteria is specified below, a VM will be selected
   /// if and only if it satisfies all of them.
-  public struct InstanceFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InstanceFilter: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Target all VMs in the project. If true, no other criteria is
@@ -323,7 +323,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// following inventories.
     public var inventories: [OSPolicyAssignment.InstanceFilter.Inventory] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstanceFilter`.
     public init() {}
@@ -382,7 +382,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -398,7 +398,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
 
     /// VM inventory details.
-    public struct Inventory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Inventory: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The OS short name
@@ -413,7 +413,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       /// An empty string matches all OS versions.
       public var osVersion: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Inventory`.
       public init() {}
@@ -456,7 +456,7 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -473,28 +473,28 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         return
           "type.googleapis.com/google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter.Inventory"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.OSPolicyAssignment.InstanceFilter"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Message to configure the rollout at the zonal level for the OS policy
   /// assignment.
-  public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Rollout: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The maximum number (or percentage) of VMs per zone to disrupt
@@ -506,9 +506,9 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// VM continues to count towards the `disruption_budget` at least
     /// until this duration of time has passed after configuration changes are
     /// applied.
-    public var minWaitDuration: GoogleCloudWKT.Duration? = nil
+    public var minWaitDuration: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Rollout`.
     public init() {}
@@ -546,10 +546,10 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.disruptionBudget = try container.decodeIfPresent(
         FixedOrPercent.self, forKey: .disruptionBudget)
       self.minWaitDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .minWaitDuration)
+        GoogleWKT.Duration.self, forKey: .minWaitDuration)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -565,11 +565,11 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.OSPolicyAssignment.Rollout"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -695,10 +695,10 @@ public struct OSPolicyAssignment: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.osconfig.v1.OSPolicyAssignment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

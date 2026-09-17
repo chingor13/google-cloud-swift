@@ -13,12 +13,12 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
-@_spi(GoogleCloudInternal) import struct GoogleCloudGax._CRC32C
+import GoogleGax
+@_spi(GoogleCloudInternal) import struct GoogleGax._CRC32C
 import GoogleCloudLocation
 import GoogleCloudSecretManagerV1
 import GoogleCloudTestHelpers
-import GoogleCloudWKT
+import GoogleWKT
 import GoogleIAMV1
 import Logging
 
@@ -79,7 +79,7 @@ public enum GlobalEndpoint {
     do {
       update = try await client.updateSecret(
         request: .init().with {
-          $0.updateMask = GoogleCloudWKT.FieldMask(paths: [
+          $0.updateMask = GoogleWKT.FieldMask(paths: [
             "annotations", "labels", "versionAliases",
           ])
           $0.secret = Secret().with { secret in

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a widget tool that the agent can invoke. When the tool is chosen
 /// by the agent, agent will return the widget to the client. The client is
 /// responsible for processing the widget and generating the next user query to
 /// continue the interaction with the agent.
-public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WidgetTool: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The display name of the widget tool.
@@ -35,7 +35,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var widgetType: WidgetTool.WidgetType = WidgetTool.WidgetType()
 
   /// Optional. Configuration for rendering the widget.
-  public var uiConfig: GoogleCloudWKT.Struct? = nil
+  public var uiConfig: GoogleWKT.Struct? = nil
 
   /// Optional. The mapping that defines how data from a source tool is mapped to
   /// the widget's input parameters.
@@ -47,7 +47,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The input of the widget tool.
   public var input: OneOf_Input? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WidgetTool`.
   public init() {}
@@ -101,7 +101,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(WidgetTool.WidgetType.self, forKey: .widgetType) {
       self.widgetType = value
     }
-    self.uiConfig = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .uiConfig)
+    self.uiConfig = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .uiConfig)
     self.dataMapping = try container.decodeIfPresent(
       WidgetTool.DataMapping.self, forKey: .dataMapping)
     self.textResponseConfig = try container.decodeIfPresent(
@@ -123,7 +123,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.input = input
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -148,7 +148,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configuration for the text response returned with the widget.
-  public struct TextResponseConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TextResponseConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The strategy for providing the text response.
@@ -162,7 +162,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// LLM_GENERATED.
     public var textResponseInstruction: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TextResponseConfig`.
     public init() {}
@@ -214,7 +214,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -344,17 +344,17 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.WidgetTool.TextResponseConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for mapping data from a source tool to the widget's input
   /// parameters.
-  public struct DataMapping: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataMapping: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The resource name of the tool that provides the data for the
@@ -377,7 +377,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     @available(*, deprecated)
     public var pythonScript: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataMapping`.
     public init() {}
@@ -437,7 +437,7 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -561,11 +561,11 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.WidgetTool.DataMapping"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -754,10 +754,10 @@ public struct WidgetTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.WidgetTool"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

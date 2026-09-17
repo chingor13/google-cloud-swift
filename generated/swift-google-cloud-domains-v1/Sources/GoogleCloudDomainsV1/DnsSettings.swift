@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines the DNS configuration of a `Registration`, including name servers,
 /// DNSSEC, and glue records.
-public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DnsSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The list of glue records for this `Registration`. Commonly empty.
@@ -28,7 +28,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The DNS provider of the registration.
   public var dnsProvider: OneOf_DnsProvider? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DnsSettings`.
   public init() {}
@@ -94,7 +94,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.dnsProvider = dnsProvider
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -116,7 +116,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configuration for an arbitrary DNS provider.
-  public struct CustomDns: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CustomDns: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. A list of name servers that store the DNS zone for this domain. Each name
@@ -129,7 +129,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// field is empty, DNSSEC is disabled.
     public var dsRecords: [DnsSettings.DsRecord] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CustomDns`.
     public init() {}
@@ -173,7 +173,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -189,11 +189,11 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.domains.v1.DnsSettings.CustomDns"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -201,7 +201,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `Registration`'s `dns_provider`. You cannot configure the DNS zone itself
   /// using the API. To configure the DNS zone, go to
   /// [Google Domains](https://domains.google/).
-  public struct GoogleDomainsDns: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GoogleDomainsDns: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. A list of name servers that store the DNS zone for this domain. Each name
@@ -219,7 +219,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// otherwise it remains empty.
     public var dsRecords: [DnsSettings.DsRecord] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GoogleDomainsDns`.
     public init() {}
@@ -268,7 +268,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -285,18 +285,18 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.domains.v1.DnsSettings.GoogleDomainsDns"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines a Delegation Signer (DS) record, which is needed to enable DNSSEC
   /// for a domain. It contains a digest (hash) of a DNSKEY record that must be
   /// present in the domain's DNS zone.
-  public struct DsRecord: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DsRecord: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The key tag of the record. Must be set in range 0 -- 65535.
@@ -311,7 +311,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The digest generated from the referenced DNSKEY.
     public var digest: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DsRecord`.
     public init() {}
@@ -368,7 +368,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -717,11 +717,11 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.domains.v1.DnsSettings.DsRecord"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -731,7 +731,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// For example, when `ns.example.com` is a name server for `example.com`, the
   /// host `ns.example.com` must have a glue record to break the circular DNS
   /// reference.
-  public struct GlueRecord: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GlueRecord: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Domain name of the host in Punycode format.
@@ -747,7 +747,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `ipv4_address` and `ipv6_address` must be set.
     public var ipv6Addresses: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GlueRecord`.
     public init() {}
@@ -795,7 +795,7 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -812,11 +812,11 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.domains.v1.DnsSettings.GlueRecord"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -941,10 +941,10 @@ public struct DnsSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.domains.v1.DnsSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

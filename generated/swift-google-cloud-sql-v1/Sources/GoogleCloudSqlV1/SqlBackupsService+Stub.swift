@@ -16,29 +16,29 @@
 
 #if SqlBackupsService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlBackupsServiceStub: Sendable {
       func createBackup(
-        request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateBackupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func getBackup(
-        request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: GetBackupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Backup
 
       func listBackups(
-        request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListBackupsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ListBackupsResponse
 
       func updateBackup(
-        request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateBackupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func deleteBackup(
-        request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteBackupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
     }
   }

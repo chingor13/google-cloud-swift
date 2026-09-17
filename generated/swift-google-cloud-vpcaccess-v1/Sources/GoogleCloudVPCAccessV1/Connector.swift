@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Definition of a Serverless VPC Access connector.
-public struct Connector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Connector: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name in the format `projects/*/locations/*/connectors/*`.
@@ -55,7 +55,7 @@ public struct Connector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Maximum value of instances in autoscaling group underlying the connector.
   public var maxInstances: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Connector`.
   public init() {}
@@ -141,7 +141,7 @@ public struct Connector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -164,7 +164,7 @@ public struct Connector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The subnet in which to house the connector
-  public struct Subnet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Subnet: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Subnet name (relative, not fully qualified).
@@ -178,7 +178,7 @@ public struct Connector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the connector create request was issued.
     public var projectId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Subnet`.
     public init() {}
@@ -221,7 +221,7 @@ public struct Connector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -237,11 +237,11 @@ public struct Connector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.vpcaccess.v1.Connector.Subnet"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -374,10 +374,10 @@ public struct Connector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vpcaccess.v1.Connector"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

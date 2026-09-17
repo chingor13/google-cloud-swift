@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The `Status` type defines a logical error model that is suitable for
 /// different programming environments, including REST APIs and RPC APIs. It is
@@ -24,7 +24,7 @@ import Foundation
 ///
 /// You can find out more about this error model and how to work with it in the
 /// [API Design Guide](https://cloud.google.com/apis/design/errors).
-public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Status: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The status code, which should be an enum value of
@@ -43,9 +43,9 @@ public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A list of messages that carry the error details.  There is a common set of
   /// message types for APIs to use.
-  public var details: [GoogleCloudWKT.`Any`] = []
+  public var details: [GoogleWKT.`Any`] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Status`.
   public init() {}
@@ -88,12 +88,12 @@ public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .message) {
       self.message = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.`Any`].self, forKey: .details) {
+    if let value = try container.decodeIfPresent([GoogleWKT.`Any`].self, forKey: .details) {
       self.details = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +110,10 @@ public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.rpc.Status"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

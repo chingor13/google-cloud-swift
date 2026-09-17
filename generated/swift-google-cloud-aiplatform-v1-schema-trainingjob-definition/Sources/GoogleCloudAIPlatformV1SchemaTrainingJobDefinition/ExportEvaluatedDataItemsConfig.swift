@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for exporting test set predictions to a BigQuery table.
-public struct ExportEvaluatedDataItemsConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExportEvaluatedDataItemsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// URI of desired destination BigQuery table. Expected format:
@@ -34,7 +34,7 @@ public struct ExportEvaluatedDataItemsConfig: Codable, Equatable, GoogleCloudWKT
   /// exists, then the export operation fails.
   public var overrideExistingTable: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExportEvaluatedDataItemsConfig`.
   public init() {}
@@ -78,7 +78,7 @@ public struct ExportEvaluatedDataItemsConfig: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,10 +95,10 @@ public struct ExportEvaluatedDataItemsConfig: Codable, Equatable, GoogleCloudWKT
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.trainingjob.definition.ExportEvaluatedDataItemsConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

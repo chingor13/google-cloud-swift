@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Video frame level annotation results for text annotation (OCR).
 /// Contains information regarding timestamp and bounding box locations for the
 /// frames containing detected OCR text snippets.
-public struct TextFrame: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TextFrame: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Bounding polygon of the detected text for this frame.
   public var rotatedBoundingBox: NormalizedBoundingPoly? = nil
 
   /// Timestamp of this frame.
-  public var timeOffset: GoogleCloudWKT.Duration? = nil
+  public var timeOffset: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TextFrame`.
   public init() {}
@@ -66,11 +66,10 @@ public struct TextFrame: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.rotatedBoundingBox = try container.decodeIfPresent(
       NormalizedBoundingPoly.self, forKey: .rotatedBoundingBox)
-    self.timeOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeOffset)
+    self.timeOffset = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeOffset)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +85,10 @@ public struct TextFrame: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.videointelligence.v1.TextFrame"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

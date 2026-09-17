@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A build resource in the Cloud Build API.
 ///
@@ -36,7 +36,7 @@ import Foundation
 /// - $REVISION_ID or $COMMIT_SHA: the commit SHA specified by RepoSource or
 ///   resolved from the specified branch or tag.
 /// - $SHORT_SHA: first 7 characters of $REVISION_ID or $COMMIT_SHA.
-public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Build: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The 'Build' name with format:
@@ -66,16 +66,16 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var results: Results? = nil
 
   /// Output only. Time at which the request to create the build was received.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time at which execution of the build was started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time at which execution of the build was finished.
   ///
   /// The difference between finish_time and start_time is the duration of the
   /// build's execution.
-  public var finishTime: GoogleCloudWKT.Timestamp? = nil
+  public var finishTime: GoogleWKT.Timestamp? = nil
 
   /// Amount of time that this build should be allowed to run, to second
   /// granularity. If this amount of time elapses, work on the build will cease
@@ -84,7 +84,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `timeout` starts ticking from `startTime`.
   ///
   /// Default time is 60 minutes.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
   /// A list of images to be pushed upon the successful completion of all build
   /// steps.
@@ -103,7 +103,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `EXPIRED`.
   ///
   /// The TTL starts ticking from create_time.
-  public var queueTtl: GoogleCloudWKT.Duration? = nil
+  public var queueTtl: GoogleWKT.Duration? = nil
 
   /// Artifacts produced by the build that should be uploaded upon
   /// successful completion of all build steps.
@@ -181,7 +181,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// executing user steps.
   public var dependencies: [Dependency] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Build`.
   public init() {}
@@ -294,17 +294,14 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.steps = value
     }
     self.results = try container.decodeIfPresent(Results.self, forKey: .results)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.finishTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .finishTime)
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.finishTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .finishTime)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .images) {
       self.images = value
     }
-    self.queueTtl = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .queueTtl)
+    self.queueTtl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .queueTtl)
     self.artifacts = try container.decodeIfPresent(Artifacts.self, forKey: .artifacts)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .logsBucket) {
       self.logsBucket = value
@@ -347,7 +344,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -390,7 +387,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A non-fatal problem encountered during the execution of the build.
-  public struct Warning: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Warning: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Explanation of the warning generated.
@@ -399,7 +396,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The priority for this warning.
     public var priority: Build.Warning.Priority = Build.Warning.Priority()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Warning`.
     public init() {}
@@ -442,7 +439,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -570,16 +567,16 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.Build.Warning"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A fatal problem encountered during the execution of the build.
-  public struct FailureInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FailureInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the failure.
@@ -588,7 +585,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Explains the failure issue in more detail using hard-coded text.
     public var detail: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FailureInfo`.
     public init() {}
@@ -633,7 +630,7 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -783,11 +780,11 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.devtools.cloudbuild.v1.Build.FailureInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -949,10 +946,10 @@ public struct Build: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.Build"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

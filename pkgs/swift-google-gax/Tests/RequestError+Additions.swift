@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 
 extension RequestError: Equatable {
   public static func == (lhs: RequestError, rhs: RequestError) -> Bool {

@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for the `responsePolicyRules` resource.
 ///
@@ -28,7 +28,7 @@ public final class ResponsePolicyRulesClient: Clients.ResponsePolicyRulesProtoco
   let inner: any Clients.ResponsePolicyRulesStub
 
   /// Creates a new `ResponsePolicyRulesClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ResponsePolicyRulesStub = try Clients.ResponsePolicyRulesTransport(
       options)
     inner = Clients.ResponsePolicyRulesRetry(inner, options: options)
@@ -42,7 +42,7 @@ public final class ResponsePolicyRulesClient: Clients.ResponsePolicyRulesProtoco
   ///
   /// @Snippet(path: "responsePolicyRules_create")
   public func create(
-    request: ResponsePolicyRulesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.CreateRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRule {
     try await self.inner.create(request: request, options: options)
   }
@@ -51,7 +51,7 @@ public final class ResponsePolicyRulesClient: Clients.ResponsePolicyRulesProtoco
   ///
   /// @Snippet(path: "responsePolicyRules_delete")
   public func delete(
-    request: ResponsePolicyRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.DeleteRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.delete(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class ResponsePolicyRulesClient: Clients.ResponsePolicyRulesProtoco
   ///
   /// @Snippet(path: "responsePolicyRules_get")
   public func `get`(
-    request: ResponsePolicyRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRule {
     try await self.inner.`get`(request: request, options: options)
   }
@@ -69,7 +69,7 @@ public final class ResponsePolicyRulesClient: Clients.ResponsePolicyRulesProtoco
   ///
   /// @Snippet(path: "responsePolicyRules_list")
   public func list(
-    request: ResponsePolicyRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRulesListResponse {
     try await self.inner.list(request: request, options: options)
   }
@@ -78,21 +78,21 @@ public final class ResponsePolicyRulesClient: Clients.ResponsePolicyRulesProtoco
   ///
   /// @Snippet(path: "responsePolicyRules_list")
   public func list(
-    byItem: ResponsePolicyRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ResponsePolicyRulesClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResponsePolicyRule, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ResponsePolicyRulesListResponse in
       var request = byItem
       request.pageToken = token
       return try await self.list(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Applies a partial update to an existing Response Policy Rule.
   ///
   /// @Snippet(path: "responsePolicyRules_patch")
   public func patch(
-    request: ResponsePolicyRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.PatchRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRulesPatchResponse {
     try await self.inner.patch(request: request, options: options)
   }
@@ -101,7 +101,7 @@ public final class ResponsePolicyRulesClient: Clients.ResponsePolicyRulesProtoco
   ///
   /// @Snippet(path: "responsePolicyRules_update")
   public func update(
-    request: ResponsePolicyRulesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.UpdateRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRulesUpdateResponse {
     try await self.inner.update(request: request, options: options)
   }
@@ -185,37 +185,37 @@ extension Clients {
 
     /// See `ResponsePolicyRulesClient.create`.
     func create(
-      request: ResponsePolicyRulesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ResponsePolicyRulesClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResponsePolicyRule
 
     /// See `ResponsePolicyRulesClient.delete`.
     func delete(
-      request: ResponsePolicyRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ResponsePolicyRulesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ResponsePolicyRulesClient.`get``.
     func `get`(
-      request: ResponsePolicyRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ResponsePolicyRulesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResponsePolicyRule
 
     /// See `ResponsePolicyRulesClient.list`.
     func list(
-      request: ResponsePolicyRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ResponsePolicyRulesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResponsePolicyRulesListResponse
 
     /// See `ResponsePolicyRulesClient.list`.
     func list(
-      byItem: ResponsePolicyRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ResponsePolicyRulesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ResponsePolicyRule, Swift.Error>
 
     /// See `ResponsePolicyRulesClient.patch`.
     func patch(
-      request: ResponsePolicyRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: ResponsePolicyRulesClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResponsePolicyRulesPatchResponse
 
     /// See `ResponsePolicyRulesClient.update`.
     func update(
-      request: ResponsePolicyRulesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: ResponsePolicyRulesClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResponsePolicyRulesUpdateResponse
   }
 }
@@ -229,9 +229,9 @@ extension Clients.ResponsePolicyRulesProtocol {
   }
 
   public func create(
-    request: ResponsePolicyRulesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.CreateRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func create(
@@ -252,9 +252,9 @@ extension Clients.ResponsePolicyRulesProtocol {
   }
 
   public func delete(
-    request: ResponsePolicyRulesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.DeleteRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func delete(
@@ -277,9 +277,9 @@ extension Clients.ResponsePolicyRulesProtocol {
   }
 
   public func `get`(
-    request: ResponsePolicyRulesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func `get`(
@@ -302,9 +302,9 @@ extension Clients.ResponsePolicyRulesProtocol {
   }
 
   public func list(
-    request: ResponsePolicyRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRulesListResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func list(
@@ -314,12 +314,12 @@ extension Clients.ResponsePolicyRulesProtocol {
   }
 
   public func list(
-    byItem: ResponsePolicyRulesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ResponsePolicyRulesClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResponsePolicyRule, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ResponsePolicyRulesListResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func list(
@@ -340,9 +340,9 @@ extension Clients.ResponsePolicyRulesProtocol {
   }
 
   public func patch(
-    request: ResponsePolicyRulesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.PatchRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRulesPatchResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func patch(
@@ -367,9 +367,9 @@ extension Clients.ResponsePolicyRulesProtocol {
   }
 
   public func update(
-    request: ResponsePolicyRulesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+    request: ResponsePolicyRulesClient.UpdateRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResponsePolicyRulesUpdateResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func update(

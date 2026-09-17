@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Resource representation as defined by the corresponding service providing the
 /// resource for a given API version.
-public struct VersionedResource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VersionedResource: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// API version of the resource.
@@ -42,9 +42,9 @@ public struct VersionedResource: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// You can find the resource definition for each supported resource type in
   /// this table:
   /// `https://cloud.google.com/asset-inventory/docs/supported-asset-types`
-  public var resource: GoogleCloudWKT.Struct? = nil
+  public var resource: GoogleWKT.Struct? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VersionedResource`.
   public init() {}
@@ -82,10 +82,10 @@ public struct VersionedResource: Codable, Equatable, GoogleCloudWKT._AnyPackable
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .version) {
       self.version = value
     }
-    self.resource = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .resource)
+    self.resource = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .resource)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +101,10 @@ public struct VersionedResource: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.VersionedResource"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

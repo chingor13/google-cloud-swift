@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class ZoneOperationsRetry: ZoneOperationsStub {
       let inner: any ZoneOperationsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any ZoneOperationsStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any ZoneOperationsStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,28 +50,28 @@
       }
 
       public func delete(
-        request: ZoneOperationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ZoneOperationsClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> Void in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ZoneOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -79,14 +79,14 @@
       }
 
       public func list(
-        request: ZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.OperationList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ZoneOperationsClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.OperationList
             in
             return try await self.inner.list(request: r, options: o)
@@ -94,14 +94,14 @@
       }
 
       public func wait(
-        request: ZoneOperationsClient.WaitRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.WaitRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ZoneOperationsClient.WaitRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ZoneOperationsClient.WaitRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.wait(request: r, options: o)

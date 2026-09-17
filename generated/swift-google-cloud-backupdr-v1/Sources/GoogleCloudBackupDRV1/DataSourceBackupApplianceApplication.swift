@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// BackupApplianceApplication describes a Source Resource when it is an
 /// application backed up by a BackupAppliance.
-public struct DataSourceBackupApplianceApplication: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataSourceBackupApplianceApplication: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the Application as known to the Backup Appliance.
@@ -43,7 +43,7 @@ public struct DataSourceBackupApplianceApplication: Codable, Equatable, GoogleCl
   /// Hostid of the application host.
   public var hostId: Swift.Int64 = Swift.Int64()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataSourceBackupApplianceApplication`.
   public init() {}
@@ -111,7 +111,7 @@ public struct DataSourceBackupApplianceApplication: Codable, Equatable, GoogleCl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -132,10 +132,10 @@ public struct DataSourceBackupApplianceApplication: Codable, Equatable, GoogleCl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.DataSourceBackupApplianceApplication"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

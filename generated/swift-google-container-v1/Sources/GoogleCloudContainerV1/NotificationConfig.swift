@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// NotificationConfig is the configuration of notifications.
-public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NotificationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Notification config for Pub/Sub.
   public var pubsub: NotificationConfig.PubSub? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NotificationConfig`.
   public init() {}
@@ -60,7 +60,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.pubsub = try container.decodeIfPresent(NotificationConfig.PubSub.self, forKey: .pubsub)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -73,7 +73,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// Pub/Sub specific notification config.
-  public struct PubSub: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PubSub: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Enable notifications for Pub/Sub.
@@ -88,7 +88,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// types will be sent
     public var filter: NotificationConfig.Filter? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PubSub`.
     public init() {}
@@ -134,7 +134,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.filter = try container.decodeIfPresent(NotificationConfig.Filter.self, forKey: .filter)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -151,11 +151,11 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NotificationConfig.PubSub"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -163,13 +163,13 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// present, those and only those event types will be transmitted to the
   /// cluster. Other types will be skipped. If no filter is specified, or no
   /// event types are present, all event types will be sent
-  public struct Filter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Filter: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Event types to allowlist.
     public var eventType: [NotificationConfig.EventType] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Filter`.
     public init() {}
@@ -209,7 +209,7 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -224,11 +224,11 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NotificationConfig.Filter"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -355,10 +355,10 @@ public struct NotificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.NotificationConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

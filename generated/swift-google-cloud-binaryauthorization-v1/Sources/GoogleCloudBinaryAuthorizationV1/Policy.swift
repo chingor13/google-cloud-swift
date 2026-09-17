@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A [policy][google.cloud.binaryauthorization.v1.Policy] for container image
 /// binary authorization.
 ///
 /// [google.cloud.binaryauthorization.v1.Policy]: <doc:Policy>
-public struct Policy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Policy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name, in the format `projects/*/policy`. There is
@@ -78,14 +78,14 @@ public struct Policy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var defaultAdmissionRule: AdmissionRule? = nil
 
   /// Output only. Time when the policy was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. A checksum, returned by the server, that can be sent on update
   /// requests to ensure the policy has an up-to-date value before attempting to
   /// update it. See https://google.aip.dev/154.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Policy`.
   public init() {}
@@ -179,14 +179,13 @@ public struct Policy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.defaultAdmissionRule = try container.decodeIfPresent(
       AdmissionRule.self, forKey: .defaultAdmissionRule)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -318,10 +317,10 @@ public struct Policy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.binaryauthorization.v1.Policy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

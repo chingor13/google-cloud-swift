@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// OIDC discovery information of the target cluster.
 ///
@@ -28,7 +28,7 @@ import Foundation
 /// Clusters with public issuers only need to specify the `issuer_url` field
 /// while clusters with private issuers need to provide both
 /// `issuer_url` and `oidc_jwks`.
-public struct AttachedOidcConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AttachedOidcConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A JSON Web Token (JWT) issuer URI. `issuer` must start with `https://`.
@@ -43,7 +43,7 @@ public struct AttachedOidcConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// to verify the OIDC JWT asserted by the IDP.
   public var jwks: Foundation.Data = Foundation.Data()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AttachedOidcConfig`.
   public init() {}
@@ -86,7 +86,7 @@ public struct AttachedOidcConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +102,10 @@ public struct AttachedOidcConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkemulticloud.v1.AttachedOidcConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

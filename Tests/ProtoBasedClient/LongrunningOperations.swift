@@ -13,9 +13,9 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudTestHelpers
-import GoogleCloudWKT
+import GoogleWKT
 import GoogleCloudWorkflowsV1
 import Logging
 import Testing

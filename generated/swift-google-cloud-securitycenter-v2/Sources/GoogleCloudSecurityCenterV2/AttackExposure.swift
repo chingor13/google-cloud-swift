@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An attack exposure contains the results of an attack path simulation run.
-public struct AttackExposure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AttackExposure: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A number between 0 (inclusive) and infinity that represents how important
@@ -27,7 +27,7 @@ public struct AttackExposure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var score: Swift.Double = Swift.Double()
 
   /// The most recent time the attack exposure was updated on this finding.
-  public var latestCalculationTime: GoogleCloudWKT.Timestamp? = nil
+  public var latestCalculationTime: GoogleWKT.Timestamp? = nil
 
   /// The resource name of the attack path simulation result that contains the
   /// details regarding this attack exposure score.
@@ -50,7 +50,7 @@ public struct AttackExposure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// finding.
   public var exposedLowValueResourcesCount: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AttackExposure`.
   public init() {}
@@ -102,7 +102,7 @@ public struct AttackExposure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.score = value
     }
     self.latestCalculationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .latestCalculationTime)
+      GoogleWKT.Timestamp.self, forKey: .latestCalculationTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .attackExposureResult) {
       self.attackExposureResult = value
     }
@@ -126,7 +126,7 @@ public struct AttackExposure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -254,10 +254,10 @@ public struct AttackExposure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.AttackExposure"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

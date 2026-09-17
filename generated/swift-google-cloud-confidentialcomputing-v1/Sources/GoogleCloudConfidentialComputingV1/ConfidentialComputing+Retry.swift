@@ -19,26 +19,26 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ConfidentialComputingRetry: ConfidentialComputingStub {
     let inner: any ConfidentialComputingStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ConfidentialComputingStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ConfidentialComputingStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func createChallenge(
-      request: CreateChallengeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChallengeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfidentialComputingV1.Challenge {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateChallengeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateChallengeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudConfidentialComputingV1.Challenge
           in
           return try await self.inner.createChallenge(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func verifyAttestation(
-      request: VerifyAttestationRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyAttestationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfidentialComputingV1.VerifyAttestationResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: VerifyAttestationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: VerifyAttestationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudConfidentialComputingV1.VerifyAttestationResponse
           in
           return try await self.inner.verifyAttestation(request: r, options: o)
@@ -80,14 +80,14 @@ extension Clients {
     }
 
     public func verifyConfidentialSpace(
-      request: VerifyConfidentialSpaceRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyConfidentialSpaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfidentialComputingV1.VerifyConfidentialSpaceResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: VerifyConfidentialSpaceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: VerifyConfidentialSpaceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudConfidentialComputingV1.VerifyConfidentialSpaceResponse
           in
           return try await self.inner.verifyConfidentialSpace(request: r, options: o)
@@ -95,14 +95,14 @@ extension Clients {
     }
 
     public func verifyConfidentialGke(
-      request: VerifyConfidentialGkeRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyConfidentialGkeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfidentialComputingV1.VerifyConfidentialGkeResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: VerifyConfidentialGkeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: VerifyConfidentialGkeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudConfidentialComputingV1.VerifyConfidentialGkeResponse
           in
           return try await self.inner.verifyConfidentialGke(request: r, options: o)
@@ -110,29 +110,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

@@ -15,79 +15,79 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol PolicyTagManagerStub: Sendable {
     func createTaxonomy(
-      request: CreateTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTaxonomyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Taxonomy
 
     func deleteTaxonomy(
-      request: DeleteTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTaxonomyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateTaxonomy(
-      request: UpdateTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTaxonomyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Taxonomy
 
     func listTaxonomies(
-      request: ListTaxonomiesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTaxonomiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.ListTaxonomiesResponse
 
     func getTaxonomy(
-      request: GetTaxonomyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTaxonomyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.Taxonomy
 
     func createPolicyTag(
-      request: CreatePolicyTagRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePolicyTagRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.PolicyTag
 
     func deletePolicyTag(
-      request: DeletePolicyTagRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePolicyTagRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updatePolicyTag(
-      request: UpdatePolicyTagRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyTagRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.PolicyTag
 
     func listPolicyTags(
-      request: ListPolicyTagsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPolicyTagsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.ListPolicyTagsResponse
 
     func getPolicyTag(
-      request: GetPolicyTagRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyTagRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogV1.PolicyTag
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

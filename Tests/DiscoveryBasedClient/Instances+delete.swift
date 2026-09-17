@@ -14,7 +14,7 @@
 
 // [START compute_instances_delete]
 import GoogleCloudComputeV1
-import GoogleCloudGax
+import GoogleGax
 import Logging
 
 extension InstanceSamples {

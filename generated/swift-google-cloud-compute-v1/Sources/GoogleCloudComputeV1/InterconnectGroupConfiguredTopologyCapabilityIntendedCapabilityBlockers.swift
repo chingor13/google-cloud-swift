@@ -16,13 +16,13 @@
 
 #if InterconnectGroups
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// [Output Only] Reasons why configuration.topologyCapability.sla differs
   /// from intent.topologyCapability. This list is empty if and only if those
   /// are the same.
   public struct InterconnectGroupConfiguredTopologyCapabilityIntendedCapabilityBlockers: Codable,
-    Equatable, GoogleCloudWKT._AnyPackable,
+    Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var blockerType:
@@ -55,7 +55,7 @@
     /// Zone names are "zone1" and/or "zone2".
     public var zones: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InterconnectGroupConfiguredTopologyCapabilityIntendedCapabilityBlockers`.
     public init() {}
@@ -120,7 +120,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -265,11 +265,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.InterconnectGroupConfiguredTopologyCapabilityIntendedCapabilityBlockers"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

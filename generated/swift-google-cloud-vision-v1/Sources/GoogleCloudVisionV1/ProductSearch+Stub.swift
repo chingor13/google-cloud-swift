@@ -15,91 +15,91 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ProductSearchStub: Sendable {
     func createProductSet(
-      request: CreateProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ProductSet
 
     func listProductSets(
-      request: ListProductSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ListProductSetsResponse
 
     func getProductSet(
-      request: GetProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ProductSet
 
     func updateProductSet(
-      request: UpdateProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ProductSet
 
     func deleteProductSet(
-      request: DeleteProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createProduct(
-      request: CreateProductRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.Product
 
     func listProducts(
-      request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ListProductsResponse
 
     func getProduct(
-      request: GetProductRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.Product
 
     func updateProduct(
-      request: UpdateProductRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProductRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.Product
 
     func deleteProduct(
-      request: DeleteProductRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProductRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createReferenceImage(
-      request: CreateReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReferenceImageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ReferenceImage
 
     func deleteReferenceImage(
-      request: DeleteReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReferenceImageRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listReferenceImages(
-      request: ListReferenceImagesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReferenceImagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ListReferenceImagesResponse
 
     func getReferenceImage(
-      request: GetReferenceImageRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReferenceImageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ReferenceImage
 
     func addProductToProductSet(
-      request: AddProductToProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: AddProductToProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func removeProductFromProductSet(
-      request: RemoveProductFromProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveProductFromProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listProductsInProductSet(
-      request: ListProductsInProductSetRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsInProductSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVisionV1.ListProductsInProductSetResponse
 
     func importProductSets(
-      request: ImportProductSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportProductSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func purgeProducts(
-      request: PurgeProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: PurgeProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

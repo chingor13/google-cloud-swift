@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The message that represents server metadata.
-public struct ServerMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ServerMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The offset position for the packet in its stream.
@@ -30,9 +30,9 @@ public struct ServerMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// this timestamp is not comparable across packets sent to the same stream
   /// different sessions. Session here refers to one individual gRPC streaming
   /// request to the stream server.
-  public var ingestTime: GoogleCloudWKT.Timestamp? = nil
+  public var ingestTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ServerMetadata`.
   public init() {}
@@ -70,11 +70,10 @@ public struct ServerMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .offset) {
       self.offset = value
     }
-    self.ingestTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .ingestTime)
+    self.ingestTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .ingestTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -90,10 +89,10 @@ public struct ServerMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.ServerMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

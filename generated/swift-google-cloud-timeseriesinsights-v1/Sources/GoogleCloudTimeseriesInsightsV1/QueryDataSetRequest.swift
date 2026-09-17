@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for performing a query against a loaded DataSet.
-public struct QueryDataSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QueryDataSetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Loaded DataSet to be queried in the format of
@@ -38,7 +38,7 @@ public struct QueryDataSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   ///
   /// [google.cloud.timeseriesinsights.v1.TimeseriesParams.granularity]: <doc:TimeseriesParams/granularity>
   /// [google.cloud.timeseriesinsights.v1.TimeseriesPoint]: <doc:TimeseriesPoint>
-  public var detectionTime: GoogleCloudWKT.Timestamp? = nil
+  public var detectionTime: GoogleWKT.Timestamp? = nil
 
   /// How many slices are returned in
   /// [QueryDataSetResponse.slices][google.cloud.timeseriesinsights.v1.QueryDataSetResponse.slices].
@@ -81,7 +81,7 @@ public struct QueryDataSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// [google.cloud.timeseriesinsights.v1.EvaluatedSlice.history]: <doc:EvaluatedSlice/history>
   public var returnTimeseries: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QueryDataSetRequest`.
   public init() {}
@@ -130,7 +130,7 @@ public struct QueryDataSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
       self.name = value
     }
     self.detectionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .detectionTime)
+      GoogleWKT.Timestamp.self, forKey: .detectionTime)
     self.numReturnedSlices = try container.decodeIfPresent(
       Swift.Int32.self, forKey: .numReturnedSlices)
     self.slicingParams = try container.decodeIfPresent(SlicingParams.self, forKey: .slicingParams)
@@ -143,7 +143,7 @@ public struct QueryDataSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -164,10 +164,10 @@ public struct QueryDataSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.timeseriesinsights.v1.QueryDataSetRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

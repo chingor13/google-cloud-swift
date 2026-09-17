@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudContainerV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: ClusterManagerClient) async throws {
   let response = try await client.completeControlPlaneUpgrade(

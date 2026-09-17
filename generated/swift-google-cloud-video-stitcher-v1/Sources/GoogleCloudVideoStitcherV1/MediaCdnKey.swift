@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for a Media CDN key.
-public struct MediaCdnKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MediaCdnKey: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Input only. 64-byte ed25519 private key for this Media CDN key.
@@ -31,7 +31,7 @@ public struct MediaCdnKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Otherwise, the URL would be signed using the standard Media CDN signature.
   public var tokenConfig: MediaCdnKey.TokenConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MediaCdnKey`.
   public init() {}
@@ -78,7 +78,7 @@ public struct MediaCdnKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       MediaCdnKey.TokenConfig.self, forKey: .tokenConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,7 +93,7 @@ public struct MediaCdnKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configuration for a Media CDN token.
-  public struct TokenConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TokenConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The query parameter in which to find the token.
@@ -106,7 +106,7 @@ public struct MediaCdnKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Defaults to `edge-cache-token`.
     public var queryParameter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TokenConfig`.
     public init() {}
@@ -144,7 +144,7 @@ public struct MediaCdnKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -159,21 +159,21 @@ public struct MediaCdnKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.stitcher.v1.MediaCdnKey.TokenConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.stitcher.v1.MediaCdnKey"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// RolloutInfo represents the state of the `FleetPackage` at all the
 /// clusters the rollout is targeting.
-public struct RolloutInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RolloutInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. state contains the overall status of the Rollout.
   public var state: RolloutInfo.State = RolloutInfo.State()
 
   /// Output only. Time when the rollout started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time when the rollout completed.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Message containing additional information related to the
   /// rollout.
@@ -39,7 +39,7 @@ public struct RolloutInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// rollout strategy.
   public var rolloutStrategyInfo: RolloutStrategyInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RolloutInfo`.
   public init() {}
@@ -83,9 +83,8 @@ public struct RolloutInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(RolloutInfo.State.self, forKey: .state) {
       self.state = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .message) {
       self.message = value
     }
@@ -93,7 +92,7 @@ public struct RolloutInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       RolloutStrategyInfo.self, forKey: .rolloutStrategyInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -252,10 +251,10 @@ public struct RolloutInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.configdelivery.v1.RolloutInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

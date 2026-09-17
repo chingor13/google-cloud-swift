@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Cloud SQL users service.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlUsersServiceStub
 
     /// Creates a new `SqlUsersServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlUsersServiceStub = try Clients.SqlUsersServiceTransport(options)
       inner = Clients.SqlUsersServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -42,7 +42,7 @@
     ///
     /// @Snippet(path: "SqlUsersService_Delete")
     public func delete(
-      request: SqlUsersDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "SqlUsersService_Get")
     public func `get`(
-      request: SqlUsersGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.User {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -60,7 +60,7 @@
     ///
     /// @Snippet(path: "SqlUsersService_Insert")
     public func insert(
-      request: SqlUsersInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -69,7 +69,7 @@
     ///
     /// @Snippet(path: "SqlUsersService_List")
     public func list(
-      request: SqlUsersListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.UsersListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -78,7 +78,7 @@
     ///
     /// @Snippet(path: "SqlUsersService_Update")
     public func update(
-      request: SqlUsersUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.update(request: request, options: options)
     }
@@ -108,27 +108,27 @@
 
       /// See `SqlUsersServiceClient.delete`.
       func delete(
-        request: SqlUsersDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlUsersServiceClient.`get``.
       func `get`(
-        request: SqlUsersGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.User
 
       /// See `SqlUsersServiceClient.insert`.
       func insert(
-        request: SqlUsersInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlUsersServiceClient.list`.
       func list(
-        request: SqlUsersListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.UsersListResponse
 
       /// See `SqlUsersServiceClient.update`.
       func update(
-        request: SqlUsersUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
     }
   }
@@ -140,9 +140,9 @@
     }
 
     public func delete(
-      request: SqlUsersDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(request: SqlUsersGetRequest) async throws -> GoogleCloudSqlV1.User {
@@ -150,9 +150,9 @@
     }
 
     public func `get`(
-      request: SqlUsersGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.User {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(request: SqlUsersInsertRequest) async throws -> GoogleCloudSqlV1.Operation {
@@ -160,9 +160,9 @@
     }
 
     public func insert(
-      request: SqlUsersInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(request: SqlUsersListRequest) async throws
@@ -172,9 +172,9 @@
     }
 
     public func list(
-      request: SqlUsersListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.UsersListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func update(request: SqlUsersUpdateRequest) async throws -> GoogleCloudSqlV1.Operation {
@@ -182,9 +182,9 @@
     }
 
     public func update(
-      request: SqlUsersUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlUsersUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

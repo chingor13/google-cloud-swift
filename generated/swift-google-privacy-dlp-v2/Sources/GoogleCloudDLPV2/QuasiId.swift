@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A column with a semantic tag attached.
-public struct QuasiId: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QuasiId: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Identifies the column.
@@ -29,7 +29,7 @@ public struct QuasiId: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// value. [required]
   public var tag: OneOf_Tag? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QuasiId`.
   public init() {}
@@ -86,13 +86,13 @@ public struct QuasiId: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let customTag = try container.decodeIfPresent(Swift.String.self, forKey: .customTag) {
       try tagCheckAndSet(.customTag(customTag))
     }
-    if let inferred = try container.decodeIfPresent(GoogleCloudWKT.Empty?.self, forKey: .inferred) {
+    if let inferred = try container.decodeIfPresent(GoogleWKT.Empty?.self, forKey: .inferred) {
       try tagCheckAndSet(.inferred(inferred))
     }
     self.tag = tag
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -131,16 +131,16 @@ public struct QuasiId: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     case customTag(Swift.String)
     /// If no semantic tag is indicated, we infer the statistical model from
     /// the distribution of values in the input data
-    indirect case inferred(GoogleCloudWKT.Empty?)
+    indirect case inferred(GoogleWKT.Empty?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.QuasiId"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

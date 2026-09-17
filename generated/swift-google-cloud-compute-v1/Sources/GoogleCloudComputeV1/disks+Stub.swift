@@ -16,94 +16,93 @@
 
 #if Disks
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol DisksStub: Sendable {
       func addResourcePolicies(
-        request: DisksClient.AddResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.AddResourcePoliciesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: DisksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskAggregatedList
 
       func bulkInsert(
-        request: DisksClient.BulkInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.BulkInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func bulkSetLabels(
-        request: DisksClient.BulkSetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.BulkSetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func createSnapshot(
-        request: DisksClient.CreateSnapshotRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.CreateSnapshotRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: DisksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: DisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Disk
 
       func getIamPolicy(
-        request: DisksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: DisksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: DisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskList
 
       func removeResourcePolicies(
-        request: DisksClient.RemoveResourcePoliciesRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.RemoveResourcePoliciesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func resize(
-        request: DisksClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.ResizeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: DisksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setLabels(
-        request: DisksClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func startAsyncReplication(
-        request: DisksClient.StartAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.StartAsyncReplicationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func stopAsyncReplication(
-        request: DisksClient.StopAsyncReplicationRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.StopAsyncReplicationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func stopGroupAsyncReplication(
-        request: DisksClient.StopGroupAsyncReplicationRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: DisksClient.StopGroupAsyncReplicationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: DisksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: DisksClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateKmsKey(
-        request: DisksClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
+        request: DisksClient.UpdateKmsKeyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

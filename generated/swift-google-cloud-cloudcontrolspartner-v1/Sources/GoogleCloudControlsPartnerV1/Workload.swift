@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Contains metadata around the [Workload
 /// resource](https://cloud.google.com/assured-workloads/docs/reference/rest/Shared.Types/Workload)
 /// in the Assured Workloads API.
-public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Workload: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Format:
@@ -31,7 +31,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var folderId: Swift.Int64 = Swift.Int64()
 
   /// Output only. Time the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The name of container folder of the assured workload
   public var folder: Swift.String = Swift.String()
@@ -51,7 +51,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Partner associated with this workload.
   public var partner: Workload.Partner = Workload.Partner()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Workload`.
   public init() {}
@@ -106,8 +106,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .folderId) {
       self.folderId = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .folder) {
       self.folder = value
     }
@@ -128,7 +127,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -289,10 +288,10 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.cloudcontrolspartner.v1.Workload"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

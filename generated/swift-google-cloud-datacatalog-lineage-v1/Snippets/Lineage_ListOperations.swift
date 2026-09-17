@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataCatalogLineageV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: LineageClient) async throws {
   let items = try client.listOperations(

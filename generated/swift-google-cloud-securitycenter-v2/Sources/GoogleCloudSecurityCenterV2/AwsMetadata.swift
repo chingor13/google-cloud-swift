@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AWS metadata associated with the resource, only applicable if the finding's
 /// cloud provider is Amazon Web Services.
-public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AwsMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The AWS organization associated with the resource.
@@ -32,7 +32,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The AWS account associated with the resource.
   public var account: AwsMetadata.AwsAccount? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AwsMetadata`.
   public init() {}
@@ -79,7 +79,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.account = try container.decodeIfPresent(AwsMetadata.AwsAccount.self, forKey: .account)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// An organization is a collection of accounts that are centrally managed
   /// together using consolidated billing, organized hierarchically with
   /// organizational units (OUs), and controlled with policies.
-  public struct AwsOrganization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AwsOrganization: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier (ID) for the organization. The regex pattern for an
@@ -104,7 +104,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// letters or digits.
     public var id: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AwsOrganization`.
     public init() {}
@@ -142,7 +142,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -157,18 +157,18 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.AwsMetadata.AwsOrganization"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An Organizational Unit (OU) is a container of AWS accounts within a root of
   /// an organization. Policies that are attached to an OU apply to all accounts
   /// contained in that OU and in any child OUs.
-  public struct AwsOrganizationalUnit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AwsOrganizationalUnit: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier (ID) associated with this OU. The regex pattern for
@@ -181,7 +181,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The friendly name of the OU.
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AwsOrganizationalUnit`.
     public init() {}
@@ -224,7 +224,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -240,16 +240,16 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.AwsMetadata.AwsOrganizationalUnit"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An AWS account that is a member of an organization.
-  public struct AwsAccount: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AwsAccount: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier (ID) of the account, containing exactly 12 digits.
@@ -258,7 +258,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The friendly name of this account.
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AwsAccount`.
     public init() {}
@@ -301,7 +301,7 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -317,21 +317,21 @@ public struct AwsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.AwsMetadata.AwsAccount"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.AwsMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -14,7 +14,7 @@
 
 // [START storage_set_retention_policy]
 import GoogleCloudStorage
-import GoogleCloudWKT
+import GoogleWKT
 
 public func setRetentionPolicy(
   client: StorageControlClient, bucketId: String, retentionPeriod: Int64

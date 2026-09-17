@@ -16,13 +16,13 @@
 
 #if AnswerRecords || Conversations || Participants || Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The sentiment, such as positive/negative feeling or association, for a unit
   /// of analysis, such as the query text. See:
   /// https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values
   /// for how to interpret the result.
-  public struct Sentiment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Sentiment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Sentiment score between -1.0 (negative sentiment) and 1.0 (positive
@@ -33,7 +33,7 @@
     /// magnitude of sentiment, regardless of score (positive or negative).
     public var magnitude: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Sentiment`.
     public init() {}
@@ -76,7 +76,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -92,11 +92,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.Sentiment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

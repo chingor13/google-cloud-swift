@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Spec of a task
-public struct TaskSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TaskSpec: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The sequence of one or more runnables (executable scripts,
@@ -45,7 +45,7 @@ public struct TaskSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the actual maximum run time for a job will be limited to the maximum run
   /// time for a job listed at
   /// https://cloud.google.com/batch/quotas#max-job-duration.
-  public var maxRunDuration: GoogleCloudWKT.Duration? = nil
+  public var maxRunDuration: GoogleWKT.Duration? = nil
 
   /// Maximum number of retries on failures.
   /// The default, 0, which means never retry.
@@ -72,7 +72,7 @@ public struct TaskSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Environment variables to set before running the Task.
   public var environment: Environment? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TaskSpec`.
   public init() {}
@@ -125,7 +125,7 @@ public struct TaskSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.computeResource = try container.decodeIfPresent(
       ComputeResource.self, forKey: .computeResource)
     self.maxRunDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxRunDuration)
+      GoogleWKT.Duration.self, forKey: .maxRunDuration)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .maxRetryCount) {
       self.maxRetryCount = value
     }
@@ -144,7 +144,7 @@ public struct TaskSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.environment = try container.decodeIfPresent(Environment.self, forKey: .environment)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -166,10 +166,10 @@ public struct TaskSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.TaskSpec"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

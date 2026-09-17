@@ -14,8 +14,8 @@
 
 #if GlobalOperations || GlobalOrganizationOperations || RegionOperations || ZoneOperations
 
-  import GoogleCloudGax
-  import GoogleCloudWKT
+  import GoogleGax
+  import GoogleWKT
   import GoogleRpc
 
   extension Operation {
@@ -32,12 +32,11 @@
 
     func _detectErrors() throws {
       if self.error != nil || (self.httpErrorStatusCode ?? 0) != 0 || self.httpErrorMessage != nil {
-        throw GoogleCloudGax.RequestError.service(
-          GoogleCloudGax.ServiceError(
+        throw GoogleGax.RequestError.service(
+          GoogleGax.ServiceError(
             code: GoogleRpc.Code(intValue: Int(self.httpErrorStatusCode ?? 0)),
             message: self.httpErrorMessage ?? "Operation failed",
-            details: self.error?.errors.compactMap { try? GoogleCloudWKT.Any(fromMessage: $0) }.map
-            {
+            details: self.error?.errors.compactMap { try? GoogleWKT.Any(fromMessage: $0) }.map {
               .other($0)
             } ?? []
           )
@@ -47,11 +46,11 @@
       if let metadata = self.instancesBulkInsertOperationMetadata,
         metadata.perLocationStatus.values.contains(where: { ($0.failedToCreateVmCount ?? 0) > 0 })
       {
-        throw GoogleCloudGax.RequestError.service(
-          GoogleCloudGax.ServiceError(
+        throw GoogleGax.RequestError.service(
+          GoogleGax.ServiceError(
             code: .unknown,
             message: "Instances bulk insert operation failed",
-            details: [.other(try! GoogleCloudWKT.Any(fromMessage: metadata))]
+            details: [.other(try! GoogleWKT.Any(fromMessage: metadata))]
           )
         )
       }
@@ -59,11 +58,11 @@
       if let metadata = self.setCommonInstanceMetadataOperationMetadata,
         metadata.perLocationOperations.values.contains(where: { $0.error != nil })
       {
-        throw GoogleCloudGax.RequestError.service(
-          GoogleCloudGax.ServiceError(
+        throw GoogleGax.RequestError.service(
+          GoogleGax.ServiceError(
             code: .unknown,
             message: "Set common instance metadata operation failed",
-            details: [.other(try! GoogleCloudWKT.Any(fromMessage: metadata))]
+            details: [.other(try! GoogleWKT.Any(fromMessage: metadata))]
           )
         )
       }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An answer to a QaQuestion.
-public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QaAnswer: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The QaQuestion answered by this answer.
@@ -41,7 +41,7 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// List of all individual answers given to the question.
   public var answerSources: [QaAnswer.AnswerSource] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QaAnswer`.
   public init() {}
@@ -105,7 +105,7 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -129,7 +129,7 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.contactcenterinsights.v1.QaAnswer]: <doc:QaAnswer>
   /// [google.cloud.contactcenterinsights.v1.QaQuestion.AnswerChoice]: <doc:QaQuestion/AnswerChoice>
-  public struct AnswerValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnswerValue: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A short string used as an identifier. Matches the value used in
@@ -149,7 +149,7 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The answer value may be one of a few different types.
     public var value: OneOf_Value? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnswerValue`.
     public init() {}
@@ -230,7 +230,7 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.value = value
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -273,18 +273,18 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.contactcenterinsights.v1.QaAnswer.AnswerValue"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A question may have multiple answers from varying sources, one of which
   /// becomes the "main" answer above. AnswerSource represents each individual
   /// answer.
-  public struct AnswerSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnswerSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// What created the answer.
@@ -293,7 +293,7 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The answer value from this source.
     public var answerValue: QaAnswer.AnswerValue? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnswerSource`.
     public init() {}
@@ -337,7 +337,7 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         QaAnswer.AnswerValue.self, forKey: .answerValue)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -458,21 +458,21 @@ public struct QaAnswer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.contactcenterinsights.v1.QaAnswer.AnswerSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.QaAnswer"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents the result of compiling a Dataform project.
-public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CompilationResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The compilation result's name.
@@ -42,7 +42,7 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var dataEncryptionState: DataEncryptionState? = nil
 
   /// Output only. The timestamp of when the compilation result was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. All the metadata information that is used internally to serve
   /// the resource. For example: timestamps, flags, status fields, etc. The
@@ -61,7 +61,7 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The source of the compilation result.
   public var source: OneOf_Source? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CompilationResult`.
   public init() {}
@@ -137,8 +137,7 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     self.dataEncryptionState = try container.decodeIfPresent(
       DataEncryptionState.self, forKey: .dataEncryptionState)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.internalMetadata = try container.decodeIfPresent(
       Swift.String.self, forKey: .internalMetadata)
     self.privateResourceMetadata = try container.decodeIfPresent(
@@ -169,7 +168,7 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.source = source
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -203,7 +202,7 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// An error encountered when attempting to compile a Dataform project.
-  public struct CompilationError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CompilationError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The error's top level message.
@@ -220,7 +219,7 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// available.
     public var actionTarget: Target? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CompilationError`.
     public init() {}
@@ -271,7 +270,7 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.actionTarget = try container.decodeIfPresent(Target.self, forKey: .actionTarget)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -289,11 +288,11 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResult.CompilationError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -316,10 +315,10 @@ public struct CompilationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.CompilationResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

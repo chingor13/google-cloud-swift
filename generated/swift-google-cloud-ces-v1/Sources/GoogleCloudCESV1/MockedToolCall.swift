@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A mocked tool call.
 ///
 /// Expresses the target tool + a pattern to match against that tool's
 /// args / inputs. If the pattern matches, then the mock response will be
 /// returned.
-public struct MockedToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MockedToolCall: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Deprecated. Use tool_identifier instead.
@@ -32,16 +32,16 @@ public struct MockedToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. A pattern to match against the args / inputs of all dispatched
   /// tool calls. If the tool call inputs match this pattern, then mock output
   /// will be returned.
-  public var expectedArgsPattern: GoogleCloudWKT.Struct? = nil
+  public var expectedArgsPattern: GoogleWKT.Struct? = nil
 
   /// Optional. The mock response / output to return if the tool call args /
   /// inputs match the pattern.
-  public var mockResponse: GoogleCloudWKT.Struct? = nil
+  public var mockResponse: GoogleWKT.Struct? = nil
 
   /// The identifier of the tool to mock.
   public var toolIdentifier: OneOf_ToolIdentifier? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MockedToolCall`.
   public init() {}
@@ -86,9 +86,8 @@ public struct MockedToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.tool = value
     }
     self.expectedArgsPattern = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .expectedArgsPattern)
-    self.mockResponse = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .mockResponse)
+      GoogleWKT.Struct.self, forKey: .expectedArgsPattern)
+    self.mockResponse = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .mockResponse)
 
     var toolIdentifier: OneOf_ToolIdentifier? = nil
     let toolIdentifierCheckAndSet = {
@@ -109,7 +108,7 @@ public struct MockedToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.toolIdentifier = toolIdentifier
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -144,10 +143,10 @@ public struct MockedToolCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.MockedToolCall"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

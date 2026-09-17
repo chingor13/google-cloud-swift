@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 
 struct MockPolicy: RetryPolicy {
   var onError: @Sendable (RetryState, RequestError) -> RetryResult = { _, e in .permanent(e) }

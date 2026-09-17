@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a particular Security Command Center service. This includes
 /// settings information such as top-level enablement in addition to individual
 /// module settings. Service settings can be configured at the organization,
 /// folder, or project level. Service settings at the organization or folder
 /// level are inherited by those in descendant folders and projects.
-public struct SecurityCenterService: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SecurityCenterService: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the service, in one of the following formats:
@@ -62,13 +62,13 @@ public struct SecurityCenterService: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// Output only. The time the service was last updated. This could be due to an
   /// explicit user update or due to a side effect of another system change, such
   /// as billing subscription expiry.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Additional service-specific configuration. Not all services will
   /// utilize this field.
-  public var serviceConfig: GoogleCloudWKT.Struct? = nil
+  public var serviceConfig: GoogleWKT.Struct? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SecurityCenterService`.
   public init() {}
@@ -129,13 +129,12 @@ public struct SecurityCenterService: Codable, Equatable, GoogleCloudWKT._AnyPack
     {
       self.modules = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.serviceConfig = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .serviceConfig)
+      GoogleWKT.Struct.self, forKey: .serviceConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -153,7 +152,7 @@ public struct SecurityCenterService: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// The settings for individual modules.
-  public struct ModuleSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ModuleSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The intended enablement state for the module at its level of
@@ -169,7 +168,7 @@ public struct SecurityCenterService: Codable, Equatable, GoogleCloudWKT._AnyPack
     public var effectiveEnablementState: SecurityCenterService.EnablementState =
       SecurityCenterService.EnablementState()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ModuleSettings`.
     public init() {}
@@ -216,7 +215,7 @@ public struct SecurityCenterService: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -233,11 +232,11 @@ public struct SecurityCenterService: Codable, Equatable, GoogleCloudWKT._AnyPack
       return
         "type.googleapis.com/google.cloud.securitycentermanagement.v1.SecurityCenterService.ModuleSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -367,10 +366,10 @@ public struct SecurityCenterService: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycentermanagement.v1.SecurityCenterService"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

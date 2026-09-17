@@ -16,38 +16,38 @@
 
 #if RegionSslPolicies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionSslPoliciesStub: Sendable {
       func delete(
-        request: RegionSslPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionSslPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslPoliciesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPolicy
 
       func insert(
-        request: RegionSslPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionSslPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesList
 
       func listAvailableFeatures(
         request: RegionSslPoliciesClient.ListAvailableFeaturesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslPoliciesListAvailableFeaturesResponse
 
       func patch(
-        request: RegionSslPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslPoliciesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

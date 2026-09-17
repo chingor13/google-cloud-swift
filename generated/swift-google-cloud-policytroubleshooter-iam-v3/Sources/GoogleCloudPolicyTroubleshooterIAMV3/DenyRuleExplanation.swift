@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details about how a deny rule in a deny policy affects a principal's ability
 /// to use a permission.
-public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DenyRuleExplanation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Indicates whether _this rule_ denies the specified permission to
@@ -103,7 +103,7 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Condition evaluation state for this role binding.
   public var conditionExplanation: ConditionExplanation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DenyRuleExplanation`.
   public init() {}
@@ -201,7 +201,7 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
       ConditionExplanation.self, forKey: .conditionExplanation)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -228,7 +228,7 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   /// Details about whether the permission in the request is denied by the
   /// deny rule.
-  public struct AnnotatedPermissionMatching: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnnotatedPermissionMatching: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates whether the permission in the request is denied by the deny
@@ -240,7 +240,7 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// the rule.
     public var relevance: HeuristicRelevance = HeuristicRelevance()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnnotatedPermissionMatching`.
     public init() {}
@@ -285,7 +285,7 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -302,18 +302,18 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
       return
         "type.googleapis.com/google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedPermissionMatching"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details about whether the principal in the request is listed as a denied
   /// principal in the deny rule, either directly or through membership in a
   /// principal set.
-  public struct AnnotatedDenyPrincipalMatching: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnnotatedDenyPrincipalMatching: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates whether the principal is listed as a denied principal in the
@@ -324,7 +324,7 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// the role binding.
     public var relevance: HeuristicRelevance = HeuristicRelevance()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnnotatedDenyPrincipalMatching`.
     public init() {}
@@ -369,7 +369,7 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -386,21 +386,21 @@ public struct DenyRuleExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackab
       return
         "type.googleapis.com/google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation.AnnotatedDenyPrincipalMatching"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.policytroubleshooter.iam.v3.DenyRuleExplanation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

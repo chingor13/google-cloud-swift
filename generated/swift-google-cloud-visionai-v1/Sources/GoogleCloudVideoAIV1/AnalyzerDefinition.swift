@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines an Analyzer.
 ///
 /// An analyzer processes data from its input streams using the logic defined in
 /// the Operator that it represents. Of course, it produces data for the output
 /// streams declared in the Operator.
-public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AnalyzerDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of this analyzer.
@@ -51,7 +51,7 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Operator option.
   public var operatorOption: AnalyzerDefinition.OperatorOption? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AnalyzerDefinition`.
   public init() {}
@@ -116,7 +116,7 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       AnalyzerDefinition.OperatorOption.self, forKey: .operatorOption)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -151,13 +151,13 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// output as its first input and "some-analyzer"'s "bar" output as its
   /// second input, you can set this field to the following:
   /// input = ["some-analyzer:foo", "some-analyzer:bar"]
-  public struct StreamInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StreamInput: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the stream input (as discussed above).
     public var input: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StreamInput`.
     public init() {}
@@ -195,7 +195,7 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -210,22 +210,22 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.AnalyzerDefinition.StreamInput"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Options available for debugging purposes only.
-  public struct DebugOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DebugOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Environment variables.
     public var environmentVariables: [Swift.String: Swift.String] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DebugOptions`.
     public init() {}
@@ -265,7 +265,7 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -280,16 +280,16 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.AnalyzerDefinition.DebugOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Option related to the operator.
-  public struct OperatorOption: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OperatorOption: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Tag of the operator.
@@ -298,7 +298,7 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// Registry of the operator. e.g. public, dev.
     public var registry: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OperatorOption`.
     public init() {}
@@ -341,7 +341,7 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -357,21 +357,21 @@ public struct AnalyzerDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.AnalyzerDefinition.OperatorOption"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.AnalyzerDefinition"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

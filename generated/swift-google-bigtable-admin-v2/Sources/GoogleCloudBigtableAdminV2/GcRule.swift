@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Rule for determining which cells to delete during garbage collection.
-public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GcRule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Garbage collection rules.
   public var rule: OneOf_Rule? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GcRule`.
   public init() {}
@@ -78,7 +78,7 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       try ruleCheckAndSet(.maxNumVersions(maxNumVersions))
     }
-    if let maxAge = try container.decodeIfPresent(GoogleCloudWKT.Duration?.self, forKey: .maxAge) {
+    if let maxAge = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .maxAge) {
       try ruleCheckAndSet(.maxAge(maxAge))
     }
     if let intersection = try container.decodeIfPresent(
@@ -92,7 +92,7 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.rule = rule
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -117,13 +117,13 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A GcRule which deletes cells matching all of the given rules.
-  public struct Intersection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Intersection: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Only delete cells which would be deleted by every element of `rules`.
     public var rules: [GcRule] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Intersection`.
     public init() {}
@@ -161,7 +161,7 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -176,22 +176,22 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.GcRule.Intersection"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A GcRule which deletes cells matching any of the given rules.
-  public struct Union: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Union: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Delete cells which would be deleted by any element of `rules`.
     public var rules: [GcRule] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Union`.
     public init() {}
@@ -229,7 +229,7 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -244,11 +244,11 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.GcRule.Union"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -259,7 +259,7 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Delete cells in a column older than the given age.
     /// Values must be at least one millisecond, and will be truncated to
     /// microsecond granularity.
-    indirect case maxAge(GoogleCloudWKT.Duration?)
+    indirect case maxAge(GoogleWKT.Duration?)
     /// Delete cells that would be deleted by every nested rule.
     indirect case intersection(GcRule.Intersection?)
     /// Delete cells that would be deleted by any nested rule.
@@ -269,10 +269,10 @@ public struct GcRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.GcRule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

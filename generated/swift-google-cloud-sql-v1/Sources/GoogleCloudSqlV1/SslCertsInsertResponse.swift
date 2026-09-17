@@ -16,10 +16,10 @@
 
 #if SqlSslCertsService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// SslCert insert response.
-  public struct SslCertsInsertResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SslCertsInsertResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This is always `sql#sslCertsInsert`.
@@ -36,7 +36,7 @@
     /// The new client certificate and private key.
     public var clientCert: SslCertDetail? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SslCertsInsertResponse`.
     public init() {}
@@ -83,7 +83,7 @@
       self.clientCert = try container.decodeIfPresent(SslCertDetail.self, forKey: .clientCert)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -101,11 +101,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SslCertsInsertResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

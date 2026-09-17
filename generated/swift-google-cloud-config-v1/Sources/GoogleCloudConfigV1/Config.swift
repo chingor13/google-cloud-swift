@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Infrastructure Manager is a managed service that automates the deployment and
 /// management of Google Cloud infrastructure resources.
@@ -31,11 +31,11 @@ import GoogleCloudGax
 /// @Snippet(path: "ConfigQuickstart")
 public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   let inner: any Clients.ConfigStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ConfigClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ConfigStub = try Clients.ConfigTransport(options)
     inner = Clients.ConfigRetry(inner, options: options)
     if let logger = options.logger {
@@ -53,7 +53,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListDeployments")
   public func listDeployments(
-    request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListDeploymentsResponse {
     try await self.inner.listDeployments(request: request, options: options)
   }
@@ -65,7 +65,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListDeployments")
   public func listDeployments(
-    byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Deployment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListDeploymentsResponse in
@@ -73,7 +73,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listDeployments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details about a [Deployment][google.cloud.config.v1.Deployment].
@@ -82,7 +82,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetDeployment")
   public func getDeployment(
-    request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Deployment {
     try await self.inner.getDeployment(request: request, options: options)
   }
@@ -93,7 +93,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_CreateDeployment")
   public func createDeployment(
-    request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createDeployment(request: request, options: options)
   }
@@ -104,21 +104,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_CreateDeployment")
   public func createDeployment(
-    withPolling: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+    withPolling: CreateDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Deployment>.State
+      in
       return try op._extractStatus(Deployment.self)
     }
     let rawOp = try await self.createDeployment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -132,7 +132,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_UpdateDeployment")
   public func updateDeployment(
-    request: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateDeployment(request: request, options: options)
   }
@@ -143,21 +143,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_UpdateDeployment")
   public func updateDeployment(
-    withPolling: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+    withPolling: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Deployment>.State
+      in
       return try op._extractStatus(Deployment.self)
     }
     let rawOp = try await self.updateDeployment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -171,7 +171,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeleteDeployment")
   public func deleteDeployment(
-    request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteDeployment(request: request, options: options)
   }
@@ -182,21 +182,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeleteDeployment")
   public func deleteDeployment(
-    withPolling: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+    withPolling: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Deployment>.State
+      in
       return try op._extractStatus(Deployment.self)
     }
     let rawOp = try await self.deleteDeployment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -210,7 +210,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListRevisions")
   public func listRevisions(
-    request: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRevisionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListRevisionsResponse {
     try await self.inner.listRevisions(request: request, options: options)
   }
@@ -221,7 +221,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListRevisions")
   public func listRevisions(
-    byItem: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRevisionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Revision, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListRevisionsResponse in
@@ -229,7 +229,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listRevisions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details about a [Revision][google.cloud.config.v1.Revision].
@@ -238,7 +238,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetRevision")
   public func getRevision(
-    request: GetRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Revision {
     try await self.inner.getRevision(request: request, options: options)
   }
@@ -250,7 +250,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetResource")
   public func getResource(
-    request: GetResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Resource {
     try await self.inner.getResource(request: request, options: options)
   }
@@ -261,7 +261,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListResources")
   public func listResources(
-    request: ListResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListResourcesResponse {
     try await self.inner.listResources(request: request, options: options)
   }
@@ -272,7 +272,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListResources")
   public func listResources(
-    byItem: ListResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Resource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListResourcesResponse in
@@ -280,14 +280,14 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listResources(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Exports Terraform state file from a given deployment.
   ///
   /// @Snippet(path: "Config_ExportDeploymentStatefile")
   public func exportDeploymentStatefile(
-    request: ExportDeploymentStatefileRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportDeploymentStatefileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Statefile {
     try await self.inner.exportDeploymentStatefile(request: request, options: options)
   }
@@ -296,7 +296,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ExportRevisionStatefile")
   public func exportRevisionStatefile(
-    request: ExportRevisionStatefileRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportRevisionStatefileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Statefile {
     try await self.inner.exportRevisionStatefile(request: request, options: options)
   }
@@ -306,7 +306,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ImportStatefile")
   public func importStatefile(
-    request: ImportStatefileRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportStatefileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Statefile {
     try await self.inner.importStatefile(request: request, options: options)
   }
@@ -315,7 +315,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeleteStatefile")
   public func deleteStatefile(
-    request: DeleteStatefileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteStatefileRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteStatefile(request: request, options: options)
   }
@@ -324,7 +324,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_LockDeployment")
   public func lockDeployment(
-    request: LockDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: LockDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.lockDeployment(request: request, options: options)
   }
@@ -333,21 +333,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_LockDeployment")
   public func lockDeployment(
-    withPolling: LockDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+    withPolling: LockDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Deployment>.State
+      in
       return try op._extractStatus(Deployment.self)
     }
     let rawOp = try await self.lockDeployment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -359,7 +359,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_UnlockDeployment")
   public func unlockDeployment(
-    request: UnlockDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: UnlockDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.unlockDeployment(request: request, options: options)
   }
@@ -368,21 +368,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_UnlockDeployment")
   public func unlockDeployment(
-    withPolling: UnlockDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+    withPolling: UnlockDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Deployment>.State
+      in
       return try op._extractStatus(Deployment.self)
     }
     let rawOp = try await self.unlockDeployment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -394,7 +394,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ExportLockInfo")
   public func exportLockInfo(
-    request: ExportLockInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportLockInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.LockInfo {
     try await self.inner.exportLockInfo(request: request, options: options)
   }
@@ -405,7 +405,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_CreatePreview")
   public func createPreview(
-    request: CreatePreviewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePreviewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPreview(request: request, options: options)
   }
@@ -416,21 +416,20 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_CreatePreview")
   public func createPreview(
-    withPolling: CreatePreviewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Preview> {
+    withPolling: CreatePreviewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Preview> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Preview>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Preview>.State in
       return try op._extractStatus(Preview.self)
     }
     let rawOp = try await self.createPreview(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Preview>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Preview>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -444,7 +443,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetPreview")
   public func getPreview(
-    request: GetPreviewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPreviewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Preview {
     try await self.inner.getPreview(request: request, options: options)
   }
@@ -456,7 +455,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListPreviews")
   public func listPreviews(
-    request: ListPreviewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPreviewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListPreviewsResponse {
     try await self.inner.listPreviews(request: request, options: options)
   }
@@ -468,7 +467,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListPreviews")
   public func listPreviews(
-    byItem: ListPreviewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPreviewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Preview, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListPreviewsResponse in
@@ -476,7 +475,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listPreviews(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a [Preview][google.cloud.config.v1.Preview].
@@ -485,7 +484,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeletePreview")
   public func deletePreview(
-    request: DeletePreviewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePreviewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePreview(request: request, options: options)
   }
@@ -496,21 +495,20 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeletePreview")
   public func deletePreview(
-    withPolling: DeletePreviewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Preview> {
+    withPolling: DeletePreviewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Preview> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Preview>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Preview>.State in
       return try op._extractStatus(Preview.self)
     }
     let rawOp = try await self.deletePreview(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Preview>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Preview>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -524,7 +522,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ExportPreviewResult")
   public func exportPreviewResult(
-    request: ExportPreviewResultRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportPreviewResultRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ExportPreviewResultResponse {
     try await self.inner.exportPreviewResult(request: request, options: options)
   }
@@ -536,7 +534,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListTerraformVersions")
   public func listTerraformVersions(
-    request: ListTerraformVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTerraformVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListTerraformVersionsResponse {
     try await self.inner.listTerraformVersions(request: request, options: options)
   }
@@ -548,7 +546,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListTerraformVersions")
   public func listTerraformVersions(
-    byItem: ListTerraformVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTerraformVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TerraformVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListTerraformVersionsResponse in
@@ -556,7 +554,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listTerraformVersions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details about a
@@ -566,7 +564,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetTerraformVersion")
   public func getTerraformVersion(
-    request: GetTerraformVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTerraformVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.TerraformVersion {
     try await self.inner.getTerraformVersion(request: request, options: options)
   }
@@ -575,7 +573,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListResourceChanges")
   public func listResourceChanges(
-    request: ListResourceChangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourceChangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListResourceChangesResponse {
     try await self.inner.listResourceChanges(request: request, options: options)
   }
@@ -584,7 +582,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListResourceChanges")
   public func listResourceChanges(
-    byItem: ListResourceChangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourceChangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceChange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListResourceChangesResponse in
@@ -592,14 +590,14 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listResourceChanges(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Get a ResourceChange for a given preview.
   ///
   /// @Snippet(path: "Config_GetResourceChange")
   public func getResourceChange(
-    request: GetResourceChangeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceChangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ResourceChange {
     try await self.inner.getResourceChange(request: request, options: options)
   }
@@ -608,7 +606,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListResourceDrifts")
   public func listResourceDrifts(
-    request: ListResourceDriftsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourceDriftsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListResourceDriftsResponse {
     try await self.inner.listResourceDrifts(request: request, options: options)
   }
@@ -617,7 +615,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListResourceDrifts")
   public func listResourceDrifts(
-    byItem: ListResourceDriftsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourceDriftsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceDrift, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListResourceDriftsResponse in
@@ -625,14 +623,14 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listResourceDrifts(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Get a ResourceDrift for a given preview.
   ///
   /// @Snippet(path: "Config_GetResourceDrift")
   public func getResourceDrift(
-    request: GetResourceDriftRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceDriftRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ResourceDrift {
     try await self.inner.getResourceDrift(request: request, options: options)
   }
@@ -641,7 +639,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetAutoMigrationConfig")
   public func getAutoMigrationConfig(
-    request: GetAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.AutoMigrationConfig {
     try await self.inner.getAutoMigrationConfig(request: request, options: options)
   }
@@ -650,7 +648,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_UpdateAutoMigrationConfig")
   public func updateAutoMigrationConfig(
-    request: UpdateAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateAutoMigrationConfig(request: request, options: options)
   }
@@ -659,22 +657,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_UpdateAutoMigrationConfig")
   public func updateAutoMigrationConfig(
-    withPolling: UpdateAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AutoMigrationConfig> {
+    withPolling: UpdateAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AutoMigrationConfig> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AutoMigrationConfig>.State in
+        -> GoogleGax._PollableOperationImpl<AutoMigrationConfig>.State in
       return try op._extractStatus(AutoMigrationConfig.self)
     }
     let rawOp = try await self.updateAutoMigrationConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AutoMigrationConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AutoMigrationConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -686,7 +683,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetDeploymentGroup")
   public func getDeploymentGroup(
-    request: GetDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.DeploymentGroup {
     try await self.inner.getDeploymentGroup(request: request, options: options)
   }
@@ -699,7 +696,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_CreateDeploymentGroup")
   public func createDeploymentGroup(
-    request: CreateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createDeploymentGroup(request: request, options: options)
   }
@@ -712,21 +709,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_CreateDeploymentGroup")
   public func createDeploymentGroup(
-    withPolling: CreateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+    withPolling: CreateDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+        -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       return try op._extractStatus(DeploymentGroup.self)
     }
     let rawOp = try await self.createDeploymentGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -740,7 +737,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_UpdateDeploymentGroup")
   public func updateDeploymentGroup(
-    request: UpdateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateDeploymentGroup(request: request, options: options)
   }
@@ -751,21 +748,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_UpdateDeploymentGroup")
   public func updateDeploymentGroup(
-    withPolling: UpdateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+    withPolling: UpdateDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+        -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       return try op._extractStatus(DeploymentGroup.self)
     }
     let rawOp = try await self.updateDeploymentGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -779,7 +776,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeleteDeploymentGroup")
   public func deleteDeploymentGroup(
-    request: DeleteDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteDeploymentGroup(request: request, options: options)
   }
@@ -790,21 +787,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeleteDeploymentGroup")
   public func deleteDeploymentGroup(
-    withPolling: DeleteDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+    withPolling: DeleteDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+        -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       return try op._extractStatus(DeploymentGroup.self)
     }
     let rawOp = try await self.deleteDeploymentGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -816,7 +813,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListDeploymentGroups")
   public func listDeploymentGroups(
-    request: ListDeploymentGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListDeploymentGroupsResponse {
     try await self.inner.listDeploymentGroups(request: request, options: options)
   }
@@ -825,7 +822,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListDeploymentGroups")
   public func listDeploymentGroups(
-    byItem: ListDeploymentGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DeploymentGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListDeploymentGroupsResponse in
@@ -833,7 +830,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listDeploymentGroups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provisions a deployment group.
@@ -852,7 +849,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ProvisionDeploymentGroup")
   public func provisionDeploymentGroup(
-    request: ProvisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: ProvisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.provisionDeploymentGroup(request: request, options: options)
   }
@@ -873,21 +870,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ProvisionDeploymentGroup")
   public func provisionDeploymentGroup(
-    withPolling: ProvisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+    withPolling: ProvisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+        -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       return try op._extractStatus(DeploymentGroup.self)
     }
     let rawOp = try await self.provisionDeploymentGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -911,7 +908,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeprovisionDeploymentGroup")
   public func deprovisionDeploymentGroup(
-    request: DeprovisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeprovisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deprovisionDeploymentGroup(request: request, options: options)
   }
@@ -932,21 +929,21 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeprovisionDeploymentGroup")
   public func deprovisionDeploymentGroup(
-    withPolling: DeprovisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+    withPolling: DeprovisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+        -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       return try op._extractStatus(DeploymentGroup.self)
     }
     let rawOp = try await self.deprovisionDeploymentGroup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -961,7 +958,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetDeploymentGroupRevision")
   public func getDeploymentGroupRevision(
-    request: GetDeploymentGroupRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentGroupRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.DeploymentGroupRevision {
     try await self.inner.getDeploymentGroupRevision(request: request, options: options)
   }
@@ -975,7 +972,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListDeploymentGroupRevisions")
   public func listDeploymentGroupRevisions(
-    request: ListDeploymentGroupRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentGroupRevisionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListDeploymentGroupRevisionsResponse {
     try await self.inner.listDeploymentGroupRevisions(request: request, options: options)
   }
@@ -989,7 +986,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListDeploymentGroupRevisions")
   public func listDeploymentGroupRevisions(
-    byItem: ListDeploymentGroupRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentGroupRevisionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DeploymentGroupRevision, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListDeploymentGroupRevisionsResponse
@@ -998,7 +995,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listDeploymentGroupRevisions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
@@ -1022,7 +1019,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -1048,7 +1045,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -1056,14 +1053,14 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Config_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -1076,7 +1073,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -1086,7 +1083,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -1101,7 +1098,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -1112,7 +1109,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -1123,7 +1120,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -1131,7 +1128,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -1140,7 +1137,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -1151,7 +1148,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -1162,7 +1159,7 @@ public final class ConfigClient: Clients.ConfigProtocol, Sendable {
   ///
   /// @Snippet(path: "Config_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -1202,7 +1199,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.createDeployment`.
-    func createDeployment(withPolling: CreateDeploymentRequest) async throws -> any GoogleCloudGax
+    func createDeployment(withPolling: CreateDeploymentRequest) async throws -> any GoogleGax
       .PollableOperation<Deployment>
 
     /// See `ConfigClient.createDeployment`.
@@ -1210,34 +1207,34 @@ extension Clients {
       parent: Swift.String,
       deployment: Deployment?,
       deploymentId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.updateDeployment`.
     func updateDeployment(request: UpdateDeploymentRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.updateDeployment`.
-    func updateDeployment(withPolling: UpdateDeploymentRequest) async throws -> any GoogleCloudGax
+    func updateDeployment(withPolling: UpdateDeploymentRequest) async throws -> any GoogleGax
       .PollableOperation<Deployment>
 
     /// See `ConfigClient.updateDeployment`.
     func updateDeployment(
       deployment: Deployment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.deleteDeployment`.
     func deleteDeployment(request: DeleteDeploymentRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.deleteDeployment`.
-    func deleteDeployment(withPolling: DeleteDeploymentRequest) async throws -> any GoogleCloudGax
+    func deleteDeployment(withPolling: DeleteDeploymentRequest) async throws -> any GoogleGax
       .PollableOperation<Deployment>
 
     /// See `ConfigClient.deleteDeployment`.
     func deleteDeployment(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.listRevisions`.
     func listRevisions(request: ListRevisionsRequest) async throws
@@ -1313,27 +1310,27 @@ extension Clients {
     func lockDeployment(request: LockDeploymentRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.lockDeployment`.
-    func lockDeployment(withPolling: LockDeploymentRequest) async throws -> any GoogleCloudGax
+    func lockDeployment(withPolling: LockDeploymentRequest) async throws -> any GoogleGax
       .PollableOperation<Deployment>
 
     /// See `ConfigClient.lockDeployment`.
     func lockDeployment(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.unlockDeployment`.
     func unlockDeployment(request: UnlockDeploymentRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.unlockDeployment`.
-    func unlockDeployment(withPolling: UnlockDeploymentRequest) async throws -> any GoogleCloudGax
+    func unlockDeployment(withPolling: UnlockDeploymentRequest) async throws -> any GoogleGax
       .PollableOperation<Deployment>
 
     /// See `ConfigClient.unlockDeployment`.
     func unlockDeployment(
       name: Swift.String,
       lockId: Swift.Int64,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.exportLockInfo`.
     func exportLockInfo(request: ExportLockInfoRequest) async throws -> GoogleCloudConfigV1.LockInfo
@@ -1347,14 +1344,14 @@ extension Clients {
     func createPreview(request: CreatePreviewRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.createPreview`.
-    func createPreview(withPolling: CreatePreviewRequest) async throws -> any GoogleCloudGax
+    func createPreview(withPolling: CreatePreviewRequest) async throws -> any GoogleGax
       .PollableOperation<Preview>
 
     /// See `ConfigClient.createPreview`.
     func createPreview(
       parent: Swift.String,
       preview: Preview?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Preview>
+    ) async throws -> any GoogleGax.PollableOperation<Preview>
 
     /// See `ConfigClient.getPreview`.
     func getPreview(request: GetPreviewRequest) async throws -> GoogleCloudConfigV1.Preview
@@ -1382,13 +1379,13 @@ extension Clients {
     func deletePreview(request: DeletePreviewRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.deletePreview`.
-    func deletePreview(withPolling: DeletePreviewRequest) async throws -> any GoogleCloudGax
+    func deletePreview(withPolling: DeletePreviewRequest) async throws -> any GoogleGax
       .PollableOperation<Preview>
 
     /// See `ConfigClient.deletePreview`.
     func deletePreview(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Preview>
+    ) async throws -> any GoogleGax.PollableOperation<Preview>
 
     /// See `ConfigClient.exportPreviewResult`.
     func exportPreviewResult(request: ExportPreviewResultRequest) async throws
@@ -1478,13 +1475,13 @@ extension Clients {
 
     /// See `ConfigClient.updateAutoMigrationConfig`.
     func updateAutoMigrationConfig(withPolling: UpdateAutoMigrationConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AutoMigrationConfig>
+      -> any GoogleGax.PollableOperation<AutoMigrationConfig>
 
     /// See `ConfigClient.updateAutoMigrationConfig`.
     func updateAutoMigrationConfig(
       autoMigrationConfig: AutoMigrationConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AutoMigrationConfig>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<AutoMigrationConfig>
 
     /// See `ConfigClient.getDeploymentGroup`.
     func getDeploymentGroup(request: GetDeploymentGroupRequest) async throws
@@ -1501,14 +1498,14 @@ extension Clients {
 
     /// See `ConfigClient.createDeploymentGroup`.
     func createDeploymentGroup(withPolling: CreateDeploymentGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.createDeploymentGroup`.
     func createDeploymentGroup(
       parent: Swift.String,
       deploymentGroup: DeploymentGroup?,
       deploymentGroupId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.updateDeploymentGroup`.
     func updateDeploymentGroup(request: UpdateDeploymentGroupRequest) async throws
@@ -1516,13 +1513,13 @@ extension Clients {
 
     /// See `ConfigClient.updateDeploymentGroup`.
     func updateDeploymentGroup(withPolling: UpdateDeploymentGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.updateDeploymentGroup`.
     func updateDeploymentGroup(
       deploymentGroup: DeploymentGroup?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.deleteDeploymentGroup`.
     func deleteDeploymentGroup(request: DeleteDeploymentGroupRequest) async throws
@@ -1530,12 +1527,12 @@ extension Clients {
 
     /// See `ConfigClient.deleteDeploymentGroup`.
     func deleteDeploymentGroup(withPolling: DeleteDeploymentGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.deleteDeploymentGroup`.
     func deleteDeploymentGroup(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.listDeploymentGroups`.
     func listDeploymentGroups(request: ListDeploymentGroupsRequest) async throws
@@ -1557,12 +1554,12 @@ extension Clients {
 
     /// See `ConfigClient.provisionDeploymentGroup`.
     func provisionDeploymentGroup(withPolling: ProvisionDeploymentGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.provisionDeploymentGroup`.
     func provisionDeploymentGroup(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.deprovisionDeploymentGroup`.
     func deprovisionDeploymentGroup(request: DeprovisionDeploymentGroupRequest) async throws
@@ -1570,12 +1567,12 @@ extension Clients {
 
     /// See `ConfigClient.deprovisionDeploymentGroup`.
     func deprovisionDeploymentGroup(withPolling: DeprovisionDeploymentGroupRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.deprovisionDeploymentGroup`.
     func deprovisionDeploymentGroup(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.getDeploymentGroupRevision`.
     func getDeploymentGroupRevision(request: GetDeploymentGroupRevisionRequest) async throws
@@ -1656,352 +1653,352 @@ extension Clients {
 
     /// See `ConfigClient.listDeployments`.
     func listDeployments(
-      request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListDeploymentsResponse
 
     /// See `ConfigClient.listDeployments`.
     func listDeployments(
-      byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Deployment, Swift.Error>
 
     /// See `ConfigClient.getDeployment`.
     func getDeployment(
-      request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.Deployment
 
     /// See `ConfigClient.createDeployment`.
     func createDeployment(
-      request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.createDeployment`.
     func createDeployment(
-      withPolling: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+      withPolling: CreateDeploymentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.updateDeployment`.
     func updateDeployment(
-      request: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.updateDeployment`.
     func updateDeployment(
-      withPolling: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+      withPolling: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.deleteDeployment`.
     func deleteDeployment(
-      request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.deleteDeployment`.
     func deleteDeployment(
-      withPolling: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+      withPolling: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.listRevisions`.
     func listRevisions(
-      request: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListRevisionsResponse
 
     /// See `ConfigClient.listRevisions`.
     func listRevisions(
-      byItem: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRevisionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Revision, Swift.Error>
 
     /// See `ConfigClient.getRevision`.
     func getRevision(
-      request: GetRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.Revision
 
     /// See `ConfigClient.getResource`.
     func getResource(
-      request: GetResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.Resource
 
     /// See `ConfigClient.listResources`.
     func listResources(
-      request: ListResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListResourcesResponse
 
     /// See `ConfigClient.listResources`.
     func listResources(
-      byItem: ListResourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListResourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Resource, Swift.Error>
 
     /// See `ConfigClient.exportDeploymentStatefile`.
     func exportDeploymentStatefile(
-      request: ExportDeploymentStatefileRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportDeploymentStatefileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.Statefile
 
     /// See `ConfigClient.exportRevisionStatefile`.
     func exportRevisionStatefile(
-      request: ExportRevisionStatefileRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportRevisionStatefileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.Statefile
 
     /// See `ConfigClient.importStatefile`.
     func importStatefile(
-      request: ImportStatefileRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportStatefileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.Statefile
 
     /// See `ConfigClient.deleteStatefile`.
     func deleteStatefile(
-      request: DeleteStatefileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteStatefileRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ConfigClient.lockDeployment`.
     func lockDeployment(
-      request: LockDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: LockDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.lockDeployment`.
     func lockDeployment(
-      withPolling: LockDeploymentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+      withPolling: LockDeploymentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.unlockDeployment`.
     func unlockDeployment(
-      request: UnlockDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UnlockDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.unlockDeployment`.
     func unlockDeployment(
-      withPolling: UnlockDeploymentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Deployment>
+      withPolling: UnlockDeploymentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Deployment>
 
     /// See `ConfigClient.exportLockInfo`.
     func exportLockInfo(
-      request: ExportLockInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportLockInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.LockInfo
 
     /// See `ConfigClient.createPreview`.
     func createPreview(
-      request: CreatePreviewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePreviewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.createPreview`.
     func createPreview(
-      withPolling: CreatePreviewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Preview>
+      withPolling: CreatePreviewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Preview>
 
     /// See `ConfigClient.getPreview`.
     func getPreview(
-      request: GetPreviewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPreviewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.Preview
 
     /// See `ConfigClient.listPreviews`.
     func listPreviews(
-      request: ListPreviewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPreviewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListPreviewsResponse
 
     /// See `ConfigClient.listPreviews`.
     func listPreviews(
-      byItem: ListPreviewsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPreviewsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Preview, Swift.Error>
 
     /// See `ConfigClient.deletePreview`.
     func deletePreview(
-      request: DeletePreviewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePreviewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.deletePreview`.
     func deletePreview(
-      withPolling: DeletePreviewRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Preview>
+      withPolling: DeletePreviewRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Preview>
 
     /// See `ConfigClient.exportPreviewResult`.
     func exportPreviewResult(
-      request: ExportPreviewResultRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportPreviewResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ExportPreviewResultResponse
 
     /// See `ConfigClient.listTerraformVersions`.
     func listTerraformVersions(
-      request: ListTerraformVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTerraformVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListTerraformVersionsResponse
 
     /// See `ConfigClient.listTerraformVersions`.
     func listTerraformVersions(
-      byItem: ListTerraformVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTerraformVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TerraformVersion, Swift.Error>
 
     /// See `ConfigClient.getTerraformVersion`.
     func getTerraformVersion(
-      request: GetTerraformVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTerraformVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.TerraformVersion
 
     /// See `ConfigClient.listResourceChanges`.
     func listResourceChanges(
-      request: ListResourceChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListResourceChangesResponse
 
     /// See `ConfigClient.listResourceChanges`.
     func listResourceChanges(
-      byItem: ListResourceChangesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListResourceChangesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ResourceChange, Swift.Error>
 
     /// See `ConfigClient.getResourceChange`.
     func getResourceChange(
-      request: GetResourceChangeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceChangeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ResourceChange
 
     /// See `ConfigClient.listResourceDrifts`.
     func listResourceDrifts(
-      request: ListResourceDriftsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceDriftsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListResourceDriftsResponse
 
     /// See `ConfigClient.listResourceDrifts`.
     func listResourceDrifts(
-      byItem: ListResourceDriftsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListResourceDriftsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ResourceDrift, Swift.Error>
 
     /// See `ConfigClient.getResourceDrift`.
     func getResourceDrift(
-      request: GetResourceDriftRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceDriftRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ResourceDrift
 
     /// See `ConfigClient.getAutoMigrationConfig`.
     func getAutoMigrationConfig(
-      request: GetAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.AutoMigrationConfig
 
     /// See `ConfigClient.updateAutoMigrationConfig`.
     func updateAutoMigrationConfig(
-      request: UpdateAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.updateAutoMigrationConfig`.
     func updateAutoMigrationConfig(
-      withPolling: UpdateAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AutoMigrationConfig>
+      withPolling: UpdateAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AutoMigrationConfig>
 
     /// See `ConfigClient.getDeploymentGroup`.
     func getDeploymentGroup(
-      request: GetDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.DeploymentGroup
 
     /// See `ConfigClient.createDeploymentGroup`.
     func createDeploymentGroup(
-      request: CreateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.createDeploymentGroup`.
     func createDeploymentGroup(
-      withPolling: CreateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      withPolling: CreateDeploymentGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.updateDeploymentGroup`.
     func updateDeploymentGroup(
-      request: UpdateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.updateDeploymentGroup`.
     func updateDeploymentGroup(
-      withPolling: UpdateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      withPolling: UpdateDeploymentGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.deleteDeploymentGroup`.
     func deleteDeploymentGroup(
-      request: DeleteDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.deleteDeploymentGroup`.
     func deleteDeploymentGroup(
-      withPolling: DeleteDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      withPolling: DeleteDeploymentGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.listDeploymentGroups`.
     func listDeploymentGroups(
-      request: ListDeploymentGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListDeploymentGroupsResponse
 
     /// See `ConfigClient.listDeploymentGroups`.
     func listDeploymentGroups(
-      byItem: ListDeploymentGroupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeploymentGroupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DeploymentGroup, Swift.Error>
 
     /// See `ConfigClient.provisionDeploymentGroup`.
     func provisionDeploymentGroup(
-      request: ProvisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: ProvisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.provisionDeploymentGroup`.
     func provisionDeploymentGroup(
-      withPolling: ProvisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      withPolling: ProvisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.deprovisionDeploymentGroup`.
     func deprovisionDeploymentGroup(
-      request: DeprovisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeprovisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ConfigClient.deprovisionDeploymentGroup`.
     func deprovisionDeploymentGroup(
-      withPolling: DeprovisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+      withPolling: DeprovisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
 
     /// See `ConfigClient.getDeploymentGroupRevision`.
     func getDeploymentGroupRevision(
-      request: GetDeploymentGroupRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentGroupRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.DeploymentGroupRevision
 
     /// See `ConfigClient.listDeploymentGroupRevisions`.
     func listDeploymentGroupRevisions(
-      request: ListDeploymentGroupRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentGroupRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigV1.ListDeploymentGroupRevisionsResponse
 
     /// See `ConfigClient.listDeploymentGroupRevisions`.
     func listDeploymentGroupRevisions(
-      byItem: ListDeploymentGroupRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeploymentGroupRevisionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DeploymentGroupRevision, Swift.Error>
 
     /// See `ConfigClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `ConfigClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `ConfigClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `ConfigClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ConfigClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ConfigClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `ConfigClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ConfigClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ConfigClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ConfigClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -2015,9 +2012,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listDeployments(
-    request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListDeploymentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDeployments(
@@ -2027,13 +2024,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listDeployments(
-    byItem: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Deployment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListDeploymentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDeployments(
@@ -2052,9 +2049,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getDeployment(
-    request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Deployment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDeployment(
@@ -2073,24 +2070,24 @@ extension Clients.ConfigProtocol {
   }
 
   public func createDeployment(
-    request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createDeployment(withPolling: CreateDeploymentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Deployment>
+  public func createDeployment(withPolling: CreateDeploymentRequest) async throws -> any GoogleGax
+    .PollableOperation<Deployment>
   {
     try await self.createDeployment(withPolling: withPolling, options: .init())
   }
 
   public func createDeployment(
-    withPolling: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2098,7 +2095,7 @@ extension Clients.ConfigProtocol {
     parent: Swift.String,
     deployment: Deployment?,
     deploymentId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let request = CreateDeploymentRequest().with {
       $0.parent = parent
       $0.deployment = deployment
@@ -2114,31 +2111,31 @@ extension Clients.ConfigProtocol {
   }
 
   public func updateDeployment(
-    request: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateDeployment(withPolling: UpdateDeploymentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Deployment>
+  public func updateDeployment(withPolling: UpdateDeploymentRequest) async throws -> any GoogleGax
+    .PollableOperation<Deployment>
   {
     try await self.updateDeployment(withPolling: withPolling, options: .init())
   }
 
   public func updateDeployment(
-    withPolling: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateDeployment(
     deployment: Deployment?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let request = UpdateDeploymentRequest().with {
       $0.deployment = deployment
       $0.updateMask = updateMask
@@ -2153,30 +2150,30 @@ extension Clients.ConfigProtocol {
   }
 
   public func deleteDeployment(
-    request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteDeployment(withPolling: DeleteDeploymentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Deployment>
+  public func deleteDeployment(withPolling: DeleteDeploymentRequest) async throws -> any GoogleGax
+    .PollableOperation<Deployment>
   {
     try await self.deleteDeployment(withPolling: withPolling, options: .init())
   }
 
   public func deleteDeployment(
-    withPolling: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteDeployment(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let request = DeleteDeploymentRequest().with {
       $0.name = name
     }
@@ -2190,9 +2187,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listRevisions(
-    request: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRevisionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListRevisionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRevisions(
@@ -2202,13 +2199,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listRevisions(
-    byItem: ListRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRevisionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Revision, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListRevisionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRevisions(
@@ -2226,9 +2223,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getRevision(
-    request: GetRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Revision {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRevision(
@@ -2246,9 +2243,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getResource(
-    request: GetResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Resource {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getResource(
@@ -2267,9 +2264,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listResources(
-    request: ListResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListResourcesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listResources(
@@ -2279,13 +2276,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listResources(
-    byItem: ListResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Resource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListResourcesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listResources(
@@ -2304,9 +2301,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func exportDeploymentStatefile(
-    request: ExportDeploymentStatefileRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportDeploymentStatefileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Statefile {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func exportRevisionStatefile(request: ExportRevisionStatefileRequest) async throws
@@ -2316,9 +2313,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func exportRevisionStatefile(
-    request: ExportRevisionStatefileRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportRevisionStatefileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Statefile {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func importStatefile(request: ImportStatefileRequest) async throws
@@ -2328,9 +2325,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func importStatefile(
-    request: ImportStatefileRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportStatefileRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Statefile {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func importStatefile(
@@ -2349,9 +2346,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func deleteStatefile(
-    request: DeleteStatefileRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteStatefileRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteStatefile(
@@ -2370,30 +2367,30 @@ extension Clients.ConfigProtocol {
   }
 
   public func lockDeployment(
-    request: LockDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: LockDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func lockDeployment(withPolling: LockDeploymentRequest) async throws -> any GoogleCloudGax
+  public func lockDeployment(withPolling: LockDeploymentRequest) async throws -> any GoogleGax
     .PollableOperation<Deployment>
   {
     try await self.lockDeployment(withPolling: withPolling, options: .init())
   }
 
   public func lockDeployment(
-    withPolling: LockDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: LockDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func lockDeployment(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let request = LockDeploymentRequest().with {
       $0.name = name
     }
@@ -2407,31 +2404,31 @@ extension Clients.ConfigProtocol {
   }
 
   public func unlockDeployment(
-    request: UnlockDeploymentRequest, options: GoogleCloudGax.RequestOptions
+    request: UnlockDeploymentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func unlockDeployment(withPolling: UnlockDeploymentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Deployment>
+  public func unlockDeployment(withPolling: UnlockDeploymentRequest) async throws -> any GoogleGax
+    .PollableOperation<Deployment>
   {
     try await self.unlockDeployment(withPolling: withPolling, options: .init())
   }
 
   public func unlockDeployment(
-    withPolling: UnlockDeploymentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Deployment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UnlockDeploymentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Deployment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func unlockDeployment(
     name: Swift.String,
     lockId: Swift.Int64,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Deployment> {
+  ) async throws -> any GoogleGax.PollableOperation<Deployment> {
     let request = UnlockDeploymentRequest().with {
       $0.name = name
       $0.lockId = lockId
@@ -2446,9 +2443,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func exportLockInfo(
-    request: ExportLockInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportLockInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.LockInfo {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func exportLockInfo(
@@ -2467,31 +2464,31 @@ extension Clients.ConfigProtocol {
   }
 
   public func createPreview(
-    request: CreatePreviewRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePreviewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createPreview(withPolling: CreatePreviewRequest) async throws -> any GoogleCloudGax
+  public func createPreview(withPolling: CreatePreviewRequest) async throws -> any GoogleGax
     .PollableOperation<Preview>
   {
     try await self.createPreview(withPolling: withPolling, options: .init())
   }
 
   public func createPreview(
-    withPolling: CreatePreviewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Preview> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Preview>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePreviewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Preview> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Preview>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createPreview(
     parent: Swift.String,
     preview: Preview?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Preview> {
+  ) async throws -> any GoogleGax.PollableOperation<Preview> {
     let request = CreatePreviewRequest().with {
       $0.parent = parent
       $0.preview = preview
@@ -2504,9 +2501,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getPreview(
-    request: GetPreviewRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPreviewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.Preview {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPreview(
@@ -2525,9 +2522,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listPreviews(
-    request: ListPreviewsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPreviewsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListPreviewsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPreviews(
@@ -2537,13 +2534,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listPreviews(
-    byItem: ListPreviewsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPreviewsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Preview, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListPreviewsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPreviews(
@@ -2562,30 +2559,30 @@ extension Clients.ConfigProtocol {
   }
 
   public func deletePreview(
-    request: DeletePreviewRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePreviewRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deletePreview(withPolling: DeletePreviewRequest) async throws -> any GoogleCloudGax
+  public func deletePreview(withPolling: DeletePreviewRequest) async throws -> any GoogleGax
     .PollableOperation<Preview>
   {
     try await self.deletePreview(withPolling: withPolling, options: .init())
   }
 
   public func deletePreview(
-    withPolling: DeletePreviewRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Preview> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Preview>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePreviewRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Preview> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Preview>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePreview(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Preview> {
+  ) async throws -> any GoogleGax.PollableOperation<Preview> {
     let request = DeletePreviewRequest().with {
       $0.name = name
     }
@@ -2599,9 +2596,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func exportPreviewResult(
-    request: ExportPreviewResultRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportPreviewResultRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ExportPreviewResultResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTerraformVersions(request: ListTerraformVersionsRequest) async throws
@@ -2611,9 +2608,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listTerraformVersions(
-    request: ListTerraformVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTerraformVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListTerraformVersionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTerraformVersions(
@@ -2623,13 +2620,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listTerraformVersions(
-    byItem: ListTerraformVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTerraformVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TerraformVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListTerraformVersionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTerraformVersions(
@@ -2648,9 +2645,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getTerraformVersion(
-    request: GetTerraformVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTerraformVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.TerraformVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTerraformVersion(
@@ -2669,9 +2666,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listResourceChanges(
-    request: ListResourceChangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourceChangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListResourceChangesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listResourceChanges(
@@ -2681,13 +2678,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listResourceChanges(
-    byItem: ListResourceChangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourceChangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceChange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListResourceChangesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listResourceChanges(
@@ -2706,9 +2703,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getResourceChange(
-    request: GetResourceChangeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceChangeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ResourceChange {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getResourceChange(
@@ -2727,9 +2724,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listResourceDrifts(
-    request: ListResourceDriftsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourceDriftsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListResourceDriftsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listResourceDrifts(
@@ -2739,13 +2736,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listResourceDrifts(
-    byItem: ListResourceDriftsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourceDriftsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceDrift, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListResourceDriftsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listResourceDrifts(
@@ -2764,9 +2761,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getResourceDrift(
-    request: GetResourceDriftRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceDriftRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ResourceDrift {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getResourceDrift(
@@ -2785,9 +2782,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getAutoMigrationConfig(
-    request: GetAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.AutoMigrationConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAutoMigrationConfig(
@@ -2806,32 +2803,31 @@ extension Clients.ConfigProtocol {
   }
 
   public func updateAutoMigrationConfig(
-    request: UpdateAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAutoMigrationConfig(withPolling: UpdateAutoMigrationConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AutoMigrationConfig>
+    -> any GoogleGax.PollableOperation<AutoMigrationConfig>
   {
     try await self.updateAutoMigrationConfig(withPolling: withPolling, options: .init())
   }
 
   public func updateAutoMigrationConfig(
-    withPolling: UpdateAutoMigrationConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AutoMigrationConfig> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<AutoMigrationConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateAutoMigrationConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AutoMigrationConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AutoMigrationConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateAutoMigrationConfig(
     autoMigrationConfig: AutoMigrationConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AutoMigrationConfig> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<AutoMigrationConfig> {
     let request = UpdateAutoMigrationConfigRequest().with {
       $0.autoMigrationConfig = autoMigrationConfig
       $0.updateMask = updateMask
@@ -2846,9 +2842,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getDeploymentGroup(
-    request: GetDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.DeploymentGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDeploymentGroup(
@@ -2867,24 +2863,24 @@ extension Clients.ConfigProtocol {
   }
 
   public func createDeploymentGroup(
-    request: CreateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDeploymentGroup(withPolling: CreateDeploymentGroupRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    -> any GoogleGax.PollableOperation<DeploymentGroup>
   {
     try await self.createDeploymentGroup(withPolling: withPolling, options: .init())
   }
 
   public func createDeploymentGroup(
-    withPolling: CreateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2892,7 +2888,7 @@ extension Clients.ConfigProtocol {
     parent: Swift.String,
     deploymentGroup: DeploymentGroup?,
     deploymentGroupId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let request = CreateDeploymentGroupRequest().with {
       $0.parent = parent
       $0.deploymentGroup = deploymentGroup
@@ -2908,31 +2904,31 @@ extension Clients.ConfigProtocol {
   }
 
   public func updateDeploymentGroup(
-    request: UpdateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateDeploymentGroup(withPolling: UpdateDeploymentGroupRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    -> any GoogleGax.PollableOperation<DeploymentGroup>
   {
     try await self.updateDeploymentGroup(withPolling: withPolling, options: .init())
   }
 
   public func updateDeploymentGroup(
-    withPolling: UpdateDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateDeploymentGroup(
     deploymentGroup: DeploymentGroup?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let request = UpdateDeploymentGroupRequest().with {
       $0.deploymentGroup = deploymentGroup
       $0.updateMask = updateMask
@@ -2947,30 +2943,30 @@ extension Clients.ConfigProtocol {
   }
 
   public func deleteDeploymentGroup(
-    request: DeleteDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDeploymentGroup(withPolling: DeleteDeploymentGroupRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    -> any GoogleGax.PollableOperation<DeploymentGroup>
   {
     try await self.deleteDeploymentGroup(withPolling: withPolling, options: .init())
   }
 
   public func deleteDeploymentGroup(
-    withPolling: DeleteDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteDeploymentGroup(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let request = DeleteDeploymentGroupRequest().with {
       $0.name = name
     }
@@ -2984,9 +2980,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listDeploymentGroups(
-    request: ListDeploymentGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListDeploymentGroupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDeploymentGroups(
@@ -2996,13 +2992,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listDeploymentGroups(
-    byItem: ListDeploymentGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DeploymentGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListDeploymentGroupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDeploymentGroups(
@@ -3021,30 +3017,30 @@ extension Clients.ConfigProtocol {
   }
 
   public func provisionDeploymentGroup(
-    request: ProvisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: ProvisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func provisionDeploymentGroup(withPolling: ProvisionDeploymentGroupRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    -> any GoogleGax.PollableOperation<DeploymentGroup>
   {
     try await self.provisionDeploymentGroup(withPolling: withPolling, options: .init())
   }
 
   public func provisionDeploymentGroup(
-    withPolling: ProvisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ProvisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func provisionDeploymentGroup(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let request = ProvisionDeploymentGroupRequest().with {
       $0.name = name
     }
@@ -3058,30 +3054,30 @@ extension Clients.ConfigProtocol {
   }
 
   public func deprovisionDeploymentGroup(
-    request: DeprovisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeprovisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deprovisionDeploymentGroup(withPolling: DeprovisionDeploymentGroupRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup>
+    async throws -> any GoogleGax.PollableOperation<DeploymentGroup>
   {
     try await self.deprovisionDeploymentGroup(withPolling: withPolling, options: .init())
   }
 
   public func deprovisionDeploymentGroup(
-    withPolling: DeprovisionDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentGroup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeprovisionDeploymentGroupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DeploymentGroup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deprovisionDeploymentGroup(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentGroup> {
+  ) async throws -> any GoogleGax.PollableOperation<DeploymentGroup> {
     let request = DeprovisionDeploymentGroupRequest().with {
       $0.name = name
     }
@@ -3095,9 +3091,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getDeploymentGroupRevision(
-    request: GetDeploymentGroupRevisionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDeploymentGroupRevisionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.DeploymentGroupRevision {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDeploymentGroupRevision(
@@ -3116,9 +3112,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listDeploymentGroupRevisions(
-    request: ListDeploymentGroupRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDeploymentGroupRevisionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudConfigV1.ListDeploymentGroupRevisionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDeploymentGroupRevisions(
@@ -3128,14 +3124,14 @@ extension Clients.ConfigProtocol {
   }
 
   public func listDeploymentGroupRevisions(
-    byItem: ListDeploymentGroupRevisionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDeploymentGroupRevisionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DeploymentGroupRevision, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudConfigV1.ListDeploymentGroupRevisionsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDeploymentGroupRevisions(
@@ -3154,9 +3150,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -3166,13 +3162,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -3182,9 +3178,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -3194,9 +3190,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -3206,9 +3202,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -3218,9 +3214,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -3230,9 +3226,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -3242,13 +3238,13 @@ extension Clients.ConfigProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -3269,9 +3265,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -3288,9 +3284,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -3307,9 +3303,9 @@ extension Clients.ConfigProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

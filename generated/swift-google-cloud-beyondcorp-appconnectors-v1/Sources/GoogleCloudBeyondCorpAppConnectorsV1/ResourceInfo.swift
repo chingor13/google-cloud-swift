@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ResourceInfo represents the information/status of an app connector resource.
 /// Such as:
@@ -27,7 +27,7 @@ import Foundation
 ///         - appconnection
 ///           - tunnel
 ///       - logagent
-public struct ResourceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ResourceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Unique Id for the resource.
@@ -38,16 +38,16 @@ public struct ResourceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var status: HealthStatus = HealthStatus()
 
   /// Specific details for the resource. This is for internal use only.
-  public var resource: GoogleCloudWKT.`Any`? = nil
+  public var resource: GoogleWKT.`Any`? = nil
 
   /// The timestamp to collect the info. It is suggested to be set by
   /// the topmost level resource only.
-  public var time: GoogleCloudWKT.Timestamp? = nil
+  public var time: GoogleWKT.Timestamp? = nil
 
   /// List of Info for the sub level resources.
   public var sub: [ResourceInfo] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResourceInfo`.
   public init() {}
@@ -94,14 +94,14 @@ public struct ResourceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(HealthStatus.self, forKey: .status) {
       self.status = value
     }
-    self.resource = try container.decodeIfPresent(GoogleCloudWKT.`Any`.self, forKey: .resource)
-    self.time = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .time)
+    self.resource = try container.decodeIfPresent(GoogleWKT.`Any`.self, forKey: .resource)
+    self.time = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .time)
     if let value = try container.decodeIfPresent([ResourceInfo].self, forKey: .sub) {
       self.sub = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -120,10 +120,10 @@ public struct ResourceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.beyondcorp.appconnectors.v1.ResourceInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

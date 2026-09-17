@@ -16,131 +16,128 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol InterceptStub: Sendable {
     func listInterceptEndpointGroups(
-      request: ListInterceptEndpointGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInterceptEndpointGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListInterceptEndpointGroupsResponse
 
     func getInterceptEndpointGroup(
-      request: GetInterceptEndpointGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInterceptEndpointGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.InterceptEndpointGroup
 
     func createInterceptEndpointGroup(
-      request: CreateInterceptEndpointGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInterceptEndpointGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateInterceptEndpointGroup(
-      request: UpdateInterceptEndpointGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInterceptEndpointGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteInterceptEndpointGroup(
-      request: DeleteInterceptEndpointGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInterceptEndpointGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listInterceptEndpointGroupAssociations(
-      request: ListInterceptEndpointGroupAssociationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInterceptEndpointGroupAssociationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListInterceptEndpointGroupAssociationsResponse
 
     func getInterceptEndpointGroupAssociation(
-      request: GetInterceptEndpointGroupAssociationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInterceptEndpointGroupAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.InterceptEndpointGroupAssociation
 
     func createInterceptEndpointGroupAssociation(
-      request: CreateInterceptEndpointGroupAssociationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: CreateInterceptEndpointGroupAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateInterceptEndpointGroupAssociation(
-      request: UpdateInterceptEndpointGroupAssociationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: UpdateInterceptEndpointGroupAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteInterceptEndpointGroupAssociation(
-      request: DeleteInterceptEndpointGroupAssociationRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: DeleteInterceptEndpointGroupAssociationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listInterceptDeploymentGroups(
-      request: ListInterceptDeploymentGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInterceptDeploymentGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListInterceptDeploymentGroupsResponse
 
     func getInterceptDeploymentGroup(
-      request: GetInterceptDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInterceptDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.InterceptDeploymentGroup
 
     func createInterceptDeploymentGroup(
-      request: CreateInterceptDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInterceptDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateInterceptDeploymentGroup(
-      request: UpdateInterceptDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInterceptDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteInterceptDeploymentGroup(
-      request: DeleteInterceptDeploymentGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInterceptDeploymentGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listInterceptDeployments(
-      request: ListInterceptDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInterceptDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListInterceptDeploymentsResponse
 
     func getInterceptDeployment(
-      request: GetInterceptDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInterceptDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.InterceptDeployment
 
     func createInterceptDeployment(
-      request: CreateInterceptDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInterceptDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateInterceptDeployment(
-      request: UpdateInterceptDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInterceptDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteInterceptDeployment(
-      request: DeleteInterceptDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInterceptDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

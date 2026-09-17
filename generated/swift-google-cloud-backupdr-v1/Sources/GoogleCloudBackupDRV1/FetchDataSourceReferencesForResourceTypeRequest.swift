@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request for the FetchDataSourceReferencesForResourceType method.
-public struct FetchDataSourceReferencesForResourceTypeRequest: Codable, Equatable, GoogleCloudWKT
+public struct FetchDataSourceReferencesForResourceTypeRequest: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -67,7 +67,7 @@ public struct FetchDataSourceReferencesForResourceTypeRequest: Codable, Equatabl
   /// * name
   public var orderBy: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FetchDataSourceReferencesForResourceTypeRequest`.
   public init() {}
@@ -130,7 +130,7 @@ public struct FetchDataSourceReferencesForResourceTypeRequest: Codable, Equatabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -151,10 +151,10 @@ public struct FetchDataSourceReferencesForResourceTypeRequest: Codable, Equatabl
     return
       "type.googleapis.com/google.cloud.backupdr.v1.FetchDataSourceReferencesForResourceTypeRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

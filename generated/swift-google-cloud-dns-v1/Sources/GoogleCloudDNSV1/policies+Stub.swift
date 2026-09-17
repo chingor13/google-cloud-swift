@@ -15,33 +15,33 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol PoliciesStub: Sendable {
     func create(
-      request: PoliciesClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: PoliciesClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> Policy
 
     func delete(
-      request: PoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: PoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func `get`(
-      request: PoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: PoliciesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Policy
 
     func list(
-      request: PoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: PoliciesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> PoliciesListResponse
 
     func patch(
-      request: PoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: PoliciesClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> PoliciesPatchResponse
 
     func update(
-      request: PoliciesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: PoliciesClient.UpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> PoliciesUpdateResponse
   }
 }

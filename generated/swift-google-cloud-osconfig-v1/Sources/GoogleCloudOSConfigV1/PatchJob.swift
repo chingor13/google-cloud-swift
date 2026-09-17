@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A high level representation of a patch job that is either in progress
 /// or has completed.
@@ -26,7 +26,7 @@ import Foundation
 /// For more information about patch jobs, see
 /// [Creating patch
 /// jobs](https://cloud.google.com/compute/docs/os-patch-management/create-patch-job).
-public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PatchJob: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Unique identifier for this patch job in the form
@@ -41,10 +41,10 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// Time this patch job was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Last time this patch job was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The current state of the PatchJob.
   public var state: PatchJob.State = PatchJob.State()
@@ -57,7 +57,7 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Duration of the patch job. After the duration ends, the
   /// patch job times out.
-  public var duration: GoogleCloudWKT.Duration? = nil
+  public var duration: GoogleWKT.Duration? = nil
 
   /// Summary of instance details.
   public var instanceDetailsSummary: PatchJob.InstanceDetailsSummary? = nil
@@ -80,7 +80,7 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Rollout strategy being applied.
   public var rollout: PatchRollout? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PatchJob`.
   public init() {}
@@ -150,17 +150,15 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(PatchJob.State.self, forKey: .state) {
       self.state = value
     }
     self.instanceFilter = try container.decodeIfPresent(
       PatchInstanceFilter.self, forKey: .instanceFilter)
     self.patchConfig = try container.decodeIfPresent(PatchConfig.self, forKey: .patchConfig)
-    self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+    self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
     self.instanceDetailsSummary = try container.decodeIfPresent(
       PatchJob.InstanceDetailsSummary.self, forKey: .instanceDetailsSummary)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .dryRun) {
@@ -178,7 +176,7 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.rollout = try container.decodeIfPresent(PatchRollout.self, forKey: .rollout)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -208,7 +206,7 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// job affects. Contains counts of instances in different states. These states
   /// map to `InstancePatchState`. List patch job instance details to see the
   /// specific states of each instance.
-  public struct InstanceDetailsSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InstanceDetailsSummary: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Number of instances pending patch job.
@@ -258,7 +256,7 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the service.
     public var noAgentDetectedInstanceCount: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstanceDetailsSummary`.
     public init() {}
@@ -391,7 +389,7 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -422,11 +420,11 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.osconfig.v1.PatchJob.InstanceDetailsSummary"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -574,10 +572,10 @@ public struct PatchJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.osconfig.v1.PatchJob"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

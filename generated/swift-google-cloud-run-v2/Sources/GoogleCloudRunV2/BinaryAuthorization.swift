@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings for Binary Authorization feature.
-public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BinaryAuthorization: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. If present, indicates to use Breakglass using this justification.
@@ -29,7 +29,7 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   public var binauthzMethod: OneOf_BinauthzMethod? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BinaryAuthorization`.
   public init() {}
@@ -91,7 +91,7 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.binauthzMethod = binauthzMethod
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -124,10 +124,10 @@ public struct BinaryAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.run.v2.BinaryAuthorization"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

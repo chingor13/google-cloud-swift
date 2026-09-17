@@ -16,10 +16,10 @@
 
 #if Routers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Configuration of logging on a NAT.
-  public struct RouterNatLogConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouterNatLogConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates whether or not to export logs. This is false by default.
@@ -36,7 +36,7 @@
     ///    unsuccessful.
     public var filter: RouterNatLogConfig.Filter? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouterNatLogConfig`.
     public init() {}
@@ -75,7 +75,7 @@
       self.filter = try container.decodeIfPresent(RouterNatLogConfig.Filter.self, forKey: .filter)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -198,11 +198,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RouterNatLogConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

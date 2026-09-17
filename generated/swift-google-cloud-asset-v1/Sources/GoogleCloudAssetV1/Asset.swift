@@ -17,9 +17,9 @@
 import Foundation
 import GoogleCloudOSConfigV1
 import GoogleCloudOrgPolicyV1
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleIdentityAccessContextManagerV1
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An asset in Google Cloud. An asset can be any resource in the Google Cloud
 /// [resource
@@ -30,12 +30,12 @@ import GoogleIdentityAccessContextManagerV1
 /// See [Supported asset
 /// types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
 /// for more information.
-public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Asset: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The last update timestamp of an asset. update_time is updated when
   /// create/update/delete operation is performed.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The full name of the asset. Example:
   /// `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`
@@ -102,7 +102,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// policy](https://cloud.google.com/access-context-manager/docs/overview#access-policies).
   public var accessContextPolicy: OneOf_AccessContextPolicy? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Asset`.
   public init() {}
@@ -159,8 +159,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
@@ -210,7 +209,7 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.accessContextPolicy = accessContextPolicy
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -259,10 +258,10 @@ public struct Asset: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.Asset"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

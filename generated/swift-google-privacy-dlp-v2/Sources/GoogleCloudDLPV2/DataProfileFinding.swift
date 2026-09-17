@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details about a piece of potentially sensitive information that was detected
 /// when the data resource was profiled.
-public struct DataProfileFinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataProfileFinding: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The content that was found. Even if the content is not textual, it
@@ -43,7 +43,7 @@ public struct DataProfileFinding: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public var findingId: Swift.String = Swift.String()
 
   /// Timestamp when the finding was detected.
-  public var timestamp: GoogleCloudWKT.Timestamp? = nil
+  public var timestamp: GoogleWKT.Timestamp? = nil
 
   /// Where the content was found.
   public var location: DataProfileFindingLocation? = nil
@@ -59,7 +59,7 @@ public struct DataProfileFinding: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// The type of the resource that was profiled.
   public var dataSourceType: DataSourceType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataProfileFinding`.
   public init() {}
@@ -123,8 +123,7 @@ public struct DataProfileFinding: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .findingId) {
       self.findingId = value
     }
-    self.timestamp = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .timestamp)
+    self.timestamp = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .timestamp)
     self.location = try container.decodeIfPresent(
       DataProfileFindingLocation.self, forKey: .location)
     if let value = try container.decodeIfPresent(
@@ -139,7 +138,7 @@ public struct DataProfileFinding: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       DataSourceType.self, forKey: .dataSourceType)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -163,10 +162,10 @@ public struct DataProfileFinding: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DataProfileFinding"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

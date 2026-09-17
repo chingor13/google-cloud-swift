@@ -16,13 +16,13 @@
 
 #if Versions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The response message for
   /// [Versions.CompareVersions][google.cloud.dialogflow.cx.v3.Versions.CompareVersions].
   ///
   /// [google.cloud.dialogflow.cx.v3.Versions.CompareVersions]: <doc:VersionsClient/compareVersions(request:options:)>
-  public struct CompareVersionsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CompareVersionsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// JSON representation of the base version content.
@@ -32,9 +32,9 @@
     public var targetVersionContentJson: Swift.String = Swift.String()
 
     /// The timestamp when the two version compares.
-    public var compareTime: GoogleCloudWKT.Timestamp? = nil
+    public var compareTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CompareVersionsResponse`.
     public init() {}
@@ -82,10 +82,10 @@
         self.targetVersionContentJson = value
       }
       self.compareTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .compareTime)
+        GoogleWKT.Timestamp.self, forKey: .compareTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -102,11 +102,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.CompareVersionsResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

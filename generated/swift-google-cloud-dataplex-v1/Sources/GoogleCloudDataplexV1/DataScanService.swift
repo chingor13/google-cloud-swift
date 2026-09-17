@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// DataScanService manages DataScan resources which can be configured to run
 /// various types of data scanning workload and generate enriched metadata (e.g.
@@ -32,11 +32,11 @@ import GoogleCloudGax
 /// @Snippet(path: "DataScanServiceQuickstart")
 public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Sendable {
   let inner: any Clients.DataScanServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `DataScanServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.DataScanServiceStub = try Clients.DataScanServiceTransport(options)
     inner = Clients.DataScanServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -51,7 +51,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_CreateDataScan")
   public func createDataScan(
-    request: CreateDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createDataScan(request: request, options: options)
   }
@@ -60,21 +60,21 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_CreateDataScan")
   public func createDataScan(
-    withPolling: CreateDataScanRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataScan> {
+    withPolling: CreateDataScanRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataScan> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DataScan>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<DataScan>.State
+      in
       return try op._extractStatus(DataScan.self)
     }
     let rawOp = try await self.createDataScan(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataScan>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataScan>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -86,7 +86,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_UpdateDataScan")
   public func updateDataScan(
-    request: UpdateDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateDataScan(request: request, options: options)
   }
@@ -95,21 +95,21 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_UpdateDataScan")
   public func updateDataScan(
-    withPolling: UpdateDataScanRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataScan> {
+    withPolling: UpdateDataScanRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataScan> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<DataScan>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<DataScan>.State
+      in
       return try op._extractStatus(DataScan.self)
     }
     let rawOp = try await self.updateDataScan(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataScan>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataScan>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -121,7 +121,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_DeleteDataScan")
   public func deleteDataScan(
-    request: DeleteDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteDataScan(request: request, options: options)
   }
@@ -130,21 +130,21 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_DeleteDataScan")
   public func deleteDataScan(
-    withPolling: DeleteDataScanRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteDataScanRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteDataScan(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -156,7 +156,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_GetDataScan")
   public func getDataScan(
-    request: GetDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataScan {
     try await self.inner.getDataScan(request: request, options: options)
   }
@@ -165,7 +165,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_ListDataScans")
   public func listDataScans(
-    request: ListDataScansRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataScansRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataScansResponse {
     try await self.inner.listDataScans(request: request, options: options)
   }
@@ -174,7 +174,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_ListDataScans")
   public func listDataScans(
-    byItem: ListDataScansRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataScansRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataScan, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataScansResponse in
@@ -182,14 +182,14 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
       request.pageToken = token
       return try await self.listDataScans(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Runs an on-demand execution of a DataScan
   ///
   /// @Snippet(path: "DataScanService_RunDataScan")
   public func runDataScan(
-    request: RunDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: RunDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.RunDataScanResponse {
     try await self.inner.runDataScan(request: request, options: options)
   }
@@ -198,7 +198,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_GetDataScanJob")
   public func getDataScanJob(
-    request: GetDataScanJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataScanJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataScanJob {
     try await self.inner.getDataScanJob(request: request, options: options)
   }
@@ -207,7 +207,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_ListDataScanJobs")
   public func listDataScanJobs(
-    request: ListDataScanJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataScanJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataScanJobsResponse {
     try await self.inner.listDataScanJobs(request: request, options: options)
   }
@@ -216,7 +216,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_ListDataScanJobs")
   public func listDataScanJobs(
-    byItem: ListDataScanJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataScanJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataScanJob, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataScanJobsResponse in
@@ -224,14 +224,14 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
       request.pageToken = token
       return try await self.listDataScanJobs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Cancels a running/pending DataScan job.
   ///
   /// @Snippet(path: "DataScanService_CancelDataScanJob")
   public func cancelDataScanJob(
-    request: CancelDataScanJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelDataScanJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.CancelDataScanJobResponse {
     try await self.inner.cancelDataScanJob(request: request, options: options)
   }
@@ -243,7 +243,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_GenerateDataQualityRules")
   public func generateDataQualityRules(
-    request: GenerateDataQualityRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateDataQualityRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GenerateDataQualityRulesResponse {
     try await self.inner.generateDataQualityRules(request: request, options: options)
   }
@@ -269,7 +269,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -295,7 +295,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -303,14 +303,14 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "DataScanService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -323,7 +323,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -333,7 +333,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -348,7 +348,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -359,7 +359,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -370,7 +370,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -378,7 +378,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -387,7 +387,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -398,7 +398,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -409,7 +409,7 @@ public final class DataScanServiceClient: Clients.DataScanServiceProtocol, Senda
   ///
   /// @Snippet(path: "DataScanService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -426,7 +426,7 @@ extension Clients {
     func createDataScan(request: CreateDataScanRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DataScanServiceClient.createDataScan`.
-    func createDataScan(withPolling: CreateDataScanRequest) async throws -> any GoogleCloudGax
+    func createDataScan(withPolling: CreateDataScanRequest) async throws -> any GoogleGax
       .PollableOperation<DataScan>
 
     /// See `DataScanServiceClient.createDataScan`.
@@ -434,32 +434,32 @@ extension Clients {
       parent: Swift.String,
       dataScan: DataScan?,
       dataScanId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataScan>
+    ) async throws -> any GoogleGax.PollableOperation<DataScan>
 
     /// See `DataScanServiceClient.updateDataScan`.
     func updateDataScan(request: UpdateDataScanRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DataScanServiceClient.updateDataScan`.
-    func updateDataScan(withPolling: UpdateDataScanRequest) async throws -> any GoogleCloudGax
+    func updateDataScan(withPolling: UpdateDataScanRequest) async throws -> any GoogleGax
       .PollableOperation<DataScan>
 
     /// See `DataScanServiceClient.updateDataScan`.
     func updateDataScan(
       dataScan: DataScan?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataScan>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<DataScan>
 
     /// See `DataScanServiceClient.deleteDataScan`.
     func deleteDataScan(request: DeleteDataScanRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `DataScanServiceClient.deleteDataScan`.
-    func deleteDataScan(withPolling: DeleteDataScanRequest) async throws -> any GoogleCloudGax
+    func deleteDataScan(withPolling: DeleteDataScanRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `DataScanServiceClient.deleteDataScan`.
     func deleteDataScan(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataScanServiceClient.getDataScan`.
     func getDataScan(request: GetDataScanRequest) async throws -> GoogleCloudDataplexV1.DataScan
@@ -589,127 +589,127 @@ extension Clients {
 
     /// See `DataScanServiceClient.createDataScan`.
     func createDataScan(
-      request: CreateDataScanRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataScanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataScanServiceClient.createDataScan`.
     func createDataScan(
-      withPolling: CreateDataScanRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataScan>
+      withPolling: CreateDataScanRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataScan>
 
     /// See `DataScanServiceClient.updateDataScan`.
     func updateDataScan(
-      request: UpdateDataScanRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDataScanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataScanServiceClient.updateDataScan`.
     func updateDataScan(
-      withPolling: UpdateDataScanRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DataScan>
+      withPolling: UpdateDataScanRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DataScan>
 
     /// See `DataScanServiceClient.deleteDataScan`.
     func deleteDataScan(
-      request: DeleteDataScanRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataScanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `DataScanServiceClient.deleteDataScan`.
     func deleteDataScan(
-      withPolling: DeleteDataScanRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteDataScanRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `DataScanServiceClient.getDataScan`.
     func getDataScan(
-      request: GetDataScanRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataScanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.DataScan
 
     /// See `DataScanServiceClient.listDataScans`.
     func listDataScans(
-      request: ListDataScansRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataScansRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListDataScansResponse
 
     /// See `DataScanServiceClient.listDataScans`.
     func listDataScans(
-      byItem: ListDataScansRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataScansRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataScan, Swift.Error>
 
     /// See `DataScanServiceClient.runDataScan`.
     func runDataScan(
-      request: RunDataScanRequest, options: GoogleCloudGax.RequestOptions
+      request: RunDataScanRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.RunDataScanResponse
 
     /// See `DataScanServiceClient.getDataScanJob`.
     func getDataScanJob(
-      request: GetDataScanJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataScanJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.DataScanJob
 
     /// See `DataScanServiceClient.listDataScanJobs`.
     func listDataScanJobs(
-      request: ListDataScanJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataScanJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListDataScanJobsResponse
 
     /// See `DataScanServiceClient.listDataScanJobs`.
     func listDataScanJobs(
-      byItem: ListDataScanJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataScanJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataScanJob, Swift.Error>
 
     /// See `DataScanServiceClient.cancelDataScanJob`.
     func cancelDataScanJob(
-      request: CancelDataScanJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelDataScanJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.CancelDataScanJobResponse
 
     /// See `DataScanServiceClient.generateDataQualityRules`.
     func generateDataQualityRules(
-      request: GenerateDataQualityRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateDataQualityRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.GenerateDataQualityRulesResponse
 
     /// See `DataScanServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `DataScanServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `DataScanServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `DataScanServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `DataScanServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `DataScanServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `DataScanServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `DataScanServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `DataScanServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `DataScanServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -723,24 +723,24 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func createDataScan(
-    request: CreateDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createDataScan(withPolling: CreateDataScanRequest) async throws -> any GoogleCloudGax
+  public func createDataScan(withPolling: CreateDataScanRequest) async throws -> any GoogleGax
     .PollableOperation<DataScan>
   {
     try await self.createDataScan(withPolling: withPolling, options: .init())
   }
 
   public func createDataScan(
-    withPolling: CreateDataScanRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataScan> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataScan>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateDataScanRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataScan> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataScan>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -748,7 +748,7 @@ extension Clients.DataScanServiceProtocol {
     parent: Swift.String,
     dataScan: DataScan?,
     dataScanId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataScan> {
+  ) async throws -> any GoogleGax.PollableOperation<DataScan> {
     let request = CreateDataScanRequest().with {
       $0.parent = parent
       $0.dataScan = dataScan
@@ -764,31 +764,31 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func updateDataScan(
-    request: UpdateDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateDataScan(withPolling: UpdateDataScanRequest) async throws -> any GoogleCloudGax
+  public func updateDataScan(withPolling: UpdateDataScanRequest) async throws -> any GoogleGax
     .PollableOperation<DataScan>
   {
     try await self.updateDataScan(withPolling: withPolling, options: .init())
   }
 
   public func updateDataScan(
-    withPolling: UpdateDataScanRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataScan> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DataScan>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateDataScanRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<DataScan> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<DataScan>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateDataScan(
     dataScan: DataScan?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<DataScan> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<DataScan> {
     let request = UpdateDataScanRequest().with {
       $0.dataScan = dataScan
       $0.updateMask = updateMask
@@ -803,30 +803,30 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func deleteDataScan(
-    request: DeleteDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteDataScan(withPolling: DeleteDataScanRequest) async throws -> any GoogleCloudGax
+  public func deleteDataScan(withPolling: DeleteDataScanRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteDataScan(withPolling: withPolling, options: .init())
   }
 
   public func deleteDataScan(
-    withPolling: DeleteDataScanRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteDataScanRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteDataScan(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteDataScanRequest().with {
       $0.name = name
     }
@@ -840,9 +840,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func getDataScan(
-    request: GetDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataScan {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDataScan(
@@ -861,9 +861,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func listDataScans(
-    request: ListDataScansRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataScansRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataScansResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDataScans(
@@ -873,13 +873,13 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func listDataScans(
-    byItem: ListDataScansRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataScansRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataScan, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataScansResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDataScans(
@@ -898,9 +898,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func runDataScan(
-    request: RunDataScanRequest, options: GoogleCloudGax.RequestOptions
+    request: RunDataScanRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.RunDataScanResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func runDataScan(
@@ -919,9 +919,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func getDataScanJob(
-    request: GetDataScanJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDataScanJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.DataScanJob {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDataScanJob(
@@ -940,9 +940,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func listDataScanJobs(
-    request: ListDataScanJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataScanJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListDataScanJobsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDataScanJobs(
@@ -952,13 +952,13 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func listDataScanJobs(
-    byItem: ListDataScanJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataScanJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataScanJob, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListDataScanJobsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDataScanJobs(
@@ -977,9 +977,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func cancelDataScanJob(
-    request: CancelDataScanJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelDataScanJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.CancelDataScanJobResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelDataScanJob(
@@ -998,9 +998,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func generateDataQualityRules(
-    request: GenerateDataQualityRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateDataQualityRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.GenerateDataQualityRulesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateDataQualityRules(
@@ -1019,9 +1019,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1031,13 +1031,13 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1047,9 +1047,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -1059,9 +1059,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -1071,9 +1071,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -1083,9 +1083,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1095,9 +1095,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1107,13 +1107,13 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1134,9 +1134,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1153,9 +1153,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1172,9 +1172,9 @@ extension Clients.DataScanServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

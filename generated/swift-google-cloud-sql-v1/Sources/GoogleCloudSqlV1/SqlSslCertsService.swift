@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service to manage SSL certs for Cloud SQL instances.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlSslCertsServiceStub
 
     /// Creates a new `SqlSslCertsServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlSslCertsServiceStub = try Clients.SqlSslCertsServiceTransport(
         options)
       inner = Clients.SqlSslCertsServiceRetry(inner, options: options)
@@ -44,7 +44,7 @@
     ///
     /// @Snippet(path: "SqlSslCertsService_Delete")
     public func delete(
-      request: SqlSslCertsDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlSslCertsDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -55,7 +55,7 @@
     ///
     /// @Snippet(path: "SqlSslCertsService_Get")
     public func `get`(
-      request: SqlSslCertsGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlSslCertsGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SslCert {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -66,7 +66,7 @@
     ///
     /// @Snippet(path: "SqlSslCertsService_Insert")
     public func insert(
-      request: SqlSslCertsInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlSslCertsInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse {
       try await self.inner.insert(request: request, options: options)
     }
@@ -75,7 +75,7 @@
     ///
     /// @Snippet(path: "SqlSslCertsService_List")
     public func list(
-      request: SqlSslCertsListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlSslCertsListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SslCertsListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -104,22 +104,22 @@
 
       /// See `SqlSslCertsServiceClient.delete`.
       func delete(
-        request: SqlSslCertsDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlSslCertsServiceClient.`get``.
       func `get`(
-        request: SqlSslCertsGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCert
 
       /// See `SqlSslCertsServiceClient.insert`.
       func insert(
-        request: SqlSslCertsInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse
 
       /// See `SqlSslCertsServiceClient.list`.
       func list(
-        request: SqlSslCertsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCertsListResponse
     }
   }
@@ -132,9 +132,9 @@
     }
 
     public func delete(
-      request: SqlSslCertsDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlSslCertsDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(request: SqlSslCertsGetRequest) async throws -> GoogleCloudSqlV1.SslCert {
@@ -142,9 +142,9 @@
     }
 
     public func `get`(
-      request: SqlSslCertsGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlSslCertsGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SslCert {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(request: SqlSslCertsInsertRequest) async throws
@@ -154,9 +154,9 @@
     }
 
     public func insert(
-      request: SqlSslCertsInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlSslCertsInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(request: SqlSslCertsListRequest) async throws
@@ -166,9 +166,9 @@
     }
 
     public func list(
-      request: SqlSslCertsListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlSslCertsListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.SslCertsListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

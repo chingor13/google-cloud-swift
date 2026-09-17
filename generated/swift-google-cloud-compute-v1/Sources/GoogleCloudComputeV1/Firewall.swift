@@ -16,13 +16,13 @@
 
 #if Firewalls || Instances || Networks || RegionNetworkFirewallPolicies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a Firewall Rule resource.
   ///
   /// Firewall rules allow or deny ingress traffic to, and egress traffic from your
   /// instances. For more information, readFirewall rules.
-  public struct Firewall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Firewall: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The list of ALLOW rules specified by this firewall. Each rule specifies a
@@ -161,7 +161,7 @@
     /// applies to all instances on the specified network.
     public var targetTags: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Firewall`.
     public init() {}
@@ -276,7 +276,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -310,7 +310,7 @@
     /// The message type for the [allowed][google.cloud.compute.v1.Firewall.allowed] field.
     ///
     /// [google.cloud.compute.v1.Firewall.allowed]: <doc:Firewall/Allowed>
-    public struct Allowed: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Allowed: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The IP protocol to which this rule applies. The protocol type is
@@ -327,7 +327,7 @@
       /// and ["12345-12349"].
       public var ports: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Allowed`.
       public init() {}
@@ -368,7 +368,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -384,18 +384,18 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.Firewall.allowed"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The message type for the [denied][google.cloud.compute.v1.Firewall.denied] field.
     ///
     /// [google.cloud.compute.v1.Firewall.denied]: <doc:Firewall/Denied>
-    public struct Denied: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Denied: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The IP protocol to which this rule applies. The protocol type is
@@ -412,7 +412,7 @@
       /// and ["12345-12349"].
       public var ports: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Denied`.
       public init() {}
@@ -453,7 +453,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -469,11 +469,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.Firewall.denied"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -580,11 +580,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Firewall"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

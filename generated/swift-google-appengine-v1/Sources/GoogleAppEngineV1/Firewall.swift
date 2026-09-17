@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Firewall resources are used to define a collection of access control rules
 /// for an Application. Each rule is defined with a position which specifies
@@ -38,7 +38,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   let inner: any Clients.FirewallStub
 
   /// Creates a new `FirewallClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.FirewallStub = try Clients.FirewallTransport(options)
     inner = Clients.FirewallRetry(inner, options: options)
     if let logger = options.logger {
@@ -51,7 +51,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_ListIngressRules")
   public func listIngressRules(
-    request: ListIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIngressRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.ListIngressRulesResponse {
     try await self.inner.listIngressRules(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_ListIngressRules")
   public func listIngressRules(
-    byItem: ListIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListIngressRulesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FirewallRule, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleAppEngineV1.ListIngressRulesResponse in
@@ -68,7 +68,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
       request.pageToken = token
       return try await self.listIngressRules(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Replaces the entire firewall ruleset in one bulk operation. This overrides
@@ -79,7 +79,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_BatchUpdateIngressRules")
   public func batchUpdateIngressRules(
-    request: BatchUpdateIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchUpdateIngressRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.BatchUpdateIngressRulesResponse {
     try await self.inner.batchUpdateIngressRules(request: request, options: options)
   }
@@ -88,7 +88,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_CreateIngressRule")
   public func createIngressRule(
-    request: CreateIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateIngressRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.FirewallRule {
     try await self.inner.createIngressRule(request: request, options: options)
   }
@@ -97,7 +97,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_GetIngressRule")
   public func getIngressRule(
-    request: GetIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIngressRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.FirewallRule {
     try await self.inner.getIngressRule(request: request, options: options)
   }
@@ -106,7 +106,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_UpdateIngressRule")
   public func updateIngressRule(
-    request: UpdateIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIngressRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.FirewallRule {
     try await self.inner.updateIngressRule(request: request, options: options)
   }
@@ -115,7 +115,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_DeleteIngressRule")
   public func deleteIngressRule(
-    request: DeleteIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIngressRuleRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteIngressRule(request: request, options: options)
   }
@@ -126,7 +126,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -137,7 +137,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -145,7 +145,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -154,7 +154,7 @@ public final class FirewallClient: Clients.FirewallProtocol, Sendable {
   ///
   /// @Snippet(path: "Firewall_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -212,47 +212,47 @@ extension Clients {
 
     /// See `FirewallClient.listIngressRules`.
     func listIngressRules(
-      request: ListIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIngressRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.ListIngressRulesResponse
 
     /// See `FirewallClient.listIngressRules`.
     func listIngressRules(
-      byItem: ListIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIngressRulesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FirewallRule, Swift.Error>
 
     /// See `FirewallClient.batchUpdateIngressRules`.
     func batchUpdateIngressRules(
-      request: BatchUpdateIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateIngressRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.BatchUpdateIngressRulesResponse
 
     /// See `FirewallClient.createIngressRule`.
     func createIngressRule(
-      request: CreateIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIngressRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.FirewallRule
 
     /// See `FirewallClient.getIngressRule`.
     func getIngressRule(
-      request: GetIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIngressRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.FirewallRule
 
     /// See `FirewallClient.updateIngressRule`.
     func updateIngressRule(
-      request: UpdateIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIngressRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleAppEngineV1.FirewallRule
 
     /// See `FirewallClient.deleteIngressRule`.
     func deleteIngressRule(
-      request: DeleteIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIngressRuleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `FirewallClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `FirewallClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -266,9 +266,9 @@ extension Clients.FirewallProtocol {
   }
 
   public func listIngressRules(
-    request: ListIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIngressRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.ListIngressRulesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listIngressRules(
@@ -278,13 +278,13 @@ extension Clients.FirewallProtocol {
   }
 
   public func listIngressRules(
-    byItem: ListIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListIngressRulesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FirewallRule, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleAppEngineV1.ListIngressRulesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func batchUpdateIngressRules(request: BatchUpdateIngressRulesRequest) async throws
@@ -294,9 +294,9 @@ extension Clients.FirewallProtocol {
   }
 
   public func batchUpdateIngressRules(
-    request: BatchUpdateIngressRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchUpdateIngressRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.BatchUpdateIngressRulesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createIngressRule(request: CreateIngressRuleRequest) async throws
@@ -306,9 +306,9 @@ extension Clients.FirewallProtocol {
   }
 
   public func createIngressRule(
-    request: CreateIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateIngressRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.FirewallRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIngressRule(request: GetIngressRuleRequest) async throws
@@ -318,9 +318,9 @@ extension Clients.FirewallProtocol {
   }
 
   public func getIngressRule(
-    request: GetIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIngressRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.FirewallRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateIngressRule(request: UpdateIngressRuleRequest) async throws
@@ -330,9 +330,9 @@ extension Clients.FirewallProtocol {
   }
 
   public func updateIngressRule(
-    request: UpdateIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIngressRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleAppEngineV1.FirewallRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteIngressRule(request: DeleteIngressRuleRequest) async throws {
@@ -340,9 +340,9 @@ extension Clients.FirewallProtocol {
   }
 
   public func deleteIngressRule(
-    request: DeleteIngressRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIngressRuleRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -352,9 +352,9 @@ extension Clients.FirewallProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -364,13 +364,13 @@ extension Clients.FirewallProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -391,9 +391,9 @@ extension Clients.FirewallProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

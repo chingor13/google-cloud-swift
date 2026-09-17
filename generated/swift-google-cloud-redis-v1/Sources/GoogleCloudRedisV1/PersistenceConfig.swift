@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration of the persistence functionality.
-public struct PersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PersistenceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Controls whether Persistence features are enabled.
@@ -36,14 +36,14 @@ public struct PersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     PersistenceConfig.SnapshotPeriod()
 
   /// Output only. The next time that a snapshot attempt is scheduled to occur.
-  public var rdbNextSnapshotTime: GoogleCloudWKT.Timestamp? = nil
+  public var rdbNextSnapshotTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Date and time that the first snapshot was/will be attempted, and
   /// to which future snapshots will be aligned. If not provided, the current
   /// time will be used.
-  public var rdbSnapshotStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var rdbSnapshotStartTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PersistenceConfig`.
   public init() {}
@@ -93,12 +93,12 @@ public struct PersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.rdbSnapshotPeriod = value
     }
     self.rdbNextSnapshotTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .rdbNextSnapshotTime)
+      GoogleWKT.Timestamp.self, forKey: .rdbNextSnapshotTime)
     self.rdbSnapshotStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .rdbSnapshotStartTime)
+      GoogleWKT.Timestamp.self, forKey: .rdbSnapshotStartTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -341,10 +341,10 @@ public struct PersistenceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.redis.v1.PersistenceConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

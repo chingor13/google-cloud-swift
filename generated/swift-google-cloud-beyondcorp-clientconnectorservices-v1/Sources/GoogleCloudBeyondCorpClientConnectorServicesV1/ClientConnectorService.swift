@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message describing ClientConnectorService object.
-public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ClientConnectorService: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Name of resource. The name is ignored during creation.
   public var name: Swift.String = Swift.String()
 
   /// Output only. [Output only] Create time stamp.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. [Output only] Update time stamp.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. User-provided name.
   /// The display name should follow certain format.
@@ -46,7 +46,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Output only. The operational state of the ClientConnectorService.
   public var state: ClientConnectorService.State = ClientConnectorService.State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ClientConnectorService`.
   public init() {}
@@ -94,10 +94,8 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
@@ -110,7 +108,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -130,12 +128,12 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   /// Settings of how to connect to the ClientGateway.
   /// One of the following options should be set.
-  public struct Ingress: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Ingress: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var ingressConfig: OneOf_IngressConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Ingress`.
     public init() {}
@@ -187,7 +185,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
       self.ingressConfig = ingressConfig
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -206,7 +204,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
 
     /// The basic ingress config for ClientGateways.
-    public struct Config: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Config: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Immutable. The transport protocol used between the client and
@@ -217,7 +215,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
       /// Required. The settings used to configure basic ClientGateways.
       public var destinationRoutes: [ClientConnectorService.Ingress.Config.DestinationRoute] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Config`.
       public init() {}
@@ -264,7 +262,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -280,7 +278,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
       /// The setting used to configure ClientGateways.
       /// It is adding routes to the client's routing table
       /// after the connection is established.
-      public struct DestinationRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct DestinationRoute: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The network address of the subnet
@@ -291,8 +289,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
         /// for which the packet is routed to the ClientGateway.
         public var netmask: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `DestinationRoute`.
         public init() {}
@@ -335,7 +332,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -352,11 +349,11 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
           return
             "type.googleapis.com/google.cloud.beyondcorp.clientconnectorservices.v1.ClientConnectorService.Ingress.Config.DestinationRoute"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -462,11 +459,11 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
         return
           "type.googleapis.com/google.cloud.beyondcorp.clientconnectorservices.v1.ClientConnectorService.Ingress.Config"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -479,21 +476,21 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.beyondcorp.clientconnectorservices.v1.ClientConnectorService.Ingress"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The details of the egress info. One of the following options should be set.
-  public struct Egress: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Egress: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var destinationType: OneOf_DestinationType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Egress`.
     public init() {}
@@ -545,7 +542,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
       self.destinationType = destinationType
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -564,13 +561,13 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
 
     /// The peered VPC owned by the consumer project.
-    public struct PeeredVpc: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PeeredVpc: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The name of the peered VPC owned by the consumer project.
       public var networkVpc: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PeeredVpc`.
       public init() {}
@@ -608,7 +605,7 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -624,11 +621,11 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
         return
           "type.googleapis.com/google.cloud.beyondcorp.clientconnectorservices.v1.ClientConnectorService.Egress.PeeredVpc"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -641,11 +638,11 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.beyondcorp.clientconnectorservices.v1.ClientConnectorService.Egress"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -788,10 +785,10 @@ public struct ClientConnectorService: Codable, Equatable, GoogleCloudWKT._AnyPac
     return
       "type.googleapis.com/google.cloud.beyondcorp.clientconnectorservices.v1.ClientConnectorService"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

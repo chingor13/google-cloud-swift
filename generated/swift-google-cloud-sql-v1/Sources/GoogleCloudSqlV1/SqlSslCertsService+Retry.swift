@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class SqlSslCertsServiceRetry: SqlSslCertsServiceStub {
       let inner: any SqlSslCertsServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any SqlSslCertsServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any SqlSslCertsServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func delete(
-        request: SqlSslCertsDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlSslCertsDeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlSslCertsDeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -65,14 +65,14 @@
       }
 
       public func `get`(
-        request: SqlSslCertsGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCert {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlSslCertsGetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlSslCertsGetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.SslCert
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -80,14 +80,14 @@
       }
 
       public func insert(
-        request: SqlSslCertsInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlSslCertsInsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlSslCertsInsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.SslCertsInsertResponse
             in
             return try await self.inner.insert(request: r, options: o)
@@ -95,14 +95,14 @@
       }
 
       public func list(
-        request: SqlSslCertsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCertsListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlSslCertsListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlSslCertsListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.SslCertsListResponse
             in
             return try await self.inner.list(request: r, options: o)

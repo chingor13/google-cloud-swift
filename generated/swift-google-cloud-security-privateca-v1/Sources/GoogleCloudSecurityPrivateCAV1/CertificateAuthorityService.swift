@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// [Certificate Authority
 /// Service][google.cloud.security.privateca.v1.CertificateAuthorityService]
@@ -36,11 +36,11 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   Sendable
 {
   let inner: any Clients.CertificateAuthorityServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `CertificateAuthorityServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CertificateAuthorityServiceStub =
       try Clients.CertificateAuthorityServiceTransport(options)
     inner = Clients.CertificateAuthorityServiceRetry(inner, options: options)
@@ -61,7 +61,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_CreateCertificate")
   public func createCertificate(
-    request: CreateCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
     try await self.inner.createCertificate(request: request, options: options)
   }
@@ -72,7 +72,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_GetCertificate")
   public func getCertificate(
-    request: GetCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
     try await self.inner.getCertificate(request: request, options: options)
   }
@@ -83,7 +83,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCertificates")
   public func listCertificates(
-    request: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCertificatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificatesResponse {
     try await self.inner.listCertificates(request: request, options: options)
   }
@@ -94,7 +94,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCertificates")
   public func listCertificates(
-    byItem: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCertificatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Certificate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificatesResponse
@@ -103,7 +103,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
       request.pageToken = token
       return try await self.listCertificates(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Revoke a [Certificate][google.cloud.security.privateca.v1.Certificate].
@@ -112,7 +112,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_RevokeCertificate")
   public func revokeCertificate(
-    request: RevokeCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: RevokeCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
     try await self.inner.revokeCertificate(request: request, options: options)
   }
@@ -126,7 +126,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCertificate")
   public func updateCertificate(
-    request: UpdateCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
     try await self.inner.updateCertificate(request: request, options: options)
   }
@@ -149,7 +149,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ActivateCertificateAuthority")
   public func activateCertificateAuthority(
-    request: ActivateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: ActivateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.activateCertificateAuthority(request: request, options: options)
   }
@@ -172,22 +172,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ActivateCertificateAuthority")
   public func activateCertificateAuthority(
-    withPolling: ActivateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+    withPolling: ActivateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       return try op._extractStatus(CertificateAuthority.self)
     }
     let rawOp = try await self.activateCertificateAuthority(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -203,7 +202,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_CreateCertificateAuthority")
   public func createCertificateAuthority(
-    request: CreateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCertificateAuthority(request: request, options: options)
   }
@@ -216,22 +215,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_CreateCertificateAuthority")
   public func createCertificateAuthority(
-    withPolling: CreateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+    withPolling: CreateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       return try op._extractStatus(CertificateAuthority.self)
     }
     let rawOp = try await self.createCertificateAuthority(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -246,7 +244,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DisableCertificateAuthority")
   public func disableCertificateAuthority(
-    request: DisableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: DisableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.disableCertificateAuthority(request: request, options: options)
   }
@@ -258,22 +256,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DisableCertificateAuthority")
   public func disableCertificateAuthority(
-    withPolling: DisableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+    withPolling: DisableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       return try op._extractStatus(CertificateAuthority.self)
     }
     let rawOp = try await self.disableCertificateAuthority(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -288,7 +285,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_EnableCertificateAuthority")
   public func enableCertificateAuthority(
-    request: EnableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: EnableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.enableCertificateAuthority(request: request, options: options)
   }
@@ -300,22 +297,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_EnableCertificateAuthority")
   public func enableCertificateAuthority(
-    withPolling: EnableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+    withPolling: EnableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       return try op._extractStatus(CertificateAuthority.self)
     }
     let rawOp = try await self.enableCertificateAuthority(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -342,7 +338,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_FetchCertificateAuthorityCsr")
   public func fetchCertificateAuthorityCsr(
-    request: FetchCertificateAuthorityCsrRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchCertificateAuthorityCsrRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.FetchCertificateAuthorityCsrResponse {
     try await self.inner.fetchCertificateAuthorityCsr(request: request, options: options)
   }
@@ -354,7 +350,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_GetCertificateAuthority")
   public func getCertificateAuthority(
-    request: GetCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateAuthority {
     try await self.inner.getCertificateAuthority(request: request, options: options)
   }
@@ -366,7 +362,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCertificateAuthorities")
   public func listCertificateAuthorities(
-    request: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCertificateAuthoritiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateAuthoritiesResponse {
     try await self.inner.listCertificateAuthorities(request: request, options: options)
   }
@@ -378,7 +374,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCertificateAuthorities")
   public func listCertificateAuthorities(
-    byItem: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCertificateAuthoritiesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateAuthority, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -387,7 +383,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
       request.pageToken = token
       return try await self.listCertificateAuthorities(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Undelete a
@@ -398,7 +394,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UndeleteCertificateAuthority")
   public func undeleteCertificateAuthority(
-    request: UndeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.undeleteCertificateAuthority(request: request, options: options)
   }
@@ -411,22 +407,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UndeleteCertificateAuthority")
   public func undeleteCertificateAuthority(
-    withPolling: UndeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+    withPolling: UndeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       return try op._extractStatus(CertificateAuthority.self)
     }
     let rawOp = try await self.undeleteCertificateAuthority(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -441,7 +436,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DeleteCertificateAuthority")
   public func deleteCertificateAuthority(
-    request: DeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCertificateAuthority(request: request, options: options)
   }
@@ -453,22 +448,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DeleteCertificateAuthority")
   public func deleteCertificateAuthority(
-    withPolling: DeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+    withPolling: DeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       return try op._extractStatus(CertificateAuthority.self)
     }
     let rawOp = try await self.deleteCertificateAuthority(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -483,7 +477,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCertificateAuthority")
   public func updateCertificateAuthority(
-    request: UpdateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCertificateAuthority(request: request, options: options)
   }
@@ -495,22 +489,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCertificateAuthority")
   public func updateCertificateAuthority(
-    withPolling: UpdateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+    withPolling: UpdateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       return try op._extractStatus(CertificateAuthority.self)
     }
     let rawOp = try await self.updateCertificateAuthority(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -524,7 +517,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_CreateCaPool")
   public func createCaPool(
-    request: CreateCaPoolRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCaPoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCaPool(request: request, options: options)
   }
@@ -535,21 +528,20 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_CreateCaPool")
   public func createCaPool(
-    withPolling: CreateCaPoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CaPool> {
+    withPolling: CreateCaPoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CaPool> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CaPool>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<CaPool>.State in
       return try op._extractStatus(CaPool.self)
     }
     let rawOp = try await self.createCaPool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CaPool>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CaPool>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -563,7 +555,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCaPool")
   public func updateCaPool(
-    request: UpdateCaPoolRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCaPoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCaPool(request: request, options: options)
   }
@@ -574,21 +566,20 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCaPool")
   public func updateCaPool(
-    withPolling: UpdateCaPoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CaPool> {
+    withPolling: UpdateCaPoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CaPool> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CaPool>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<CaPool>.State in
       return try op._extractStatus(CaPool.self)
     }
     let rawOp = try await self.updateCaPool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CaPool>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CaPool>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -602,7 +593,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_GetCaPool")
   public func getCaPool(
-    request: GetCaPoolRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCaPoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.CaPool {
     try await self.inner.getCaPool(request: request, options: options)
   }
@@ -613,7 +604,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCaPools")
   public func listCaPools(
-    request: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCaPoolsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCaPoolsResponse {
     try await self.inner.listCaPools(request: request, options: options)
   }
@@ -624,7 +615,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCaPools")
   public func listCaPools(
-    byItem: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCaPoolsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CaPool, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityPrivateCAV1.ListCaPoolsResponse in
@@ -632,7 +623,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
       request.pageToken = token
       return try await self.listCaPools(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Delete a [CaPool][google.cloud.security.privateca.v1.CaPool].
@@ -641,7 +632,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DeleteCaPool")
   public func deleteCaPool(
-    request: DeleteCaPoolRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCaPoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCaPool(request: request, options: options)
   }
@@ -652,21 +643,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DeleteCaPool")
   public func deleteCaPool(
-    withPolling: DeleteCaPoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteCaPoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteCaPool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -683,7 +674,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_FetchCaCerts")
   public func fetchCaCerts(
-    request: FetchCaCertsRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchCaCertsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.FetchCaCertsResponse {
     try await self.inner.fetchCaCerts(request: request, options: options)
   }
@@ -695,7 +686,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_GetCertificateRevocationList")
   public func getCertificateRevocationList(
-    request: GetCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCertificateRevocationListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateRevocationList {
     try await self.inner.getCertificateRevocationList(request: request, options: options)
   }
@@ -707,7 +698,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCertificateRevocationLists")
   public func listCertificateRevocationLists(
-    request: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCertificateRevocationListsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateRevocationListsResponse {
     try await self.inner.listCertificateRevocationLists(request: request, options: options)
   }
@@ -719,7 +710,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCertificateRevocationLists")
   public func listCertificateRevocationLists(
-    byItem: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCertificateRevocationListsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateRevocationList, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -728,7 +719,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
       request.pageToken = token
       return try await self.listCertificateRevocationLists(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Update a
@@ -738,7 +729,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCertificateRevocationList")
   public func updateCertificateRevocationList(
-    request: UpdateCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCertificateRevocationListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCertificateRevocationList(request: request, options: options)
   }
@@ -750,23 +741,23 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCertificateRevocationList")
   public func updateCertificateRevocationList(
-    withPolling: UpdateCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateRevocationList> {
+    withPolling: UpdateCertificateRevocationListRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateRevocationList> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateRevocationList>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateRevocationList>.State in
       return try op._extractStatus(CertificateRevocationList.self)
     }
     let rawOp = try await self.updateCertificateRevocationList(
       request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateRevocationList>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<CertificateRevocationList>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -782,7 +773,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_CreateCertificateTemplate")
   public func createCertificateTemplate(
-    request: CreateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCertificateTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCertificateTemplate(request: request, options: options)
   }
@@ -795,22 +786,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_CreateCertificateTemplate")
   public func createCertificateTemplate(
-    withPolling: CreateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate> {
+    withPolling: CreateCertificateTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateTemplate>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateTemplate>.State in
       return try op._extractStatus(CertificateTemplate.self)
     }
     let rawOp = try await self.createCertificateTemplate(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateTemplate>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateTemplate>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -825,7 +815,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DeleteCertificateTemplate")
   public func deleteCertificateTemplate(
-    request: DeleteCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCertificateTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCertificateTemplate(request: request, options: options)
   }
@@ -837,21 +827,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DeleteCertificateTemplate")
   public func deleteCertificateTemplate(
-    withPolling: DeleteCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteCertificateTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteCertificateTemplate(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -866,7 +856,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_GetCertificateTemplate")
   public func getCertificateTemplate(
-    request: GetCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCertificateTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateTemplate {
     try await self.inner.getCertificateTemplate(request: request, options: options)
   }
@@ -878,7 +868,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCertificateTemplates")
   public func listCertificateTemplates(
-    request: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCertificateTemplatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateTemplatesResponse {
     try await self.inner.listCertificateTemplates(request: request, options: options)
   }
@@ -890,7 +880,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListCertificateTemplates")
   public func listCertificateTemplates(
-    byItem: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCertificateTemplatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateTemplate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -899,7 +889,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
       request.pageToken = token
       return try await self.listCertificateTemplates(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Update a
@@ -909,7 +899,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCertificateTemplate")
   public func updateCertificateTemplate(
-    request: UpdateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCertificateTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCertificateTemplate(request: request, options: options)
   }
@@ -921,22 +911,21 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_UpdateCertificateTemplate")
   public func updateCertificateTemplate(
-    withPolling: UpdateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate> {
+    withPolling: UpdateCertificateTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CertificateTemplate>.State in
+        -> GoogleGax._PollableOperationImpl<CertificateTemplate>.State in
       return try op._extractStatus(CertificateTemplate.self)
     }
     let rawOp = try await self.updateCertificateTemplate(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateTemplate>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateTemplate>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -965,7 +954,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -991,7 +980,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -999,14 +988,14 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "CertificateAuthorityService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -1019,7 +1008,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -1029,7 +1018,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -1044,7 +1033,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -1055,7 +1044,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -1066,7 +1055,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -1074,7 +1063,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -1083,7 +1072,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -1094,7 +1083,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -1105,7 +1094,7 @@ public final class CertificateAuthorityServiceClient: Clients.CertificateAuthori
   ///
   /// @Snippet(path: "CertificateAuthorityService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -1168,7 +1157,7 @@ extension Clients {
     /// See `CertificateAuthorityServiceClient.updateCertificate`.
     func updateCertificate(
       certificate: Certificate?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     /// See `CertificateAuthorityServiceClient.activateCertificateAuthority`.
@@ -1177,12 +1166,12 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.activateCertificateAuthority`.
     func activateCertificateAuthority(withPolling: ActivateCertificateAuthorityRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.activateCertificateAuthority`.
     func activateCertificateAuthority(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.createCertificateAuthority`.
     func createCertificateAuthority(request: CreateCertificateAuthorityRequest) async throws
@@ -1190,14 +1179,14 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.createCertificateAuthority`.
     func createCertificateAuthority(withPolling: CreateCertificateAuthorityRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.createCertificateAuthority`.
     func createCertificateAuthority(
       parent: Swift.String,
       certificateAuthority: CertificateAuthority?,
       certificateAuthorityId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.disableCertificateAuthority`.
     func disableCertificateAuthority(request: DisableCertificateAuthorityRequest) async throws
@@ -1205,12 +1194,12 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.disableCertificateAuthority`.
     func disableCertificateAuthority(withPolling: DisableCertificateAuthorityRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.disableCertificateAuthority`.
     func disableCertificateAuthority(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.enableCertificateAuthority`.
     func enableCertificateAuthority(request: EnableCertificateAuthorityRequest) async throws
@@ -1218,12 +1207,12 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.enableCertificateAuthority`.
     func enableCertificateAuthority(withPolling: EnableCertificateAuthorityRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.enableCertificateAuthority`.
     func enableCertificateAuthority(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.fetchCertificateAuthorityCsr`.
     func fetchCertificateAuthorityCsr(request: FetchCertificateAuthorityCsrRequest) async throws
@@ -1263,12 +1252,12 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.undeleteCertificateAuthority`.
     func undeleteCertificateAuthority(withPolling: UndeleteCertificateAuthorityRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.undeleteCertificateAuthority`.
     func undeleteCertificateAuthority(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateAuthority`.
     func deleteCertificateAuthority(request: DeleteCertificateAuthorityRequest) async throws
@@ -1276,12 +1265,12 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateAuthority`.
     func deleteCertificateAuthority(withPolling: DeleteCertificateAuthorityRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateAuthority`.
     func deleteCertificateAuthority(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.updateCertificateAuthority`.
     func updateCertificateAuthority(request: UpdateCertificateAuthorityRequest) async throws
@@ -1289,19 +1278,19 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.updateCertificateAuthority`.
     func updateCertificateAuthority(withPolling: UpdateCertificateAuthorityRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.updateCertificateAuthority`.
     func updateCertificateAuthority(
       certificateAuthority: CertificateAuthority?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.createCaPool`.
     func createCaPool(request: CreateCaPoolRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.createCaPool`.
-    func createCaPool(withPolling: CreateCaPoolRequest) async throws -> any GoogleCloudGax
+    func createCaPool(withPolling: CreateCaPoolRequest) async throws -> any GoogleGax
       .PollableOperation<CaPool>
 
     /// See `CertificateAuthorityServiceClient.createCaPool`.
@@ -1309,20 +1298,20 @@ extension Clients {
       parent: Swift.String,
       caPool: CaPool?,
       caPoolId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CaPool>
+    ) async throws -> any GoogleGax.PollableOperation<CaPool>
 
     /// See `CertificateAuthorityServiceClient.updateCaPool`.
     func updateCaPool(request: UpdateCaPoolRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.updateCaPool`.
-    func updateCaPool(withPolling: UpdateCaPoolRequest) async throws -> any GoogleCloudGax
+    func updateCaPool(withPolling: UpdateCaPoolRequest) async throws -> any GoogleGax
       .PollableOperation<CaPool>
 
     /// See `CertificateAuthorityServiceClient.updateCaPool`.
     func updateCaPool(
       caPool: CaPool?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CaPool>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<CaPool>
 
     /// See `CertificateAuthorityServiceClient.getCaPool`.
     func getCaPool(request: GetCaPoolRequest) async throws -> GoogleCloudSecurityPrivateCAV1.CaPool
@@ -1350,13 +1339,13 @@ extension Clients {
     func deleteCaPool(request: DeleteCaPoolRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.deleteCaPool`.
-    func deleteCaPool(withPolling: DeleteCaPoolRequest) async throws -> any GoogleCloudGax
+    func deleteCaPool(withPolling: DeleteCaPoolRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `CertificateAuthorityServiceClient.deleteCaPool`.
     func deleteCaPool(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CertificateAuthorityServiceClient.fetchCaCerts`.
     func fetchCaCerts(request: FetchCaCertsRequest) async throws
@@ -1396,13 +1385,13 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.updateCertificateRevocationList`.
     func updateCertificateRevocationList(withPolling: UpdateCertificateRevocationListRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<CertificateRevocationList>
+      async throws -> any GoogleGax.PollableOperation<CertificateRevocationList>
 
     /// See `CertificateAuthorityServiceClient.updateCertificateRevocationList`.
     func updateCertificateRevocationList(
       certificateRevocationList: CertificateRevocationList?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateRevocationList>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<CertificateRevocationList>
 
     /// See `CertificateAuthorityServiceClient.createCertificateTemplate`.
     func createCertificateTemplate(request: CreateCertificateTemplateRequest) async throws
@@ -1410,14 +1399,14 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.createCertificateTemplate`.
     func createCertificateTemplate(withPolling: CreateCertificateTemplateRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateTemplate>
+      -> any GoogleGax.PollableOperation<CertificateTemplate>
 
     /// See `CertificateAuthorityServiceClient.createCertificateTemplate`.
     func createCertificateTemplate(
       parent: Swift.String,
       certificateTemplate: CertificateTemplate?,
       certificateTemplateId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate>
+    ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate>
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateTemplate`.
     func deleteCertificateTemplate(request: DeleteCertificateTemplateRequest) async throws
@@ -1425,12 +1414,12 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateTemplate`.
     func deleteCertificateTemplate(withPolling: DeleteCertificateTemplateRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateTemplate`.
     func deleteCertificateTemplate(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CertificateAuthorityServiceClient.getCertificateTemplate`.
     func getCertificateTemplate(request: GetCertificateTemplateRequest) async throws
@@ -1461,13 +1450,13 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.updateCertificateTemplate`.
     func updateCertificateTemplate(withPolling: UpdateCertificateTemplateRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CertificateTemplate>
+      -> any GoogleGax.PollableOperation<CertificateTemplate>
 
     /// See `CertificateAuthorityServiceClient.updateCertificateTemplate`.
     func updateCertificateTemplate(
       certificateTemplate: CertificateTemplate?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate>
 
     /// See `CertificateAuthorityServiceClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -1525,292 +1514,292 @@ extension Clients {
 
     /// See `CertificateAuthorityServiceClient.createCertificate`.
     func createCertificate(
-      request: CreateCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     /// See `CertificateAuthorityServiceClient.getCertificate`.
     func getCertificate(
-      request: GetCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     /// See `CertificateAuthorityServiceClient.listCertificates`.
     func listCertificates(
-      request: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCertificatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificatesResponse
 
     /// See `CertificateAuthorityServiceClient.listCertificates`.
     func listCertificates(
-      byItem: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCertificatesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Certificate, Swift.Error>
 
     /// See `CertificateAuthorityServiceClient.revokeCertificate`.
     func revokeCertificate(
-      request: RevokeCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: RevokeCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     /// See `CertificateAuthorityServiceClient.updateCertificate`.
     func updateCertificate(
-      request: UpdateCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate
 
     /// See `CertificateAuthorityServiceClient.activateCertificateAuthority`.
     func activateCertificateAuthority(
-      request: ActivateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: ActivateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.activateCertificateAuthority`.
     func activateCertificateAuthority(
-      withPolling: ActivateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      withPolling: ActivateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.createCertificateAuthority`.
     func createCertificateAuthority(
-      request: CreateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.createCertificateAuthority`.
     func createCertificateAuthority(
-      withPolling: CreateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      withPolling: CreateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.disableCertificateAuthority`.
     func disableCertificateAuthority(
-      request: DisableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.disableCertificateAuthority`.
     func disableCertificateAuthority(
-      withPolling: DisableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      withPolling: DisableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.enableCertificateAuthority`.
     func enableCertificateAuthority(
-      request: EnableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.enableCertificateAuthority`.
     func enableCertificateAuthority(
-      withPolling: EnableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      withPolling: EnableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.fetchCertificateAuthorityCsr`.
     func fetchCertificateAuthorityCsr(
-      request: FetchCertificateAuthorityCsrRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchCertificateAuthorityCsrRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.FetchCertificateAuthorityCsrResponse
 
     /// See `CertificateAuthorityServiceClient.getCertificateAuthority`.
     func getCertificateAuthority(
-      request: GetCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateAuthority
 
     /// See `CertificateAuthorityServiceClient.listCertificateAuthorities`.
     func listCertificateAuthorities(
-      request: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCertificateAuthoritiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateAuthoritiesResponse
 
     /// See `CertificateAuthorityServiceClient.listCertificateAuthorities`.
     func listCertificateAuthorities(
-      byItem: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCertificateAuthoritiesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CertificateAuthority, Swift.Error>
 
     /// See `CertificateAuthorityServiceClient.undeleteCertificateAuthority`.
     func undeleteCertificateAuthority(
-      request: UndeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.undeleteCertificateAuthority`.
     func undeleteCertificateAuthority(
-      withPolling: UndeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      withPolling: UndeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateAuthority`.
     func deleteCertificateAuthority(
-      request: DeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateAuthority`.
     func deleteCertificateAuthority(
-      withPolling: DeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      withPolling: DeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.updateCertificateAuthority`.
     func updateCertificateAuthority(
-      request: UpdateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.updateCertificateAuthority`.
     func updateCertificateAuthority(
-      withPolling: UpdateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+      withPolling: UpdateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
 
     /// See `CertificateAuthorityServiceClient.createCaPool`.
     func createCaPool(
-      request: CreateCaPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCaPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.createCaPool`.
     func createCaPool(
-      withPolling: CreateCaPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CaPool>
+      withPolling: CreateCaPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CaPool>
 
     /// See `CertificateAuthorityServiceClient.updateCaPool`.
     func updateCaPool(
-      request: UpdateCaPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCaPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.updateCaPool`.
     func updateCaPool(
-      withPolling: UpdateCaPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CaPool>
+      withPolling: UpdateCaPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CaPool>
 
     /// See `CertificateAuthorityServiceClient.getCaPool`.
     func getCaPool(
-      request: GetCaPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCaPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.CaPool
 
     /// See `CertificateAuthorityServiceClient.listCaPools`.
     func listCaPools(
-      request: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCaPoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCaPoolsResponse
 
     /// See `CertificateAuthorityServiceClient.listCaPools`.
     func listCaPools(
-      byItem: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCaPoolsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CaPool, Swift.Error>
 
     /// See `CertificateAuthorityServiceClient.deleteCaPool`.
     func deleteCaPool(
-      request: DeleteCaPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCaPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.deleteCaPool`.
     func deleteCaPool(
-      withPolling: DeleteCaPoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteCaPoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CertificateAuthorityServiceClient.fetchCaCerts`.
     func fetchCaCerts(
-      request: FetchCaCertsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchCaCertsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.FetchCaCertsResponse
 
     /// See `CertificateAuthorityServiceClient.getCertificateRevocationList`.
     func getCertificateRevocationList(
-      request: GetCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCertificateRevocationListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateRevocationList
 
     /// See `CertificateAuthorityServiceClient.listCertificateRevocationLists`.
     func listCertificateRevocationLists(
-      request: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCertificateRevocationListsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateRevocationListsResponse
 
     /// See `CertificateAuthorityServiceClient.listCertificateRevocationLists`.
     func listCertificateRevocationLists(
-      byItem: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCertificateRevocationListsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CertificateRevocationList, Swift.Error>
 
     /// See `CertificateAuthorityServiceClient.updateCertificateRevocationList`.
     func updateCertificateRevocationList(
-      request: UpdateCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCertificateRevocationListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.updateCertificateRevocationList`.
     func updateCertificateRevocationList(
-      withPolling: UpdateCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateRevocationList>
+      withPolling: UpdateCertificateRevocationListRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateRevocationList>
 
     /// See `CertificateAuthorityServiceClient.createCertificateTemplate`.
     func createCertificateTemplate(
-      request: CreateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCertificateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.createCertificateTemplate`.
     func createCertificateTemplate(
-      withPolling: CreateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate>
+      withPolling: CreateCertificateTemplateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate>
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateTemplate`.
     func deleteCertificateTemplate(
-      request: DeleteCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCertificateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.deleteCertificateTemplate`.
     func deleteCertificateTemplate(
-      withPolling: DeleteCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteCertificateTemplateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CertificateAuthorityServiceClient.getCertificateTemplate`.
     func getCertificateTemplate(
-      request: GetCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCertificateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateTemplate
 
     /// See `CertificateAuthorityServiceClient.listCertificateTemplates`.
     func listCertificateTemplates(
-      request: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCertificateTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateTemplatesResponse
 
     /// See `CertificateAuthorityServiceClient.listCertificateTemplates`.
     func listCertificateTemplates(
-      byItem: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCertificateTemplatesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CertificateTemplate, Swift.Error>
 
     /// See `CertificateAuthorityServiceClient.updateCertificateTemplate`.
     func updateCertificateTemplate(
-      request: UpdateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCertificateTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CertificateAuthorityServiceClient.updateCertificateTemplate`.
     func updateCertificateTemplate(
-      withPolling: UpdateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate>
+      withPolling: UpdateCertificateTemplateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate>
 
     /// See `CertificateAuthorityServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `CertificateAuthorityServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `CertificateAuthorityServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `CertificateAuthorityServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `CertificateAuthorityServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `CertificateAuthorityServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `CertificateAuthorityServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `CertificateAuthorityServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `CertificateAuthorityServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CertificateAuthorityServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1824,9 +1813,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func createCertificate(
-    request: CreateCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCertificate(
@@ -1849,9 +1838,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func getCertificate(
-    request: GetCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCertificate(
@@ -1870,9 +1859,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCertificates(
-    request: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCertificatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificatesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCertificates(
@@ -1882,14 +1871,14 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCertificates(
-    byItem: ListCertificatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCertificatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Certificate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificatesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCertificates(
@@ -1908,9 +1897,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func revokeCertificate(
-    request: RevokeCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: RevokeCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func revokeCertificate(
@@ -1929,14 +1918,14 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func updateCertificate(
-    request: UpdateCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCertificate(
     certificate: Certificate?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityPrivateCAV1.Certificate {
     let request = UpdateCertificateRequest().with {
       $0.certificate = certificate
@@ -1952,31 +1941,30 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func activateCertificateAuthority(
-    request: ActivateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: ActivateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func activateCertificateAuthority(withPolling: ActivateCertificateAuthorityRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
   {
     try await self.activateCertificateAuthority(withPolling: withPolling, options: .init())
   }
 
   public func activateCertificateAuthority(
-    withPolling: ActivateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ActivateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func activateCertificateAuthority(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let request = ActivateCertificateAuthorityRequest().with {
       $0.name = name
     }
@@ -1990,25 +1978,24 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func createCertificateAuthority(
-    request: CreateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCertificateAuthority(withPolling: CreateCertificateAuthorityRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
   {
     try await self.createCertificateAuthority(withPolling: withPolling, options: .init())
   }
 
   public func createCertificateAuthority(
-    withPolling: CreateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2016,7 +2003,7 @@ extension Clients.CertificateAuthorityServiceProtocol {
     parent: Swift.String,
     certificateAuthority: CertificateAuthority?,
     certificateAuthorityId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let request = CreateCertificateAuthorityRequest().with {
       $0.parent = parent
       $0.certificateAuthority = certificateAuthority
@@ -2032,31 +2019,30 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func disableCertificateAuthority(
-    request: DisableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: DisableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func disableCertificateAuthority(withPolling: DisableCertificateAuthorityRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
   {
     try await self.disableCertificateAuthority(withPolling: withPolling, options: .init())
   }
 
   public func disableCertificateAuthority(
-    withPolling: DisableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DisableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func disableCertificateAuthority(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let request = DisableCertificateAuthorityRequest().with {
       $0.name = name
     }
@@ -2070,31 +2056,30 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func enableCertificateAuthority(
-    request: EnableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: EnableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func enableCertificateAuthority(withPolling: EnableCertificateAuthorityRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
   {
     try await self.enableCertificateAuthority(withPolling: withPolling, options: .init())
   }
 
   public func enableCertificateAuthority(
-    withPolling: EnableCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: EnableCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func enableCertificateAuthority(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let request = EnableCertificateAuthorityRequest().with {
       $0.name = name
     }
@@ -2108,9 +2093,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func fetchCertificateAuthorityCsr(
-    request: FetchCertificateAuthorityCsrRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchCertificateAuthorityCsrRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.FetchCertificateAuthorityCsrResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func fetchCertificateAuthorityCsr(
@@ -2129,9 +2114,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func getCertificateAuthority(
-    request: GetCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateAuthority {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCertificateAuthority(
@@ -2150,9 +2135,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCertificateAuthorities(
-    request: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCertificateAuthoritiesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateAuthoritiesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCertificateAuthorities(
@@ -2162,14 +2147,14 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCertificateAuthorities(
-    byItem: ListCertificateAuthoritiesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCertificateAuthoritiesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateAuthority, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivateCAV1.ListCertificateAuthoritiesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCertificateAuthorities(
@@ -2188,31 +2173,30 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func undeleteCertificateAuthority(
-    request: UndeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: UndeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func undeleteCertificateAuthority(withPolling: UndeleteCertificateAuthorityRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
   {
     try await self.undeleteCertificateAuthority(withPolling: withPolling, options: .init())
   }
 
   public func undeleteCertificateAuthority(
-    withPolling: UndeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UndeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func undeleteCertificateAuthority(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let request = UndeleteCertificateAuthorityRequest().with {
       $0.name = name
     }
@@ -2226,31 +2210,30 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func deleteCertificateAuthority(
-    request: DeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCertificateAuthority(withPolling: DeleteCertificateAuthorityRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
   {
     try await self.deleteCertificateAuthority(withPolling: withPolling, options: .init())
   }
 
   public func deleteCertificateAuthority(
-    withPolling: DeleteCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCertificateAuthority(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let request = DeleteCertificateAuthorityRequest().with {
       $0.name = name
     }
@@ -2264,32 +2247,31 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func updateCertificateAuthority(
-    request: UpdateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCertificateAuthority(withPolling: UpdateCertificateAuthorityRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority>
+    async throws -> any GoogleGax.PollableOperation<CertificateAuthority>
   {
     try await self.updateCertificateAuthority(withPolling: withPolling, options: .init())
   }
 
   public func updateCertificateAuthority(
-    withPolling: UpdateCertificateAuthorityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateAuthority>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateCertificateAuthorityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateAuthority>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCertificateAuthority(
     certificateAuthority: CertificateAuthority?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateAuthority> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<CertificateAuthority> {
     let request = UpdateCertificateAuthorityRequest().with {
       $0.certificateAuthority = certificateAuthority
       $0.updateMask = updateMask
@@ -2303,24 +2285,24 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func createCaPool(
-    request: CreateCaPoolRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCaPoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createCaPool(withPolling: CreateCaPoolRequest) async throws -> any GoogleCloudGax
+  public func createCaPool(withPolling: CreateCaPoolRequest) async throws -> any GoogleGax
     .PollableOperation<CaPool>
   {
     try await self.createCaPool(withPolling: withPolling, options: .init())
   }
 
   public func createCaPool(
-    withPolling: CreateCaPoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CaPool> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CaPool>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateCaPoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CaPool> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CaPool>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2328,7 +2310,7 @@ extension Clients.CertificateAuthorityServiceProtocol {
     parent: Swift.String,
     caPool: CaPool?,
     caPoolId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CaPool> {
+  ) async throws -> any GoogleGax.PollableOperation<CaPool> {
     let request = CreateCaPoolRequest().with {
       $0.parent = parent
       $0.caPool = caPool
@@ -2343,31 +2325,31 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func updateCaPool(
-    request: UpdateCaPoolRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCaPoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateCaPool(withPolling: UpdateCaPoolRequest) async throws -> any GoogleCloudGax
+  public func updateCaPool(withPolling: UpdateCaPoolRequest) async throws -> any GoogleGax
     .PollableOperation<CaPool>
   {
     try await self.updateCaPool(withPolling: withPolling, options: .init())
   }
 
   public func updateCaPool(
-    withPolling: UpdateCaPoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CaPool> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<CaPool>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateCaPoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CaPool> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CaPool>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCaPool(
     caPool: CaPool?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CaPool> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<CaPool> {
     let request = UpdateCaPoolRequest().with {
       $0.caPool = caPool
       $0.updateMask = updateMask
@@ -2382,9 +2364,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func getCaPool(
-    request: GetCaPoolRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCaPoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.CaPool {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCaPool(
@@ -2403,9 +2385,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCaPools(
-    request: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCaPoolsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCaPoolsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCaPools(
@@ -2415,13 +2397,13 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCaPools(
-    byItem: ListCaPoolsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCaPoolsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CaPool, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityPrivateCAV1.ListCaPoolsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCaPools(
@@ -2439,30 +2421,30 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func deleteCaPool(
-    request: DeleteCaPoolRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCaPoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteCaPool(withPolling: DeleteCaPoolRequest) async throws -> any GoogleCloudGax
+  public func deleteCaPool(withPolling: DeleteCaPoolRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteCaPool(withPolling: withPolling, options: .init())
   }
 
   public func deleteCaPool(
-    withPolling: DeleteCaPoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteCaPoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCaPool(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteCaPoolRequest().with {
       $0.name = name
     }
@@ -2476,9 +2458,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func fetchCaCerts(
-    request: FetchCaCertsRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchCaCertsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.FetchCaCertsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func fetchCaCerts(
@@ -2497,9 +2479,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func getCertificateRevocationList(
-    request: GetCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCertificateRevocationListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateRevocationList {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCertificateRevocationList(
@@ -2518,9 +2500,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCertificateRevocationLists(
-    request: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCertificateRevocationListsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateRevocationListsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCertificateRevocationLists(
@@ -2530,14 +2512,14 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCertificateRevocationLists(
-    byItem: ListCertificateRevocationListsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCertificateRevocationListsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateRevocationList, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivateCAV1.ListCertificateRevocationListsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCertificateRevocationLists(
@@ -2556,32 +2538,32 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func updateCertificateRevocationList(
-    request: UpdateCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCertificateRevocationListRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCertificateRevocationList(withPolling: UpdateCertificateRevocationListRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<CertificateRevocationList>
+    async throws -> any GoogleGax.PollableOperation<CertificateRevocationList>
   {
     try await self.updateCertificateRevocationList(withPolling: withPolling, options: .init())
   }
 
   public func updateCertificateRevocationList(
-    withPolling: UpdateCertificateRevocationListRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateRevocationList> {
+    withPolling: UpdateCertificateRevocationListRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateRevocationList> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateRevocationList>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<CertificateRevocationList>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCertificateRevocationList(
     certificateRevocationList: CertificateRevocationList?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateRevocationList> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<CertificateRevocationList> {
     let request = UpdateCertificateRevocationListRequest().with {
       $0.certificateRevocationList = certificateRevocationList
       $0.updateMask = updateMask
@@ -2596,25 +2578,24 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func createCertificateTemplate(
-    request: CreateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCertificateTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCertificateTemplate(withPolling: CreateCertificateTemplateRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<CertificateTemplate>
+    -> any GoogleGax.PollableOperation<CertificateTemplate>
   {
     try await self.createCertificateTemplate(withPolling: withPolling, options: .init())
   }
 
   public func createCertificateTemplate(
-    withPolling: CreateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateTemplate>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateCertificateTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateTemplate>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2622,7 +2603,7 @@ extension Clients.CertificateAuthorityServiceProtocol {
     parent: Swift.String,
     certificateTemplate: CertificateTemplate?,
     certificateTemplateId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate> {
+  ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate> {
     let request = CreateCertificateTemplateRequest().with {
       $0.parent = parent
       $0.certificateTemplate = certificateTemplate
@@ -2638,30 +2619,30 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func deleteCertificateTemplate(
-    request: DeleteCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCertificateTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCertificateTemplate(withPolling: DeleteCertificateTemplateRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteCertificateTemplate(withPolling: withPolling, options: .init())
   }
 
   public func deleteCertificateTemplate(
-    withPolling: DeleteCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteCertificateTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCertificateTemplate(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteCertificateTemplateRequest().with {
       $0.name = name
     }
@@ -2675,9 +2656,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func getCertificateTemplate(
-    request: GetCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCertificateTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.CertificateTemplate {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCertificateTemplate(
@@ -2696,9 +2677,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCertificateTemplates(
-    request: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCertificateTemplatesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityPrivateCAV1.ListCertificateTemplatesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCertificateTemplates(
@@ -2708,14 +2689,14 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listCertificateTemplates(
-    byItem: ListCertificateTemplatesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCertificateTemplatesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CertificateTemplate, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecurityPrivateCAV1.ListCertificateTemplatesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCertificateTemplates(
@@ -2734,32 +2715,31 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func updateCertificateTemplate(
-    request: UpdateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCertificateTemplateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCertificateTemplate(withPolling: UpdateCertificateTemplateRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<CertificateTemplate>
+    -> any GoogleGax.PollableOperation<CertificateTemplate>
   {
     try await self.updateCertificateTemplate(withPolling: withPolling, options: .init())
   }
 
   public func updateCertificateTemplate(
-    withPolling: UpdateCertificateTemplateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<CertificateTemplate>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateCertificateTemplateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<CertificateTemplate>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCertificateTemplate(
     certificateTemplate: CertificateTemplate?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<CertificateTemplate> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<CertificateTemplate> {
     let request = UpdateCertificateTemplateRequest().with {
       $0.certificateTemplate = certificateTemplate
       $0.updateMask = updateMask
@@ -2774,9 +2754,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -2786,13 +2766,13 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -2802,9 +2782,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -2814,9 +2794,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -2826,9 +2806,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -2838,9 +2818,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -2850,9 +2830,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2862,13 +2842,13 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2889,9 +2869,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2908,9 +2888,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -2927,9 +2907,9 @@ extension Clients.CertificateAuthorityServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

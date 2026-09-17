@@ -20,9 +20,9 @@
   import Foundation
   import GoogleCloudDiscoveryEngineV1
   import GoogleApi
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(client: UserEventServiceClient) async throws {
     try await client.cancelOperation(

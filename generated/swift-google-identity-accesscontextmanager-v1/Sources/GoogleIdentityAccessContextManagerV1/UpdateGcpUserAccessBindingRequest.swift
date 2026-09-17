@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request of [UpdateGcpUserAccessBinding]
 /// [google.identity.accesscontextmanager.v1.AccessContextManager.UpdateGcpUserAccessBinding].
-public struct UpdateGcpUserAccessBindingRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateGcpUserAccessBindingRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. [GcpUserAccessBinding]
@@ -32,9 +32,9 @@ public struct UpdateGcpUserAccessBindingRequest: Codable, Equatable, GoogleCloud
   /// update_mask {
   /// paths: "access_levels"
   /// }
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateGcpUserAccessBindingRequest`.
   public init() {}
@@ -71,11 +71,10 @@ public struct UpdateGcpUserAccessBindingRequest: Codable, Equatable, GoogleCloud
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.gcpUserAccessBinding = try container.decodeIfPresent(
       GcpUserAccessBinding.self, forKey: .gcpUserAccessBinding)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +91,10 @@ public struct UpdateGcpUserAccessBindingRequest: Codable, Equatable, GoogleCloud
     return
       "type.googleapis.com/google.identity.accesscontextmanager.v1.UpdateGcpUserAccessBindingRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

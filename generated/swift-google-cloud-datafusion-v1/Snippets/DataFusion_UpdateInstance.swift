@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataFusionV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DataFusionClient, projectId: String, locationId: String, instanceId: String)
   async throws
@@ -31,7 +31,7 @@ func sample(client: DataFusionClient, projectId: String, locationId: String, ins
         $0.instance = Instance().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/instances/\(instanceId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

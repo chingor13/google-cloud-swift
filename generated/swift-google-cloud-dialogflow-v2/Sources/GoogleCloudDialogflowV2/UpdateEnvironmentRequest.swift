@@ -16,20 +16,20 @@
 
 #if Environments
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The request message for
   /// [Environments.UpdateEnvironment][google.cloud.dialogflow.v2.Environments.UpdateEnvironment].
   ///
   /// [google.cloud.dialogflow.v2.Environments.UpdateEnvironment]: <doc:EnvironmentsClient/updateEnvironment(request:options:)>
-  public struct UpdateEnvironmentRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UpdateEnvironmentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The environment to update.
     public var environment: Environment? = nil
 
     /// Required. The mask to control which fields get updated.
-    public var updateMask: GoogleCloudWKT.FieldMask? = nil
+    public var updateMask: GoogleWKT.FieldMask? = nil
 
     /// Optional. This field is used to prevent accidental overwrite of the default
     /// environment, which is an operation that cannot be undone. To confirm that
@@ -37,7 +37,7 @@
     /// true when updating the default environment (environment ID = `-`).
     public var allowLoadToDraftAndDiscardChanges: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpdateEnvironmentRequest`.
     public init() {}
@@ -76,8 +76,7 @@
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.environment = try container.decodeIfPresent(Environment.self, forKey: .environment)
-      self.updateMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+      self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
       if let value = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .allowLoadToDraftAndDiscardChanges)
       {
@@ -85,7 +84,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -103,11 +102,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.UpdateEnvironmentRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

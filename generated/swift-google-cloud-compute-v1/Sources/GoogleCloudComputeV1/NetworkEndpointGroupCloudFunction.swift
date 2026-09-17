@@ -16,14 +16,14 @@
 
 #if GlobalNetworkEndpointGroups || NetworkEndpointGroups || RegionNetworkEndpointGroups
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Configuration for a Cloud Function network endpoint group (NEG).
   /// The function must be provided explicitly or in the URL mask.
   ///
   /// Note: Cloud Function must be in the same project and located in the same
   /// region as the Serverless NEG.
-  public struct NetworkEndpointGroupCloudFunction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkEndpointGroupCloudFunction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A user-defined name of the Cloud Function.
@@ -46,7 +46,7 @@
     /// mask will parse them to { function = "function1" } and{ function = "function2" } respectively.
     public var urlMask: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkEndpointGroupCloudFunction`.
     public init() {}
@@ -85,7 +85,7 @@
       self.urlMask = try container.decodeIfPresent(Swift.String.self, forKey: .urlMask)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -101,11 +101,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.NetworkEndpointGroupCloudFunction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

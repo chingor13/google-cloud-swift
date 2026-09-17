@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `reliabilityRisks` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.ReliabilityRisksStub
 
     /// Creates a new `ReliabilityRisksClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ReliabilityRisksStub = try Clients.ReliabilityRisksTransport(options)
       inner = Clients.ReliabilityRisksRetry(inner, options: options)
       if let logger = options.logger {
@@ -42,7 +42,7 @@
     ///
     /// @Snippet(path: "reliabilityRisks_get")
     public func `get`(
-      request: ReliabilityRisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ReliabilityRisksClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReliabilityRisk {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "reliabilityRisks_list")
     public func list(
-      request: ReliabilityRisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ReliabilityRisksClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReliabilityRisksListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -60,7 +60,7 @@
     ///
     /// @Snippet(path: "reliabilityRisks_list")
     public func list(
-      byItem: ReliabilityRisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ReliabilityRisksClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ReliabilityRisk, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.ReliabilityRisksListResponse in
@@ -68,7 +68,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -105,17 +105,17 @@
 
       /// See `ReliabilityRisksClient.`get``.
       func `get`(
-        request: ReliabilityRisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReliabilityRisksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReliabilityRisk
 
       /// See `ReliabilityRisksClient.list`.
       func list(
-        request: ReliabilityRisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReliabilityRisksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReliabilityRisksListResponse
 
       /// See `ReliabilityRisksClient.list`.
       func list(
-        byItem: ReliabilityRisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ReliabilityRisksClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<ReliabilityRisk, Swift.Error>
     }
   }
@@ -129,9 +129,9 @@
     }
 
     public func `get`(
-      request: ReliabilityRisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ReliabilityRisksClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReliabilityRisk {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -152,9 +152,9 @@
     }
 
     public func list(
-      request: ReliabilityRisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ReliabilityRisksClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ReliabilityRisksListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -164,13 +164,13 @@
     }
 
     public func list(
-      byItem: ReliabilityRisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ReliabilityRisksClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ReliabilityRisk, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.ReliabilityRisksListResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

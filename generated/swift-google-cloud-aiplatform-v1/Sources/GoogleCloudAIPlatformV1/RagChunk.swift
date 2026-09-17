@@ -16,11 +16,11 @@
 
 #if PredictionService || SessionService || VertexRagService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A RagChunk includes the content of a chunk of a RagFile, and associated
   /// metadata.
-  public struct RagChunk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RagChunk: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The content of the chunk.
@@ -29,7 +29,7 @@
     /// If populated, represents where the chunk starts and ends in the document.
     public var pageSpan: RagChunk.PageSpan? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RagChunk`.
     public init() {}
@@ -70,7 +70,7 @@
       self.pageSpan = try container.decodeIfPresent(RagChunk.PageSpan.self, forKey: .pageSpan)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -84,7 +84,7 @@
     }
 
     /// Represents where the chunk starts and ends in the document.
-    public struct PageSpan: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PageSpan: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Page where chunk starts in the document. Inclusive. 1-indexed.
@@ -93,7 +93,7 @@
       /// Page where chunk ends in the document. Inclusive. 1-indexed.
       public var lastPage: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PageSpan`.
       public init() {}
@@ -136,7 +136,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -152,22 +152,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.RagChunk.PageSpan"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RagChunk"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

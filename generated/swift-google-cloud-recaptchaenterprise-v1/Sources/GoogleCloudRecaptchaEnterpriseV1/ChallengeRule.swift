@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A rule to configure the behavior of reCAPTCHA for conditionally presenting a
 /// challenge.
-public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ChallengeRule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. A CEL condition that must be met for this rule to apply.
@@ -42,7 +42,7 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. The outcome to apply when this challenge rule matches.
   public var outcome: OneOf_Outcome? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ChallengeRule`.
   public init() {}
@@ -106,7 +106,7 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.outcome = outcome
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -129,10 +129,10 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// An outcome that indicates that no challenge should be presented to the
   /// user.
-  public struct NoChallengeOutcome: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NoChallengeOutcome: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NoChallengeOutcome`.
     public init() {}
@@ -163,7 +163,7 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -178,17 +178,17 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.ChallengeRule.NoChallengeOutcome"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An outcome that indicates that a challenge of a specified difficulty should
   /// be presented to the user.
-  public struct ChallengeOutcome: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ChallengeOutcome: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The difficulty of the challenge to present to the user.
@@ -196,7 +196,7 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var difficulty: WebKeySettings.ChallengeSecurityPreference =
       WebKeySettings.ChallengeSecurityPreference()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ChallengeOutcome`.
     public init() {}
@@ -236,7 +236,7 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -252,11 +252,11 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.ChallengeRule.ChallengeOutcome"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -271,10 +271,10 @@ public struct ChallengeRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.ChallengeRule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

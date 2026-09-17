@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details of the deployment where APIs are hosted.
 /// A deployment could represent an Apigee proxy, API gateway, other Google Cloud
 /// services or non-Google Cloud services as well. A deployment entity is a root
 /// level entity in the API hub and exists independent of any API.
-public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Deployment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the deployment.
@@ -68,10 +68,10 @@ public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var apiVersions: [Swift.String] = []
 
   /// Output only. The time at which the deployment was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time at which the deployment was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The SLO for this deployment.
   /// This maps to the following system defined attribute:
@@ -131,7 +131,7 @@ public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// For example: prod, dev, staging, etc.
   public var sourceEnvironment: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Deployment`.
   public init() {}
@@ -219,10 +219,8 @@ public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .apiVersions) {
       self.apiVersions = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.slo = try container.decodeIfPresent(AttributeValues.self, forKey: .slo)
     self.environment = try container.decodeIfPresent(AttributeValues.self, forKey: .environment)
     if let value = try container.decodeIfPresent(
@@ -243,7 +241,7 @@ public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -275,10 +273,10 @@ public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.Deployment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

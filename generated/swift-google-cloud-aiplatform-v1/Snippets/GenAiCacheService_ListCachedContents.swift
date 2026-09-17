@@ -20,9 +20,9 @@
   import Foundation
   import GoogleCloudAIPlatformV1
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
+  import GoogleWKT
 
   func sample(client: GenAiCacheServiceClient, projectId: String, locationId: String) async throws {
     let items = try client.listCachedContents(

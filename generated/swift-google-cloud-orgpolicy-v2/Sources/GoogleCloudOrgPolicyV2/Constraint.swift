@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A constraint describes a way to restrict resource's configuration. For
 /// example, you could enforce a constraint that controls which Google Cloud
@@ -33,7 +33,7 @@ import Foundation
 /// policy being defined or inherited for the resource in question.
 ///
 /// [google.cloud.orgpolicy.v2.Policy]: <doc:Policy>
-public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Constraint: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. The resource name of the constraint. Must be in one of
@@ -75,7 +75,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Immutable after creation.
   public var constraintType: OneOf_ConstraintType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Constraint`.
   public init() {}
@@ -171,7 +171,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.constraintType = constraintType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -203,7 +203,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [`PolicyRule`][google.cloud.orgpolicy.v2.PolicySpec.PolicyRule].
   ///
   /// [google.cloud.orgpolicy.v2.PolicySpec.PolicyRule]: <doc:PolicySpec/PolicyRule>
-  public struct ListConstraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ListConstraint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates whether values grouped into categories can be used in
@@ -217,7 +217,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// 'folders/123' folder.
     public var supportsUnder: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListConstraint`.
     public init() {}
@@ -260,7 +260,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -276,16 +276,16 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.orgpolicy.v2.Constraint.ListConstraint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Custom constraint definition. Defines this as a managed constraint.
-  public struct CustomConstraintDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CustomConstraintDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The resource instance type on which this policy applies. Format will be
@@ -316,7 +316,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter]: <doc:Constraint/CustomConstraintDefinition/Parameter>
     public var parameters: [Swift.String: Constraint.CustomConstraintDefinition.Parameter] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CustomConstraintDefinition`.
     public init() {}
@@ -380,7 +380,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -397,7 +397,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Defines a parameter structure.
-    public struct Parameter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Parameter: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Type of the parameter.
@@ -405,7 +405,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         .CustomConstraintDefinition.Parameter.Type_()
 
       /// Sets the value of the parameter in an assignment if no value is given.
-      public var defaultValue: GoogleCloudWKT.Value? = nil
+      public var defaultValue: GoogleWKT.Value? = nil
 
       /// Provides a CEL expression to specify the acceptable parameter values
       /// during assignment.
@@ -422,7 +422,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public var item: Constraint.CustomConstraintDefinition.Parameter.Type_ = Constraint
         .CustomConstraintDefinition.Parameter.Type_()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Parameter`.
       public init() {}
@@ -469,7 +469,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           self.type = value
         }
         self.defaultValue = try container.decodeIfPresent(
-          GoogleCloudWKT.Value.self, forKey: .defaultValue)
+          GoogleWKT.Value.self, forKey: .defaultValue)
         if let value = try container.decodeIfPresent(Swift.String.self, forKey: .validValuesExpr) {
           self.validValuesExpr = value
         }
@@ -482,7 +482,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -499,15 +499,14 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
 
       /// Defines Metadata structure.
-      public struct Metadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Metadata: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Detailed description of what this `parameter` is and use of it.
         /// Mutable.
         public var description: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Metadata`.
         public init() {}
@@ -545,7 +544,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -561,11 +560,11 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter.Metadata"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -686,11 +685,11 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition.Parameter"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -937,11 +936,11 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.orgpolicy.v2.Constraint.CustomConstraintDefinition"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -952,13 +951,13 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// constraint.
   ///
   /// [google.cloud.orgpolicy.v2.PolicySpec.PolicyRule]: <doc:PolicySpec/PolicyRule>
-  public struct BooleanConstraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BooleanConstraint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Custom constraint definition. Defines this as a managed constraint.
     public var customConstraintDefinition: Constraint.CustomConstraintDefinition? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BooleanConstraint`.
     public init() {}
@@ -995,7 +994,7 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Constraint.CustomConstraintDefinition.self, forKey: .customConstraintDefinition)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1011,11 +1010,11 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.orgpolicy.v2.Constraint.BooleanConstraint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1143,10 +1142,10 @@ public struct Constraint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.orgpolicy.v2.Constraint"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

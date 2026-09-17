@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleApi
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,29 +58,29 @@ extension Clients {
     }
 
     public func listMonitoredResourceDescriptors(
-      request: ListMonitoredResourceDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMonitoredResourceDescriptorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListMonitoredResourceDescriptorsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listMonitoredResourceDescriptors",
         action: {
-          (r: ListMonitoredResourceDescriptorsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudMonitoringV3.ListMonitoredResourceDescriptorsResponse
+          (r: ListMonitoredResourceDescriptorsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudMonitoringV3.ListMonitoredResourceDescriptorsResponse
           in
           return try await self.inner.listMonitoredResourceDescriptors(request: r, options: o)
         })
     }
 
     public func getMonitoredResourceDescriptor(
-      request: GetMonitoredResourceDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMonitoredResourceDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MonitoredResourceDescriptor {
       try await self._intercept(
         request: request,
         options: options,
         name: "getMonitoredResourceDescriptor",
         action: {
-          (r: GetMonitoredResourceDescriptorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetMonitoredResourceDescriptorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApi.MonitoredResourceDescriptor
           in
           return try await self.inner.getMonitoredResourceDescriptor(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func listMetricDescriptors(
-      request: ListMetricDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetricDescriptorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListMetricDescriptorsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listMetricDescriptors",
         action: {
-          (r: ListMetricDescriptorsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListMetricDescriptorsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListMetricDescriptorsResponse
           in
           return try await self.inner.listMetricDescriptors(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func getMetricDescriptor(
-      request: GetMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MetricDescriptor {
       try await self._intercept(
         request: request,
         options: options,
         name: "getMetricDescriptor",
         action: {
-          (r: GetMetricDescriptorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetMetricDescriptorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApi.MetricDescriptor
           in
           return try await self.inner.getMetricDescriptor(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func createMetricDescriptor(
-      request: CreateMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.MetricDescriptor {
       try await self._intercept(
         request: request,
         options: options,
         name: "createMetricDescriptor",
         action: {
-          (r: CreateMetricDescriptorRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateMetricDescriptorRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApi.MetricDescriptor
           in
           return try await self.inner.createMetricDescriptor(request: r, options: o)
@@ -133,28 +133,27 @@ extension Clients {
     }
 
     public func deleteMetricDescriptor(
-      request: DeleteMetricDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMetricDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteMetricDescriptor",
         action: {
-          (r: DeleteMetricDescriptorRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteMetricDescriptorRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteMetricDescriptor(request: r, options: o)
         })
     }
 
     public func listTimeSeries(
-      request: ListTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListTimeSeriesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listTimeSeries",
         action: {
-          (r: ListTimeSeriesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListTimeSeriesResponse
           in
           return try await self.inner.listTimeSeries(request: r, options: o)
@@ -162,27 +161,25 @@ extension Clients {
     }
 
     public func createTimeSeries(
-      request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "createTimeSeries",
-        action: {
-          (r: CreateTimeSeriesRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: CreateTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.createTimeSeries(request: r, options: o)
         })
     }
 
     public func createServiceTimeSeries(
-      request: CreateTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "createServiceTimeSeries",
-        action: {
-          (r: CreateTimeSeriesRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: CreateTimeSeriesRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.createServiceTimeSeries(request: r, options: o)
         })
     }

@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for BatchTransferResources.
-public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Responses of the transfer for individual resources.
   public var responses: [BatchTransferResourcesResponse.TransferResourceResponse] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchTransferResourcesResponse`.
   public init() {}
@@ -65,7 +65,7 @@ public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -78,7 +78,7 @@ public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleCloudWKT
   }
 
   /// Transfer response for a single resource.
-  public struct TransferResourceResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TransferResourceResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Full name of the resource to transfer as specified in the request.
@@ -91,7 +91,7 @@ public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleCloudWKT
     /// The error result in case of failure.
     public var error: GoogleRpc.Status? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TransferResourceResponse`.
     public init() {}
@@ -137,7 +137,7 @@ public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleCloudWKT
       self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -155,21 +155,21 @@ public struct BatchTransferResourcesResponse: Codable, Equatable, GoogleCloudWKT
       return
         "type.googleapis.com/google.cloud.translation.v3.BatchTransferResourcesResponse.TransferResourceResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.translation.v3.BatchTransferResourcesResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudSecurityCenterV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: SecurityCenterClient, organizationId: String, sourceId: String) async throws {
   let response = try await client.updateSource(
@@ -30,7 +30,7 @@ func sample(client: SecurityCenterClient, organizationId: String, sourceId: Stri
         $0.source = Source().with {
           $0.name = "organizations/\(organizationId)/sources/\(sourceId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

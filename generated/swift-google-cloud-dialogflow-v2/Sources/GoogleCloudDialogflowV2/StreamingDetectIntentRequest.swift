@@ -16,7 +16,7 @@
 
 #if Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The top-level message sent by the client to the
   /// [StreamingDetectIntent][] method.
@@ -59,7 +59,7 @@
   /// [google.cloud.dialogflow.v2.StreamingDetectIntentRequest.query_input]: <doc:StreamingDetectIntentRequest/queryInput>
   /// [google.cloud.dialogflow.v2.StreamingDetectIntentRequest.query_params]: <doc:StreamingDetectIntentRequest/queryParams>
   /// [google.cloud.dialogflow.v2.StreamingDetectIntentRequest.session]: <doc:StreamingDetectIntentRequest/session>
-  public struct StreamingDetectIntentRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StreamingDetectIntentRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the session the query is sent to.
@@ -123,7 +123,7 @@
     /// replaces the agent-level config in its entirety.
     ///
     /// [google.cloud.dialogflow.v2.StreamingDetectIntentRequest.output_audio_config]: <doc:StreamingDetectIntentRequest/outputAudioConfig>
-    public var outputAudioConfigMask: GoogleCloudWKT.FieldMask? = nil
+    public var outputAudioConfigMask: GoogleWKT.FieldMask? = nil
 
     /// The input audio content to be recognized. Must be sent if
     /// `query_input` was set to a streaming input audio config. The complete audio
@@ -133,7 +133,7 @@
     /// if true, `StreamingDetectIntentResponse.debugging_info` will get populated.
     public var enableDebuggingInfo: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StreamingDetectIntentRequest`.
     public init() {}
@@ -191,7 +191,7 @@
       self.outputAudioConfig = try container.decodeIfPresent(
         OutputAudioConfig.self, forKey: .outputAudioConfig)
       self.outputAudioConfigMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .outputAudioConfigMask)
+        GoogleWKT.FieldMask.self, forKey: .outputAudioConfigMask)
       if let value = try container.decodeIfPresent(Foundation.Data.self, forKey: .inputAudio) {
         self.inputAudio = value
       }
@@ -200,7 +200,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -222,11 +222,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.StreamingDetectIntentRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

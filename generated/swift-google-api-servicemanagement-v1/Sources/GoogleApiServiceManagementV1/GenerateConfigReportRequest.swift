@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for GenerateConfigReport method.
-public struct GenerateConfigReportRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GenerateConfigReportRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Service configuration for which we want to generate the report.
@@ -30,7 +30,7 @@ public struct GenerateConfigReportRequest: Codable, Equatable, GoogleCloudWKT._A
   /// [google.api.Service]: https://www.google.com/search?q=Swift+google.api+GoogleApi.Service
   /// [google.api.servicemanagement.v1.ConfigRef]: <doc:ConfigRef>
   /// [google.api.servicemanagement.v1.ConfigSource]: <doc:ConfigSource>
-  public var newConfig: GoogleCloudWKT.`Any`? = nil
+  public var newConfig: GoogleWKT.`Any`? = nil
 
   /// Optional. Service configuration against which the comparison will be done.
   /// For this version of API, the supported types are
@@ -41,9 +41,9 @@ public struct GenerateConfigReportRequest: Codable, Equatable, GoogleCloudWKT._A
   /// [google.api.Service]: https://www.google.com/search?q=Swift+google.api+GoogleApi.Service
   /// [google.api.servicemanagement.v1.ConfigRef]: <doc:ConfigRef>
   /// [google.api.servicemanagement.v1.ConfigSource]: <doc:ConfigSource>
-  public var oldConfig: GoogleCloudWKT.`Any`? = nil
+  public var oldConfig: GoogleWKT.`Any`? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GenerateConfigReportRequest`.
   public init() {}
@@ -78,11 +78,11 @@ public struct GenerateConfigReportRequest: Codable, Equatable, GoogleCloudWKT._A
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.newConfig = try container.decodeIfPresent(GoogleCloudWKT.`Any`.self, forKey: .newConfig)
-    self.oldConfig = try container.decodeIfPresent(GoogleCloudWKT.`Any`.self, forKey: .oldConfig)
+    self.newConfig = try container.decodeIfPresent(GoogleWKT.`Any`.self, forKey: .newConfig)
+    self.oldConfig = try container.decodeIfPresent(GoogleWKT.`Any`.self, forKey: .oldConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +98,10 @@ public struct GenerateConfigReportRequest: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicemanagement.v1.GenerateConfigReportRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

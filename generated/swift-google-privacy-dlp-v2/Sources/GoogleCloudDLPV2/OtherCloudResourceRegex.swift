@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A pattern to match against one or more resources. At least one pattern must
 /// be specified. Regular expressions use RE2
 /// [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
 /// under the google/re2 repository on GitHub.
-public struct OtherCloudResourceRegex: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OtherCloudResourceRegex: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The type of resource regex to use.
   public var resourceRegex: OneOf_ResourceRegex? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OtherCloudResourceRegex`.
   public init() {}
@@ -79,7 +79,7 @@ public struct OtherCloudResourceRegex: Codable, Equatable, GoogleCloudWKT._AnyPa
     self.resourceRegex = resourceRegex
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,10 +106,10 @@ public struct OtherCloudResourceRegex: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.OtherCloudResourceRegex"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

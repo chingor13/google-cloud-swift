@@ -17,50 +17,50 @@
 #if TransitionRouteGroups
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol TransitionRouteGroupsStub: Sendable {
       func listTransitionRouteGroups(
-        request: ListTransitionRouteGroupsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTransitionRouteGroupsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListTransitionRouteGroupsResponse
 
       func getTransitionRouteGroup(
-        request: GetTransitionRouteGroupRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTransitionRouteGroupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.TransitionRouteGroup
 
       func createTransitionRouteGroup(
-        request: CreateTransitionRouteGroupRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTransitionRouteGroupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.TransitionRouteGroup
 
       func updateTransitionRouteGroup(
-        request: UpdateTransitionRouteGroupRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateTransitionRouteGroupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.TransitionRouteGroup
 
       func deleteTransitionRouteGroup(
-        request: DeleteTransitionRouteGroupRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteTransitionRouteGroupRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

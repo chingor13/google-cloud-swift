@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing database backups.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlBackupRunsServiceStub
 
     /// Creates a new `SqlBackupRunsServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlBackupRunsServiceStub = try Clients.SqlBackupRunsServiceTransport(
         options)
       inner = Clients.SqlBackupRunsServiceRetry(inner, options: options)
@@ -43,7 +43,7 @@
     ///
     /// @Snippet(path: "SqlBackupRunsService_Delete")
     public func delete(
-      request: SqlBackupRunsDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlBackupRunsDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -52,7 +52,7 @@
     ///
     /// @Snippet(path: "SqlBackupRunsService_Get")
     public func `get`(
-      request: SqlBackupRunsGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlBackupRunsGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.BackupRun {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -61,7 +61,7 @@
     ///
     /// @Snippet(path: "SqlBackupRunsService_Insert")
     public func insert(
-      request: SqlBackupRunsInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlBackupRunsInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -72,7 +72,7 @@
     ///
     /// @Snippet(path: "SqlBackupRunsService_List")
     public func list(
-      request: SqlBackupRunsListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlBackupRunsListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.BackupRunsListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -83,7 +83,7 @@
     ///
     /// @Snippet(path: "SqlBackupRunsService_List")
     public func list(
-      byItem: SqlBackupRunsListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SqlBackupRunsListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BackupRun, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudSqlV1.BackupRunsListResponse in
@@ -91,7 +91,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -122,27 +122,27 @@
 
       /// See `SqlBackupRunsServiceClient.delete`.
       func delete(
-        request: SqlBackupRunsDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlBackupRunsDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlBackupRunsServiceClient.`get``.
       func `get`(
-        request: SqlBackupRunsGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlBackupRunsGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.BackupRun
 
       /// See `SqlBackupRunsServiceClient.insert`.
       func insert(
-        request: SqlBackupRunsInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlBackupRunsInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlBackupRunsServiceClient.list`.
       func list(
-        request: SqlBackupRunsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlBackupRunsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.BackupRunsListResponse
 
       /// See `SqlBackupRunsServiceClient.list`.
       func list(
-        byItem: SqlBackupRunsListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SqlBackupRunsListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<BackupRun, Swift.Error>
     }
   }
@@ -156,9 +156,9 @@
     }
 
     public func delete(
-      request: SqlBackupRunsDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlBackupRunsDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(request: SqlBackupRunsGetRequest) async throws -> GoogleCloudSqlV1.BackupRun {
@@ -166,9 +166,9 @@
     }
 
     public func `get`(
-      request: SqlBackupRunsGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlBackupRunsGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.BackupRun {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(request: SqlBackupRunsInsertRequest) async throws
@@ -178,9 +178,9 @@
     }
 
     public func insert(
-      request: SqlBackupRunsInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlBackupRunsInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(request: SqlBackupRunsListRequest) async throws
@@ -190,9 +190,9 @@
     }
 
     public func list(
-      request: SqlBackupRunsListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlBackupRunsListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.BackupRunsListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -202,13 +202,13 @@
     }
 
     public func list(
-      byItem: SqlBackupRunsListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SqlBackupRunsListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BackupRun, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudSqlV1.BackupRunsListResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 #endif

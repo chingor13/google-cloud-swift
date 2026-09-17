@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A type of transformation that is applied over images.
-public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImageTransformations: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// List of transforms to make.
   public var transforms: [ImageTransformations.ImageTransformation] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImageTransformations`.
   public init() {}
@@ -64,7 +64,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -77,7 +77,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Configuration for determining how redaction of images should occur.
-  public struct ImageTransformation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ImageTransformation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The color to use when redacting content from an image. If not
@@ -87,7 +87,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Part of the image to transform.
     public var target: OneOf_Target? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ImageTransformation`.
     public init() {}
@@ -156,7 +156,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.target = target
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -180,14 +180,14 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
 
     /// Apply transformation to the selected info_types.
-    public struct SelectedInfoTypes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SelectedInfoTypes: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. InfoTypes to apply the transformation to. Required. Provided
       /// InfoType must be unique within the ImageTransformations message.
       public var infoTypes: [InfoType] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SelectedInfoTypes`.
       public init() {}
@@ -225,7 +225,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -241,19 +241,19 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
         return
           "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations.ImageTransformation.SelectedInfoTypes"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Apply transformation to all findings.
-    public struct AllInfoTypes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AllInfoTypes: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AllInfoTypes`.
       public init() {}
@@ -284,7 +284,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -299,19 +299,19 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
         return
           "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations.ImageTransformation.AllInfoTypes"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Apply to all text.
-    public struct AllText: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AllText: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AllText`.
       public init() {}
@@ -342,7 +342,7 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -357,11 +357,11 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
         return
           "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations.ImageTransformation.AllText"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -381,21 +381,21 @@ public struct ImageTransformations: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations.ImageTransformation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.ImageTransformations"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

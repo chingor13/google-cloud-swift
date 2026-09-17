@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The Cloud Scheduler API allows external entities to reliably
 /// schedule asynchronous jobs.
@@ -30,7 +30,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   let inner: any Clients.CloudSchedulerStub
 
   /// Creates a new `CloudSchedulerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CloudSchedulerStub = try Clients.CloudSchedulerTransport(options)
     inner = Clients.CloudSchedulerRetry(inner, options: options)
     if let logger = options.logger {
@@ -43,7 +43,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_ListJobs")
   public func listJobs(
-    request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.ListJobsResponse {
     try await self.inner.listJobs(request: request, options: options)
   }
@@ -52,21 +52,21 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_ListJobs")
   public func listJobs(
-    byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Job, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudSchedulerV1.ListJobsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listJobs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a job.
   ///
   /// @Snippet(path: "CloudScheduler_GetJob")
   public func getJob(
-    request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
     try await self.inner.getJob(request: request, options: options)
   }
@@ -75,7 +75,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_CreateJob")
   public func createJob(
-    request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
     try await self.inner.createJob(request: request, options: options)
   }
@@ -96,7 +96,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_UpdateJob")
   public func updateJob(
-    request: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
     try await self.inner.updateJob(request: request, options: options)
   }
@@ -105,7 +105,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_DeleteJob")
   public func deleteJob(
-    request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteJobRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteJob(request: request, options: options)
   }
@@ -128,7 +128,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_PauseJob")
   public func pauseJob(
-    request: PauseJobRequest, options: GoogleCloudGax.RequestOptions
+    request: PauseJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
     try await self.inner.pauseJob(request: request, options: options)
   }
@@ -149,7 +149,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_ResumeJob")
   public func resumeJob(
-    request: ResumeJobRequest, options: GoogleCloudGax.RequestOptions
+    request: ResumeJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
     try await self.inner.resumeJob(request: request, options: options)
   }
@@ -161,7 +161,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_RunJob")
   public func runJob(
-    request: RunJobRequest, options: GoogleCloudGax.RequestOptions
+    request: RunJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
     try await self.inner.runJob(request: request, options: options)
   }
@@ -170,7 +170,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -179,7 +179,7 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
   ///
   /// @Snippet(path: "CloudScheduler_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -187,14 +187,14 @@ public final class CloudSchedulerClient: Clients.CloudSchedulerProtocol, Sendabl
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "CloudScheduler_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -243,7 +243,7 @@ extension Clients {
     /// See `CloudSchedulerClient.updateJob`.
     func updateJob(
       job: Job?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     /// See `CloudSchedulerClient.deleteJob`.
@@ -293,62 +293,62 @@ extension Clients {
 
     /// See `CloudSchedulerClient.listJobs`.
     func listJobs(
-      request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.ListJobsResponse
 
     /// See `CloudSchedulerClient.listJobs`.
     func listJobs(
-      byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Job, Swift.Error>
 
     /// See `CloudSchedulerClient.getJob`.
     func getJob(
-      request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     /// See `CloudSchedulerClient.createJob`.
     func createJob(
-      request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     /// See `CloudSchedulerClient.updateJob`.
     func updateJob(
-      request: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     /// See `CloudSchedulerClient.deleteJob`.
     func deleteJob(
-      request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CloudSchedulerClient.pauseJob`.
     func pauseJob(
-      request: PauseJobRequest, options: GoogleCloudGax.RequestOptions
+      request: PauseJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     /// See `CloudSchedulerClient.resumeJob`.
     func resumeJob(
-      request: ResumeJobRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumeJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     /// See `CloudSchedulerClient.runJob`.
     func runJob(
-      request: RunJobRequest, options: GoogleCloudGax.RequestOptions
+      request: RunJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     /// See `CloudSchedulerClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `CloudSchedulerClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `CloudSchedulerClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }
@@ -362,9 +362,9 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func listJobs(
-    request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListJobsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.ListJobsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listJobs(
@@ -374,12 +374,12 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func listJobs(
-    byItem: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListJobsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Job, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudSchedulerV1.ListJobsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listJobs(
@@ -396,9 +396,9 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func getJob(
-    request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+    request: GetJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getJob(
@@ -415,9 +415,9 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func createJob(
-    request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createJob(
@@ -436,14 +436,14 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func updateJob(
-    request: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateJob(
     job: Job?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSchedulerV1.Job {
     let request = UpdateJobRequest().with {
       $0.job = job
@@ -457,9 +457,9 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func deleteJob(
-    request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteJobRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteJob(
@@ -476,9 +476,9 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func pauseJob(
-    request: PauseJobRequest, options: GoogleCloudGax.RequestOptions
+    request: PauseJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func pauseJob(
@@ -495,9 +495,9 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func resumeJob(
-    request: ResumeJobRequest, options: GoogleCloudGax.RequestOptions
+    request: ResumeJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func resumeJob(
@@ -514,9 +514,9 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func runJob(
-    request: RunJobRequest, options: GoogleCloudGax.RequestOptions
+    request: RunJobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSchedulerV1.Job {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func runJob(
@@ -535,9 +535,9 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -547,13 +547,13 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -563,8 +563,8 @@ extension Clients.CloudSchedulerProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

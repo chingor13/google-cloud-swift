@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An entry is a representation of a data resource that can be described by
 /// various metadata.
-public struct Entry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Entry: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The relative resource name of the entry, in the format
@@ -33,11 +33,11 @@ public struct Entry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The time when the entry was created in Dataplex Universal
   /// Catalog.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the entry was last updated in Dataplex Universal
   /// Catalog.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The aspects that are attached to the entry. Depending on how the
   /// aspect is attached to the entry, the format of the aspect key can be one of
@@ -63,7 +63,7 @@ public struct Entry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// that is represented by the entry.
   public var entrySource: EntrySource? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Entry`.
   public init() {}
@@ -116,10 +116,8 @@ public struct Entry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .entryType) {
       self.entryType = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Aspect].self, forKey: .aspects) {
       self.aspects = value
     }
@@ -132,7 +130,7 @@ public struct Entry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.entrySource = try container.decodeIfPresent(EntrySource.self, forKey: .entrySource)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -154,10 +152,10 @@ public struct Entry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.Entry"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

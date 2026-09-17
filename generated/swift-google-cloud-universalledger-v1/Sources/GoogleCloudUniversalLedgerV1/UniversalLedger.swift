@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service for interacting with the Google Cloud Universal Ledger.
 /// Endpoints are pre-created and managed by Google and cannot
@@ -35,7 +35,7 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
   let inner: any Clients.UniversalLedgerStub
 
   /// Creates a new `UniversalLedgerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.UniversalLedgerStub = try Clients.UniversalLedgerTransport(options)
     inner = Clients.UniversalLedgerRetry(inner, options: options)
     if let logger = options.logger {
@@ -53,7 +53,7 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
   ///
   /// @Snippet(path: "UniversalLedger_SubmitTransaction")
   public func submitTransaction(
-    request: SubmitTransactionRequest, options: GoogleCloudGax.RequestOptions
+    request: SubmitTransactionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.SubmitTransactionResponse {
     try await self.inner.submitTransaction(request: request, options: options)
   }
@@ -62,7 +62,7 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
   ///
   /// @Snippet(path: "UniversalLedger_ListEndpoints")
   public func listEndpoints(
-    request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEndpointsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.ListEndpointsResponse {
     try await self.inner.listEndpoints(request: request, options: options)
   }
@@ -71,7 +71,7 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
   ///
   /// @Snippet(path: "UniversalLedger_ListEndpoints")
   public func listEndpoints(
-    byItem: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEndpointsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Endpoint, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudUniversalLedgerV1.ListEndpointsResponse in
@@ -79,14 +79,14 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
       request.pageToken = token
       return try await self.listEndpoints(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a specific endpoint.
   ///
   /// @Snippet(path: "UniversalLedger_GetEndpoint")
   public func getEndpoint(
-    request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.Endpoint {
     try await self.inner.getEndpoint(request: request, options: options)
   }
@@ -97,7 +97,7 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
   ///
   /// @Snippet(path: "UniversalLedger_SubmitOperationalTransaction")
   public func submitOperationalTransaction(
-    request: SubmitOperationalTransactionRequest, options: GoogleCloudGax.RequestOptions
+    request: SubmitOperationalTransactionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.SubmitOperationalTransactionResponse {
     try await self.inner.submitOperationalTransaction(request: request, options: options)
   }
@@ -110,7 +110,7 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
   ///
   /// @Snippet(path: "UniversalLedger_QueryTransactionState")
   public func queryTransactionState(
-    request: QueryTransactionStateRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryTransactionStateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.QueryTransactionStateResponse {
     try await self.inner.queryTransactionState(request: request, options: options)
   }
@@ -123,7 +123,7 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
   ///
   /// @Snippet(path: "UniversalLedger_QueryAccount")
   public func queryAccount(
-    request: QueryAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.QueryAccountResponse {
     try await self.inner.queryAccount(request: request, options: options)
   }
@@ -138,7 +138,7 @@ public final class UniversalLedgerClient: Clients.UniversalLedgerProtocol, Senda
   ///
   /// @Snippet(path: "UniversalLedger_QueryData")
   public func queryData(
-    request: QueryDataRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryDataRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.QueryDataResponse {
     try await self.inner.queryData(request: request, options: options)
   }
@@ -226,42 +226,42 @@ extension Clients {
 
     /// See `UniversalLedgerClient.submitTransaction`.
     func submitTransaction(
-      request: SubmitTransactionRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitTransactionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.SubmitTransactionResponse
 
     /// See `UniversalLedgerClient.listEndpoints`.
     func listEndpoints(
-      request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEndpointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.ListEndpointsResponse
 
     /// See `UniversalLedgerClient.listEndpoints`.
     func listEndpoints(
-      byItem: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEndpointsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Endpoint, Swift.Error>
 
     /// See `UniversalLedgerClient.getEndpoint`.
     func getEndpoint(
-      request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.Endpoint
 
     /// See `UniversalLedgerClient.submitOperationalTransaction`.
     func submitOperationalTransaction(
-      request: SubmitOperationalTransactionRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitOperationalTransactionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.SubmitOperationalTransactionResponse
 
     /// See `UniversalLedgerClient.queryTransactionState`.
     func queryTransactionState(
-      request: QueryTransactionStateRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryTransactionStateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryTransactionStateResponse
 
     /// See `UniversalLedgerClient.queryAccount`.
     func queryAccount(
-      request: QueryAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryAccountResponse
 
     /// See `UniversalLedgerClient.queryData`.
     func queryData(
-      request: QueryDataRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudUniversalLedgerV1.QueryDataResponse
   }
 }
@@ -275,9 +275,9 @@ extension Clients.UniversalLedgerProtocol {
   }
 
   public func submitTransaction(
-    request: SubmitTransactionRequest, options: GoogleCloudGax.RequestOptions
+    request: SubmitTransactionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.SubmitTransactionResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func submitTransaction(
@@ -298,9 +298,9 @@ extension Clients.UniversalLedgerProtocol {
   }
 
   public func listEndpoints(
-    request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEndpointsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.ListEndpointsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEndpoints(
@@ -310,13 +310,13 @@ extension Clients.UniversalLedgerProtocol {
   }
 
   public func listEndpoints(
-    byItem: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEndpointsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Endpoint, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudUniversalLedgerV1.ListEndpointsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEndpoints(
@@ -335,9 +335,9 @@ extension Clients.UniversalLedgerProtocol {
   }
 
   public func getEndpoint(
-    request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEndpointRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.Endpoint {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEndpoint(
@@ -356,9 +356,9 @@ extension Clients.UniversalLedgerProtocol {
   }
 
   public func submitOperationalTransaction(
-    request: SubmitOperationalTransactionRequest, options: GoogleCloudGax.RequestOptions
+    request: SubmitOperationalTransactionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.SubmitOperationalTransactionResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func submitOperationalTransaction(
@@ -379,9 +379,9 @@ extension Clients.UniversalLedgerProtocol {
   }
 
   public func queryTransactionState(
-    request: QueryTransactionStateRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryTransactionStateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.QueryTransactionStateResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func queryTransactionState(
@@ -402,9 +402,9 @@ extension Clients.UniversalLedgerProtocol {
   }
 
   public func queryAccount(
-    request: QueryAccountRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryAccountRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.QueryAccountResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func queryAccount(
@@ -425,9 +425,9 @@ extension Clients.UniversalLedgerProtocol {
   }
 
   public func queryData(
-    request: QueryDataRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryDataRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudUniversalLedgerV1.QueryDataResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func queryData(

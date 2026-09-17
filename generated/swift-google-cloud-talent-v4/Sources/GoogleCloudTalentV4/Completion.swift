@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service handles auto completion.
 ///
@@ -29,7 +29,7 @@ public final class CompletionClient: Clients.CompletionProtocol, Sendable {
   let inner: any Clients.CompletionStub
 
   /// Creates a new `CompletionClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CompletionStub = try Clients.CompletionTransport(options)
     inner = Clients.CompletionRetry(inner, options: options)
     if let logger = options.logger {
@@ -43,7 +43,7 @@ public final class CompletionClient: Clients.CompletionProtocol, Sendable {
   ///
   /// @Snippet(path: "Completion_CompleteQuery")
   public func completeQuery(
-    request: CompleteQueryRequest, options: GoogleCloudGax.RequestOptions
+    request: CompleteQueryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTalentV4.CompleteQueryResponse {
     try await self.inner.completeQuery(request: request, options: options)
   }
@@ -54,7 +54,7 @@ public final class CompletionClient: Clients.CompletionProtocol, Sendable {
   ///
   /// @Snippet(path: "Completion_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -73,7 +73,7 @@ extension Clients {
 
     /// See `CompletionClient.completeQuery`.
     func completeQuery(
-      request: CompleteQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: CompleteQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.CompleteQueryResponse
   }
 }
@@ -87,9 +87,9 @@ extension Clients.CompletionProtocol {
   }
 
   public func completeQuery(
-    request: CompleteQueryRequest, options: GoogleCloudGax.RequestOptions
+    request: CompleteQueryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTalentV4.CompleteQueryResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(request: GoogleLongRunning.GetOperationRequest) async throws
@@ -99,9 +99,9 @@ extension Clients.CompletionProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

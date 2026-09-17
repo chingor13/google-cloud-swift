@@ -15,11 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ResourceRecordSet data for one geo location.
-public struct RRSetRoutingPolicyGeoPolicyGeoPolicyItem: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct RRSetRoutingPolicyGeoPolicyGeoPolicyItem: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// For A and AAAA types only. Endpoints to return in the query result only if they are healthy. These can be specified along with `rrdata` within this item.
@@ -35,7 +34,7 @@ public struct RRSetRoutingPolicyGeoPolicyGeoPolicyItem: Codable, Equatable, Goog
   /// DNSSEC generated signatures for all the `rrdata` within this item. When using health-checked targets for DNSSEC-enabled zones, you can only use at most one health-checked IP address per item.
   public var signatureRrdatas: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RRSetRoutingPolicyGeoPolicyGeoPolicyItem`.
   public init() {}
@@ -88,7 +87,7 @@ public struct RRSetRoutingPolicyGeoPolicyGeoPolicyItem: Codable, Equatable, Goog
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -107,10 +106,10 @@ public struct RRSetRoutingPolicyGeoPolicyGeoPolicyItem: Codable, Equatable, Goog
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.RRSetRoutingPolicyGeoPolicyGeoPolicyItem"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

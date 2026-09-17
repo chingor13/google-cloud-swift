@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// TlsRoute defines how traffic should be routed based on SNI and other matching
 /// L3 attributes.
-public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TlsRoute: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the TlsRoute resource. It matches pattern
@@ -30,10 +30,10 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var selfLink: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. A free-text description of the resource. Max length 1024
   /// characters.
@@ -71,7 +71,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Set of label tags associated with the TlsRoute resource.
   public var labels: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TlsRoute`.
   public init() {}
@@ -128,10 +128,8 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .selfLink) {
       self.selfLink = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -153,7 +151,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -176,7 +174,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Specifies how to match traffic and how to route traffic when traffic is
   /// matched.
-  public struct RouteRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouteRule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. RouteMatch defines the predicate used to match requests to a
@@ -187,7 +185,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. The detailed rule defining how to route matched traffic.
     public var action: TlsRoute.RouteAction? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouteRule`.
     public init() {}
@@ -228,7 +226,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.action = try container.decodeIfPresent(TlsRoute.RouteAction.self, forKey: .action)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -244,17 +242,17 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.TlsRoute.RouteRule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// RouteMatch defines the predicate used to match requests to a given action.
   /// Multiple match types are "AND"ed for evaluation.
-  public struct RouteMatch: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouteMatch: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. SNI (server name indicator) to match against.
@@ -273,7 +271,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Up to 5 alpns across all matches can be set.
     public var alpn: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouteMatch`.
     public init() {}
@@ -316,7 +314,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -332,16 +330,16 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.TlsRoute.RouteMatch"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The specifications for routing traffic and applying associated policies.
-  public struct RouteAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouteAction: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The destination services to which traffic should be forwarded.
@@ -353,9 +351,9 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// received on either the upstream or downstream connection. If not set, the
     /// default idle timeout is 1 hour. If set to 0s, the timeout will be
     /// disabled.
-    public var idleTimeout: GoogleCloudWKT.Duration? = nil
+    public var idleTimeout: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouteAction`.
     public init() {}
@@ -396,10 +394,10 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.destinations = value
       }
       self.idleTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .idleTimeout)
+        GoogleWKT.Duration.self, forKey: .idleTimeout)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -415,16 +413,16 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.TlsRoute.RouteAction"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describe the destination for traffic to be routed to.
-  public struct RouteDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RouteDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The URL of a BackendService to route traffic to.
@@ -436,7 +434,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Weights in all destinations does not need to sum up to 100.
     public var weight: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RouteDestination`.
     public init() {}
@@ -479,7 +477,7 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -495,21 +493,21 @@ public struct TlsRoute: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.TlsRoute.RouteDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkservices.v1.TlsRoute"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

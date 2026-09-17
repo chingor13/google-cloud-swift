@@ -16,99 +16,97 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataTransferServiceStub: Sendable {
     func listMulticloudDataTransferConfigs(
-      request: ListMulticloudDataTransferConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMulticloudDataTransferConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ListMulticloudDataTransferConfigsResponse
 
     func getMulticloudDataTransferConfig(
-      request: GetMulticloudDataTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMulticloudDataTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.MulticloudDataTransferConfig
 
     func createMulticloudDataTransferConfig(
-      request: CreateMulticloudDataTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMulticloudDataTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMulticloudDataTransferConfig(
-      request: UpdateMulticloudDataTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMulticloudDataTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMulticloudDataTransferConfig(
-      request: DeleteMulticloudDataTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMulticloudDataTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listDestinations(
-      request: ListDestinationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDestinationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.ListDestinationsResponse
 
     func getDestination(
-      request: GetDestinationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDestinationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.Destination
 
     func createDestination(
-      request: CreateDestinationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDestinationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateDestination(
-      request: UpdateDestinationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDestinationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteDestination(
-      request: DeleteDestinationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDestinationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getMulticloudDataTransferSupportedService(
-      request: GetMulticloudDataTransferSupportedServiceRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: GetMulticloudDataTransferSupportedServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkConnectivityV1.MulticloudDataTransferSupportedService
 
     func listMulticloudDataTransferSupportedServices(
-      request: ListMulticloudDataTransferSupportedServicesRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ListMulticloudDataTransferSupportedServicesRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudNetworkConnectivityV1.ListMulticloudDataTransferSupportedServicesResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

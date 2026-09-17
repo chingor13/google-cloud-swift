@@ -16,11 +16,11 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Active learning data sampling config. For every active learning labeling
   /// iteration, it will select a batch of data based on the sampling strategy.
-  public struct SampleConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SampleConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Field to choose sampling strategy. Sampling strategy will decide which data
@@ -35,7 +35,7 @@
     /// following_batch_sample_percentage is used by default.
     public var followingBatchSampleSize: OneOf_FollowingBatchSampleSize? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SampleConfig`.
     public init() {}
@@ -117,7 +117,7 @@
       self.followingBatchSampleSize = followingBatchSampleSize
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -260,11 +260,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SampleConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

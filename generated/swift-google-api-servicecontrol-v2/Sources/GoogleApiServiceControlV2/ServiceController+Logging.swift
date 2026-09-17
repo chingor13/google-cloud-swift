@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func check(
-      request: CheckRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV2.CheckResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "check",
         action: {
-          (r: CheckRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CheckRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiServiceControlV2.CheckResponse
           in
           return try await self.inner.check(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func report(
-      request: ReportRequest, options: GoogleCloudGax.RequestOptions
+      request: ReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiServiceControlV2.ReportResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "report",
         action: {
-          (r: ReportRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ReportRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiServiceControlV2.ReportResponse
           in
           return try await self.inner.report(request: r, options: o)

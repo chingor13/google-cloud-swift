@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // [START storage_set_client_endpoint]
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudStorage
 
 public func setClientEndpoint(bucketId: String) async throws {

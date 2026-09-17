@@ -16,10 +16,10 @@
 
 #if TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a test case.
-  public struct TestCase: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TestCase: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier of the test case.
@@ -51,12 +51,12 @@
     public var testCaseConversationTurns: [ConversationTurn] = []
 
     /// Output only. When the test was created.
-    public var creationTime: GoogleCloudWKT.Timestamp? = nil
+    public var creationTime: GoogleWKT.Timestamp? = nil
 
     /// The latest test result.
     public var lastTestResult: TestCaseResult? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TestCase`.
     public init() {}
@@ -122,12 +122,12 @@
         self.testCaseConversationTurns = value
       }
       self.creationTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .creationTime)
+        GoogleWKT.Timestamp.self, forKey: .creationTime)
       self.lastTestResult = try container.decodeIfPresent(
         TestCaseResult.self, forKey: .lastTestResult)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -149,11 +149,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TestCase"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

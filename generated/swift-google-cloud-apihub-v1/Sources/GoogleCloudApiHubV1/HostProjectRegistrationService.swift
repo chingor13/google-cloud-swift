@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service is used for managing the host project registrations.
 ///
@@ -32,7 +32,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   let inner: any Clients.HostProjectRegistrationServiceStub
 
   /// Creates a new `HostProjectRegistrationServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.HostProjectRegistrationServiceStub =
       try Clients.HostProjectRegistrationServiceTransport(options)
     inner = Clients.HostProjectRegistrationServiceRetry(inner, options: options)
@@ -50,7 +50,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_CreateHostProjectRegistration")
   public func createHostProjectRegistration(
-    request: CreateHostProjectRegistrationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateHostProjectRegistrationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.HostProjectRegistration {
     try await self.inner.createHostProjectRegistration(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_GetHostProjectRegistration")
   public func getHostProjectRegistration(
-    request: GetHostProjectRegistrationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetHostProjectRegistrationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.HostProjectRegistration {
     try await self.inner.getHostProjectRegistration(request: request, options: options)
   }
@@ -68,7 +68,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_ListHostProjectRegistrations")
   public func listHostProjectRegistrations(
-    request: ListHostProjectRegistrationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListHostProjectRegistrationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListHostProjectRegistrationsResponse {
     try await self.inner.listHostProjectRegistrations(request: request, options: options)
   }
@@ -77,7 +77,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_ListHostProjectRegistrations")
   public func listHostProjectRegistrations(
-    byItem: ListHostProjectRegistrationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListHostProjectRegistrationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<HostProjectRegistration, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiHubV1.ListHostProjectRegistrationsResponse
@@ -86,14 +86,14 @@ public final class HostProjectRegistrationServiceClient: Clients
       request.pageToken = token
       return try await self.listHostProjectRegistrations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "HostProjectRegistrationService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -102,7 +102,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -110,14 +110,14 @@ public final class HostProjectRegistrationServiceClient: Clients
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "HostProjectRegistrationService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -128,7 +128,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -139,7 +139,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -147,7 +147,7 @@ public final class HostProjectRegistrationServiceClient: Clients
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -156,7 +156,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -167,7 +167,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -178,7 +178,7 @@ public final class HostProjectRegistrationServiceClient: Clients
   ///
   /// @Snippet(path: "HostProjectRegistrationService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -271,57 +271,57 @@ extension Clients {
 
     /// See `HostProjectRegistrationServiceClient.createHostProjectRegistration`.
     func createHostProjectRegistration(
-      request: CreateHostProjectRegistrationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateHostProjectRegistrationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.HostProjectRegistration
 
     /// See `HostProjectRegistrationServiceClient.getHostProjectRegistration`.
     func getHostProjectRegistration(
-      request: GetHostProjectRegistrationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetHostProjectRegistrationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.HostProjectRegistration
 
     /// See `HostProjectRegistrationServiceClient.listHostProjectRegistrations`.
     func listHostProjectRegistrations(
-      request: ListHostProjectRegistrationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHostProjectRegistrationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiHubV1.ListHostProjectRegistrationsResponse
 
     /// See `HostProjectRegistrationServiceClient.listHostProjectRegistrations`.
     func listHostProjectRegistrations(
-      byItem: ListHostProjectRegistrationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListHostProjectRegistrationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<HostProjectRegistration, Swift.Error>
 
     /// See `HostProjectRegistrationServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `HostProjectRegistrationServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `HostProjectRegistrationServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `HostProjectRegistrationServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `HostProjectRegistrationServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `HostProjectRegistrationServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `HostProjectRegistrationServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -335,9 +335,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func createHostProjectRegistration(
-    request: CreateHostProjectRegistrationRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateHostProjectRegistrationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.HostProjectRegistration {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createHostProjectRegistration(
@@ -360,9 +360,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func getHostProjectRegistration(
-    request: GetHostProjectRegistrationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetHostProjectRegistrationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.HostProjectRegistration {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getHostProjectRegistration(
@@ -381,9 +381,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func listHostProjectRegistrations(
-    request: ListHostProjectRegistrationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListHostProjectRegistrationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiHubV1.ListHostProjectRegistrationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listHostProjectRegistrations(
@@ -393,14 +393,14 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func listHostProjectRegistrations(
-    byItem: ListHostProjectRegistrationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListHostProjectRegistrationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<HostProjectRegistration, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiHubV1.ListHostProjectRegistrationsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listHostProjectRegistrations(
@@ -419,9 +419,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -431,13 +431,13 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -447,9 +447,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -459,9 +459,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -471,13 +471,13 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -498,9 +498,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -517,9 +517,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -536,9 +536,9 @@ extension Clients.HostProjectRegistrationServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -15,9 +15,9 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// InToto spec defined at
@@ -30,7 +30,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   public var predicate: InTotoSlsaProvenanceV1.SlsaProvenanceV1? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InTotoSlsaProvenanceV1`.
   public init() {}
@@ -82,7 +82,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
       InTotoSlsaProvenanceV1.SlsaProvenanceV1.self, forKey: .predicate)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,14 +100,14 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Keep in sync with schema at
   /// https://github.com/slsa-framework/slsa/blob/main/docs/provenance/schema/v1/provenance.proto
   /// Builder renamed to ProvenanceBuilder because of Java conflicts.
-  public struct SlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SlsaProvenanceV1: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var buildDefinition: InTotoSlsaProvenanceV1.BuildDefinition? = nil
 
     public var runDetails: InTotoSlsaProvenanceV1.RunDetails? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SlsaProvenanceV1`.
     public init() {}
@@ -148,7 +148,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
         InTotoSlsaProvenanceV1.RunDetails.self, forKey: .runDetails)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -164,26 +164,26 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.SlsaProvenanceV1"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct BuildDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BuildDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var buildType: Swift.String = Swift.String()
 
-    public var externalParameters: GoogleCloudWKT.Struct? = nil
+    public var externalParameters: GoogleWKT.Struct? = nil
 
-    public var internalParameters: GoogleCloudWKT.Struct? = nil
+    public var internalParameters: GoogleWKT.Struct? = nil
 
     public var resolvedDependencies: [InTotoSlsaProvenanceV1.ResourceDescriptor] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BuildDefinition`.
     public init() {}
@@ -226,9 +226,9 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
         self.buildType = value
       }
       self.externalParameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .externalParameters)
+        GoogleWKT.Struct.self, forKey: .externalParameters)
       self.internalParameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .internalParameters)
+        GoogleWKT.Struct.self, forKey: .internalParameters)
       if let value = try container.decodeIfPresent(
         [InTotoSlsaProvenanceV1.ResourceDescriptor].self, forKey: .resolvedDependencies)
       {
@@ -236,7 +236,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -254,15 +254,15 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.BuildDefinition"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct ResourceDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ResourceDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var name: Swift.String = Swift.String()
@@ -277,9 +277,9 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
 
     public var mediaType: Swift.String = Swift.String()
 
-    public var annotations: [Swift.String: GoogleCloudWKT.Value] = [:]
+    public var annotations: [Swift.String: GoogleWKT.Value] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourceDescriptor`.
     public init() {}
@@ -345,13 +345,13 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
         self.mediaType = value
       }
       if let value = try container.decodeIfPresent(
-        [Swift.String: GoogleCloudWKT.Value].self, forKey: .annotations)
+        [Swift.String: GoogleWKT.Value].self, forKey: .annotations)
       {
         self.annotations = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -372,15 +372,15 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.ResourceDescriptor"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct RunDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RunDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var builder: InTotoSlsaProvenanceV1.ProvenanceBuilder? = nil
@@ -389,7 +389,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
 
     public var byproducts: [InTotoSlsaProvenanceV1.ResourceDescriptor] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RunDetails`.
     public init() {}
@@ -437,7 +437,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -454,15 +454,15 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.RunDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct ProvenanceBuilder: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ProvenanceBuilder: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var id: Swift.String = Swift.String()
@@ -471,7 +471,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
 
     public var builderDependencies: [InTotoSlsaProvenanceV1.ResourceDescriptor] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ProvenanceBuilder`.
     public init() {}
@@ -523,7 +523,7 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -540,24 +540,24 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.ProvenanceBuilder"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct BuildMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BuildMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var invocationId: Swift.String = Swift.String()
 
-    public var startedOn: GoogleCloudWKT.Timestamp? = nil
+    public var startedOn: GoogleWKT.Timestamp? = nil
 
-    public var finishedOn: GoogleCloudWKT.Timestamp? = nil
+    public var finishedOn: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BuildMetadata`.
     public init() {}
@@ -597,13 +597,11 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .invocationId) {
         self.invocationId = value
       }
-      self.startedOn = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startedOn)
-      self.finishedOn = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .finishedOn)
+      self.startedOn = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startedOn)
+      self.finishedOn = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .finishedOn)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -620,21 +618,21 @@ public struct InTotoSlsaProvenanceV1: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1.BuildMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.InTotoSlsaProvenanceV1"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

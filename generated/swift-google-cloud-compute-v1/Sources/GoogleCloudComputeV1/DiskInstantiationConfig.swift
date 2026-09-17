@@ -16,11 +16,11 @@
 
 #if InstanceTemplates || RegionInstanceTemplates
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A specification of the desired way to instantiate a disk in the instance
   /// template when its created from a source instance.
-  public struct DiskInstantiationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DiskInstantiationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies whether the disk will be auto-deleted when the instance is
@@ -54,7 +54,7 @@
     ///      disks.
     public var instantiateFrom: DiskInstantiationConfig.InstantiateFrom? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DiskInstantiationConfig`.
     public init() {}
@@ -100,7 +100,7 @@
         DiskInstantiationConfig.InstantiateFrom.self, forKey: .instantiateFrom)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -267,11 +267,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.DiskInstantiationConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

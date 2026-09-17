@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudSecurityPrivateCAV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, caPoolId: String, ) async throws {
   let client = try GoogleCloudSecurityPrivateCAV1.CertificateAuthorityServiceClient()

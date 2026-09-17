@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// EngineVersion controls which version of the engine is used to tune, train,
 /// and run the model.
-public struct EngineVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EngineVersion: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Identifier. The resource name of the EngineVersion
@@ -32,18 +32,18 @@ public struct EngineVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. Planned time to stop allowing training/tuning using this
   /// version. Existing trained models can still be used for prediction/backtest.
-  public var expectedLimitationStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var expectedLimitationStartTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Planned time to stop supporting the version, in addition
   /// to no training or tuning, models trained on this version
   /// can no longer be used for prediction/backtest.
-  public var expectedDecommissionTime: GoogleCloudWKT.Timestamp? = nil
+  public var expectedDecommissionTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The line of business (Retail/Commercial) this engine version
   /// is used for.
   public var lineOfBusiness: LineOfBusiness = LineOfBusiness()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EngineVersion`.
   public init() {}
@@ -91,15 +91,15 @@ public struct EngineVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.state = value
     }
     self.expectedLimitationStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expectedLimitationStartTime)
+      GoogleWKT.Timestamp.self, forKey: .expectedLimitationStartTime)
     self.expectedDecommissionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expectedDecommissionTime)
+      GoogleWKT.Timestamp.self, forKey: .expectedDecommissionTime)
     if let value = try container.decodeIfPresent(LineOfBusiness.self, forKey: .lineOfBusiness) {
       self.lineOfBusiness = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -233,10 +233,10 @@ public struct EngineVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.financialservices.v1.EngineVersion"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

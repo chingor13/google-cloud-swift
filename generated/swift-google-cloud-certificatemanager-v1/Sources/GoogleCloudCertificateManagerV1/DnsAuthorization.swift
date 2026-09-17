@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A DnsAuthorization resource describes a way to perform domain authorization
 /// for certificate issuance.
-public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DnsAuthorization: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A user-defined name of the dns authorization. DnsAuthorization names must
@@ -28,10 +28,10 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The creation timestamp of a DnsAuthorization.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last update timestamp of a DnsAuthorization.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Set of labels associated with a DnsAuthorization.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -54,7 +54,7 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// - in location global: FIXED_RECORD.
   public var type: DnsAuthorization.Type_ = DnsAuthorization.Type_()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DnsAuthorization`.
   public init() {}
@@ -104,10 +104,8 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -125,7 +123,7 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,7 +145,7 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The structure describing the DNS Resource Record that needs to be added
   /// to DNS configuration for the authorization to be usable by
   /// certificate.
-  public struct DnsResourceRecord: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DnsResourceRecord: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Fully qualified name of the DNS Resource Record.
@@ -161,7 +159,7 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. Data of the DNS Resource Record.
     public var data: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DnsResourceRecord`.
     public init() {}
@@ -209,7 +207,7 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -227,11 +225,11 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.certificatemanager.v1.DnsAuthorization.DnsResourceRecord"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -345,10 +343,10 @@ public struct DnsAuthorization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.certificatemanager.v1.DnsAuthorization"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudBiglakeV1
 import GoogleApi
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: IcebergCatalogServiceClient) async throws {
   try await client.deleteIcebergCatalog(

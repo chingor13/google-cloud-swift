@@ -16,53 +16,53 @@
 
 #if UrlMaps
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol UrlMapsStub: Sendable {
       func aggregatedList(
-        request: UrlMapsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsAggregatedList
 
       func delete(
-        request: UrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: UrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMap
 
       func insert(
-        request: UrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func invalidateCache(
-        request: UrlMapsClient.InvalidateCacheRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.InvalidateCacheRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: UrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapList
 
       func patch(
-        request: UrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: UrlMapsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: UrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func validate(
-        request: UrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+        request: UrlMapsClient.ValidateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

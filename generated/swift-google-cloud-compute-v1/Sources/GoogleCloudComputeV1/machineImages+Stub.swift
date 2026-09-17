@@ -16,46 +16,45 @@
 
 #if MachineImages
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol MachineImagesStub: Sendable {
       func delete(
-        request: MachineImagesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineImagesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: MachineImagesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineImagesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineImage
 
       func getIamPolicy(
-        request: MachineImagesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineImagesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: MachineImagesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineImagesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: MachineImagesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineImagesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.MachineImageList
 
       func setIamPolicy(
-        request: MachineImagesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineImagesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setLabels(
-        request: MachineImagesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: MachineImagesClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: MachineImagesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: MachineImagesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

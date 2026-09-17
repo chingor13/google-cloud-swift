@@ -16,29 +16,29 @@
 
 #if SqlUsersService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlUsersServiceStub: Sendable {
       func delete(
-        request: SqlUsersDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func `get`(
-        request: SqlUsersGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.User
 
       func insert(
-        request: SqlUsersInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func list(
-        request: SqlUsersListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.UsersListResponse
 
       func update(
-        request: SqlUsersUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
     }
   }

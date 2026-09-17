@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Properties of the audio stream.
-public struct AudioStreamProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AudioStreamProperty: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Index of this audio stream.
@@ -27,7 +27,7 @@ public struct AudioStreamProperty: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Properties of the audio format.
   public var audioFormat: AudioFormat? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AudioStreamProperty`.
   public init() {}
@@ -68,7 +68,7 @@ public struct AudioStreamProperty: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.audioFormat = try container.decodeIfPresent(AudioFormat.self, forKey: .audioFormat)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -84,10 +84,10 @@ public struct AudioStreamProperty: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.AudioStreamProperty"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

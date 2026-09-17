@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// BackupApplianceBackupProperties represents BackupDR backup appliance's
 /// properties.
-public struct BackupApplianceBackupProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackupApplianceBackupProperties: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The numeric generation ID of the backup (monotonically
@@ -28,15 +28,15 @@ public struct BackupApplianceBackupProperties: Codable, Equatable, GoogleCloudWK
 
   /// Output only. The time when this backup object was finalized (if none,
   /// backup is not finalized).
-  public var finalizeTime: GoogleCloudWKT.Timestamp? = nil
+  public var finalizeTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The earliest timestamp of data available in this Backup.
-  public var recoveryRangeStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var recoveryRangeStartTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The latest timestamp of data available in this Backup.
-  public var recoveryRangeEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var recoveryRangeEndTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackupApplianceBackupProperties`.
   public init() {}
@@ -77,14 +77,14 @@ public struct BackupApplianceBackupProperties: Codable, Equatable, GoogleCloudWK
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.generationId = try container.decodeIfPresent(Swift.Int32.self, forKey: .generationId)
     self.finalizeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .finalizeTime)
+      GoogleWKT.Timestamp.self, forKey: .finalizeTime)
     self.recoveryRangeStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .recoveryRangeStartTime)
+      GoogleWKT.Timestamp.self, forKey: .recoveryRangeStartTime)
     self.recoveryRangeEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .recoveryRangeEndTime)
+      GoogleWKT.Timestamp.self, forKey: .recoveryRangeEndTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +102,10 @@ public struct BackupApplianceBackupProperties: Codable, Equatable, GoogleCloudWK
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.BackupApplianceBackupProperties"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

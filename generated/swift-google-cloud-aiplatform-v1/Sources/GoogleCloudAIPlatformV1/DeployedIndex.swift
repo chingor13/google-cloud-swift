@@ -16,10 +16,10 @@
 
 #if IndexEndpointService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A deployment of an Index. IndexEndpoints contain one or more DeployedIndexes.
-  public struct DeployedIndex: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeployedIndex: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The user specified ID of the DeployedIndex.
@@ -37,7 +37,7 @@
     public var displayName: Swift.String = Swift.String()
 
     /// Output only. Timestamp when the DeployedIndex was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Provides paths for users to send requests directly to the
     /// deployed index services running on Cloud via private services access. This
@@ -64,7 +64,7 @@
     ///
     /// [google.cloud.aiplatform.v1.GenericOperationMetadata.update_time]: <doc:GenericOperationMetadata/updateTime>
     /// [google.cloud.aiplatform.v1.Index.update_time]: <doc:Index/updateTime>
-    public var indexSyncTime: GoogleCloudWKT.Timestamp? = nil
+    public var indexSyncTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. A description of resources that the DeployedIndex uses, which to
     /// large degree are decided by Vertex AI, and optionally allows only a modest
@@ -159,7 +159,7 @@
     /// is populated in private_endpoints.psc_automated_endpoints.
     public var pscAutomationConfigs: [PSCAutomationConfig] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeployedIndex`.
     public init() {}
@@ -230,12 +230,11 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
         self.displayName = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       self.privateEndpoints = try container.decodeIfPresent(
         IndexPrivateEndpoints.self, forKey: .privateEndpoints)
       self.indexSyncTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .indexSyncTime)
+        GoogleWKT.Timestamp.self, forKey: .indexSyncTime)
       self.automaticResources = try container.decodeIfPresent(
         AutomaticResources.self, forKey: .automaticResources)
       self.dedicatedResources = try container.decodeIfPresent(
@@ -268,7 +267,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -395,11 +394,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DeployedIndex"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudDataplexV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: ContentServiceClient) async throws {
   let response = try await client.setIamPolicy(

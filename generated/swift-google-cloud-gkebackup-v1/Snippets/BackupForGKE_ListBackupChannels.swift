@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudGKEBackupV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: BackupForGKEClient, parent: String) async throws {
   let items = try client.listBackupChannels(

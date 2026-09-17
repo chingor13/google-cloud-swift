@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata for TuneQaScorecardRevision endpoint.
-public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The time the operation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time the operation finished running.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The original request.
   public var request: TuneQaScorecardRevisionRequest? = nil
@@ -44,7 +44,7 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
   /// indicates the job has completed i.e. 100%.
   public var tuningCompletionRatio: Swift.Double = Swift.Double()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TuneQaScorecardRevisionMetadata`.
   public init() {}
@@ -89,9 +89,8 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.request = try container.decodeIfPresent(
       TuneQaScorecardRevisionRequest.self, forKey: .request)
     if let value = try container.decodeIfPresent(
@@ -112,7 +111,7 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -132,7 +131,7 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
   }
 
   /// Contains validation results for a question in the tuning request.
-  public struct QaQuestionDatasetValidationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QaQuestionDatasetValidationResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource path of the question whose dataset was
@@ -146,7 +145,7 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
     /// The number of valid feedback labels in the question's dataset.
     public var validFeedbackLabelsCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QaQuestionDatasetValidationResult`.
     public init() {}
@@ -198,7 +197,7 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -216,17 +215,17 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetValidationResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Contains performance metrics for each QaQuestion in the
   /// TuneScorecardRevision request.
-  public struct QaQuestionDatasetTuningMetrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QaQuestionDatasetTuningMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource path of the question whose dataset was
@@ -237,7 +236,7 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
     public var metrics: TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics? =
       nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QaQuestionDatasetTuningMetrics`.
     public init() {}
@@ -280,7 +279,7 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
         forKey: .metrics)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -295,13 +294,13 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
 
     /// Performance metrics for the question's dataset calculated over the tuned
     /// model.
-    public struct Metrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Metrics: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Accuracy of the question's dataset.
       public var accuracy: Swift.Double = Swift.Double()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Metrics`.
       public init() {}
@@ -339,7 +338,7 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -355,11 +354,11 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
         return
           "type.googleapis.com/google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics.Metrics"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -367,11 +366,11 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata.QaQuestionDatasetTuningMetrics"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -379,10 +378,10 @@ public struct TuneQaScorecardRevisionMetadata: Codable, Equatable, GoogleCloudWK
     return
       "type.googleapis.com/google.cloud.contactcenterinsights.v1.TuneQaScorecardRevisionMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

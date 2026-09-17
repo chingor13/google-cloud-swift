@@ -16,13 +16,13 @@
 
 #if SqlBackupsService || SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A primary instance and disaster recovery (DR) replica pair.
   /// A DR replica is a cross-region replica that you designate for failover in
   /// the event that the primary instance experiences regional failure.
   /// Applicable to MySQL and PostgreSQL.
-  public struct ReplicationCluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReplicationCluster: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. If set, this field indicates this instance has a private
@@ -47,7 +47,7 @@
     /// replica. This field is not set if the instance is a primary instance.
     public var drReplica: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReplicationCluster`.
     public init() {}
@@ -97,7 +97,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -114,11 +114,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.ReplicationCluster"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

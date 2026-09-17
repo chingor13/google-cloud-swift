@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Video frame level annotation results for explicit content.
-public struct ExplicitContentFrame: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExplicitContentFrame: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Time-offset, relative to the beginning of the video, corresponding to the
   /// video frame for this location.
-  public var timeOffset: GoogleCloudWKT.Duration? = nil
+  public var timeOffset: GoogleWKT.Duration? = nil
 
   /// Likelihood of the pornography content..
   public var pornographyLikelihood: Likelihood = Likelihood()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExplicitContentFrame`.
   public init() {}
@@ -63,14 +63,13 @@ public struct ExplicitContentFrame: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.timeOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeOffset)
+    self.timeOffset = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeOffset)
     if let value = try container.decodeIfPresent(Likelihood.self, forKey: .pornographyLikelihood) {
       self.pornographyLikelihood = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +85,10 @@ public struct ExplicitContentFrame: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.videointelligence.v1.ExplicitContentFrame"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

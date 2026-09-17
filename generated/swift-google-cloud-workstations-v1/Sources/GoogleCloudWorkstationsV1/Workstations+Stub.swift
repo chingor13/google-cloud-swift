@@ -15,120 +15,120 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol WorkstationsStub: Sendable {
     func getWorkstationCluster(
-      request: GetWorkstationClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkstationClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.WorkstationCluster
 
     func listWorkstationClusters(
-      request: ListWorkstationClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkstationClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.ListWorkstationClustersResponse
 
     func createWorkstationCluster(
-      request: CreateWorkstationClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkstationClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateWorkstationCluster(
-      request: UpdateWorkstationClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWorkstationClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteWorkstationCluster(
-      request: DeleteWorkstationClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkstationClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getWorkstationConfig(
-      request: GetWorkstationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkstationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.WorkstationConfig
 
     func listWorkstationConfigs(
-      request: ListWorkstationConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkstationConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.ListWorkstationConfigsResponse
 
     func listUsableWorkstationConfigs(
-      request: ListUsableWorkstationConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUsableWorkstationConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.ListUsableWorkstationConfigsResponse
 
     func createWorkstationConfig(
-      request: CreateWorkstationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkstationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateWorkstationConfig(
-      request: UpdateWorkstationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWorkstationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteWorkstationConfig(
-      request: DeleteWorkstationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkstationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getWorkstation(
-      request: GetWorkstationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkstationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.Workstation
 
     func listWorkstations(
-      request: ListWorkstationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkstationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.ListWorkstationsResponse
 
     func listUsableWorkstations(
-      request: ListUsableWorkstationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUsableWorkstationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.ListUsableWorkstationsResponse
 
     func createWorkstation(
-      request: CreateWorkstationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkstationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateWorkstation(
-      request: UpdateWorkstationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWorkstationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteWorkstation(
-      request: DeleteWorkstationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkstationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func startWorkstation(
-      request: StartWorkstationRequest, options: GoogleCloudGax.RequestOptions
+      request: StartWorkstationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func stopWorkstation(
-      request: StopWorkstationRequest, options: GoogleCloudGax.RequestOptions
+      request: StopWorkstationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateAccessToken(
-      request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkstationsV1.GenerateAccessTokenResponse
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A running instance of a
 /// [Workflow](/workflows/docs/reference/rest/v1/projects.locations.workflows).
-public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Execution: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the execution.
@@ -28,13 +28,13 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Marks the beginning of execution.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Marks the end of execution, successful or not.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Measures the duration of the execution.
-  public var duration: GoogleCloudWKT.Duration? = nil
+  public var duration: GoogleWKT.Duration? = nil
 
   /// Output only. Current state of the execution.
   public var state: Execution.State = Execution.State()
@@ -80,7 +80,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// unavailable due to revoked KMS key permissions.
   public var stateError: Execution.StateError? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Execution`.
   public init() {}
@@ -140,10 +140,9 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
-    self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
+    self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
     if let value = try container.decodeIfPresent(Execution.State.self, forKey: .state) {
       self.state = value
     }
@@ -169,7 +168,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.stateError = try container.decodeIfPresent(Execution.StateError.self, forKey: .stateError)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -194,7 +193,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A single stack element (frame) where an error occurred.
-  public struct StackTraceElement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StackTraceElement: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The step the error occurred at.
@@ -206,7 +205,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The source position information of the stack trace element.
     public var position: Execution.StackTraceElement.Position? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StackTraceElement`.
     public init() {}
@@ -253,7 +252,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Execution.StackTraceElement.Position.self, forKey: .position)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -270,7 +269,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Position contains source position information about the stack trace
     /// element such as line number, column number and length of the code block
     /// in bytes.
-    public struct Position: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Position: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The source code line number the current instruction was generated from.
@@ -283,7 +282,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The number of bytes of source code making up this stack trace element.
       public var length: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Position`.
       public init() {}
@@ -331,7 +330,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -349,33 +348,33 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.workflows.executions.v1.Execution.StackTraceElement.Position"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workflows.executions.v1.Execution.StackTraceElement"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A collection of stack elements (frames) where an error occurred.
-  public struct StackTrace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StackTrace: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// An array of stack elements.
     public var elements: [Execution.StackTraceElement] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StackTrace`.
     public init() {}
@@ -415,7 +414,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -430,16 +429,16 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workflows.executions.v1.Execution.StackTrace"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Error describes why the execution was abnormally terminated.
-  public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Error: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Error message and data returned represented as a JSON string.
@@ -451,7 +450,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Stack trace with detailed information of where error was generated.
     public var stackTrace: Execution.StackTrace? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Error`.
     public init() {}
@@ -498,7 +497,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Execution.StackTrace.self, forKey: .stackTrace)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -515,16 +514,16 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workflows.executions.v1.Execution.Error"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents the current status of this execution.
-  public struct Status: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Status: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of currently executing or last executed step names for the
@@ -536,7 +535,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// ending with the most deeply nested step.
     public var currentSteps: [Execution.Status.Step] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Status`.
     public init() {}
@@ -576,7 +575,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -589,7 +588,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Represents a step of the workflow this execution is running.
-    public struct Step: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Step: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Name of a routine within the workflow.
@@ -598,7 +597,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Name of a step within the routine.
       public var step: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Step`.
       public init() {}
@@ -641,7 +640,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -657,27 +656,27 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.workflows.executions.v1.Execution.Status.Step"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workflows.executions.v1.Execution.Status"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describes an error related to the current state of the Execution resource.
-  public struct StateError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StateError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Provides specifics about the error.
@@ -686,7 +685,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The type of this state error.
     public var type: Execution.StateError.Type_ = Execution.StateError.Type_()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StateError`.
     public init() {}
@@ -729,7 +728,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -843,11 +842,11 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workflows.executions.v1.Execution.StateError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1102,10 +1101,10 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.workflows.executions.v1.Execution"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

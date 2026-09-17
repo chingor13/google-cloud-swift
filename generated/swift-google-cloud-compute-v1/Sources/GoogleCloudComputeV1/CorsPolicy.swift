@@ -16,13 +16,13 @@
 
 #if RegionUrlMaps || UrlMaps
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The specification for allowing client-side cross-origin requests. For more
   /// information about the W3C recommendation for cross-origin resource sharing
   /// (CORS), see Fetch API Living
   /// Standard.
-  public struct CorsPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CorsPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// In response to a preflight request, setting this to true
@@ -69,7 +69,7 @@
     /// header.
     public var maxAge: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CorsPolicy`.
     public init() {}
@@ -138,7 +138,7 @@
       self.maxAge = try container.decodeIfPresent(Swift.Int32.self, forKey: .maxAge)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -160,11 +160,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.CorsPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

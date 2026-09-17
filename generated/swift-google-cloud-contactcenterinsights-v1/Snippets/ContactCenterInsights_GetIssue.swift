@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudContactCenterInsightsV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: ContactCenterInsightsClient, projectId: String, locationId: String, issueModelId: String,

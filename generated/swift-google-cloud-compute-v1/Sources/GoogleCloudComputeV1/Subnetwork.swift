@@ -16,7 +16,7 @@
 
 #if Subnetworks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a Subnetwork resource.
   ///
@@ -24,7 +24,7 @@
   /// Private Cloud network with one primary IP range and zero or more secondary
   /// IP ranges. For more information, read
   /// Virtual Private Cloud (VPC) Network.
-  public struct Subnetwork: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Subnetwork: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Whether this subnetwork's ranges can conflict with existing custom routes.
@@ -225,7 +225,7 @@
     /// the total number of allocated and free IPs in each range.
     public var utilizationDetails: SubnetworkUtilizationDetails? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Subnetwork`.
     public init() {}
@@ -334,7 +334,7 @@
       self.externalIpv6Prefix = try container.decodeIfPresent(
         Swift.String.self, forKey: .externalIpv6Prefix)
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .fingerprint) {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -392,7 +392,7 @@
         SubnetworkUtilizationDetails.self, forKey: .utilizationDetails)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -406,7 +406,7 @@
       try container.encodeIfPresent(self.externalIpv6Prefix, forKey: .externalIpv6Prefix)
       if let v = fingerprint {
         try container.encode(
-          GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
+          GoogleWKT._DiscoveryBase64.encode(v), forKey: .fingerprint
         )
       }
       try container.encodeIfPresent(self.gatewayAddress, forKey: .gatewayAddress)
@@ -1329,11 +1329,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Subnetwork"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Performance data sample.
-public struct PerformanceSample: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PerformanceSample: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Time the sample was collected.
   /// If omitted, the frame report time will be used.
-  public var sampleTime: GoogleCloudWKT.Timestamp? = nil
+  public var sampleTime: GoogleWKT.Timestamp? = nil
 
   /// Memory usage sample.
   public var memory: MemoryUsageSample? = nil
@@ -37,7 +37,7 @@ public struct PerformanceSample: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Disk usage sample.
   public var disk: DiskUsageSample? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PerformanceSample`.
   public init() {}
@@ -78,15 +78,14 @@ public struct PerformanceSample: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.sampleTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .sampleTime)
+    self.sampleTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .sampleTime)
     self.memory = try container.decodeIfPresent(MemoryUsageSample.self, forKey: .memory)
     self.cpu = try container.decodeIfPresent(CpuUsageSample.self, forKey: .cpu)
     self.network = try container.decodeIfPresent(NetworkUsageSample.self, forKey: .network)
     self.disk = try container.decodeIfPresent(DiskUsageSample.self, forKey: .disk)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -105,10 +104,10 @@ public struct PerformanceSample: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.migrationcenter.v1.PerformanceSample"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

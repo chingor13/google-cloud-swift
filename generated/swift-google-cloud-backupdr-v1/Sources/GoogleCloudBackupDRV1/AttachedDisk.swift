@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An instance-attached disk resource.
-public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AttachedDisk: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Specifies the parameters to initialize this disk.
@@ -82,7 +82,7 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Specifies the type of the disk.
   public var type: AttachedDisk.DiskType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AttachedDisk`.
   public init() {}
@@ -175,7 +175,7 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.type = try container.decodeIfPresent(AttachedDisk.DiskType.self, forKey: .type)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -204,7 +204,7 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Specifies the parameters to initialize this disk.
-  public struct InitializeParams: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InitializeParams: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies the disk name. If not specified, the default is to
@@ -215,7 +215,7 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required for each regional disk associated with the instance.
     public var replicaZones: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InitializeParams`.
     public init() {}
@@ -256,7 +256,7 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -272,11 +272,11 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.backupdr.v1.AttachedDisk.InitializeParams"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -722,10 +722,10 @@ public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.AttachedDisk"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,10 +16,10 @@
 
 #if Sessions || TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The result of calling a tool's action that has been executed by the client.
-  public struct ToolCallResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ToolCallResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The [tool][google.cloud.dialogflow.cx.v3.Tool] associated with
@@ -35,7 +35,7 @@
     /// The tool call's result.
     public var result: OneOf_Result? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ToolCallResult`.
     public init() {}
@@ -95,14 +95,14 @@
         try resultCheckAndSet(.error(error))
       }
       if let outputParameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct?.self, forKey: .outputParameters)
+        GoogleWKT.Struct?.self, forKey: .outputParameters)
       {
         try resultCheckAndSet(.outputParameters(outputParameters))
       }
       self.result = result
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -125,13 +125,13 @@
     }
 
     /// An error produced by the tool call.
-    public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Error: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The error message of the function.
       public var message: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Error`.
       public init() {}
@@ -169,7 +169,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -184,11 +184,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ToolCallResult.Error"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -197,17 +197,17 @@
       /// The tool call's error.
       indirect case error(ToolCallResult.Error?)
       /// The tool call's output parameters.
-      indirect case outputParameters(GoogleCloudWKT.Struct?)
+      indirect case outputParameters(GoogleWKT.Struct?)
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ToolCallResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

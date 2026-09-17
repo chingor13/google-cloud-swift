@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudLicenseManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: LicenseManagerClient) async throws {
   let items = try client.listOperations(

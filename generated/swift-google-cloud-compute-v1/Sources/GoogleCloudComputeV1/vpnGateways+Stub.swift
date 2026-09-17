@@ -16,45 +16,45 @@
 
 #if VpnGateways
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol VpnGatewaysStub: Sendable {
       func aggregatedList(
-        request: VpnGatewaysClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewayAggregatedList
 
       func delete(
-        request: VpnGatewaysClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: VpnGatewaysClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGateway
 
       func getStatus(
-        request: VpnGatewaysClient.GetStatusRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.GetStatusRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewaysGetStatusResponse
 
       func insert(
-        request: VpnGatewaysClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: VpnGatewaysClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VpnGatewayList
 
       func setLabels(
-        request: VpnGatewaysClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: VpnGatewaysClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: VpnGatewaysClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

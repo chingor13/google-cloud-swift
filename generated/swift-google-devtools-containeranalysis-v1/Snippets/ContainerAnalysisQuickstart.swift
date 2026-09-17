@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudContainerAnalysisV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudContainerAnalysisV1.ContainerAnalysisClient()

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A process is the definition of a data transformation operation.
-public struct Process: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Process: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. The resource name of the lineage process. Format:
@@ -38,12 +38,12 @@ public struct Process: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// process).
   ///
   /// Up to 100 attributes are allowed.
-  public var attributes: [Swift.String: GoogleCloudWKT.Value] = [:]
+  public var attributes: [Swift.String: GoogleWKT.Value] = [:]
 
   /// Optional. The origin of this process and its runs and lineage events.
   public var origin: Origin? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Process`.
   public init() {}
@@ -89,14 +89,14 @@ public struct Process: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.displayName = value
     }
     if let value = try container.decodeIfPresent(
-      [Swift.String: GoogleCloudWKT.Value].self, forKey: .attributes)
+      [Swift.String: GoogleWKT.Value].self, forKey: .attributes)
     {
       self.attributes = value
     }
     self.origin = try container.decodeIfPresent(Origin.self, forKey: .origin)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,10 +114,10 @@ public struct Process: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.lineage.v1.Process"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

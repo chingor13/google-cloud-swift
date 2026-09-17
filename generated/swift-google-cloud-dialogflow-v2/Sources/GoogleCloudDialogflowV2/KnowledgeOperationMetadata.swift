@@ -16,10 +16,10 @@
 
 #if Documents
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Metadata in google::longrunning::Operation for Knowledge operations.
-  public struct KnowledgeOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct KnowledgeOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The current state of this operation.
@@ -29,12 +29,12 @@
     public var knowledgeBase: Swift.String = Swift.String()
 
     /// The time when the operation finished.
-    public var doneTime: GoogleCloudWKT.Timestamp? = nil
+    public var doneTime: GoogleWKT.Timestamp? = nil
 
     /// Additional metadata for the Knowledge operation.
     public var operationMetadata: OneOf_OperationMetadata? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `KnowledgeOperationMetadata`.
     public init() {}
@@ -81,8 +81,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .knowledgeBase) {
         self.knowledgeBase = value
       }
-      self.doneTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .doneTime)
+      self.doneTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .doneTime)
 
       var operationMetadata: OneOf_OperationMetadata? = nil
       let operationMetadataCheckAndSet = {
@@ -102,7 +101,7 @@
       self.operationMetadata = operationMetadata
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -244,11 +243,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeOperationMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

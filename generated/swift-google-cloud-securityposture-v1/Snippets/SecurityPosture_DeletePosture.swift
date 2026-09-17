@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudSecuritypostureV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: SecurityPostureClient, organizationId: String, locationId: String, postureId: String

@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudMigrationCenterV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: MigrationCenterClient) async throws {
   try await client.batchDeleteAssets(

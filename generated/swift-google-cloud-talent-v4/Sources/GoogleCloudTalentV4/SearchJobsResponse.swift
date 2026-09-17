@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response for SearchJob method.
-public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchJobsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The Job entities that match the specified
@@ -67,7 +67,7 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// The spell checking result, and correction.
   public var spellCorrection: SpellingCorrection? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchJobsResponse`.
   public init() {}
@@ -142,7 +142,7 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       SpellingCorrection.self, forKey: .spellCorrection)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -165,7 +165,7 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// [SearchJobsResponse][google.cloud.talent.v4.SearchJobsResponse].
   ///
   /// [google.cloud.talent.v4.SearchJobsResponse]: <doc:SearchJobsResponse>
-  public struct MatchingJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MatchingJob: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Job resource that matches the specified
@@ -201,7 +201,7 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// [google.cloud.talent.v4.CommuteFilter]: <doc:CommuteFilter>
     public var commuteInfo: SearchJobsResponse.CommuteInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MatchingJob`.
     public init() {}
@@ -256,7 +256,7 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         SearchJobsResponse.CommuteInfo.self, forKey: .commuteInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -275,16 +275,16 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.SearchJobsResponse.MatchingJob"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Commute details related to this job.
-  public struct CommuteInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CommuteInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Location used as the destination in the commute calculation.
@@ -294,9 +294,9 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// query location. A duration of 0 seconds indicates that the job isn't
     /// reachable within the requested duration, but was returned as part of an
     /// expanded query.
-    public var travelDuration: GoogleCloudWKT.Duration? = nil
+    public var travelDuration: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CommuteInfo`.
     public init() {}
@@ -333,10 +333,10 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.jobLocation = try container.decodeIfPresent(Location.self, forKey: .jobLocation)
       self.travelDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .travelDuration)
+        GoogleWKT.Duration.self, forKey: .travelDuration)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -352,21 +352,21 @@ public struct SearchJobsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.SearchJobsResponse.CommuteInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.SearchJobsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

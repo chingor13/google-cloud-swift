@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for the `resourceRecordSets` resource.
 ///
@@ -28,7 +28,7 @@ public final class ResourceRecordSetsClient: Clients.ResourceRecordSetsProtocol,
   let inner: any Clients.ResourceRecordSetsStub
 
   /// Creates a new `ResourceRecordSetsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ResourceRecordSetsStub = try Clients.ResourceRecordSetsTransport(options)
     inner = Clients.ResourceRecordSetsRetry(inner, options: options)
     if let logger = options.logger {
@@ -41,7 +41,7 @@ public final class ResourceRecordSetsClient: Clients.ResourceRecordSetsProtocol,
   ///
   /// @Snippet(path: "resourceRecordSets_create")
   public func create(
-    request: ResourceRecordSetsClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.CreateRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSet {
     try await self.inner.create(request: request, options: options)
   }
@@ -50,7 +50,7 @@ public final class ResourceRecordSetsClient: Clients.ResourceRecordSetsProtocol,
   ///
   /// @Snippet(path: "resourceRecordSets_delete")
   public func delete(
-    request: ResourceRecordSetsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.DeleteRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSetsDeleteResponse {
     try await self.inner.delete(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class ResourceRecordSetsClient: Clients.ResourceRecordSetsProtocol,
   ///
   /// @Snippet(path: "resourceRecordSets_get")
   public func `get`(
-    request: ResourceRecordSetsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSet {
     try await self.inner.`get`(request: request, options: options)
   }
@@ -68,7 +68,7 @@ public final class ResourceRecordSetsClient: Clients.ResourceRecordSetsProtocol,
   ///
   /// @Snippet(path: "resourceRecordSets_list")
   public func list(
-    request: ResourceRecordSetsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSetsListResponse {
     try await self.inner.list(request: request, options: options)
   }
@@ -77,21 +77,21 @@ public final class ResourceRecordSetsClient: Clients.ResourceRecordSetsProtocol,
   ///
   /// @Snippet(path: "resourceRecordSets_list")
   public func list(
-    byItem: ResourceRecordSetsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ResourceRecordSetsClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceRecordSet, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ResourceRecordSetsListResponse in
       var request = byItem
       request.pageToken = token
       return try await self.list(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Applies a partial update to an existing ResourceRecordSet.
   ///
   /// @Snippet(path: "resourceRecordSets_patch")
   public func patch(
-    request: ResourceRecordSetsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.PatchRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSet {
     try await self.inner.patch(request: request, options: options)
   }
@@ -166,32 +166,32 @@ extension Clients {
 
     /// See `ResourceRecordSetsClient.create`.
     func create(
-      request: ResourceRecordSetsClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.CreateRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet
 
     /// See `ResourceRecordSetsClient.delete`.
     func delete(
-      request: ResourceRecordSetsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSetsDeleteResponse
 
     /// See `ResourceRecordSetsClient.`get``.
     func `get`(
-      request: ResourceRecordSetsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet
 
     /// See `ResourceRecordSetsClient.list`.
     func list(
-      request: ResourceRecordSetsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSetsListResponse
 
     /// See `ResourceRecordSetsClient.list`.
     func list(
-      byItem: ResourceRecordSetsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ResourceRecordSetsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ResourceRecordSet, Swift.Error>
 
     /// See `ResourceRecordSetsClient.patch`.
     func patch(
-      request: ResourceRecordSetsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+      request: ResourceRecordSetsClient.PatchRequest, options: GoogleGax.RequestOptions
     ) async throws -> ResourceRecordSet
   }
 }
@@ -205,9 +205,9 @@ extension Clients.ResourceRecordSetsProtocol {
   }
 
   public func create(
-    request: ResourceRecordSetsClient.CreateRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.CreateRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func create(
@@ -230,9 +230,9 @@ extension Clients.ResourceRecordSetsProtocol {
   }
 
   public func delete(
-    request: ResourceRecordSetsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.DeleteRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSetsDeleteResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func delete(
@@ -256,9 +256,9 @@ extension Clients.ResourceRecordSetsProtocol {
   }
 
   public func `get`(
-    request: ResourceRecordSetsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func `get`(
@@ -283,9 +283,9 @@ extension Clients.ResourceRecordSetsProtocol {
   }
 
   public func list(
-    request: ResourceRecordSetsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSetsListResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func list(
@@ -295,12 +295,12 @@ extension Clients.ResourceRecordSetsProtocol {
   }
 
   public func list(
-    byItem: ResourceRecordSetsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ResourceRecordSetsClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceRecordSet, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ResourceRecordSetsListResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func list(
@@ -321,9 +321,9 @@ extension Clients.ResourceRecordSetsProtocol {
   }
 
   public func patch(
-    request: ResourceRecordSetsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+    request: ResourceRecordSetsClient.PatchRequest, options: GoogleGax.RequestOptions
   ) async throws -> ResourceRecordSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func patch(

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Repository for storing artifacts with a specific format.
-public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Repository: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the repository, for example:
@@ -40,10 +40,10 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. The time when the repository was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the repository was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The Cloud KMS resource name of the customer managed encryption key that's
   /// used to encrypt the contents of the Repository. Has the form:
@@ -94,7 +94,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// or Virtual)
   public var modeConfig: OneOf_ModeConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Repository`.
   public init() {}
@@ -178,10 +178,8 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.labels = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .kmsKeyName) {
       self.kmsKeyName = value
     }
@@ -260,7 +258,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.modeConfig = modeConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -309,7 +307,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// MavenRepositoryConfig is maven related repository details.
   /// Provides additional configuration details for repositories of the maven
   /// format type.
-  public struct MavenRepositoryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MavenRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The repository with this flag will allow publishing
@@ -320,7 +318,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var versionPolicy: Repository.MavenRepositoryConfig.VersionPolicy = Repository
       .MavenRepositoryConfig.VersionPolicy()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MavenRepositoryConfig`.
     public init() {}
@@ -367,7 +365,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -491,18 +489,18 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.Repository.MavenRepositoryConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// DockerRepositoryConfig is docker related repository details.
   /// Provides additional configuration details for repositories of the docker
   /// format type.
-  public struct DockerRepositoryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DockerRepositoryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The repository which enabled this flag prevents all tags from being
@@ -510,7 +508,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// created.
     public var immutableTags: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DockerRepositoryConfig`.
     public init() {}
@@ -548,7 +546,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -564,17 +562,17 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.Repository.DockerRepositoryConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Config on whether to perform vulnerability scanning for resources in this
   /// repository, as well as output fields describing current state.
-  public struct VulnerabilityScanningConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VulnerabilityScanningConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Config for whether this repository has vulnerability scanning
@@ -583,7 +581,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Repository.VulnerabilityScanningConfig.EnablementConfig()
 
     /// Output only. The last time this repository config was enabled.
-    public var lastEnableTime: GoogleCloudWKT.Timestamp? = nil
+    public var lastEnableTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. State of feature enablement, combining repository enablement
     /// config and API enablement state.
@@ -593,7 +591,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. Reason for the repository state.
     public var enablementStateReason: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VulnerabilityScanningConfig`.
     public init() {}
@@ -638,7 +636,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.enablementConfig = value
       }
       self.lastEnableTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .lastEnableTime)
+        GoogleWKT.Timestamp.self, forKey: .lastEnableTime)
       if let value = try container.decodeIfPresent(
         Repository.VulnerabilityScanningConfig.EnablementState.self, forKey: .enablementState)
       {
@@ -651,7 +649,7 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -890,11 +888,11 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.devtools.artifactregistry.v1.Repository.VulnerabilityScanningConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1194,10 +1192,10 @@ public struct Repository: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.artifactregistry.v1.Repository"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for all of the cluster's control plane endpoints.
-public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// DNS endpoint configuration.
@@ -27,7 +27,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
   /// IP endpoints configuration.
   public var ipEndpointsConfig: ControlPlaneEndpointsConfig.IPEndpointsConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ControlPlaneEndpointsConfig`.
   public init() {}
@@ -68,7 +68,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
       ControlPlaneEndpointsConfig.IPEndpointsConfig.self, forKey: .ipEndpointsConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -82,7 +82,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
   }
 
   /// Describes the configuration of a DNS endpoint.
-  public struct DNSEndpointConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DNSEndpointConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The cluster's DNS endpoint configuration.
@@ -104,7 +104,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
     /// Controls whether the k8s certs auth is allowed via DNS.
     public var enableK8SCertsViaDns: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DNSEndpointConfig`.
     public init() {}
@@ -154,7 +154,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
         Swift.Bool.self, forKey: .enableK8SCertsViaDns)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -172,16 +172,16 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ControlPlaneEndpointsConfig.DNSEndpointConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// IP endpoints configuration.
-  public struct IPEndpointsConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IPEndpointsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Controls whether to allow direct IP access.
@@ -224,7 +224,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
     /// same time.
     public var privateEndpointSubnetwork: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IPEndpointsConfig`.
     public init() {}
@@ -288,7 +288,7 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -310,21 +310,21 @@ public struct ControlPlaneEndpointsConfig: Codable, Equatable, GoogleCloudWKT._A
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.ControlPlaneEndpointsConfig.IPEndpointsConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ControlPlaneEndpointsConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

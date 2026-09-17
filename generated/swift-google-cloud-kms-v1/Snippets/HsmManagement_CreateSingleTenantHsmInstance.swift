@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudKMSV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: HsmManagementClient, parent: String) async throws {
   let poller = try await client.createSingleTenantHsmInstance(

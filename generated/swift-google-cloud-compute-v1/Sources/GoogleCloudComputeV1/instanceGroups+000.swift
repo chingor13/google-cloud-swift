@@ -19,19 +19,19 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `instanceGroups` resource.
   ///
   /// @Snippet(path: "instanceGroupsQuickstart")
   public final class InstanceGroupsClient: Clients.InstanceGroupsProtocol, Sendable {
     let inner: any Clients.InstanceGroupsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `InstanceGroupsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.InstanceGroupsStub = try Clients.InstanceGroupsTransport(options)
       inner = Clients.InstanceGroupsRetry(inner, options: options)
       if let logger = options.logger {
@@ -49,7 +49,7 @@
     ///
     /// @Snippet(path: "instanceGroups_addInstances")
     public func addInstances(
-      request: InstanceGroupsClient.AddInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.AddInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.addInstances(request: request, options: options)
     }
@@ -61,18 +61,18 @@
     ///
     /// @Snippet(path: "instanceGroups_addInstances")
     public func addInstances(
-      withPolling: InstanceGroupsClient.AddInstancesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.AddInstancesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -80,8 +80,7 @@
       let rawOp = try await self.addInstances(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -90,7 +89,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -105,7 +104,7 @@
     ///
     /// @Snippet(path: "instanceGroups_aggregatedList")
     public func aggregatedList(
-      request: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -117,7 +116,7 @@
     ///
     /// @Snippet(path: "instanceGroups_aggregatedList")
     public func aggregatedList(
-      byItem: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InstanceGroupsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, InstanceGroupsScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList in
@@ -125,7 +124,7 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes the specified instance group. The instances in the group are not
@@ -135,7 +134,7 @@
     ///
     /// @Snippet(path: "instanceGroups_delete")
     public func delete(
-      request: InstanceGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -147,18 +146,18 @@
     ///
     /// @Snippet(path: "instanceGroups_delete")
     public func delete(
-      withPolling: InstanceGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -166,8 +165,7 @@
       let rawOp = try await self.delete(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -176,7 +174,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -193,7 +191,7 @@
     ///
     /// @Snippet(path: "instanceGroups_get")
     public func `get`(
-      request: InstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroup {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -203,7 +201,7 @@
     ///
     /// @Snippet(path: "instanceGroups_insert")
     public func insert(
-      request: InstanceGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -213,18 +211,18 @@
     ///
     /// @Snippet(path: "instanceGroups_insert")
     public func insert(
-      withPolling: InstanceGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -232,8 +230,7 @@
       let rawOp = try await self.insert(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -242,7 +239,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -259,7 +256,7 @@
     ///
     /// @Snippet(path: "instanceGroups_list")
     public func list(
-      request: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupList {
       try await self.inner.list(request: request, options: options)
     }
@@ -273,7 +270,7 @@
     ///
     /// @Snippet(path: "instanceGroups_list")
     public func list(
-      byItem: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroup, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupList in
@@ -281,7 +278,7 @@
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Lists the instances in the specified instance group.
@@ -291,7 +288,7 @@
     ///
     /// @Snippet(path: "instanceGroups_listInstances")
     public func listInstances(
-      request: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances {
       try await self.inner.listInstances(request: request, options: options)
     }
@@ -303,7 +300,7 @@
     ///
     /// @Snippet(path: "instanceGroups_listInstances")
     public func listInstances(
-      byItem: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceWithNamedPorts, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances in
@@ -311,7 +308,7 @@
         request.pageToken = token
         return try await self.listInstances(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Removes one or more instances from the specified instance group, but does
@@ -324,7 +321,7 @@
     ///
     /// @Snippet(path: "instanceGroups_removeInstances")
     public func removeInstances(
-      request: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.removeInstances(request: request, options: options)
     }
@@ -339,19 +336,18 @@
     ///
     /// @Snippet(path: "instanceGroups_removeInstances")
     public func removeInstances(
-      withPolling: InstanceGroupsClient.RemoveInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -359,8 +355,7 @@
       let rawOp = try await self.removeInstances(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -369,7 +364,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -381,7 +376,7 @@
     ///
     /// @Snippet(path: "instanceGroups_setNamedPorts")
     public func setNamedPorts(
-      request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.setNamedPorts(request: request, options: options)
     }
@@ -390,18 +385,18 @@
     ///
     /// @Snippet(path: "instanceGroups_setNamedPorts")
     public func setNamedPorts(
-      withPolling: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let extractStatus = {
         (op: GoogleCloudComputeV1.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+          -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         guard op._done() else {
           return .init(done: false, result: nil)
         }
 
         do {
           try op._detectErrors()
-        } catch let e as GoogleCloudGax.RequestError {
+        } catch let e as GoogleGax.RequestError {
           return .init(done: true, result: .failure(e))
         }
         return .init(done: true, result: .success(op))
@@ -409,8 +404,7 @@
       let rawOp = try await self.setNamedPorts(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
         let op = try await self.getOperation(
           request: .init().with {
             $0.operation = rawOp._name()
@@ -419,7 +413,7 @@
           }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -431,8 +425,7 @@
     ///
     /// @Snippet(path: "instanceGroups_testIamPermissions")
     public func testIamPermissions(
-      request: InstanceGroupsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -441,7 +434,7 @@
     ///
     /// @Snippet(path: "instanceGroups_getOperation")
     func getOperation(
-      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -545,68 +538,67 @@
 
       /// See `InstanceGroupsClient.addInstances`.
       func addInstances(
-        request: InstanceGroupsClient.AddInstancesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.AddInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupsClient.aggregatedList`.
       func aggregatedList(
-        request: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList
 
       /// See `InstanceGroupsClient.aggregatedList`.
       func aggregatedList(
-        byItem: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: InstanceGroupsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, InstanceGroupsScopedList), Swift.Error>
 
       /// See `InstanceGroupsClient.delete`.
       func delete(
-        request: InstanceGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupsClient.`get``.
       func `get`(
-        request: InstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroup
 
       /// See `InstanceGroupsClient.insert`.
       func insert(
-        request: InstanceGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupsClient.list`.
       func list(
-        request: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupList
 
       /// See `InstanceGroupsClient.list`.
       func list(
-        byItem: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: InstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<InstanceGroup, Swift.Error>
 
       /// See `InstanceGroupsClient.listInstances`.
       func listInstances(
-        request: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances
 
       /// See `InstanceGroupsClient.listInstances`.
       func listInstances(
-        byItem: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: InstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<InstanceWithNamedPorts, Swift.Error>
 
       /// See `InstanceGroupsClient.removeInstances`.
       func removeInstances(
-        request: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupsClient.setNamedPorts`.
       func setNamedPorts(
-        request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       /// See `InstanceGroupsClient.testIamPermissions`.
       func testIamPermissions(
-        request: InstanceGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: InstanceGroupsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
     }
   }
@@ -620,26 +612,25 @@
     }
 
     public func addInstances(
-      request: InstanceGroupsClient.AddInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.AddInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func addInstances(
       withPolling: InstanceGroupsClient.AddInstancesRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.addInstances(withPolling: withPolling, options: .init())
     }
 
     public func addInstances(
-      withPolling: InstanceGroupsClient.AddInstancesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.AddInstancesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -648,7 +639,7 @@
       zone: Swift.String,
       instanceGroup: Swift.String,
       body: InstanceGroupsAddInstancesRequest?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = InstanceGroupsClient.AddInstancesRequest().with {
         $0.project = project
         $0.zone = zone
@@ -665,9 +656,9 @@
     }
 
     public func aggregatedList(
-      request: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -677,13 +668,13 @@
     }
 
     public func aggregatedList(
-      byItem: InstanceGroupsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InstanceGroupsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, InstanceGroupsScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -702,26 +693,25 @@
     }
 
     public func delete(
-      request: InstanceGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func delete(
       withPolling: InstanceGroupsClient.DeleteRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.delete(withPolling: withPolling, options: .init())
     }
 
     public func delete(
-      withPolling: InstanceGroupsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.DeleteRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -729,7 +719,7 @@
       project: Swift.String,
       zone: Swift.String,
       instanceGroup: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = InstanceGroupsClient.DeleteRequest().with {
         $0.project = project
         $0.zone = zone
@@ -745,9 +735,9 @@
     }
 
     public func `get`(
-      request: InstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroup {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -770,26 +760,25 @@
     }
 
     public func insert(
-      request: InstanceGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(
       withPolling: InstanceGroupsClient.InsertRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.insert(withPolling: withPolling, options: .init())
     }
 
     public func insert(
-      withPolling: InstanceGroupsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.InsertRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -797,7 +786,7 @@
       project: Swift.String,
       zone: Swift.String,
       body: InstanceGroup?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = InstanceGroupsClient.InsertRequest().with {
         $0.project = project
         $0.zone = zone
@@ -813,9 +802,9 @@
     }
 
     public func list(
-      request: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -825,13 +814,13 @@
     }
 
     public func list(
-      byItem: InstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceGroup, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(
@@ -852,9 +841,9 @@
     }
 
     public func listInstances(
-      request: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listInstances(
@@ -864,13 +853,13 @@
     }
 
     public func listInstances(
-      byItem: InstanceGroupsClient.ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: InstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<InstanceWithNamedPorts, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.InstanceGroupsListInstances in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listInstances(
@@ -895,27 +884,25 @@
     }
 
     public func removeInstances(
-      request: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func removeInstances(
       withPolling: InstanceGroupsClient.RemoveInstancesRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.removeInstances(withPolling: withPolling, options: .init())
     }
 
     public func removeInstances(
-      withPolling: InstanceGroupsClient.RemoveInstancesRequest,
-      options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.RemoveInstancesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -924,7 +911,7 @@
       zone: Swift.String,
       instanceGroup: Swift.String,
       body: InstanceGroupsRemoveInstancesRequest?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = InstanceGroupsClient.RemoveInstancesRequest().with {
         $0.project = project
         $0.zone = zone
@@ -941,26 +928,25 @@
     }
 
     public func setNamedPorts(
-      request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setNamedPorts(
       withPolling: InstanceGroupsClient.SetNamedPortsRequest
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       try await self.setNamedPorts(withPolling: withPolling, options: .init())
     }
 
     public func setNamedPorts(
-      withPolling: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+      withPolling: InstanceGroupsClient.SetNamedPortsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<GoogleCloudComputeV1.Operation>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -969,7 +955,7 @@
       zone: Swift.String,
       instanceGroup: Swift.String,
       body: InstanceGroupsSetNamedPortsRequest?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GoogleCloudComputeV1.Operation> {
+    ) async throws -> any GoogleGax.PollableOperation<GoogleCloudComputeV1.Operation> {
       let request = InstanceGroupsClient.SetNamedPortsRequest().with {
         $0.project = project
         $0.zone = zone
@@ -986,10 +972,9 @@
     }
 
     public func testIamPermissions(
-      request: InstanceGroupsClient.TestIamPermissionsRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: InstanceGroupsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(
@@ -1014,9 +999,9 @@
     }
 
     public func getOperation(
-      request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

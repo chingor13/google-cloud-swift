@@ -15,249 +15,249 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DlpServiceStub: Sendable {
     func inspectContent(
-      request: InspectContentRequest, options: GoogleCloudGax.RequestOptions
+      request: InspectContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.InspectContentResponse
 
     func redactImage(
-      request: RedactImageRequest, options: GoogleCloudGax.RequestOptions
+      request: RedactImageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.RedactImageResponse
 
     func deidentifyContent(
-      request: DeidentifyContentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeidentifyContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DeidentifyContentResponse
 
     func reidentifyContent(
-      request: ReidentifyContentRequest, options: GoogleCloudGax.RequestOptions
+      request: ReidentifyContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ReidentifyContentResponse
 
     func listInfoTypes(
-      request: ListInfoTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInfoTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListInfoTypesResponse
 
     func createInspectTemplate(
-      request: CreateInspectTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInspectTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.InspectTemplate
 
     func updateInspectTemplate(
-      request: UpdateInspectTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInspectTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.InspectTemplate
 
     func getInspectTemplate(
-      request: GetInspectTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInspectTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.InspectTemplate
 
     func listInspectTemplates(
-      request: ListInspectTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInspectTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListInspectTemplatesResponse
 
     func deleteInspectTemplate(
-      request: DeleteInspectTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInspectTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createDeidentifyTemplate(
-      request: CreateDeidentifyTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeidentifyTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DeidentifyTemplate
 
     func updateDeidentifyTemplate(
-      request: UpdateDeidentifyTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeidentifyTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DeidentifyTemplate
 
     func getDeidentifyTemplate(
-      request: GetDeidentifyTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeidentifyTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DeidentifyTemplate
 
     func listDeidentifyTemplates(
-      request: ListDeidentifyTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeidentifyTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListDeidentifyTemplatesResponse
 
     func deleteDeidentifyTemplate(
-      request: DeleteDeidentifyTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeidentifyTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createJobTrigger(
-      request: CreateJobTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateJobTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.JobTrigger
 
     func updateJobTrigger(
-      request: UpdateJobTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateJobTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.JobTrigger
 
     func hybridInspectJobTrigger(
-      request: HybridInspectJobTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: HybridInspectJobTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.HybridInspectResponse
 
     func getJobTrigger(
-      request: GetJobTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.JobTrigger
 
     func listJobTriggers(
-      request: ListJobTriggersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobTriggersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListJobTriggersResponse
 
     func deleteJobTrigger(
-      request: DeleteJobTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteJobTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func activateJobTrigger(
-      request: ActivateJobTriggerRequest, options: GoogleCloudGax.RequestOptions
+      request: ActivateJobTriggerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DlpJob
 
     func createDiscoveryConfig(
-      request: CreateDiscoveryConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDiscoveryConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DiscoveryConfig
 
     func updateDiscoveryConfig(
-      request: UpdateDiscoveryConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDiscoveryConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DiscoveryConfig
 
     func getDiscoveryConfig(
-      request: GetDiscoveryConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDiscoveryConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DiscoveryConfig
 
     func listDiscoveryConfigs(
-      request: ListDiscoveryConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDiscoveryConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListDiscoveryConfigsResponse
 
     func deleteDiscoveryConfig(
-      request: DeleteDiscoveryConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDiscoveryConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createDlpJob(
-      request: CreateDlpJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDlpJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DlpJob
 
     func listDlpJobs(
-      request: ListDlpJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDlpJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListDlpJobsResponse
 
     func getDlpJob(
-      request: GetDlpJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDlpJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.DlpJob
 
     func deleteDlpJob(
-      request: DeleteDlpJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDlpJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelDlpJob(
-      request: CancelDlpJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelDlpJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createStoredInfoType(
-      request: CreateStoredInfoTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateStoredInfoTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.StoredInfoType
 
     func updateStoredInfoType(
-      request: UpdateStoredInfoTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateStoredInfoTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.StoredInfoType
 
     func getStoredInfoType(
-      request: GetStoredInfoTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStoredInfoTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.StoredInfoType
 
     func listStoredInfoTypes(
-      request: ListStoredInfoTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListStoredInfoTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListStoredInfoTypesResponse
 
     func deleteStoredInfoType(
-      request: DeleteStoredInfoTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteStoredInfoTypeRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listProjectDataProfiles(
-      request: ListProjectDataProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProjectDataProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListProjectDataProfilesResponse
 
     func listTableDataProfiles(
-      request: ListTableDataProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTableDataProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListTableDataProfilesResponse
 
     func listColumnDataProfiles(
-      request: ListColumnDataProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListColumnDataProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListColumnDataProfilesResponse
 
     func getProjectDataProfile(
-      request: GetProjectDataProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProjectDataProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ProjectDataProfile
 
     func listFileStoreDataProfiles(
-      request: ListFileStoreDataProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFileStoreDataProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListFileStoreDataProfilesResponse
 
     func getFileStoreDataProfile(
-      request: GetFileStoreDataProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFileStoreDataProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.FileStoreDataProfile
 
     func deleteFileStoreDataProfile(
-      request: DeleteFileStoreDataProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFileStoreDataProfileRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getTableDataProfile(
-      request: GetTableDataProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTableDataProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.TableDataProfile
 
     func getColumnDataProfile(
-      request: GetColumnDataProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetColumnDataProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ColumnDataProfile
 
     func deleteTableDataProfile(
-      request: DeleteTableDataProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTableDataProfileRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func hybridInspectDlpJob(
-      request: HybridInspectDlpJobRequest, options: GoogleCloudGax.RequestOptions
+      request: HybridInspectDlpJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.HybridInspectResponse
 
     func finishDlpJob(
-      request: FinishDlpJobRequest, options: GoogleCloudGax.RequestOptions
+      request: FinishDlpJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createConnection(
-      request: CreateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.Connection
 
     func getConnection(
-      request: GetConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.Connection
 
     func listConnections(
-      request: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListConnectionsResponse
 
     func searchConnections(
-      request: SearchConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.SearchConnectionsResponse
 
     func deleteConnection(
-      request: DeleteConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateConnection(
-      request: UpdateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.Connection
 
     func createContentPolicy(
-      request: CreateContentPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateContentPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ContentPolicy
 
     func updateContentPolicy(
-      request: UpdateContentPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateContentPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ContentPolicy
 
     func getContentPolicy(
-      request: GetContentPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetContentPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ContentPolicy
 
     func listContentPolicies(
-      request: ListContentPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListContentPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDLPV2.ListContentPoliciesResponse
 
     func deleteContentPolicy(
-      request: DeleteContentPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteContentPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

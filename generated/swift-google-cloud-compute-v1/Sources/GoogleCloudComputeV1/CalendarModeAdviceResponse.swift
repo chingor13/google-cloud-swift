@@ -16,19 +16,19 @@
 
 #if Advice
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A response containing the recommended way of creating the specified resources
   /// in the future. It contains (will contain) multiple recommendations that can
   /// be analyzed by the customer and the best one can be picked.
-  public struct CalendarModeAdviceResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CalendarModeAdviceResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Recommendations where, how and when to create the requested resources
     /// in order to maximize their obtainability and minimize cost.
     public var recommendations: [CalendarModeRecommendation] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CalendarModeAdviceResponse`.
     public init() {}
@@ -68,7 +68,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -83,11 +83,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.CalendarModeAdviceResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

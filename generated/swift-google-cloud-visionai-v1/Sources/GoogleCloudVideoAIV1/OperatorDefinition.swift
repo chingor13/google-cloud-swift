@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines the interface of an Operator.
 ///
 /// Arguments to an operator are input/output streams that are getting
 /// processesed/returned while attributes are fixed configuration parameters.
-public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OperatorDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of this operator.
@@ -48,7 +48,7 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Full description of the operator.
   public var description: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OperatorDefinition`.
   public init() {}
@@ -120,7 +120,7 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -141,7 +141,7 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Defines an argument to an operator.
   ///
   /// Used for both inputs and outputs.
-  public struct ArgumentDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ArgumentDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the argument.
@@ -155,7 +155,7 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// This should match the textual representation of a stream/Packet type.
     public var type: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ArgumentDefinition`.
     public init() {}
@@ -198,7 +198,7 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -214,16 +214,16 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.OperatorDefinition.ArgumentDefinition"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines an attribute of an operator.
-  public struct AttributeDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AttributeDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the attribute.
@@ -240,7 +240,7 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// The default value for the attribute.
     public var defaultValue: AttributeValue? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AttributeDefinition`.
     public init() {}
@@ -286,7 +286,7 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.defaultValue = try container.decodeIfPresent(AttributeValue.self, forKey: .defaultValue)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -303,21 +303,21 @@ public struct OperatorDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.OperatorDefinition.AttributeDefinition"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.OperatorDefinition"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

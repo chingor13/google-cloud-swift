@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudApiHubV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: ApiHubDiscoveryClient, projectId: String, locationId: String) async throws {
   let items = try client.listDiscoveredApiObservations(

@@ -16,21 +16,21 @@
 
 #if RegionSnapshotSettings
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionSnapshotSettingsStub: Sendable {
       func `get`(
-        request: RegionSnapshotSettingsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSnapshotSettingsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SnapshotSettings
 
       func patch(
-        request: RegionSnapshotSettingsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSnapshotSettingsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

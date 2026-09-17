@@ -31,8 +31,8 @@ let package = Package(
     .target(
       name: "GoogleCloudDNSV1",
       dependencies: [
-        .product(name: "GoogleCloudGax", package: "swift-google-gax"),
-        .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
+        .product(name: "GoogleGax", package: "swift-google-gax"),
+        .product(name: "GoogleWKT", package: "swift-google-wkt"),
       ],
     )
   ]

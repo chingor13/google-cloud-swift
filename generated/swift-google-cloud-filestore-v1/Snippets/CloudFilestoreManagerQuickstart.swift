@@ -20,9 +20,9 @@ import Foundation
 import GoogleCloudFilestoreV1
 import GoogleCloudCommon
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudFilestoreV1.CloudFilestoreManagerClient()

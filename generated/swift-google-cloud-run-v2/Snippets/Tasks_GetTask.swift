@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudRunV2
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(
   client: TasksClient, projectId: String, locationId: String, jobId: String, executionId: String,

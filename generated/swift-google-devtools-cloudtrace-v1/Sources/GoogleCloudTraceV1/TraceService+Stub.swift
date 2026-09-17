@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TraceServiceStub: Sendable {
     func listTraces(
-      request: ListTracesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTracesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV1.ListTracesResponse
 
     func getTrace(
-      request: GetTraceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTraceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV1.Trace
 
     func patchTraces(
-      request: PatchTracesRequest, options: GoogleCloudGax.RequestOptions
+      request: PatchTracesRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

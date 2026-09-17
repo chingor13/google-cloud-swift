@@ -15,11 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Video Action Recognition.
-public struct VideoActionRecognitionPredictionResult: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct VideoActionRecognitionPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource ID of the AnnotationSpec that had been identified.
@@ -32,19 +31,19 @@ public struct VideoActionRecognitionPredictionResult: Codable, Equatable, Google
   /// AnnotationSpec has been identified. Expressed as a number of seconds as
   /// measured from the start of the video, with fractions up to a microsecond
   /// precision, and with "s" appended at the end.
-  public var timeSegmentStart: GoogleCloudWKT.Duration? = nil
+  public var timeSegmentStart: GoogleWKT.Duration? = nil
 
   /// The end, exclusive, of the video's time segment in which the
   /// AnnotationSpec has been identified. Expressed as a number of seconds as
   /// measured from the start of the video, with fractions up to a microsecond
   /// precision, and with "s" appended at the end.
-  public var timeSegmentEnd: GoogleCloudWKT.Duration? = nil
+  public var timeSegmentEnd: GoogleWKT.Duration? = nil
 
   /// The Model's confidence in correction of this prediction, higher
   /// value means higher confidence.
-  public var confidence: GoogleCloudWKT.FloatValue? = nil
+  public var confidence: GoogleWKT.FloatValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoActionRecognitionPredictionResult`.
   public init() {}
@@ -92,14 +91,13 @@ public struct VideoActionRecognitionPredictionResult: Codable, Equatable, Google
       self.displayName = value
     }
     self.timeSegmentStart = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeSegmentStart)
+      GoogleWKT.Duration.self, forKey: .timeSegmentStart)
     self.timeSegmentEnd = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeSegmentEnd)
-    self.confidence = try container.decodeIfPresent(
-      GoogleCloudWKT.FloatValue.self, forKey: .confidence)
+      GoogleWKT.Duration.self, forKey: .timeSegmentEnd)
+    self.confidence = try container.decodeIfPresent(GoogleWKT.FloatValue.self, forKey: .confidence)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,10 +117,10 @@ public struct VideoActionRecognitionPredictionResult: Codable, Equatable, Google
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.prediction.VideoActionRecognitionPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

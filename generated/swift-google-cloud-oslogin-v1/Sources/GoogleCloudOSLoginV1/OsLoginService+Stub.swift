@@ -16,37 +16,37 @@
 
 import Foundation
 import GoogleCloudOSLoginCommon
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol OsLoginServiceStub: Sendable {
     func createSshPublicKey(
-      request: CreateSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginCommon.SshPublicKey
 
     func deletePosixAccount(
-      request: DeletePosixAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePosixAccountRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func deleteSshPublicKey(
-      request: DeleteSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getLoginProfile(
-      request: GetLoginProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLoginProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginV1.LoginProfile
 
     func getSshPublicKey(
-      request: GetSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginCommon.SshPublicKey
 
     func importSshPublicKey(
-      request: ImportSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginV1.ImportSshPublicKeyResponse
 
     func updateSshPublicKey(
-      request: UpdateSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginCommon.SshPublicKey
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Kubernetes-related attributes.
-public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Kubernetes: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Kubernetes
@@ -54,7 +54,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Kubernetes objects related to the finding.
   public var objects: [Kubernetes.Object] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Kubernetes`.
   public init() {}
@@ -124,7 +124,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -143,7 +143,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A Kubernetes Pod.
-  public struct Pod: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Pod: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Kubernetes Pod namespace.
@@ -159,7 +159,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Pod containers associated with this finding, if any.
     public var containers: [Container] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Pod`.
     public init() {}
@@ -212,7 +212,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -230,23 +230,23 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes.Pod"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Kubernetes nodes associated with the finding.
-  public struct Node: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Node: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// [Full resource name](https://google.aip.dev/122#full-resource-names) of
     /// the Compute Engine VM running the cluster node.
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Node`.
     public init() {}
@@ -284,7 +284,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -299,16 +299,16 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes.Node"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Provides GKE node pool information.
-  public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Kubernetes node pool name.
@@ -317,7 +317,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Nodes associated with the finding.
     public var nodes: [Kubernetes.Node] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NodePool`.
     public init() {}
@@ -360,7 +360,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -376,16 +376,16 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes.NodePool"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Kubernetes Role or ClusterRole.
-  public struct Role: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Role: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Role type.
@@ -397,7 +397,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Role name.
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Role`.
     public init() {}
@@ -445,7 +445,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -567,16 +567,16 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes.Role"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents a Kubernetes RoleBinding or ClusterRoleBinding.
-  public struct Binding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Binding: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Namespace for the binding.
@@ -592,7 +592,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// available for PATCH requests.
     public var subjects: [Kubernetes.Subject] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Binding`.
     public init() {}
@@ -643,7 +643,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -661,16 +661,16 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes.Binding"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents a Kubernetes subject.
-  public struct Subject: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Subject: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Authentication type for the subject.
@@ -682,7 +682,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Name for the subject.
     public var name: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Subject`.
     public init() {}
@@ -731,7 +731,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -860,11 +860,11 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes.Subject"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -872,7 +872,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// by a [`kubectl auth
   /// can-i`](https://kubernetes.io/docs/reference/access-authn-authz/authorization/#checking-api-access)
   /// command) that was involved in a finding.
-  public struct AccessReview: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccessReview: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The API group of the resource. "*" means all.
@@ -899,7 +899,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The API version of the resource. "*" means all.
     public var version: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccessReview`.
     public init() {}
@@ -967,7 +967,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -988,18 +988,18 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes.AccessReview"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Kubernetes object related to the finding, uniquely identified by GKNN.
   /// Used if the object Kind is not one of Pod, Node, NodePool, Binding, or
   /// AccessReview.
-  public struct Object: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Object: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Kubernetes object group, such as "policy.k8s.io/v1".
@@ -1020,7 +1020,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Pod containers associated with this finding, if any.
     public var containers: [Container] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Object`.
     public init() {}
@@ -1078,7 +1078,7 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1097,21 +1097,21 @@ public struct Kubernetes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes.Object"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.Kubernetes"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

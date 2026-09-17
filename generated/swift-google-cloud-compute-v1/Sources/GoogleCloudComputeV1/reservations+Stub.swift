@@ -16,59 +16,57 @@
 
 #if Reservations
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ReservationsStub: Sendable {
       func aggregatedList(
-        request: ReservationsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationAggregatedList
 
       func delete(
-        request: ReservationsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: ReservationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Reservation
 
       func getIamPolicy(
-        request: ReservationsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: ReservationsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: ReservationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationList
 
       func performMaintenance(
-        request: ReservationsClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.PerformMaintenanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func resize(
-        request: ReservationsClient.ResizeRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.ResizeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: ReservationsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
-        request: ReservationsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: ReservationsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

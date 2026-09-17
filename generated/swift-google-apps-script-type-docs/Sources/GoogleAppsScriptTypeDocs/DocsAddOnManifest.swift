@@ -16,10 +16,10 @@
 
 import Foundation
 import GoogleAppsScriptType
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Docs add-on manifest.
-public struct DocsAddOnManifest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DocsAddOnManifest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// If present, this overrides the configuration from
@@ -30,7 +30,7 @@ public struct DocsAddOnManifest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// for this document/user pair.
   public var onFileScopeGrantedTrigger: DocsExtensionPoint? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DocsAddOnManifest`.
   public init() {}
@@ -71,7 +71,7 @@ public struct DocsAddOnManifest: Codable, Equatable, GoogleCloudWKT._AnyPackable
       DocsExtensionPoint.self, forKey: .onFileScopeGrantedTrigger)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -88,10 +88,10 @@ public struct DocsAddOnManifest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.apps.script.type.docs.DocsAddOnManifest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

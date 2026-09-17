@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Segment settings for `fmp4` and `ts`.
-public struct SegmentSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SegmentSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Duration of the segments in seconds. The default is `6s`. Note that
@@ -33,9 +33,9 @@ public struct SegmentSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.video.livestream.v1.Manifest.mux_streams]: <doc:Manifest/muxStreams>
   /// [google.cloud.video.livestream.v1.VideoStream.H264CodecSettings.gop_duration]: <doc:VideoStream/H264CodecSettings/OneOf_GopMode/gopDuration(_:)>
-  public var segmentDuration: GoogleCloudWKT.Duration? = nil
+  public var segmentDuration: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SegmentSettings`.
   public init() {}
@@ -69,10 +69,10 @@ public struct SegmentSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.segmentDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .segmentDuration)
+      GoogleWKT.Duration.self, forKey: .segmentDuration)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,10 +87,10 @@ public struct SegmentSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.SegmentSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

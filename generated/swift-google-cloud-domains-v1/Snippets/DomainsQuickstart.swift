@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudDomainsV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
 import GoogleType
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudDomainsV1.DomainsClient()

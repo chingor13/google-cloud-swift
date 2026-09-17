@@ -15,168 +15,168 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol BigtableTableAdminStub: Sendable {
     func createTable(
-      request: CreateTableRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Table
 
     func createTableFromSnapshot(
-      request: CreateTableFromSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTableFromSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listTables(
-      request: ListTablesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTablesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListTablesResponse
 
     func getTable(
-      request: GetTableRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Table
 
     func updateTable(
-      request: UpdateTableRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteTable(
-      request: DeleteTableRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTableRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func undeleteTable(
-      request: UndeleteTableRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createAuthorizedView(
-      request: CreateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAuthorizedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAuthorizedViews(
-      request: ListAuthorizedViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuthorizedViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListAuthorizedViewsResponse
 
     func getAuthorizedView(
-      request: GetAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthorizedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.AuthorizedView
 
     func updateAuthorizedView(
-      request: UpdateAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAuthorizedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAuthorizedView(
-      request: DeleteAuthorizedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAuthorizedViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func modifyColumnFamilies(
-      request: ModifyColumnFamiliesRequest, options: GoogleCloudGax.RequestOptions
+      request: ModifyColumnFamiliesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Table
 
     func dropRowRange(
-      request: DropRowRangeRequest, options: GoogleCloudGax.RequestOptions
+      request: DropRowRangeRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func generateConsistencyToken(
-      request: GenerateConsistencyTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateConsistencyTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.GenerateConsistencyTokenResponse
 
     func checkConsistency(
-      request: CheckConsistencyRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckConsistencyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.CheckConsistencyResponse
 
     func snapshotTable(
-      request: SnapshotTableRequest, options: GoogleCloudGax.RequestOptions
+      request: SnapshotTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getSnapshot(
-      request: GetSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Snapshot
 
     func listSnapshots(
-      request: ListSnapshotsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSnapshotsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListSnapshotsResponse
 
     func deleteSnapshot(
-      request: DeleteSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createBackup(
-      request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getBackup(
-      request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Backup
 
     func updateBackup(
-      request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Backup
 
     func deleteBackup(
-      request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listBackups(
-      request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListBackupsResponse
 
     func restoreTable(
-      request: RestoreTableRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreTableRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func copyBackup(
-      request: CopyBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: CopyBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func createSchemaBundle(
-      request: CreateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSchemaBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateSchemaBundle(
-      request: UpdateSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSchemaBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getSchemaBundle(
-      request: GetSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.SchemaBundle
 
     func listSchemaBundles(
-      request: ListSchemaBundlesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSchemaBundlesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListSchemaBundlesResponse
 
     func deleteSchemaBundle(
-      request: DeleteSchemaBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSchemaBundleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

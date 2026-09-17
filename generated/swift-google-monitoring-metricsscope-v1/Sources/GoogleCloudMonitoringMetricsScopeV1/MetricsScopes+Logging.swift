@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func getMetricsScope(
-      request: GetMetricsScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetricsScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringMetricsScopeV1.MetricsScope {
       try await self._intercept(
         request: request,
         options: options,
         name: "getMetricsScope",
         action: {
-          (r: GetMetricsScopeRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetMetricsScopeRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringMetricsScopeV1.MetricsScope
           in
           return try await self.inner.getMetricsScope(request: r, options: o)
@@ -74,7 +74,7 @@ extension Clients {
     }
 
     public func listMetricsScopesByMonitoredProject(
-      request: ListMetricsScopesByMonitoredProjectRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetricsScopesByMonitoredProjectRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudMonitoringMetricsScopeV1.ListMetricsScopesByMonitoredProjectResponse
     {
@@ -83,8 +83,7 @@ extension Clients {
         options: options,
         name: "listMetricsScopesByMonitoredProject",
         action: {
-          (r: ListMetricsScopesByMonitoredProjectRequest, o: GoogleCloudGax.RequestOptions)
-            async throws
+          (r: ListMetricsScopesByMonitoredProjectRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringMetricsScopeV1.ListMetricsScopesByMonitoredProjectResponse
           in
           return try await self.inner.listMetricsScopesByMonitoredProject(request: r, options: o)
@@ -92,14 +91,14 @@ extension Clients {
     }
 
     public func createMonitoredProject(
-      request: CreateMonitoredProjectRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMonitoredProjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createMonitoredProject",
         action: {
-          (r: CreateMonitoredProjectRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateMonitoredProjectRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createMonitoredProject(request: r, options: o)
@@ -107,14 +106,14 @@ extension Clients {
     }
 
     public func deleteMonitoredProject(
-      request: DeleteMonitoredProjectRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMonitoredProjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteMonitoredProject",
         action: {
-          (r: DeleteMonitoredProjectRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteMonitoredProjectRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteMonitoredProject(request: r, options: o)
@@ -122,14 +121,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

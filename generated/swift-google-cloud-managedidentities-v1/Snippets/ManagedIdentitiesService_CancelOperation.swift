@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudManagedIdentitiesV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ManagedIdentitiesServiceClient) async throws {
   try await client.cancelOperation(

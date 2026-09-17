@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The replication status of a
 /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
 ///
 /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReplicationStatus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The replication status of the
@@ -30,7 +30,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var replicationStatus: OneOf_ReplicationStatus? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReplicationStatus`.
   public init() {}
@@ -89,7 +89,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.replicationStatus = replicationStatus
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,7 +118,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public struct AutomaticStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutomaticStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The customer-managed encryption status of the
@@ -128,7 +128,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     public var customerManagedEncryption: CustomerManagedEncryptionStatus? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutomaticStatus`.
     public init() {}
@@ -165,7 +165,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
         CustomerManagedEncryptionStatus.self, forKey: .customerManagedEncryption)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -181,11 +181,11 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.AutomaticStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -198,7 +198,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
   ///
   /// [google.cloud.secretmanager.v1.Secret]: <doc:Secret>
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public struct UserManagedStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UserManagedStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The list of replica statuses for the
@@ -207,7 +207,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
     public var replicas: [ReplicationStatus.UserManagedStatus.ReplicaStatus] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UserManagedStatus`.
     public init() {}
@@ -247,7 +247,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -263,7 +263,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
     ///
     /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-    public struct ReplicaStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ReplicaStatus: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The canonical ID of the replica location.
@@ -277,7 +277,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
       /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
       public var customerManagedEncryption: CustomerManagedEncryptionStatus? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ReplicaStatus`.
       public init() {}
@@ -319,7 +319,7 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
           CustomerManagedEncryptionStatus.self, forKey: .customerManagedEncryption)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -337,22 +337,22 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
         return
           "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus.ReplicaStatus"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus.UserManagedStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -388,10 +388,10 @@ public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.secretmanager.v1.ReplicationStatus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

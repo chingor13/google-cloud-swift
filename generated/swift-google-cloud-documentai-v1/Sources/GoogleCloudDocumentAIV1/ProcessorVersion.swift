@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A processor version is an implementation of a processor. Each processor
 /// can have multiple versions, pretrained by Google internally or uptrained
 /// by the customer. A processor can only have one default version at a time.
 /// Its document-processing behavior is defined by that version.
-public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProcessorVersion: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the processor version.
@@ -39,7 +39,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var state: ProcessorVersion.State = ProcessorVersion.State()
 
   /// Output only. The time the processor version was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The most recently invoked evaluation for the processor
   /// version.
@@ -71,7 +71,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// versions.
   public var genAiModelInfo: ProcessorVersion.GenAiModelInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProcessorVersion`.
   public init() {}
@@ -141,8 +141,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(ProcessorVersion.State.self, forKey: .state) {
       self.state = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.latestEvaluation = try container.decodeIfPresent(
       EvaluationReference.self, forKey: .latestEvaluation)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .kmsKeyName) {
@@ -171,7 +170,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ProcessorVersion.GenAiModelInfo.self, forKey: .genAiModelInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -197,16 +196,16 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Information about the upcoming deprecation of this processor version.
-  public struct DeprecationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeprecationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The time at which this processor version will be deprecated.
-    public var deprecationTime: GoogleCloudWKT.Timestamp? = nil
+    public var deprecationTime: GoogleWKT.Timestamp? = nil
 
     /// If set, the processor version that will be used as a replacement.
     public var replacementProcessorVersion: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeprecationInfo`.
     public init() {}
@@ -243,7 +242,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.deprecationTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .deprecationTime)
+        GoogleWKT.Timestamp.self, forKey: .deprecationTime)
       if let value = try container.decodeIfPresent(
         Swift.String.self, forKey: .replacementProcessorVersion)
       {
@@ -251,7 +250,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -267,23 +266,23 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.ProcessorVersion.DeprecationInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Information about Generative AI model-based processor versions.
-  public struct GenAiModelInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GenAiModelInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The processor version is either a pretrained Google-managed foundation
     /// model or a custom Generative AI model created by the user.
     public var modelInfo: OneOf_ModelInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GenAiModelInfo`.
     public init() {}
@@ -343,7 +342,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.modelInfo = modelInfo
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -364,7 +363,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Information for a pretrained Google-managed foundation model.
-    public struct FoundationGenAiModelInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FoundationGenAiModelInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Whether finetuning is allowed for this base processor version.
@@ -374,7 +373,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// required for finetuning.
       public var minTrainLabeledDocuments: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FoundationGenAiModelInfo`.
       public init() {}
@@ -419,7 +418,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -436,18 +435,18 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.FoundationGenAiModelInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Information for a custom Generative AI model created by the user. These
     /// are created with `Create New Version` in either the `Call foundation
     /// model` or `Fine tuning` tabs.
-    public struct CustomGenAiModelInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct CustomGenAiModelInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The type of custom model created by the user.
@@ -458,7 +457,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The base processor version ID for the custom model.
       public var baseProcessorVersionId: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CustomGenAiModelInfo`.
       public init() {}
@@ -506,7 +505,7 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -628,11 +627,11 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo.CustomGenAiModelInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -649,11 +648,11 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.ProcessorVersion.GenAiModelInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -912,10 +911,10 @@ public struct ProcessorVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.documentai.v1.ProcessorVersion"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

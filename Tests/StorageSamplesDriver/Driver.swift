@@ -14,7 +14,7 @@
 
 import Foundation
 import StorageSamples
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudStorage
 import Testing
 

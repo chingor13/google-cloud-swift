@@ -15,50 +15,49 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol NotificationChannelServiceStub: Sendable {
     func listNotificationChannelDescriptors(
-      request: ListNotificationChannelDescriptorsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotificationChannelDescriptorsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListNotificationChannelDescriptorsResponse
 
     func getNotificationChannelDescriptor(
-      request: GetNotificationChannelDescriptorRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationChannelDescriptorRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannelDescriptor
 
     func listNotificationChannels(
-      request: ListNotificationChannelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotificationChannelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListNotificationChannelsResponse
 
     func getNotificationChannel(
-      request: GetNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannel
 
     func createNotificationChannel(
-      request: CreateNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannel
 
     func updateNotificationChannel(
-      request: UpdateNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannel
 
     func deleteNotificationChannel(
-      request: DeleteNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func sendNotificationChannelVerificationCode(
-      request: SendNotificationChannelVerificationCodeRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: SendNotificationChannelVerificationCodeRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getNotificationChannelVerificationCode(
-      request: GetNotificationChannelVerificationCodeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationChannelVerificationCodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.GetNotificationChannelVerificationCodeResponse
 
     func verifyNotificationChannel(
-      request: VerifyNotificationChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyNotificationChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.NotificationChannel
   }
 }

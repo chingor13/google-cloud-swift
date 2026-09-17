@@ -16,9 +16,9 @@
 
 #if ImageFamilyViews || Images || InstanceTemplates || Instances || MachineImages || RegionInstanceTemplates || RegionInstances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct FileContentBuffer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FileContentBuffer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The raw content in the secure keys file.
@@ -27,7 +27,7 @@
     /// The file type of source file.
     public var fileType: FileContentBuffer.FileType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FileContentBuffer`.
     public init() {}
@@ -63,7 +63,7 @@
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .content) {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -75,7 +75,7 @@
         FileContentBuffer.FileType.self, forKey: .fileType)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -83,7 +83,7 @@
       var container = encoder.container(keyedBy: CodingKeys.self)
       if let v = content {
         try container.encode(
-          GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .content
+          GoogleWKT._DiscoveryBase64.encode(v), forKey: .content
         )
       }
       try container.encodeIfPresent(self.fileType, forKey: .fileType)
@@ -199,11 +199,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.FileContentBuffer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

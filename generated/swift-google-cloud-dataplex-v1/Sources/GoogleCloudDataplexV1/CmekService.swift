@@ -19,22 +19,22 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Dataplex Universal Catalog Customer Managed Encryption Keys (CMEK) Service
 ///
 /// @Snippet(path: "CmekServiceQuickstart")
 public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   let inner: any Clients.CmekServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `CmekServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CmekServiceStub = try Clients.CmekServiceTransport(options)
     inner = Clients.CmekServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_CreateEncryptionConfig")
   public func createEncryptionConfig(
-    request: CreateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEncryptionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createEncryptionConfig(request: request, options: options)
   }
@@ -58,21 +58,21 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_CreateEncryptionConfig")
   public func createEncryptionConfig(
-    withPolling: CreateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig> {
+    withPolling: CreateEncryptionConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<EncryptionConfig>.State in
+        -> GoogleGax._PollableOperationImpl<EncryptionConfig>.State in
       return try op._extractStatus(EncryptionConfig.self)
     }
     let rawOp = try await self.createEncryptionConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<EncryptionConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<EncryptionConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -84,7 +84,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_UpdateEncryptionConfig")
   public func updateEncryptionConfig(
-    request: UpdateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEncryptionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateEncryptionConfig(request: request, options: options)
   }
@@ -93,21 +93,21 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_UpdateEncryptionConfig")
   public func updateEncryptionConfig(
-    withPolling: UpdateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig> {
+    withPolling: UpdateEncryptionConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<EncryptionConfig>.State in
+        -> GoogleGax._PollableOperationImpl<EncryptionConfig>.State in
       return try op._extractStatus(EncryptionConfig.self)
     }
     let rawOp = try await self.updateEncryptionConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<EncryptionConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<EncryptionConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -119,7 +119,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_DeleteEncryptionConfig")
   public func deleteEncryptionConfig(
-    request: DeleteEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEncryptionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteEncryptionConfig(request: request, options: options)
   }
@@ -128,21 +128,21 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_DeleteEncryptionConfig")
   public func deleteEncryptionConfig(
-    withPolling: DeleteEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteEncryptionConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteEncryptionConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -154,7 +154,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_ListEncryptionConfigs")
   public func listEncryptionConfigs(
-    request: ListEncryptionConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEncryptionConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListEncryptionConfigsResponse {
     try await self.inner.listEncryptionConfigs(request: request, options: options)
   }
@@ -163,7 +163,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_ListEncryptionConfigs")
   public func listEncryptionConfigs(
-    byItem: ListEncryptionConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEncryptionConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EncryptionConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListEncryptionConfigsResponse in
@@ -171,14 +171,14 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listEncryptionConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Get an EncryptionConfig.
   ///
   /// @Snippet(path: "CmekService_GetEncryptionConfig")
   public func getEncryptionConfig(
-    request: GetEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEncryptionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.EncryptionConfig {
     try await self.inner.getEncryptionConfig(request: request, options: options)
   }
@@ -204,7 +204,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -230,7 +230,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -238,14 +238,14 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "CmekService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -258,7 +258,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -268,7 +268,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -283,7 +283,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -294,7 +294,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -305,7 +305,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -313,7 +313,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -322,7 +322,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -333,7 +333,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -344,7 +344,7 @@ public final class CmekServiceClient: Clients.CmekServiceProtocol, Sendable {
   ///
   /// @Snippet(path: "CmekService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -363,14 +363,14 @@ extension Clients {
 
     /// See `CmekServiceClient.createEncryptionConfig`.
     func createEncryptionConfig(withPolling: CreateEncryptionConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<EncryptionConfig>
+      -> any GoogleGax.PollableOperation<EncryptionConfig>
 
     /// See `CmekServiceClient.createEncryptionConfig`.
     func createEncryptionConfig(
       parent: Swift.String,
       encryptionConfig: EncryptionConfig?,
       encryptionConfigId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig>
+    ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig>
 
     /// See `CmekServiceClient.updateEncryptionConfig`.
     func updateEncryptionConfig(request: UpdateEncryptionConfigRequest) async throws
@@ -378,13 +378,13 @@ extension Clients {
 
     /// See `CmekServiceClient.updateEncryptionConfig`.
     func updateEncryptionConfig(withPolling: UpdateEncryptionConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<EncryptionConfig>
+      -> any GoogleGax.PollableOperation<EncryptionConfig>
 
     /// See `CmekServiceClient.updateEncryptionConfig`.
     func updateEncryptionConfig(
       encryptionConfig: EncryptionConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig>
 
     /// See `CmekServiceClient.deleteEncryptionConfig`.
     func deleteEncryptionConfig(request: DeleteEncryptionConfigRequest) async throws
@@ -392,12 +392,12 @@ extension Clients {
 
     /// See `CmekServiceClient.deleteEncryptionConfig`.
     func deleteEncryptionConfig(withPolling: DeleteEncryptionConfigRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CmekServiceClient.deleteEncryptionConfig`.
     func deleteEncryptionConfig(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CmekServiceClient.listEncryptionConfigs`.
     func listEncryptionConfigs(request: ListEncryptionConfigsRequest) async throws
@@ -478,97 +478,97 @@ extension Clients {
 
     /// See `CmekServiceClient.createEncryptionConfig`.
     func createEncryptionConfig(
-      request: CreateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEncryptionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CmekServiceClient.createEncryptionConfig`.
     func createEncryptionConfig(
-      withPolling: CreateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig>
+      withPolling: CreateEncryptionConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig>
 
     /// See `CmekServiceClient.updateEncryptionConfig`.
     func updateEncryptionConfig(
-      request: UpdateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEncryptionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CmekServiceClient.updateEncryptionConfig`.
     func updateEncryptionConfig(
-      withPolling: UpdateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig>
+      withPolling: UpdateEncryptionConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig>
 
     /// See `CmekServiceClient.deleteEncryptionConfig`.
     func deleteEncryptionConfig(
-      request: DeleteEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEncryptionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CmekServiceClient.deleteEncryptionConfig`.
     func deleteEncryptionConfig(
-      withPolling: DeleteEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteEncryptionConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CmekServiceClient.listEncryptionConfigs`.
     func listEncryptionConfigs(
-      request: ListEncryptionConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEncryptionConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListEncryptionConfigsResponse
 
     /// See `CmekServiceClient.listEncryptionConfigs`.
     func listEncryptionConfigs(
-      byItem: ListEncryptionConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEncryptionConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<EncryptionConfig, Swift.Error>
 
     /// See `CmekServiceClient.getEncryptionConfig`.
     func getEncryptionConfig(
-      request: GetEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEncryptionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.EncryptionConfig
 
     /// See `CmekServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `CmekServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `CmekServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `CmekServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `CmekServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `CmekServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `CmekServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `CmekServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `CmekServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CmekServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -582,24 +582,24 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func createEncryptionConfig(
-    request: CreateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEncryptionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createEncryptionConfig(withPolling: CreateEncryptionConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<EncryptionConfig>
+    -> any GoogleGax.PollableOperation<EncryptionConfig>
   {
     try await self.createEncryptionConfig(withPolling: withPolling, options: .init())
   }
 
   public func createEncryptionConfig(
-    withPolling: CreateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<EncryptionConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateEncryptionConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<EncryptionConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -607,7 +607,7 @@ extension Clients.CmekServiceProtocol {
     parent: Swift.String,
     encryptionConfig: EncryptionConfig?,
     encryptionConfigId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig> {
+  ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig> {
     let request = CreateEncryptionConfigRequest().with {
       $0.parent = parent
       $0.encryptionConfig = encryptionConfig
@@ -623,31 +623,31 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func updateEncryptionConfig(
-    request: UpdateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateEncryptionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateEncryptionConfig(withPolling: UpdateEncryptionConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<EncryptionConfig>
+    -> any GoogleGax.PollableOperation<EncryptionConfig>
   {
     try await self.updateEncryptionConfig(withPolling: withPolling, options: .init())
   }
 
   public func updateEncryptionConfig(
-    withPolling: UpdateEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<EncryptionConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateEncryptionConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<EncryptionConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateEncryptionConfig(
     encryptionConfig: EncryptionConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<EncryptionConfig> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<EncryptionConfig> {
     let request = UpdateEncryptionConfigRequest().with {
       $0.encryptionConfig = encryptionConfig
       $0.updateMask = updateMask
@@ -662,30 +662,30 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func deleteEncryptionConfig(
-    request: DeleteEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteEncryptionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteEncryptionConfig(withPolling: DeleteEncryptionConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteEncryptionConfig(withPolling: withPolling, options: .init())
   }
 
   public func deleteEncryptionConfig(
-    withPolling: DeleteEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteEncryptionConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteEncryptionConfig(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteEncryptionConfigRequest().with {
       $0.name = name
     }
@@ -699,9 +699,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func listEncryptionConfigs(
-    request: ListEncryptionConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEncryptionConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.ListEncryptionConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEncryptionConfigs(
@@ -711,13 +711,13 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func listEncryptionConfigs(
-    byItem: ListEncryptionConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEncryptionConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EncryptionConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudDataplexV1.ListEncryptionConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEncryptionConfigs(
@@ -736,9 +736,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func getEncryptionConfig(
-    request: GetEncryptionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEncryptionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudDataplexV1.EncryptionConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getEncryptionConfig(
@@ -757,9 +757,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -769,13 +769,13 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -785,9 +785,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -797,9 +797,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -809,9 +809,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -821,9 +821,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -833,9 +833,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -845,13 +845,13 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -872,9 +872,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -891,9 +891,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -910,9 +910,9 @@ extension Clients.CmekServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

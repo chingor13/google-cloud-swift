@@ -16,25 +16,25 @@
 
 #if PreviewFeatures
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol PreviewFeaturesStub: Sendable {
       func `get`(
-        request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeature
 
       func list(
-        request: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeatureList
 
       func update(
-        request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

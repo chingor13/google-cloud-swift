@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudDatastoreAdminV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudDatastoreAdminV1.DatastoreAdminClient()

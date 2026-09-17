@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A single result of a SearchEntries request.
-public struct SearchEntriesResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchEntriesResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Linked resource name.
@@ -31,7 +31,7 @@ public struct SearchEntriesResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
   @available(*, deprecated)
   public var snippets: SearchEntriesResult.Snippets? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchEntriesResult`.
   public init() {}
@@ -76,7 +76,7 @@ public struct SearchEntriesResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
       SearchEntriesResult.Snippets.self, forKey: .snippets)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -93,14 +93,14 @@ public struct SearchEntriesResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Snippets for the entry, contains HTML-style highlighting for
   /// matched tokens, will be used in UI.
   @available(*, deprecated)
-  public struct Snippets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Snippets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Entry
     @available(*, deprecated)
     public var dataplexEntry: Entry? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Snippets`.
     public init() {}
@@ -136,7 +136,7 @@ public struct SearchEntriesResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
       self.dataplexEntry = try container.decodeIfPresent(Entry.self, forKey: .dataplexEntry)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -151,21 +151,21 @@ public struct SearchEntriesResult: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.SearchEntriesResult.Snippets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.SearchEntriesResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

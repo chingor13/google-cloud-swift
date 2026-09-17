@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AuthConfig defines details of a authentication type.
-public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The type of authentication configured.
@@ -30,7 +30,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Supported auth types.
   public var type: OneOf_Type? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AuthConfig`.
   public init() {}
@@ -115,7 +115,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.type = type
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -142,7 +142,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Parameters to support Username and Password Authentication.
-  public struct UserPassword: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UserPassword: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Username.
@@ -151,7 +151,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Secret version reference containing the password.
     public var password: Secret? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UserPassword`.
     public init() {}
@@ -192,7 +192,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.password = try container.decodeIfPresent(Secret.self, forKey: .password)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -208,18 +208,18 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.connectors.v1.AuthConfig.UserPassword"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Parameters to support JSON Web Token (JWT) Profile for Oauth 2.0
   /// Authorization Grant based authentication.
   /// See https://tools.ietf.org/html/rfc7523 for more details.
-  public struct Oauth2JwtBearer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Oauth2JwtBearer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Secret version reference containing a PKCS#8 PEM-encoded private
@@ -231,7 +231,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// JwtClaims providers fields to generate the token.
     public var jwtClaims: AuthConfig.Oauth2JwtBearer.JwtClaims? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Oauth2JwtBearer`.
     public init() {}
@@ -271,7 +271,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         AuthConfig.Oauth2JwtBearer.JwtClaims.self, forKey: .jwtClaims)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -285,7 +285,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// JWT claims used for the jwt-bearer authorization grant.
-    public struct JwtClaims: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct JwtClaims: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Value for the "iss" claim.
@@ -297,7 +297,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Value for the "aud" claim.
       public var audience: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `JwtClaims`.
       public init() {}
@@ -345,7 +345,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -362,28 +362,28 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.connectors.v1.AuthConfig.Oauth2JwtBearer.JwtClaims"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.connectors.v1.AuthConfig.Oauth2JwtBearer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Parameters to support Oauth 2.0 Client Credentials Grant Authentication.
   /// See https://tools.ietf.org/html/rfc6749#section-1.3.4 for more details.
-  public struct Oauth2ClientCredentials: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Oauth2ClientCredentials: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The client identifier.
@@ -392,7 +392,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Secret version reference containing the client secret.
     public var clientSecret: Secret? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Oauth2ClientCredentials`.
     public init() {}
@@ -433,7 +433,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.clientSecret = try container.decodeIfPresent(Secret.self, forKey: .clientSecret)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -449,16 +449,16 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.connectors.v1.AuthConfig.Oauth2ClientCredentials"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Parameters to support Ssh public key Authentication.
-  public struct SshPublicKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SshPublicKey: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The user account used to authenticate.
@@ -473,7 +473,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Password (passphrase) for ssh client certificate if it has one.
     public var sshClientCertPass: Secret? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SshPublicKey`.
     public init() {}
@@ -523,7 +523,7 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Secret.self, forKey: .sshClientCertPass)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -541,11 +541,11 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.connectors.v1.AuthConfig.SshPublicKey"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -564,10 +564,10 @@ public struct AuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.connectors.v1.AuthConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

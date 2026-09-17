@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudIAPV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: IdentityAwareProxyAdminServiceClient) async throws {
   let response = try await client.testIamPermissions(

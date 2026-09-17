@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleApiCloudQuotasV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: QuotaAdjusterSettingsManagerClient, projectId: String, locationId: String)
   async throws

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A group of information for attaching an input resource to this channel.
-public struct InputAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InputAttachment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A unique key for this input attachment. The key must be 1-63
@@ -33,7 +33,7 @@ public struct InputAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Automatic failover configurations.
   public var automaticFailover: InputAttachment.AutomaticFailover? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InputAttachment`.
   public init() {}
@@ -80,7 +80,7 @@ public struct InputAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       InputAttachment.AutomaticFailover.self, forKey: .automaticFailover)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,7 +95,7 @@ public struct InputAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configurations to follow when automatic failover happens.
-  public struct AutomaticFailover: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutomaticFailover: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The
@@ -106,7 +106,7 @@ public struct InputAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.video.livestream.v1.InputAttachment.key]: <doc:InputAttachment/key>
     public var inputKeys: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutomaticFailover`.
     public init() {}
@@ -144,7 +144,7 @@ public struct InputAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -160,21 +160,21 @@ public struct InputAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.video.livestream.v1.InputAttachment.AutomaticFailover"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.InputAttachment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

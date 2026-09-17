@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response for calculating conversation statistics.
-public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CalculateStatsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The average duration of all conversations. The average is calculated using
   /// only conversations that have a time duration.
-  public var averageDuration: GoogleCloudWKT.Duration? = nil
+  public var averageDuration: GoogleWKT.Duration? = nil
 
   /// The average number of turns per conversation.
   public var averageTurnCount: Swift.Int32 = Swift.Int32()
@@ -55,7 +55,7 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// that match that requested filter criteria.
   public var conversationCountTimeSeries: CalculateStatsResponse.TimeSeries? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CalculateStatsResponse`.
   public init() {}
@@ -103,7 +103,7 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.averageDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .averageDuration)
+      GoogleWKT.Duration.self, forKey: .averageDuration)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .averageTurnCount) {
       self.averageTurnCount = value
     }
@@ -134,7 +134,7 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       CalculateStatsResponse.TimeSeries.self, forKey: .conversationCountTimeSeries)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -155,18 +155,18 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   }
 
   /// A time series representing conversations over time.
-  public struct TimeSeries: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TimeSeries: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The duration of each interval.
-    public var intervalDuration: GoogleCloudWKT.Duration? = nil
+    public var intervalDuration: GoogleWKT.Duration? = nil
 
     /// An ordered list of intervals from earliest to latest, where each interval
     /// represents the number of conversations that transpired during the time
     /// window.
     public var points: [CalculateStatsResponse.TimeSeries.Interval] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TimeSeries`.
     public init() {}
@@ -202,7 +202,7 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.intervalDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .intervalDuration)
+        GoogleWKT.Duration.self, forKey: .intervalDuration)
       if let value = try container.decodeIfPresent(
         [CalculateStatsResponse.TimeSeries.Interval].self, forKey: .points)
       {
@@ -210,7 +210,7 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -224,16 +224,16 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
 
     /// A single interval in a time series.
-    public struct Interval: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Interval: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The start time of this interval.
-      public var startTime: GoogleCloudWKT.Timestamp? = nil
+      public var startTime: GoogleWKT.Timestamp? = nil
 
       /// The number of conversations created in this interval.
       public var conversationCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Interval`.
       public init() {}
@@ -268,14 +268,13 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.startTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+        self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
         if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .conversationCount) {
           self.conversationCount = value
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -292,11 +291,11 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
         return
           "type.googleapis.com/google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries.Interval"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -304,21 +303,21 @@ public struct CalculateStatsResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.CalculateStatsResponse.TimeSeries"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.CalculateStatsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,10 +16,10 @@
 
 #if AnswerRecords || Conversations || GeneratorEvaluations || Generators || Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Suggestion for coaching agents.
-  public struct AgentCoachingSuggestion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AgentCoachingSuggestion: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Instructions applicable based on the current context.
@@ -31,7 +31,7 @@
     /// Optional. Sample response for the Agent.
     public var sampleResponses: [AgentCoachingSuggestion.SampleResponse] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AgentCoachingSuggestion`.
     public init() {}
@@ -85,7 +85,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -100,14 +100,14 @@
     }
 
     /// Sources for the suggestion.
-    public struct Sources: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Sources: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Source instruction indexes for the suggestion. This is the
       /// index of the applicable_instructions field.
       public var instructionIndexes: [Swift.Int32] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Sources`.
       public init() {}
@@ -147,7 +147,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -162,23 +162,23 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.Sources"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Duplication check for the suggestion.
-    public struct DuplicateCheckResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DuplicateCheckResult: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The duplicate suggestions.
       public var duplicateSuggestions:
         [AgentCoachingSuggestion.DuplicateCheckResult.DuplicateSuggestion] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DuplicateCheckResult`.
       public init() {}
@@ -219,7 +219,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -234,7 +234,7 @@
       /// The duplicate suggestion details.
       /// Keeping answer_record and sources together as they are identifiers for
       /// duplicate suggestions.
-      public struct DuplicateSuggestion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct DuplicateSuggestion: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Output only. The answer record id of the past duplicate suggestion.
@@ -251,8 +251,7 @@
         /// suggestion.
         public var similarityScore: Swift.Float = Swift.Float()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `DuplicateSuggestion`.
         public init() {}
@@ -304,7 +303,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -323,11 +322,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.DuplicateCheckResult.DuplicateSuggestion"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -335,16 +334,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.DuplicateCheckResult"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Actions suggested for the agent. This is based on applicable instructions.
-    public struct AgentActionSuggestion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AgentActionSuggestion: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The suggested action for the agent.
@@ -356,7 +355,7 @@
       /// Output only. Duplicate check result for the agent action suggestion.
       public var duplicateCheckResult: AgentCoachingSuggestion.DuplicateCheckResult? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AgentActionSuggestion`.
       public init() {}
@@ -402,7 +401,7 @@
           AgentCoachingSuggestion.DuplicateCheckResult.self, forKey: .duplicateCheckResult)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -420,17 +419,17 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.AgentActionSuggestion"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Sample response that the agent can use. This could be based on applicable
     /// instructions and ingested data from other systems.
-    public struct SampleResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SampleResponse: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Sample response for Agent in text.
@@ -442,7 +441,7 @@
       /// Output only. Duplicate check result for the sample response.
       public var duplicateCheckResult: AgentCoachingSuggestion.DuplicateCheckResult? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SampleResponse`.
       public init() {}
@@ -488,7 +487,7 @@
           AgentCoachingSuggestion.DuplicateCheckResult.self, forKey: .duplicateCheckResult)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -506,22 +505,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion.SampleResponse"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.AgentCoachingSuggestion"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Indicates the session has terminated, due to either successful completion
 /// (e.g. user says "Good bye!" ) or an agent escalation.
@@ -23,14 +23,14 @@ import Foundation
 /// The agent will not process any further inputs after session is terminated and
 /// the client should half-close and disconnect after receiving all remaining
 /// responses from the agent.
-public struct EndSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EndSession: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Provides additional information about the end session signal,
   /// such as the reason for ending the session.
-  public var metadata: GoogleCloudWKT.Struct? = nil
+  public var metadata: GoogleWKT.Struct? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EndSession`.
   public init() {}
@@ -63,10 +63,10 @@ public struct EndSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.metadata = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .metadata)
+    self.metadata = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .metadata)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,10 +81,10 @@ public struct EndSession: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.EndSession"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

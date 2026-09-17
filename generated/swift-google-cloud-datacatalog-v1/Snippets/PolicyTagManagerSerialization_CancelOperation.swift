@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataCatalogV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: PolicyTagManagerSerializationClient) async throws {
   try await client.cancelOperation(

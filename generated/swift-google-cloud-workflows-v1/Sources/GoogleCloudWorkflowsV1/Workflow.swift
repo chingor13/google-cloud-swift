@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Workflow program to be executed by Workflows.
-public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Workflow: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the workflow.
@@ -52,15 +52,15 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The timestamp for when the workflow was created.
   /// This is a workflow-wide field and is not tied to a specific revision.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp for when the workflow was last updated.
   /// This is a workflow-wide field and is not tied to a specific revision.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp for the latest revision of the workflow's
   /// creation.
-  public var revisionCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var revisionCreateTime: GoogleWKT.Timestamp? = nil
 
   /// Labels associated with this workflow.
   /// Labels can contain at most 64 entries. Keys and values can be no longer
@@ -140,7 +140,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// revision.
   public var sourceCode: OneOf_SourceCode? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Workflow`.
   public init() {}
@@ -221,12 +221,10 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .revisionId) {
       self.revisionId = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     self.revisionCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .revisionCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .revisionCreateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -283,7 +281,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.sourceCode = sourceCode
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -320,7 +318,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Describes an error related to the current state of the workflow.
-  public struct StateError: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StateError: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Provides specifics about the error.
@@ -329,7 +327,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The type of this state error.
     public var type: Workflow.StateError.Type_ = Workflow.StateError.Type_()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StateError`.
     public init() {}
@@ -372,7 +370,7 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -486,11 +484,11 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workflows.v1.Workflow.StateError"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -724,10 +722,10 @@ public struct Workflow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.workflows.v1.Workflow"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

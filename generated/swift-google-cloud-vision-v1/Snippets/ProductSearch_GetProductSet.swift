@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudVisionV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: ProductSearchClient, projectId: String, locationId: String, productSetId: String

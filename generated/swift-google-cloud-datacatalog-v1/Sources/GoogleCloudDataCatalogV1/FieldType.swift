@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FieldType: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required.
   public var typeDecl: OneOf_TypeDecl? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FieldType`.
   public init() {}
@@ -80,7 +80,7 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.typeDecl = typeDecl
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,7 +100,7 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
   }
 
-  public struct EnumType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EnumType: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The set of allowed values for this enum.
@@ -114,7 +114,7 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `RenameTagTemplateFieldEnumValue` method.
     public var allowedValues: [FieldType.EnumType.EnumValue] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EnumType`.
     public init() {}
@@ -154,7 +154,7 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -166,7 +166,7 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
     }
 
-    public struct EnumValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EnumValue: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The display name of the enum value. Must not be an empty
@@ -177,7 +177,7 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// maximum length is 200 characters.
       public var displayName: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EnumValue`.
       public init() {}
@@ -215,7 +215,7 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -230,22 +230,22 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.datacatalog.v1.FieldType.EnumType.EnumValue"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datacatalog.v1.FieldType.EnumType"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -385,10 +385,10 @@ public struct FieldType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.FieldType"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

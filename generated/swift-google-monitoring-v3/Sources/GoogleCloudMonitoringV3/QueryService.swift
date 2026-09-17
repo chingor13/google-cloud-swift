@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The QueryService API is used to manage time series data in Cloud
 /// Monitoring. Time series data is a collection of data points that describes
@@ -30,7 +30,7 @@ public final class QueryServiceClient: Clients.QueryServiceProtocol, Sendable {
   let inner: any Clients.QueryServiceStub
 
   /// Creates a new `QueryServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.QueryServiceStub = try Clients.QueryServiceTransport(options)
     inner = Clients.QueryServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -47,7 +47,7 @@ public final class QueryServiceClient: Clients.QueryServiceProtocol, Sendable {
   /// @Snippet(path: "QueryService_QueryTimeSeries")
   @available(*, deprecated)
   public func queryTimeSeries(
-    request: QueryTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.QueryTimeSeriesResponse {
     try await self.inner.queryTimeSeries(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class QueryServiceClient: Clients.QueryServiceProtocol, Sendable {
   /// @Snippet(path: "QueryService_QueryTimeSeries")
   @available(*, deprecated)
   public func queryTimeSeries(
-    byItem: QueryTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: QueryTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TimeSeriesData, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.QueryTimeSeriesResponse in
@@ -68,7 +68,7 @@ public final class QueryServiceClient: Clients.QueryServiceProtocol, Sendable {
       request.pageToken = token
       return try await self.queryTimeSeries(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -93,13 +93,13 @@ extension Clients {
     /// See `QueryServiceClient.queryTimeSeries`.
     @available(*, deprecated)
     func queryTimeSeries(
-      request: QueryTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.QueryTimeSeriesResponse
 
     /// See `QueryServiceClient.queryTimeSeries`.
     @available(*, deprecated)
     func queryTimeSeries(
-      byItem: QueryTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: QueryTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TimeSeriesData, Swift.Error>
   }
 }
@@ -115,9 +115,9 @@ extension Clients.QueryServiceProtocol {
 
   @available(*, deprecated)
   public func queryTimeSeries(
-    request: QueryTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudMonitoringV3.QueryTimeSeriesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -129,12 +129,12 @@ extension Clients.QueryServiceProtocol {
 
   @available(*, deprecated)
   public func queryTimeSeries(
-    byItem: QueryTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: QueryTimeSeriesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TimeSeriesData, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudMonitoringV3.QueryTimeSeriesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }

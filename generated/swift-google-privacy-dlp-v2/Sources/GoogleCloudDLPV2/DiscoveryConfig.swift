@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for discovery to scan resources for profile generation.
 /// Only one discovery configuration may exist per organization, folder,
@@ -24,7 +24,7 @@ import Foundation
 /// The generated data profiles are retained according to the
 /// [data retention policy]
 /// (https://docs.cloud.google.com/sensitive-data-protection/docs/data-profiles#retention).
-public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DiscoveryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Unique resource name for the DiscoveryConfig, assigned by the
@@ -72,13 +72,13 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var errors: [Error] = []
 
   /// Output only. The creation timestamp of a DiscoveryConfig.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last update timestamp of a DiscoveryConfig.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp of the last time this config was executed.
-  public var lastRunTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastRunTime: GoogleWKT.Timestamp? = nil
 
   /// Required. A status for this configuration.
   public var status: DiscoveryConfig.Status = DiscoveryConfig.Status()
@@ -88,7 +88,7 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// by default.
   public var processingLocation: ProcessingLocation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DiscoveryConfig`.
   public init() {}
@@ -167,12 +167,9 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([Error].self, forKey: .errors) {
       self.errors = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.lastRunTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastRunTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.lastRunTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .lastRunTime)
     if let value = try container.decodeIfPresent(DiscoveryConfig.Status.self, forKey: .status) {
       self.status = value
     }
@@ -180,7 +177,7 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ProcessingLocation.self, forKey: .processingLocation)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -206,7 +203,7 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Project and scan location information. Only set when the parent is an org.
-  public struct OrgConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OrgConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The data to scan: folder, org, or project
@@ -217,7 +214,7 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// that are profiled, and the DLP API must be enabled.
     public var projectId: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OrgConfig`.
     public init() {}
@@ -259,7 +256,7 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -275,11 +272,11 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryConfig.OrgConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -392,10 +389,10 @@ public struct DiscoveryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudDomainsV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
 import GoogleType
+import GoogleWKT
 
 func sample(client: DomainsClient, parent: String) async throws {
   let items = try client.listRegistrations(

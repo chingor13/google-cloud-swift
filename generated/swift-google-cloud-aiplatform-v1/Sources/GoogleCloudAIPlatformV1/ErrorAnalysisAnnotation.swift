@@ -16,10 +16,10 @@
 
 #if ModelService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Model error analysis for each annotation.
-  public struct ErrorAnalysisAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ErrorAnalysisAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Attributed items for a given annotation, typically representing neighbors
@@ -36,7 +36,7 @@
     /// The threshold used to determine if this annotation is an outlier or not.
     public var outlierThreshold: Swift.Double = Swift.Double()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ErrorAnalysisAnnotation`.
     public init() {}
@@ -93,7 +93,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -110,7 +110,7 @@
 
     /// Attributed items for a given annotation, typically representing neighbors
     /// from the training sets constrained by the query type.
-    public struct AttributedItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AttributedItem: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The unique ID for each annotation. Used by FE to allocate the annotation
@@ -120,7 +120,7 @@
       /// The distance of this item to the annotation.
       public var distance: Swift.Double = Swift.Double()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AttributedItem`.
       public init() {}
@@ -165,7 +165,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -182,11 +182,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ErrorAnalysisAnnotation.AttributedItem"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -305,11 +305,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ErrorAnalysisAnnotation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

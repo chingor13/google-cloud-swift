@@ -17,74 +17,74 @@
 #if Conversations
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ConversationsStub: Sendable {
       func createConversation(
-        request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Conversation
 
       func listConversations(
-        request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListConversationsResponse
 
       func getConversation(
-        request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Conversation
 
       func completeConversation(
-        request: CompleteConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: CompleteConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Conversation
 
       func ingestContextReferences(
-        request: IngestContextReferencesRequest, options: GoogleCloudGax.RequestOptions
+        request: IngestContextReferencesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.IngestContextReferencesResponse
 
       func listMessages(
-        request: ListMessagesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListMessagesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListMessagesResponse
 
       func suggestConversationSummary(
-        request: SuggestConversationSummaryRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestConversationSummaryRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestConversationSummaryResponse
 
       func generateStatelessSummary(
-        request: GenerateStatelessSummaryRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateStatelessSummaryRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.GenerateStatelessSummaryResponse
 
       func generateStatelessSuggestion(
-        request: GenerateStatelessSuggestionRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateStatelessSuggestionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.GenerateStatelessSuggestionResponse
 
       func searchKnowledge(
-        request: SearchKnowledgeRequest, options: GoogleCloudGax.RequestOptions
+        request: SearchKnowledgeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SearchKnowledgeResponse
 
       func generateSuggestions(
-        request: GenerateSuggestionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateSuggestionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.GenerateSuggestionsResponse
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service is used showcase the four main types of rpcs - unary, server
 /// side streaming, client side streaming, and bidirectional streaming. This
@@ -36,11 +36,11 @@ import GoogleCloudGax
 /// @Snippet(path: "EchoQuickstart")
 public final class EchoClient: Clients.EchoProtocol, Sendable {
   let inner: any Clients.EchoStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `EchoClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.EchoStub = try Clients.EchoTransport(options)
     inner = Clients.EchoRetry(inner, options: options)
     if let logger = options.logger {
@@ -55,7 +55,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_Echo")
   public func echo(
-    request: EchoRequest, options: GoogleCloudGax.RequestOptions
+    request: EchoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.EchoResponse {
     try await self.inner.echo(request: request, options: options)
   }
@@ -69,7 +69,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_EchoErrorDetails")
   public func echoErrorDetails(
-    request: EchoErrorDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: EchoErrorDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.EchoErrorDetailsResponse {
     try await self.inner.echoErrorDetails(request: request, options: options)
   }
@@ -84,7 +84,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_FailEchoWithDetails")
   public func failEchoWithDetails(
-    request: FailEchoWithDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: FailEchoWithDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.FailEchoWithDetailsResponse {
     try await self.inner.failEchoWithDetails(request: request, options: options)
   }
@@ -94,7 +94,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_Expand")
   public func expand(
-    request: ExpandRequest, options: GoogleCloudGax.RequestOptions
+    request: ExpandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.EchoResponse {
     try await self.inner.expand(request: request, options: options)
   }
@@ -105,7 +105,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_Collect")
   public func collect(
-    request: EchoRequest, options: GoogleCloudGax.RequestOptions
+    request: EchoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.EchoResponse {
     try await self.inner.collect(request: request, options: options)
   }
@@ -115,7 +115,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_PagedExpand")
   public func pagedExpand(
-    request: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+    request: PagedExpandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse {
     try await self.inner.pagedExpand(request: request, options: options)
   }
@@ -125,7 +125,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_PagedExpand")
   public func pagedExpand(
-    byItem: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+    byItem: PagedExpandRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EchoResponse, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse in
@@ -133,7 +133,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
       request.pageToken = token
       return try await self.pagedExpand(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// This is similar to the PagedExpand except that it uses
@@ -142,7 +142,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_PagedExpandLegacy")
   public func pagedExpandLegacy(
-    request: PagedExpandLegacyRequest, options: GoogleCloudGax.RequestOptions
+    request: PagedExpandLegacyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse {
     try await self.inner.pagedExpandLegacy(request: request, options: options)
   }
@@ -153,7 +153,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_PagedExpandLegacy")
   public func pagedExpandLegacy(
-    byItem: PagedExpandLegacyRequest, options: GoogleCloudGax.RequestOptions
+    byItem: PagedExpandLegacyRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EchoResponse, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse in
@@ -161,7 +161,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
       request.pageToken = token
       return try await self.pagedExpandLegacy(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// This method returns a map containing lists of words that appear in the input, keyed by their
@@ -172,7 +172,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_PagedExpandLegacyMapped")
   public func pagedExpandLegacyMapped(
-    request: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+    request: PagedExpandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.PagedExpandLegacyMappedResponse {
     try await self.inner.pagedExpandLegacyMapped(request: request, options: options)
   }
@@ -185,7 +185,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_PagedExpandLegacyMapped")
   public func pagedExpandLegacyMapped(
-    byItem: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+    byItem: PagedExpandRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<(Swift.String, PagedExpandResponseList), Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.PagedExpandLegacyMappedResponse in
@@ -193,7 +193,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
       request.pageToken = token
       return try await self.pagedExpandLegacyMapped(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// This method will wait for the requested amount of time and then return.
@@ -201,7 +201,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_Wait")
   public func wait(
-    request: WaitRequest, options: GoogleCloudGax.RequestOptions
+    request: WaitRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.wait(request: request, options: options)
   }
@@ -211,21 +211,21 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_Wait")
   public func wait(
-    withPolling: WaitRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<WaitResponse> {
+    withPolling: WaitRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<WaitResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<WaitResponse>.State in
+        -> GoogleGax._PollableOperationImpl<WaitResponse>.State in
       return try op._extractStatus(WaitResponse.self)
     }
     let rawOp = try await self.wait(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<WaitResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<WaitResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -239,7 +239,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_Block")
   public func block(
-    request: BlockRequest, options: GoogleCloudGax.RequestOptions
+    request: BlockRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.BlockResponse {
     try await self.inner.block(request: request, options: options)
   }
@@ -250,7 +250,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -261,7 +261,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -269,7 +269,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Locations][google.cloud.location.Locations] service functionality in this service.
@@ -278,7 +278,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -289,7 +289,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -300,7 +300,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -311,7 +311,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -322,7 +322,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -333,7 +333,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -341,7 +341,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -350,7 +350,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -361,7 +361,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -372,7 +372,7 @@ public final class EchoClient: Clients.EchoProtocol, Sendable {
   ///
   /// @Snippet(path: "Echo_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -439,7 +439,7 @@ extension Clients {
     func wait(request: WaitRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `EchoClient.wait`.
-    func wait(withPolling: WaitRequest) async throws -> any GoogleCloudGax.PollableOperation<
+    func wait(withPolling: WaitRequest) async throws -> any GoogleGax.PollableOperation<
       WaitResponse
     >
 
@@ -502,122 +502,122 @@ extension Clients {
 
     /// See `EchoClient.echo`.
     func echo(
-      request: EchoRequest, options: GoogleCloudGax.RequestOptions
+      request: EchoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.EchoResponse
 
     /// See `EchoClient.echoErrorDetails`.
     func echoErrorDetails(
-      request: EchoErrorDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: EchoErrorDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.EchoErrorDetailsResponse
 
     /// See `EchoClient.failEchoWithDetails`.
     func failEchoWithDetails(
-      request: FailEchoWithDetailsRequest, options: GoogleCloudGax.RequestOptions
+      request: FailEchoWithDetailsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.FailEchoWithDetailsResponse
 
     /// See `EchoClient.expand`.
     func expand(
-      request: ExpandRequest, options: GoogleCloudGax.RequestOptions
+      request: ExpandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.EchoResponse
 
     /// See `EchoClient.collect`.
     func collect(
-      request: EchoRequest, options: GoogleCloudGax.RequestOptions
+      request: EchoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.EchoResponse
 
     /// See `EchoClient.pagedExpand`.
     func pagedExpand(
-      request: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+      request: PagedExpandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse
 
     /// See `EchoClient.pagedExpand`.
     func pagedExpand(
-      byItem: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PagedExpandRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<EchoResponse, Swift.Error>
 
     /// See `EchoClient.pagedExpandLegacy`.
     func pagedExpandLegacy(
-      request: PagedExpandLegacyRequest, options: GoogleCloudGax.RequestOptions
+      request: PagedExpandLegacyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse
 
     /// See `EchoClient.pagedExpandLegacy`.
     func pagedExpandLegacy(
-      byItem: PagedExpandLegacyRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PagedExpandLegacyRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<EchoResponse, Swift.Error>
 
     /// See `EchoClient.pagedExpandLegacyMapped`.
     func pagedExpandLegacyMapped(
-      request: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+      request: PagedExpandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.PagedExpandLegacyMappedResponse
 
     /// See `EchoClient.pagedExpandLegacyMapped`.
     func pagedExpandLegacyMapped(
-      byItem: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+      byItem: PagedExpandRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, PagedExpandResponseList), Swift.Error>
 
     /// See `EchoClient.wait`.
     func wait(
-      request: WaitRequest, options: GoogleCloudGax.RequestOptions
+      request: WaitRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `EchoClient.wait`.
     func wait(
-      withPolling: WaitRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<WaitResponse>
+      withPolling: WaitRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<WaitResponse>
 
     /// See `EchoClient.block`.
     func block(
-      request: BlockRequest, options: GoogleCloudGax.RequestOptions
+      request: BlockRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.BlockResponse
 
     /// See `EchoClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `EchoClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `EchoClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `EchoClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `EchoClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `EchoClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `EchoClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `EchoClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `EchoClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `EchoClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -629,9 +629,9 @@ extension Clients.EchoProtocol {
   }
 
   public func echo(
-    request: EchoRequest, options: GoogleCloudGax.RequestOptions
+    request: EchoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.EchoResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func echoErrorDetails(request: EchoErrorDetailsRequest) async throws
@@ -641,9 +641,9 @@ extension Clients.EchoProtocol {
   }
 
   public func echoErrorDetails(
-    request: EchoErrorDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: EchoErrorDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.EchoErrorDetailsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func failEchoWithDetails(request: FailEchoWithDetailsRequest) async throws
@@ -653,9 +653,9 @@ extension Clients.EchoProtocol {
   }
 
   public func failEchoWithDetails(
-    request: FailEchoWithDetailsRequest, options: GoogleCloudGax.RequestOptions
+    request: FailEchoWithDetailsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.FailEchoWithDetailsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func expand(request: ExpandRequest) async throws -> GoogleShowcaseV1Beta1.EchoResponse {
@@ -663,9 +663,9 @@ extension Clients.EchoProtocol {
   }
 
   public func expand(
-    request: ExpandRequest, options: GoogleCloudGax.RequestOptions
+    request: ExpandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.EchoResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func expand(
@@ -684,9 +684,9 @@ extension Clients.EchoProtocol {
   }
 
   public func collect(
-    request: EchoRequest, options: GoogleCloudGax.RequestOptions
+    request: EchoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.EchoResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func pagedExpand(request: PagedExpandRequest) async throws
@@ -696,9 +696,9 @@ extension Clients.EchoProtocol {
   }
 
   public func pagedExpand(
-    request: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+    request: PagedExpandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func pagedExpand(
@@ -708,13 +708,13 @@ extension Clients.EchoProtocol {
   }
 
   public func pagedExpand(
-    byItem: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+    byItem: PagedExpandRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EchoResponse, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func pagedExpandLegacy(request: PagedExpandLegacyRequest) async throws
@@ -724,9 +724,9 @@ extension Clients.EchoProtocol {
   }
 
   public func pagedExpandLegacy(
-    request: PagedExpandLegacyRequest, options: GoogleCloudGax.RequestOptions
+    request: PagedExpandLegacyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func pagedExpandLegacy(
@@ -736,13 +736,13 @@ extension Clients.EchoProtocol {
   }
 
   public func pagedExpandLegacy(
-    byItem: PagedExpandLegacyRequest, options: GoogleCloudGax.RequestOptions
+    byItem: PagedExpandLegacyRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EchoResponse, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.PagedExpandResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func pagedExpandLegacyMapped(request: PagedExpandRequest) async throws
@@ -752,9 +752,9 @@ extension Clients.EchoProtocol {
   }
 
   public func pagedExpandLegacyMapped(
-    request: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+    request: PagedExpandRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.PagedExpandLegacyMappedResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func pagedExpandLegacyMapped(
@@ -764,13 +764,13 @@ extension Clients.EchoProtocol {
   }
 
   public func pagedExpandLegacyMapped(
-    byItem: PagedExpandRequest, options: GoogleCloudGax.RequestOptions
+    byItem: PagedExpandRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<(Swift.String, PagedExpandResponseList), Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.PagedExpandLegacyMappedResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func wait(request: WaitRequest) async throws -> GoogleLongRunning.Operation {
@@ -778,24 +778,24 @@ extension Clients.EchoProtocol {
   }
 
   public func wait(
-    request: WaitRequest, options: GoogleCloudGax.RequestOptions
+    request: WaitRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func wait(withPolling: WaitRequest) async throws -> any GoogleCloudGax.PollableOperation<
+  public func wait(withPolling: WaitRequest) async throws -> any GoogleGax.PollableOperation<
     WaitResponse
   > {
     try await self.wait(withPolling: withPolling, options: .init())
   }
 
   public func wait(
-    withPolling: WaitRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<WaitResponse> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<WaitResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: WaitRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<WaitResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<WaitResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -804,9 +804,9 @@ extension Clients.EchoProtocol {
   }
 
   public func block(
-    request: BlockRequest, options: GoogleCloudGax.RequestOptions
+    request: BlockRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.BlockResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -816,9 +816,9 @@ extension Clients.EchoProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -828,13 +828,13 @@ extension Clients.EchoProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -844,9 +844,9 @@ extension Clients.EchoProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -856,9 +856,9 @@ extension Clients.EchoProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -868,9 +868,9 @@ extension Clients.EchoProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -880,9 +880,9 @@ extension Clients.EchoProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -892,9 +892,9 @@ extension Clients.EchoProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -904,13 +904,13 @@ extension Clients.EchoProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -931,9 +931,9 @@ extension Clients.EchoProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -950,9 +950,9 @@ extension Clients.EchoProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -969,9 +969,9 @@ extension Clients.EchoProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

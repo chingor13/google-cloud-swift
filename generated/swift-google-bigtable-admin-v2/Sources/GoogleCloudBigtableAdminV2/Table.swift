@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A collection of user data indexed by row, column, and timestamp.
 /// Each table is served using the resources of its parent cluster.
-public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Table: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique name of the table. Values are of the form
@@ -132,7 +132,7 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public var automatedBackupConfig: OneOf_AutomatedBackupConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Table`.
   public init() {}
@@ -229,7 +229,7 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.automatedBackupConfig = automatedBackupConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -257,7 +257,7 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The state of a table's data in a particular cluster.
-  public struct ClusterState: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ClusterState: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The state of replication for the table in this cluster.
@@ -271,7 +271,7 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// changes propagate from Cloud KMS.
     public var encryptionInfo: [EncryptionInfo] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ClusterState`.
     public init() {}
@@ -316,7 +316,7 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -466,25 +466,25 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.Table.ClusterState"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines an automated backup policy for a table
-  public struct AutomatedBackupPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutomatedBackupPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. How long the automated backups should be retained. Values must
     /// be at least 3 days and at most 90 days.
-    public var retentionPeriod: GoogleCloudWKT.Duration? = nil
+    public var retentionPeriod: GoogleWKT.Duration? = nil
 
     /// How frequently automated backups should occur. The only supported value
     /// at this time is 24 hours. An undefined frequency is treated as 24 hours.
-    public var frequency: GoogleCloudWKT.Duration? = nil
+    public var frequency: GoogleWKT.Duration? = nil
 
     /// Optional. A list of Cloud Bigtable zones where automated backups are
     /// allowed to be created. If empty, automated backups will be created in all
@@ -493,7 +493,7 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// This field can only set for tables in Enterprise Plus instances.
     public var locations: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutomatedBackupPolicy`.
     public init() {}
@@ -531,15 +531,14 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.retentionPeriod = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .retentionPeriod)
-      self.frequency = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .frequency)
+        GoogleWKT.Duration.self, forKey: .retentionPeriod)
+      self.frequency = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .frequency)
       if let value = try container.decodeIfPresent([Swift.String].self, forKey: .locations) {
         self.locations = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -556,11 +555,11 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.bigtable.admin.v2.Table.AutomatedBackupPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -807,10 +806,10 @@ public struct Table: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.bigtable.admin.v2.Table"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Preprocessing configurations.
-public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PreprocessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Color preprocessing configuration.
@@ -42,7 +42,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Specify the video deinterlace configuration.
   public var deinterlace: PreprocessingConfig.Deinterlace? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PreprocessingConfig`.
   public init() {}
@@ -97,7 +97,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       PreprocessingConfig.Deinterlace.self, forKey: .deinterlace)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,7 +118,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Color preprocessing configuration.
   ///
   /// **Note:** This configuration is not supported.
-  public struct Color: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Color: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Control color saturation of the video. Enter a value between -1 and 1,
@@ -136,7 +136,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// default is 0.
     public var brightness: Swift.Double = Swift.Double()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Color`.
     public init() {}
@@ -184,7 +184,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -201,18 +201,18 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Color"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Denoise preprocessing configuration.
   ///
   /// **Note:** This configuration is not supported.
-  public struct Denoise: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Denoise: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Set strength of the denoise. Enter a value between 0 and 1. The higher
@@ -227,7 +227,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// - `grain`
     public var tune: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Denoise`.
     public init() {}
@@ -270,7 +270,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -286,18 +286,18 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Denoise"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Deblock preprocessing configuration.
   ///
   /// **Note:** This configuration is not supported.
-  public struct Deblock: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Deblock: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Set strength of the deblocker. Enter a value between 0 and 1. The higher
@@ -308,7 +308,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// Enable deblocker. The default is `false`.
     public var enabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Deblock`.
     public init() {}
@@ -351,7 +351,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -367,16 +367,16 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Deblock"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Audio preprocessing configuration.
-  public struct Audio: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Audio: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specify audio loudness normalization in loudness units relative to full
@@ -402,7 +402,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// **Note:** This field is not supported.
     public var lowBoost: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Audio`.
     public init() {}
@@ -450,7 +450,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -467,17 +467,17 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Audio"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Video cropping configuration for the input video. The cropped input video
   /// is scaled to match the output resolution.
-  public struct Crop: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Crop: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of pixels to crop from the top. The default is 0.
@@ -492,7 +492,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// The number of pixels to crop from the right. The default is 0.
     public var rightPixels: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Crop`.
     public init() {}
@@ -545,7 +545,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -563,17 +563,17 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Crop"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Pad filter configuration for the input video. The padded input video
   /// is scaled after padding with black to match the output resolution.
-  public struct Pad: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Pad: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of pixels to add to the top. The default is 0.
@@ -588,7 +588,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// The number of pixels to add to the right. The default is 0.
     public var rightPixels: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Pad`.
     public init() {}
@@ -641,7 +641,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -659,22 +659,22 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Pad"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Deinterlace configuration for input video.
-  public struct Deinterlace: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Deinterlace: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specify the video deinterlacing filter. The default is `yadif`.
     public var deinterlacingFilter: OneOf_DeinterlacingFilter? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Deinterlace`.
     public init() {}
@@ -733,7 +733,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       self.deinterlacingFilter = deinterlacingFilter
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -754,7 +754,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
 
     /// Yet Another Deinterlacing Filter Configuration.
-    public struct YadifConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct YadifConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specifies the deinterlacing mode to adopt.
@@ -782,7 +782,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       /// interlaced. The default is `false`.
       public var deinterlaceAllFrames: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `YadifConfig`.
       public init() {}
@@ -838,7 +838,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -857,16 +857,16 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
         return
           "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.YadifConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Bob Weaver Deinterlacing Filter Configuration.
-    public struct BwdifConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BwdifConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specifies the deinterlacing mode to adopt.
@@ -890,7 +890,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       /// interlaced. The default is `false`.
       public var deinterlaceAllFrames: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BwdifConfig`.
       public init() {}
@@ -939,7 +939,7 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -957,11 +957,11 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
         return
           "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace.BwdifConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -976,21 +976,21 @@ public struct PreprocessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig.Deinterlace"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.transcoder.v1.PreprocessingConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

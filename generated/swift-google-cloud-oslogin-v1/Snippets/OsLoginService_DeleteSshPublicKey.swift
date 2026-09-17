@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudOSLoginV1
 import GoogleCloudOSLoginCommon
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: OsLoginServiceClient, userId: String, fingerprintId: String) async throws {
   try await client.deleteSshPublicKey(

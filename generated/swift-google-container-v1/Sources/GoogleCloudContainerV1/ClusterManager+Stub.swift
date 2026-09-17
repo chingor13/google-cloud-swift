@@ -15,157 +15,157 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ClusterManagerStub: Sendable {
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.ListClustersResponse
 
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Cluster
 
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func updateNodePool(
-      request: UpdateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setNodePoolAutoscaling(
-      request: SetNodePoolAutoscalingRequest, options: GoogleCloudGax.RequestOptions
+      request: SetNodePoolAutoscalingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setLoggingService(
-      request: SetLoggingServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: SetLoggingServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setMonitoringService(
-      request: SetMonitoringServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: SetMonitoringServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setAddonsConfig(
-      request: SetAddonsConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SetAddonsConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setLocations(
-      request: SetLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: SetLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func updateMaster(
-      request: UpdateMasterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMasterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setMasterAuth(
-      request: SetMasterAuthRequest, options: GoogleCloudGax.RequestOptions
+      request: SetMasterAuthRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func listOperations(
-      request: ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.ListOperationsResponse
 
     func getOperation(
-      request: GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func cancelOperation(
-      request: CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getServerConfig(
-      request: GetServerConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServerConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.ServerConfig
 
     func getJsonwebKeys(
-      request: GetJSONWebKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJSONWebKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.GetJSONWebKeysResponse
 
     func listNodePools(
-      request: ListNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNodePoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.ListNodePoolsResponse
 
     func getNodePool(
-      request: GetNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.NodePool
 
     func createNodePool(
-      request: CreateNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func deleteNodePool(
-      request: DeleteNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func completeNodePoolUpgrade(
-      request: CompleteNodePoolUpgradeRequest, options: GoogleCloudGax.RequestOptions
+      request: CompleteNodePoolUpgradeRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func rollbackNodePoolUpgrade(
-      request: RollbackNodePoolUpgradeRequest, options: GoogleCloudGax.RequestOptions
+      request: RollbackNodePoolUpgradeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setNodePoolManagement(
-      request: SetNodePoolManagementRequest, options: GoogleCloudGax.RequestOptions
+      request: SetNodePoolManagementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setLabels(
-      request: SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: SetLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setLegacyAbac(
-      request: SetLegacyAbacRequest, options: GoogleCloudGax.RequestOptions
+      request: SetLegacyAbacRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func startIprotation(
-      request: StartIPRotationRequest, options: GoogleCloudGax.RequestOptions
+      request: StartIPRotationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func completeIprotation(
-      request: CompleteIPRotationRequest, options: GoogleCloudGax.RequestOptions
+      request: CompleteIPRotationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setNodePoolSize(
-      request: SetNodePoolSizeRequest, options: GoogleCloudGax.RequestOptions
+      request: SetNodePoolSizeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setNetworkPolicy(
-      request: SetNetworkPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: SetNetworkPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func setMaintenancePolicy(
-      request: SetMaintenancePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: SetMaintenancePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
 
     func listUsableSubnetworks(
-      request: ListUsableSubnetworksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUsableSubnetworksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.ListUsableSubnetworksResponse
 
     func checkAutopilotCompatibility(
-      request: CheckAutopilotCompatibilityRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckAutopilotCompatibilityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.CheckAutopilotCompatibilityResponse
 
     func fetchClusterUpgradeInfo(
-      request: FetchClusterUpgradeInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchClusterUpgradeInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.ClusterUpgradeInfo
 
     func fetchNodePoolUpgradeInfo(
-      request: FetchNodePoolUpgradeInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchNodePoolUpgradeInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.NodePoolUpgradeInfo
 
     func completeControlPlaneUpgrade(
-      request: CompleteControlPlaneUpgradeRequest, options: GoogleCloudGax.RequestOptions
+      request: CompleteControlPlaneUpgradeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerV1.Operation
   }
 }

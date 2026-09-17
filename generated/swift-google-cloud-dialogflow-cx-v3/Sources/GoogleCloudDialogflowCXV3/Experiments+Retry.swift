@@ -20,27 +20,27 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class ExperimentsRetry: ExperimentsStub {
       let inner: any ExperimentsStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any ExperimentsStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any ExperimentsStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -52,14 +52,14 @@
       }
 
       public func listExperiments(
-        request: ListExperimentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListExperimentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListExperimentsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListExperimentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListExperimentsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.ListExperimentsResponse
             in
             return try await self.inner.listExperiments(request: r, options: o)
@@ -67,14 +67,14 @@
       }
 
       public func getExperiment(
-        request: GetExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Experiment
             in
             return try await self.inner.getExperiment(request: r, options: o)
@@ -82,14 +82,14 @@
       }
 
       public func createExperiment(
-        request: CreateExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Experiment
             in
             return try await self.inner.createExperiment(request: r, options: o)
@@ -97,14 +97,14 @@
       }
 
       public func updateExperiment(
-        request: UpdateExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UpdateExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Experiment
             in
             return try await self.inner.updateExperiment(request: r, options: o)
@@ -112,27 +112,27 @@
       }
 
       public func deleteExperiment(
-        request: DeleteExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: DeleteExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+            (r: DeleteExperimentRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.deleteExperiment(request: r, options: o)
           })
       }
 
       public func startExperiment(
-        request: StartExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: StartExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: StartExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: StartExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Experiment
             in
             return try await self.inner.startExperiment(request: r, options: o)
@@ -140,14 +140,14 @@
       }
 
       public func stopExperiment(
-        request: StopExperimentRequest, options: GoogleCloudGax.RequestOptions
+        request: StopExperimentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Experiment {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: StopExperimentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: StopExperimentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Experiment
             in
             return try await self.inner.stopExperiment(request: r, options: o)
@@ -155,75 +155,75 @@
       }
 
       public func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.ListLocationsResponse
+            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.ListLocationsResponse
             in
             return try await self.inner.listLocations(request: r, options: o)
           })
       }
 
       public func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.Location
+            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.Location
             in
             return try await self.inner.getLocation(request: r, options: o)
           })
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

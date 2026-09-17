@@ -16,45 +16,45 @@
 
 #if Addresses
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol AddressesStub: Sendable {
       func aggregatedList(
-        request: AddressesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: AddressesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AddressAggregatedList
 
       func delete(
-        request: AddressesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: AddressesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: AddressesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: AddressesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Address
 
       func insert(
-        request: AddressesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: AddressesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: AddressesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: AddressesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.AddressList
 
       func move(
-        request: AddressesClient.MoveRequest, options: GoogleCloudGax.RequestOptions
+        request: AddressesClient.MoveRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setLabels(
-        request: AddressesClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: AddressesClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: AddressesClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: AddressesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

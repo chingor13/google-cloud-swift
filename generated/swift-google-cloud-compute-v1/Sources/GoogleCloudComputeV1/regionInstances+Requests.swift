@@ -16,13 +16,13 @@
 
 #if RegionInstances
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   extension RegionInstancesClient {
     /// Synthetic request message for the [bulkInsert()][google.cloud.compute.v1.regionInstances.bulkInsert] method.
     ///
     /// [google.cloud.compute.v1.regionInstances.bulkInsert]: <doc:RegionInstancesClient/bulkInsert(request:options:)>
-    public struct BulkInsertRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BulkInsertRequest: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Project ID for this request.
@@ -51,7 +51,7 @@
       /// [google.cloud.compute.v1.regionInstances.bulkInsert]: <doc:RegionInstancesClient/bulkInsert(request:options:)>
       public var body: BulkInsertInstanceResource? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BulkInsertRequest`.
       public init() {}
@@ -100,7 +100,7 @@
         self.body = try container.decodeIfPresent(BulkInsertInstanceResource.self, forKey: .body)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -118,11 +118,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.compute.v1.regionInstances.bulkInsertRequest"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
   }

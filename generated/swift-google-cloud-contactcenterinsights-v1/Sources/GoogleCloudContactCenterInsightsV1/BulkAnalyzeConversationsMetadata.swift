@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The metadata for a bulk analyze conversations operation.
-public struct BulkAnalyzeConversationsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BulkAnalyzeConversationsMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The time the operation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The time the operation finished running.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The original request for bulk analyze.
   public var request: BulkAnalyzeConversationsRequest? = nil
@@ -45,7 +45,7 @@ public struct BulkAnalyzeConversationsMetadata: Codable, Equatable, GoogleCloudW
   /// the operation output to be incomplete.
   public var partialErrors: [GoogleRpc.Status] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BulkAnalyzeConversationsMetadata`.
   public init() {}
@@ -90,9 +90,8 @@ public struct BulkAnalyzeConversationsMetadata: Codable, Equatable, GoogleCloudW
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.request = try container.decodeIfPresent(
       BulkAnalyzeConversationsRequest.self, forKey: .request)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .completedAnalysesCount)
@@ -112,7 +111,7 @@ public struct BulkAnalyzeConversationsMetadata: Codable, Equatable, GoogleCloudW
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,10 +133,10 @@ public struct BulkAnalyzeConversationsMetadata: Codable, Equatable, GoogleCloudW
     return
       "type.googleapis.com/google.cloud.contactcenterinsights.v1.BulkAnalyzeConversationsMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

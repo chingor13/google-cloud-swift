@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudMonitoringMetricsScopeV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: MetricsScopesClient, metricsScopeId: String, projectId: String) async throws {
   let poller = try await client.deleteMonitoredProject(

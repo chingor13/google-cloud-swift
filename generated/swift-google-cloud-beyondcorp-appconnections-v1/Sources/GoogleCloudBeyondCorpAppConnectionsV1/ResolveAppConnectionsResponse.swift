@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for BeyondCorp.ResolveAppConnections.
-public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// A list of BeyondCorp AppConnections with details in the project.
@@ -33,7 +33,7 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleCloudWKT.
   /// A list of locations that could not be reached.
   public var unreachable: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ResolveAppConnectionsResponse`.
   public init() {}
@@ -83,7 +83,7 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,7 +98,7 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleCloudWKT.
   }
 
   /// Details of the AppConnection.
-  public struct AppConnectionDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AppConnectionDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A BeyondCorp AppConnection in the project.
@@ -108,7 +108,7 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleCloudWKT.
     /// `https://www.googleapis.com/compute/v1/projects/{project_id}/zones/{zone_id}/instances/{instance_id}`.
     public var recentMigVms: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AppConnectionDetails`.
     public init() {}
@@ -149,7 +149,7 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleCloudWKT.
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -166,11 +166,11 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleCloudWKT.
       return
         "type.googleapis.com/google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse.AppConnectionDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -178,11 +178,11 @@ public struct ResolveAppConnectionsResponse: Codable, Equatable, GoogleCloudWKT.
     return
       "type.googleapis.com/google.cloud.beyondcorp.appconnections.v1.ResolveAppConnectionsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [ResolveAppConnectionsResponse.AppConnectionDetails] {

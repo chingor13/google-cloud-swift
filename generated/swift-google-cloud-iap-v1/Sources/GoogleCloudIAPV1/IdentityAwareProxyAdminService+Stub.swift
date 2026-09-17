@@ -15,54 +15,54 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol IdentityAwareProxyAdminServiceStub: Sendable {
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getIapSettings(
-      request: GetIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIapSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IapSettings
 
     func updateIapSettings(
-      request: UpdateIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIapSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IapSettings
 
     func validateIapAttributeExpression(
-      request: ValidateIapAttributeExpressionRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateIapAttributeExpressionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.ValidateIapAttributeExpressionResponse
 
     func listTunnelDestGroups(
-      request: ListTunnelDestGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTunnelDestGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.ListTunnelDestGroupsResponse
 
     func createTunnelDestGroup(
-      request: CreateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup
 
     func getTunnelDestGroup(
-      request: GetTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup
 
     func deleteTunnelDestGroup(
-      request: DeleteTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateTunnelDestGroup(
-      request: UpdateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup
   }
 }

@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudFunctionsV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudFunctionsV2.FunctionServiceClient()

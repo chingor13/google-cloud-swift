@@ -18,21 +18,21 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The API Gateway Service is the interface for managing API Gateways.
 ///
 /// @Snippet(path: "ApiGatewayServiceQuickstart")
 public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, Sendable {
   let inner: any Clients.ApiGatewayServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ApiGatewayServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ApiGatewayServiceStub = try Clients.ApiGatewayServiceTransport(options)
     inner = Clients.ApiGatewayServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -47,7 +47,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_ListGateways")
   public func listGateways(
-    request: ListGatewaysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGatewaysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.ListGatewaysResponse {
     try await self.inner.listGateways(request: request, options: options)
   }
@@ -56,7 +56,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_ListGateways")
   public func listGateways(
-    byItem: ListGatewaysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGatewaysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Gateway, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiGatewayV1.ListGatewaysResponse in
@@ -64,14 +64,14 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
       request.pageToken = token
       return try await self.listGateways(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Gateway.
   ///
   /// @Snippet(path: "ApiGatewayService_GetGateway")
   public func getGateway(
-    request: GetGatewayRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGatewayRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.Gateway {
     try await self.inner.getGateway(request: request, options: options)
   }
@@ -80,7 +80,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_CreateGateway")
   public func createGateway(
-    request: CreateGatewayRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGatewayRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createGateway(request: request, options: options)
   }
@@ -89,21 +89,20 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_CreateGateway")
   public func createGateway(
-    withPolling: CreateGatewayRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Gateway> {
+    withPolling: CreateGatewayRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Gateway> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Gateway>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Gateway>.State in
       return try op._extractStatus(Gateway.self)
     }
     let rawOp = try await self.createGateway(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Gateway>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Gateway>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -115,7 +114,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_UpdateGateway")
   public func updateGateway(
-    request: UpdateGatewayRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGatewayRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateGateway(request: request, options: options)
   }
@@ -124,21 +123,20 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_UpdateGateway")
   public func updateGateway(
-    withPolling: UpdateGatewayRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Gateway> {
+    withPolling: UpdateGatewayRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Gateway> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Gateway>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Gateway>.State in
       return try op._extractStatus(Gateway.self)
     }
     let rawOp = try await self.updateGateway(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Gateway>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Gateway>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -150,7 +148,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_DeleteGateway")
   public func deleteGateway(
-    request: DeleteGatewayRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGatewayRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteGateway(request: request, options: options)
   }
@@ -159,21 +157,21 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_DeleteGateway")
   public func deleteGateway(
-    withPolling: DeleteGatewayRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteGatewayRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteGateway(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -185,7 +183,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_ListApis")
   public func listApis(
-    request: ListApisRequest, options: GoogleCloudGax.RequestOptions
+    request: ListApisRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.ListApisResponse {
     try await self.inner.listApis(request: request, options: options)
   }
@@ -194,7 +192,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_ListApis")
   public func listApis(
-    byItem: ListApisRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListApisRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Api, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiGatewayV1.ListApisResponse in
@@ -202,14 +200,14 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
       request.pageToken = token
       return try await self.listApis(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Api.
   ///
   /// @Snippet(path: "ApiGatewayService_GetApi")
   public func getApi(
-    request: GetApiRequest, options: GoogleCloudGax.RequestOptions
+    request: GetApiRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.Api {
     try await self.inner.getApi(request: request, options: options)
   }
@@ -218,7 +216,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_CreateApi")
   public func createApi(
-    request: CreateApiRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateApiRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createApi(request: request, options: options)
   }
@@ -227,21 +225,20 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_CreateApi")
   public func createApi(
-    withPolling: CreateApiRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Api> {
+    withPolling: CreateApiRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Api> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Api>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Api>.State in
       return try op._extractStatus(Api.self)
     }
     let rawOp = try await self.createApi(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Api>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Api>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -253,7 +250,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_UpdateApi")
   public func updateApi(
-    request: UpdateApiRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateApiRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateApi(request: request, options: options)
   }
@@ -262,21 +259,20 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_UpdateApi")
   public func updateApi(
-    withPolling: UpdateApiRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Api> {
+    withPolling: UpdateApiRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Api> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Api>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Api>.State in
       return try op._extractStatus(Api.self)
     }
     let rawOp = try await self.updateApi(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Api>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Api>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -288,7 +284,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_DeleteApi")
   public func deleteApi(
-    request: DeleteApiRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteApiRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteApi(request: request, options: options)
   }
@@ -297,21 +293,21 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_DeleteApi")
   public func deleteApi(
-    withPolling: DeleteApiRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteApiRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteApi(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -323,7 +319,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_ListApiConfigs")
   public func listApiConfigs(
-    request: ListApiConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListApiConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.ListApiConfigsResponse {
     try await self.inner.listApiConfigs(request: request, options: options)
   }
@@ -332,7 +328,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_ListApiConfigs")
   public func listApiConfigs(
-    byItem: ListApiConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListApiConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ApiConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiGatewayV1.ListApiConfigsResponse in
@@ -340,14 +336,14 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
       request.pageToken = token
       return try await self.listApiConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single ApiConfig.
   ///
   /// @Snippet(path: "ApiGatewayService_GetApiConfig")
   public func getApiConfig(
-    request: GetApiConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetApiConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.ApiConfig {
     try await self.inner.getApiConfig(request: request, options: options)
   }
@@ -356,7 +352,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_CreateApiConfig")
   public func createApiConfig(
-    request: CreateApiConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateApiConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createApiConfig(request: request, options: options)
   }
@@ -365,21 +361,21 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_CreateApiConfig")
   public func createApiConfig(
-    withPolling: CreateApiConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig> {
+    withPolling: CreateApiConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ApiConfig> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ApiConfig>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<ApiConfig>.State
+      in
       return try op._extractStatus(ApiConfig.self)
     }
     let rawOp = try await self.createApiConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ApiConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ApiConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -391,7 +387,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_UpdateApiConfig")
   public func updateApiConfig(
-    request: UpdateApiConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateApiConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateApiConfig(request: request, options: options)
   }
@@ -400,21 +396,21 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_UpdateApiConfig")
   public func updateApiConfig(
-    withPolling: UpdateApiConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig> {
+    withPolling: UpdateApiConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ApiConfig> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ApiConfig>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<ApiConfig>.State
+      in
       return try op._extractStatus(ApiConfig.self)
     }
     let rawOp = try await self.updateApiConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ApiConfig>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ApiConfig>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -426,7 +422,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_DeleteApiConfig")
   public func deleteApiConfig(
-    request: DeleteApiConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteApiConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteApiConfig(request: request, options: options)
   }
@@ -435,21 +431,21 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_DeleteApiConfig")
   public func deleteApiConfig(
-    withPolling: DeleteApiConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteApiConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteApiConfig(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -463,7 +459,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -474,7 +470,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -482,7 +478,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -491,7 +487,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -502,7 +498,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -513,7 +509,7 @@ public final class ApiGatewayServiceClient: Clients.ApiGatewayServiceProtocol, S
   ///
   /// @Snippet(path: "ApiGatewayService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -552,7 +548,7 @@ extension Clients {
     func createGateway(request: CreateGatewayRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.createGateway`.
-    func createGateway(withPolling: CreateGatewayRequest) async throws -> any GoogleCloudGax
+    func createGateway(withPolling: CreateGatewayRequest) async throws -> any GoogleGax
       .PollableOperation<Gateway>
 
     /// See `ApiGatewayServiceClient.createGateway`.
@@ -560,32 +556,32 @@ extension Clients {
       parent: Swift.String,
       gateway: Gateway?,
       gatewayId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Gateway>
+    ) async throws -> any GoogleGax.PollableOperation<Gateway>
 
     /// See `ApiGatewayServiceClient.updateGateway`.
     func updateGateway(request: UpdateGatewayRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.updateGateway`.
-    func updateGateway(withPolling: UpdateGatewayRequest) async throws -> any GoogleCloudGax
+    func updateGateway(withPolling: UpdateGatewayRequest) async throws -> any GoogleGax
       .PollableOperation<Gateway>
 
     /// See `ApiGatewayServiceClient.updateGateway`.
     func updateGateway(
       gateway: Gateway?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Gateway>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Gateway>
 
     /// See `ApiGatewayServiceClient.deleteGateway`.
     func deleteGateway(request: DeleteGatewayRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.deleteGateway`.
-    func deleteGateway(withPolling: DeleteGatewayRequest) async throws -> any GoogleCloudGax
+    func deleteGateway(withPolling: DeleteGatewayRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `ApiGatewayServiceClient.deleteGateway`.
     func deleteGateway(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiGatewayServiceClient.listApis`.
     func listApis(request: ListApisRequest) async throws -> GoogleCloudApiGatewayV1.ListApisResponse
@@ -612,40 +608,43 @@ extension Clients {
     func createApi(request: CreateApiRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.createApi`.
-    func createApi(withPolling: CreateApiRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Api>
+    func createApi(withPolling: CreateApiRequest) async throws -> any GoogleGax.PollableOperation<
+      Api
+    >
 
     /// See `ApiGatewayServiceClient.createApi`.
     func createApi(
       parent: Swift.String,
       api: Api?,
       apiId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Api>
+    ) async throws -> any GoogleGax.PollableOperation<Api>
 
     /// See `ApiGatewayServiceClient.updateApi`.
     func updateApi(request: UpdateApiRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.updateApi`.
-    func updateApi(withPolling: UpdateApiRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Api>
+    func updateApi(withPolling: UpdateApiRequest) async throws -> any GoogleGax.PollableOperation<
+      Api
+    >
 
     /// See `ApiGatewayServiceClient.updateApi`.
     func updateApi(
       api: Api?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Api>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Api>
 
     /// See `ApiGatewayServiceClient.deleteApi`.
     func deleteApi(request: DeleteApiRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.deleteApi`.
-    func deleteApi(withPolling: DeleteApiRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Swift.Void>
+    func deleteApi(withPolling: DeleteApiRequest) async throws -> any GoogleGax.PollableOperation<
+      Swift.Void
+    >
 
     /// See `ApiGatewayServiceClient.deleteApi`.
     func deleteApi(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiGatewayServiceClient.listApiConfigs`.
     func listApiConfigs(request: ListApiConfigsRequest) async throws
@@ -675,7 +674,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.createApiConfig`.
-    func createApiConfig(withPolling: CreateApiConfigRequest) async throws -> any GoogleCloudGax
+    func createApiConfig(withPolling: CreateApiConfigRequest) async throws -> any GoogleGax
       .PollableOperation<ApiConfig>
 
     /// See `ApiGatewayServiceClient.createApiConfig`.
@@ -683,34 +682,34 @@ extension Clients {
       parent: Swift.String,
       apiConfig: ApiConfig?,
       apiConfigId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig>
+    ) async throws -> any GoogleGax.PollableOperation<ApiConfig>
 
     /// See `ApiGatewayServiceClient.updateApiConfig`.
     func updateApiConfig(request: UpdateApiConfigRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.updateApiConfig`.
-    func updateApiConfig(withPolling: UpdateApiConfigRequest) async throws -> any GoogleCloudGax
+    func updateApiConfig(withPolling: UpdateApiConfigRequest) async throws -> any GoogleGax
       .PollableOperation<ApiConfig>
 
     /// See `ApiGatewayServiceClient.updateApiConfig`.
     func updateApiConfig(
       apiConfig: ApiConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<ApiConfig>
 
     /// See `ApiGatewayServiceClient.deleteApiConfig`.
     func deleteApiConfig(request: DeleteApiConfigRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.deleteApiConfig`.
-    func deleteApiConfig(withPolling: DeleteApiConfigRequest) async throws -> any GoogleCloudGax
+    func deleteApiConfig(withPolling: DeleteApiConfigRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `ApiGatewayServiceClient.deleteApiConfig`.
     func deleteApiConfig(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiGatewayServiceClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -745,157 +744,157 @@ extension Clients {
 
     /// See `ApiGatewayServiceClient.listGateways`.
     func listGateways(
-      request: ListGatewaysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGatewaysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiGatewayV1.ListGatewaysResponse
 
     /// See `ApiGatewayServiceClient.listGateways`.
     func listGateways(
-      byItem: ListGatewaysRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGatewaysRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Gateway, Swift.Error>
 
     /// See `ApiGatewayServiceClient.getGateway`.
     func getGateway(
-      request: GetGatewayRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGatewayRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiGatewayV1.Gateway
 
     /// See `ApiGatewayServiceClient.createGateway`.
     func createGateway(
-      request: CreateGatewayRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGatewayRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.createGateway`.
     func createGateway(
-      withPolling: CreateGatewayRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Gateway>
+      withPolling: CreateGatewayRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Gateway>
 
     /// See `ApiGatewayServiceClient.updateGateway`.
     func updateGateway(
-      request: UpdateGatewayRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGatewayRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.updateGateway`.
     func updateGateway(
-      withPolling: UpdateGatewayRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Gateway>
+      withPolling: UpdateGatewayRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Gateway>
 
     /// See `ApiGatewayServiceClient.deleteGateway`.
     func deleteGateway(
-      request: DeleteGatewayRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGatewayRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.deleteGateway`.
     func deleteGateway(
-      withPolling: DeleteGatewayRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteGatewayRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiGatewayServiceClient.listApis`.
     func listApis(
-      request: ListApisRequest, options: GoogleCloudGax.RequestOptions
+      request: ListApisRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiGatewayV1.ListApisResponse
 
     /// See `ApiGatewayServiceClient.listApis`.
     func listApis(
-      byItem: ListApisRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListApisRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Api, Swift.Error>
 
     /// See `ApiGatewayServiceClient.getApi`.
     func getApi(
-      request: GetApiRequest, options: GoogleCloudGax.RequestOptions
+      request: GetApiRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiGatewayV1.Api
 
     /// See `ApiGatewayServiceClient.createApi`.
     func createApi(
-      request: CreateApiRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateApiRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.createApi`.
     func createApi(
-      withPolling: CreateApiRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Api>
+      withPolling: CreateApiRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Api>
 
     /// See `ApiGatewayServiceClient.updateApi`.
     func updateApi(
-      request: UpdateApiRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateApiRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.updateApi`.
     func updateApi(
-      withPolling: UpdateApiRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Api>
+      withPolling: UpdateApiRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Api>
 
     /// See `ApiGatewayServiceClient.deleteApi`.
     func deleteApi(
-      request: DeleteApiRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteApiRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.deleteApi`.
     func deleteApi(
-      withPolling: DeleteApiRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteApiRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiGatewayServiceClient.listApiConfigs`.
     func listApiConfigs(
-      request: ListApiConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListApiConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiGatewayV1.ListApiConfigsResponse
 
     /// See `ApiGatewayServiceClient.listApiConfigs`.
     func listApiConfigs(
-      byItem: ListApiConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListApiConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ApiConfig, Swift.Error>
 
     /// See `ApiGatewayServiceClient.getApiConfig`.
     func getApiConfig(
-      request: GetApiConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetApiConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudApiGatewayV1.ApiConfig
 
     /// See `ApiGatewayServiceClient.createApiConfig`.
     func createApiConfig(
-      request: CreateApiConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateApiConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.createApiConfig`.
     func createApiConfig(
-      withPolling: CreateApiConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig>
+      withPolling: CreateApiConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ApiConfig>
 
     /// See `ApiGatewayServiceClient.updateApiConfig`.
     func updateApiConfig(
-      request: UpdateApiConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateApiConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.updateApiConfig`.
     func updateApiConfig(
-      withPolling: UpdateApiConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig>
+      withPolling: UpdateApiConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ApiConfig>
 
     /// See `ApiGatewayServiceClient.deleteApiConfig`.
     func deleteApiConfig(
-      request: DeleteApiConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteApiConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ApiGatewayServiceClient.deleteApiConfig`.
     func deleteApiConfig(
-      withPolling: DeleteApiConfigRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteApiConfigRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ApiGatewayServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ApiGatewayServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ApiGatewayServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ApiGatewayServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -909,9 +908,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func listGateways(
-    request: ListGatewaysRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGatewaysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.ListGatewaysResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listGateways(
@@ -921,13 +920,13 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func listGateways(
-    byItem: ListGatewaysRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGatewaysRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Gateway, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiGatewayV1.ListGatewaysResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listGateways(
@@ -945,9 +944,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func getGateway(
-    request: GetGatewayRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGatewayRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.Gateway {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getGateway(
@@ -966,24 +965,24 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func createGateway(
-    request: CreateGatewayRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGatewayRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createGateway(withPolling: CreateGatewayRequest) async throws -> any GoogleCloudGax
+  public func createGateway(withPolling: CreateGatewayRequest) async throws -> any GoogleGax
     .PollableOperation<Gateway>
   {
     try await self.createGateway(withPolling: withPolling, options: .init())
   }
 
   public func createGateway(
-    withPolling: CreateGatewayRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Gateway> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Gateway>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateGatewayRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Gateway> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Gateway>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -991,7 +990,7 @@ extension Clients.ApiGatewayServiceProtocol {
     parent: Swift.String,
     gateway: Gateway?,
     gatewayId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Gateway> {
+  ) async throws -> any GoogleGax.PollableOperation<Gateway> {
     let request = CreateGatewayRequest().with {
       $0.parent = parent
       $0.gateway = gateway
@@ -1007,31 +1006,31 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func updateGateway(
-    request: UpdateGatewayRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGatewayRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateGateway(withPolling: UpdateGatewayRequest) async throws -> any GoogleCloudGax
+  public func updateGateway(withPolling: UpdateGatewayRequest) async throws -> any GoogleGax
     .PollableOperation<Gateway>
   {
     try await self.updateGateway(withPolling: withPolling, options: .init())
   }
 
   public func updateGateway(
-    withPolling: UpdateGatewayRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Gateway> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Gateway>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateGatewayRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Gateway> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Gateway>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateGateway(
     gateway: Gateway?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Gateway> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Gateway> {
     let request = UpdateGatewayRequest().with {
       $0.gateway = gateway
       $0.updateMask = updateMask
@@ -1046,30 +1045,30 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func deleteGateway(
-    request: DeleteGatewayRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGatewayRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteGateway(withPolling: DeleteGatewayRequest) async throws -> any GoogleCloudGax
+  public func deleteGateway(withPolling: DeleteGatewayRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteGateway(withPolling: withPolling, options: .init())
   }
 
   public func deleteGateway(
-    withPolling: DeleteGatewayRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteGatewayRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteGateway(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteGatewayRequest().with {
       $0.name = name
     }
@@ -1083,9 +1082,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func listApis(
-    request: ListApisRequest, options: GoogleCloudGax.RequestOptions
+    request: ListApisRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.ListApisResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listApis(
@@ -1095,13 +1094,13 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func listApis(
-    byItem: ListApisRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListApisRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Api, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiGatewayV1.ListApisResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listApis(
@@ -1118,9 +1117,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func getApi(
-    request: GetApiRequest, options: GoogleCloudGax.RequestOptions
+    request: GetApiRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.Api {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getApi(
@@ -1137,24 +1136,24 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func createApi(
-    request: CreateApiRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateApiRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createApi(withPolling: CreateApiRequest) async throws -> any GoogleCloudGax
+  public func createApi(withPolling: CreateApiRequest) async throws -> any GoogleGax
     .PollableOperation<Api>
   {
     try await self.createApi(withPolling: withPolling, options: .init())
   }
 
   public func createApi(
-    withPolling: CreateApiRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Api> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Api>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateApiRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Api> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Api>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1162,7 +1161,7 @@ extension Clients.ApiGatewayServiceProtocol {
     parent: Swift.String,
     api: Api?,
     apiId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Api> {
+  ) async throws -> any GoogleGax.PollableOperation<Api> {
     let request = CreateApiRequest().with {
       $0.parent = parent
       $0.api = api
@@ -1176,31 +1175,31 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func updateApi(
-    request: UpdateApiRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateApiRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateApi(withPolling: UpdateApiRequest) async throws -> any GoogleCloudGax
+  public func updateApi(withPolling: UpdateApiRequest) async throws -> any GoogleGax
     .PollableOperation<Api>
   {
     try await self.updateApi(withPolling: withPolling, options: .init())
   }
 
   public func updateApi(
-    withPolling: UpdateApiRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Api> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Api>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateApiRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Api> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Api>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateApi(
     api: Api?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Api> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Api> {
     let request = UpdateApiRequest().with {
       $0.api = api
       $0.updateMask = updateMask
@@ -1213,30 +1212,30 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func deleteApi(
-    request: DeleteApiRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteApiRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteApi(withPolling: DeleteApiRequest) async throws -> any GoogleCloudGax
+  public func deleteApi(withPolling: DeleteApiRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteApi(withPolling: withPolling, options: .init())
   }
 
   public func deleteApi(
-    withPolling: DeleteApiRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteApiRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteApi(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteApiRequest().with {
       $0.name = name
     }
@@ -1250,9 +1249,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func listApiConfigs(
-    request: ListApiConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListApiConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.ListApiConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listApiConfigs(
@@ -1262,13 +1261,13 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func listApiConfigs(
-    byItem: ListApiConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListApiConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ApiConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudApiGatewayV1.ListApiConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listApiConfigs(
@@ -1287,9 +1286,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func getApiConfig(
-    request: GetApiConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetApiConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudApiGatewayV1.ApiConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getApiConfig(
@@ -1308,24 +1307,24 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func createApiConfig(
-    request: CreateApiConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateApiConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createApiConfig(withPolling: CreateApiConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ApiConfig>
+  public func createApiConfig(withPolling: CreateApiConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<ApiConfig>
   {
     try await self.createApiConfig(withPolling: withPolling, options: .init())
   }
 
   public func createApiConfig(
-    withPolling: CreateApiConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ApiConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateApiConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ApiConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ApiConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1333,7 +1332,7 @@ extension Clients.ApiGatewayServiceProtocol {
     parent: Swift.String,
     apiConfig: ApiConfig?,
     apiConfigId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig> {
+  ) async throws -> any GoogleGax.PollableOperation<ApiConfig> {
     let request = CreateApiConfigRequest().with {
       $0.parent = parent
       $0.apiConfig = apiConfig
@@ -1349,31 +1348,31 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func updateApiConfig(
-    request: UpdateApiConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateApiConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateApiConfig(withPolling: UpdateApiConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ApiConfig>
+  public func updateApiConfig(withPolling: UpdateApiConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<ApiConfig>
   {
     try await self.updateApiConfig(withPolling: withPolling, options: .init())
   }
 
   public func updateApiConfig(
-    withPolling: UpdateApiConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ApiConfig>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateApiConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ApiConfig> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ApiConfig>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateApiConfig(
     apiConfig: ApiConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ApiConfig> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<ApiConfig> {
     let request = UpdateApiConfigRequest().with {
       $0.apiConfig = apiConfig
       $0.updateMask = updateMask
@@ -1388,30 +1387,30 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func deleteApiConfig(
-    request: DeleteApiConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteApiConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteApiConfig(withPolling: DeleteApiConfigRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteApiConfig(withPolling: DeleteApiConfigRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteApiConfig(withPolling: withPolling, options: .init())
   }
 
   public func deleteApiConfig(
-    withPolling: DeleteApiConfigRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteApiConfigRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteApiConfig(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteApiConfigRequest().with {
       $0.name = name
     }
@@ -1425,9 +1424,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1437,13 +1436,13 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1464,9 +1463,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1483,9 +1482,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1502,9 +1501,9 @@ extension Clients.ApiGatewayServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

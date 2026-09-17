@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIAMV1
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// IAM Policy analysis result, consisting of one IAM policy binding and derived
 /// access control lists.
-public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The [full resource
@@ -57,7 +57,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// [google.cloud.asset.v1.IamPolicyAnalysisResult.iam_binding]: <doc:IamPolicyAnalysisResult/iamBinding>
   public var fullyExplored: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IamPolicyAnalysisResult`.
   public init() {}
@@ -116,7 +116,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -133,7 +133,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
   }
 
   /// A Google Cloud resource under analysis.
-  public struct Resource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Resource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The [full resource
@@ -143,7 +143,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// The analysis state of this resource.
     public var analysisState: IamPolicyAnalysisState? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Resource`.
     public init() {}
@@ -185,7 +185,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
         IamPolicyAnalysisState.self, forKey: .analysisState)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -201,16 +201,16 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.IamPolicyAnalysisResult.Resource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An IAM role or permission under analysis.
-  public struct Access: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Access: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The analysis state of this access.
@@ -218,7 +218,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
 
     public var oneofAccess: OneOf_OneofAccess? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Access`.
     public init() {}
@@ -277,7 +277,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
       self.oneofAccess = oneofAccess
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -308,16 +308,16 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.IamPolicyAnalysisResult.Access"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// An identity under analysis.
-  public struct Identity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Identity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The identity of members, formatted as appear in an
@@ -336,7 +336,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// The analysis state of this identity.
     public var analysisState: IamPolicyAnalysisState? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Identity`.
     public init() {}
@@ -378,7 +378,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
         IamPolicyAnalysisState.self, forKey: .analysisState)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -394,16 +394,16 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.IamPolicyAnalysisResult.Identity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A directional edge.
-  public struct Edge: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Edge: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The source node of the edge. For example, it could be a full resource
@@ -414,7 +414,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// name for a resource node or an email of an identity.
     public var targetNode: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Edge`.
     public init() {}
@@ -457,7 +457,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -473,11 +473,11 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.IamPolicyAnalysisResult.Edge"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -496,7 +496,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// This will result in the following access control lists:
   /// - AccessControlList 1: [R1, R2], [P1, P2]
   /// - AccessControlList 2: [R2, R3], [P3]
-  public struct AccessControlList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccessControlList: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The resources that match one of the following conditions:
@@ -525,7 +525,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// defined in the above IAM policy binding.
     public var conditionEvaluation: ConditionEvaluation? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccessControlList`.
     public init() {}
@@ -583,7 +583,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
         ConditionEvaluation.self, forKey: .conditionEvaluation)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -601,16 +601,16 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.IamPolicyAnalysisResult.AccessControlList"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The identities and group edges.
-  public struct IdentityList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IdentityList: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Only the identities that match one of the following conditions will be
@@ -635,7 +635,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// [google.cloud.asset.v1.IamPolicyAnalysisResult.IdentityList.identities]: <doc:IamPolicyAnalysisResult/IdentityList/identities>
     public var groupEdges: [IamPolicyAnalysisResult.Edge] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IdentityList`.
     public init() {}
@@ -682,7 +682,7 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -698,21 +698,21 @@ public struct IamPolicyAnalysisResult: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.IamPolicyAnalysisResult.IdentityList"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.IamPolicyAnalysisResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

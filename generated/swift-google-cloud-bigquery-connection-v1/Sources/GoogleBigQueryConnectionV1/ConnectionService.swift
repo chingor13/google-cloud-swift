@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Manages external data source connections and credentials.
 ///
@@ -29,7 +29,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   let inner: any Clients.ConnectionServiceStub
 
   /// Creates a new `ConnectionServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ConnectionServiceStub = try Clients.ConnectionServiceTransport(options)
     inner = Clients.ConnectionServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -42,7 +42,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_CreateConnection")
   public func createConnection(
-    request: CreateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryConnectionV1.Connection {
     try await self.inner.createConnection(request: request, options: options)
   }
@@ -51,7 +51,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_GetConnection")
   public func getConnection(
-    request: GetConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryConnectionV1.Connection {
     try await self.inner.getConnection(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_ListConnections")
   public func listConnections(
-    request: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConnectionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryConnectionV1.ListConnectionsResponse {
     try await self.inner.listConnections(request: request, options: options)
   }
@@ -69,7 +69,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_ListConnections")
   public func listConnections(
-    byItem: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConnectionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Connection, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryConnectionV1.ListConnectionsResponse in
@@ -77,7 +77,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
       request.pageToken = token
       return try await self.listConnections(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates the specified connection. For security reasons, also resets
@@ -85,7 +85,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_UpdateConnection")
   public func updateConnection(
-    request: UpdateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryConnectionV1.Connection {
     try await self.inner.updateConnection(request: request, options: options)
   }
@@ -94,7 +94,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_DeleteConnection")
   public func deleteConnection(
-    request: DeleteConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteConnection(request: request, options: options)
   }
@@ -105,7 +105,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -117,7 +117,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -132,7 +132,7 @@ public final class ConnectionServiceClient: Clients.ConnectionServiceProtocol, S
   ///
   /// @Snippet(path: "ConnectionService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -187,7 +187,7 @@ extension Clients {
     func updateConnection(
       name: Swift.String,
       connection: Connection?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleBigQueryConnectionV1.Connection
 
     /// See `ConnectionServiceClient.deleteConnection`.
@@ -228,47 +228,47 @@ extension Clients {
 
     /// See `ConnectionServiceClient.createConnection`.
     func createConnection(
-      request: CreateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection
 
     /// See `ConnectionServiceClient.getConnection`.
     func getConnection(
-      request: GetConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection
 
     /// See `ConnectionServiceClient.listConnections`.
     func listConnections(
-      request: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.ListConnectionsResponse
 
     /// See `ConnectionServiceClient.listConnections`.
     func listConnections(
-      byItem: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConnectionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Connection, Swift.Error>
 
     /// See `ConnectionServiceClient.updateConnection`.
     func updateConnection(
-      request: UpdateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryConnectionV1.Connection
 
     /// See `ConnectionServiceClient.deleteConnection`.
     func deleteConnection(
-      request: DeleteConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ConnectionServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ConnectionServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `ConnectionServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -282,9 +282,9 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func createConnection(
-    request: CreateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryConnectionV1.Connection {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createConnection(
@@ -307,9 +307,9 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func getConnection(
-    request: GetConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryConnectionV1.Connection {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConnection(
@@ -328,9 +328,9 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func listConnections(
-    request: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConnectionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryConnectionV1.ListConnectionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listConnections(
@@ -340,13 +340,13 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func listConnections(
-    byItem: ListConnectionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConnectionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Connection, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleBigQueryConnectionV1.ListConnectionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listConnections(
@@ -365,15 +365,15 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func updateConnection(
-    request: UpdateConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleBigQueryConnectionV1.Connection {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateConnection(
     name: Swift.String,
     connection: Connection?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleBigQueryConnectionV1.Connection {
     let request = UpdateConnectionRequest().with {
       $0.name = name
@@ -388,9 +388,9 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func deleteConnection(
-    request: DeleteConnectionRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConnectionRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteConnection(
@@ -409,9 +409,9 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -432,9 +432,9 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -455,9 +455,9 @@ extension Clients.ConnectionServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(

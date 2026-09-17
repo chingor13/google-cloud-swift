@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVPCAccessV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: VpcAccessServiceClient, projectId: String, locationId: String, connectorId: String

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request message for the text annotation API, which can perform multiple
 /// analysis types in one call.
-public struct AnnotateTextRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AnnotateTextRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Input document.
@@ -31,7 +31,7 @@ public struct AnnotateTextRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// The encoding type used by the API to calculate offsets.
   public var encodingType: EncodingType = EncodingType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AnnotateTextRequest`.
   public init() {}
@@ -76,7 +76,7 @@ public struct AnnotateTextRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,7 +92,7 @@ public struct AnnotateTextRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   /// All available features.
   /// Setting each one to true will enable that specific analysis for the input.
-  public struct Features: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Features: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Extract entities.
@@ -107,7 +107,7 @@ public struct AnnotateTextRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// Optional. Moderate the document for harmful and sensitive categories.
     public var moderateText: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Features`.
     public init() {}
@@ -162,7 +162,7 @@ public struct AnnotateTextRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -180,21 +180,21 @@ public struct AnnotateTextRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.language.v2.AnnotateTextRequest.Features"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.language.v2.AnnotateTextRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,11 +16,11 @@
 
 #if OrganizationSecurityPolicies || RegionSecurityPolicies || SecurityPolicies
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a rule that describes one or more match conditions along with
   /// the action to be taken when traffic matches this condition (allow or deny).
-  public struct SecurityPolicyRule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SecurityPolicyRule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Action to perform when the rule is matched.
@@ -128,7 +128,7 @@
     /// CLOUD_ARMOR.
     public var redirectOptions: SecurityPolicyRuleRedirectOptions? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SecurityPolicyRule`.
     public init() {}
@@ -199,7 +199,7 @@
         SecurityPolicyRuleRedirectOptions.self, forKey: .redirectOptions)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -224,11 +224,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.SecurityPolicyRule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

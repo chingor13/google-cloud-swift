@@ -15,23 +15,23 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol FleetRoutingStub: Sendable {
     func optimizeTours(
-      request: OptimizeToursRequest, options: GoogleCloudGax.RequestOptions
+      request: OptimizeToursRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOptimizationV1.OptimizeToursResponse
 
     func batchOptimizeTours(
-      request: BatchOptimizeToursRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchOptimizeToursRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings that determine the retry behavior.
 ///
@@ -25,7 +25,7 @@ import Foundation
 /// [RetryConfig][google.cloud.scheduler.v1.RetryConfig].
 ///
 /// [google.cloud.scheduler.v1.RetryConfig]: <doc:RetryConfig>
-public struct RetryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RetryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The number of attempts that the system will make to run a job using the
@@ -58,19 +58,19 @@ public struct RetryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// duration is unlimited.
   ///
   /// [google.cloud.scheduler.v1.RetryConfig.retry_count]: <doc:RetryConfig/retryCount>
-  public var maxRetryDuration: GoogleCloudWKT.Duration? = nil
+  public var maxRetryDuration: GoogleWKT.Duration? = nil
 
   /// The minimum amount of time to wait before retrying a job after
   /// it fails.
   ///
   /// The default value of this field is 5 seconds.
-  public var minBackoffDuration: GoogleCloudWKT.Duration? = nil
+  public var minBackoffDuration: GoogleWKT.Duration? = nil
 
   /// The maximum amount of time to wait before retrying a job after
   /// it fails.
   ///
   /// The default value of this field is 1 hour.
-  public var maxBackoffDuration: GoogleCloudWKT.Duration? = nil
+  public var maxBackoffDuration: GoogleWKT.Duration? = nil
 
   /// The time between retries will double `max_doublings` times.
   ///
@@ -102,7 +102,7 @@ public struct RetryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.scheduler.v1.RetryConfig.retry_count]: <doc:RetryConfig/retryCount>
   public var maxDoublings: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RetryConfig`.
   public init() {}
@@ -147,17 +147,17 @@ public struct RetryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.retryCount = value
     }
     self.maxRetryDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxRetryDuration)
+      GoogleWKT.Duration.self, forKey: .maxRetryDuration)
     self.minBackoffDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .minBackoffDuration)
+      GoogleWKT.Duration.self, forKey: .minBackoffDuration)
     self.maxBackoffDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxBackoffDuration)
+      GoogleWKT.Duration.self, forKey: .maxBackoffDuration)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .maxDoublings) {
       self.maxDoublings = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -176,10 +176,10 @@ public struct RetryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.scheduler.v1.RetryConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

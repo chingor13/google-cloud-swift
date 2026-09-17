@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources
 ///
@@ -30,7 +30,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   let inner: any Clients.AppTopologyStub
 
   /// Creates a new `AppTopologyClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AppTopologyStub = try Clients.AppTopologyTransport(options)
     inner = Clients.AppTopologyRetry(inner, options: options)
     if let logger = options.logger {
@@ -47,7 +47,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_GenerateDiscoveredResourcesTopology")
   public func generateDiscoveredResourcesTopology(
-    request: GenerateDiscoveredResourcesTopologyRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateDiscoveredResourcesTopologyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAppTopologyV1.GenerateDiscoveredResourcesTopologyResponse {
     try await self.inner.generateDiscoveredResourcesTopology(request: request, options: options)
   }
@@ -59,7 +59,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_GetSchema")
   public func getSchema(
-    request: GetSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAppTopologyV1.Schema {
     try await self.inner.getSchema(request: request, options: options)
   }
@@ -68,7 +68,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_GetDomain")
   public func getDomain(
-    request: GetDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAppTopologyV1.Domain {
     try await self.inner.getDomain(request: request, options: options)
   }
@@ -78,7 +78,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_ListDomains")
   public func listDomains(
-    request: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDomainsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAppTopologyV1.ListDomainsResponse {
     try await self.inner.listDomains(request: request, options: options)
   }
@@ -88,7 +88,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_ListDomains")
   public func listDomains(
-    byItem: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDomainsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Domain, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAppTopologyV1.ListDomainsResponse in
@@ -96,7 +96,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
       request.pageToken = token
       return try await self.listDomains(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
@@ -120,7 +120,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -146,7 +146,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -154,14 +154,14 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "AppTopology_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -172,7 +172,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -183,7 +183,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -191,7 +191,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -200,7 +200,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -211,7 +211,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -222,7 +222,7 @@ public final class AppTopologyClient: Clients.AppTopologyProtocol, Sendable {
   ///
   /// @Snippet(path: "AppTopology_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -321,62 +321,62 @@ extension Clients {
 
     /// See `AppTopologyClient.generateDiscoveredResourcesTopology`.
     func generateDiscoveredResourcesTopology(
-      request: GenerateDiscoveredResourcesTopologyRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateDiscoveredResourcesTopologyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppTopologyV1.GenerateDiscoveredResourcesTopologyResponse
 
     /// See `AppTopologyClient.getSchema`.
     func getSchema(
-      request: GetSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppTopologyV1.Schema
 
     /// See `AppTopologyClient.getDomain`.
     func getDomain(
-      request: GetDomainRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDomainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppTopologyV1.Domain
 
     /// See `AppTopologyClient.listDomains`.
     func listDomains(
-      request: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDomainsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAppTopologyV1.ListDomainsResponse
 
     /// See `AppTopologyClient.listDomains`.
     func listDomains(
-      byItem: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDomainsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Domain, Swift.Error>
 
     /// See `AppTopologyClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `AppTopologyClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `AppTopologyClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `AppTopologyClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `AppTopologyClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `AppTopologyClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AppTopologyClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -390,9 +390,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func generateDiscoveredResourcesTopology(
-    request: GenerateDiscoveredResourcesTopologyRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateDiscoveredResourcesTopologyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAppTopologyV1.GenerateDiscoveredResourcesTopologyResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateDiscoveredResourcesTopology(
@@ -411,9 +411,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func getSchema(
-    request: GetSchemaRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSchemaRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAppTopologyV1.Schema {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSchema(
@@ -430,9 +430,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func getDomain(
-    request: GetDomainRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDomainRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAppTopologyV1.Domain {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDomain(
@@ -451,9 +451,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func listDomains(
-    request: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDomainsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAppTopologyV1.ListDomainsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDomains(
@@ -463,13 +463,13 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func listDomains(
-    byItem: ListDomainsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDomainsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Domain, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAppTopologyV1.ListDomainsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDomains(
@@ -488,9 +488,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -500,13 +500,13 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -516,9 +516,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -528,9 +528,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -540,13 +540,13 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -567,9 +567,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -586,9 +586,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -605,9 +605,9 @@ extension Clients.AppTopologyProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

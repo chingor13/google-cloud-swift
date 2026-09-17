@@ -17,7 +17,7 @@ import Synchronization
 import Testing
 import GoogleRpc
 
-@testable import GoogleCloudGax
+@testable import GoogleGax
 
 @Suite struct PollableOperationTest {
   struct MockError: Error, Equatable {

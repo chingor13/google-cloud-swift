@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Corpus is a set of media contents for management.
 /// Within a corpus, media shares the same data schema. Search is also restricted
 /// within a single corpus.
-public struct Corpus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Corpus: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Resource name of the corpus.
@@ -39,7 +39,7 @@ public struct Corpus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// asset level user-defined TTL. For STREAM_VIDEO type corpora, this is
   /// required and the maximum allowed
   ///   default_ttl is 10 years.
-  public var defaultTtl: GoogleCloudWKT.Duration? = nil
+  public var defaultTtl: GoogleWKT.Duration? = nil
 
   /// Optional. Type of the asset inside corpus.
   public var type: Corpus.Type_ = Corpus.Type_()
@@ -57,7 +57,7 @@ public struct Corpus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the corpus is a valid zone isolated corpus and false if it isn't.
   public var satisfiesPzi: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Corpus`.
   public init() {}
@@ -113,8 +113,7 @@ public struct Corpus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.defaultTtl = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .defaultTtl)
+    self.defaultTtl = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .defaultTtl)
     if let value = try container.decodeIfPresent(Corpus.Type_.self, forKey: .type) {
       self.type = value
     }
@@ -124,7 +123,7 @@ public struct Corpus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.satisfiesPzi = try container.decodeIfPresent(Swift.Bool.self, forKey: .satisfiesPzi)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -259,10 +258,10 @@ public struct Corpus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.Corpus"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

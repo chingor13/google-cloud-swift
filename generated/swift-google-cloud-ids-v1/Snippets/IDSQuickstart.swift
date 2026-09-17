@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudIDSV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudIDSV1.IDSClient()

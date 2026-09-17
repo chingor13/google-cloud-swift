@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 import InMemoryLogging
 import Logging
 
@@ -22,7 +22,7 @@ public func runLoggedTest(_ name: String, _ test: (Logger) async throws -> Void)
   let logger = Logger(label: "logging.test", factory: { (_: String) in handler })
   do {
     try await test(logger)
-  } catch let e as GoogleCloudGax.RequestError {
+  } catch let e as GoogleGax.RequestError {
     try reportRequestError(name, error: e, handler: handler)
   } catch {
     try reportError(name, error: error, handler: handler)
@@ -30,7 +30,7 @@ public func runLoggedTest(_ name: String, _ test: (Logger) async throws -> Void)
 }
 
 func reportRequestError(
-  _ name: String, error: GoogleCloudGax.RequestError, handler: InMemoryLogHandler
+  _ name: String, error: GoogleGax.RequestError, handler: InMemoryLogHandler
 ) throws {
   for entry in handler.entries {
     print("\(entry.message)")

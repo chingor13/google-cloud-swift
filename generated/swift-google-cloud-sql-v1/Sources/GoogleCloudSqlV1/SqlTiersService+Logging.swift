@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func list(
-        request: SqlTiersListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlTiersListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.TiersListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: SqlTiersListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlTiersListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.TiersListResponse
             in
             return try await self.inner.list(request: r, options: o)

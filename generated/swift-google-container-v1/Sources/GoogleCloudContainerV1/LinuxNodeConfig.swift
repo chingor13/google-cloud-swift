@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Parameters that can be configured on Linux nodes.
-public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LinuxNodeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The Linux kernel parameters to be applied to the nodes and all pods running
@@ -134,7 +134,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Controls the configuration for the disk IO scheduler.
   public var diskIoScheduler: DiskIoScheduler? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LinuxNodeConfig`.
   public init() {}
@@ -223,7 +223,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       DiskIoScheduler.self, forKey: .diskIoScheduler)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -246,7 +246,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Hugepages amount in both 2m and 1g size
-  public struct HugepagesConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HugepagesConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Amount of 2M hugepages
@@ -255,7 +255,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Amount of 1G hugepages
     public var hugepageSize1G: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HugepagesConfig`.
     public init() {}
@@ -294,7 +294,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.hugepageSize1G = try container.decodeIfPresent(Swift.Int32.self, forKey: .hugepageSize1G)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -310,22 +310,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.HugepagesConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Support for running custom init code while bootstrapping nodes.
-  public struct CustomNodeInit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CustomNodeInit: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The init script to be executed on the node.
     public var initScript: LinuxNodeConfig.CustomNodeInit.InitScript? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CustomNodeInit`.
     public init() {}
@@ -362,7 +362,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         LinuxNodeConfig.CustomNodeInit.InitScript.self, forKey: .initScript)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -375,7 +375,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// InitScript provide a simply bash script to be executed on the node.
-    public struct InitScript: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InitScript: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The Cloud Storage URI for storing the init script.
@@ -407,7 +407,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// User can't configure both gcp_secret_manager_secret_uri and gcs_uri.
       public var gcpSecretManagerSecretUri: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InitScript`.
       public init() {}
@@ -462,7 +462,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -480,27 +480,27 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.container.v1.LinuxNodeConfig.CustomNodeInit.InitScript"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.CustomNodeInit"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for swap memory on a node pool.
-  public struct SwapConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SwapConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Enables or disables swap for the node pool.
@@ -513,7 +513,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// If omitted, defaults to the 'boot_disk_profile'.
     public var performanceProfile: OneOf_PerformanceProfile? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SwapConfig`.
     public init() {}
@@ -586,7 +586,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.performanceProfile = performanceProfile
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -611,14 +611,14 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Defines encryption settings for the swap space.
-    public struct EncryptionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EncryptionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. If true, swap space will not be encrypted.
       /// Defaults to false (encrypted).
       public var disabled: Swift.Bool? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EncryptionConfig`.
       public init() {}
@@ -654,7 +654,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.disabled = try container.decodeIfPresent(Swift.Bool.self, forKey: .disabled)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -669,23 +669,23 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig.EncryptionConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Swap on the node's boot disk.
-    public struct BootDiskProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BootDiskProfile: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Specifies the size of the swap space. If omitted, GKE
       /// determines an optimal size based on node memory.
       public var swapSize: OneOf_SwapSize? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BootDiskProfile`.
       public init() {}
@@ -742,7 +742,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.swapSize = swapSize
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -775,22 +775,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig.BootDiskProfile"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Swap on the local SSD shared with pod ephemeral storage.
-    public struct EphemeralLocalSsdProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EphemeralLocalSsdProfile: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specifies the size of the swap space to be provisioned.
       public var swapSize: OneOf_SwapSize? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EphemeralLocalSsdProfile`.
       public init() {}
@@ -847,7 +847,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.swapSize = swapSize
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -880,22 +880,22 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig.EphemeralLocalSsdProfile"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Provisions a new, separate local NVMe SSD exclusively for swap.
-    public struct DedicatedLocalSsdProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DedicatedLocalSsdProfile: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The number of physical local NVMe SSD disks to attach.
       public var diskCount: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DedicatedLocalSsdProfile`.
       public init() {}
@@ -933,7 +933,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -949,11 +949,11 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig.DedicatedLocalSsdProfile"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -971,23 +971,23 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.SwapConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for kernel module loading on nodes.
-  public struct NodeKernelModuleLoading: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NodeKernelModuleLoading: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Set the node module loading policy for nodes in the node pool.
     public var policy: LinuxNodeConfig.NodeKernelModuleLoading.Policy = LinuxNodeConfig
       .NodeKernelModuleLoading.Policy()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NodeKernelModuleLoading`.
     public init() {}
@@ -1027,7 +1027,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1160,23 +1160,23 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.NodeKernelModuleLoading"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// AccurateTimeConfig contains configuration for the accurate time
   /// synchronization feature.
-  public struct AccurateTimeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AccurateTimeConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Enables enhanced time synchronization using PTP-KVM.
     public var enablePtpKvmTimeSync: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AccurateTimeConfig`.
     public init() {}
@@ -1213,7 +1213,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Swift.Bool.self, forKey: .enablePtpKvmTimeSync)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1228,17 +1228,17 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.AccurateTimeConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration settings for VFIO (Virtual Function I/O) on a node.
   /// VFIO allows safe, unprivileged, userspace drivers to access I/O devices.
-  public struct NodeVfioConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NodeVfioConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Specifies the maximum number of DMA entries (pages) that can be
@@ -1252,7 +1252,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Supported values are integers between `65535` and `4194304`.
     public var dmaEntryLimit: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NodeVfioConfig`.
     public init() {}
@@ -1288,7 +1288,7 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.dmaEntryLimit = try container.decodeIfPresent(Swift.Int32.self, forKey: .dmaEntryLimit)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1303,11 +1303,11 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.LinuxNodeConfig.NodeVfioConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1674,10 +1674,10 @@ public struct LinuxNodeConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.LinuxNodeConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

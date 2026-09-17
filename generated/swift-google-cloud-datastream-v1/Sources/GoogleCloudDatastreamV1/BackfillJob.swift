@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a backfill job on a specific stream object.
-public struct BackfillJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackfillJob: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Backfill job state.
@@ -28,15 +28,15 @@ public struct BackfillJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var trigger: BackfillJob.Trigger = BackfillJob.Trigger()
 
   /// Output only. Backfill job's start time.
-  public var lastStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastStartTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Backfill job's end time.
-  public var lastEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastEndTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Errors which caused the backfill job to fail.
   public var errors: [Error] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackfillJob`.
   public init() {}
@@ -84,15 +84,14 @@ public struct BackfillJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.trigger = value
     }
     self.lastStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastStartTime)
-    self.lastEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastEndTime)
+      GoogleWKT.Timestamp.self, forKey: .lastStartTime)
+    self.lastEndTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .lastEndTime)
     if let value = try container.decodeIfPresent([Error].self, forKey: .errors) {
       self.errors = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -360,10 +359,10 @@ public struct BackfillJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datastream.v1.BackfillJob"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

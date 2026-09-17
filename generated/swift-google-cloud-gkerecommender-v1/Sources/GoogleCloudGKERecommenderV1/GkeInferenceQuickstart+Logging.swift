@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func fetchModels(
-      request: FetchModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "fetchModels",
         action: {
-          (r: FetchModelsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchModelsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchModelsResponse
           in
           return try await self.inner.fetchModels(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func fetchModelServers(
-      request: FetchModelServersRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelServersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "fetchModelServers",
         action: {
-          (r: FetchModelServersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchModelServersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchModelServersResponse
           in
           return try await self.inner.fetchModelServers(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func fetchModelServerVersions(
-      request: FetchModelServerVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelServerVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelServerVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "fetchModelServerVersions",
         action: {
-          (r: FetchModelServerVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchModelServerVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchModelServerVersionsResponse
           in
           return try await self.inner.fetchModelServerVersions(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func fetchProfiles(
-      request: FetchProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchProfilesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "fetchProfiles",
         action: {
-          (r: FetchProfilesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchProfilesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchProfilesResponse
           in
           return try await self.inner.fetchProfiles(request: r, options: o)
@@ -117,14 +117,14 @@ extension Clients {
     }
 
     public func generateOptimizedManifest(
-      request: GenerateOptimizedManifestRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateOptimizedManifestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.GenerateOptimizedManifestResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "generateOptimizedManifest",
         action: {
-          (r: GenerateOptimizedManifestRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GenerateOptimizedManifestRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.GenerateOptimizedManifestResponse
           in
           return try await self.inner.generateOptimizedManifest(request: r, options: o)
@@ -132,14 +132,14 @@ extension Clients {
     }
 
     public func fetchBenchmarkingData(
-      request: FetchBenchmarkingDataRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchBenchmarkingDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchBenchmarkingDataResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "fetchBenchmarkingData",
         action: {
-          (r: FetchBenchmarkingDataRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchBenchmarkingDataRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchBenchmarkingDataResponse
           in
           return try await self.inner.fetchBenchmarkingData(request: r, options: o)

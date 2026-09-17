@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents civil time (or occasionally physical time).
 ///
@@ -41,7 +41,7 @@ import Foundation
 ///
 /// This type is more flexible than some applications may want. Make sure to
 /// document and validate your application's limitations.
-public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DateTime: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Year of date. Must be from 1 to 9999, or 0 if specifying a
@@ -79,7 +79,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// If omitted, the DateTime is considered to be in local time.
   public var timeOffset: OneOf_TimeOffset? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DateTime`.
   public init() {}
@@ -160,9 +160,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       timeOffset = $0
     }
-    if let utcOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration?.self, forKey: .utcOffset)
-    {
+    if let utcOffset = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .utcOffset) {
       try timeOffsetCheckAndSet(.utcOffset(utcOffset))
     }
     if let timeZone = try container.decodeIfPresent(TimeZone?.self, forKey: .timeZone) {
@@ -171,7 +169,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.timeOffset = timeOffset
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -207,7 +205,7 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// UTC offset. Must be whole seconds, between -18 hours and +18 hours.
     /// For example, a UTC offset of -4:00 would be represented as
     /// { seconds: -14400 }.
-    indirect case utcOffset(GoogleCloudWKT.Duration?)
+    indirect case utcOffset(GoogleWKT.Duration?)
     /// Time zone.
     indirect case timeZone(TimeZone?)
   }
@@ -215,10 +213,10 @@ public struct DateTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.type.DateTime"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

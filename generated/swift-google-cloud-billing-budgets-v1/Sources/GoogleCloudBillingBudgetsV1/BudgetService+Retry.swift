@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class BudgetServiceRetry: BudgetServiceStub {
     let inner: any BudgetServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any BudgetServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any BudgetServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func createBudget(
-      request: CreateBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateBudgetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateBudgetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingBudgetsV1.Budget
           in
           return try await self.inner.createBudget(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func updateBudget(
-      request: UpdateBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateBudgetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateBudgetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingBudgetsV1.Budget
           in
           return try await self.inner.updateBudget(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func getBudget(
-      request: GetBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetBudgetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetBudgetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingBudgetsV1.Budget
           in
           return try await self.inner.getBudget(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func listBudgets(
-      request: ListBudgetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBudgetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.ListBudgetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListBudgetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListBudgetsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingBudgetsV1.ListBudgetsResponse
           in
           return try await self.inner.listBudgets(request: r, options: o)
@@ -109,13 +109,13 @@ extension Clients {
     }
 
     public func deleteBudget(
-      request: DeleteBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: { (r: DeleteBudgetRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteBudgetRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteBudget(request: r, options: o)
         })
     }

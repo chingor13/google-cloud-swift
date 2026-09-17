@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request to export an issue model.
-public struct ExportIssueModelRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExportIssueModelRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The issue model to export.
@@ -26,7 +26,7 @@ public struct ExportIssueModelRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
 
   public var destination: OneOf_Destination? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExportIssueModelRequest`.
   public init() {}
@@ -83,7 +83,7 @@ public struct ExportIssueModelRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
     self.destination = destination
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,13 +103,13 @@ public struct ExportIssueModelRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   }
 
   /// Google Cloud Storage Object URI to save the issue model to.
-  public struct GcsDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GcsDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Format: `gs://<bucket-name>/<object-name>`
     public var objectUri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GcsDestination`.
     public init() {}
@@ -147,7 +147,7 @@ public struct ExportIssueModelRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -163,11 +163,11 @@ public struct ExportIssueModelRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.ExportIssueModelRequest.GcsDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -179,10 +179,10 @@ public struct ExportIssueModelRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.ExportIssueModelRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

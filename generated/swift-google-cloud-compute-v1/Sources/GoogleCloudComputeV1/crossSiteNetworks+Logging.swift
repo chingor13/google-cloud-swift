@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,29 +58,29 @@
       }
 
       public func delete(
-        request: CrossSiteNetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: CrossSiteNetworksClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: CrossSiteNetworksClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
           })
       }
 
       public func `get`(
-        request: CrossSiteNetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetwork {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: CrossSiteNetworksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CrossSiteNetworksClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.CrossSiteNetwork
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -88,29 +88,29 @@
       }
 
       public func insert(
-        request: CrossSiteNetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: CrossSiteNetworksClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: CrossSiteNetworksClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
           })
       }
 
       public func list(
-        request: CrossSiteNetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CrossSiteNetworkList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: CrossSiteNetworksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CrossSiteNetworksClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.CrossSiteNetworkList
             in
             return try await self.inner.list(request: r, options: o)
@@ -118,14 +118,14 @@
       }
 
       public func patch(
-        request: CrossSiteNetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: CrossSiteNetworksClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: CrossSiteNetworksClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CrossSiteNetworksClient.PatchRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -133,14 +133,14 @@
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

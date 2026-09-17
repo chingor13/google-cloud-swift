@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents tables and fileset metadata contained within a zone.
-public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Entity: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the entity, of the form:
@@ -33,10 +33,10 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// Output only. The time when the entity was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the entity was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Required. A user-provided entity ID. It is mutable, and will be used as the
   /// published table name. Specifying a new ID in an update entity
@@ -95,7 +95,7 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `SCHEMA` and `FULL` entity views of a `GetEntity` response.
   public var schema: Schema? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Entity`.
   public init() {}
@@ -171,10 +171,8 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .id) {
       self.id = value
     }
@@ -209,7 +207,7 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.schema = try container.decodeIfPresent(Schema.self, forKey: .schema)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -239,7 +237,7 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Provides compatibility information for various metadata stores.
-  public struct CompatibilityStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CompatibilityStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Whether this entity is compatible with Hive Metastore.
@@ -248,7 +246,7 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. Whether this entity is compatible with BigQuery.
     public var bigquery: Entity.CompatibilityStatus.Compatibility? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CompatibilityStatus`.
     public init() {}
@@ -289,7 +287,7 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Entity.CompatibilityStatus.Compatibility.self, forKey: .bigquery)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -303,7 +301,7 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Provides compatibility information for a specific metadata store.
-    public struct Compatibility: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Compatibility: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Whether the entity is compatible and can be represented in
@@ -314,7 +312,7 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// with the metadata store.
       public var reason: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Compatibility`.
       public init() {}
@@ -357,7 +355,7 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -374,22 +372,22 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.Entity.CompatibilityStatus.Compatibility"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Entity.CompatibilityStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -501,10 +499,10 @@ public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.Entity"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

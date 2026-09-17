@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Guardrail contains a list of checks and balances to keep the agents safe and
 /// secure.
-public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Guardrail: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The unique identifier of the guardrail.
@@ -40,10 +40,10 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var action: TriggerAction? = nil
 
   /// Output only. Timestamp when the guardrail was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp when the guardrail was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Etag used to ensure the object hasn't changed during a read-modify-write
   /// operation. If the etag is empty, the update will overwrite any concurrent
@@ -53,7 +53,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Guardrail type.
   public var guardrailType: OneOf_GuardrailType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Guardrail`.
   public init() {}
@@ -123,10 +123,8 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.enabled = value
     }
     self.action = try container.decodeIfPresent(TriggerAction.self, forKey: .action)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
@@ -168,7 +166,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.guardrailType = guardrailType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -203,7 +201,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Guardrail that bans certain content from being used in the conversation.
-  public struct ContentFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ContentFilter: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. List of banned phrases. Applies to both user inputs and agent
@@ -222,7 +220,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. If true, diacritics are ignored during matching.
     public var disregardDiacritics: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ContentFilter`.
     public init() {}
@@ -287,7 +285,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -421,17 +419,17 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.Guardrail.ContentFilter"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Guardrail that blocks the conversation if the input is considered unsafe
   /// based on the LLM classification.
-  public struct LlmPromptSecurity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LlmPromptSecurity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Determines the behavior when the guardrail encounters an LLM
@@ -447,7 +445,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The user must choose one of the following configurations.
     public var securityConfig: OneOf_SecurityConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LlmPromptSecurity`.
     public init() {}
@@ -511,7 +509,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.securityConfig = securityConfig
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -533,7 +531,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Configuration for default system security settings.
-    public struct DefaultSecuritySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DefaultSecuritySettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The default prompt template used by the system.
@@ -541,7 +539,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// the system uses by default. It is OUTPUT_ONLY.
       public var defaultPromptTemplate: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DefaultSecuritySettings`.
       public init() {}
@@ -581,7 +579,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -597,11 +595,11 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.ces.v1.Guardrail.LlmPromptSecurity.DefaultSecuritySettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -621,17 +619,17 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.Guardrail.LlmPromptSecurity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Guardrail that blocks the conversation if the LLM response is considered
   /// violating the policy based on the LLM classification.
-  public struct LlmPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LlmPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. When checking this policy, consider the last 'n' messages in
@@ -659,7 +657,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// utterances, including those that would normally be skipped.
     public var allowShortUtterance: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LlmPolicy`.
     public init() {}
@@ -724,7 +722,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -860,24 +858,24 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.Guardrail.LlmPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Model safety settings overrides. When this is set, it will override the
   /// default settings and trigger the guardrail if the response is considered
   /// unsafe.
-  public struct ModelSafety: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ModelSafety: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. List of safety settings.
     public var safetySettings: [Guardrail.ModelSafety.SafetySetting] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ModelSafety`.
     public init() {}
@@ -917,7 +915,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -930,7 +928,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Safety setting.
-    public struct SafetySetting: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SafetySetting: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The harm category.
@@ -940,7 +938,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public var threshold: Guardrail.ModelSafety.HarmBlockThreshold = Guardrail.ModelSafety
         .HarmBlockThreshold()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SafetySetting`.
       public init() {}
@@ -987,7 +985,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1003,11 +1001,11 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.ces.v1.Guardrail.ModelSafety.SafetySetting"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1259,17 +1257,17 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.Guardrail.ModelSafety"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Guardrail that blocks the conversation based on the code callbacks
   /// provided.
-  public struct CodeCallback: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CodeCallback: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The callback to execute before the agent is called.
@@ -1306,7 +1304,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// A 'TRIGGER' decision may halt further processing.
     public var afterModelCallback: Callback? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CodeCallback`.
     public init() {}
@@ -1355,7 +1353,7 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Callback.self, forKey: .afterModelCallback)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1373,11 +1371,11 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.Guardrail.CodeCallback"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1403,10 +1401,10 @@ public struct Guardrail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.Guardrail"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

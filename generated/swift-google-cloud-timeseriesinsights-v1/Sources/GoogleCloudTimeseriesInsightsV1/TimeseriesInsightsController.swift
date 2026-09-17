@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 ///
 /// @Snippet(path: "TimeseriesInsightsControllerQuickstart")
@@ -29,7 +29,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   let inner: any Clients.TimeseriesInsightsControllerStub
 
   /// Creates a new `TimeseriesInsightsControllerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.TimeseriesInsightsControllerStub =
       try Clients.TimeseriesInsightsControllerTransport(options)
     inner = Clients.TimeseriesInsightsControllerRetry(inner, options: options)
@@ -49,7 +49,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   ///
   /// @Snippet(path: "TimeseriesInsightsController_ListDataSets")
   public func listDataSets(
-    request: ListDataSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.ListDataSetsResponse {
     try await self.inner.listDataSets(request: request, options: options)
   }
@@ -64,7 +64,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   ///
   /// @Snippet(path: "TimeseriesInsightsController_ListDataSets")
   public func listDataSets(
-    byItem: ListDataSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudTimeseriesInsightsV1.ListDataSetsResponse in
@@ -72,7 +72,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
       request.pageToken = token
       return try await self.listDataSets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Create a [DataSet][google.cloud.timeseriesinsights.v1.DataSet] from data stored on Cloud
@@ -86,7 +86,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   ///
   /// @Snippet(path: "TimeseriesInsightsController_CreateDataSet")
   public func createDataSet(
-    request: CreateDataSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.DataSet {
     try await self.inner.createDataSet(request: request, options: options)
   }
@@ -100,7 +100,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   ///
   /// @Snippet(path: "TimeseriesInsightsController_DeleteDataSet")
   public func deleteDataSet(
-    request: DeleteDataSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteDataSet(request: request, options: options)
   }
@@ -111,7 +111,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   ///
   /// @Snippet(path: "TimeseriesInsightsController_AppendEvents")
   public func appendEvents(
-    request: AppendEventsRequest, options: GoogleCloudGax.RequestOptions
+    request: AppendEventsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.AppendEventsResponse {
     try await self.inner.appendEvents(request: request, options: options)
   }
@@ -123,7 +123,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   ///
   /// @Snippet(path: "TimeseriesInsightsController_QueryDataSet")
   public func queryDataSet(
-    request: QueryDataSetRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryDataSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.QueryDataSetResponse {
     try await self.inner.queryDataSet(request: request, options: options)
   }
@@ -134,7 +134,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   ///
   /// @Snippet(path: "TimeseriesInsightsController_EvaluateSlice")
   public func evaluateSlice(
-    request: EvaluateSliceRequest, options: GoogleCloudGax.RequestOptions
+    request: EvaluateSliceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice {
     try await self.inner.evaluateSlice(request: request, options: options)
   }
@@ -143,7 +143,7 @@ public final class TimeseriesInsightsControllerClient: Clients.TimeseriesInsight
   ///
   /// @Snippet(path: "TimeseriesInsightsController_EvaluateTimeseries")
   public func evaluateTimeseries(
-    request: EvaluateTimeseriesRequest, options: GoogleCloudGax.RequestOptions
+    request: EvaluateTimeseriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice {
     try await self.inner.evaluateTimeseries(request: request, options: options)
   }
@@ -212,42 +212,42 @@ extension Clients {
 
     /// See `TimeseriesInsightsControllerClient.listDataSets`.
     func listDataSets(
-      request: ListDataSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.ListDataSetsResponse
 
     /// See `TimeseriesInsightsControllerClient.listDataSets`.
     func listDataSets(
-      byItem: ListDataSetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataSetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataSet, Swift.Error>
 
     /// See `TimeseriesInsightsControllerClient.createDataSet`.
     func createDataSet(
-      request: CreateDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.DataSet
 
     /// See `TimeseriesInsightsControllerClient.deleteDataSet`.
     func deleteDataSet(
-      request: DeleteDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `TimeseriesInsightsControllerClient.appendEvents`.
     func appendEvents(
-      request: AppendEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: AppendEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.AppendEventsResponse
 
     /// See `TimeseriesInsightsControllerClient.queryDataSet`.
     func queryDataSet(
-      request: QueryDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.QueryDataSetResponse
 
     /// See `TimeseriesInsightsControllerClient.evaluateSlice`.
     func evaluateSlice(
-      request: EvaluateSliceRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateSliceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice
 
     /// See `TimeseriesInsightsControllerClient.evaluateTimeseries`.
     func evaluateTimeseries(
-      request: EvaluateTimeseriesRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateTimeseriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice
   }
 }
@@ -261,9 +261,9 @@ extension Clients.TimeseriesInsightsControllerProtocol {
   }
 
   public func listDataSets(
-    request: ListDataSetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDataSetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.ListDataSetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDataSets(
@@ -273,13 +273,13 @@ extension Clients.TimeseriesInsightsControllerProtocol {
   }
 
   public func listDataSets(
-    byItem: ListDataSetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDataSetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<DataSet, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudTimeseriesInsightsV1.ListDataSetsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDataSets(
@@ -298,9 +298,9 @@ extension Clients.TimeseriesInsightsControllerProtocol {
   }
 
   public func createDataSet(
-    request: CreateDataSetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateDataSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.DataSet {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createDataSet(
@@ -319,9 +319,9 @@ extension Clients.TimeseriesInsightsControllerProtocol {
   }
 
   public func deleteDataSet(
-    request: DeleteDataSetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteDataSetRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteDataSet(
@@ -340,9 +340,9 @@ extension Clients.TimeseriesInsightsControllerProtocol {
   }
 
   public func appendEvents(
-    request: AppendEventsRequest, options: GoogleCloudGax.RequestOptions
+    request: AppendEventsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.AppendEventsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func appendEvents(
@@ -363,9 +363,9 @@ extension Clients.TimeseriesInsightsControllerProtocol {
   }
 
   public func queryDataSet(
-    request: QueryDataSetRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryDataSetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.QueryDataSetResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func evaluateSlice(request: EvaluateSliceRequest) async throws
@@ -375,9 +375,9 @@ extension Clients.TimeseriesInsightsControllerProtocol {
   }
 
   public func evaluateSlice(
-    request: EvaluateSliceRequest, options: GoogleCloudGax.RequestOptions
+    request: EvaluateSliceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func evaluateTimeseries(request: EvaluateTimeseriesRequest) async throws
@@ -387,8 +387,8 @@ extension Clients.TimeseriesInsightsControllerProtocol {
   }
 
   public func evaluateTimeseries(
-    request: EvaluateTimeseriesRequest, options: GoogleCloudGax.RequestOptions
+    request: EvaluateTimeseriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

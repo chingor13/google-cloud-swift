@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func createNamespace(
-      request: CreateNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
       try await self._intercept(
         request: request,
         options: options,
         name: "createNamespace",
         action: {
-          (r: CreateNamespaceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateNamespaceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Namespace
           in
           return try await self.inner.createNamespace(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func listNamespaces(
-      request: ListNamespacesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNamespacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.ListNamespacesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listNamespaces",
         action: {
-          (r: ListNamespacesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListNamespacesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.ListNamespacesResponse
           in
           return try await self.inner.listNamespaces(request: r, options: o)
@@ -89,14 +89,14 @@ extension Clients {
     }
 
     public func getNamespace(
-      request: GetNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
       try await self._intercept(
         request: request,
         options: options,
         name: "getNamespace",
         action: {
-          (r: GetNamespaceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetNamespaceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Namespace
           in
           return try await self.inner.getNamespace(request: r, options: o)
@@ -104,14 +104,14 @@ extension Clients {
     }
 
     public func updateNamespace(
-      request: UpdateNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Namespace {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateNamespace",
         action: {
-          (r: UpdateNamespaceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateNamespaceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Namespace
           in
           return try await self.inner.updateNamespace(request: r, options: o)
@@ -119,27 +119,26 @@ extension Clients {
     }
 
     public func deleteNamespace(
-      request: DeleteNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteNamespace",
-        action: {
-          (r: DeleteNamespaceRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteNamespaceRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteNamespace(request: r, options: o)
         })
     }
 
     public func createService(
-      request: CreateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Service {
       try await self._intercept(
         request: request,
         options: options,
         name: "createService",
         action: {
-          (r: CreateServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Service
           in
           return try await self.inner.createService(request: r, options: o)
@@ -147,14 +146,14 @@ extension Clients {
     }
 
     public func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.ListServicesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listServices",
         action: {
-          (r: ListServicesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListServicesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.ListServicesResponse
           in
           return try await self.inner.listServices(request: r, options: o)
@@ -162,14 +161,14 @@ extension Clients {
     }
 
     public func getService(
-      request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Service {
       try await self._intercept(
         request: request,
         options: options,
         name: "getService",
         action: {
-          (r: GetServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Service
           in
           return try await self.inner.getService(request: r, options: o)
@@ -177,14 +176,14 @@ extension Clients {
     }
 
     public func updateService(
-      request: UpdateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Service {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateService",
         action: {
-          (r: UpdateServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Service
           in
           return try await self.inner.updateService(request: r, options: o)
@@ -192,27 +191,26 @@ extension Clients {
     }
 
     public func deleteService(
-      request: DeleteServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteService",
-        action: {
-          (r: DeleteServiceRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteServiceRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteService(request: r, options: o)
         })
     }
 
     public func createEndpoint(
-      request: CreateEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
       try await self._intercept(
         request: request,
         options: options,
         name: "createEndpoint",
         action: {
-          (r: CreateEndpointRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateEndpointRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Endpoint
           in
           return try await self.inner.createEndpoint(request: r, options: o)
@@ -220,14 +218,14 @@ extension Clients {
     }
 
     public func listEndpoints(
-      request: ListEndpointsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEndpointsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.ListEndpointsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listEndpoints",
         action: {
-          (r: ListEndpointsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEndpointsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.ListEndpointsResponse
           in
           return try await self.inner.listEndpoints(request: r, options: o)
@@ -235,14 +233,14 @@ extension Clients {
     }
 
     public func getEndpoint(
-      request: GetEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
       try await self._intercept(
         request: request,
         options: options,
         name: "getEndpoint",
         action: {
-          (r: GetEndpointRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEndpointRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Endpoint
           in
           return try await self.inner.getEndpoint(request: r, options: o)
@@ -250,14 +248,14 @@ extension Clients {
     }
 
     public func updateEndpoint(
-      request: UpdateEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceDirectoryV1.Endpoint {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateEndpoint",
         action: {
-          (r: UpdateEndpointRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateEndpointRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceDirectoryV1.Endpoint
           in
           return try await self.inner.updateEndpoint(request: r, options: o)
@@ -265,27 +263,26 @@ extension Clients {
     }
 
     public func deleteEndpoint(
-      request: DeleteEndpointRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEndpointRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteEndpoint",
-        action: {
-          (r: DeleteEndpointRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteEndpointRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteEndpoint(request: r, options: o)
         })
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -293,14 +290,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -308,14 +305,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -323,29 +320,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

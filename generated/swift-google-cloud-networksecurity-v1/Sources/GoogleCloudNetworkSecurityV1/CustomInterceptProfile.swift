@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// CustomInterceptProfile defines in-band integration behavior (intercept).
 /// It is used by firewall rules with an APPLY_SECURITY_PROFILE_GROUP action.
-public struct CustomInterceptProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CustomInterceptProfile: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The target InterceptEndpointGroup.
@@ -27,7 +27,7 @@ public struct CustomInterceptProfile: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// the packet will be intercepted to the location-local target in this group.
   public var interceptEndpointGroup: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CustomInterceptProfile`.
   public init() {}
@@ -66,7 +66,7 @@ public struct CustomInterceptProfile: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,10 +81,10 @@ public struct CustomInterceptProfile: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.CustomInterceptProfile"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

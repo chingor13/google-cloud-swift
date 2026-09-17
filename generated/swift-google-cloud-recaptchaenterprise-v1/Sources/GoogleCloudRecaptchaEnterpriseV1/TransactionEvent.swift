@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes an event in the lifecycle of a payment transaction.
-public struct TransactionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransactionEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The type of this transaction event.
@@ -37,9 +37,9 @@ public struct TransactionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Optional. Timestamp when this transaction event occurred; otherwise assumed
   /// to be the time of the API call.
-  public var eventTime: GoogleCloudWKT.Timestamp? = nil
+  public var eventTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransactionEvent`.
   public init() {}
@@ -89,11 +89,10 @@ public struct TransactionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Double.self, forKey: .value) {
       self.value = value
     }
-    self.eventTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .eventTime)
+    self.eventTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .eventTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -367,10 +366,10 @@ public struct TransactionEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.TransactionEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

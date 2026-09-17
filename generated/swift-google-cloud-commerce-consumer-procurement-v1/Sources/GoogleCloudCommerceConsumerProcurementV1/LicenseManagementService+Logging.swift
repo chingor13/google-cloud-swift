@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func getLicensePool(
-      request: GetLicensePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLicensePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.LicensePool {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLicensePool",
         action: {
-          (r: GetLicensePoolRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetLicensePoolRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudCommerceConsumerProcurementV1.LicensePool
           in
           return try await self.inner.getLicensePool(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func updateLicensePool(
-      request: UpdateLicensePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLicensePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.LicensePool {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateLicensePool",
         action: {
-          (r: UpdateLicensePoolRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateLicensePoolRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudCommerceConsumerProcurementV1.LicensePool
           in
           return try await self.inner.updateLicensePool(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func assign(
-      request: AssignRequest, options: GoogleCloudGax.RequestOptions
+      request: AssignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.AssignResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "assign",
         action: {
-          (r: AssignRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AssignRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudCommerceConsumerProcurementV1.AssignResponse
           in
           return try await self.inner.assign(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func unassign(
-      request: UnassignRequest, options: GoogleCloudGax.RequestOptions
+      request: UnassignRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.UnassignResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "unassign",
         action: {
-          (r: UnassignRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UnassignRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudCommerceConsumerProcurementV1.UnassignResponse
           in
           return try await self.inner.unassign(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func enumerateLicensedUsers(
-      request: EnumerateLicensedUsersRequest, options: GoogleCloudGax.RequestOptions
+      request: EnumerateLicensedUsersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.EnumerateLicensedUsersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "enumerateLicensedUsers",
         action: {
-          (r: EnumerateLicensedUsersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: EnumerateLicensedUsersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudCommerceConsumerProcurementV1.EnumerateLicensedUsersResponse
           in
           return try await self.inner.enumerateLicensedUsers(request: r, options: o)
@@ -133,14 +133,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

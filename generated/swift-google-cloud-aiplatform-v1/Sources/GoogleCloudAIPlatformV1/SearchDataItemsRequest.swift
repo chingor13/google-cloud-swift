@@ -16,13 +16,13 @@
 
 #if DatasetService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [DatasetService.SearchDataItems][google.cloud.aiplatform.v1.DatasetService.SearchDataItems].
   ///
   /// [google.cloud.aiplatform.v1.DatasetService.SearchDataItems]: <doc:DatasetServiceClient/searchDataItems(request:options:)>
-  public struct SearchDataItemsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SearchDataItemsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the Dataset from which to search DataItems.
@@ -75,7 +75,7 @@
     /// [DataItemView][google.cloud.aiplatform.v1.DataItemView] to read.
     ///
     /// [google.cloud.aiplatform.v1.DataItemView]: <doc:DataItemView>
-    public var fieldMask: GoogleCloudWKT.FieldMask? = nil
+    public var fieldMask: GoogleWKT.FieldMask? = nil
 
     /// If set, only up to this many of Annotations will be returned per
     /// DataItemView. The maximum value is 1000. If not set, the maximum value will
@@ -104,7 +104,7 @@
 
     public var order: OneOf_Order? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SearchDataItemsRequest`.
     public init() {}
@@ -180,8 +180,7 @@
       {
         self.annotationFilters = value
       }
-      self.fieldMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .fieldMask)
+      self.fieldMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .fieldMask)
       if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .annotationsLimit) {
         self.annotationsLimit = value
       }
@@ -218,7 +217,7 @@
       self.order = order
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -250,7 +249,7 @@
     }
 
     /// Expression that allows ranking results based on annotation's property.
-    public struct OrderByAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OrderByAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Saved query of the Annotation. Only Annotations belong to this
@@ -262,7 +261,7 @@
       /// specify saved_query.
       public var orderBy: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OrderByAnnotation`.
       public init() {}
@@ -305,7 +304,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -322,11 +321,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SearchDataItemsRequest.OrderByAnnotation"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -341,11 +340,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SearchDataItemsRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

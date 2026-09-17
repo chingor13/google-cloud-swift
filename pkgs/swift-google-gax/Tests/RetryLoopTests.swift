@@ -16,7 +16,7 @@ import Foundation
 import GoogleRpc
 import Synchronization
 import Testing
-@_spi(GoogleCloudInternal) @testable import GoogleCloudGax
+@_spi(GoogleCloudInternal) @testable import GoogleGax
 
 @Suite struct RetryLoopTest {
   func permanent() -> RequestError {

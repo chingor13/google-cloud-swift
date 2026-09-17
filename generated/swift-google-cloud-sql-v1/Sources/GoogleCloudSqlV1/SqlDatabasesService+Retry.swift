@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class SqlDatabasesServiceRetry: SqlDatabasesServiceStub {
       let inner: any SqlDatabasesServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any SqlDatabasesServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any SqlDatabasesServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func delete(
-        request: SqlDatabasesDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlDatabasesDeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlDatabasesDeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -65,14 +65,14 @@
       }
 
       public func `get`(
-        request: SqlDatabasesGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Database {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlDatabasesGetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlDatabasesGetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Database
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -80,14 +80,14 @@
       }
 
       public func insert(
-        request: SqlDatabasesInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlDatabasesInsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlDatabasesInsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -95,14 +95,14 @@
       }
 
       public func list(
-        request: SqlDatabasesListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.DatabasesListResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlDatabasesListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlDatabasesListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.DatabasesListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -110,14 +110,14 @@
       }
 
       public func patch(
-        request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: SqlDatabasesUpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlDatabasesUpdateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -125,14 +125,14 @@
       }
 
       public func update(
-        request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: SqlDatabasesUpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlDatabasesUpdateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.update(request: r, options: o)

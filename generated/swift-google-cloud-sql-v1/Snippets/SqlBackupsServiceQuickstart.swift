@@ -19,7 +19,7 @@
   // snippet.show
   import Foundation
   import GoogleCloudSqlV1
-  import GoogleCloudWKT
+  import GoogleWKT
 
   func sample(projectId: String, ) async throws {
     let client = try GoogleCloudSqlV1.SqlBackupsServiceClient()

@@ -15,9 +15,9 @@
 import Foundation
 import GRPCCore
 import GRPCProtobuf
-import GoogleCloudGax
-@testable import GoogleCloudGaxGRPC
-import GoogleCloudWKT
+import GoogleGax
+@testable import GoogleGaxGRPC
+import GoogleWKT
 import GoogleRpc
 import SwiftProtobuf
 import Testing

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A task represents a user-visible job.
-public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Task: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The relative resource name of the task, of the form:
@@ -31,10 +31,10 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uid: Swift.String = Swift.String()
 
   /// Output only. The time when the task was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the task was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Description of the task.
   public var description: Swift.String = Swift.String()
@@ -60,7 +60,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Task template specific user-specified config.
   public var config: OneOf_Config? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Task`.
   public init() {}
@@ -123,10 +123,8 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -167,7 +165,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.config = config
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -199,7 +197,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configuration for the underlying infrastructure used to run workloads.
-  public struct InfrastructureSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InfrastructureSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Hardware config.
@@ -211,7 +209,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Networking config.
     public var network: OneOf_Network? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InfrastructureSpec`.
     public init() {}
@@ -301,7 +299,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.network = network
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -334,7 +332,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Batch compute resources associated with the task.
-    public struct BatchComputeResources: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BatchComputeResources: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Total number of job executors.
@@ -346,7 +344,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Max Executor Count should be between 2 and 1000. [Default=1000]
       public var maxExecutorsCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BatchComputeResources`.
       public init() {}
@@ -389,7 +387,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -406,16 +404,16 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.Task.InfrastructureSpec.BatchComputeResources"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Container Image Runtime Configuration used with Batch execution.
-    public struct ContainerImageRuntime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ContainerImageRuntime: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Container image to use.
@@ -438,7 +436,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// properties](https://cloud.google.com/dataproc/docs/concepts/cluster-properties).
       public var properties: [Swift.String: Swift.String] = [:]
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ContainerImageRuntime`.
       public init() {}
@@ -493,7 +491,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -512,16 +510,16 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.Task.InfrastructureSpec.ContainerImageRuntime"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Cloud VPC Network used to run the infrastructure.
-    public struct VpcNetwork: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct VpcNetwork: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. List of network tags to apply to the job.
@@ -530,7 +528,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The Cloud VPC network identifier.
       public var networkName: OneOf_NetworkName? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `VpcNetwork`.
       public init() {}
@@ -590,7 +588,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.networkName = networkName
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -623,11 +621,11 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dataplex.v1.Task.InfrastructureSpec.VpcNetwork"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -652,16 +650,16 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Task.InfrastructureSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Task scheduling and trigger settings.
-  public struct TriggerSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TriggerSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Immutable. Trigger type of the user-specified Task.
@@ -670,7 +668,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The first run of the task will be after this time.
     /// If not specified, the task will run shortly after being submitted if
     /// ON_DEMAND and based on the schedule if RECURRING.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. Prevent the task from executing.
     /// This does not cancel already running tasks. It is intended to temporarily
@@ -684,7 +682,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Trigger only applies for RECURRING tasks.
     public var trigger: OneOf_Trigger? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TriggerSpec`.
     public init() {}
@@ -728,8 +726,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       if let value = try container.decodeIfPresent(Task.TriggerSpec.Type_.self, forKey: .type) {
         self.type = value
       }
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .disabled) {
         self.disabled = value
       }
@@ -753,7 +750,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.trigger = trigger
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -895,16 +892,16 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Task.TriggerSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Execution related settings, like retry and service_account.
-  public struct ExecutionSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExecutionSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The arguments to pass to the task.
@@ -935,13 +932,13 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var project: Swift.String = Swift.String()
 
     /// Optional. The maximum duration after which the job execution is expired.
-    public var maxJobExecutionLifetime: GoogleCloudWKT.Duration? = nil
+    public var maxJobExecutionLifetime: GoogleWKT.Duration? = nil
 
     /// Optional. The Cloud KMS key to use for encryption, of the form:
     /// `projects/{project_number}/locations/{location_id}/keyRings/{key-ring-name}/cryptoKeys/{key-name}`.
     public var kmsKey: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExecutionSpec`.
     public init() {}
@@ -993,13 +990,13 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.project = value
       }
       self.maxJobExecutionLifetime = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .maxJobExecutionLifetime)
+        GoogleWKT.Duration.self, forKey: .maxJobExecutionLifetime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .kmsKey) {
         self.kmsKey = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1018,16 +1015,16 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Task.ExecutionSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// User-specified config for running a Spark task.
-  public struct SparkTaskConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SparkTaskConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Cloud Storage URIs of files to be placed in the working
@@ -1047,7 +1044,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// main class name.
     public var driver: OneOf_Driver? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SparkTaskConfig`.
     public init() {}
@@ -1137,7 +1134,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.driver = driver
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1197,16 +1194,16 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Task.SparkTaskConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Config for running scheduled notebooks.
-  public struct NotebookTaskConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NotebookTaskConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Path to input notebook. This can be the Cloud Storage URI of
@@ -1227,7 +1224,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// .tgz, and .zip.
     public var archiveUris: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NotebookTaskConfig`.
     public init() {}
@@ -1279,7 +1276,7 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1297,25 +1294,25 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Task.NotebookTaskConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Status of the task execution (e.g. Jobs).
-  public struct ExecutionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExecutionStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Last update time of the status.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. latest job execution
     public var latestJob: Job? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExecutionStatus`.
     public init() {}
@@ -1350,12 +1347,11 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.latestJob = try container.decodeIfPresent(Job.self, forKey: .latestJob)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1371,11 +1367,11 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Task.ExecutionStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1390,10 +1386,10 @@ public struct Task: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.Task"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

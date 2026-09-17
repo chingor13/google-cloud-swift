@@ -20,22 +20,22 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// The service that manages Vertex Session related resources.
   ///
   /// @Snippet(path: "SessionServiceQuickstart")
   public final class SessionServiceClient: Clients.SessionServiceProtocol, Sendable {
     let inner: any Clients.SessionServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `SessionServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SessionServiceStub = try Clients.SessionServiceTransport(options)
       inner = Clients.SessionServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -52,7 +52,7 @@
     ///
     /// @Snippet(path: "SessionService_CreateSession")
     public func createSession(
-      request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createSession(request: request, options: options)
     }
@@ -63,21 +63,21 @@
     ///
     /// @Snippet(path: "SessionService_CreateSession")
     public func createSession(
-      withPolling: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Session> {
+      withPolling: CreateSessionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Session> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Session>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Session>.State
+        in
         return try op._extractStatus(Session.self)
       }
       let rawOp = try await self.createSession(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Session>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Session>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -91,7 +91,7 @@
     ///
     /// @Snippet(path: "SessionService_GetSession")
     public func getSession(
-      request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Session {
       try await self.inner.getSession(request: request, options: options)
     }
@@ -103,7 +103,7 @@
     ///
     /// @Snippet(path: "SessionService_ListSessions")
     public func listSessions(
-      request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListSessionsResponse {
       try await self.inner.listSessions(request: request, options: options)
     }
@@ -115,7 +115,7 @@
     ///
     /// @Snippet(path: "SessionService_ListSessions")
     public func listSessions(
-      byItem: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Session, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListSessionsResponse in
@@ -123,7 +123,7 @@
         request.pageToken = token
         return try await self.listSessions(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates the specific [Session][google.cloud.aiplatform.v1.Session].
@@ -132,7 +132,7 @@
     ///
     /// @Snippet(path: "SessionService_UpdateSession")
     public func updateSession(
-      request: UpdateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Session {
       try await self.inner.updateSession(request: request, options: options)
     }
@@ -144,7 +144,7 @@
     ///
     /// @Snippet(path: "SessionService_DeleteSession")
     public func deleteSession(
-      request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteSession(request: request, options: options)
     }
@@ -156,21 +156,21 @@
     ///
     /// @Snippet(path: "SessionService_DeleteSession")
     public func deleteSession(
-      withPolling: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteSessionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteSession(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -184,7 +184,7 @@
     ///
     /// @Snippet(path: "SessionService_ListEvents")
     public func listEvents(
-      request: ListEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListEventsResponse {
       try await self.inner.listEvents(request: request, options: options)
     }
@@ -195,7 +195,7 @@
     ///
     /// @Snippet(path: "SessionService_ListEvents")
     public func listEvents(
-      byItem: ListEventsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEventsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SessionEvent, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListEventsResponse in
@@ -203,14 +203,14 @@
         request.pageToken = token
         return try await self.listEvents(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Appends an event to a given session.
     ///
     /// @Snippet(path: "SessionService_AppendEvent")
     public func appendEvent(
-      request: AppendEventRequest, options: GoogleCloudGax.RequestOptions
+      request: AppendEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AppendEventResponse {
       try await self.inner.appendEvent(request: request, options: options)
     }
@@ -219,7 +219,7 @@
     ///
     /// @Snippet(path: "SessionService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -228,7 +228,7 @@
     ///
     /// @Snippet(path: "SessionService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -236,14 +236,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "SessionService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -256,7 +256,7 @@
     ///
     /// @Snippet(path: "SessionService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -266,7 +266,7 @@
     ///
     /// @Snippet(path: "SessionService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -281,7 +281,7 @@
     ///
     /// @Snippet(path: "SessionService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -292,7 +292,7 @@
     ///
     /// @Snippet(path: "SessionService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -303,7 +303,7 @@
     ///
     /// @Snippet(path: "SessionService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -311,7 +311,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -320,7 +320,7 @@
     ///
     /// @Snippet(path: "SessionService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -331,7 +331,7 @@
     ///
     /// @Snippet(path: "SessionService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -342,7 +342,7 @@
     ///
     /// @Snippet(path: "SessionService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -353,7 +353,7 @@
     ///
     /// @Snippet(path: "SessionService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -370,21 +370,21 @@
       func createSession(request: CreateSessionRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `SessionServiceClient.createSession`.
-      func createSession(withPolling: CreateSessionRequest) async throws -> any GoogleCloudGax
+      func createSession(withPolling: CreateSessionRequest) async throws -> any GoogleGax
         .PollableOperation<Session>
 
       /// See `SessionServiceClient.createSession`.
       func createSession(
         parent: Swift.String,
         session: Session?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Session>
+      ) async throws -> any GoogleGax.PollableOperation<Session>
 
       /// See `SessionServiceClient.createSession`.
       func createSession(
         parent: Swift.String,
         session: Session?,
         sessionId: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Session>
+      ) async throws -> any GoogleGax.PollableOperation<Session>
 
       /// See `SessionServiceClient.getSession`.
       func getSession(request: GetSessionRequest) async throws -> GoogleCloudAIPlatformV1.Session
@@ -415,20 +415,20 @@
       /// See `SessionServiceClient.updateSession`.
       func updateSession(
         session: Session?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudAIPlatformV1.Session
 
       /// See `SessionServiceClient.deleteSession`.
       func deleteSession(request: DeleteSessionRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `SessionServiceClient.deleteSession`.
-      func deleteSession(withPolling: DeleteSessionRequest) async throws -> any GoogleCloudGax
+      func deleteSession(withPolling: DeleteSessionRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `SessionServiceClient.deleteSession`.
       func deleteSession(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `SessionServiceClient.listEvents`.
       func listEvents(request: ListEventsRequest) async throws
@@ -514,112 +514,112 @@
 
       /// See `SessionServiceClient.createSession`.
       func createSession(
-        request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SessionServiceClient.createSession`.
       func createSession(
-        withPolling: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Session>
+        withPolling: CreateSessionRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Session>
 
       /// See `SessionServiceClient.getSession`.
       func getSession(
-        request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Session
 
       /// See `SessionServiceClient.listSessions`.
       func listSessions(
-        request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListSessionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListSessionsResponse
 
       /// See `SessionServiceClient.listSessions`.
       func listSessions(
-        byItem: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListSessionsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Session, Swift.Error>
 
       /// See `SessionServiceClient.updateSession`.
       func updateSession(
-        request: UpdateSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Session
 
       /// See `SessionServiceClient.deleteSession`.
       func deleteSession(
-        request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `SessionServiceClient.deleteSession`.
       func deleteSession(
-        withPolling: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteSessionRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `SessionServiceClient.listEvents`.
       func listEvents(
-        request: ListEventsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListEventsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListEventsResponse
 
       /// See `SessionServiceClient.listEvents`.
       func listEvents(
-        byItem: ListEventsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListEventsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<SessionEvent, Swift.Error>
 
       /// See `SessionServiceClient.appendEvent`.
       func appendEvent(
-        request: AppendEventRequest, options: GoogleCloudGax.RequestOptions
+        request: AppendEventRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.AppendEventResponse
 
       /// See `SessionServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `SessionServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `SessionServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `SessionServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `SessionServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `SessionServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `SessionServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `SessionServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `SessionServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `SessionServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `SessionServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -633,31 +633,31 @@
     }
 
     public func createSession(
-      request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func createSession(withPolling: CreateSessionRequest) async throws -> any GoogleCloudGax
+    public func createSession(withPolling: CreateSessionRequest) async throws -> any GoogleGax
       .PollableOperation<Session>
     {
       try await self.createSession(withPolling: withPolling, options: .init())
     }
 
     public func createSession(
-      withPolling: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Session> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Session>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateSessionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Session> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Session>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createSession(
       parent: Swift.String,
       session: Session?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Session> {
+    ) async throws -> any GoogleGax.PollableOperation<Session> {
       let request = CreateSessionRequest().with {
         $0.parent = parent
         $0.session = session
@@ -669,7 +669,7 @@
       parent: Swift.String,
       session: Session?,
       sessionId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Session> {
+    ) async throws -> any GoogleGax.PollableOperation<Session> {
       let request = CreateSessionRequest().with {
         $0.parent = parent
         $0.session = session
@@ -685,9 +685,9 @@
     }
 
     public func getSession(
-      request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Session {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getSession(
@@ -706,9 +706,9 @@
     }
 
     public func listSessions(
-      request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListSessionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listSessions(
@@ -718,13 +718,13 @@
     }
 
     public func listSessions(
-      byItem: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSessionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Session, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListSessionsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listSessions(
@@ -743,14 +743,14 @@
     }
 
     public func updateSession(
-      request: UpdateSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Session {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateSession(
       session: Session?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudAIPlatformV1.Session {
       let request = UpdateSessionRequest().with {
         $0.session = session
@@ -766,30 +766,30 @@
     }
 
     public func deleteSession(
-      request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteSession(withPolling: DeleteSessionRequest) async throws -> any GoogleCloudGax
+    public func deleteSession(withPolling: DeleteSessionRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.deleteSession(withPolling: withPolling, options: .init())
     }
 
     public func deleteSession(
-      withPolling: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteSessionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteSession(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteSessionRequest().with {
         $0.name = name
       }
@@ -803,9 +803,9 @@
     }
 
     public func listEvents(
-      request: ListEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListEventsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listEvents(
@@ -815,13 +815,13 @@
     }
 
     public func listEvents(
-      byItem: ListEventsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEventsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SessionEvent, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListEventsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listEvents(
@@ -840,9 +840,9 @@
     }
 
     public func appendEvent(
-      request: AppendEventRequest, options: GoogleCloudGax.RequestOptions
+      request: AppendEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AppendEventResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func appendEvent(
@@ -863,9 +863,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -875,13 +875,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -891,9 +891,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -903,9 +903,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -915,9 +915,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -927,9 +927,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -939,9 +939,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -951,13 +951,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -978,9 +978,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -997,9 +997,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -1016,9 +1016,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -1037,9 +1037,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

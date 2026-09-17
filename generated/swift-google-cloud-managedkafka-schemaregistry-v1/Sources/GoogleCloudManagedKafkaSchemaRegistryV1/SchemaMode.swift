@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// SchemaMode represents the mode of a schema registry or a specific subject.
 /// Four modes are supported:
@@ -26,7 +26,7 @@ import Foundation
 /// write operations on the schema.
 /// * IMPORT: The schema registry is in import mode, which allows more editing
 /// operations on the schema for data importing purposes.
-public struct SchemaMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SchemaMode: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The mode type of a schema registry (READWRITE by default) or of a
@@ -34,7 +34,7 @@ public struct SchemaMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// setting).
   public var mode: SchemaMode.ModeType = SchemaMode.ModeType()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SchemaMode`.
   public init() {}
@@ -72,7 +72,7 @@ public struct SchemaMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -201,10 +201,10 @@ public struct SchemaMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.managedkafka.schemaregistry.v1.SchemaMode"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The export asset response. This message is returned by the
 /// [google.longrunning.Operations.GetOperation][google.longrunning.Operations.GetOperation]
@@ -24,11 +24,11 @@ import Foundation
 /// field.
 ///
 /// [google.longrunning.Operation.response]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation/OneOf_Result/response(_:)
-public struct ExportAssetsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExportAssetsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Time the snapshot was taken.
-  public var readTime: GoogleCloudWKT.Timestamp? = nil
+  public var readTime: GoogleWKT.Timestamp? = nil
 
   /// Output configuration indicating where the results were output to.
   public var outputConfig: OutputConfig? = nil
@@ -40,7 +40,7 @@ public struct ExportAssetsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// single Cloud Storage object limit.
   public var outputResult: OutputResult? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExportAssetsResponse`.
   public init() {}
@@ -77,12 +77,12 @@ public struct ExportAssetsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.readTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .readTime)
+    self.readTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .readTime)
     self.outputConfig = try container.decodeIfPresent(OutputConfig.self, forKey: .outputConfig)
     self.outputResult = try container.decodeIfPresent(OutputResult.self, forKey: .outputResult)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,10 +99,10 @@ public struct ExportAssetsResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.ExportAssetsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

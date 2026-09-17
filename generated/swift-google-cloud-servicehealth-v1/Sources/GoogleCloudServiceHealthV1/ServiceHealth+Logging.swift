@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func listEvents(
-      request: ListEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceHealthV1.ListEventsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listEvents",
         action: {
-          (r: ListEventsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEventsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceHealthV1.ListEventsResponse
           in
           return try await self.inner.listEvents(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func getEvent(
-      request: GetEventRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceHealthV1.Event {
       try await self._intercept(
         request: request,
         options: options,
         name: "getEvent",
         action: {
-          (r: GetEventRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEventRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceHealthV1.Event
           in
           return try await self.inner.getEvent(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func listOrganizationEvents(
-      request: ListOrganizationEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrganizationEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceHealthV1.ListOrganizationEventsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOrganizationEvents",
         action: {
-          (r: ListOrganizationEventsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListOrganizationEventsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceHealthV1.ListOrganizationEventsResponse
           in
           return try await self.inner.listOrganizationEvents(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func getOrganizationEvent(
-      request: GetOrganizationEventRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOrganizationEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceHealthV1.OrganizationEvent {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOrganizationEvent",
         action: {
-          (r: GetOrganizationEventRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetOrganizationEventRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceHealthV1.OrganizationEvent
           in
           return try await self.inner.getOrganizationEvent(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func listOrganizationImpacts(
-      request: ListOrganizationImpactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrganizationImpactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceHealthV1.ListOrganizationImpactsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOrganizationImpacts",
         action: {
-          (r: ListOrganizationImpactsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListOrganizationImpactsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceHealthV1.ListOrganizationImpactsResponse
           in
           return try await self.inner.listOrganizationImpacts(request: r, options: o)
@@ -133,14 +133,14 @@ extension Clients {
     }
 
     public func getOrganizationImpact(
-      request: GetOrganizationImpactRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOrganizationImpactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudServiceHealthV1.OrganizationImpact {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOrganizationImpact",
         action: {
-          (r: GetOrganizationImpactRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetOrganizationImpactRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudServiceHealthV1.OrganizationImpact
           in
           return try await self.inner.getOrganizationImpact(request: r, options: o)
@@ -148,29 +148,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

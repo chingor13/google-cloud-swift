@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a data transfer configuration. A transfer configuration
 /// contains all metadata needed to perform a data transfer. For example,
@@ -24,7 +24,7 @@ import GoogleRpc
 /// When a new transfer configuration is created, the specified
 /// `destination_dataset_id` is created when needed and shared with the
 /// appropriate data source service account.
-public struct TransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TransferConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the transfer config.
@@ -48,7 +48,7 @@ public struct TransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// bq tab in the 'Setting up a data transfer' section for each data source.
   /// For example the parameters for Cloud Storage transfers are listed here:
   /// https://cloud.google.com/bigquery-transfer/docs/cloud-storage-transfer#bq
-  public var params: GoogleCloudWKT.Struct? = nil
+  public var params: GoogleWKT.Struct? = nil
 
   /// Data transfer schedule.
   /// If the data source does not support a custom schedule, this should be
@@ -86,10 +86,10 @@ public struct TransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var disabled: Swift.Bool = Swift.Bool()
 
   /// Output only. Data transfer modification time. Ignored by server on input.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Next time when data transfer will run.
-  public var nextRunTime: GoogleCloudWKT.Timestamp? = nil
+  public var nextRunTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. State of the most recently updated transfer run.
   public var state: TransferState = TransferState()
@@ -130,7 +130,7 @@ public struct TransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The desination of the transfer config.
   public var destination: OneOf_Destination? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TransferConfig`.
   public init() {}
@@ -210,7 +210,7 @@ public struct TransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .dataSourceId) {
       self.dataSourceId = value
     }
-    self.params = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .params)
+    self.params = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .params)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .schedule) {
       self.schedule = value
     }
@@ -224,10 +224,8 @@ public struct TransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .disabled) {
       self.disabled = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.nextRunTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .nextRunTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.nextRunTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .nextRunTime)
     if let value = try container.decodeIfPresent(TransferState.self, forKey: .state) {
       self.state = value
     }
@@ -267,7 +265,7 @@ public struct TransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.destination = destination
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -313,10 +311,10 @@ public struct TransferConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.datatransfer.v1.TransferConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

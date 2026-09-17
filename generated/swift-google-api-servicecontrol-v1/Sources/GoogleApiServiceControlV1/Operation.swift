@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents information regarding an operation.
-public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identity of the operation. This must be unique within the scope of the
@@ -51,7 +51,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var consumerId: Swift.String = Swift.String()
 
   /// Required. Start time of the operation.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// End time of the operation.
   /// Required when the operation is used in
@@ -61,7 +61,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.api.servicecontrol.v1.ServiceController.Check]: <doc:ServiceControllerClient/check(request:options:)>
   /// [google.api.servicecontrol.v1.ServiceController.Report]: <doc:ServiceControllerClient/report(request:options:)>
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Labels describing the operation. Only the following labels are allowed:
   ///
@@ -106,9 +106,9 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var userLabels: [Swift.String: Swift.String] = [:]
 
   /// Unimplemented.
-  public var extensions: [GoogleCloudWKT.`Any`] = []
+  public var extensions: [GoogleWKT.`Any`] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Operation`.
   public init() {}
@@ -170,9 +170,8 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .consumerId) {
       self.consumerId = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -191,12 +190,12 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.userLabels = value
     }
-    if let value = try container.decodeIfPresent([GoogleCloudWKT.`Any`].self, forKey: .extensions) {
+    if let value = try container.decodeIfPresent([GoogleWKT.`Any`].self, forKey: .extensions) {
       self.extensions = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -322,10 +321,10 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicecontrol.v1.Operation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

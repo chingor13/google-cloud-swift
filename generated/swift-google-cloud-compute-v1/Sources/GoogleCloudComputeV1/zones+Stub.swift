@@ -16,17 +16,17 @@
 
 #if Zones
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ZonesStub: Sendable {
       func `get`(
-        request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZonesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Zone
 
       func list(
-        request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ZonesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList
     }
   }

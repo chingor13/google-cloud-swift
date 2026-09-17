@@ -16,7 +16,7 @@
 
 #if InterconnectAttachments
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents an Interconnect Attachment (VLAN) resource.
   ///
@@ -24,7 +24,7 @@
   /// Cloud networks to your on-premises networks through an Interconnect.
   /// For more information, read
   /// Creating VLAN Attachments.
-  public struct InterconnectAttachment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InterconnectAttachment: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Determines whether this Attachment will carry packets.
@@ -370,7 +370,7 @@
     /// Only specified at creation time.
     public var vlanTag8021Q: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InterconnectAttachment`.
     public init() {}
@@ -557,7 +557,7 @@
       self.l2Forwarding = try container.decodeIfPresent(
         InterconnectAttachmentL2Forwarding.self, forKey: .l2Forwarding)
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .labelFingerprint) {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -595,7 +595,7 @@
       self.vlanTag8021Q = try container.decodeIfPresent(Swift.Int32.self, forKey: .vlanTag8021Q)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -638,7 +638,7 @@
       try container.encodeIfPresent(self.l2Forwarding, forKey: .l2Forwarding)
       if let v = labelFingerprint {
         try container.encode(
-          GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
+          GoogleWKT._DiscoveryBase64.encode(v), forKey: .labelFingerprint
         )
       }
       try container.encode(self.labels, forKey: .labels)
@@ -1518,11 +1518,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InterconnectAttachment"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

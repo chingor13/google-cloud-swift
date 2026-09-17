@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Evaluates the given
 /// [ProcessorVersion][google.cloud.documentai.v1.ProcessorVersion] against the
 /// supplied documents.
 ///
 /// [google.cloud.documentai.v1.ProcessorVersion]: <doc:ProcessorVersion>
-public struct EvaluateProcessorVersionRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EvaluateProcessorVersionRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the
@@ -37,7 +37,7 @@ public struct EvaluateProcessorVersionRequest: Codable, Equatable, GoogleCloudWK
   /// processor's dataset as evaluation input.
   public var evaluationDocuments: BatchDocumentsInputConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EvaluateProcessorVersionRequest`.
   public init() {}
@@ -79,7 +79,7 @@ public struct EvaluateProcessorVersionRequest: Codable, Equatable, GoogleCloudWK
       BatchDocumentsInputConfig.self, forKey: .evaluationDocuments)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,10 +95,10 @@ public struct EvaluateProcessorVersionRequest: Codable, Equatable, GoogleCloudWK
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.documentai.v1.EvaluateProcessorVersionRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

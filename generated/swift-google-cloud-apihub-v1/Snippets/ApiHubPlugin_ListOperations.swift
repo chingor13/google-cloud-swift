@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudApiHubV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ApiHubPluginClient) async throws {
   let items = try client.listOperations(

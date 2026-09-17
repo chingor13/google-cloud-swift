@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Sanitization result after applying all the filters on input content.
-public struct SanitizationResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SanitizationResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Overall filter match state for Sanitization.
@@ -44,7 +44,7 @@ public struct SanitizationResult: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Output only. Metadata related to Sanitization.
   public var sanitizationMetadata: SanitizationResult.SanitizationMetadata? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SanitizationResult`.
   public init() {}
@@ -98,7 +98,7 @@ public struct SanitizationResult: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       SanitizationResult.SanitizationMetadata.self, forKey: .sanitizationMetadata)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,7 +114,7 @@ public struct SanitizationResult: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// Message describing Sanitization metadata.
-  public struct SanitizationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SanitizationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Error code if any.
@@ -130,7 +130,7 @@ public struct SanitizationResult: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// Output only. The stream chunk processed by the Sanitization service.
     public var streamChunkProcessed: DataItem? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SanitizationMetadata`.
     public init() {}
@@ -185,7 +185,7 @@ public struct SanitizationResult: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         DataItem.self, forKey: .streamChunkProcessed)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -205,21 +205,21 @@ public struct SanitizationResult: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       return
         "type.googleapis.com/google.cloud.modelarmor.v1.SanitizationResult.SanitizationMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.modelarmor.v1.SanitizationResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

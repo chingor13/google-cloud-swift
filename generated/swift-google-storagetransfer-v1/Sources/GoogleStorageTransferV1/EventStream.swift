@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Specifies the Event-driven transfer options. Event-driven transfers listen to
 /// an event stream to transfer updated files.
-public struct EventStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EventStream: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Specifies a unique name of the resource such as AWS SQS
@@ -32,14 +32,14 @@ public struct EventStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// listening for events from this stream. If no start time is specified or
   /// start time is in the past, Storage Transfer Service starts listening
   /// immediately.
-  public var eventStreamStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var eventStreamStartTime: GoogleWKT.Timestamp? = nil
 
   /// Specifies the data and time at which Storage Transfer Service stops
   /// listening for events from this stream. After this time, any transfers in
   /// progress will complete, but no new transfers are initiated.
-  public var eventStreamExpirationTime: GoogleCloudWKT.Timestamp? = nil
+  public var eventStreamExpirationTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EventStream`.
   public init() {}
@@ -80,12 +80,12 @@ public struct EventStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.name = value
     }
     self.eventStreamStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .eventStreamStartTime)
+      GoogleWKT.Timestamp.self, forKey: .eventStreamStartTime)
     self.eventStreamExpirationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .eventStreamExpirationTime)
+      GoogleWKT.Timestamp.self, forKey: .eventStreamExpirationTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +103,10 @@ public struct EventStream: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.EventStream"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

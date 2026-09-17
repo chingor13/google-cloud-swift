@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudNetAppV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: NetAppClient, projectId: String, locationId: String, backupVaultId: String,

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Contains the information of an automated promote-release operation.
-public struct PromoteReleaseOperation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PromoteReleaseOperation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The ID of the target that represents the promotion stage to
@@ -27,7 +27,7 @@ public struct PromoteReleaseOperation: Codable, Equatable, GoogleCloudWKT._AnyPa
   public var targetId: Swift.String = Swift.String()
 
   /// Output only. How long the operation will be paused.
-  public var wait: GoogleCloudWKT.Duration? = nil
+  public var wait: GoogleWKT.Duration? = nil
 
   /// Output only. The name of the rollout that initiates the `AutomationRun`.
   public var rollout: Swift.String = Swift.String()
@@ -35,7 +35,7 @@ public struct PromoteReleaseOperation: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// Output only. The starting phase of the rollout created by this operation.
   public var phase: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PromoteReleaseOperation`.
   public init() {}
@@ -77,7 +77,7 @@ public struct PromoteReleaseOperation: Codable, Equatable, GoogleCloudWKT._AnyPa
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .targetId) {
       self.targetId = value
     }
-    self.wait = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .wait)
+    self.wait = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .wait)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .rollout) {
       self.rollout = value
     }
@@ -86,7 +86,7 @@ public struct PromoteReleaseOperation: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,10 +104,10 @@ public struct PromoteReleaseOperation: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.PromoteReleaseOperation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Constraint is not used as an independent entity, it is retrieved
 /// as part of another entity such as Table or View.
-public struct ConstraintEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ConstraintEntity: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the table constraint.
@@ -34,7 +34,7 @@ public struct ConstraintEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var tableColumns: [Swift.String] = []
 
   /// Custom engine specific features.
-  public var customFeatures: GoogleCloudWKT.Struct? = nil
+  public var customFeatures: GoogleWKT.Struct? = nil
 
   /// Reference columns which may be associated with the constraint. For example,
   /// if the constraint is a FOREIGN_KEY, this represents the list of full names
@@ -52,7 +52,7 @@ public struct ConstraintEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// field stores the table name on which the view is defined.
   public var tableName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ConstraintEntity`.
   public init() {}
@@ -107,7 +107,7 @@ public struct ConstraintEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.tableColumns = value
     }
     self.customFeatures = try container.decodeIfPresent(
-      GoogleCloudWKT.Struct.self, forKey: .customFeatures)
+      GoogleWKT.Struct.self, forKey: .customFeatures)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .referenceColumns) {
       self.referenceColumns = value
     }
@@ -119,7 +119,7 @@ public struct ConstraintEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -140,10 +140,10 @@ public struct ConstraintEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.ConstraintEntity"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

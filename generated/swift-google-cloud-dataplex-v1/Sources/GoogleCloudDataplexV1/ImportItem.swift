@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An object that describes the values that you want to set for an entry and its
 /// attached aspects when you import metadata. Used when you run a metadata
@@ -27,7 +27,7 @@ import Foundation
 /// file](https://cloud.google.com/dataplex/docs/import-metadata#metadata-import-file).
 ///
 /// [google.cloud.dataplex.v1.CatalogService.CreateMetadataJob]: <doc:CatalogServiceClient/createMetadataJob(request:options:)>
-public struct ImportItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImportItem: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Information about an entry and its attached aspects.
@@ -59,7 +59,7 @@ public struct ImportItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// metadata import file with the values and timestamps that exist in your
   /// project. For more information, see [Comparison
   /// logic](https://cloud.google.com/dataplex/docs/import-metadata#data-modification-logic).
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// The aspects to modify. Supports the following syntaxes:
   ///
@@ -81,7 +81,7 @@ public struct ImportItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// required aspects of an entry.
   public var aspectKeys: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImportItem`.
   public init() {}
@@ -122,14 +122,13 @@ public struct ImportItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.entry = try container.decodeIfPresent(Entry.self, forKey: .entry)
     self.entryLink = try container.decodeIfPresent(EntryLink.self, forKey: .entryLink)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .aspectKeys) {
       self.aspectKeys = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,10 +146,10 @@ public struct ImportItem: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.ImportItem"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

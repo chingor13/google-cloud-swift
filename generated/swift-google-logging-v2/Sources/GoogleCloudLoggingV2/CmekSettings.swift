@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes the customer-managed encryption key (CMEK) settings associated with
 /// a project, folder, organization, billing account, or flexible resource.
@@ -27,7 +27,7 @@ import Foundation
 /// See [Enabling CMEK for Log
 /// Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
 /// more information.
-public struct CmekSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CmekSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the CMEK settings.
@@ -98,7 +98,7 @@ public struct CmekSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.logging.v2.ConfigServiceV2.GetCmekSettings]: <doc:ConfigServiceV2Client/getCmekSettings(request:options:)>
   public var serviceAccountId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CmekSettings`.
   public init() {}
@@ -151,7 +151,7 @@ public struct CmekSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -169,10 +169,10 @@ public struct CmekSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.logging.v2.CmekSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

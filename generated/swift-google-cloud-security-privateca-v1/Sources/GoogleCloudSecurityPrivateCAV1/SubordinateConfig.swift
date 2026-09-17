@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes a subordinate CA's issuers. This is either a resource name to a
 /// known issuing
@@ -23,12 +23,12 @@ import Foundation
 /// or a PEM issuer certificate chain.
 ///
 /// [google.cloud.security.privateca.v1.CertificateAuthority]: <doc:CertificateAuthority>
-public struct SubordinateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SubordinateConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var subordinateConfig: OneOf_SubordinateConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SubordinateConfig`.
   public init() {}
@@ -87,7 +87,7 @@ public struct SubordinateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.subordinateConfig = subordinateConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,13 +109,13 @@ public struct SubordinateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
   /// This message describes a subordinate CA's issuer certificate chain. This
   /// wrapper exists for compatibility reasons.
-  public struct SubordinateConfigChain: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SubordinateConfigChain: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Expected to be in leaf-to-root order according to RFC 5246.
     public var pemCertificates: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SubordinateConfigChain`.
     public init() {}
@@ -153,7 +153,7 @@ public struct SubordinateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -169,11 +169,11 @@ public struct SubordinateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.security.privateca.v1.SubordinateConfig.SubordinateConfigChain"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -199,10 +199,10 @@ public struct SubordinateConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.SubordinateConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Cloud SQL instance names service.
   ///
@@ -31,7 +31,7 @@
     let inner: any Clients.SqlInstanceNamesServiceStub
 
     /// Creates a new `SqlInstanceNamesServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlInstanceNamesServiceStub =
         try Clients.SqlInstanceNamesServiceTransport(options)
       inner = Clients.SqlInstanceNamesServiceRetry(inner, options: options)

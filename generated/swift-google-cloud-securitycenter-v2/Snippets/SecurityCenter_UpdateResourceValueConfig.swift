@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudSecurityCenterV2
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: SecurityCenterClient, organizationId: String, resourceValueConfigId: String)
   async throws
@@ -32,7 +32,7 @@ func sample(client: SecurityCenterClient, organizationId: String, resourceValueC
         $0.resourceValueConfig = ResourceValueConfig().with {
           $0.name = "organizations/\(organizationId)/resourceValueConfigs/\(resourceValueConfigId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

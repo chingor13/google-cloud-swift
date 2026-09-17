@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for managing BigQuery export configurations for Chronicle instances.
 ///
@@ -29,7 +29,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   let inner: any Clients.BigQueryExportServiceStub
 
   /// Creates a new `BigQueryExportServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.BigQueryExportServiceStub = try Clients.BigQueryExportServiceTransport(
       options)
     inner = Clients.BigQueryExportServiceRetry(inner, options: options)
@@ -43,7 +43,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   ///
   /// @Snippet(path: "BigQueryExportService_GetBigQueryExport")
   public func getBigQueryExport(
-    request: GetBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.BigQueryExport {
     try await self.inner.getBigQueryExport(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   ///
   /// @Snippet(path: "BigQueryExportService_UpdateBigQueryExport")
   public func updateBigQueryExport(
-    request: UpdateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.BigQueryExport {
     try await self.inner.updateBigQueryExport(request: request, options: options)
   }
@@ -63,7 +63,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   ///
   /// @Snippet(path: "BigQueryExportService_ProvisionBigQueryExport")
   public func provisionBigQueryExport(
-    request: ProvisionBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: ProvisionBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.BigQueryExport {
     try await self.inner.provisionBigQueryExport(request: request, options: options)
   }
@@ -74,7 +74,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   ///
   /// @Snippet(path: "BigQueryExportService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   ///
   /// @Snippet(path: "BigQueryExportService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -93,7 +93,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -102,7 +102,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   ///
   /// @Snippet(path: "BigQueryExportService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -113,7 +113,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   ///
   /// @Snippet(path: "BigQueryExportService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -124,7 +124,7 @@ public final class BigQueryExportServiceClient: Clients.BigQueryExportServicePro
   ///
   /// @Snippet(path: "BigQueryExportService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -153,7 +153,7 @@ extension Clients {
     /// See `BigQueryExportServiceClient.updateBigQueryExport`.
     func updateBigQueryExport(
       bigQueryExport: BigQueryExport?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudChronicleV1.BigQueryExport
 
     /// See `BigQueryExportServiceClient.provisionBigQueryExport`.
@@ -198,37 +198,37 @@ extension Clients {
 
     /// See `BigQueryExportServiceClient.getBigQueryExport`.
     func getBigQueryExport(
-      request: GetBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.BigQueryExport
 
     /// See `BigQueryExportServiceClient.updateBigQueryExport`.
     func updateBigQueryExport(
-      request: UpdateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.BigQueryExport
 
     /// See `BigQueryExportServiceClient.provisionBigQueryExport`.
     func provisionBigQueryExport(
-      request: ProvisionBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: ProvisionBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.BigQueryExport
 
     /// See `BigQueryExportServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `BigQueryExportServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `BigQueryExportServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `BigQueryExportServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -242,9 +242,9 @@ extension Clients.BigQueryExportServiceProtocol {
   }
 
   public func getBigQueryExport(
-    request: GetBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.BigQueryExport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBigQueryExport(
@@ -263,14 +263,14 @@ extension Clients.BigQueryExportServiceProtocol {
   }
 
   public func updateBigQueryExport(
-    request: UpdateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.BigQueryExport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateBigQueryExport(
     bigQueryExport: BigQueryExport?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudChronicleV1.BigQueryExport {
     let request = UpdateBigQueryExportRequest().with {
       $0.bigQueryExport = bigQueryExport
@@ -286,9 +286,9 @@ extension Clients.BigQueryExportServiceProtocol {
   }
 
   public func provisionBigQueryExport(
-    request: ProvisionBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: ProvisionBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChronicleV1.BigQueryExport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func provisionBigQueryExport(
@@ -307,9 +307,9 @@ extension Clients.BigQueryExportServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -319,13 +319,13 @@ extension Clients.BigQueryExportServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -346,9 +346,9 @@ extension Clients.BigQueryExportServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -365,9 +365,9 @@ extension Clients.BigQueryExportServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -384,9 +384,9 @@ extension Clients.BigQueryExportServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

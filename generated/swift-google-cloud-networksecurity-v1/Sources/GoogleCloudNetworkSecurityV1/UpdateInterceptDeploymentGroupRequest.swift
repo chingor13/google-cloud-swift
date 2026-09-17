@@ -15,11 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for UpdateInterceptDeploymentGroup.
-public struct UpdateInterceptDeploymentGroupRequest: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct UpdateInterceptDeploymentGroupRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The list of fields to update.
@@ -27,7 +26,7 @@ public struct UpdateInterceptDeploymentGroupRequest: Codable, Equatable, GoogleC
   /// (e.g. `description`; *not*
   /// `intercept_deployment_group.description`). See
   /// https://google.aip.dev/161 for more details.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The deployment group to update.
   public var interceptDeploymentGroup: InterceptDeploymentGroup? = nil
@@ -37,7 +36,7 @@ public struct UpdateInterceptDeploymentGroupRequest: Codable, Equatable, GoogleC
   /// See https://google.aip.dev/155 for more details.
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateInterceptDeploymentGroupRequest`.
   public init() {}
@@ -74,8 +73,7 @@ public struct UpdateInterceptDeploymentGroupRequest: Codable, Equatable, GoogleC
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.interceptDeploymentGroup = try container.decodeIfPresent(
       InterceptDeploymentGroup.self, forKey: .interceptDeploymentGroup)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
@@ -83,7 +81,7 @@ public struct UpdateInterceptDeploymentGroupRequest: Codable, Equatable, GoogleC
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -101,10 +99,10 @@ public struct UpdateInterceptDeploymentGroupRequest: Codable, Equatable, GoogleC
     return
       "type.googleapis.com/google.cloud.networksecurity.v1.UpdateInterceptDeploymentGroupRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

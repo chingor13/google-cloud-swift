@@ -16,10 +16,10 @@
 
 import Foundation
 import GoogleCloudDatastreamV1
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Log definition for activities related to a stream.
-public struct StreamActivityLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StreamActivityLogEntry: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A code representing the event.
@@ -30,7 +30,7 @@ public struct StreamActivityLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   public var eventPayload: OneOf_EventPayload? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StreamActivityLogEntry`.
   public init() {}
@@ -92,7 +92,7 @@ public struct StreamActivityLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.eventPayload = eventPayload
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,14 +113,14 @@ public struct StreamActivityLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPac
   }
 
   /// Payload for a change in the state of a stream.
-  public struct StreamStateChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StreamStateChange: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The new stream state.
     public var newState: GoogleCloudDatastreamV1.Stream.State = GoogleCloudDatastreamV1.Stream
       .State()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StreamStateChange`.
     public init() {}
@@ -160,7 +160,7 @@ public struct StreamActivityLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -176,11 +176,11 @@ public struct StreamActivityLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.datastream.logging.v1.StreamActivityLogEntry.StreamStateChange"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -192,10 +192,10 @@ public struct StreamActivityLogEntry: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datastream.logging.v1.StreamActivityLogEntry"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

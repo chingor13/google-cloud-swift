@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A decision that has been made to dismiss an approval request.
-public struct DismissDecision: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DismissDecision: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The time at which the approval request was dismissed.
-  public var dismissTime: GoogleCloudWKT.Timestamp? = nil
+  public var dismissTime: GoogleWKT.Timestamp? = nil
 
   /// This field will be true if the ApprovalRequest was implicitly dismissed due
   /// to inaction by the access approval approvers (the request is not acted
   /// on by the approvers before the exiration time).
   public var implicit: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DismissDecision`.
   public init() {}
@@ -64,14 +64,13 @@ public struct DismissDecision: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.dismissTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .dismissTime)
+    self.dismissTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .dismissTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .implicit) {
       self.implicit = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,10 +86,10 @@ public struct DismissDecision: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.accessapproval.v1.DismissDecision"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

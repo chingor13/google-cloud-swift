@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudCertificateManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CertificateManagerClient, parent: String) async throws {
   let items = try client.listCertificateMaps(

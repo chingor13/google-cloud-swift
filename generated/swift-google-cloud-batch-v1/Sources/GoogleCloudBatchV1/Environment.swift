@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An Environment describes a collection of environment variables to set when
 /// executing Tasks.
-public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Environment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A map of environment variable names to values.
@@ -34,7 +34,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// environment variable names and their values.
   public var encryptedVariables: Environment.KMSEnvMap? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Environment`.
   public init() {}
@@ -85,7 +85,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Environment.KMSEnvMap.self, forKey: .encryptedVariables)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,7 +99,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
   }
 
-  public struct KMSEnvMap: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct KMSEnvMap: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the KMS key that will be used to decrypt the cipher text.
@@ -108,7 +108,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The value of the cipherText response from the `encrypt` method.
     public var cipherText: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `KMSEnvMap`.
     public init() {}
@@ -151,7 +151,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -167,21 +167,21 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.Environment.KMSEnvMap"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.Environment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `BatchingSettingsProto` specifies a set of batching thresholds, each of
 /// which acts as a trigger to send a batch of messages as a request. At least
 /// one threshold must be positive nonzero.
-public struct BatchingSettingsProto: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchingSettingsProto: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The number of elements of a field collected into a batch which, if
@@ -34,7 +34,7 @@ public struct BatchingSettingsProto: Codable, Equatable, GoogleCloudWKT._AnyPack
 
   /// The duration after which a batch should be sent, starting from the addition
   /// of the first message to that batch.
-  public var delayThreshold: GoogleCloudWKT.Duration? = nil
+  public var delayThreshold: GoogleWKT.Duration? = nil
 
   /// The maximum number of elements collected in a batch that could be accepted
   /// by server.
@@ -53,7 +53,7 @@ public struct BatchingSettingsProto: Codable, Equatable, GoogleCloudWKT._AnyPack
   public var flowControlLimitExceededBehavior: FlowControlLimitExceededBehaviorProto =
     FlowControlLimitExceededBehaviorProto()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchingSettingsProto`.
   public init() {}
@@ -108,7 +108,7 @@ public struct BatchingSettingsProto: Codable, Equatable, GoogleCloudWKT._AnyPack
       self.requestByteThreshold = value
     }
     self.delayThreshold = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .delayThreshold)
+      GoogleWKT.Duration.self, forKey: .delayThreshold)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .elementCountLimit) {
       self.elementCountLimit = value
     }
@@ -129,7 +129,7 @@ public struct BatchingSettingsProto: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -152,10 +152,10 @@ public struct BatchingSettingsProto: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.BatchingSettingsProto"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

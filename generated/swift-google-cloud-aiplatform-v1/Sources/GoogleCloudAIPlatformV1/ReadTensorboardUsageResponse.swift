@@ -16,20 +16,20 @@
 
 #if TensorboardService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [TensorboardService.ReadTensorboardUsage][google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage].
   ///
   /// [google.cloud.aiplatform.v1.TensorboardService.ReadTensorboardUsage]: <doc:TensorboardServiceClient/readTensorboardUsage(request:options:)>
-  public struct ReadTensorboardUsageResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReadTensorboardUsageResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Maps year-month (YYYYMM) string to per month usage data.
     public var monthlyUsageData: [Swift.String: ReadTensorboardUsageResponse.PerMonthUsageData] =
       [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReadTensorboardUsageResponse`.
     public init() {}
@@ -70,7 +70,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -83,7 +83,7 @@
     }
 
     /// Per user usage data.
-    public struct PerUserUsageData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PerUserUsageData: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// User's username
@@ -92,7 +92,7 @@
       /// Number of times the user has read data within the Tensorboard.
       public var viewCount: Swift.Int64 = Swift.Int64()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PerUserUsageData`.
       public init() {}
@@ -135,7 +135,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -152,22 +152,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerUserUsageData"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Per month usage data
-    public struct PerMonthUsageData: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PerMonthUsageData: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Usage data for each user in the given month.
       public var userUsageData: [ReadTensorboardUsageResponse.PerUserUsageData] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PerMonthUsageData`.
       public init() {}
@@ -207,7 +207,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -223,22 +223,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ReadTensorboardUsageResponse.PerMonthUsageData"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ReadTensorboardUsageResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

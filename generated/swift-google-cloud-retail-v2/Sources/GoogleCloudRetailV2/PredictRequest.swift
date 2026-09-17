@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for Predict method.
-public struct PredictRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PredictRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Full resource name of the format:
@@ -140,7 +140,7 @@ public struct PredictRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///    category.
   /// * `filterSyntaxV2`: Boolean. False by default. If set to true, the `filter`
   ///   field is interpreteted according to the new, attribute-based syntax.
-  public var params: [Swift.String: GoogleCloudWKT.Value] = [:]
+  public var params: [Swift.String: GoogleWKT.Value] = [:]
 
   /// The labels applied to a resource must meet the following requirements:
   ///
@@ -161,7 +161,7 @@ public struct PredictRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// for more details.
   public var labels: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PredictRequest`.
   public init() {}
@@ -225,7 +225,7 @@ public struct PredictRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.validateOnly = value
     }
     if let value = try container.decodeIfPresent(
-      [Swift.String: GoogleCloudWKT.Value].self, forKey: .params)
+      [Swift.String: GoogleWKT.Value].self, forKey: .params)
     {
       self.params = value
     }
@@ -235,7 +235,7 @@ public struct PredictRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -257,10 +257,10 @@ public struct PredictRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.PredictRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

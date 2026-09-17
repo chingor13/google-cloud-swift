@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A ChannelProfile configures the agent's behavior for a specific communication
 /// channel, such as web UI or telephony.
-public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ChannelProfile: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The unique identifier of the channel profile.
@@ -53,7 +53,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Configuration specific to Instagram deployments.
   public var instagramConfig: ChannelProfile.InstagramConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ChannelProfile`.
   public init() {}
@@ -130,7 +130,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ChannelProfile.InstagramConfig.self, forKey: .instagramConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -151,14 +151,14 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Represents the persona property of a channel.
-  public struct PersonaProperty: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PersonaProperty: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The persona of the channel.
     public var persona: ChannelProfile.PersonaProperty.Persona = ChannelProfile.PersonaProperty
       .Persona()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PersonaProperty`.
     public init() {}
@@ -198,7 +198,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -318,16 +318,16 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.ChannelProfile.PersonaProperty"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Message for configuration for the web widget.
-  public struct WebWidgetConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WebWidgetConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The modality of the web widget.
@@ -343,7 +343,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The security settings of the web widget.
     public var securitySettings: ChannelProfile.WebWidgetConfig.SecuritySettings? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WebWidgetConfig`.
     public init() {}
@@ -399,7 +399,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         ChannelProfile.WebWidgetConfig.SecuritySettings.self, forKey: .securitySettings)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -415,7 +415,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Security settings for the web widget.
-    public struct SecuritySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SecuritySettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Indicates whether public access to the web widget is enabled.
@@ -440,7 +440,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// is enabled.
       public var enableRecaptcha: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SecuritySettings`.
       public init() {}
@@ -493,7 +493,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -512,11 +512,11 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.ces.v1.ChannelProfile.WebWidgetConfig.SecuritySettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -747,16 +747,16 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.ChannelProfile.WebWidgetConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration specific to WhatsApp deployments.
-  public struct WhatsAppConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WhatsAppConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The WhatsApp Business Account ID.
@@ -777,7 +777,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. The description of the Meta business page or profile.
     public var description: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WhatsAppConfig`.
     public init() {}
@@ -840,7 +840,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -860,16 +860,16 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.ChannelProfile.WhatsAppConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration specific to Instagram deployments.
-  public struct InstagramConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InstagramConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The Instagram Account ID.
@@ -884,7 +884,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. The description of the Meta business page or profile.
     public var description: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstagramConfig`.
     public init() {}
@@ -937,7 +937,7 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -955,11 +955,11 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.ChannelProfile.InstagramConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1128,10 +1128,10 @@ public struct ChannelProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.ChannelProfile"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

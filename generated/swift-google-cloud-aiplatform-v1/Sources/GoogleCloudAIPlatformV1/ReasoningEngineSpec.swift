@@ -16,10 +16,10 @@
 
 #if ReasoningEngineService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// ReasoningEngine configurations
-  public struct ReasoningEngineSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReasoningEngineSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The service account that the Reasoning Engine artifact runs as.
@@ -42,7 +42,7 @@
 
     /// Optional. Declarations for object class methods in OpenAPI specification
     /// format.
-    public var classMethods: [GoogleCloudWKT.Struct] = []
+    public var classMethods: [GoogleWKT.Struct] = []
 
     /// Optional. The OSS agent framework used to develop the agent.
     /// Currently supported values: "google-adk", "langchain", "langgraph", "ag2",
@@ -63,7 +63,7 @@
     /// specified.
     public var deploymentSource: OneOf_DeploymentSource? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReasoningEngineSpec`.
     public init() {}
@@ -118,9 +118,7 @@
         ReasoningEngineSpec.PackageSpec.self, forKey: .packageSpec)
       self.deploymentSpec = try container.decodeIfPresent(
         ReasoningEngineSpec.DeploymentSpec.self, forKey: .deploymentSpec)
-      if let value = try container.decodeIfPresent(
-        [GoogleCloudWKT.Struct].self, forKey: .classMethods)
-      {
+      if let value = try container.decodeIfPresent([GoogleWKT.Struct].self, forKey: .classMethods) {
         self.classMethods = value
       }
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .agentFramework) {
@@ -157,7 +155,7 @@
       self.deploymentSource = deploymentSource
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -186,7 +184,7 @@
 
     /// User-provided package specification, containing pickled object and package
     /// requirements.
-    public struct PackageSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PackageSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The Cloud Storage URI of the pickled python object.
@@ -203,7 +201,7 @@
       /// is 3.10.
       public var pythonVersion: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PackageSpec`.
       public init() {}
@@ -260,7 +258,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -278,16 +276,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.PackageSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The specification of a Reasoning Engine deployment.
-    public struct DeploymentSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DeploymentSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Environment variables to be set with the Reasoning Engine
@@ -330,7 +328,7 @@
       /// value: 2 * cpu + 1. Defaults to 9.
       public var containerConcurrency: Swift.Int32? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DeploymentSpec`.
       public init() {}
@@ -394,7 +392,7 @@
           Swift.Int32.self, forKey: .containerConcurrency)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -415,16 +413,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.DeploymentSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Specification for deploying from source code.
-    public struct SourceCodeSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SourceCodeSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Specifies where the source code is located.
@@ -434,7 +432,7 @@
       /// the code.
       public var languageSpec: OneOf_LanguageSpec? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SourceCodeSpec`.
       public init() {}
@@ -520,7 +518,7 @@
         self.languageSpec = languageSpec
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -550,15 +548,14 @@
       }
 
       /// Specifies source code provided as a byte stream.
-      public struct InlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct InlineSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. Input only. The application source code archive, provided as
         /// a compressed tarball (.tar.gz) file.
         public var sourceArchive: Foundation.Data = Foundation.Data()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `InlineSource`.
         public init() {}
@@ -597,7 +594,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -613,25 +610,24 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.InlineSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// The image spec for building an image (within a single build step), based
       /// on the config file (i.e. Dockerfile) in the source directory.
-      public struct ImageSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ImageSpec: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. Build arguments to be used. They will be passed through
         /// --build-arg flags.
         public var buildArgs: [Swift.String: Swift.String] = [:]
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ImageSpec`.
         public init() {}
@@ -671,7 +667,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -687,18 +683,18 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.ImageSpec"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Specifies the configuration for fetching source code from a Git
       /// repository that is managed by Developer Connect. This includes the
       /// repository, revision, and directory to use.
-      public struct DeveloperConnectConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct DeveloperConnectConfig: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The Developer Connect Git repository link, formatted as
@@ -713,8 +709,7 @@
         /// branch, a tag, a commit SHA, or any Git ref.
         public var revision: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `DeveloperConnectConfig`.
         public init() {}
@@ -764,7 +759,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -782,17 +777,17 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Specifies source code to be fetched from a Git repository managed through
       /// the Developer Connect service.
-      public struct DeveloperConnectSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct DeveloperConnectSource: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The Developer Connect configuration that defines the
@@ -800,8 +795,7 @@
         /// root.
         public var config: ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `DeveloperConnectSource`.
         public init() {}
@@ -838,7 +832,7 @@
             ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectConfig.self, forKey: .config)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -854,16 +848,16 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.DeveloperConnectSource"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Specification for running a Python application from source.
-      public struct PythonSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct PythonSpec: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The version of Python to use. Support version
@@ -888,8 +882,7 @@
         /// root. If not specified, defaults to "requirements.txt".
         public var requirementsFile: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `PythonSpec`.
         public init() {}
@@ -945,7 +938,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -964,11 +957,11 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec.PythonSpec"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -993,16 +986,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.SourceCodeSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Specification for deploying from a container image.
-    public struct ContainerSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ContainerSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The Artifact Registry Docker image URI (e.g.,
@@ -1010,7 +1003,7 @@
       /// container image that is to be run on each worker replica.
       public var imageUri: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ContainerSpec`.
       public init() {}
@@ -1048,7 +1041,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1063,16 +1056,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.ContainerSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Specification for building container image.
-    public struct BuildSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BuildSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The resource name of the Cloud Build WorkerPool to use for
@@ -1091,7 +1084,7 @@
       /// `{service_account}@{project}.iam.gserviceaccount.com`
       public var serviceAccount: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BuildSpec`.
       public init() {}
@@ -1134,7 +1127,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1150,11 +1143,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec.BuildSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1280,11 +1273,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ReasoningEngineSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DataQualityRuleResult provides a more detailed, per-rule view of the results.
-public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataQualityRuleResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The rule specified in the DataQualitySpec, as is.
@@ -74,7 +74,7 @@ public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// [google.cloud.dataplex.v1.DataQualityRule.debug_queries]: <doc:DataQualityRule/debugQueries>
   public var debugQueriesResultSets: [DataQualityRuleResult.DebugQueryResultSet] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataQualityRuleResult`.
   public init() {}
@@ -152,7 +152,7 @@ public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -173,7 +173,7 @@ public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// Contains a single result from the debug query.
-  public struct DebugQueryResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DebugQueryResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Specifies the name of the result. Available if provided with an explicit
@@ -188,7 +188,7 @@ public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// Represents the value of the result as a string.
     public var value: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DebugQueryResult`.
     public init() {}
@@ -236,7 +236,7 @@ public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -253,22 +253,22 @@ public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataQualityRuleResult.DebugQueryResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Contains all results from a debug query.
-  public struct DebugQueryResultSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DebugQueryResultSet: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Contains all results. Up to 10 results can be returned.
     public var results: [DataQualityRuleResult.DebugQueryResult] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DebugQueryResultSet`.
     public init() {}
@@ -308,7 +308,7 @@ public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -324,21 +324,21 @@ public struct DataQualityRuleResult: Codable, Equatable, GoogleCloudWKT._AnyPack
       return
         "type.googleapis.com/google.cloud.dataplex.v1.DataQualityRuleResult.DebugQueryResultSet"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataQualityRuleResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

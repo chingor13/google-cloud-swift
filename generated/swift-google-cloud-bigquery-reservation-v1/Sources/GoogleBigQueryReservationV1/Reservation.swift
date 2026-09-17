@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A reservation is a mechanism used to guarantee slots to users.
-public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Reservation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the reservation, e.g.,
@@ -64,10 +64,10 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var concurrency: Swift.Int64 = Swift.Int64()
 
   /// Output only. Creation time of the reservation.
-  public var creationTime: GoogleCloudWKT.Timestamp? = nil
+  public var creationTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Last update time of the reservation.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Applicable only for reservations located within one of the BigQuery
   /// multi-regions (US or EU).
@@ -190,7 +190,7 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// reservation group path is ["group-1", "group-2", "group-3"].
   public var reservationGroupPath: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Reservation`.
   public init() {}
@@ -273,9 +273,8 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.concurrency = value
     }
     self.creationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .creationTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      GoogleWKT.Timestamp.self, forKey: .creationTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .multiRegionAuxiliary) {
       self.multiRegionAuxiliary = value
     }
@@ -315,7 +314,7 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -346,7 +345,7 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Auto scaling settings.
-  public struct Autoscale: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Autoscale: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The slot capacity added to this reservation when autoscale
@@ -359,7 +358,7 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Number of slots to be scaled when needed.
     public var maxSlots: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Autoscale`.
     public init() {}
@@ -402,7 +401,7 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -418,16 +417,16 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.reservation.v1.Reservation.Autoscale"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Disaster Recovery(DR) replication status of the reservation.
-  public struct ReplicationStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReplicationStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The last error encountered while trying to replicate changes
@@ -438,20 +437,20 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. The time at which the last error was encountered while
     /// trying to replicate changes from the primary to the secondary. This field
     /// is only available if the replication has not succeeded since.
-    public var lastErrorTime: GoogleCloudWKT.Timestamp? = nil
+    public var lastErrorTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. A timestamp corresponding to the last change on the primary
     /// that was successfully replicated to the secondary.
-    public var lastReplicationTime: GoogleCloudWKT.Timestamp? = nil
+    public var lastReplicationTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The time at which a soft failover for the reservation and
     /// its associated datasets was initiated. After this field is set, all
     /// subsequent changes to the reservation will be rejected unless a hard
     /// failover overrides this operation. This field will be cleared once the
     /// failover is complete.
-    public var softFailoverStartTime: GoogleCloudWKT.Timestamp? = nil
+    public var softFailoverStartTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReplicationStatus`.
     public init() {}
@@ -492,14 +491,14 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
       self.lastErrorTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .lastErrorTime)
+        GoogleWKT.Timestamp.self, forKey: .lastErrorTime)
       self.lastReplicationTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .lastReplicationTime)
+        GoogleWKT.Timestamp.self, forKey: .lastReplicationTime)
       self.softFailoverStartTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .softFailoverStartTime)
+        GoogleWKT.Timestamp.self, forKey: .softFailoverStartTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -518,11 +517,11 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.bigquery.reservation.v1.Reservation.ReplicationStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -685,10 +684,10 @@ public struct Reservation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.reservation.v1.Reservation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

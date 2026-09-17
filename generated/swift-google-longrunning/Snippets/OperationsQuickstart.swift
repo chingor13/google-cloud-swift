@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleLongRunning
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleLongRunning.OperationsClient()

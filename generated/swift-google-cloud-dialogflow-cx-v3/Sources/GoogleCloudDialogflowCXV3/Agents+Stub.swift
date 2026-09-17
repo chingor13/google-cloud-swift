@@ -17,75 +17,75 @@
 #if Agents
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol AgentsStub: Sendable {
       func listAgents(
-        request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListAgentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListAgentsResponse
 
       func getAgent(
-        request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent
 
       func createAgent(
-        request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent
 
       func updateAgent(
-        request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent
 
       func deleteAgent(
-        request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteAgentRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func exportAgent(
-        request: ExportAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func restoreAgent(
-        request: RestoreAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: RestoreAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func validateAgent(
-        request: ValidateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: ValidateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult
 
       func getAgentValidationResult(
-        request: GetAgentValidationResultRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAgentValidationResultRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult
 
       func getGenerativeSettings(
-        request: GetGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: GetGenerativeSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings
 
       func updateGenerativeSettings(
-        request: UpdateGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateGenerativeSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents an instance of a Security Health Analytics custom module,
 /// including its full module name, display name, enablement state, and last
 /// updated time. You can create a custom module at the organization, folder, or
 /// project level. Custom modules that you create at the organization or folder
 /// level are inherited by the descendant folders and projects.
-public struct SecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The full resource name of the custom module, in one of the
@@ -45,7 +45,7 @@ public struct SecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleClo
     SecurityHealthAnalyticsCustomModule.EnablementState()
 
   /// Output only. The time at which the custom module was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The editor that last updated the custom module.
   public var lastEditor: Swift.String = Swift.String()
@@ -59,7 +59,7 @@ public struct SecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleClo
   /// Optional. The user-specified custom configuration for the module.
   public var customConfig: CustomConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SecurityHealthAnalyticsCustomModule`.
   public init() {}
@@ -115,8 +115,7 @@ public struct SecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleClo
     {
       self.enablementState = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .lastEditor) {
       self.lastEditor = value
     }
@@ -126,7 +125,7 @@ public struct SecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleClo
     self.customConfig = try container.decodeIfPresent(CustomConfig.self, forKey: .customConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -264,10 +263,10 @@ public struct SecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleClo
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.SecurityHealthAnalyticsCustomModule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

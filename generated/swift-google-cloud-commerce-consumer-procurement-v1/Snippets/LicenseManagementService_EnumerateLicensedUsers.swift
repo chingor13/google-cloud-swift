@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudCommerceConsumerProcurementV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: LicenseManagementServiceClient) async throws {
   let items = try client.enumerateLicensedUsers(

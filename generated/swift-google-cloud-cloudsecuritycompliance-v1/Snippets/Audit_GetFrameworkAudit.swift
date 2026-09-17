@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudSecurityComplianceV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AuditClient, projectId: String, locationId: String, frameworkAuditId: String)
   async throws

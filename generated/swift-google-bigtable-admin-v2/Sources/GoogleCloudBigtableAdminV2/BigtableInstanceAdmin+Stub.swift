@@ -15,152 +15,152 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol BigtableInstanceAdminStub: Sendable {
     func createInstance(
-      request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Instance
 
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListInstancesResponse
 
     func updateInstance(
-      request: Instance, options: GoogleCloudGax.RequestOptions
+      request: Instance, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Instance
 
     func partialUpdateInstance(
-      request: PartialUpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: PartialUpdateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteInstance(
-      request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.Cluster
 
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListClustersResponse
 
     func updateCluster(
-      request: Cluster, options: GoogleCloudGax.RequestOptions
+      request: Cluster, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func partialUpdateCluster(
-      request: PartialUpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: PartialUpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createAppProfile(
-      request: CreateAppProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAppProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.AppProfile
 
     func getAppProfile(
-      request: GetAppProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAppProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.AppProfile
 
     func listAppProfiles(
-      request: ListAppProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAppProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListAppProfilesResponse
 
     func updateAppProfile(
-      request: UpdateAppProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAppProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAppProfile(
-      request: DeleteAppProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAppProfileRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listHotTablets(
-      request: ListHotTabletsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHotTabletsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListHotTabletsResponse
 
     func createLogicalView(
-      request: CreateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLogicalViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getLogicalView(
-      request: GetLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLogicalViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.LogicalView
 
     func listLogicalViews(
-      request: ListLogicalViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLogicalViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListLogicalViewsResponse
 
     func updateLogicalView(
-      request: UpdateLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLogicalViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteLogicalView(
-      request: DeleteLogicalViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLogicalViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createMaterializedView(
-      request: CreateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMaterializedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getMaterializedView(
-      request: GetMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMaterializedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.MaterializedView
 
     func listMaterializedViews(
-      request: ListMaterializedViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMaterializedViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBigtableAdminV2.ListMaterializedViewsResponse
 
     func updateMaterializedView(
-      request: UpdateMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMaterializedViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMaterializedView(
-      request: DeleteMaterializedViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMaterializedViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

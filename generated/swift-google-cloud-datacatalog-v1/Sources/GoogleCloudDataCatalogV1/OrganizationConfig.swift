@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The configuration related to the migration from Data Catalog to Dataplex that
 /// has been applied to an organization and any projects under it. It is the
@@ -23,7 +23,7 @@ import Foundation
 /// [RetrieveConfig][google.cloud.datacatalog.v1.DataCatalog.RetrieveConfig].
 ///
 /// [google.cloud.datacatalog.v1.DataCatalog.RetrieveConfig]: <doc:DataCatalogClient/retrieveConfig(request:options:)>
-public struct OrganizationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OrganizationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Map of organizations and project resource names and their configuration.
@@ -31,7 +31,7 @@ public struct OrganizationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// `projects/{projectId}`.
   public var config: [Swift.String: MigrationConfig] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OrganizationConfig`.
   public init() {}
@@ -71,7 +71,7 @@ public struct OrganizationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +86,10 @@ public struct OrganizationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.OrganizationConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

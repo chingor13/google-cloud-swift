@@ -16,11 +16,11 @@
 
 #if Interconnects
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Describes a single physical circuit between the Customer and Google.
   /// CircuitInfo objects are created by Google, so all fields are output only.
-  public struct InterconnectCircuitInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InterconnectCircuitInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Customer-side demarc ID for this circuit.
@@ -33,7 +33,7 @@
     /// provided by Google to the customer in the LOA.
     public var googleDemarcId: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InterconnectCircuitInfo`.
     public init() {}
@@ -78,7 +78,7 @@
         Swift.String.self, forKey: .googleDemarcId)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -95,11 +95,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InterconnectCircuitInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

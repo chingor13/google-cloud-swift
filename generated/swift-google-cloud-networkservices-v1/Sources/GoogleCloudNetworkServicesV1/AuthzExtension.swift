@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `AuthzExtension` is a resource that allows traffic forwarding
 /// to a callout backend service to make an authorization decision.
-public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AuthzExtension: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Identifier. Name of the `AuthzExtension` resource in the
@@ -28,10 +28,10 @@ public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. A human-readable description of the resource.
   public var description: Swift.String = Swift.String()
@@ -71,7 +71,7 @@ public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Required. Specifies the timeout for each individual message on the stream.
   /// The timeout must be between 10-10000 milliseconds.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
   /// Optional. Determines how the proxy behaves if the call to the extension
   /// fails or times out.
@@ -98,7 +98,7 @@ public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// `{forwarding_rule_id}` - substituted with the forwarding rule's fully
   ///   qualified resource name.
-  public var metadata: GoogleCloudWKT.Struct? = nil
+  public var metadata: GoogleWKT.Struct? = nil
 
   /// Optional. List of the HTTP headers to forward to the extension
   /// (from the client). If omitted, all headers are sent.
@@ -122,7 +122,7 @@ public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `AuthzExtension` resources use the `EXT_PROC_GRPC` wire format.
   public var wireFormat: WireFormat = WireFormat()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AuthzExtension`.
   public init() {}
@@ -184,10 +184,8 @@ public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -206,11 +204,11 @@ public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .service) {
       self.service = value
     }
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .failOpen) {
       self.failOpen = value
     }
-    self.metadata = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .metadata)
+    self.metadata = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .metadata)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .forwardHeaders) {
       self.forwardHeaders = value
     }
@@ -222,7 +220,7 @@ public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -250,10 +248,10 @@ public struct AuthzExtension: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkservices.v1.AuthzExtension"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings to describe how errors should be handled in the app.
-public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ErrorHandlingSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The strategy to use for error handling.
@@ -32,7 +32,7 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// (e.g. LLM errors).
   public var endSessionConfig: ErrorHandlingSettings.EndSessionConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ErrorHandlingSettings`.
   public init() {}
@@ -80,7 +80,7 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
       ErrorHandlingSettings.EndSessionConfig.self, forKey: .endSessionConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,7 +95,7 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// Configuration for handling fallback responses.
-  public struct FallbackResponseConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FallbackResponseConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The fallback messages in case of system errors (e.g. LLM
@@ -109,7 +109,7 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// [google.cloud.ces.v1.EndSession]: <doc:EndSession>
     public var maxFallbackAttempts: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FallbackResponseConfig`.
     public init() {}
@@ -154,7 +154,7 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -170,17 +170,17 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.ErrorHandlingSettings.FallbackResponseConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for ending the session in case of system errors (e.g. LLM
   /// errors).
-  public struct EndSessionConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EndSessionConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Whether to escalate the session in
@@ -194,7 +194,7 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
     /// [google.cloud.ces.v1.EndSession.metadata]: <doc:EndSession/metadata>
     public var escalateSession: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EndSessionConfig`.
     public init() {}
@@ -231,7 +231,7 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
         Swift.Bool.self, forKey: .escalateSession)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -246,11 +246,11 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.ErrorHandlingSettings.EndSessionConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -373,10 +373,10 @@ public struct ErrorHandlingSettings: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.ErrorHandlingSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

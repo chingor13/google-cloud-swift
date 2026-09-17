@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudAlloyDBV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudAlloyDBV1.AlloyDBCSQLAdminClient()

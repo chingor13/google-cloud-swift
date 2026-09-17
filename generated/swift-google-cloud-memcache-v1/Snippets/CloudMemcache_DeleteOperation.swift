@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudMemcacheV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudMemcacheClient) async throws {
   try await client.deleteOperation(

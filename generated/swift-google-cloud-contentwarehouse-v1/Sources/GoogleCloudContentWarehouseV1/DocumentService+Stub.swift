@@ -15,47 +15,47 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DocumentServiceStub: Sendable {
     func createDocument(
-      request: CreateDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.CreateDocumentResponse
 
     func getDocument(
-      request: GetDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.Document
 
     func updateDocument(
-      request: UpdateDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.UpdateDocumentResponse
 
     func deleteDocument(
-      request: DeleteDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func searchDocuments(
-      request: SearchDocumentsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchDocumentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SearchDocumentsResponse
 
     func lockDocument(
-      request: LockDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: LockDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.Document
 
     func fetchAcl(
-      request: FetchAclRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.FetchAclResponse
 
     func setAcl(
-      request: SetAclRequest, options: GoogleCloudGax.RequestOptions
+      request: SetAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SetAclResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The configuration related to the migration to Dataplex applied to an
 /// organization or project.
@@ -25,7 +25,7 @@ import Foundation
 ///
 /// [google.cloud.datacatalog.v1.DataCatalog.RetrieveEffectiveConfig]: <doc:DataCatalogClient/retrieveEffectiveConfig(request:options:)>
 /// [google.cloud.datacatalog.v1.DataCatalog.SetConfig]: <doc:DataCatalogClient/setConfig(request:options:)>
-public struct MigrationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MigrationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Opt-in status for the migration of Tag Templates to Dataplex.
@@ -36,9 +36,9 @@ public struct MigrationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The time when the Tag Template migration was enabled.
   /// If the Tag Template migration is not enabled, this field is not set.
-  public var templateMigrationEnabledTime: GoogleCloudWKT.Timestamp? = nil
+  public var templateMigrationEnabledTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MigrationConfig`.
   public init() {}
@@ -87,10 +87,10 @@ public struct MigrationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.catalogUiExperience = value
     }
     self.templateMigrationEnabledTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .templateMigrationEnabledTime)
+      GoogleWKT.Timestamp.self, forKey: .templateMigrationEnabledTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -108,10 +108,10 @@ public struct MigrationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.v1.MigrationConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,7 +15,7 @@
 import Foundation
 import NIOCore
 import GoogleAuth
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudStorage
 
 enum StorageOperations {

@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Options customizing the time based transfer schedule.
 /// Options are migrated from the original ScheduleOptions message.
-public struct TimeBasedSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TimeBasedSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Data transfer schedule.
@@ -41,14 +41,14 @@ public struct TimeBasedSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// scheduled at or after the start time according to a recurrence pattern
   /// defined in the schedule string. The start time can be changed at any
   /// moment.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Defines time to stop scheduling transfer runs. A transfer run cannot be
   /// scheduled at or after the end time. The end time can be changed at any
   /// moment.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TimeBasedSchedule`.
   public init() {}
@@ -88,12 +88,11 @@ public struct TimeBasedSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .schedule) {
       self.schedule = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +109,10 @@ public struct TimeBasedSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.datatransfer.v1.TimeBasedSchedule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

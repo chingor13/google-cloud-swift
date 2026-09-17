@@ -16,17 +16,17 @@
 
 #if SqlUsersService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// User level password validation policy.
-  public struct UserPasswordValidationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UserPasswordValidationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Number of failed login attempts allowed before user get locked.
     public var allowedFailedAttempts: Swift.Int32 = Swift.Int32()
 
     /// Expiration duration after password is updated.
-    public var passwordExpirationDuration: GoogleCloudWKT.Duration? = nil
+    public var passwordExpirationDuration: GoogleWKT.Duration? = nil
 
     /// If true, failed login attempts check will be enabled.
     public var enableFailedAttemptsCheck: Swift.Bool = Swift.Bool()
@@ -38,7 +38,7 @@
     /// password. This flag is supported only for MySQL.
     public var enablePasswordVerification: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UserPasswordValidationPolicy`.
     public init() {}
@@ -84,7 +84,7 @@
         self.allowedFailedAttempts = value
       }
       self.passwordExpirationDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .passwordExpirationDuration)
+        GoogleWKT.Duration.self, forKey: .passwordExpirationDuration)
       if let value = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .enableFailedAttemptsCheck)
       {
@@ -98,7 +98,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -118,11 +118,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.UserPasswordValidationPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

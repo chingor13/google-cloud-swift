@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudVideoAIV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudVideoAIV1.StreamingServiceClient()

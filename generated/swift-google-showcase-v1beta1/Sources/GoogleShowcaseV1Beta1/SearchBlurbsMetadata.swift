@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The operation metadata message for the
 /// google.showcase.v1beta1.Messaging\SearchBlurbs method.
-public struct SearchBlurbsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchBlurbsMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// This signals to the client when to next poll for response.
   public var retryInfo: GoogleRpc.RetryInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchBlurbsMetadata`.
   public init() {}
@@ -62,7 +62,7 @@ public struct SearchBlurbsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.retryInfo = try container.decodeIfPresent(GoogleRpc.RetryInfo.self, forKey: .retryInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -77,10 +77,10 @@ public struct SearchBlurbsMetadata: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.showcase.v1beta1.SearchBlurbsMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

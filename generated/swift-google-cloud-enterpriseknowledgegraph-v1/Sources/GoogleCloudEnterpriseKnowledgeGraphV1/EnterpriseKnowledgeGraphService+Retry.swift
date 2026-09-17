@@ -18,28 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class EnterpriseKnowledgeGraphServiceRetry: EnterpriseKnowledgeGraphServiceStub {
     let inner: any EnterpriseKnowledgeGraphServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(
-      _ inner: any EnterpriseKnowledgeGraphServiceStub, options: GoogleCloudGax.ClientOptions
-    ) {
+    public init(_ inner: any EnterpriseKnowledgeGraphServiceStub, options: GoogleGax.ClientOptions)
+    {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +50,14 @@ extension Clients {
     }
 
     public func createEntityReconciliationJob(
-      request: CreateEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateEntityReconciliationJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateEntityReconciliationJobRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob
           in
           return try await self.inner.createEntityReconciliationJob(request: r, options: o)
@@ -66,14 +65,14 @@ extension Clients {
     }
 
     public func getEntityReconciliationJob(
-      request: GetEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetEntityReconciliationJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEntityReconciliationJobRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEnterpriseKnowledgeGraphV1.EntityReconciliationJob
           in
           return try await self.inner.getEntityReconciliationJob(request: r, options: o)
@@ -81,14 +80,14 @@ extension Clients {
     }
 
     public func listEntityReconciliationJobs(
-      request: ListEntityReconciliationJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntityReconciliationJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.ListEntityReconciliationJobsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListEntityReconciliationJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEntityReconciliationJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEnterpriseKnowledgeGraphV1.ListEntityReconciliationJobsResponse
           in
           return try await self.inner.listEntityReconciliationJobs(request: r, options: o)
@@ -96,42 +95,42 @@ extension Clients {
     }
 
     public func cancelEntityReconciliationJob(
-      request: CancelEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CancelEntityReconciliationJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CancelEntityReconciliationJobRequest, o: GoogleGax.RequestOptions) async throws
             -> Void in
           return try await self.inner.cancelEntityReconciliationJob(request: r, options: o)
         })
     }
 
     public func deleteEntityReconciliationJob(
-      request: DeleteEntityReconciliationJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntityReconciliationJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteEntityReconciliationJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteEntityReconciliationJobRequest, o: GoogleGax.RequestOptions) async throws
             -> Void in
           return try await self.inner.deleteEntityReconciliationJob(request: r, options: o)
         })
     }
 
     public func lookup(
-      request: LookupRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: LookupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: LookupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupResponse
           in
           return try await self.inner.lookup(request: r, options: o)
@@ -139,14 +138,14 @@ extension Clients {
     }
 
     public func search(
-      request: SearchRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: SearchRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchResponse
           in
           return try await self.inner.search(request: r, options: o)
@@ -154,14 +153,14 @@ extension Clients {
     }
 
     public func lookupPublicKg(
-      request: LookupPublicKgRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupPublicKgRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupPublicKgResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: LookupPublicKgRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: LookupPublicKgRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEnterpriseKnowledgeGraphV1.LookupPublicKgResponse
           in
           return try await self.inner.lookupPublicKg(request: r, options: o)
@@ -169,14 +168,14 @@ extension Clients {
     }
 
     public func searchPublicKg(
-      request: SearchPublicKgRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchPublicKgRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchPublicKgResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: SearchPublicKgRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchPublicKgRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEnterpriseKnowledgeGraphV1.SearchPublicKgResponse
           in
           return try await self.inner.searchPublicKg(request: r, options: o)

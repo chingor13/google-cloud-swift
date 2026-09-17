@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class ResourcePoliciesRetry: ResourcePoliciesStub {
       let inner: any ResourcePoliciesStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any ResourcePoliciesStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any ResourcePoliciesStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,15 +50,14 @@
       }
 
       public func aggregatedList(
-        request: ResourcePoliciesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ResourcePoliciesClient.AggregatedListRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ResourcePoliciesClient.AggregatedListRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.ResourcePolicyAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -66,14 +65,14 @@
       }
 
       public func delete(
-        request: ResourcePoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ResourcePoliciesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ResourcePoliciesClient.DeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -81,14 +80,14 @@
       }
 
       public func `get`(
-        request: ResourcePoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ResourcePolicy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ResourcePoliciesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ResourcePoliciesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.ResourcePolicy
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -96,14 +95,14 @@
       }
 
       public func getIamPolicy(
-        request: ResourcePoliciesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ResourcePoliciesClient.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ResourcePoliciesClient.GetIamPolicyRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.getIamPolicy(request: r, options: o)
@@ -111,14 +110,14 @@
       }
 
       public func insert(
-        request: ResourcePoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ResourcePoliciesClient.InsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ResourcePoliciesClient.InsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -126,14 +125,14 @@
       }
 
       public func list(
-        request: ResourcePoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ResourcePolicyList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ResourcePoliciesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ResourcePoliciesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.ResourcePolicyList
             in
             return try await self.inner.list(request: r, options: o)
@@ -141,14 +140,14 @@
       }
 
       public func patch(
-        request: ResourcePoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ResourcePoliciesClient.PatchRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ResourcePoliciesClient.PatchRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -156,14 +155,14 @@
       }
 
       public func setIamPolicy(
-        request: ResourcePoliciesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ResourcePoliciesClient.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ResourcePoliciesClient.SetIamPolicyRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Policy
             in
             return try await self.inner.setIamPolicy(request: r, options: o)
@@ -171,15 +170,14 @@
       }
 
       public func testIamPermissions(
-        request: ResourcePoliciesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ResourcePoliciesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ResourcePoliciesClient.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: ResourcePoliciesClient.TestIamPermissionsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.TestPermissionsResponse
             in
             return try await self.inner.testIamPermissions(request: r, options: o)
@@ -187,14 +185,14 @@
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

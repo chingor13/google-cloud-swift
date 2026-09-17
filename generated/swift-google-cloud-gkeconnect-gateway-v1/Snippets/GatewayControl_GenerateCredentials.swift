@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKEConnectGatewayV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: GatewayControlClient) async throws {
   let response = try await client.generateCredentials(

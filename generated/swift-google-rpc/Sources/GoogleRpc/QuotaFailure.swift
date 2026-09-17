@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes how a quota check failed.
 ///
@@ -28,13 +28,13 @@ import Foundation
 ///
 /// Also see RetryInfo and Help types for other details about handling a
 /// quota failure.
-public struct QuotaFailure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QuotaFailure: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Describes all quota violations.
   public var violations: [QuotaFailure.Violation] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QuotaFailure`.
   public init() {}
@@ -73,7 +73,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,7 +87,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A message type used to describe a single quota violation.  For example, a
   /// daily quota or a custom quota that was exceeded.
-  public struct Violation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Violation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The subject on which the quota check failed.
@@ -169,7 +169,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// this field.
     public var futureQuotaValue: Swift.Int64? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Violation`.
     public init() {}
@@ -243,7 +243,7 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Swift.Int64.self, forKey: .futureQuotaValue)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -265,21 +265,21 @@ public struct QuotaFailure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.rpc.QuotaFailure.Violation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.rpc.QuotaFailure"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

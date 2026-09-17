@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func delete(
-        request: SqlUsersDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: SqlUsersDeleteRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlUsersDeleteRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -73,14 +73,14 @@
       }
 
       public func `get`(
-        request: SqlUsersGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.User {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: SqlUsersGetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlUsersGetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.User
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -88,14 +88,14 @@
       }
 
       public func insert(
-        request: SqlUsersInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: SqlUsersInsertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlUsersInsertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -103,14 +103,14 @@
       }
 
       public func list(
-        request: SqlUsersListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.UsersListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: SqlUsersListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlUsersListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.UsersListResponse
             in
             return try await self.inner.list(request: r, options: o)
@@ -118,14 +118,14 @@
       }
 
       public func update(
-        request: SqlUsersUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlUsersUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "update",
           action: {
-            (r: SqlUsersUpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: SqlUsersUpdateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.Operation
             in
             return try await self.inner.update(request: r, options: o)

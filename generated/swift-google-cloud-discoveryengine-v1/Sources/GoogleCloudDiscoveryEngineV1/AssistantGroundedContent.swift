@@ -16,13 +16,13 @@
 
 #if AssistantService || ConversationalSearchService || SessionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A piece of content and possibly its grounding information.
   ///
   /// Not all content needs grounding. Phrases like "Of course, I will gladly
   /// search it for you." do not need grounding.
-  public struct AssistantGroundedContent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AssistantGroundedContent: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The content.
@@ -31,7 +31,7 @@
     /// Grounding metadata for various modals. It only supports text for now.
     public var metadata: OneOf_Metadata? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AssistantGroundedContent`.
     public init() {}
@@ -86,7 +86,7 @@
       self.metadata = metadata
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -106,7 +106,7 @@
     }
 
     /// Grounding details for text sources.
-    public struct TextGroundingMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct TextGroundingMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Grounding information for parts of the text.
@@ -115,7 +115,7 @@
       /// References for the grounded text.
       public var references: [AssistantGroundedContent.TextGroundingMetadata.Reference] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `TextGroundingMetadata`.
       public init() {}
@@ -162,7 +162,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -176,7 +176,7 @@
       }
 
       /// Grounding information for a segment of the text.
-      public struct Segment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Segment: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Zero-based index indicating the start of the segment, measured in bytes
@@ -196,8 +196,7 @@
         /// The text segment itself.
         public var text: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Segment`.
         public init() {}
@@ -257,7 +256,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -277,16 +276,16 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.AssistantGroundedContent.TextGroundingMetadata.Segment"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Referenced content and related document metadata.
-      public struct Reference: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Reference: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Referenced text content.
@@ -296,8 +295,7 @@
         public var documentMetadata:
           AssistantGroundedContent.TextGroundingMetadata.Reference.DocumentMetadata? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Reference`.
         public init() {}
@@ -340,7 +338,7 @@
             forKey: .documentMetadata)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -354,7 +352,7 @@
         }
 
         /// Document metadata.
-        public struct DocumentMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct DocumentMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Document resource name.
@@ -375,8 +373,7 @@
           /// this will contain the domain name of the target site.
           public var domain: Swift.String? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `DocumentMetadata`.
           public init() {}
@@ -425,7 +422,7 @@
             self.domain = try container.decodeIfPresent(Swift.String.self, forKey: .domain)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -445,11 +442,11 @@
             return
               "type.googleapis.com/google.cloud.discoveryengine.v1.AssistantGroundedContent.TextGroundingMetadata.Reference.DocumentMetadata"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -457,11 +454,11 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.AssistantGroundedContent.TextGroundingMetadata.Reference"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -469,11 +466,11 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.AssistantGroundedContent.TextGroundingMetadata"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -486,11 +483,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.AssistantGroundedContent"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

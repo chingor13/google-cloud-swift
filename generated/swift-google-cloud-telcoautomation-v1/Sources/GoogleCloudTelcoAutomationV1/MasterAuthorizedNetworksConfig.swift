@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration of the Master Authorized Network that support multiple CIDRs
-public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. cidr_blocks define up to 50 external networks that could access
   /// Kubernetes master through HTTPS.
   public var cidrBlocks: [MasterAuthorizedNetworksConfig.CidrBlock] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MasterAuthorizedNetworksConfig`.
   public init() {}
@@ -65,7 +65,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -78,7 +78,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
   }
 
   /// CidrBlock contains an optional name and one CIDR block.
-  public struct CidrBlock: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CidrBlock: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. display_name is an optional field for users to identify CIDR
@@ -91,7 +91,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
     /// will be required in the future.
     public var cidrBlock: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CidrBlock`.
     public init() {}
@@ -134,7 +134,7 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -151,21 +151,21 @@ public struct MasterAuthorizedNetworksConfig: Codable, Equatable, GoogleCloudWKT
       return
         "type.googleapis.com/google.cloud.telcoautomation.v1.MasterAuthorizedNetworksConfig.CidrBlock"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.telcoautomation.v1.MasterAuthorizedNetworksConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

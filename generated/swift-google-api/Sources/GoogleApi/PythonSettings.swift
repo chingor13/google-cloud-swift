@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings for Python client libraries.
-public struct PythonSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PythonSettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Some settings.
@@ -27,7 +27,7 @@ public struct PythonSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Experimental features to be included during client library generation.
   public var experimentalFeatures: PythonSettings.ExperimentalFeatures? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PythonSettings`.
   public init() {}
@@ -67,7 +67,7 @@ public struct PythonSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       PythonSettings.ExperimentalFeatures.self, forKey: .experimentalFeatures)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -83,7 +83,7 @@ public struct PythonSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Experimental features to be included during client library generation.
   /// These fields will be deprecated once the feature graduates and is enabled
   /// by default.
-  public struct ExperimentalFeatures: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExperimentalFeatures: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Enables generation of asynchronous REST clients if `rest` transport is
@@ -104,7 +104,7 @@ public struct PythonSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// of `import google.cloud.library`.
     public var unversionedPackageDisabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExperimentalFeatures`.
     public init() {}
@@ -157,7 +157,7 @@ public struct PythonSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -174,21 +174,21 @@ public struct PythonSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.PythonSettings.ExperimentalFeatures"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.PythonSettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

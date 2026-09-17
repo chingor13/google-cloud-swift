@@ -16,13 +16,13 @@
 
 #if Environments || Webhooks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Webhooks host the developer's business logic. During a session, webhooks
   /// allow the developer to use the data extracted by Dialogflow's natural
   /// language processing to generate dynamic responses, validate collected data,
   /// or trigger actions on the backend.
-  public struct Webhook: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Webhook: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The unique identifier of the webhook.
@@ -43,7 +43,7 @@
     /// Webhook execution timeout. Execution is considered failed if Dialogflow
     /// doesn't receive a response from webhook at the end of the timeout period.
     /// Defaults to 5 seconds, maximum allowed timeout is 30 seconds.
-    public var timeout: GoogleCloudWKT.Duration? = nil
+    public var timeout: GoogleWKT.Duration? = nil
 
     /// Indicates whether the webhook is disabled.
     public var disabled: Swift.Bool = Swift.Bool()
@@ -51,7 +51,7 @@
     /// Required. The webhook configuration.
     public var webhook: OneOf_Webhook? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Webhook`.
     public init() {}
@@ -100,7 +100,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
         self.displayName = value
       }
-      self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+      self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .disabled) {
         self.disabled = value
       }
@@ -128,7 +128,7 @@
       self.webhook = webhook
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -153,7 +153,7 @@
     }
 
     /// Represents configuration for a generic web service.
-    public struct GenericWebService: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GenericWebService: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The webhook URI for receiving POST requests. It must use https
@@ -233,7 +233,7 @@
       /// - Value: field path in the webhook response
       public var parameterMapping: [Swift.String: Swift.String] = [:]
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GenericWebService`.
       public init() {}
@@ -354,7 +354,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -384,15 +384,14 @@
 
       /// Represents the value of an HTTP header stored in a SecretManager secret
       /// version.
-      public struct SecretVersionHeaderValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SecretVersionHeaderValue: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The SecretManager secret version resource storing the header
         /// value. Format: `projects/{project}/secrets/{secret}/versions/{version}`
         public var secretVersion: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SecretVersionHeaderValue`.
         public init() {}
@@ -430,7 +429,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -446,17 +445,17 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.SecretVersionHeaderValue"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Represents configuration of OAuth client credential flow for 3rd party
       /// API authentication.
-      public struct OAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct OAuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The client ID provided by the 3rd party platform.
@@ -478,8 +477,7 @@
         /// Optional. The OAuth scopes to grant.
         public var scopes: [Swift.String] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `OAuthConfig`.
         public init() {}
@@ -540,7 +538,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -561,16 +559,16 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.OAuthConfig"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Configuration for authentication using a service account.
-      public struct ServiceAccountAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ServiceAccountAuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The email address of the service account used to authenticate
@@ -584,8 +582,7 @@
         /// agent](https://cloud.google.com/iam/docs/service-agents#dialogflow-service-agent).
         public var serviceAccount: Swift.String = Swift.String()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ServiceAccountAuthConfig`.
         public init() {}
@@ -623,7 +620,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -639,11 +636,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.GenericWebService.ServiceAccountAuthConfig"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -1016,17 +1013,17 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.GenericWebService"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Represents configuration for a [Service
     /// Directory](https://cloud.google.com/service-directory) service.
-    public struct ServiceDirectoryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ServiceDirectoryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The name of [Service
@@ -1040,7 +1037,7 @@
       /// Generic Service configuration of this webhook.
       public var genericWebService: Webhook.GenericWebService? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ServiceDirectoryConfig`.
       public init() {}
@@ -1082,7 +1079,7 @@
           Webhook.GenericWebService.self, forKey: .genericWebService)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1098,11 +1095,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook.ServiceDirectoryConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1118,11 +1115,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.Webhook"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

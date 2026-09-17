@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Code and application artifacts used to deploy a version to App Engine.
-public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Deployment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Manifest of the files stored in Google Cloud Storage that are included
@@ -40,7 +40,7 @@ public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// deploying to the App Engine flexible environment using files or zip.
   public var cloudBuildOptions: CloudBuildOptions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Deployment`.
   public init() {}
@@ -88,7 +88,7 @@ public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       CloudBuildOptions.self, forKey: .cloudBuildOptions)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,10 +106,10 @@ public struct Deployment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.Deployment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

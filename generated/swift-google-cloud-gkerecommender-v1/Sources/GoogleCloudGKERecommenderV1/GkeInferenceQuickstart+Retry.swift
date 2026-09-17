@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class GkeInferenceQuickstartRetry: GkeInferenceQuickstartStub {
     let inner: any GkeInferenceQuickstartStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any GkeInferenceQuickstartStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any GkeInferenceQuickstartStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func fetchModels(
-      request: FetchModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: FetchModelsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchModelsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchModelsResponse
           in
           return try await self.inner.fetchModels(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func fetchModelServers(
-      request: FetchModelServersRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelServersResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: FetchModelServersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchModelServersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchModelServersResponse
           in
           return try await self.inner.fetchModelServers(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func fetchModelServerVersions(
-      request: FetchModelServerVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchModelServerVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchModelServerVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: FetchModelServerVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchModelServerVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchModelServerVersionsResponse
           in
           return try await self.inner.fetchModelServerVersions(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func fetchProfiles(
-      request: FetchProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchProfilesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: FetchProfilesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchProfilesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchProfilesResponse
           in
           return try await self.inner.fetchProfiles(request: r, options: o)
@@ -109,14 +109,14 @@ extension Clients {
     }
 
     public func generateOptimizedManifest(
-      request: GenerateOptimizedManifestRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateOptimizedManifestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.GenerateOptimizedManifestResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GenerateOptimizedManifestRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GenerateOptimizedManifestRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.GenerateOptimizedManifestResponse
           in
           return try await self.inner.generateOptimizedManifest(request: r, options: o)
@@ -124,14 +124,14 @@ extension Clients {
     }
 
     public func fetchBenchmarkingData(
-      request: FetchBenchmarkingDataRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchBenchmarkingDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKERecommenderV1.FetchBenchmarkingDataResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: FetchBenchmarkingDataRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FetchBenchmarkingDataRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKERecommenderV1.FetchBenchmarkingDataResponse
           in
           return try await self.inner.fetchBenchmarkingData(request: r, options: o)

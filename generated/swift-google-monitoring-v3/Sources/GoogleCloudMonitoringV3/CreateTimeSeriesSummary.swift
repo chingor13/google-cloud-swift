@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Summary of the result of a failed request to write data to a time series.
-public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The number of points in the request.
@@ -31,7 +31,7 @@ public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// The number of points that failed to be written. Order is not guaranteed.
   public var errors: [CreateTimeSeriesSummary.Error] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateTimeSeriesSummary`.
   public init() {}
@@ -81,7 +81,7 @@ public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleCloudWKT._AnyPa
   }
 
   /// Detailed information about an error category.
-  public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Error: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The status of the requested write operation.
@@ -105,7 +105,7 @@ public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// The number of points that couldn't be written because of `status`.
     public var pointCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Error`.
     public init() {}
@@ -146,7 +146,7 @@ public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -162,21 +162,21 @@ public struct CreateTimeSeriesSummary: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.v3.CreateTimeSeriesSummary.Error"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.CreateTimeSeriesSummary"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

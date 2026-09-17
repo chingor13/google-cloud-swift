@@ -15,151 +15,151 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ConfigServiceV2Stub: Sendable {
     func listBuckets(
-      request: ListBucketsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBucketsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.ListBucketsResponse
 
     func getBucket(
-      request: GetBucketRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBucketRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogBucket
 
     func createBucketAsync(
-      request: CreateBucketRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBucketRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateBucketAsync(
-      request: UpdateBucketRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBucketRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createBucket(
-      request: CreateBucketRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBucketRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogBucket
 
     func updateBucket(
-      request: UpdateBucketRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBucketRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogBucket
 
     func deleteBucket(
-      request: DeleteBucketRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBucketRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func undeleteBucket(
-      request: UndeleteBucketRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteBucketRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listViews(
-      request: ListViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.ListViewsResponse
 
     func getView(
-      request: GetViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogView
 
     func createView(
-      request: CreateViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogView
 
     func updateView(
-      request: UpdateViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogView
 
     func deleteView(
-      request: DeleteViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listSinks(
-      request: ListSinksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSinksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.ListSinksResponse
 
     func getSink(
-      request: GetSinkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogSink
 
     func createSink(
-      request: CreateSinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogSink
 
     func updateSink(
-      request: UpdateSinkRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogSink
 
     func deleteSink(
-      request: DeleteSinkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSinkRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createLink(
-      request: CreateLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteLink(
-      request: DeleteLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLinks(
-      request: ListLinksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLinksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.ListLinksResponse
 
     func getLink(
-      request: GetLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.Link
 
     func listExclusions(
-      request: ListExclusionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExclusionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.ListExclusionsResponse
 
     func getExclusion(
-      request: GetExclusionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExclusionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogExclusion
 
     func createExclusion(
-      request: CreateExclusionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExclusionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogExclusion
 
     func updateExclusion(
-      request: UpdateExclusionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExclusionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.LogExclusion
 
     func deleteExclusion(
-      request: DeleteExclusionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExclusionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getCmekSettings(
-      request: GetCmekSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCmekSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.CmekSettings
 
     func updateCmekSettings(
-      request: UpdateCmekSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCmekSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.CmekSettings
 
     func getSettings(
-      request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.Settings
 
     func updateSettings(
-      request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLoggingV2.Settings
 
     func copyLogEntries(
-      request: CopyLogEntriesRequest, options: GoogleCloudGax.RequestOptions
+      request: CopyLogEntriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

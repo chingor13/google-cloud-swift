@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a file label.
-public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FileLabel: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The type of file label.
   public var type: OneOf_Type? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FileLabel`.
   public init() {}
@@ -83,7 +83,7 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.type = type
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,13 +104,13 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Sensitivity labels published by Microsoft.
-  public struct SensitivityLabelMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SensitivityLabelMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The GUID of the sensitivity label.
     public var guid: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SensitivityLabelMetadata`.
     public init() {}
@@ -148,7 +148,7 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -163,16 +163,16 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.FileLabel.SensitivityLabelMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Google Drive labels published by Google.
-  public struct GoogleDriveLabelMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GoogleDriveLabelMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The [label
@@ -183,7 +183,7 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The field values of the Google Drive label
     public var labelFields: [FileLabel.GoogleDriveLabelMetadata.LabelFieldMetadata] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GoogleDriveLabelMetadata`.
     public init() {}
@@ -228,7 +228,7 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -242,7 +242,7 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// The field values of the Google Drive label
-    public struct LabelFieldMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct LabelFieldMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The identifier of the Label Field.
@@ -251,7 +251,7 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The value of the Label Field.
       public var value: Value? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `LabelFieldMetadata`.
       public init() {}
@@ -292,7 +292,7 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.value = try container.decodeIfPresent(Value.self, forKey: .value)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -309,22 +309,22 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.privacy.dlp.v2.FileLabel.GoogleDriveLabelMetadata.LabelFieldMetadata"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.FileLabel.GoogleDriveLabelMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -339,10 +339,10 @@ public struct FileLabel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.FileLabel"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

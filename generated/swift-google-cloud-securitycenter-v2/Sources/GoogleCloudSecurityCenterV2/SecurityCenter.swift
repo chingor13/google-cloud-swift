@@ -18,22 +18,22 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// V2 APIs for Security Center service.
 ///
 /// @Snippet(path: "SecurityCenterQuickstart")
 public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendable {
   let inner: any Clients.SecurityCenterStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `SecurityCenterClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SecurityCenterStub = try Clients.SecurityCenterTransport(options)
     inner = Clients.SecurityCenterRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_BatchCreateResourceValueConfigs")
   public func batchCreateResourceValueConfigs(
-    request: BatchCreateResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchCreateResourceValueConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.BatchCreateResourceValueConfigsResponse {
     try await self.inner.batchCreateResourceValueConfigs(request: request, options: options)
   }
@@ -61,7 +61,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_BulkMuteFindings")
   public func bulkMuteFindings(
-    request: BulkMuteFindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkMuteFindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.bulkMuteFindings(request: request, options: options)
   }
@@ -73,22 +73,22 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_BulkMuteFindings")
   public func bulkMuteFindings(
-    withPolling: BulkMuteFindingsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkMuteFindingsResponse> {
+    withPolling: BulkMuteFindingsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkMuteFindingsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BulkMuteFindingsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BulkMuteFindingsResponse>.State in
       return try op._extractStatus(BulkMuteFindingsResponse.self)
     }
     let rawOp = try await self.bulkMuteFindings(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BulkMuteFindingsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<BulkMuteFindingsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -100,7 +100,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_CreateBigQueryExport")
   public func createBigQueryExport(
-    request: CreateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
     try await self.inner.createBigQueryExport(request: request, options: options)
   }
@@ -110,7 +110,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_CreateFinding")
   public func createFinding(
-    request: CreateFindingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateFindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
     try await self.inner.createFinding(request: request, options: options)
   }
@@ -119,7 +119,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_CreateMuteConfig")
   public func createMuteConfig(
-    request: CreateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateMuteConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
     try await self.inner.createMuteConfig(request: request, options: options)
   }
@@ -128,7 +128,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_CreateNotificationConfig")
   public func createNotificationConfig(
-    request: CreateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateNotificationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
     try await self.inner.createNotificationConfig(request: request, options: options)
   }
@@ -137,7 +137,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_CreateSource")
   public func createSource(
-    request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Source {
     try await self.inner.createSource(request: request, options: options)
   }
@@ -146,7 +146,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_DeleteBigQueryExport")
   public func deleteBigQueryExport(
-    request: DeleteBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteBigQueryExport(request: request, options: options)
   }
@@ -156,7 +156,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_DeleteMuteConfig")
   public func deleteMuteConfig(
-    request: DeleteMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteMuteConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteMuteConfig(request: request, options: options)
   }
@@ -165,7 +165,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_DeleteNotificationConfig")
   public func deleteNotificationConfig(
-    request: DeleteNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteNotificationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteNotificationConfig(request: request, options: options)
   }
@@ -174,7 +174,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_DeleteResourceValueConfig")
   public func deleteResourceValueConfig(
-    request: DeleteResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteResourceValueConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteResourceValueConfig(request: request, options: options)
   }
@@ -183,7 +183,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetBigQueryExport")
   public func getBigQueryExport(
-    request: GetBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
     try await self.inner.getBigQueryExport(request: request, options: options)
   }
@@ -193,7 +193,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetSimulation")
   public func getSimulation(
-    request: GetSimulationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSimulationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Simulation {
     try await self.inner.getSimulation(request: request, options: options)
   }
@@ -202,7 +202,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetValuedResource")
   public func getValuedResource(
-    request: GetValuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetValuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ValuedResource {
     try await self.inner.getValuedResource(request: request, options: options)
   }
@@ -211,7 +211,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -221,7 +221,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetMuteConfig")
   public func getMuteConfig(
-    request: GetMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMuteConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
     try await self.inner.getMuteConfig(request: request, options: options)
   }
@@ -230,7 +230,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetNotificationConfig")
   public func getNotificationConfig(
-    request: GetNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNotificationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
     try await self.inner.getNotificationConfig(request: request, options: options)
   }
@@ -239,7 +239,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetResourceValueConfig")
   public func getResourceValueConfig(
-    request: GetResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceValueConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig {
     try await self.inner.getResourceValueConfig(request: request, options: options)
   }
@@ -248,7 +248,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetSource")
   public func getSource(
-    request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Source {
     try await self.inner.getSource(request: request, options: options)
   }
@@ -270,7 +270,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GroupFindings")
   public func groupFindings(
-    request: GroupFindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: GroupFindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.GroupFindingsResponse {
     try await self.inner.groupFindings(request: request, options: options)
   }
@@ -292,7 +292,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GroupFindings")
   public func groupFindings(
-    byItem: GroupFindingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GroupFindingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GroupResult, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.GroupFindingsResponse in
@@ -300,7 +300,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.groupFindings(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the attack paths for a set of simulation results or valued resources
@@ -308,7 +308,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListAttackPaths")
   public func listAttackPaths(
-    request: ListAttackPathsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAttackPathsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListAttackPathsResponse {
     try await self.inner.listAttackPaths(request: request, options: options)
   }
@@ -318,7 +318,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListAttackPaths")
   public func listAttackPaths(
-    byItem: ListAttackPathsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAttackPathsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AttackPath, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListAttackPathsResponse in
@@ -326,7 +326,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listAttackPaths(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists BigQuery exports. Note that when requesting BigQuery exports at a
@@ -337,7 +337,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListBigQueryExports")
   public func listBigQueryExports(
-    request: ListBigQueryExportsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBigQueryExportsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListBigQueryExportsResponse {
     try await self.inner.listBigQueryExports(request: request, options: options)
   }
@@ -350,7 +350,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListBigQueryExports")
   public func listBigQueryExports(
-    byItem: ListBigQueryExportsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBigQueryExportsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<BigQueryExport, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListBigQueryExportsResponse
@@ -359,7 +359,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listBigQueryExports(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists an organization or source's findings.
@@ -374,7 +374,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListFindings")
   public func listFindings(
-    request: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListFindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListFindingsResponse {
     try await self.inner.listFindings(request: request, options: options)
   }
@@ -391,7 +391,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListFindings")
   public func listFindings(
-    byItem: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListFindingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ListFindingsResponse.ListFindingsResult, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListFindingsResponse in
@@ -399,7 +399,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listFindings(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists mute configs. If no location is specified, default is
@@ -407,7 +407,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListMuteConfigs")
   public func listMuteConfigs(
-    request: ListMuteConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMuteConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListMuteConfigsResponse {
     try await self.inner.listMuteConfigs(request: request, options: options)
   }
@@ -417,7 +417,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListMuteConfigs")
   public func listMuteConfigs(
-    byItem: ListMuteConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMuteConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<MuteConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListMuteConfigsResponse in
@@ -425,14 +425,14 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listMuteConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists notification configs.
   ///
   /// @Snippet(path: "SecurityCenter_ListNotificationConfigs")
   public func listNotificationConfigs(
-    request: ListNotificationConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListNotificationConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListNotificationConfigsResponse {
     try await self.inner.listNotificationConfigs(request: request, options: options)
   }
@@ -441,7 +441,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListNotificationConfigs")
   public func listNotificationConfigs(
-    byItem: ListNotificationConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListNotificationConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<NotificationConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -450,14 +450,14 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listNotificationConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists all ResourceValueConfigs.
   ///
   /// @Snippet(path: "SecurityCenter_ListResourceValueConfigs")
   public func listResourceValueConfigs(
-    request: ListResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourceValueConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListResourceValueConfigsResponse {
     try await self.inner.listResourceValueConfigs(request: request, options: options)
   }
@@ -466,7 +466,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListResourceValueConfigs")
   public func listResourceValueConfigs(
-    byItem: ListResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourceValueConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceValueConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -475,14 +475,14 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listResourceValueConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists all sources belonging to an organization.
   ///
   /// @Snippet(path: "SecurityCenter_ListSources")
   public func listSources(
-    request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListSourcesResponse {
     try await self.inner.listSources(request: request, options: options)
   }
@@ -491,7 +491,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListSources")
   public func listSources(
-    byItem: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Source, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListSourcesResponse in
@@ -499,14 +499,14 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listSources(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the valued resources for a set of simulation results and filter.
   ///
   /// @Snippet(path: "SecurityCenter_ListValuedResources")
   public func listValuedResources(
-    request: ListValuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListValuedResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListValuedResourcesResponse {
     try await self.inner.listValuedResources(request: request, options: options)
   }
@@ -515,7 +515,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListValuedResources")
   public func listValuedResources(
-    byItem: ListValuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListValuedResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ValuedResource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListValuedResourcesResponse
@@ -524,7 +524,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listValuedResources(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates the state of a finding. If no location is specified, finding is
@@ -532,7 +532,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_SetFindingState")
   public func setFindingState(
-    request: SetFindingStateRequest, options: GoogleCloudGax.RequestOptions
+    request: SetFindingStateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
     try await self.inner.setFindingState(request: request, options: options)
   }
@@ -541,7 +541,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -551,7 +551,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_SetMute")
   public func setMute(
-    request: SetMuteRequest, options: GoogleCloudGax.RequestOptions
+    request: SetMuteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
     try await self.inner.setMute(request: request, options: options)
   }
@@ -560,7 +560,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -569,7 +569,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_UpdateBigQueryExport")
   public func updateBigQueryExport(
-    request: UpdateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
     try await self.inner.updateBigQueryExport(request: request, options: options)
   }
@@ -579,7 +579,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_UpdateExternalSystem")
   public func updateExternalSystem(
-    request: UpdateExternalSystemRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateExternalSystemRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ExternalSystem {
     try await self.inner.updateExternalSystem(request: request, options: options)
   }
@@ -590,7 +590,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_UpdateFinding")
   public func updateFinding(
-    request: UpdateFindingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateFindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
     try await self.inner.updateFinding(request: request, options: options)
   }
@@ -600,7 +600,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_UpdateMuteConfig")
   public func updateMuteConfig(
-    request: UpdateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateMuteConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
     try await self.inner.updateMuteConfig(request: request, options: options)
   }
@@ -610,7 +610,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_UpdateNotificationConfig")
   public func updateNotificationConfig(
-    request: UpdateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateNotificationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
     try await self.inner.updateNotificationConfig(request: request, options: options)
   }
@@ -619,7 +619,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_UpdateResourceValueConfig")
   public func updateResourceValueConfig(
-    request: UpdateResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateResourceValueConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig {
     try await self.inner.updateResourceValueConfig(request: request, options: options)
   }
@@ -630,7 +630,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_UpdateSecurityMarks")
   public func updateSecurityMarks(
-    request: UpdateSecurityMarksRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSecurityMarksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.SecurityMarks {
     try await self.inner.updateSecurityMarks(request: request, options: options)
   }
@@ -639,7 +639,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_UpdateSource")
   public func updateSource(
-    request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Source {
     try await self.inner.updateSource(request: request, options: options)
   }
@@ -650,7 +650,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -661,7 +661,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -669,7 +669,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -678,7 +678,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -689,7 +689,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -700,7 +700,7 @@ public final class SecurityCenterClient: Clients.SecurityCenterProtocol, Sendabl
   ///
   /// @Snippet(path: "SecurityCenter_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -728,13 +728,13 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SecurityCenterClient.bulkMuteFindings`.
-    func bulkMuteFindings(withPolling: BulkMuteFindingsRequest) async throws -> any GoogleCloudGax
+    func bulkMuteFindings(withPolling: BulkMuteFindingsRequest) async throws -> any GoogleGax
       .PollableOperation<BulkMuteFindingsResponse>
 
     /// See `SecurityCenterClient.bulkMuteFindings`.
     func bulkMuteFindings(
       parent: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkMuteFindingsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BulkMuteFindingsResponse>
 
     /// See `SecurityCenterClient.createBigQueryExport`.
     func createBigQueryExport(request: CreateBigQueryExportRequest) async throws
@@ -1064,7 +1064,7 @@ extension Clients {
     /// See `SecurityCenterClient.updateBigQueryExport`.
     func updateBigQueryExport(
       bigQueryExport: BigQueryExport?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport
 
     /// See `SecurityCenterClient.updateExternalSystem`.
@@ -1074,7 +1074,7 @@ extension Clients {
     /// See `SecurityCenterClient.updateExternalSystem`.
     func updateExternalSystem(
       externalSystem: ExternalSystem?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityCenterV2.ExternalSystem
 
     /// See `SecurityCenterClient.updateFinding`.
@@ -1084,7 +1084,7 @@ extension Clients {
     /// See `SecurityCenterClient.updateFinding`.
     func updateFinding(
       finding: Finding?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     /// See `SecurityCenterClient.updateMuteConfig`.
@@ -1094,7 +1094,7 @@ extension Clients {
     /// See `SecurityCenterClient.updateMuteConfig`.
     func updateMuteConfig(
       muteConfig: MuteConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig
 
     /// See `SecurityCenterClient.updateNotificationConfig`.
@@ -1104,7 +1104,7 @@ extension Clients {
     /// See `SecurityCenterClient.updateNotificationConfig`.
     func updateNotificationConfig(
       notificationConfig: NotificationConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig
 
     /// See `SecurityCenterClient.updateResourceValueConfig`.
@@ -1114,7 +1114,7 @@ extension Clients {
     /// See `SecurityCenterClient.updateResourceValueConfig`.
     func updateResourceValueConfig(
       resourceValueConfig: ResourceValueConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig
 
     /// See `SecurityCenterClient.updateSecurityMarks`.
@@ -1124,7 +1124,7 @@ extension Clients {
     /// See `SecurityCenterClient.updateSecurityMarks`.
     func updateSecurityMarks(
       securityMarks: SecurityMarks?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityCenterV2.SecurityMarks
 
     /// See `SecurityCenterClient.updateSource`.
@@ -1134,7 +1134,7 @@ extension Clients {
     /// See `SecurityCenterClient.updateSource`.
     func updateSource(
       source: Source?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudSecurityCenterV2.Source
 
     /// See `SecurityCenterClient.listOperations`.
@@ -1170,272 +1170,272 @@ extension Clients {
 
     /// See `SecurityCenterClient.batchCreateResourceValueConfigs`.
     func batchCreateResourceValueConfigs(
-      request: BatchCreateResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateResourceValueConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BatchCreateResourceValueConfigsResponse
 
     /// See `SecurityCenterClient.bulkMuteFindings`.
     func bulkMuteFindings(
-      request: BulkMuteFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkMuteFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecurityCenterClient.bulkMuteFindings`.
     func bulkMuteFindings(
-      withPolling: BulkMuteFindingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BulkMuteFindingsResponse>
+      withPolling: BulkMuteFindingsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BulkMuteFindingsResponse>
 
     /// See `SecurityCenterClient.createBigQueryExport`.
     func createBigQueryExport(
-      request: CreateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport
 
     /// See `SecurityCenterClient.createFinding`.
     func createFinding(
-      request: CreateFindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     /// See `SecurityCenterClient.createMuteConfig`.
     func createMuteConfig(
-      request: CreateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig
 
     /// See `SecurityCenterClient.createNotificationConfig`.
     func createNotificationConfig(
-      request: CreateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig
 
     /// See `SecurityCenterClient.createSource`.
     func createSource(
-      request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source
 
     /// See `SecurityCenterClient.deleteBigQueryExport`.
     func deleteBigQueryExport(
-      request: DeleteBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SecurityCenterClient.deleteMuteConfig`.
     func deleteMuteConfig(
-      request: DeleteMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SecurityCenterClient.deleteNotificationConfig`.
     func deleteNotificationConfig(
-      request: DeleteNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SecurityCenterClient.deleteResourceValueConfig`.
     func deleteResourceValueConfig(
-      request: DeleteResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SecurityCenterClient.getBigQueryExport`.
     func getBigQueryExport(
-      request: GetBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport
 
     /// See `SecurityCenterClient.getSimulation`.
     func getSimulation(
-      request: GetSimulationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSimulationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Simulation
 
     /// See `SecurityCenterClient.getValuedResource`.
     func getValuedResource(
-      request: GetValuedResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetValuedResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ValuedResource
 
     /// See `SecurityCenterClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SecurityCenterClient.getMuteConfig`.
     func getMuteConfig(
-      request: GetMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig
 
     /// See `SecurityCenterClient.getNotificationConfig`.
     func getNotificationConfig(
-      request: GetNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig
 
     /// See `SecurityCenterClient.getResourceValueConfig`.
     func getResourceValueConfig(
-      request: GetResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig
 
     /// See `SecurityCenterClient.getSource`.
     func getSource(
-      request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source
 
     /// See `SecurityCenterClient.groupFindings`.
     func groupFindings(
-      request: GroupFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GroupFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.GroupFindingsResponse
 
     /// See `SecurityCenterClient.groupFindings`.
     func groupFindings(
-      byItem: GroupFindingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GroupFindingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GroupResult, Swift.Error>
 
     /// See `SecurityCenterClient.listAttackPaths`.
     func listAttackPaths(
-      request: ListAttackPathsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttackPathsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListAttackPathsResponse
 
     /// See `SecurityCenterClient.listAttackPaths`.
     func listAttackPaths(
-      byItem: ListAttackPathsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAttackPathsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AttackPath, Swift.Error>
 
     /// See `SecurityCenterClient.listBigQueryExports`.
     func listBigQueryExports(
-      request: ListBigQueryExportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBigQueryExportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListBigQueryExportsResponse
 
     /// See `SecurityCenterClient.listBigQueryExports`.
     func listBigQueryExports(
-      byItem: ListBigQueryExportsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBigQueryExportsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BigQueryExport, Swift.Error>
 
     /// See `SecurityCenterClient.listFindings`.
     func listFindings(
-      request: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListFindingsResponse
 
     /// See `SecurityCenterClient.listFindings`.
     func listFindings(
-      byItem: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListFindingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ListFindingsResponse.ListFindingsResult, Swift.Error>
 
     /// See `SecurityCenterClient.listMuteConfigs`.
     func listMuteConfigs(
-      request: ListMuteConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMuteConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListMuteConfigsResponse
 
     /// See `SecurityCenterClient.listMuteConfigs`.
     func listMuteConfigs(
-      byItem: ListMuteConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListMuteConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<MuteConfig, Swift.Error>
 
     /// See `SecurityCenterClient.listNotificationConfigs`.
     func listNotificationConfigs(
-      request: ListNotificationConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotificationConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListNotificationConfigsResponse
 
     /// See `SecurityCenterClient.listNotificationConfigs`.
     func listNotificationConfigs(
-      byItem: ListNotificationConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListNotificationConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NotificationConfig, Swift.Error>
 
     /// See `SecurityCenterClient.listResourceValueConfigs`.
     func listResourceValueConfigs(
-      request: ListResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceValueConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListResourceValueConfigsResponse
 
     /// See `SecurityCenterClient.listResourceValueConfigs`.
     func listResourceValueConfigs(
-      byItem: ListResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListResourceValueConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ResourceValueConfig, Swift.Error>
 
     /// See `SecurityCenterClient.listSources`.
     func listSources(
-      request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListSourcesResponse
 
     /// See `SecurityCenterClient.listSources`.
     func listSources(
-      byItem: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Source, Swift.Error>
 
     /// See `SecurityCenterClient.listValuedResources`.
     func listValuedResources(
-      request: ListValuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListValuedResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListValuedResourcesResponse
 
     /// See `SecurityCenterClient.listValuedResources`.
     func listValuedResources(
-      byItem: ListValuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListValuedResourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ValuedResource, Swift.Error>
 
     /// See `SecurityCenterClient.setFindingState`.
     func setFindingState(
-      request: SetFindingStateRequest, options: GoogleCloudGax.RequestOptions
+      request: SetFindingStateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     /// See `SecurityCenterClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SecurityCenterClient.setMute`.
     func setMute(
-      request: SetMuteRequest, options: GoogleCloudGax.RequestOptions
+      request: SetMuteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     /// See `SecurityCenterClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `SecurityCenterClient.updateBigQueryExport`.
     func updateBigQueryExport(
-      request: UpdateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport
 
     /// See `SecurityCenterClient.updateExternalSystem`.
     func updateExternalSystem(
-      request: UpdateExternalSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExternalSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ExternalSystem
 
     /// See `SecurityCenterClient.updateFinding`.
     func updateFinding(
-      request: UpdateFindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     /// See `SecurityCenterClient.updateMuteConfig`.
     func updateMuteConfig(
-      request: UpdateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig
 
     /// See `SecurityCenterClient.updateNotificationConfig`.
     func updateNotificationConfig(
-      request: UpdateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig
 
     /// See `SecurityCenterClient.updateResourceValueConfig`.
     func updateResourceValueConfig(
-      request: UpdateResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig
 
     /// See `SecurityCenterClient.updateSecurityMarks`.
     func updateSecurityMarks(
-      request: UpdateSecurityMarksRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityMarksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.SecurityMarks
 
     /// See `SecurityCenterClient.updateSource`.
     func updateSource(
-      request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source
 
     /// See `SecurityCenterClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `SecurityCenterClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `SecurityCenterClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SecurityCenterClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1449,9 +1449,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func batchCreateResourceValueConfigs(
-    request: BatchCreateResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchCreateResourceValueConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.BatchCreateResourceValueConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchCreateResourceValueConfigs(
@@ -1472,31 +1472,31 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func bulkMuteFindings(
-    request: BulkMuteFindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: BulkMuteFindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func bulkMuteFindings(withPolling: BulkMuteFindingsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BulkMuteFindingsResponse>
+  public func bulkMuteFindings(withPolling: BulkMuteFindingsRequest) async throws -> any GoogleGax
+    .PollableOperation<BulkMuteFindingsResponse>
   {
     try await self.bulkMuteFindings(withPolling: withPolling, options: .init())
   }
 
   public func bulkMuteFindings(
-    withPolling: BulkMuteFindingsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkMuteFindingsResponse> {
+    withPolling: BulkMuteFindingsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BulkMuteFindingsResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BulkMuteFindingsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BulkMuteFindingsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func bulkMuteFindings(
     parent: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BulkMuteFindingsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BulkMuteFindingsResponse> {
     let request = BulkMuteFindingsRequest().with {
       $0.parent = parent
     }
@@ -1510,9 +1510,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func createBigQueryExport(
-    request: CreateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createBigQueryExport(
@@ -1535,9 +1535,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func createFinding(
-    request: CreateFindingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateFindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createFinding(
@@ -1560,9 +1560,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func createMuteConfig(
-    request: CreateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateMuteConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createMuteConfig(
@@ -1585,9 +1585,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func createNotificationConfig(
-    request: CreateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateNotificationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createNotificationConfig(
@@ -1610,9 +1610,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func createSource(
-    request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Source {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSource(
@@ -1631,9 +1631,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func deleteBigQueryExport(
-    request: DeleteBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteBigQueryExport(
@@ -1650,9 +1650,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func deleteMuteConfig(
-    request: DeleteMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteMuteConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteMuteConfig(
@@ -1669,9 +1669,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func deleteNotificationConfig(
-    request: DeleteNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteNotificationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteNotificationConfig(
@@ -1688,9 +1688,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func deleteResourceValueConfig(
-    request: DeleteResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteResourceValueConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteResourceValueConfig(
@@ -1709,9 +1709,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getBigQueryExport(
-    request: GetBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBigQueryExport(
@@ -1730,9 +1730,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getSimulation(
-    request: GetSimulationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSimulationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Simulation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSimulation(
@@ -1751,9 +1751,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getValuedResource(
-    request: GetValuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetValuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ValuedResource {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getValuedResource(
@@ -1772,9 +1772,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(
@@ -1793,9 +1793,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getMuteConfig(
-    request: GetMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetMuteConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getMuteConfig(
@@ -1814,9 +1814,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getNotificationConfig(
-    request: GetNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNotificationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getNotificationConfig(
@@ -1835,9 +1835,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getResourceValueConfig(
-    request: GetResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetResourceValueConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getResourceValueConfig(
@@ -1856,9 +1856,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getSource(
-    request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Source {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSource(
@@ -1877,9 +1877,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func groupFindings(
-    request: GroupFindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: GroupFindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.GroupFindingsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func groupFindings(
@@ -1889,13 +1889,13 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func groupFindings(
-    byItem: GroupFindingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GroupFindingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GroupResult, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.GroupFindingsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func groupFindings(
@@ -1916,9 +1916,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listAttackPaths(
-    request: ListAttackPathsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAttackPathsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListAttackPathsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAttackPaths(
@@ -1928,13 +1928,13 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listAttackPaths(
-    byItem: ListAttackPathsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAttackPathsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AttackPath, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListAttackPathsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAttackPaths(
@@ -1953,9 +1953,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listBigQueryExports(
-    request: ListBigQueryExportsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBigQueryExportsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListBigQueryExportsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listBigQueryExports(
@@ -1965,14 +1965,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listBigQueryExports(
-    byItem: ListBigQueryExportsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBigQueryExportsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<BigQueryExport, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListBigQueryExportsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listBigQueryExports(
@@ -1991,9 +1991,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listFindings(
-    request: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListFindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListFindingsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listFindings(
@@ -2003,13 +2003,13 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listFindings(
-    byItem: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListFindingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ListFindingsResponse.ListFindingsResult, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListFindingsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listFindings(
@@ -2028,9 +2028,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listMuteConfigs(
-    request: ListMuteConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListMuteConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListMuteConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listMuteConfigs(
@@ -2040,13 +2040,13 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listMuteConfigs(
-    byItem: ListMuteConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListMuteConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<MuteConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListMuteConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listMuteConfigs(
@@ -2065,9 +2065,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listNotificationConfigs(
-    request: ListNotificationConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListNotificationConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListNotificationConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listNotificationConfigs(
@@ -2077,14 +2077,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listNotificationConfigs(
-    byItem: ListNotificationConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListNotificationConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<NotificationConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecurityCenterV2.ListNotificationConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listNotificationConfigs(
@@ -2103,9 +2103,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listResourceValueConfigs(
-    request: ListResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListResourceValueConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListResourceValueConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listResourceValueConfigs(
@@ -2115,14 +2115,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listResourceValueConfigs(
-    byItem: ListResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListResourceValueConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ResourceValueConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecurityCenterV2.ListResourceValueConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listResourceValueConfigs(
@@ -2141,9 +2141,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listSources(
-    request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListSourcesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSources(
@@ -2153,13 +2153,13 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listSources(
-    byItem: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Source, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListSourcesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSources(
@@ -2178,9 +2178,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listValuedResources(
-    request: ListValuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListValuedResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ListValuedResourcesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listValuedResources(
@@ -2190,14 +2190,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listValuedResources(
-    byItem: ListValuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListValuedResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ValuedResource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecurityCenterV2.ListValuedResourcesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listValuedResources(
@@ -2216,9 +2216,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func setFindingState(
-    request: SetFindingStateRequest, options: GoogleCloudGax.RequestOptions
+    request: SetFindingStateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setFindingState(
@@ -2239,9 +2239,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(
@@ -2260,9 +2260,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func setMute(
-    request: SetMuteRequest, options: GoogleCloudGax.RequestOptions
+    request: SetMuteRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setMute(
@@ -2283,9 +2283,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(
@@ -2306,14 +2306,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func updateBigQueryExport(
-    request: UpdateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBigQueryExportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateBigQueryExport(
     bigQueryExport: BigQueryExport?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport {
     let request = UpdateBigQueryExportRequest().with {
       $0.bigQueryExport = bigQueryExport
@@ -2329,14 +2329,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func updateExternalSystem(
-    request: UpdateExternalSystemRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateExternalSystemRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ExternalSystem {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateExternalSystem(
     externalSystem: ExternalSystem?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityCenterV2.ExternalSystem {
     let request = UpdateExternalSystemRequest().with {
       $0.externalSystem = externalSystem
@@ -2352,14 +2352,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func updateFinding(
-    request: UpdateFindingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateFindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateFinding(
     finding: Finding?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityCenterV2.Finding {
     let request = UpdateFindingRequest().with {
       $0.finding = finding
@@ -2375,14 +2375,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func updateMuteConfig(
-    request: UpdateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateMuteConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateMuteConfig(
     muteConfig: MuteConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig {
     let request = UpdateMuteConfigRequest().with {
       $0.muteConfig = muteConfig
@@ -2398,14 +2398,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func updateNotificationConfig(
-    request: UpdateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateNotificationConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateNotificationConfig(
     notificationConfig: NotificationConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig {
     let request = UpdateNotificationConfigRequest().with {
       $0.notificationConfig = notificationConfig
@@ -2421,14 +2421,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func updateResourceValueConfig(
-    request: UpdateResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateResourceValueConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateResourceValueConfig(
     resourceValueConfig: ResourceValueConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig {
     let request = UpdateResourceValueConfigRequest().with {
       $0.resourceValueConfig = resourceValueConfig
@@ -2444,14 +2444,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func updateSecurityMarks(
-    request: UpdateSecurityMarksRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSecurityMarksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.SecurityMarks {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSecurityMarks(
     securityMarks: SecurityMarks?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityCenterV2.SecurityMarks {
     let request = UpdateSecurityMarksRequest().with {
       $0.securityMarks = securityMarks
@@ -2467,14 +2467,14 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func updateSource(
-    request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateSourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecurityCenterV2.Source {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateSource(
     source: Source?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudSecurityCenterV2.Source {
     let request = UpdateSourceRequest().with {
       $0.source = source
@@ -2490,9 +2490,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -2502,13 +2502,13 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -2529,9 +2529,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -2548,9 +2548,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -2567,9 +2567,9 @@ extension Clients.SecurityCenterProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

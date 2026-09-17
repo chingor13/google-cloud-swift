@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudSecretManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: SecretManagerServiceClient) async throws {
   let response = try await client.setIamPolicy(

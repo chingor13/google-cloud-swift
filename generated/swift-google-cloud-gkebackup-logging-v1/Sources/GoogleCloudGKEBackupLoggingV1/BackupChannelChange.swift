@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// use case 5
 /// A log entry when modification(creation, update, deletion) is made to a
 /// backupChannel.
-public struct BackupChannelChange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BackupChannelChange: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The full name of the BackupChannel resource that is being modified.
@@ -34,7 +34,7 @@ public struct BackupChannelChange: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var changeType: ChangeType = ChangeType()
 
   /// Modification details.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// The input BackupChannel resource with the updated fields populated to
   /// update the source BackupChannel to.
@@ -43,7 +43,7 @@ public struct BackupChannelChange: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// The error code and message.
   public var error: GoogleRpc.Status? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BackupChannelChange`.
   public init() {}
@@ -90,14 +90,13 @@ public struct BackupChannelChange: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(ChangeType.self, forKey: .changeType) {
       self.changeType = value
     }
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.inputBackupChannel = try container.decodeIfPresent(
       LoggedBackupChannel.self, forKey: .inputBackupChannel)
     self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -116,10 +115,10 @@ public struct BackupChannelChange: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkebackup.logging.v1.BackupChannelChange"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

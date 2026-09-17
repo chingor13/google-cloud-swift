@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for the
 /// [ProcessDocument][google.cloud.documentai.v1.DocumentProcessorService.ProcessDocument]
 /// method.
 ///
 /// [google.cloud.documentai.v1.DocumentProcessorService.ProcessDocument]: <doc:DocumentProcessorServiceClient/processDocument(request:options:)>
-public struct ProcessRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ProcessRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the
@@ -51,7 +51,7 @@ public struct ProcessRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the form of `{document_field_name}` or `pages.{page_field_name}`.
   ///
   /// [google.cloud.documentai.v1.ProcessResponse.document]: <doc:ProcessResponse/document>
-  public var fieldMask: GoogleCloudWKT.FieldMask? = nil
+  public var fieldMask: GoogleWKT.FieldMask? = nil
 
   /// Inference-time options for the process API
   public var processOptions: ProcessOptions? = nil
@@ -70,7 +70,7 @@ public struct ProcessRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The document payload.
   public var source: OneOf_Source? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ProcessRequest`.
   public init() {}
@@ -125,8 +125,7 @@ public struct ProcessRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .skipHumanReview) {
       self.skipHumanReview = value
     }
-    self.fieldMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .fieldMask)
+    self.fieldMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .fieldMask)
     self.processOptions = try container.decodeIfPresent(
       ProcessOptions.self, forKey: .processOptions)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
@@ -159,7 +158,7 @@ public struct ProcessRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.source = source
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -200,10 +199,10 @@ public struct ProcessRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.documentai.v1.ProcessRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

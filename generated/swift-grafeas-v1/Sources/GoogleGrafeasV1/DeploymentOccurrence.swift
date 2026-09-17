@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The period during which some deployable was active in a runtime.
-public struct DeploymentOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DeploymentOccurrence: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identity of the user that triggered this deployment.
   public var userEmail: Swift.String = Swift.String()
 
   /// Required. Beginning of the lifetime of this deployment.
-  public var deployTime: GoogleCloudWKT.Timestamp? = nil
+  public var deployTime: GoogleWKT.Timestamp? = nil
 
   /// End of the lifetime of this deployment.
-  public var undeployTime: GoogleCloudWKT.Timestamp? = nil
+  public var undeployTime: GoogleWKT.Timestamp? = nil
 
   /// Configuration used to create this deployment.
   public var config: Swift.String = Swift.String()
@@ -43,7 +43,7 @@ public struct DeploymentOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Platform hosting this deployment.
   public var platform: DeploymentOccurrence.Platform = DeploymentOccurrence.Platform()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DeploymentOccurrence`.
   public init() {}
@@ -91,10 +91,9 @@ public struct DeploymentOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPacka
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .userEmail) {
       self.userEmail = value
     }
-    self.deployTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deployTime)
+    self.deployTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deployTime)
     self.undeployTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .undeployTime)
+      GoogleWKT.Timestamp.self, forKey: .undeployTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .config) {
       self.config = value
     }
@@ -111,7 +110,7 @@ public struct DeploymentOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -244,10 +243,10 @@ public struct DeploymentOccurrence: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.DeploymentOccurrence"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

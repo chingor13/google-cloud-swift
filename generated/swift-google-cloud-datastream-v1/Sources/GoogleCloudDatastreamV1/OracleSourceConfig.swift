@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Oracle data source configuration
-public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct OracleSourceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Oracle objects to include in the stream.
@@ -41,7 +41,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// Configuration to select the CDC method.
   public var cdcMethod: OneOf_CdcMethod? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `OracleSourceConfig`.
   public init() {}
@@ -144,7 +144,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.cdcMethod = cdcMethod
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -178,10 +178,10 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// Configuration to drop large object values.
-  public struct DropLargeObjects: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DropLargeObjects: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DropLargeObjects`.
     public init() {}
@@ -212,7 +212,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -226,19 +226,19 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration to stream large object values.
-  public struct StreamLargeObjects: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StreamLargeObjects: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StreamLargeObjects`.
     public init() {}
@@ -269,7 +269,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -283,19 +283,19 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration to use LogMiner CDC method.
-  public struct LogMiner: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LogMiner: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LogMiner`.
     public init() {}
@@ -326,7 +326,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -340,22 +340,22 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.OracleSourceConfig.LogMiner"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration to use Binary Log Parser CDC technique.
-  public struct BinaryLogParser: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BinaryLogParser: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Configuration to specify how the log file should be accessed.
     public var logFileAccess: OneOf_LogFileAccess? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BinaryLogParser`.
     public init() {}
@@ -415,7 +415,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.logFileAccess = logFileAccess
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -436,10 +436,10 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
 
     /// Configuration to use Oracle ASM to access the log files.
-    public struct OracleAsmLogFileAccess: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OracleAsmLogFileAccess: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OracleAsmLogFileAccess`.
       public init() {}
@@ -470,7 +470,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -485,16 +485,16 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         return
           "type.googleapis.com/google.cloud.datastream.v1.OracleSourceConfig.BinaryLogParser.OracleAsmLogFileAccess"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Configuration to specify the Oracle directories to access the log files.
-    public struct LogFileDirectories: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct LogFileDirectories: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Oracle directory for online logs.
@@ -503,7 +503,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       /// Required. Oracle directory for archived logs.
       public var archivedLogDirectory: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `LogFileDirectories`.
       public init() {}
@@ -549,7 +549,7 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -566,11 +566,11 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
         return
           "type.googleapis.com/google.cloud.datastream.v1.OracleSourceConfig.BinaryLogParser.LogFileDirectories"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -586,11 +586,11 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.OracleSourceConfig.BinaryLogParser"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -613,10 +613,10 @@ public struct OracleSourceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datastream.v1.OracleSourceConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,10 +19,10 @@
 import Foundation
 import GoogleApiServiceManagementV1
 import GoogleApi
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleApiServiceManagementV1.ServiceManagerClient()

@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for the `projects` resource.
 ///
@@ -28,7 +28,7 @@ public final class ProjectsClient: Clients.ProjectsProtocol, Sendable {
   let inner: any Clients.ProjectsStub
 
   /// Creates a new `ProjectsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ProjectsStub = try Clients.ProjectsTransport(options)
     inner = Clients.ProjectsRetry(inner, options: options)
     if let logger = options.logger {
@@ -41,7 +41,7 @@ public final class ProjectsClient: Clients.ProjectsProtocol, Sendable {
   ///
   /// @Snippet(path: "projects_get")
   public func `get`(
-    request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ProjectsClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> Project {
     try await self.inner.`get`(request: request, options: options)
   }
@@ -64,7 +64,7 @@ extension Clients {
 
     /// See `ProjectsClient.`get``.
     func `get`(
-      request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Project
   }
 }
@@ -76,9 +76,9 @@ extension Clients.ProjectsProtocol {
   }
 
   public func `get`(
-    request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ProjectsClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> Project {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func `get`(

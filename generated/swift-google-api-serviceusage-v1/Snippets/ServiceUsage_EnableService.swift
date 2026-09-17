@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleApiServiceUsageV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ServiceUsageClient) async throws {
   let poller = try await client.enableService(

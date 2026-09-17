@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// SoleTenantConfig contains the NodeAffinities to specify what shared sole
 /// tenant node groups should back the node pool.
-public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SoleTenantConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// NodeAffinities used to match to a shared sole tenant node group.
@@ -30,7 +30,7 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// pool is created in a shared sole-tenant node group.
   public var minNodeCpus: Swift.Int32? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SoleTenantConfig`.
   public init() {}
@@ -73,7 +73,7 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.minNodeCpus = try container.decodeIfPresent(Swift.Int32.self, forKey: .minNodeCpus)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,7 +89,7 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Specifies the NodeAffinity key, values, and affinity operator according to
   /// [shared sole tenant node group
   /// affinities](https://cloud.google.com/compute/docs/nodes/sole-tenant-nodes#node_affinity_and_anti-affinity).
-  public struct NodeAffinity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NodeAffinity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Key for NodeAffinity.
@@ -102,7 +102,7 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Values for NodeAffinity.
     public var values: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NodeAffinity`.
     public init() {}
@@ -152,7 +152,7 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -275,21 +275,21 @@ public struct SoleTenantConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.SoleTenantConfig.NodeAffinity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.SoleTenantConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudWorkloadManagerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: WorkloadManagerClient) async throws {
   let items = try client.listExecutionResults(

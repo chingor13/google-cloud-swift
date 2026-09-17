@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DataQualityRuleTemplate represents a template which can be reused across
 /// multiple data quality rules.
-public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataQualityRuleTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The name of the rule template in the format:
@@ -41,7 +41,7 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// template.
   public var capabilities: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataQualityRuleTemplate`.
   public init() {}
@@ -103,7 +103,7 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -121,13 +121,13 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPa
 
   /// Templatized SQL query for data quality rules. It can have parameters that
   /// can be substituted with values when a rule is created using this template.
-  public struct Sql: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Sql: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Templatized SQL query for data quality rules.
     public var query: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Sql`.
     public init() {}
@@ -165,7 +165,7 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -180,18 +180,18 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataQualityRuleTemplate.Sql"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Description of the input parameter. It can include the type(s) supported
   /// by the parameter and intended usage. It is for information purposes only
   /// and does not affect the behavior of the rule template.
-  public struct ParameterDescription: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ParameterDescription: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Description of the input parameter. It can include the
@@ -203,7 +203,7 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// Output only. The default value for the parameter if no value is provided.
     public var defaultValue: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ParameterDescription`.
     public init() {}
@@ -246,7 +246,7 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -263,21 +263,21 @@ public struct DataQualityRuleTemplate: Codable, Equatable, GoogleCloudWKT._AnyPa
       return
         "type.googleapis.com/google.cloud.dataplex.v1.DataQualityRuleTemplate.ParameterDescription"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataQualityRuleTemplate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

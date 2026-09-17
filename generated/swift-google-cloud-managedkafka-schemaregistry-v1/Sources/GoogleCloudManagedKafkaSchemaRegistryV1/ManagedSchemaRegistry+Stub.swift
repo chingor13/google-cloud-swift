@@ -17,142 +17,142 @@
 import Foundation
 import GoogleApi
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ManagedSchemaRegistryStub: Sendable {
     func getSchemaRegistry(
-      request: GetSchemaRegistryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaRegistryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaRegistry
 
     func listSchemaRegistries(
-      request: ListSchemaRegistriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSchemaRegistriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.ListSchemaRegistriesResponse
 
     func createSchemaRegistry(
-      request: CreateSchemaRegistryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSchemaRegistryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaRegistry
 
     func deleteSchemaRegistry(
-      request: DeleteSchemaRegistryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSchemaRegistryRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getContext(
-      request: GetContextRequest, options: GoogleCloudGax.RequestOptions
+      request: GetContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.Context
 
     func listContexts(
-      request: ListContextsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListContextsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func getSchema(
-      request: GetSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.Schema
 
     func getRawSchema(
-      request: GetSchemaRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func listSchemaVersions(
-      request: ListSchemaVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSchemaVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func listSchemaTypes(
-      request: ListSchemaTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSchemaTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func listSubjects(
-      request: ListSubjectsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubjectsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func listSubjectsBySchemaId(
-      request: ListSubjectsBySchemaIdRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubjectsBySchemaIdRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func deleteSubject(
-      request: DeleteSubjectRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSubjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func lookupVersion(
-      request: LookupVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaVersion
 
     func getVersion(
-      request: GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaVersion
 
     func getRawSchemaVersion(
-      request: GetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func listVersions(
-      request: ListVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func createVersion(
-      request: CreateVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.CreateVersionResponse
 
     func deleteVersion(
-      request: DeleteVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func listReferencedSchemas(
-      request: ListReferencedSchemasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReferencedSchemasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody
 
     func checkCompatibility(
-      request: CheckCompatibilityRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckCompatibilityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.CheckCompatibilityResponse
 
     func getSchemaConfig(
-      request: GetSchemaConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaConfig
 
     func updateSchemaConfig(
-      request: UpdateSchemaConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSchemaConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaConfig
 
     func deleteSchemaConfig(
-      request: DeleteSchemaConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSchemaConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaConfig
 
     func getSchemaMode(
-      request: GetSchemaModeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSchemaModeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaMode
 
     func updateSchemaMode(
-      request: UpdateSchemaModeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSchemaModeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaMode
 
     func deleteSchemaMode(
-      request: DeleteSchemaModeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSchemaModeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaSchemaRegistryV1.SchemaMode
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

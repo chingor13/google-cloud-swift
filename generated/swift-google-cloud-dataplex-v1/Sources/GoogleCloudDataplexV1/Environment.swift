@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Environment represents a user-visible compute infrastructure for analytics
 /// within a lake.
-public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Environment: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The relative resource name of the environment, of the form:
@@ -35,10 +35,10 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uid: Swift.String = Swift.String()
 
   /// Output only. Environment creation time.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time when the environment was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. User defined labels for the environment.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -62,7 +62,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Environment.
   public var endpoints: Environment.Endpoints? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Environment`.
   public init() {}
@@ -126,10 +126,8 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -149,7 +147,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.endpoints = try container.decodeIfPresent(Environment.Endpoints.self, forKey: .endpoints)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -173,7 +171,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Configuration for the underlying infrastructure used to run workloads.
-  public struct InfrastructureSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InfrastructureSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Hardware config
@@ -182,7 +180,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Software config
     public var runtime: OneOf_Runtime? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InfrastructureSpec`.
     public init() {}
@@ -253,7 +251,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.runtime = runtime
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -279,7 +277,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Compute resources associated with the analyze interactive workloads.
-    public struct ComputeResources: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ComputeResources: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Size in GB of the disk. Default is 100 GB.
@@ -293,7 +291,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// If max_node_count > node_count, then auto-scaling is enabled.
       public var maxNodeCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ComputeResources`.
       public init() {}
@@ -341,7 +339,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -359,16 +357,16 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.Environment.InfrastructureSpec.ComputeResources"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Software Runtime Configuration to run Analyze.
-    public struct OsImageRuntime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OsImageRuntime: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Dataplex Universal Catalog Image version.
@@ -390,7 +388,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// prefix must be "spark".
       public var properties: [Swift.String: Swift.String] = [:]
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OsImageRuntime`.
       public init() {}
@@ -445,7 +443,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -464,11 +462,11 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.dataplex.v1.Environment.InfrastructureSpec.OsImageRuntime"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -488,21 +486,21 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Environment.InfrastructureSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for sessions created for this environment.
-  public struct SessionSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SessionSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The idle time configuration of the session. The session will be
     /// auto-terminated at the end of this period.
-    public var maxIdleDuration: GoogleCloudWKT.Duration? = nil
+    public var maxIdleDuration: GoogleWKT.Duration? = nil
 
     /// Optional. If True, this causes sessions to be pre-created and available
     /// for faster startup to enable interactive exploration use-cases. This
@@ -511,7 +509,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// default configuration.
     public var enableFastStartup: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SessionSpec`.
     public init() {}
@@ -547,13 +545,13 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.maxIdleDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .maxIdleDuration)
+        GoogleWKT.Duration.self, forKey: .maxIdleDuration)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .enableFastStartup) {
         self.enableFastStartup = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -569,23 +567,23 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Environment.SessionSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Status of sessions created for this environment.
-  public struct SessionStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SessionStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Queries over sessions to mark whether the environment is
     /// currently active or not
     public var active: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SessionStatus`.
     public init() {}
@@ -623,7 +621,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -638,16 +636,16 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Environment.SessionStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// URI Endpoints to access sessions associated with the Environment.
-  public struct Endpoints: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Endpoints: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. URI to serve notebook APIs
@@ -656,7 +654,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. URI to serve SQL APIs
     public var sql: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Endpoints`.
     public init() {}
@@ -699,7 +697,7 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -715,21 +713,21 @@ public struct Environment: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Environment.Endpoints"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.Environment"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

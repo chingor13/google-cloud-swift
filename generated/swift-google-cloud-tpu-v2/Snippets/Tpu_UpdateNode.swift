@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudTpuV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: TpuClient, projectId: String, locationId: String, nodeId: String) async throws {
   let poller = try await client.updateNode(
@@ -30,7 +30,7 @@ func sample(client: TpuClient, projectId: String, locationId: String, nodeId: St
         $0.node = Node().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/nodes/\(nodeId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

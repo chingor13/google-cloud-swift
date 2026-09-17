@@ -16,29 +16,29 @@
 
 #if RegionSslCertificates
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionSslCertificatesStub: Sendable {
       func delete(
-        request: RegionSslCertificatesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionSslCertificatesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificate
 
       func insert(
-        request: RegionSslCertificatesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionSslCertificatesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSslCertificatesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SslCertificateList
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

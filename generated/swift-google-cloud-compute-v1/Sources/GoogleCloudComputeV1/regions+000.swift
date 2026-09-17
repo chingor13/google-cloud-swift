@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `regions` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.RegionsStub
 
     /// Creates a new `RegionsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.RegionsStub = try Clients.RegionsTransport(options)
       inner = Clients.RegionsRetry(inner, options: options)
       if let logger = options.logger {
@@ -59,7 +59,7 @@
     ///
     /// @Snippet(path: "regions_get")
     public func `get`(
-      request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Region {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -86,7 +86,7 @@
     ///
     /// @Snippet(path: "regions_list")
     public func list(
-      request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RegionList {
       try await self.inner.list(request: request, options: options)
     }
@@ -113,14 +113,14 @@
     ///
     /// @Snippet(path: "regions_list")
     public func list(
-      byItem: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Region, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.RegionList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -155,17 +155,17 @@
 
       /// See `RegionsClient.`get``.
       func `get`(
-        request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Region
 
       /// See `RegionsClient.list`.
       func list(
-        request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionList
 
       /// See `RegionsClient.list`.
       func list(
-        byItem: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RegionsClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Region, Swift.Error>
     }
   }
@@ -178,9 +178,9 @@
     }
 
     public func `get`(
-      request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Region {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -201,9 +201,9 @@
     }
 
     public func list(
-      request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.RegionList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -213,12 +213,12 @@
     }
 
     public func list(
-      byItem: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Region, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.RegionList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

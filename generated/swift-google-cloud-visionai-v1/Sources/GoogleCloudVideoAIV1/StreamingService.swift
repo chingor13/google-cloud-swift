@@ -19,9 +19,9 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Streaming service for receiving and sending packets.
 ///
@@ -30,7 +30,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   let inner: any Clients.StreamingServiceStub
 
   /// Creates a new `StreamingServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.StreamingServiceStub = try Clients.StreamingServiceTransport(options)
     inner = Clients.StreamingServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -43,7 +43,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_AcquireLease")
   public func acquireLease(
-    request: AcquireLeaseRequest, options: GoogleCloudGax.RequestOptions
+    request: AcquireLeaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoAIV1.Lease {
     try await self.inner.acquireLease(request: request, options: options)
   }
@@ -52,7 +52,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_RenewLease")
   public func renewLease(
-    request: RenewLeaseRequest, options: GoogleCloudGax.RequestOptions
+    request: RenewLeaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoAIV1.Lease {
     try await self.inner.renewLease(request: request, options: options)
   }
@@ -61,7 +61,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_ReleaseLease")
   public func releaseLease(
-    request: ReleaseLeaseRequest, options: GoogleCloudGax.RequestOptions
+    request: ReleaseLeaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoAIV1.ReleaseLeaseResponse {
     try await self.inner.releaseLease(request: request, options: options)
   }
@@ -70,7 +70,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -79,7 +79,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -87,14 +87,14 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "StreamingService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -105,7 +105,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -116,7 +116,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -124,7 +124,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -133,7 +133,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -144,7 +144,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -155,7 +155,7 @@ public final class StreamingServiceClient: Clients.StreamingServiceProtocol, Sen
   ///
   /// @Snippet(path: "StreamingService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -224,52 +224,52 @@ extension Clients {
 
     /// See `StreamingServiceClient.acquireLease`.
     func acquireLease(
-      request: AcquireLeaseRequest, options: GoogleCloudGax.RequestOptions
+      request: AcquireLeaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Lease
 
     /// See `StreamingServiceClient.renewLease`.
     func renewLease(
-      request: RenewLeaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RenewLeaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.Lease
 
     /// See `StreamingServiceClient.releaseLease`.
     func releaseLease(
-      request: ReleaseLeaseRequest, options: GoogleCloudGax.RequestOptions
+      request: ReleaseLeaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoAIV1.ReleaseLeaseResponse
 
     /// See `StreamingServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `StreamingServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `StreamingServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `StreamingServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `StreamingServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `StreamingServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `StreamingServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -282,9 +282,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func acquireLease(
-    request: AcquireLeaseRequest, options: GoogleCloudGax.RequestOptions
+    request: AcquireLeaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoAIV1.Lease {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func renewLease(request: RenewLeaseRequest) async throws -> GoogleCloudVideoAIV1.Lease {
@@ -292,9 +292,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func renewLease(
-    request: RenewLeaseRequest, options: GoogleCloudGax.RequestOptions
+    request: RenewLeaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoAIV1.Lease {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func releaseLease(request: ReleaseLeaseRequest) async throws
@@ -304,9 +304,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func releaseLease(
-    request: ReleaseLeaseRequest, options: GoogleCloudGax.RequestOptions
+    request: ReleaseLeaseRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudVideoAIV1.ReleaseLeaseResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -316,9 +316,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -328,13 +328,13 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -344,9 +344,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -356,9 +356,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -368,13 +368,13 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -395,9 +395,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -414,9 +414,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -433,9 +433,9 @@ extension Clients.StreamingServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

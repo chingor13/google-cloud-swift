@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Job's resource allocation policy describes when, where, and how compute
 /// resources should be allocated for the Job.
-public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AllocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Location where compute resources should be allocated for the Job.
@@ -72,7 +72,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [RFC1035](https://www.ietf.org/rfc/rfc1035.txt).
   public var tags: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AllocationPolicy`.
   public init() {}
@@ -139,7 +139,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -157,7 +157,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
   }
 
-  public struct LocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LocationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of location names that are allowed for the job's VMs formatted
@@ -188,7 +188,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// `us-central1` (e.g. `zones/us-west1-a`) causes an error.
     public var allowedLocations: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LocationPolicy`.
     public init() {}
@@ -226,7 +226,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -241,11 +241,11 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.LocationPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -253,7 +253,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// A VM can only have one local SSD setting but multiple local SSD partitions.
   /// See https://cloud.google.com/compute/docs/disks#pdspecs and
   /// https://cloud.google.com/compute/docs/disks#localssds.
-  public struct Disk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Disk: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Disk type as shown in `gcloud compute disk-types list`.
@@ -295,7 +295,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// A data source from which a PD will be created.
     public var dataSource: OneOf_DataSource? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Disk`.
     public init() {}
@@ -365,7 +365,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.dataSource = dataSource
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -413,17 +413,17 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.Disk"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A new or an existing persistent disk (PD) or a local ssd attached to a VM
   /// instance.
-  public struct AttachedDisk: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AttachedDisk: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Device name that the guest operating system will see.
@@ -434,7 +434,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public var attached: OneOf_Attached? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AttachedDisk`.
     public init() {}
@@ -496,7 +496,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.attached = attached
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -526,16 +526,16 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.AttachedDisk"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Accelerator describes Compute Engine accelerators to be attached to the VM.
-  public struct Accelerator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Accelerator: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The accelerator type. For example, "nvidia-tesla-t4".
@@ -558,7 +558,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Batch will install the specific accelerator driver if qualified.
     public var driverVersion: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Accelerator`.
     public init() {}
@@ -611,7 +611,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -629,17 +629,17 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.Accelerator"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// InstancePolicy describes an instance type and resources attached to each VM
   /// created by this InstancePolicy.
-  public struct InstancePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InstancePolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Compute Engine machine type.
@@ -675,7 +675,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// reservation.
     public var reservation: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstancePolicy`.
     public init() {}
@@ -747,7 +747,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -768,11 +768,11 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.InstancePolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -780,7 +780,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// this job either with an InstancePolicy or an instance template.
   /// If undefined, Batch picks the type of VM to use and doesn't include
   /// optional VM resources such as GPUs and extra disks.
-  public struct InstancePolicyOrTemplate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InstancePolicyOrTemplate: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Set this field true if you want Batch to help fetch drivers from a third
@@ -820,7 +820,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     public var policyTemplate: OneOf_PolicyTemplate? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstancePolicyOrTemplate`.
     public init() {}
@@ -894,7 +894,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.policyTemplate = policyTemplate
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -933,16 +933,16 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A network interface.
-  public struct NetworkInterface: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkInterface: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The URL of an existing network resource.
@@ -977,7 +977,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The NIC type of the network interface.
     public var nicType: AllocationPolicy.NetworkInterface.NicType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkInterface`.
     public init() {}
@@ -1029,7 +1029,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         AllocationPolicy.NetworkInterface.NicType.self, forKey: .nicType)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1159,22 +1159,22 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.NetworkInterface"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// NetworkPolicy describes VM instance network configurations.
-  public struct NetworkPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Network configurations.
     public var networkInterfaces: [AllocationPolicy.NetworkInterface] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkPolicy`.
     public init() {}
@@ -1214,7 +1214,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1229,17 +1229,17 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.NetworkPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// PlacementPolicy describes a group placement policy for the VMs controlled
   /// by this AllocationPolicy.
-  public struct PlacementPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PlacementPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// UNSPECIFIED vs. COLLOCATED (default UNSPECIFIED). Use COLLOCATED when you
@@ -1255,7 +1255,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Not yet implemented
     public var maxDistance: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PlacementPolicy`.
     public init() {}
@@ -1298,7 +1298,7 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1314,11 +1314,11 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy.PlacementPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1458,10 +1458,10 @@ public struct AllocationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.batch.v1.AllocationPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

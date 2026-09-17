@@ -15,29 +15,29 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol BudgetServiceStub: Sendable {
     func createBudget(
-      request: CreateBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget
 
     func updateBudget(
-      request: UpdateBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget
 
     func getBudget(
-      request: GetBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget
 
     func listBudgets(
-      request: ListBudgetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBudgetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.ListBudgetsResponse
 
     func deleteBudget(
-      request: DeleteBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

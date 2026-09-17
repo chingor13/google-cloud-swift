@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudVideoLiveStreamV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: LivestreamServiceClient, projectId: String, locationId: String, poolId: String)
   async throws

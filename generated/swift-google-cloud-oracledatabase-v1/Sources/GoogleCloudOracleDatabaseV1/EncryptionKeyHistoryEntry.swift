@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The history of the encryption keys used to encrypt the Autonomous Database.
-public struct EncryptionKeyHistoryEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EncryptionKeyHistoryEntry: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The encryption key used to encrypt the Autonomous Database.
@@ -26,9 +26,9 @@ public struct EncryptionKeyHistoryEntry: Codable, Equatable, GoogleCloudWKT._Any
 
   /// Output only. The date and time when the encryption key was activated on the
   /// Autonomous Database..
-  public var activationTime: GoogleCloudWKT.Timestamp? = nil
+  public var activationTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EncryptionKeyHistoryEntry`.
   public init() {}
@@ -65,10 +65,10 @@ public struct EncryptionKeyHistoryEntry: Codable, Equatable, GoogleCloudWKT._Any
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.encryptionKey = try container.decodeIfPresent(EncryptionKey.self, forKey: .encryptionKey)
     self.activationTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .activationTime)
+      GoogleWKT.Timestamp.self, forKey: .activationTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -84,10 +84,10 @@ public struct EncryptionKeyHistoryEntry: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.EncryptionKeyHistoryEntry"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

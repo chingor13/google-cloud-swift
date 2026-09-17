@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The AwsClusters API provides a single centrally managed service
 /// to create and manage Anthos clusters that run on AWS infrastructure.
@@ -30,11 +30,11 @@ import GoogleCloudGax
 @available(*, deprecated)
 public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   let inner: any Clients.AwsClustersStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `AwsClustersClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AwsClustersStub = try Clients.AwsClustersTransport(options)
     inner = Clients.AwsClustersRetry(inner, options: options)
     if let logger = options.logger {
@@ -58,7 +58,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_CreateAwsCluster")
   @available(*, deprecated)
   public func createAwsCluster(
-    request: CreateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAwsClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createAwsCluster(request: request, options: options)
   }
@@ -76,21 +76,21 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_CreateAwsCluster")
   @available(*, deprecated)
   public func createAwsCluster(
-    withPolling: CreateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster> {
+    withPolling: CreateAwsClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsCluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AwsCluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<AwsCluster>.State
+      in
       return try op._extractStatus(AwsCluster.self)
     }
     let rawOp = try await self.createAwsCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsCluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsCluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -105,7 +105,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_UpdateAwsCluster")
   @available(*, deprecated)
   public func updateAwsCluster(
-    request: UpdateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAwsClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateAwsCluster(request: request, options: options)
   }
@@ -117,21 +117,21 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_UpdateAwsCluster")
   @available(*, deprecated)
   public func updateAwsCluster(
-    withPolling: UpdateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster> {
+    withPolling: UpdateAwsClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsCluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AwsCluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<AwsCluster>.State
+      in
       return try op._extractStatus(AwsCluster.self)
     }
     let rawOp = try await self.updateAwsCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsCluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsCluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -147,7 +147,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_GetAwsCluster")
   @available(*, deprecated)
   public func getAwsCluster(
-    request: GetAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsCluster {
     try await self.inner.getAwsCluster(request: request, options: options)
   }
@@ -160,7 +160,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_ListAwsClusters")
   @available(*, deprecated)
   public func listAwsClusters(
-    request: ListAwsClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAwsClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsClustersResponse {
     try await self.inner.listAwsClusters(request: request, options: options)
   }
@@ -173,7 +173,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_ListAwsClusters")
   @available(*, deprecated)
   public func listAwsClusters(
-    byItem: ListAwsClustersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAwsClustersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AwsCluster, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsClustersResponse in
@@ -181,7 +181,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
       request.pageToken = token
       return try await self.listAwsClusters(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a specific [AwsCluster][google.cloud.gkemulticloud.v1.AwsCluster]
@@ -201,7 +201,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_DeleteAwsCluster")
   @available(*, deprecated)
   public func deleteAwsCluster(
-    request: DeleteAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAwsClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteAwsCluster(request: request, options: options)
   }
@@ -223,21 +223,21 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_DeleteAwsCluster")
   @available(*, deprecated)
   public func deleteAwsCluster(
-    withPolling: DeleteAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteAwsClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteAwsCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -250,7 +250,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_GenerateAwsClusterAgentToken")
   @available(*, deprecated)
   public func generateAwsClusterAgentToken(
-    request: GenerateAwsClusterAgentTokenRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAwsClusterAgentTokenRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAwsClusterAgentTokenResponse {
     try await self.inner.generateAwsClusterAgentToken(request: request, options: options)
   }
@@ -263,7 +263,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_GenerateAwsAccessToken")
   @available(*, deprecated)
   public func generateAwsAccessToken(
-    request: GenerateAwsAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAwsAccessTokenRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAwsAccessTokenResponse {
     try await self.inner.generateAwsAccessToken(request: request, options: options)
   }
@@ -282,7 +282,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_CreateAwsNodePool")
   @available(*, deprecated)
   public func createAwsNodePool(
-    request: CreateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAwsNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createAwsNodePool(request: request, options: options)
   }
@@ -301,21 +301,21 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_CreateAwsNodePool")
   @available(*, deprecated)
   public func createAwsNodePool(
-    withPolling: CreateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
+    withPolling: CreateAwsNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
+        -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
       return try op._extractStatus(AwsNodePool.self)
     }
     let rawOp = try await self.createAwsNodePool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -330,7 +330,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_UpdateAwsNodePool")
   @available(*, deprecated)
   public func updateAwsNodePool(
-    request: UpdateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAwsNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateAwsNodePool(request: request, options: options)
   }
@@ -342,21 +342,21 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_UpdateAwsNodePool")
   @available(*, deprecated)
   public func updateAwsNodePool(
-    withPolling: UpdateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
+    withPolling: UpdateAwsNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
+        -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
       return try op._extractStatus(AwsNodePool.self)
     }
     let rawOp = try await self.updateAwsNodePool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -376,7 +376,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_RollbackAwsNodePoolUpdate")
   @available(*, deprecated)
   public func rollbackAwsNodePoolUpdate(
-    request: RollbackAwsNodePoolUpdateRequest, options: GoogleCloudGax.RequestOptions
+    request: RollbackAwsNodePoolUpdateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.rollbackAwsNodePoolUpdate(request: request, options: options)
   }
@@ -393,21 +393,21 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_RollbackAwsNodePoolUpdate")
   @available(*, deprecated)
   public func rollbackAwsNodePoolUpdate(
-    withPolling: RollbackAwsNodePoolUpdateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
+    withPolling: RollbackAwsNodePoolUpdateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
+        -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
       return try op._extractStatus(AwsNodePool.self)
     }
     let rawOp = try await self.rollbackAwsNodePoolUpdate(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -423,7 +423,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_GetAwsNodePool")
   @available(*, deprecated)
   public func getAwsNodePool(
-    request: GetAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsNodePool {
     try await self.inner.getAwsNodePool(request: request, options: options)
   }
@@ -438,7 +438,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_ListAwsNodePools")
   @available(*, deprecated)
   public func listAwsNodePools(
-    request: ListAwsNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAwsNodePoolsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsNodePoolsResponse {
     try await self.inner.listAwsNodePools(request: request, options: options)
   }
@@ -453,7 +453,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_ListAwsNodePools")
   @available(*, deprecated)
   public func listAwsNodePools(
-    byItem: ListAwsNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAwsNodePoolsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AwsNodePool, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsNodePoolsResponse in
@@ -461,7 +461,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
       request.pageToken = token
       return try await self.listAwsNodePools(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a specific [AwsNodePool][google.cloud.gkemulticloud.v1.AwsNodePool]
@@ -477,7 +477,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_DeleteAwsNodePool")
   @available(*, deprecated)
   public func deleteAwsNodePool(
-    request: DeleteAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAwsNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteAwsNodePool(request: request, options: options)
   }
@@ -495,21 +495,21 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_DeleteAwsNodePool")
   @available(*, deprecated)
   public func deleteAwsNodePool(
-    withPolling: DeleteAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteAwsNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteAwsNodePool(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -526,7 +526,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_GetAwsOpenIdConfig")
   @available(*, deprecated)
   public func getAwsOpenIdConfig(
-    request: GetAwsOpenIdConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsOpenIdConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsOpenIdConfig {
     try await self.inner.getAwsOpenIdConfig(request: request, options: options)
   }
@@ -537,7 +537,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_GetAwsJsonWebKeys")
   @available(*, deprecated)
   public func getAwsJsonWebKeys(
-    request: GetAwsJsonWebKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsJsonWebKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsJsonWebKeys {
     try await self.inner.getAwsJsonWebKeys(request: request, options: options)
   }
@@ -548,7 +548,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   /// @Snippet(path: "AwsClusters_GetAwsServerConfig")
   @available(*, deprecated)
   public func getAwsServerConfig(
-    request: GetAwsServerConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsServerConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsServerConfig {
     try await self.inner.getAwsServerConfig(request: request, options: options)
   }
@@ -559,7 +559,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   ///
   /// @Snippet(path: "AwsClusters_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -570,7 +570,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   ///
   /// @Snippet(path: "AwsClusters_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -578,7 +578,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -587,7 +587,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   ///
   /// @Snippet(path: "AwsClusters_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -598,7 +598,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   ///
   /// @Snippet(path: "AwsClusters_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -609,7 +609,7 @@ public final class AwsClustersClient: Clients.AwsClustersProtocol, Sendable {
   ///
   /// @Snippet(path: "AwsClusters_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -630,7 +630,7 @@ extension Clients {
 
     /// See `AwsClustersClient.createAwsCluster`.
     @available(*, deprecated)
-    func createAwsCluster(withPolling: CreateAwsClusterRequest) async throws -> any GoogleCloudGax
+    func createAwsCluster(withPolling: CreateAwsClusterRequest) async throws -> any GoogleGax
       .PollableOperation<AwsCluster>
 
     /// See `AwsClustersClient.createAwsCluster`.
@@ -639,7 +639,7 @@ extension Clients {
       parent: Swift.String,
       awsCluster: AwsCluster?,
       awsClusterId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster>
+    ) async throws -> any GoogleGax.PollableOperation<AwsCluster>
 
     /// See `AwsClustersClient.updateAwsCluster`.
     @available(*, deprecated)
@@ -648,15 +648,15 @@ extension Clients {
 
     /// See `AwsClustersClient.updateAwsCluster`.
     @available(*, deprecated)
-    func updateAwsCluster(withPolling: UpdateAwsClusterRequest) async throws -> any GoogleCloudGax
+    func updateAwsCluster(withPolling: UpdateAwsClusterRequest) async throws -> any GoogleGax
       .PollableOperation<AwsCluster>
 
     /// See `AwsClustersClient.updateAwsCluster`.
     @available(*, deprecated)
     func updateAwsCluster(
       awsCluster: AwsCluster?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<AwsCluster>
 
     /// See `AwsClustersClient.getAwsCluster`.
     @available(*, deprecated)
@@ -693,14 +693,14 @@ extension Clients {
 
     /// See `AwsClustersClient.deleteAwsCluster`.
     @available(*, deprecated)
-    func deleteAwsCluster(withPolling: DeleteAwsClusterRequest) async throws -> any GoogleCloudGax
+    func deleteAwsCluster(withPolling: DeleteAwsClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `AwsClustersClient.deleteAwsCluster`.
     @available(*, deprecated)
     func deleteAwsCluster(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AwsClustersClient.generateAwsClusterAgentToken`.
     @available(*, deprecated)
@@ -719,7 +719,7 @@ extension Clients {
 
     /// See `AwsClustersClient.createAwsNodePool`.
     @available(*, deprecated)
-    func createAwsNodePool(withPolling: CreateAwsNodePoolRequest) async throws -> any GoogleCloudGax
+    func createAwsNodePool(withPolling: CreateAwsNodePoolRequest) async throws -> any GoogleGax
       .PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.createAwsNodePool`.
@@ -728,7 +728,7 @@ extension Clients {
       parent: Swift.String,
       awsNodePool: AwsNodePool?,
       awsNodePoolId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+    ) async throws -> any GoogleGax.PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.updateAwsNodePool`.
     @available(*, deprecated)
@@ -737,15 +737,15 @@ extension Clients {
 
     /// See `AwsClustersClient.updateAwsNodePool`.
     @available(*, deprecated)
-    func updateAwsNodePool(withPolling: UpdateAwsNodePoolRequest) async throws -> any GoogleCloudGax
+    func updateAwsNodePool(withPolling: UpdateAwsNodePoolRequest) async throws -> any GoogleGax
       .PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.updateAwsNodePool`.
     @available(*, deprecated)
     func updateAwsNodePool(
       awsNodePool: AwsNodePool?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.rollbackAwsNodePoolUpdate`.
     @available(*, deprecated)
@@ -755,13 +755,13 @@ extension Clients {
     /// See `AwsClustersClient.rollbackAwsNodePoolUpdate`.
     @available(*, deprecated)
     func rollbackAwsNodePoolUpdate(withPolling: RollbackAwsNodePoolUpdateRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+      -> any GoogleGax.PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.rollbackAwsNodePoolUpdate`.
     @available(*, deprecated)
     func rollbackAwsNodePoolUpdate(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+    ) async throws -> any GoogleGax.PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.getAwsNodePool`.
     @available(*, deprecated)
@@ -798,14 +798,14 @@ extension Clients {
 
     /// See `AwsClustersClient.deleteAwsNodePool`.
     @available(*, deprecated)
-    func deleteAwsNodePool(withPolling: DeleteAwsNodePoolRequest) async throws -> any GoogleCloudGax
+    func deleteAwsNodePool(withPolling: DeleteAwsNodePoolRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `AwsClustersClient.deleteAwsNodePool`.
     @available(*, deprecated)
     func deleteAwsNodePool(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AwsClustersClient.getAwsOpenIdConfig`.
     @available(*, deprecated)
@@ -862,171 +862,171 @@ extension Clients {
     /// See `AwsClustersClient.createAwsCluster`.
     @available(*, deprecated)
     func createAwsCluster(
-      request: CreateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAwsClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AwsClustersClient.createAwsCluster`.
     @available(*, deprecated)
     func createAwsCluster(
-      withPolling: CreateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster>
+      withPolling: CreateAwsClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AwsCluster>
 
     /// See `AwsClustersClient.updateAwsCluster`.
     @available(*, deprecated)
     func updateAwsCluster(
-      request: UpdateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAwsClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AwsClustersClient.updateAwsCluster`.
     @available(*, deprecated)
     func updateAwsCluster(
-      withPolling: UpdateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster>
+      withPolling: UpdateAwsClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AwsCluster>
 
     /// See `AwsClustersClient.getAwsCluster`.
     @available(*, deprecated)
     func getAwsCluster(
-      request: GetAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsCluster
 
     /// See `AwsClustersClient.listAwsClusters`.
     @available(*, deprecated)
     func listAwsClusters(
-      request: ListAwsClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAwsClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsClustersResponse
 
     /// See `AwsClustersClient.listAwsClusters`.
     @available(*, deprecated)
     func listAwsClusters(
-      byItem: ListAwsClustersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAwsClustersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AwsCluster, Swift.Error>
 
     /// See `AwsClustersClient.deleteAwsCluster`.
     @available(*, deprecated)
     func deleteAwsCluster(
-      request: DeleteAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAwsClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AwsClustersClient.deleteAwsCluster`.
     @available(*, deprecated)
     func deleteAwsCluster(
-      withPolling: DeleteAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteAwsClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AwsClustersClient.generateAwsClusterAgentToken`.
     @available(*, deprecated)
     func generateAwsClusterAgentToken(
-      request: GenerateAwsClusterAgentTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAwsClusterAgentTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAwsClusterAgentTokenResponse
 
     /// See `AwsClustersClient.generateAwsAccessToken`.
     @available(*, deprecated)
     func generateAwsAccessToken(
-      request: GenerateAwsAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAwsAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAwsAccessTokenResponse
 
     /// See `AwsClustersClient.createAwsNodePool`.
     @available(*, deprecated)
     func createAwsNodePool(
-      request: CreateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAwsNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AwsClustersClient.createAwsNodePool`.
     @available(*, deprecated)
     func createAwsNodePool(
-      withPolling: CreateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+      withPolling: CreateAwsNodePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.updateAwsNodePool`.
     @available(*, deprecated)
     func updateAwsNodePool(
-      request: UpdateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAwsNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AwsClustersClient.updateAwsNodePool`.
     @available(*, deprecated)
     func updateAwsNodePool(
-      withPolling: UpdateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+      withPolling: UpdateAwsNodePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.rollbackAwsNodePoolUpdate`.
     @available(*, deprecated)
     func rollbackAwsNodePoolUpdate(
-      request: RollbackAwsNodePoolUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: RollbackAwsNodePoolUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AwsClustersClient.rollbackAwsNodePoolUpdate`.
     @available(*, deprecated)
     func rollbackAwsNodePoolUpdate(
-      withPolling: RollbackAwsNodePoolUpdateRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+      withPolling: RollbackAwsNodePoolUpdateRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AwsNodePool>
 
     /// See `AwsClustersClient.getAwsNodePool`.
     @available(*, deprecated)
     func getAwsNodePool(
-      request: GetAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsNodePool
 
     /// See `AwsClustersClient.listAwsNodePools`.
     @available(*, deprecated)
     func listAwsNodePools(
-      request: ListAwsNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAwsNodePoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsNodePoolsResponse
 
     /// See `AwsClustersClient.listAwsNodePools`.
     @available(*, deprecated)
     func listAwsNodePools(
-      byItem: ListAwsNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAwsNodePoolsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AwsNodePool, Swift.Error>
 
     /// See `AwsClustersClient.deleteAwsNodePool`.
     @available(*, deprecated)
     func deleteAwsNodePool(
-      request: DeleteAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAwsNodePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AwsClustersClient.deleteAwsNodePool`.
     @available(*, deprecated)
     func deleteAwsNodePool(
-      withPolling: DeleteAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteAwsNodePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AwsClustersClient.getAwsOpenIdConfig`.
     @available(*, deprecated)
     func getAwsOpenIdConfig(
-      request: GetAwsOpenIdConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsOpenIdConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsOpenIdConfig
 
     /// See `AwsClustersClient.getAwsJsonWebKeys`.
     @available(*, deprecated)
     func getAwsJsonWebKeys(
-      request: GetAwsJsonWebKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsJsonWebKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsJsonWebKeys
 
     /// See `AwsClustersClient.getAwsServerConfig`.
     @available(*, deprecated)
     func getAwsServerConfig(
-      request: GetAwsServerConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAwsServerConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEMultiCloudV1.AwsServerConfig
 
     /// See `AwsClustersClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `AwsClustersClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `AwsClustersClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AwsClustersClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1043,26 +1043,26 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func createAwsCluster(
-    request: CreateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAwsClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
-  public func createAwsCluster(withPolling: CreateAwsClusterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AwsCluster>
+  public func createAwsCluster(withPolling: CreateAwsClusterRequest) async throws -> any GoogleGax
+    .PollableOperation<AwsCluster>
   {
     try await self.createAwsCluster(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func createAwsCluster(
-    withPolling: CreateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsCluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateAwsClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsCluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsCluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1071,7 +1071,7 @@ extension Clients.AwsClustersProtocol {
     parent: Swift.String,
     awsCluster: AwsCluster?,
     awsClusterId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster> {
+  ) async throws -> any GoogleGax.PollableOperation<AwsCluster> {
     let request = CreateAwsClusterRequest().with {
       $0.parent = parent
       $0.awsCluster = awsCluster
@@ -1089,34 +1089,34 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func updateAwsCluster(
-    request: UpdateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAwsClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
-  public func updateAwsCluster(withPolling: UpdateAwsClusterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AwsCluster>
+  public func updateAwsCluster(withPolling: UpdateAwsClusterRequest) async throws -> any GoogleGax
+    .PollableOperation<AwsCluster>
   {
     try await self.updateAwsCluster(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func updateAwsCluster(
-    withPolling: UpdateAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsCluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateAwsClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsCluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsCluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func updateAwsCluster(
     awsCluster: AwsCluster?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsCluster> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<AwsCluster> {
     let request = UpdateAwsClusterRequest().with {
       $0.awsCluster = awsCluster
       $0.updateMask = updateMask
@@ -1133,9 +1133,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func getAwsCluster(
-    request: GetAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsCluster {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1157,9 +1157,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func listAwsClusters(
-    request: ListAwsClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAwsClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsClustersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1171,13 +1171,13 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func listAwsClusters(
-    byItem: ListAwsClustersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAwsClustersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AwsCluster, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsClustersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   @available(*, deprecated)
@@ -1199,33 +1199,33 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func deleteAwsCluster(
-    request: DeleteAwsClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAwsClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
-  public func deleteAwsCluster(withPolling: DeleteAwsClusterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteAwsCluster(withPolling: DeleteAwsClusterRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteAwsCluster(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func deleteAwsCluster(
-    withPolling: DeleteAwsClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteAwsClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func deleteAwsCluster(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteAwsClusterRequest().with {
       $0.name = name
     }
@@ -1241,9 +1241,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func generateAwsClusterAgentToken(
-    request: GenerateAwsClusterAgentTokenRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAwsClusterAgentTokenRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAwsClusterAgentTokenResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1255,9 +1255,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func generateAwsAccessToken(
-    request: GenerateAwsAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateAwsAccessTokenRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.GenerateAwsAccessTokenResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1269,26 +1269,26 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func createAwsNodePool(
-    request: CreateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAwsNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
-  public func createAwsNodePool(withPolling: CreateAwsNodePoolRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+  public func createAwsNodePool(withPolling: CreateAwsNodePoolRequest) async throws -> any GoogleGax
+    .PollableOperation<AwsNodePool>
   {
     try await self.createAwsNodePool(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func createAwsNodePool(
-    withPolling: CreateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateAwsNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1297,7 +1297,7 @@ extension Clients.AwsClustersProtocol {
     parent: Swift.String,
     awsNodePool: AwsNodePool?,
     awsNodePoolId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
     let request = CreateAwsNodePoolRequest().with {
       $0.parent = parent
       $0.awsNodePool = awsNodePool
@@ -1315,34 +1315,34 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func updateAwsNodePool(
-    request: UpdateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAwsNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
-  public func updateAwsNodePool(withPolling: UpdateAwsNodePoolRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+  public func updateAwsNodePool(withPolling: UpdateAwsNodePoolRequest) async throws -> any GoogleGax
+    .PollableOperation<AwsNodePool>
   {
     try await self.updateAwsNodePool(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func updateAwsNodePool(
-    withPolling: UpdateAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateAwsNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func updateAwsNodePool(
     awsNodePool: AwsNodePool?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
     let request = UpdateAwsNodePoolRequest().with {
       $0.awsNodePool = awsNodePool
       $0.updateMask = updateMask
@@ -1359,33 +1359,33 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func rollbackAwsNodePoolUpdate(
-    request: RollbackAwsNodePoolUpdateRequest, options: GoogleCloudGax.RequestOptions
+    request: RollbackAwsNodePoolUpdateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
   public func rollbackAwsNodePoolUpdate(withPolling: RollbackAwsNodePoolUpdateRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AwsNodePool>
+    -> any GoogleGax.PollableOperation<AwsNodePool>
   {
     try await self.rollbackAwsNodePoolUpdate(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func rollbackAwsNodePoolUpdate(
-    withPolling: RollbackAwsNodePoolUpdateRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AwsNodePool>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RollbackAwsNodePoolUpdateRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AwsNodePool>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func rollbackAwsNodePoolUpdate(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AwsNodePool> {
+  ) async throws -> any GoogleGax.PollableOperation<AwsNodePool> {
     let request = RollbackAwsNodePoolUpdateRequest().with {
       $0.name = name
     }
@@ -1401,9 +1401,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func getAwsNodePool(
-    request: GetAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsNodePool {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1425,9 +1425,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func listAwsNodePools(
-    request: ListAwsNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAwsNodePoolsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsNodePoolsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1439,13 +1439,13 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func listAwsNodePools(
-    byItem: ListAwsNodePoolsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAwsNodePoolsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AwsNodePool, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudGKEMultiCloudV1.ListAwsNodePoolsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   @available(*, deprecated)
@@ -1467,33 +1467,33 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func deleteAwsNodePool(
-    request: DeleteAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAwsNodePoolRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
-  public func deleteAwsNodePool(withPolling: DeleteAwsNodePoolRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteAwsNodePool(withPolling: DeleteAwsNodePoolRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteAwsNodePool(withPolling: withPolling, options: .init())
   }
 
   @available(*, deprecated)
   public func deleteAwsNodePool(
-    withPolling: DeleteAwsNodePoolRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteAwsNodePoolRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   @available(*, deprecated)
   public func deleteAwsNodePool(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteAwsNodePoolRequest().with {
       $0.name = name
     }
@@ -1509,9 +1509,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func getAwsOpenIdConfig(
-    request: GetAwsOpenIdConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsOpenIdConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsOpenIdConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1523,9 +1523,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func getAwsJsonWebKeys(
-    request: GetAwsJsonWebKeysRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsJsonWebKeysRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsJsonWebKeys {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1537,9 +1537,9 @@ extension Clients.AwsClustersProtocol {
 
   @available(*, deprecated)
   public func getAwsServerConfig(
-    request: GetAwsServerConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAwsServerConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudGKEMultiCloudV1.AwsServerConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   @available(*, deprecated)
@@ -1559,9 +1559,9 @@ extension Clients.AwsClustersProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1571,13 +1571,13 @@ extension Clients.AwsClustersProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1598,9 +1598,9 @@ extension Clients.AwsClustersProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1617,9 +1617,9 @@ extension Clients.AwsClustersProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1636,9 +1636,9 @@ extension Clients.AwsClustersProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A BackupChannel imposes constraints on where clusters can be backed up.
 /// The BackupChannel should be in the same project and region
 /// as the cluster being backed up.
 /// The backup can be created only in destination_project.
-public struct LoggedBackupChannel: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LoggedBackupChannel: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The project where Backups are allowed to be stored.
@@ -34,7 +34,7 @@ public struct LoggedBackupChannel: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// User specified descriptive string for this BackupChannel.
   public var description: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LoggedBackupChannel`.
   public init() {}
@@ -83,7 +83,7 @@ public struct LoggedBackupChannel: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +100,10 @@ public struct LoggedBackupChannel: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkebackup.logging.v1.LoggedBackupChannel"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

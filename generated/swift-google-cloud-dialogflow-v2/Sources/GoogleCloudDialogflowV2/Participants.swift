@@ -20,9 +20,9 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Participants][google.cloud.dialogflow.v2.Participant].
   ///
@@ -33,7 +33,7 @@
     let inner: any Clients.ParticipantsStub
 
     /// Creates a new `ParticipantsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ParticipantsStub = try Clients.ParticipantsTransport(options)
       inner = Clients.ParticipantsRetry(inner, options: options)
       if let logger = options.logger {
@@ -46,7 +46,7 @@
     ///
     /// @Snippet(path: "Participants_CreateParticipant")
     public func createParticipant(
-      request: CreateParticipantRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateParticipantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.Participant {
       try await self.inner.createParticipant(request: request, options: options)
     }
@@ -55,7 +55,7 @@
     ///
     /// @Snippet(path: "Participants_GetParticipant")
     public func getParticipant(
-      request: GetParticipantRequest, options: GoogleCloudGax.RequestOptions
+      request: GetParticipantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.Participant {
       try await self.inner.getParticipant(request: request, options: options)
     }
@@ -64,7 +64,7 @@
     ///
     /// @Snippet(path: "Participants_ListParticipants")
     public func listParticipants(
-      request: ListParticipantsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListParticipantsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListParticipantsResponse {
       try await self.inner.listParticipants(request: request, options: options)
     }
@@ -73,7 +73,7 @@
     ///
     /// @Snippet(path: "Participants_ListParticipants")
     public func listParticipants(
-      byItem: ListParticipantsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListParticipantsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Participant, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowV2.ListParticipantsResponse in
@@ -81,14 +81,14 @@
         request.pageToken = token
         return try await self.listParticipants(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Updates the specified participant.
     ///
     /// @Snippet(path: "Participants_UpdateParticipant")
     public func updateParticipant(
-      request: UpdateParticipantRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateParticipantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.Participant {
       try await self.inner.updateParticipant(request: request, options: options)
     }
@@ -102,7 +102,7 @@
     ///
     /// @Snippet(path: "Participants_AnalyzeContent")
     public func analyzeContent(
-      request: AnalyzeContentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.AnalyzeContentResponse {
       try await self.inner.analyzeContent(request: request, options: options)
     }
@@ -112,7 +112,7 @@
     ///
     /// @Snippet(path: "Participants_SuggestArticles")
     public func suggestArticles(
-      request: SuggestArticlesRequest, options: GoogleCloudGax.RequestOptions
+      request: SuggestArticlesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.SuggestArticlesResponse {
       try await self.inner.suggestArticles(request: request, options: options)
     }
@@ -122,7 +122,7 @@
     ///
     /// @Snippet(path: "Participants_SuggestFaqAnswers")
     public func suggestFaqAnswers(
-      request: SuggestFaqAnswersRequest, options: GoogleCloudGax.RequestOptions
+      request: SuggestFaqAnswersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.SuggestFaqAnswersResponse {
       try await self.inner.suggestFaqAnswers(request: request, options: options)
     }
@@ -132,7 +132,7 @@
     ///
     /// @Snippet(path: "Participants_SuggestSmartReplies")
     public func suggestSmartReplies(
-      request: SuggestSmartRepliesRequest, options: GoogleCloudGax.RequestOptions
+      request: SuggestSmartRepliesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.SuggestSmartRepliesResponse {
       try await self.inner.suggestSmartReplies(request: request, options: options)
     }
@@ -141,7 +141,7 @@
     ///
     /// @Snippet(path: "Participants_SuggestKnowledgeAssist")
     public func suggestKnowledgeAssist(
-      request: SuggestKnowledgeAssistRequest, options: GoogleCloudGax.RequestOptions
+      request: SuggestKnowledgeAssistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.SuggestKnowledgeAssistResponse {
       try await self.inner.suggestKnowledgeAssist(request: request, options: options)
     }
@@ -167,7 +167,7 @@
     ///
     /// @Snippet(path: "Participants_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -193,7 +193,7 @@
     ///
     /// @Snippet(path: "Participants_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -201,14 +201,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "Participants_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -219,7 +219,7 @@
     ///
     /// @Snippet(path: "Participants_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -230,7 +230,7 @@
     ///
     /// @Snippet(path: "Participants_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -238,7 +238,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -247,7 +247,7 @@
     ///
     /// @Snippet(path: "Participants_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -258,7 +258,7 @@
     ///
     /// @Snippet(path: "Participants_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -311,7 +311,7 @@
       /// See `ParticipantsClient.updateParticipant`.
       func updateParticipant(
         participant: Participant?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowV2.Participant
 
       /// See `ParticipantsClient.analyzeContent`.
@@ -405,82 +405,82 @@
 
       /// See `ParticipantsClient.createParticipant`.
       func createParticipant(
-        request: CreateParticipantRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateParticipantRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Participant
 
       /// See `ParticipantsClient.getParticipant`.
       func getParticipant(
-        request: GetParticipantRequest, options: GoogleCloudGax.RequestOptions
+        request: GetParticipantRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Participant
 
       /// See `ParticipantsClient.listParticipants`.
       func listParticipants(
-        request: ListParticipantsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListParticipantsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListParticipantsResponse
 
       /// See `ParticipantsClient.listParticipants`.
       func listParticipants(
-        byItem: ListParticipantsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListParticipantsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Participant, Swift.Error>
 
       /// See `ParticipantsClient.updateParticipant`.
       func updateParticipant(
-        request: UpdateParticipantRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateParticipantRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.Participant
 
       /// See `ParticipantsClient.analyzeContent`.
       func analyzeContent(
-        request: AnalyzeContentRequest, options: GoogleCloudGax.RequestOptions
+        request: AnalyzeContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.AnalyzeContentResponse
 
       /// See `ParticipantsClient.suggestArticles`.
       func suggestArticles(
-        request: SuggestArticlesRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestArticlesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestArticlesResponse
 
       /// See `ParticipantsClient.suggestFaqAnswers`.
       func suggestFaqAnswers(
-        request: SuggestFaqAnswersRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestFaqAnswersRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestFaqAnswersResponse
 
       /// See `ParticipantsClient.suggestSmartReplies`.
       func suggestSmartReplies(
-        request: SuggestSmartRepliesRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestSmartRepliesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestSmartRepliesResponse
 
       /// See `ParticipantsClient.suggestKnowledgeAssist`.
       func suggestKnowledgeAssist(
-        request: SuggestKnowledgeAssistRequest, options: GoogleCloudGax.RequestOptions
+        request: SuggestKnowledgeAssistRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.SuggestKnowledgeAssistResponse
 
       /// See `ParticipantsClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `ParticipantsClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `ParticipantsClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `ParticipantsClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `ParticipantsClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `ParticipantsClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -494,9 +494,9 @@
     }
 
     public func createParticipant(
-      request: CreateParticipantRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateParticipantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.Participant {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createParticipant(
@@ -517,9 +517,9 @@
     }
 
     public func getParticipant(
-      request: GetParticipantRequest, options: GoogleCloudGax.RequestOptions
+      request: GetParticipantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.Participant {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getParticipant(
@@ -538,9 +538,9 @@
     }
 
     public func listParticipants(
-      request: ListParticipantsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListParticipantsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListParticipantsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listParticipants(
@@ -550,13 +550,13 @@
     }
 
     public func listParticipants(
-      byItem: ListParticipantsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListParticipantsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Participant, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowV2.ListParticipantsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listParticipants(
@@ -575,14 +575,14 @@
     }
 
     public func updateParticipant(
-      request: UpdateParticipantRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateParticipantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.Participant {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateParticipant(
       participant: Participant?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowV2.Participant {
       let request = UpdateParticipantRequest().with {
         $0.participant = participant
@@ -598,9 +598,9 @@
     }
 
     public func analyzeContent(
-      request: AnalyzeContentRequest, options: GoogleCloudGax.RequestOptions
+      request: AnalyzeContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.AnalyzeContentResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func analyzeContent(
@@ -643,9 +643,9 @@
     }
 
     public func suggestArticles(
-      request: SuggestArticlesRequest, options: GoogleCloudGax.RequestOptions
+      request: SuggestArticlesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.SuggestArticlesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func suggestArticles(
@@ -664,9 +664,9 @@
     }
 
     public func suggestFaqAnswers(
-      request: SuggestFaqAnswersRequest, options: GoogleCloudGax.RequestOptions
+      request: SuggestFaqAnswersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.SuggestFaqAnswersResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func suggestFaqAnswers(
@@ -685,9 +685,9 @@
     }
 
     public func suggestSmartReplies(
-      request: SuggestSmartRepliesRequest, options: GoogleCloudGax.RequestOptions
+      request: SuggestSmartRepliesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.SuggestSmartRepliesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func suggestSmartReplies(
@@ -706,9 +706,9 @@
     }
 
     public func suggestKnowledgeAssist(
-      request: SuggestKnowledgeAssistRequest, options: GoogleCloudGax.RequestOptions
+      request: SuggestKnowledgeAssistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.SuggestKnowledgeAssistResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -718,9 +718,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -730,13 +730,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -746,9 +746,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -758,9 +758,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -770,13 +770,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -797,9 +797,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -816,9 +816,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

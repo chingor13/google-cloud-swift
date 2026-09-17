@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The metadata associated with a spec of the API version.
-public struct SpecMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SpecMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The spec resource to be pushed to Hub's collect layer. The ID of
@@ -30,13 +30,13 @@ public struct SpecMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var originalId: Swift.String = Swift.String()
 
   /// Optional. Timestamp indicating when the spec was created at the source.
-  public var originalCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var originalCreateTime: GoogleWKT.Timestamp? = nil
 
   /// Required. Timestamp indicating when the spec was last updated at the
   /// source.
-  public var originalUpdateTime: GoogleCloudWKT.Timestamp? = nil
+  public var originalUpdateTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SpecMetadata`.
   public init() {}
@@ -80,12 +80,12 @@ public struct SpecMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.originalId = value
     }
     self.originalCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .originalCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .originalCreateTime)
     self.originalUpdateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .originalUpdateTime)
+      GoogleWKT.Timestamp.self, forKey: .originalUpdateTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +103,10 @@ public struct SpecMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.apihub.v1.SpecMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

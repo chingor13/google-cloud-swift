@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudWebSecurityScannerV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: WebSecurityScannerClient) async throws {
   let items = try client.listScanConfigs(

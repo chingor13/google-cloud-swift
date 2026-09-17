@@ -16,10 +16,10 @@
 
 import Foundation
 import GoogleCloudOSLoginCommon
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A request message for importing an SSH public key.
-public struct ImportSshPublicKeyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ImportSshPublicKeyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The unique ID for the user in format `users/{user}`.
@@ -36,7 +36,7 @@ public struct ImportSshPublicKeyRequest: Codable, Equatable, GoogleCloudWKT._Any
   /// Regions are listed at https://cloud.google.com/about/locations#region.
   public var regions: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ImportSshPublicKeyRequest`.
   public init() {}
@@ -88,7 +88,7 @@ public struct ImportSshPublicKeyRequest: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -106,10 +106,10 @@ public struct ImportSshPublicKeyRequest: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oslogin.v1.ImportSshPublicKeyRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

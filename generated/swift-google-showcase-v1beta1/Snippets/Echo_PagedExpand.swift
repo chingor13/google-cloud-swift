@@ -19,10 +19,10 @@
 import Foundation
 import GoogleShowcaseV1Beta1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: EchoClient) async throws {
   let items = try client.pagedExpand(

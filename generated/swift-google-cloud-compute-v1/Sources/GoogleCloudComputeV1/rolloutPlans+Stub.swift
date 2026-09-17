@@ -16,29 +16,29 @@
 
 #if RolloutPlans
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RolloutPlansStub: Sendable {
       func delete(
-        request: RolloutPlansClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RolloutPlansClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlan
 
       func insert(
-        request: RolloutPlansClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RolloutPlansClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutPlansClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutPlansListResponse
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

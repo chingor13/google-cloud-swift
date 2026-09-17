@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -41,9 +41,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -60,14 +60,14 @@ extension Clients {
     }
 
     public func listCloudExadataInfrastructures(
-      request: ListCloudExadataInfrastructuresRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCloudExadataInfrastructuresRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListCloudExadataInfrastructuresResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCloudExadataInfrastructures",
         action: {
-          (r: ListCloudExadataInfrastructuresRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCloudExadataInfrastructuresRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListCloudExadataInfrastructuresResponse
           in
           return try await self.inner.listCloudExadataInfrastructures(request: r, options: o)
@@ -75,14 +75,14 @@ extension Clients {
     }
 
     public func getCloudExadataInfrastructure(
-      request: GetCloudExadataInfrastructureRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCloudExadataInfrastructureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.CloudExadataInfrastructure {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCloudExadataInfrastructure",
         action: {
-          (r: GetCloudExadataInfrastructureRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCloudExadataInfrastructureRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.CloudExadataInfrastructure
           in
           return try await self.inner.getCloudExadataInfrastructure(request: r, options: o)
@@ -90,45 +90,44 @@ extension Clients {
     }
 
     public func createCloudExadataInfrastructure(
-      request: CreateCloudExadataInfrastructureRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCloudExadataInfrastructureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCloudExadataInfrastructure",
         action: {
-          (r: CreateCloudExadataInfrastructureRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: CreateCloudExadataInfrastructureRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.createCloudExadataInfrastructure(request: r, options: o)
         })
     }
 
     public func deleteCloudExadataInfrastructure(
-      request: DeleteCloudExadataInfrastructureRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCloudExadataInfrastructureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCloudExadataInfrastructure",
         action: {
-          (r: DeleteCloudExadataInfrastructureRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: DeleteCloudExadataInfrastructureRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteCloudExadataInfrastructure(request: r, options: o)
         })
     }
 
     public func configureExascaleCloudExadataInfrastructure(
-      request: ConfigureExascaleCloudExadataInfrastructureRequest,
-      options: GoogleCloudGax.RequestOptions
+      request: ConfigureExascaleCloudExadataInfrastructureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "configureExascaleCloudExadataInfrastructure",
         action: {
-          (r: ConfigureExascaleCloudExadataInfrastructureRequest, o: GoogleCloudGax.RequestOptions)
+          (r: ConfigureExascaleCloudExadataInfrastructureRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleLongRunning.Operation
           in
           return try await self.inner.configureExascaleCloudExadataInfrastructure(
@@ -137,14 +136,14 @@ extension Clients {
     }
 
     public func listCloudVmClusters(
-      request: ListCloudVmClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCloudVmClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListCloudVmClustersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCloudVmClusters",
         action: {
-          (r: ListCloudVmClustersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCloudVmClustersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListCloudVmClustersResponse
           in
           return try await self.inner.listCloudVmClusters(request: r, options: o)
@@ -152,14 +151,14 @@ extension Clients {
     }
 
     public func getCloudVmCluster(
-      request: GetCloudVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCloudVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.CloudVmCluster {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCloudVmCluster",
         action: {
-          (r: GetCloudVmClusterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetCloudVmClusterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.CloudVmCluster
           in
           return try await self.inner.getCloudVmCluster(request: r, options: o)
@@ -167,14 +166,14 @@ extension Clients {
     }
 
     public func createCloudVmCluster(
-      request: CreateCloudVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCloudVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCloudVmCluster",
         action: {
-          (r: CreateCloudVmClusterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCloudVmClusterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createCloudVmCluster(request: r, options: o)
@@ -182,14 +181,14 @@ extension Clients {
     }
 
     public func deleteCloudVmCluster(
-      request: DeleteCloudVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCloudVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteCloudVmCluster",
         action: {
-          (r: DeleteCloudVmClusterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteCloudVmClusterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteCloudVmCluster(request: r, options: o)
@@ -197,14 +196,14 @@ extension Clients {
     }
 
     public func listEntitlements(
-      request: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListEntitlementsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listEntitlements",
         action: {
-          (r: ListEntitlementsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEntitlementsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListEntitlementsResponse
           in
           return try await self.inner.listEntitlements(request: r, options: o)
@@ -212,14 +211,14 @@ extension Clients {
     }
 
     public func listDbServers(
-      request: ListDbServersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbServersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbServersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDbServers",
         action: {
-          (r: ListDbServersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDbServersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListDbServersResponse
           in
           return try await self.inner.listDbServers(request: r, options: o)
@@ -227,14 +226,14 @@ extension Clients {
     }
 
     public func listDbNodes(
-      request: ListDbNodesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbNodesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbNodesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDbNodes",
         action: {
-          (r: ListDbNodesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDbNodesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListDbNodesResponse
           in
           return try await self.inner.listDbNodes(request: r, options: o)
@@ -242,14 +241,14 @@ extension Clients {
     }
 
     public func listGiVersions(
-      request: ListGiVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGiVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGiVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGiVersions",
         action: {
-          (r: ListGiVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListGiVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListGiVersionsResponse
           in
           return try await self.inner.listGiVersions(request: r, options: o)
@@ -257,14 +256,14 @@ extension Clients {
     }
 
     public func listMinorVersions(
-      request: ListMinorVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMinorVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListMinorVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listMinorVersions",
         action: {
-          (r: ListMinorVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListMinorVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListMinorVersionsResponse
           in
           return try await self.inner.listMinorVersions(request: r, options: o)
@@ -272,14 +271,14 @@ extension Clients {
     }
 
     public func listDbSystemShapes(
-      request: ListDbSystemShapesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbSystemShapesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbSystemShapesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDbSystemShapes",
         action: {
-          (r: ListDbSystemShapesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDbSystemShapesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListDbSystemShapesResponse
           in
           return try await self.inner.listDbSystemShapes(request: r, options: o)
@@ -287,14 +286,14 @@ extension Clients {
     }
 
     public func listAutonomousDatabases(
-      request: ListAutonomousDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutonomousDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabasesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAutonomousDatabases",
         action: {
-          (r: ListAutonomousDatabasesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAutonomousDatabasesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabasesResponse
           in
           return try await self.inner.listAutonomousDatabases(request: r, options: o)
@@ -302,14 +301,14 @@ extension Clients {
     }
 
     public func getAutonomousDatabase(
-      request: GetAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.AutonomousDatabase {
       try await self._intercept(
         request: request,
         options: options,
         name: "getAutonomousDatabase",
         action: {
-          (r: GetAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.AutonomousDatabase
           in
           return try await self.inner.getAutonomousDatabase(request: r, options: o)
@@ -317,14 +316,14 @@ extension Clients {
     }
 
     public func createAutonomousDatabase(
-      request: CreateAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createAutonomousDatabase",
         action: {
-          (r: CreateAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createAutonomousDatabase(request: r, options: o)
@@ -332,14 +331,14 @@ extension Clients {
     }
 
     public func updateAutonomousDatabase(
-      request: UpdateAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateAutonomousDatabase",
         action: {
-          (r: UpdateAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateAutonomousDatabase(request: r, options: o)
@@ -347,14 +346,14 @@ extension Clients {
     }
 
     public func deleteAutonomousDatabase(
-      request: DeleteAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteAutonomousDatabase",
         action: {
-          (r: DeleteAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteAutonomousDatabase(request: r, options: o)
@@ -362,14 +361,14 @@ extension Clients {
     }
 
     public func restoreAutonomousDatabase(
-      request: RestoreAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "restoreAutonomousDatabase",
         action: {
-          (r: RestoreAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RestoreAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.restoreAutonomousDatabase(request: r, options: o)
@@ -377,29 +376,29 @@ extension Clients {
     }
 
     public func generateAutonomousDatabaseWallet(
-      request: GenerateAutonomousDatabaseWalletRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAutonomousDatabaseWalletRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.GenerateAutonomousDatabaseWalletResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "generateAutonomousDatabaseWallet",
         action: {
-          (r: GenerateAutonomousDatabaseWalletRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudOracleDatabaseV1.GenerateAutonomousDatabaseWalletResponse
+          (r: GenerateAutonomousDatabaseWalletRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudOracleDatabaseV1.GenerateAutonomousDatabaseWalletResponse
           in
           return try await self.inner.generateAutonomousDatabaseWallet(request: r, options: o)
         })
     }
 
     public func listAutonomousDbVersions(
-      request: ListAutonomousDbVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutonomousDbVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDbVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAutonomousDbVersions",
         action: {
-          (r: ListAutonomousDbVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAutonomousDbVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListAutonomousDbVersionsResponse
           in
           return try await self.inner.listAutonomousDbVersions(request: r, options: o)
@@ -407,29 +406,29 @@ extension Clients {
     }
 
     public func listAutonomousDatabaseCharacterSets(
-      request: ListAutonomousDatabaseCharacterSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutonomousDatabaseCharacterSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabaseCharacterSetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAutonomousDatabaseCharacterSets",
         action: {
-          (r: ListAutonomousDatabaseCharacterSetsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabaseCharacterSetsResponse
+          (r: ListAutonomousDatabaseCharacterSetsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabaseCharacterSetsResponse
           in
           return try await self.inner.listAutonomousDatabaseCharacterSets(request: r, options: o)
         })
     }
 
     public func listAutonomousDatabaseBackups(
-      request: ListAutonomousDatabaseBackupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutonomousDatabaseBackupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabaseBackupsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAutonomousDatabaseBackups",
         action: {
-          (r: ListAutonomousDatabaseBackupsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAutonomousDatabaseBackupsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListAutonomousDatabaseBackupsResponse
           in
           return try await self.inner.listAutonomousDatabaseBackups(request: r, options: o)
@@ -437,14 +436,14 @@ extension Clients {
     }
 
     public func stopAutonomousDatabase(
-      request: StopAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: StopAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "stopAutonomousDatabase",
         action: {
-          (r: StopAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StopAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.stopAutonomousDatabase(request: r, options: o)
@@ -452,14 +451,14 @@ extension Clients {
     }
 
     public func startAutonomousDatabase(
-      request: StartAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: StartAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "startAutonomousDatabase",
         action: {
-          (r: StartAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StartAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.startAutonomousDatabase(request: r, options: o)
@@ -467,14 +466,14 @@ extension Clients {
     }
 
     public func restartAutonomousDatabase(
-      request: RestartAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RestartAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "restartAutonomousDatabase",
         action: {
-          (r: RestartAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RestartAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.restartAutonomousDatabase(request: r, options: o)
@@ -482,14 +481,14 @@ extension Clients {
     }
 
     public func switchoverAutonomousDatabase(
-      request: SwitchoverAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: SwitchoverAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "switchoverAutonomousDatabase",
         action: {
-          (r: SwitchoverAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SwitchoverAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.switchoverAutonomousDatabase(request: r, options: o)
@@ -497,14 +496,14 @@ extension Clients {
     }
 
     public func failoverAutonomousDatabase(
-      request: FailoverAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: FailoverAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "failoverAutonomousDatabase",
         action: {
-          (r: FailoverAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: FailoverAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.failoverAutonomousDatabase(request: r, options: o)
@@ -512,14 +511,14 @@ extension Clients {
     }
 
     public func refreshAutonomousDatabase(
-      request: RefreshAutonomousDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RefreshAutonomousDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "refreshAutonomousDatabase",
         action: {
-          (r: RefreshAutonomousDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RefreshAutonomousDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.refreshAutonomousDatabase(request: r, options: o)
@@ -527,14 +526,14 @@ extension Clients {
     }
 
     public func getAutonomousDatabaseRefreshableClones(
-      request: GetAutonomousDatabaseRefreshableClonesRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutonomousDatabaseRefreshableClonesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.AutonomousDatabaseRefreshableClones {
       try await self._intercept(
         request: request,
         options: options,
         name: "getAutonomousDatabaseRefreshableClones",
         action: {
-          (r: GetAutonomousDatabaseRefreshableClonesRequest, o: GoogleCloudGax.RequestOptions)
+          (r: GetAutonomousDatabaseRefreshableClonesRequest, o: GoogleGax.RequestOptions)
             async throws -> GoogleCloudOracleDatabaseV1.AutonomousDatabaseRefreshableClones
           in
           return try await self.inner.getAutonomousDatabaseRefreshableClones(request: r, options: o)
@@ -542,14 +541,14 @@ extension Clients {
     }
 
     public func listOdbNetworks(
-      request: ListOdbNetworksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOdbNetworksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListOdbNetworksResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOdbNetworks",
         action: {
-          (r: ListOdbNetworksRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListOdbNetworksRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListOdbNetworksResponse
           in
           return try await self.inner.listOdbNetworks(request: r, options: o)
@@ -557,14 +556,14 @@ extension Clients {
     }
 
     public func getOdbNetwork(
-      request: GetOdbNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOdbNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.OdbNetwork {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOdbNetwork",
         action: {
-          (r: GetOdbNetworkRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetOdbNetworkRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.OdbNetwork
           in
           return try await self.inner.getOdbNetwork(request: r, options: o)
@@ -572,14 +571,14 @@ extension Clients {
     }
 
     public func createOdbNetwork(
-      request: CreateOdbNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOdbNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createOdbNetwork",
         action: {
-          (r: CreateOdbNetworkRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateOdbNetworkRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createOdbNetwork(request: r, options: o)
@@ -587,14 +586,14 @@ extension Clients {
     }
 
     public func deleteOdbNetwork(
-      request: DeleteOdbNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOdbNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOdbNetwork",
         action: {
-          (r: DeleteOdbNetworkRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteOdbNetworkRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteOdbNetwork(request: r, options: o)
@@ -602,14 +601,14 @@ extension Clients {
     }
 
     public func listOdbSubnets(
-      request: ListOdbSubnetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOdbSubnetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListOdbSubnetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOdbSubnets",
         action: {
-          (r: ListOdbSubnetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListOdbSubnetsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListOdbSubnetsResponse
           in
           return try await self.inner.listOdbSubnets(request: r, options: o)
@@ -617,14 +616,14 @@ extension Clients {
     }
 
     public func getOdbSubnet(
-      request: GetOdbSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOdbSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.OdbSubnet {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOdbSubnet",
         action: {
-          (r: GetOdbSubnetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetOdbSubnetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.OdbSubnet
           in
           return try await self.inner.getOdbSubnet(request: r, options: o)
@@ -632,14 +631,14 @@ extension Clients {
     }
 
     public func createOdbSubnet(
-      request: CreateOdbSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOdbSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createOdbSubnet",
         action: {
-          (r: CreateOdbSubnetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateOdbSubnetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createOdbSubnet(request: r, options: o)
@@ -647,14 +646,14 @@ extension Clients {
     }
 
     public func deleteOdbSubnet(
-      request: DeleteOdbSubnetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOdbSubnetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOdbSubnet",
         action: {
-          (r: DeleteOdbSubnetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteOdbSubnetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteOdbSubnet(request: r, options: o)
@@ -662,14 +661,14 @@ extension Clients {
     }
 
     public func listExadbVmClusters(
-      request: ListExadbVmClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExadbVmClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListExadbVmClustersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listExadbVmClusters",
         action: {
-          (r: ListExadbVmClustersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListExadbVmClustersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListExadbVmClustersResponse
           in
           return try await self.inner.listExadbVmClusters(request: r, options: o)
@@ -677,14 +676,14 @@ extension Clients {
     }
 
     public func getExadbVmCluster(
-      request: GetExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ExadbVmCluster {
       try await self._intercept(
         request: request,
         options: options,
         name: "getExadbVmCluster",
         action: {
-          (r: GetExadbVmClusterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetExadbVmClusterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ExadbVmCluster
           in
           return try await self.inner.getExadbVmCluster(request: r, options: o)
@@ -692,14 +691,14 @@ extension Clients {
     }
 
     public func createExadbVmCluster(
-      request: CreateExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createExadbVmCluster",
         action: {
-          (r: CreateExadbVmClusterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateExadbVmClusterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createExadbVmCluster(request: r, options: o)
@@ -707,14 +706,14 @@ extension Clients {
     }
 
     public func deleteExadbVmCluster(
-      request: DeleteExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteExadbVmCluster",
         action: {
-          (r: DeleteExadbVmClusterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteExadbVmClusterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteExadbVmCluster(request: r, options: o)
@@ -722,14 +721,14 @@ extension Clients {
     }
 
     public func updateExadbVmCluster(
-      request: UpdateExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateExadbVmCluster",
         action: {
-          (r: UpdateExadbVmClusterRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateExadbVmClusterRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateExadbVmCluster(request: r, options: o)
@@ -737,29 +736,29 @@ extension Clients {
     }
 
     public func removeVirtualMachineExadbVmCluster(
-      request: RemoveVirtualMachineExadbVmClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveVirtualMachineExadbVmClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "removeVirtualMachineExadbVmCluster",
         action: {
-          (r: RemoveVirtualMachineExadbVmClusterRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: RemoveVirtualMachineExadbVmClusterRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.removeVirtualMachineExadbVmCluster(request: r, options: o)
         })
     }
 
     public func listExascaleDbStorageVaults(
-      request: ListExascaleDbStorageVaultsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExascaleDbStorageVaultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListExascaleDbStorageVaultsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listExascaleDbStorageVaults",
         action: {
-          (r: ListExascaleDbStorageVaultsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListExascaleDbStorageVaultsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListExascaleDbStorageVaultsResponse
           in
           return try await self.inner.listExascaleDbStorageVaults(request: r, options: o)
@@ -767,14 +766,14 @@ extension Clients {
     }
 
     public func getExascaleDbStorageVault(
-      request: GetExascaleDbStorageVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExascaleDbStorageVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ExascaleDbStorageVault {
       try await self._intercept(
         request: request,
         options: options,
         name: "getExascaleDbStorageVault",
         action: {
-          (r: GetExascaleDbStorageVaultRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetExascaleDbStorageVaultRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ExascaleDbStorageVault
           in
           return try await self.inner.getExascaleDbStorageVault(request: r, options: o)
@@ -782,14 +781,14 @@ extension Clients {
     }
 
     public func createExascaleDbStorageVault(
-      request: CreateExascaleDbStorageVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExascaleDbStorageVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createExascaleDbStorageVault",
         action: {
-          (r: CreateExascaleDbStorageVaultRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateExascaleDbStorageVaultRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createExascaleDbStorageVault(request: r, options: o)
@@ -797,14 +796,14 @@ extension Clients {
     }
 
     public func deleteExascaleDbStorageVault(
-      request: DeleteExascaleDbStorageVaultRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteExascaleDbStorageVaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteExascaleDbStorageVault",
         action: {
-          (r: DeleteExascaleDbStorageVaultRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteExascaleDbStorageVaultRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteExascaleDbStorageVault(request: r, options: o)
@@ -812,14 +811,14 @@ extension Clients {
     }
 
     public func listDbSystemInitialStorageSizes(
-      request: ListDbSystemInitialStorageSizesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbSystemInitialStorageSizesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbSystemInitialStorageSizesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDbSystemInitialStorageSizes",
         action: {
-          (r: ListDbSystemInitialStorageSizesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDbSystemInitialStorageSizesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListDbSystemInitialStorageSizesResponse
           in
           return try await self.inner.listDbSystemInitialStorageSizes(request: r, options: o)
@@ -827,14 +826,14 @@ extension Clients {
     }
 
     public func listDatabases(
-      request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDatabasesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDatabases",
         action: {
-          (r: ListDatabasesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDatabasesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListDatabasesResponse
           in
           return try await self.inner.listDatabases(request: r, options: o)
@@ -842,14 +841,14 @@ extension Clients {
     }
 
     public func getDatabase(
-      request: GetDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.Database {
       try await self._intercept(
         request: request,
         options: options,
         name: "getDatabase",
         action: {
-          (r: GetDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.Database
           in
           return try await self.inner.getDatabase(request: r, options: o)
@@ -857,14 +856,14 @@ extension Clients {
     }
 
     public func listPluggableDatabases(
-      request: ListPluggableDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPluggableDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListPluggableDatabasesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listPluggableDatabases",
         action: {
-          (r: ListPluggableDatabasesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListPluggableDatabasesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListPluggableDatabasesResponse
           in
           return try await self.inner.listPluggableDatabases(request: r, options: o)
@@ -872,14 +871,14 @@ extension Clients {
     }
 
     public func getPluggableDatabase(
-      request: GetPluggableDatabaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPluggableDatabaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.PluggableDatabase {
       try await self._intercept(
         request: request,
         options: options,
         name: "getPluggableDatabase",
         action: {
-          (r: GetPluggableDatabaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPluggableDatabaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.PluggableDatabase
           in
           return try await self.inner.getPluggableDatabase(request: r, options: o)
@@ -887,14 +886,14 @@ extension Clients {
     }
 
     public func listDbSystems(
-      request: ListDbSystemsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbSystemsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbSystemsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDbSystems",
         action: {
-          (r: ListDbSystemsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDbSystemsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListDbSystemsResponse
           in
           return try await self.inner.listDbSystems(request: r, options: o)
@@ -902,14 +901,14 @@ extension Clients {
     }
 
     public func getDbSystem(
-      request: GetDbSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDbSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.DbSystem {
       try await self._intercept(
         request: request,
         options: options,
         name: "getDbSystem",
         action: {
-          (r: GetDbSystemRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDbSystemRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.DbSystem
           in
           return try await self.inner.getDbSystem(request: r, options: o)
@@ -917,14 +916,14 @@ extension Clients {
     }
 
     public func createDbSystem(
-      request: CreateDbSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDbSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createDbSystem",
         action: {
-          (r: CreateDbSystemRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDbSystemRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createDbSystem(request: r, options: o)
@@ -932,14 +931,14 @@ extension Clients {
     }
 
     public func deleteDbSystem(
-      request: DeleteDbSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDbSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteDbSystem",
         action: {
-          (r: DeleteDbSystemRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteDbSystemRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteDbSystem(request: r, options: o)
@@ -947,14 +946,14 @@ extension Clients {
     }
 
     public func listGoldengateDeployments(
-      request: ListGoldengateDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGoldengateDeployments",
         action: {
-          (r: ListGoldengateDeploymentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListGoldengateDeploymentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentsResponse
           in
           return try await self.inner.listGoldengateDeployments(request: r, options: o)
@@ -962,14 +961,14 @@ extension Clients {
     }
 
     public func getGoldengateDeployment(
-      request: GetGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.GoldengateDeployment {
       try await self._intercept(
         request: request,
         options: options,
         name: "getGoldengateDeployment",
         action: {
-          (r: GetGoldengateDeploymentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetGoldengateDeploymentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.GoldengateDeployment
           in
           return try await self.inner.getGoldengateDeployment(request: r, options: o)
@@ -977,14 +976,14 @@ extension Clients {
     }
 
     public func createGoldengateDeployment(
-      request: CreateGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createGoldengateDeployment",
         action: {
-          (r: CreateGoldengateDeploymentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateGoldengateDeploymentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createGoldengateDeployment(request: r, options: o)
@@ -992,14 +991,14 @@ extension Clients {
     }
 
     public func deleteGoldengateDeployment(
-      request: DeleteGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteGoldengateDeployment",
         action: {
-          (r: DeleteGoldengateDeploymentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteGoldengateDeploymentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteGoldengateDeployment(request: r, options: o)
@@ -1007,14 +1006,14 @@ extension Clients {
     }
 
     public func stopGoldengateDeployment(
-      request: StopGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: StopGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "stopGoldengateDeployment",
         action: {
-          (r: StopGoldengateDeploymentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StopGoldengateDeploymentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.stopGoldengateDeployment(request: r, options: o)
@@ -1022,14 +1021,14 @@ extension Clients {
     }
 
     public func startGoldengateDeployment(
-      request: StartGoldengateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: StartGoldengateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "startGoldengateDeployment",
         action: {
-          (r: StartGoldengateDeploymentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StartGoldengateDeploymentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.startGoldengateDeployment(request: r, options: o)
@@ -1037,14 +1036,14 @@ extension Clients {
     }
 
     public func listGoldengateConnections(
-      request: ListGoldengateConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGoldengateConnections",
         action: {
-          (r: ListGoldengateConnectionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListGoldengateConnectionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionsResponse
           in
           return try await self.inner.listGoldengateConnections(request: r, options: o)
@@ -1052,14 +1051,14 @@ extension Clients {
     }
 
     public func getGoldengateConnection(
-      request: GetGoldengateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoldengateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.GoldengateConnection {
       try await self._intercept(
         request: request,
         options: options,
         name: "getGoldengateConnection",
         action: {
-          (r: GetGoldengateConnectionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetGoldengateConnectionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.GoldengateConnection
           in
           return try await self.inner.getGoldengateConnection(request: r, options: o)
@@ -1067,14 +1066,14 @@ extension Clients {
     }
 
     public func createGoldengateConnection(
-      request: CreateGoldengateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGoldengateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createGoldengateConnection",
         action: {
-          (r: CreateGoldengateConnectionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateGoldengateConnectionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createGoldengateConnection(request: r, options: o)
@@ -1082,14 +1081,14 @@ extension Clients {
     }
 
     public func deleteGoldengateConnection(
-      request: DeleteGoldengateConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGoldengateConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteGoldengateConnection",
         action: {
-          (r: DeleteGoldengateConnectionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteGoldengateConnectionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteGoldengateConnection(request: r, options: o)
@@ -1097,29 +1096,29 @@ extension Clients {
     }
 
     public func listGoldengateDeploymentVersions(
-      request: ListGoldengateDeploymentVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateDeploymentVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGoldengateDeploymentVersions",
         action: {
-          (r: ListGoldengateDeploymentVersionsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentVersionsResponse
+          (r: ListGoldengateDeploymentVersionsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentVersionsResponse
           in
           return try await self.inner.listGoldengateDeploymentVersions(request: r, options: o)
         })
     }
 
     public func listGoldengateDeploymentTypes(
-      request: ListGoldengateDeploymentTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateDeploymentTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentTypesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGoldengateDeploymentTypes",
         action: {
-          (r: ListGoldengateDeploymentTypesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListGoldengateDeploymentTypesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentTypesResponse
           in
           return try await self.inner.listGoldengateDeploymentTypes(request: r, options: o)
@@ -1127,29 +1126,29 @@ extension Clients {
     }
 
     public func listGoldengateDeploymentEnvironments(
-      request: ListGoldengateDeploymentEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateDeploymentEnvironmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentEnvironmentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGoldengateDeploymentEnvironments",
         action: {
-          (r: ListGoldengateDeploymentEnvironmentsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentEnvironmentsResponse
+          (r: ListGoldengateDeploymentEnvironmentsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudOracleDatabaseV1.ListGoldengateDeploymentEnvironmentsResponse
           in
           return try await self.inner.listGoldengateDeploymentEnvironments(request: r, options: o)
         })
     }
 
     public func listGoldengateConnectionTypes(
-      request: ListGoldengateConnectionTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateConnectionTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionTypesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGoldengateConnectionTypes",
         action: {
-          (r: ListGoldengateConnectionTypesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListGoldengateConnectionTypesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionTypesResponse
           in
           return try await self.inner.listGoldengateConnectionTypes(request: r, options: o)
@@ -1157,14 +1156,14 @@ extension Clients {
     }
 
     public func listDbVersions(
-      request: ListDbVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDbVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDbVersionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDbVersions",
         action: {
-          (r: ListDbVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDbVersionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListDbVersionsResponse
           in
           return try await self.inner.listDbVersions(request: r, options: o)
@@ -1172,14 +1171,14 @@ extension Clients {
     }
 
     public func listDatabaseCharacterSets(
-      request: ListDatabaseCharacterSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatabaseCharacterSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListDatabaseCharacterSetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listDatabaseCharacterSets",
         action: {
-          (r: ListDatabaseCharacterSetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDatabaseCharacterSetsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOracleDatabaseV1.ListDatabaseCharacterSetsResponse
           in
           return try await self.inner.listDatabaseCharacterSets(request: r, options: o)
@@ -1187,104 +1186,104 @@ extension Clients {
     }
 
     public func listGoldengateConnectionAssignments(
-      request: ListGoldengateConnectionAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGoldengateConnectionAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionAssignmentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGoldengateConnectionAssignments",
         action: {
-          (r: ListGoldengateConnectionAssignmentsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionAssignmentsResponse
+          (r: ListGoldengateConnectionAssignmentsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudOracleDatabaseV1.ListGoldengateConnectionAssignmentsResponse
           in
           return try await self.inner.listGoldengateConnectionAssignments(request: r, options: o)
         })
     }
 
     public func getGoldengateConnectionAssignment(
-      request: GetGoldengateConnectionAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGoldengateConnectionAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.GoldengateConnectionAssignment {
       try await self._intercept(
         request: request,
         options: options,
         name: "getGoldengateConnectionAssignment",
         action: {
-          (r: GetGoldengateConnectionAssignmentRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudOracleDatabaseV1.GoldengateConnectionAssignment
+          (r: GetGoldengateConnectionAssignmentRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudOracleDatabaseV1.GoldengateConnectionAssignment
           in
           return try await self.inner.getGoldengateConnectionAssignment(request: r, options: o)
         })
     }
 
     public func createGoldengateConnectionAssignment(
-      request: CreateGoldengateConnectionAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGoldengateConnectionAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createGoldengateConnectionAssignment",
         action: {
-          (r: CreateGoldengateConnectionAssignmentRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: CreateGoldengateConnectionAssignmentRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.createGoldengateConnectionAssignment(request: r, options: o)
         })
     }
 
     public func deleteGoldengateConnectionAssignment(
-      request: DeleteGoldengateConnectionAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGoldengateConnectionAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteGoldengateConnectionAssignment",
         action: {
-          (r: DeleteGoldengateConnectionAssignmentRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: DeleteGoldengateConnectionAssignmentRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteGoldengateConnectionAssignment(request: r, options: o)
         })
     }
 
     public func testGoldengateConnectionAssignment(
-      request: TestGoldengateConnectionAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: TestGoldengateConnectionAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOracleDatabaseV1.TestGoldengateConnectionAssignmentResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testGoldengateConnectionAssignment",
         action: {
-          (r: TestGoldengateConnectionAssignmentRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudOracleDatabaseV1.TestGoldengateConnectionAssignmentResponse
+          (r: TestGoldengateConnectionAssignmentRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudOracleDatabaseV1.TestGoldengateConnectionAssignmentResponse
           in
           return try await self.inner.testGoldengateConnectionAssignment(request: r, options: o)
         })
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
@@ -1292,29 +1291,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -1322,29 +1321,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOperation",
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

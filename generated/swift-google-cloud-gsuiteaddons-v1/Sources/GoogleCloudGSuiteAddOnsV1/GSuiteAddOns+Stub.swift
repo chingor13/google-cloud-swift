@@ -15,45 +15,45 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol GSuiteAddOnsStub: Sendable {
     func getAuthorization(
-      request: GetAuthorizationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthorizationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.Authorization
 
     func createDeployment(
-      request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment
 
     func replaceDeployment(
-      request: ReplaceDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment
 
     func getDeployment(
-      request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.Deployment
 
     func listDeployments(
-      request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.ListDeploymentsResponse
 
     func deleteDeployment(
-      request: DeleteDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func installDeployment(
-      request: InstallDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: InstallDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func uninstallDeployment(
-      request: UninstallDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UninstallDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getInstallStatus(
-      request: GetInstallStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstallStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGSuiteAddOnsV1.InstallStatus
   }
 }

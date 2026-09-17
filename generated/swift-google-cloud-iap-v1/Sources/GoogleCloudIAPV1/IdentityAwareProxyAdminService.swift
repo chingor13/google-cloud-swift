@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// APIs for Identity-Aware Proxy Admin configurations.
 ///
@@ -31,7 +31,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   let inner: any Clients.IdentityAwareProxyAdminServiceStub
 
   /// Creates a new `IdentityAwareProxyAdminServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.IdentityAwareProxyAdminServiceStub =
       try Clients.IdentityAwareProxyAdminServiceTransport(options)
     inner = Clients.IdentityAwareProxyAdminServiceRetry(inner, options: options)
@@ -48,7 +48,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -60,7 +60,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -72,7 +72,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_GetIapSettings")
   public func getIapSettings(
-    request: GetIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIapSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.IapSettings {
     try await self.inner.getIapSettings(request: request, options: options)
   }
@@ -91,7 +91,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_UpdateIapSettings")
   public func updateIapSettings(
-    request: UpdateIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIapSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.IapSettings {
     try await self.inner.updateIapSettings(request: request, options: options)
   }
@@ -100,7 +100,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_ValidateIapAttributeExpression")
   public func validateIapAttributeExpression(
-    request: ValidateIapAttributeExpressionRequest, options: GoogleCloudGax.RequestOptions
+    request: ValidateIapAttributeExpressionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.ValidateIapAttributeExpressionResponse {
     try await self.inner.validateIapAttributeExpression(request: request, options: options)
   }
@@ -111,7 +111,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_ListTunnelDestGroups")
   public func listTunnelDestGroups(
-    request: ListTunnelDestGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTunnelDestGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.ListTunnelDestGroupsResponse {
     try await self.inner.listTunnelDestGroups(request: request, options: options)
   }
@@ -122,7 +122,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_ListTunnelDestGroups")
   public func listTunnelDestGroups(
-    byItem: ListTunnelDestGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTunnelDestGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TunnelDestGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudIAPV1.ListTunnelDestGroupsResponse in
@@ -130,14 +130,14 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
       request.pageToken = token
       return try await self.listTunnelDestGroups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a new TunnelDestGroup.
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_CreateTunnelDestGroup")
   public func createTunnelDestGroup(
-    request: CreateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
     try await self.inner.createTunnelDestGroup(request: request, options: options)
   }
@@ -146,7 +146,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_GetTunnelDestGroup")
   public func getTunnelDestGroup(
-    request: GetTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTunnelDestGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
     try await self.inner.getTunnelDestGroup(request: request, options: options)
   }
@@ -155,7 +155,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_DeleteTunnelDestGroup")
   public func deleteTunnelDestGroup(
-    request: DeleteTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTunnelDestGroupRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteTunnelDestGroup(request: request, options: options)
   }
@@ -164,7 +164,7 @@ public final class IdentityAwareProxyAdminServiceClient: Clients
   ///
   /// @Snippet(path: "IdentityAwareProxyAdminService_UpdateTunnelDestGroup")
   public func updateTunnelDestGroup(
-    request: UpdateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
     try await self.inner.updateTunnelDestGroup(request: request, options: options)
   }
@@ -247,67 +247,67 @@ extension Clients {
     /// See `IdentityAwareProxyAdminServiceClient.updateTunnelDestGroup`.
     func updateTunnelDestGroup(
       tunnelDestGroup: TunnelDestGroup?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup
 
     /// See `IdentityAwareProxyAdminServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `IdentityAwareProxyAdminServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `IdentityAwareProxyAdminServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `IdentityAwareProxyAdminServiceClient.getIapSettings`.
     func getIapSettings(
-      request: GetIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIapSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IapSettings
 
     /// See `IdentityAwareProxyAdminServiceClient.updateIapSettings`.
     func updateIapSettings(
-      request: UpdateIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIapSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IapSettings
 
     /// See `IdentityAwareProxyAdminServiceClient.validateIapAttributeExpression`.
     func validateIapAttributeExpression(
-      request: ValidateIapAttributeExpressionRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateIapAttributeExpressionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.ValidateIapAttributeExpressionResponse
 
     /// See `IdentityAwareProxyAdminServiceClient.listTunnelDestGroups`.
     func listTunnelDestGroups(
-      request: ListTunnelDestGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTunnelDestGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.ListTunnelDestGroupsResponse
 
     /// See `IdentityAwareProxyAdminServiceClient.listTunnelDestGroups`.
     func listTunnelDestGroups(
-      byItem: ListTunnelDestGroupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTunnelDestGroupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TunnelDestGroup, Swift.Error>
 
     /// See `IdentityAwareProxyAdminServiceClient.createTunnelDestGroup`.
     func createTunnelDestGroup(
-      request: CreateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup
 
     /// See `IdentityAwareProxyAdminServiceClient.getTunnelDestGroup`.
     func getTunnelDestGroup(
-      request: GetTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup
 
     /// See `IdentityAwareProxyAdminServiceClient.deleteTunnelDestGroup`.
     func deleteTunnelDestGroup(
-      request: DeleteTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `IdentityAwareProxyAdminServiceClient.updateTunnelDestGroup`.
     func updateTunnelDestGroup(
-      request: UpdateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.TunnelDestGroup
   }
 }
@@ -321,9 +321,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -333,9 +333,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -345,9 +345,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIapSettings(request: GetIapSettingsRequest) async throws
@@ -357,9 +357,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func getIapSettings(
-    request: GetIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIapSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.IapSettings {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateIapSettings(request: UpdateIapSettingsRequest) async throws
@@ -369,9 +369,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func updateIapSettings(
-    request: UpdateIapSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIapSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.IapSettings {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func validateIapAttributeExpression(request: ValidateIapAttributeExpressionRequest)
@@ -381,9 +381,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func validateIapAttributeExpression(
-    request: ValidateIapAttributeExpressionRequest, options: GoogleCloudGax.RequestOptions
+    request: ValidateIapAttributeExpressionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.ValidateIapAttributeExpressionResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTunnelDestGroups(request: ListTunnelDestGroupsRequest) async throws
@@ -393,9 +393,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func listTunnelDestGroups(
-    request: ListTunnelDestGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTunnelDestGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.ListTunnelDestGroupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTunnelDestGroups(
@@ -405,13 +405,13 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func listTunnelDestGroups(
-    byItem: ListTunnelDestGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTunnelDestGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TunnelDestGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudIAPV1.ListTunnelDestGroupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTunnelDestGroups(
@@ -430,9 +430,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func createTunnelDestGroup(
-    request: CreateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createTunnelDestGroup(
@@ -455,9 +455,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func getTunnelDestGroup(
-    request: GetTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTunnelDestGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTunnelDestGroup(
@@ -474,9 +474,9 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func deleteTunnelDestGroup(
-    request: DeleteTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTunnelDestGroupRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteTunnelDestGroup(
@@ -495,14 +495,14 @@ extension Clients.IdentityAwareProxyAdminServiceProtocol {
   }
 
   public func updateTunnelDestGroup(
-    request: UpdateTunnelDestGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTunnelDestGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateTunnelDestGroup(
     tunnelDestGroup: TunnelDestGroup?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudIAPV1.TunnelDestGroup {
     let request = UpdateTunnelDestGroupRequest().with {
       $0.tunnelDestGroup = tunnelDestGroup

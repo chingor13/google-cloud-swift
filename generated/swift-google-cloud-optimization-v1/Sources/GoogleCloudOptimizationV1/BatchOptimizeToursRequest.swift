@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request to batch optimize tours as an asynchronous operation.
 /// Each input file should contain one `OptimizeToursRequest`, and each output
 /// file will contain one `OptimizeToursResponse`. The request contains
 /// information to read/write and parse the files. All the input and output files
 /// should be under the same project.
-public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Target project and location to make a call.
@@ -36,7 +36,7 @@ public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleCloudWKT._Any
   /// and data formats.
   public var modelConfigs: [BatchOptimizeToursRequest.AsyncModelConfig] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchOptimizeToursRequest`.
   public init() {}
@@ -81,7 +81,7 @@ public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -95,7 +95,7 @@ public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleCloudWKT._Any
   }
 
   /// Information for solving one optimization model asynchronously.
-  public struct AsyncModelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AsyncModelConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// User defined model name, can be used as alias by users to keep track of
@@ -118,7 +118,7 @@ public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleCloudWKT._Any
     /// of interruption.
     public var enableCheckpoints: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AsyncModelConfig`.
     public init() {}
@@ -167,7 +167,7 @@ public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleCloudWKT._Any
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -186,21 +186,21 @@ public struct BatchOptimizeToursRequest: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.optimization.v1.BatchOptimizeToursRequest.AsyncModelConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.optimization.v1.BatchOptimizeToursRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

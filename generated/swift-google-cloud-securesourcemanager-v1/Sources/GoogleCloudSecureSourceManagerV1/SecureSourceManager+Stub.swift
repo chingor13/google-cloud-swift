@@ -16,256 +16,256 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SecureSourceManagerStub: Sendable {
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListInstancesResponse
 
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.Instance
 
     func createInstance(
-      request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteInstance(
-      request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listRepositories(
-      request: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRepositoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListRepositoriesResponse
 
     func getRepository(
-      request: GetRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.Repository
 
     func createRepository(
-      request: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateRepository(
-      request: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteRepository(
-      request: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listHooks(
-      request: ListHooksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHooksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListHooksResponse
 
     func getHook(
-      request: GetHookRequest, options: GoogleCloudGax.RequestOptions
+      request: GetHookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.Hook
 
     func createHook(
-      request: CreateHookRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateHookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateHook(
-      request: UpdateHookRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateHookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteHook(
-      request: DeleteHookRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteHookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIamPolicyRepo(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicyRepo(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissionsRepo(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func createBranchRule(
-      request: CreateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBranchRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listBranchRules(
-      request: ListBranchRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBranchRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListBranchRulesResponse
 
     func getBranchRule(
-      request: GetBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBranchRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.BranchRule
 
     func updateBranchRule(
-      request: UpdateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBranchRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteBranchRule(
-      request: DeleteBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBranchRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createPullRequest(
-      request: CreatePullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getPullRequest(
-      request: GetPullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.PullRequest
 
     func listPullRequests(
-      request: ListPullRequestsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPullRequestsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestsResponse
 
     func updatePullRequest(
-      request: UpdatePullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func mergePullRequest(
-      request: MergePullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: MergePullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func openPullRequest(
-      request: OpenPullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: OpenPullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func closePullRequest(
-      request: ClosePullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: ClosePullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listPullRequestFileDiffs(
-      request: ListPullRequestFileDiffsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPullRequestFileDiffsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestFileDiffsResponse
 
     func fetchTree(
-      request: FetchTreeRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchTreeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.FetchTreeResponse
 
     func fetchBlob(
-      request: FetchBlobRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchBlobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.FetchBlobResponse
 
     func createIssue(
-      request: CreateIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIssue(
-      request: GetIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.Issue
 
     func listIssues(
-      request: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIssuesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListIssuesResponse
 
     func updateIssue(
-      request: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteIssue(
-      request: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func openIssue(
-      request: OpenIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: OpenIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func closeIssue(
-      request: CloseIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: CloseIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getPullRequestComment(
-      request: GetPullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPullRequestCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.PullRequestComment
 
     func listPullRequestComments(
-      request: ListPullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestCommentsResponse
 
     func createPullRequestComment(
-      request: CreatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePullRequestCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updatePullRequestComment(
-      request: UpdatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePullRequestCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deletePullRequestComment(
-      request: DeletePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePullRequestCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func batchCreatePullRequestComments(
-      request: BatchCreatePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreatePullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func resolvePullRequestComments(
-      request: ResolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ResolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func unresolvePullRequestComments(
-      request: UnresolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: UnresolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createIssueComment(
-      request: CreateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIssueCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIssueComment(
-      request: GetIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIssueCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.IssueComment
 
     func listIssueComments(
-      request: ListIssueCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIssueCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListIssueCommentsResponse
 
     func updateIssueComment(
-      request: UpdateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIssueCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteIssueComment(
-      request: DeleteIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIssueCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudAppHubV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: AppHubClient, projectId: String, locationId: String, serviceProjectAttachmentId: String

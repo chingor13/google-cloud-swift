@@ -13,12 +13,12 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
+import GoogleWKT
 import Testing
 
 @Suite struct DoubleValueTests {
   struct WrappedDoubleValueEncode: Encodable {
-    let value: GoogleCloudWKT.DoubleValue?
+    let value: GoogleWKT.DoubleValue?
   }
 
   @Test(
@@ -45,7 +45,7 @@ import Testing
   }
 
   struct WrappedDoubleValueDecode: Decodable {
-    let value: GoogleCloudWKT.DoubleValue?
+    let value: GoogleWKT.DoubleValue?
   }
 
   @Test(
@@ -71,7 +71,7 @@ import Testing
   }
 
   struct WrappedAny: Codable {
-    let content: GoogleCloudWKT.`Any`
+    let content: GoogleWKT.`Any`
   }
 
   @Test("Unpack DoubleValue from Any")

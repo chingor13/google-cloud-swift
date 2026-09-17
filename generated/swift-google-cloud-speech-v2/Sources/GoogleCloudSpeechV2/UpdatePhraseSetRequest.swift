@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for the
 /// [UpdatePhraseSet][google.cloud.speech.v2.Speech.UpdatePhraseSet] method.
 ///
 /// [google.cloud.speech.v2.Speech.UpdatePhraseSet]: <doc:SpeechClient/updatePhraseSet(request:options:)>
-public struct UpdatePhraseSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdatePhraseSetRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The PhraseSet to update.
@@ -32,13 +32,13 @@ public struct UpdatePhraseSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   /// The list of fields to update. If empty, all non-default valued fields are
   /// considered for update. Use `*` to update the entire PhraseSet resource.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// If set, validate the request and preview the updated PhraseSet, but do not
   /// actually update it.
   public var validateOnly: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdatePhraseSetRequest`.
   public init() {}
@@ -76,14 +76,13 @@ public struct UpdatePhraseSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.phraseSet = try container.decodeIfPresent(PhraseSet.self, forKey: .phraseSet)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .validateOnly) {
       self.validateOnly = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -100,10 +99,10 @@ public struct UpdatePhraseSetRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.UpdatePhraseSetRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

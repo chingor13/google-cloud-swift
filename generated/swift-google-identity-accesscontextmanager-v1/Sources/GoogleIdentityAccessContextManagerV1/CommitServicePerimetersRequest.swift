@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A request to commit dry-run specs in all [Service Perimeters]
 /// [google.identity.accesscontextmanager.v1.ServicePerimeter] belonging to
 /// an [Access Policy][google.identity.accesscontextmanager.v1.AccessPolicy].
 ///
 /// [google.identity.accesscontextmanager.v1.AccessPolicy]: <doc:AccessPolicy>
-public struct CommitServicePerimetersRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CommitServicePerimetersRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Resource name for the parent [Access Policy]
@@ -43,7 +43,7 @@ public struct CommitServicePerimetersRequest: Codable, Equatable, GoogleCloudWKT
   /// provided, the operation will be performed as if a valid etag is provided.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CommitServicePerimetersRequest`.
   public init() {}
@@ -86,7 +86,7 @@ public struct CommitServicePerimetersRequest: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +103,10 @@ public struct CommitServicePerimetersRequest: Codable, Equatable, GoogleCloudWKT
     return
       "type.googleapis.com/google.identity.accesscontextmanager.v1.CommitServicePerimetersRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

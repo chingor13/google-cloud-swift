@@ -16,14 +16,14 @@
 
 #if UserLicenseService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [UserLicenseService.BatchUpdateUserLicenses][google.cloud.discoveryengine.v1.UserLicenseService.BatchUpdateUserLicenses]
   /// method.
   ///
   /// [google.cloud.discoveryengine.v1.UserLicenseService.BatchUpdateUserLicenses]: <doc:UserLicenseServiceClient/batchUpdateUserLicenses(request:options:)>
-  public struct BatchUpdateUserLicensesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BatchUpdateUserLicensesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The parent [UserStore][] resource name, format:
@@ -38,7 +38,7 @@
     /// Required. The source of the input.
     public var source: OneOf_Source? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BatchUpdateUserLicensesRequest`.
     public init() {}
@@ -103,7 +103,7 @@
       self.source = source
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -125,7 +125,7 @@
 
     /// The inline source for the input config for BatchUpdateUserLicenses
     /// method.
-    public struct InlineSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InlineSource: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. A list of user licenses to update. Each user license
@@ -136,9 +136,9 @@
       public var userLicenses: [UserLicense] = []
 
       /// Optional. The list of fields to update.
-      public var updateMask: GoogleCloudWKT.FieldMask? = nil
+      public var updateMask: GoogleWKT.FieldMask? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InlineSource`.
       public init() {}
@@ -177,10 +177,10 @@
           self.userLicenses = value
         }
         self.updateMask = try container.decodeIfPresent(
-          GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+          GoogleWKT.FieldMask.self, forKey: .updateMask)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -197,11 +197,11 @@
         return
           "type.googleapis.com/google.cloud.discoveryengine.v1.BatchUpdateUserLicensesRequest.InlineSource"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -214,11 +214,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.BatchUpdateUserLicensesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

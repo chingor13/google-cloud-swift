@@ -16,11 +16,11 @@
 
 #if IndexService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A representation of a collection of database items organized in a way that
   /// allows for approximate nearest neighbor (a.k.a ANN) algorithms search.
-  public struct Index: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Index: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The resource name of the Index.
@@ -49,7 +49,7 @@
     /// [metadata_schema][google.cloud.aiplatform.v1.Index.metadata_schema_uri].
     ///
     /// [google.cloud.aiplatform.v1.Index.metadata_schema_uri]: <doc:Index/metadataSchemaUri>
-    public var metadata: GoogleCloudWKT.Value? = nil
+    public var metadata: GoogleWKT.Value? = nil
 
     /// Output only. The pointers to DeployedIndexes created from this Index.
     /// An Index can be only deleted if all its DeployedIndexes had been undeployed
@@ -70,7 +70,7 @@
     public var labels: [Swift.String: Swift.String] = [:]
 
     /// Output only. Timestamp when this Index was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this Index was most recently updated.
     /// This also includes any update to the contents of the Index.
@@ -80,7 +80,7 @@
     /// after the value of this timestamp, yet that does not mean their results are
     /// not already reflected in the Index. Result of any successfully completed
     /// Operation on the Index is reflected in it.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Stats of the index resource.
     public var indexStats: IndexStats? = nil
@@ -99,7 +99,7 @@
     /// Output only. Reserved for future use.
     public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Index`.
     public init() {}
@@ -172,7 +172,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .metadataSchemaUri) {
         self.metadataSchemaUri = value
       }
-      self.metadata = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .metadata)
+      self.metadata = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .metadata)
       if let value = try container.decodeIfPresent(
         [DeployedIndexRef].self, forKey: .deployedIndexes)
       {
@@ -186,10 +186,8 @@
       {
         self.labels = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.indexStats = try container.decodeIfPresent(IndexStats.self, forKey: .indexStats)
       if let value = try container.decodeIfPresent(
         Index.IndexUpdateMethod.self, forKey: .indexUpdateMethod)
@@ -206,7 +204,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -343,11 +341,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Index"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

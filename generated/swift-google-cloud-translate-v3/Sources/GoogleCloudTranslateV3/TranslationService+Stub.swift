@@ -16,191 +16,191 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TranslationServiceStub: Sendable {
     func translateText(
-      request: TranslateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: TranslateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.TranslateTextResponse
 
     func romanizeText(
-      request: RomanizeTextRequest, options: GoogleCloudGax.RequestOptions
+      request: RomanizeTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.RomanizeTextResponse
 
     func detectLanguage(
-      request: DetectLanguageRequest, options: GoogleCloudGax.RequestOptions
+      request: DetectLanguageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.DetectLanguageResponse
 
     func getSupportedLanguages(
-      request: GetSupportedLanguagesRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSupportedLanguagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.SupportedLanguages
 
     func translateDocument(
-      request: TranslateDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: TranslateDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.TranslateDocumentResponse
 
     func batchTranslateText(
-      request: BatchTranslateTextRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchTranslateTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func batchTranslateDocument(
-      request: BatchTranslateDocumentRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchTranslateDocumentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createGlossary(
-      request: CreateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateGlossary(
-      request: UpdateGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listGlossaries(
-      request: ListGlossariesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGlossariesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ListGlossariesResponse
 
     func getGlossary(
-      request: GetGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.Glossary
 
     func deleteGlossary(
-      request: DeleteGlossaryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGlossaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getGlossaryEntry(
-      request: GetGlossaryEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGlossaryEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.GlossaryEntry
 
     func listGlossaryEntries(
-      request: ListGlossaryEntriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGlossaryEntriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ListGlossaryEntriesResponse
 
     func createGlossaryEntry(
-      request: CreateGlossaryEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGlossaryEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.GlossaryEntry
 
     func updateGlossaryEntry(
-      request: UpdateGlossaryEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGlossaryEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.GlossaryEntry
 
     func deleteGlossaryEntry(
-      request: DeleteGlossaryEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGlossaryEntryRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createDataset(
-      request: CreateDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getDataset(
-      request: GetDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.Dataset
 
     func listDatasets(
-      request: ListDatasetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatasetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ListDatasetsResponse
 
     func deleteDataset(
-      request: DeleteDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createAdaptiveMtDataset(
-      request: CreateAdaptiveMtDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAdaptiveMtDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.AdaptiveMtDataset
 
     func deleteAdaptiveMtDataset(
-      request: DeleteAdaptiveMtDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAdaptiveMtDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getAdaptiveMtDataset(
-      request: GetAdaptiveMtDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAdaptiveMtDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.AdaptiveMtDataset
 
     func listAdaptiveMtDatasets(
-      request: ListAdaptiveMtDatasetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAdaptiveMtDatasetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ListAdaptiveMtDatasetsResponse
 
     func adaptiveMtTranslate(
-      request: AdaptiveMtTranslateRequest, options: GoogleCloudGax.RequestOptions
+      request: AdaptiveMtTranslateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.AdaptiveMtTranslateResponse
 
     func getAdaptiveMtFile(
-      request: GetAdaptiveMtFileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAdaptiveMtFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.AdaptiveMtFile
 
     func deleteAdaptiveMtFile(
-      request: DeleteAdaptiveMtFileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAdaptiveMtFileRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func importAdaptiveMtFile(
-      request: ImportAdaptiveMtFileRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportAdaptiveMtFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ImportAdaptiveMtFileResponse
 
     func listAdaptiveMtFiles(
-      request: ListAdaptiveMtFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAdaptiveMtFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ListAdaptiveMtFilesResponse
 
     func listAdaptiveMtSentences(
-      request: ListAdaptiveMtSentencesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAdaptiveMtSentencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ListAdaptiveMtSentencesResponse
 
     func importData(
-      request: ImportDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportData(
-      request: ExportDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listExamples(
-      request: ListExamplesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExamplesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ListExamplesResponse
 
     func createModel(
-      request: CreateModelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listModels(
-      request: ListModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.ListModelsResponse
 
     func getModel(
-      request: GetModelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTranslateV3.Model
 
     func deleteModel(
-      request: DeleteModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

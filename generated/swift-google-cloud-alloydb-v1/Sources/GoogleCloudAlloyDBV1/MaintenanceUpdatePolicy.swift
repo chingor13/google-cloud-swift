@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// MaintenanceUpdatePolicy defines the policy for system updates.
-public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Preferred windows to perform maintenance. Currently limited to 1.
@@ -28,7 +28,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// Periods to deny maintenance. Currently limited to 1.
   public var denyMaintenancePeriods: [MaintenanceUpdatePolicy.DenyMaintenancePeriod] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MaintenanceUpdatePolicy`.
   public init() {}
@@ -75,7 +75,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,7 +89,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
   }
 
   /// MaintenanceWindow specifies a preferred day and time for maintenance.
-  public struct MaintenanceWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MaintenanceWindow: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Preferred day of the week for maintenance, e.g. MONDAY, TUESDAY, etc.
@@ -99,7 +99,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// Maintenance will start within 1 hour of this time.
     public var startTime: GoogleType.TimeOfDay? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MaintenanceWindow`.
     public init() {}
@@ -140,7 +140,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
       self.startTime = try container.decodeIfPresent(GoogleType.TimeOfDay.self, forKey: .startTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -156,18 +156,18 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.MaintenanceUpdatePolicy.MaintenanceWindow"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// DenyMaintenancePeriod definition. Excepting emergencies, maintenance
   /// will not be scheduled to start within this deny period. The start_date must
   /// be less than the end_date.
-  public struct DenyMaintenancePeriod: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DenyMaintenancePeriod: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Deny period start date.
@@ -188,7 +188,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// * All zeros for 00:00:00 UTC
     public var time: GoogleType.TimeOfDay? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DenyMaintenancePeriod`.
     public init() {}
@@ -230,7 +230,7 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
       self.time = try container.decodeIfPresent(GoogleType.TimeOfDay.self, forKey: .time)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -248,21 +248,21 @@ public struct MaintenanceUpdatePolicy: Codable, Equatable, GoogleCloudWKT._AnyPa
       return
         "type.googleapis.com/google.cloud.alloydb.v1.MaintenanceUpdatePolicy.DenyMaintenancePeriod"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.MaintenanceUpdatePolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

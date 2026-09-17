@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A balance to settle between two token managers.
-public struct BalanceToSettle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BalanceToSettle: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Deprecated: Use `balance_payer_id` instead.
@@ -40,7 +40,7 @@ public struct BalanceToSettle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The balance to settle. Must be positive.
   public var balance: CurrencyValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BalanceToSettle`.
   public init() {}
@@ -92,7 +92,7 @@ public struct BalanceToSettle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.balance = try container.decodeIfPresent(CurrencyValue.self, forKey: .balance)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,10 +111,10 @@ public struct BalanceToSettle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.BalanceToSettle"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

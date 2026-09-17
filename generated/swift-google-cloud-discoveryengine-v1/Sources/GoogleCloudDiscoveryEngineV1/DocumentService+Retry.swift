@@ -19,28 +19,28 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class DocumentServiceRetry: DocumentServiceStub {
       let inner: any DocumentServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any DocumentServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any DocumentServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -52,14 +52,14 @@
       }
 
       public func getDocument(
-        request: GetDocumentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDocumentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Document {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetDocumentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.Document
             in
             return try await self.inner.getDocument(request: r, options: o)
@@ -67,14 +67,14 @@
       }
 
       public func listDocuments(
-        request: ListDocumentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDocumentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListDocumentsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ListDocumentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListDocumentsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.ListDocumentsResponse
             in
             return try await self.inner.listDocuments(request: r, options: o)
@@ -82,14 +82,14 @@
       }
 
       public func createDocument(
-        request: CreateDocumentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDocumentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Document {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: CreateDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateDocumentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.Document
             in
             return try await self.inner.createDocument(request: r, options: o)
@@ -97,14 +97,14 @@
       }
 
       public func updateDocument(
-        request: UpdateDocumentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateDocumentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Document {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: UpdateDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdateDocumentRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.Document
             in
             return try await self.inner.updateDocument(request: r, options: o)
@@ -112,27 +112,26 @@
       }
 
       public func deleteDocument(
-        request: DeleteDocumentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDocumentRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
-          action: {
-            (r: DeleteDocumentRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          action: { (r: DeleteDocumentRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.deleteDocument(request: r, options: o)
           })
       }
 
       public func importDocuments(
-        request: ImportDocumentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportDocumentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: ImportDocumentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ImportDocumentsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.importDocuments(request: r, options: o)
@@ -140,14 +139,14 @@
       }
 
       public func purgeDocuments(
-        request: PurgeDocumentsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeDocumentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: PurgeDocumentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: PurgeDocumentsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.purgeDocuments(request: r, options: o)
@@ -155,14 +154,14 @@
       }
 
       public func batchGetDocumentsMetadata(
-        request: BatchGetDocumentsMetadataRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchGetDocumentsMetadataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.BatchGetDocumentsMetadataResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: BatchGetDocumentsMetadataRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: BatchGetDocumentsMetadataRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.BatchGetDocumentsMetadataResponse
             in
             return try await self.inner.batchGetDocumentsMetadata(request: r, options: o)
@@ -170,45 +169,45 @@
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

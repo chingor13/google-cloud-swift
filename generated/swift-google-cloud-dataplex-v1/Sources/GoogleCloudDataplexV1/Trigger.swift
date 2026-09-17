@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DataScan scheduling and trigger settings.
-public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Trigger: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// DataScan scheduling and trigger settings.
@@ -26,7 +26,7 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// If not specified, the default is `onDemand`.
   public var mode: OneOf_Mode? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Trigger`.
   public init() {}
@@ -86,7 +86,7 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.mode = mode
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,10 +109,10 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The scan runs once via `RunDataScan` API.
-  public struct OnDemand: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OnDemand: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OnDemand`.
     public init() {}
@@ -143,7 +143,7 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -157,16 +157,16 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Trigger.OnDemand"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The scan is scheduled to run periodically.
-  public struct Schedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Schedule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. [Cron](https://en.wikipedia.org/wiki/Cron) schedule for running
@@ -183,7 +183,7 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// This field is required for Schedule scans.
     public var cron: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Schedule`.
     public init() {}
@@ -221,7 +221,7 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -236,16 +236,16 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Trigger.Schedule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The scan runs once using create API.
-  public struct OneTime: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OneTime: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Time to live for OneTime scans.
@@ -253,9 +253,9 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// is 365 days. The time is calculated from the data scan job completion
     /// time. If value is set as 0 seconds, the scan will be immediately deleted
     /// upon job completion, regardless of whether the job succeeded or failed.
-    public var ttlAfterScanCompletion: GoogleCloudWKT.Duration? = nil
+    public var ttlAfterScanCompletion: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OneTime`.
     public init() {}
@@ -289,10 +289,10 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.ttlAfterScanCompletion = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .ttlAfterScanCompletion)
+        GoogleWKT.Duration.self, forKey: .ttlAfterScanCompletion)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -307,11 +307,11 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.Trigger.OneTime"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -331,10 +331,10 @@ public struct Trigger: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.Trigger"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

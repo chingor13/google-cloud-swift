@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudBackupDRV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: BackupDRClient, projectId: String, locationId: String, backupPlanId: String)
   async throws
@@ -33,7 +33,7 @@ func sample(client: BackupDRClient, projectId: String, locationId: String, backu
         $0.backupPlan = BackupPlan().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/backupPlans/\(backupPlanId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

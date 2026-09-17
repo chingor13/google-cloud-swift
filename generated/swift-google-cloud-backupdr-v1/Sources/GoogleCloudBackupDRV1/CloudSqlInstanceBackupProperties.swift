@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// CloudSqlInstanceBackupProperties represents Cloud SQL Instance
 /// Backup properties.
-public struct CloudSqlInstanceBackupProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CloudSqlInstanceBackupProperties: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The installed database version of the Cloud SQL instance
@@ -35,16 +35,16 @@ public struct CloudSqlInstanceBackupProperties: Codable, Equatable, GoogleCloudW
   public var sourceInstance: Swift.String = Swift.String()
 
   /// Output only. The instance creation timestamp.
-  public var instanceCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var instanceCreateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The tier (or machine type) for this instance. Example:
   /// `db-custom-1-3840`
   public var instanceTier: Swift.String = Swift.String()
 
   /// Output only. The instance delete timestamp.
-  public var instanceDeleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var instanceDeleteTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CloudSqlInstanceBackupProperties`.
   public init() {}
@@ -99,15 +99,15 @@ public struct CloudSqlInstanceBackupProperties: Codable, Equatable, GoogleCloudW
       self.sourceInstance = value
     }
     self.instanceCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .instanceCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .instanceCreateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .instanceTier) {
       self.instanceTier = value
     }
     self.instanceDeleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .instanceDeleteTime)
+      GoogleWKT.Timestamp.self, forKey: .instanceDeleteTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,10 +127,10 @@ public struct CloudSqlInstanceBackupProperties: Codable, Equatable, GoogleCloudW
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.CloudSqlInstanceBackupProperties"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

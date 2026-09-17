@@ -16,12 +16,12 @@
 
 #if TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// One interaction between a human and virtual agent. The human provides some
   /// input and the virtual agent provides a response.
-  public struct ConversationTurn: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConversationTurn: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The user input.
@@ -30,7 +30,7 @@
     /// The virtual agent output.
     public var virtualAgentOutput: ConversationTurn.VirtualAgentOutput? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConversationTurn`.
     public init() {}
@@ -71,7 +71,7 @@
         ConversationTurn.VirtualAgentOutput.self, forKey: .virtualAgentOutput)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -85,7 +85,7 @@
     }
 
     /// The input from the human user.
-    public struct UserInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UserInput: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Supports [text input][google.cloud.dialogflow.cx.v3.QueryInput.text],
@@ -99,7 +99,7 @@
 
       /// Parameters that need to be injected into the conversation during intent
       /// detection.
-      public var injectedParameters: GoogleCloudWKT.Struct? = nil
+      public var injectedParameters: GoogleWKT.Struct? = nil
 
       /// If webhooks should be allowed to trigger in response to the user
       /// utterance. Often if parameters are injected, webhooks should not be
@@ -109,7 +109,7 @@
       /// Whether sentiment analysis is enabled.
       public var enableSentimentAnalysis: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UserInput`.
       public init() {}
@@ -150,7 +150,7 @@
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.input = try container.decodeIfPresent(QueryInput.self, forKey: .input)
         self.injectedParameters = try container.decodeIfPresent(
-          GoogleCloudWKT.Struct.self, forKey: .injectedParameters)
+          GoogleWKT.Struct.self, forKey: .injectedParameters)
         if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .isWebhookEnabled) {
           self.isWebhookEnabled = value
         }
@@ -161,7 +161,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -179,20 +179,20 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ConversationTurn.UserInput"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The output from the virtual agent.
-    public struct VirtualAgentOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct VirtualAgentOutput: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The session parameters available to the bot at this point.
-      public var sessionParameters: GoogleCloudWKT.Struct? = nil
+      public var sessionParameters: GoogleWKT.Struct? = nil
 
       /// Output only. If this is part of a [result conversation
       /// turn][TestCaseResult.conversation_turns], the list of differences
@@ -204,7 +204,7 @@
       /// Required. Input only. The diagnostic
       /// [info][Session.DetectIntentResponse.QueryResult.diagnostic_info]
       /// output for the turn. Required to calculate the testing coverage.
-      public var diagnosticInfo: GoogleCloudWKT.Struct? = nil
+      public var diagnosticInfo: GoogleWKT.Struct? = nil
 
       /// The [Intent][google.cloud.dialogflow.cx.v3.Intent] that triggered the
       /// response. Only name and displayName will be set.
@@ -228,7 +228,7 @@
       /// is empty.
       public var status: GoogleRpc.Status? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `VirtualAgentOutput`.
       public init() {}
@@ -274,13 +274,13 @@
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.sessionParameters = try container.decodeIfPresent(
-          GoogleCloudWKT.Struct.self, forKey: .sessionParameters)
+          GoogleWKT.Struct.self, forKey: .sessionParameters)
         if let value = try container.decodeIfPresent([TestRunDifference].self, forKey: .differences)
         {
           self.differences = value
         }
         self.diagnosticInfo = try container.decodeIfPresent(
-          GoogleCloudWKT.Struct.self, forKey: .diagnosticInfo)
+          GoogleWKT.Struct.self, forKey: .diagnosticInfo)
         self.triggeredIntent = try container.decodeIfPresent(Intent.self, forKey: .triggeredIntent)
         self.currentPage = try container.decodeIfPresent(Page.self, forKey: .currentPage)
         if let value = try container.decodeIfPresent(
@@ -291,7 +291,7 @@
         self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -313,22 +313,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.ConversationTurn.VirtualAgentOutput"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.ConversationTurn"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

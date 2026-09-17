@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudOrchestrationAirflowServiceV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: EnvironmentsClient) async throws {
   let response = try await client.stopAirflowCommand(

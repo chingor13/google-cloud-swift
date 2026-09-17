@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response message for
 /// [AssetService.AnalyzeOrgPolicyGovernedContainers][google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedContainers].
 ///
 /// [google.cloud.asset.v1.AssetService.AnalyzeOrgPolicyGovernedContainers]: <doc:AssetServiceClient/analyzeOrgPolicyGovernedContainers(request:options:)>
-public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, GoogleCloudWKT
+public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, GoogleWKT
     ._AnyPackable,
-  GoogleCloudGax._PaginatedResponse,
+  GoogleGax._PaginatedResponse,
   Sendable
 {
   /// The list of the analyzed governed containers.
@@ -39,7 +39,7 @@ public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, Go
   /// [google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.governed_containers]: <doc:AnalyzeOrgPolicyGovernedContainersResponse/governedContainers>
   public var nextPageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AnalyzeOrgPolicyGovernedContainersResponse`.
   public init() {}
@@ -89,7 +89,7 @@ public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, Go
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -108,7 +108,7 @@ public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, Go
   /// [AnalyzeOrgPolicyGovernedContainersRequest.constraint][google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest.constraint].
   ///
   /// [google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersRequest.constraint]: <doc:AnalyzeOrgPolicyGovernedContainersRequest/constraint>
-  public struct GovernedContainer: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GovernedContainer: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The [full resource name]
@@ -161,7 +161,7 @@ public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, Go
     /// The effective tags on this resource.
     public var effectiveTags: [EffectiveTagDetails] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GovernedContainer`.
     public init() {}
@@ -236,7 +236,7 @@ public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, Go
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -259,22 +259,22 @@ public struct AnalyzeOrgPolicyGovernedContainersResponse: Codable, Equatable, Go
       return
         "type.googleapis.com/google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.AnalyzeOrgPolicyGovernedContainersResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 
   public func _getPaginatedItems() -> [AnalyzeOrgPolicyGovernedContainersResponse.GovernedContainer]

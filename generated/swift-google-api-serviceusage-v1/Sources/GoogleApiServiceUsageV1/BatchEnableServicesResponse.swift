@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for the `BatchEnableServices` method.
 /// This response message is assigned to the `response` field of the returned
 /// Operation when that operation is done.
-public struct BatchEnableServicesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchEnableServicesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The new state of the services after enabling.
@@ -30,7 +30,7 @@ public struct BatchEnableServicesResponse: Codable, Equatable, GoogleCloudWKT._A
   /// enabled, this field contains the details about each failure.
   public var failures: [BatchEnableServicesResponse.EnableFailure] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchEnableServicesResponse`.
   public init() {}
@@ -75,7 +75,7 @@ public struct BatchEnableServicesResponse: Codable, Equatable, GoogleCloudWKT._A
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,7 +89,7 @@ public struct BatchEnableServicesResponse: Codable, Equatable, GoogleCloudWKT._A
   }
 
   /// Provides error messages for the failing services.
-  public struct EnableFailure: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EnableFailure: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The service id of a service that could not be enabled.
@@ -98,7 +98,7 @@ public struct BatchEnableServicesResponse: Codable, Equatable, GoogleCloudWKT._A
     /// An error message describing why the service could not be enabled.
     public var errorMessage: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EnableFailure`.
     public init() {}
@@ -141,7 +141,7 @@ public struct BatchEnableServicesResponse: Codable, Equatable, GoogleCloudWKT._A
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -158,21 +158,21 @@ public struct BatchEnableServicesResponse: Codable, Equatable, GoogleCloudWKT._A
       return
         "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse.EnableFailure"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.serviceusage.v1.BatchEnableServicesResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

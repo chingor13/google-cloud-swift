@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func createAccessPolicy(
-      request: CreateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createAccessPolicy",
         action: {
-          (r: CreateAccessPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAccessPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createAccessPolicy(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func getAccessPolicy(
-      request: GetAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.AccessPolicy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getAccessPolicy",
         action: {
-          (r: GetAccessPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAccessPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV3.AccessPolicy
           in
           return try await self.inner.getAccessPolicy(request: r, options: o)
@@ -89,14 +89,14 @@ extension Clients {
     }
 
     public func updateAccessPolicy(
-      request: UpdateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateAccessPolicy",
         action: {
-          (r: UpdateAccessPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAccessPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateAccessPolicy(request: r, options: o)
@@ -104,14 +104,14 @@ extension Clients {
     }
 
     public func deleteAccessPolicy(
-      request: DeleteAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteAccessPolicy",
         action: {
-          (r: DeleteAccessPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteAccessPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteAccessPolicy(request: r, options: o)
@@ -119,14 +119,14 @@ extension Clients {
     }
 
     public func listAccessPolicies(
-      request: ListAccessPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAccessPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.ListAccessPoliciesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAccessPolicies",
         action: {
-          (r: ListAccessPoliciesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAccessPoliciesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV3.ListAccessPoliciesResponse
           in
           return try await self.inner.listAccessPolicies(request: r, options: o)
@@ -134,14 +134,14 @@ extension Clients {
     }
 
     public func searchAccessPolicyBindings(
-      request: SearchAccessPolicyBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchAccessPolicyBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV3.SearchAccessPolicyBindingsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "searchAccessPolicyBindings",
         action: {
-          (r: SearchAccessPolicyBindingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchAccessPolicyBindingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV3.SearchAccessPolicyBindingsResponse
           in
           return try await self.inner.searchAccessPolicyBindings(request: r, options: o)
@@ -149,14 +149,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

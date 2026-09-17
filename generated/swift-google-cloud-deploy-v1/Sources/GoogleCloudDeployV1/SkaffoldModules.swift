@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Skaffold Config modules and their remote source.
-public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SkaffoldModules: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The Skaffold Config modules to use from the specified source.
@@ -27,7 +27,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The source that contains the Skaffold Config modules.
   public var source: OneOf_Source? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SkaffoldModules`.
   public init() {}
@@ -98,7 +98,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.source = source
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -122,7 +122,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Git repository containing Skaffold Config modules.
-  public struct SkaffoldGitSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SkaffoldGitSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Git repository the package should be cloned from.
@@ -134,7 +134,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Git branch or tag to use when cloning the repository.
     public var ref: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SkaffoldGitSource`.
     public init() {}
@@ -182,7 +182,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -199,16 +199,16 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.deploy.v1.SkaffoldModules.SkaffoldGitSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Cloud Storage bucket containing Skaffold Config modules.
-  public struct SkaffoldGCSSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SkaffoldGCSSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Cloud Storage source paths to copy recursively. For example,
@@ -219,7 +219,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Relative path from the source to the Skaffold file.
     public var path: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SkaffoldGCSSource`.
     public init() {}
@@ -262,7 +262,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -278,16 +278,16 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCSSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Cloud Build V2 Repository containing Skaffold Configs.
-  public struct SkaffoldGCBRepoSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SkaffoldGCBRepoSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Name of the Cloud Build V2 Repository.
@@ -302,7 +302,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Branch or tag to use when cloning the repository.
     public var ref: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SkaffoldGCBRepoSource`.
     public init() {}
@@ -350,7 +350,7 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -367,11 +367,11 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.deploy.v1.SkaffoldModules.SkaffoldGCBRepoSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -389,10 +389,10 @@ public struct SkaffoldModules: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.SkaffoldModules"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

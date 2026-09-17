@@ -16,49 +16,49 @@
 
 #if Snapshots
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SnapshotsStub: Sendable {
       func delete(
-        request: SnapshotsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: SnapshotsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Snapshot
 
       func getIamPolicy(
-        request: SnapshotsClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: SnapshotsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: SnapshotsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SnapshotList
 
       func setIamPolicy(
-        request: SnapshotsClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setLabels(
-        request: SnapshotsClient.SetLabelsRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: SnapshotsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func updateKmsKey(
-        request: SnapshotsClient.UpdateKmsKeyRequest, options: GoogleCloudGax.RequestOptions
+        request: SnapshotsClient.UpdateKmsKeyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AWS access key (see
 /// [AWS Security
@@ -23,7 +23,7 @@ import Foundation
 ///
 /// For information on our data retention policy for user credentials, see
 /// [User credentials](/storage-transfer/docs/data-retention#user-credentials).
-public struct AwsAccessKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AwsAccessKey: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. AWS access key ID.
@@ -33,7 +33,7 @@ public struct AwsAccessKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// responses.
   public var secretAccessKey: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AwsAccessKey`.
   public init() {}
@@ -76,7 +76,7 @@ public struct AwsAccessKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +92,10 @@ public struct AwsAccessKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.AwsAccessKey"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

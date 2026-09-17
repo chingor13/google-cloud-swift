@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudOptimizationV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: FleetRoutingClient) async throws {
   let response = try await client.optimizeTours(

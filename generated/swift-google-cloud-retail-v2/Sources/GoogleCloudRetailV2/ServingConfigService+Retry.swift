@@ -18,27 +18,27 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ServingConfigServiceRetry: ServingConfigServiceStub {
     let inner: any ServingConfigServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ServingConfigServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ServingConfigServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func createServingConfig(
-      request: CreateServingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateServingConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateServingConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.ServingConfig
           in
           return try await self.inner.createServingConfig(request: r, options: o)
@@ -65,27 +65,27 @@ extension Clients {
     }
 
     public func deleteServingConfig(
-      request: DeleteServingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteServingConfigRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeleteServingConfigRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteServingConfig(request: r, options: o)
         })
     }
 
     public func updateServingConfig(
-      request: UpdateServingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateServingConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateServingConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.ServingConfig
           in
           return try await self.inner.updateServingConfig(request: r, options: o)
@@ -93,14 +93,14 @@ extension Clients {
     }
 
     public func getServingConfig(
-      request: GetServingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetServingConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetServingConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.ServingConfig
           in
           return try await self.inner.getServingConfig(request: r, options: o)
@@ -108,14 +108,14 @@ extension Clients {
     }
 
     public func listServingConfigs(
-      request: ListServingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServingConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListServingConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListServingConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListServingConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.ListServingConfigsResponse
           in
           return try await self.inner.listServingConfigs(request: r, options: o)
@@ -123,14 +123,14 @@ extension Clients {
     }
 
     public func addControl(
-      request: AddControlRequest, options: GoogleCloudGax.RequestOptions
+      request: AddControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AddControlRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AddControlRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.ServingConfig
           in
           return try await self.inner.addControl(request: r, options: o)
@@ -138,14 +138,14 @@ extension Clients {
     }
 
     public func removeControl(
-      request: RemoveControlRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveControlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ServingConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: RemoveControlRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: RemoveControlRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudRetailV2.ServingConfig
           in
           return try await self.inner.removeControl(request: r, options: o)
@@ -153,29 +153,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

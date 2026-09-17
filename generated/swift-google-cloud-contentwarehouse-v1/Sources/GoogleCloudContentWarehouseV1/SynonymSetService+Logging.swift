@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func createSynonymSet(
-      request: CreateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
       try await self._intercept(
         request: request,
         options: options,
         name: "createSynonymSet",
         action: {
-          (r: CreateSynonymSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateSynonymSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.SynonymSet
           in
           return try await self.inner.createSynonymSet(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func getSynonymSet(
-      request: GetSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSynonymSet",
         action: {
-          (r: GetSynonymSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSynonymSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.SynonymSet
           in
           return try await self.inner.getSynonymSet(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func updateSynonymSet(
-      request: UpdateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSynonymSet",
         action: {
-          (r: UpdateSynonymSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSynonymSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.SynonymSet
           in
           return try await self.inner.updateSynonymSet(request: r, options: o)
@@ -103,27 +103,26 @@ extension Clients {
     }
 
     public func deleteSynonymSet(
-      request: DeleteSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteSynonymSet",
-        action: {
-          (r: DeleteSynonymSetRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteSynonymSetRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteSynonymSet(request: r, options: o)
         })
     }
 
     public func listSynonymSets(
-      request: ListSynonymSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSynonymSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListSynonymSetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSynonymSets",
         action: {
-          (r: ListSynonymSetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSynonymSetsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudContentWarehouseV1.ListSynonymSetsResponse
           in
           return try await self.inner.listSynonymSets(request: r, options: o)
@@ -131,14 +130,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

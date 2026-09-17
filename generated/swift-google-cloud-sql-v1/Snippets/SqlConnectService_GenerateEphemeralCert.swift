@@ -19,7 +19,7 @@
   // snippet.show
   import Foundation
   import GoogleCloudSqlV1
-  import GoogleCloudWKT
+  import GoogleWKT
 
   func sample(client: SqlConnectServiceClient) async throws {
     let response = try await client.generateEphemeralCert(

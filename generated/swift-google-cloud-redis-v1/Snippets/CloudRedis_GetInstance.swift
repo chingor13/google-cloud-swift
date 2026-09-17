@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudRedisV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudRedisClient, projectId: String, locationId: String, instanceId: String)
   async throws

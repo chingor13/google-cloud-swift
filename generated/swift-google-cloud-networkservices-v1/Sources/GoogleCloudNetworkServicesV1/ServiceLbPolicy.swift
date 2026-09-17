@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ServiceLbPolicy holds global load balancing and traffic distribution
 /// configuration that can be applied to a BackendService.
-public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ServiceLbPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the ServiceLbPolicy resource. It matches pattern
@@ -27,10 +27,10 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The timestamp when this resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when this resource was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Set of label tags associated with the ServiceLbPolicy resource.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -55,7 +55,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Backend Service.
   public var isolationConfig: ServiceLbPolicy.IsolationConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ServiceLbPolicy`.
   public init() {}
@@ -107,10 +107,8 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -131,7 +129,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       ServiceLbPolicy.IsolationConfig.self, forKey: .isolationConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -153,7 +151,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Option to specify if an unhealthy IG/NEG should be considered for global
   /// load balancing and traffic routing.
-  public struct AutoCapacityDrain: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutoCapacityDrain: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. If set to 'True', an unhealthy IG/NEG will be set as drained.
@@ -163,7 +161,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// configured IGs/NEGs for the Backend Service.
     public var enable: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutoCapacityDrain`.
     public init() {}
@@ -201,7 +199,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -216,17 +214,17 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.ServiceLbPolicy.AutoCapacityDrain"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Option to specify health based failover behavior.
   /// This is not related to Network load balancer FailoverPolicy.
-  public struct FailoverConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FailoverConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The percentage threshold that a load balancer will begin to
@@ -237,7 +235,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// (classic) and Proxyless service mesh, and 70 for others.
     public var failoverHealthThreshold: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FailoverConfig`.
     public init() {}
@@ -277,7 +275,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -292,17 +290,17 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.ServiceLbPolicy.FailoverConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration to provide isolation support for the associated Backend
   /// Service.
-  public struct IsolationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IsolationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The isolation granularity of the load balancer.
@@ -312,7 +310,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The isolation mode of the load balancer.
     public var isolationMode: ServiceLbPolicy.IsolationMode = ServiceLbPolicy.IsolationMode()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IsolationConfig`.
     public init() {}
@@ -359,7 +357,7 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -375,11 +373,11 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.ServiceLbPolicy.IsolationConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -718,10 +716,10 @@ public struct ServiceLbPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkservices.v1.ServiceLbPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

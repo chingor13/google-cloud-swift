@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudApiHubV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: LintingServiceClient, projectId: String, locationId: String, pluginId: String)
   async throws

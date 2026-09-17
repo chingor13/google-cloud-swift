@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudGax
+import GoogleGax
 
 /// A retry policy decorator that counts each policy consultation and logs details
 /// when the policy returns "exhausted" or "permanent".

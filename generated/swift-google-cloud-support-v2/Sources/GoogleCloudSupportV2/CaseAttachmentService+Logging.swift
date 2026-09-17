@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func listAttachments(
-      request: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttachmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListAttachmentsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAttachments",
         action: {
-          (r: ListAttachmentsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAttachmentsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.ListAttachmentsResponse
           in
           return try await self.inner.listAttachments(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func getAttachment(
-      request: GetAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Attachment {
       try await self._intercept(
         request: request,
         options: options,
         name: "getAttachment",
         action: {
-          (r: GetAttachmentRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAttachmentRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.Attachment
           in
           return try await self.inner.getAttachment(request: r, options: o)

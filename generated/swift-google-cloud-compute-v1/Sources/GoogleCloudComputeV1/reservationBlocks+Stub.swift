@@ -16,39 +16,39 @@
 
 #if ReservationBlocks
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ReservationBlocksStub: Sendable {
       func `get`(
-        request: ReservationBlocksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationBlocksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationBlocksGetResponse
 
       func getIamPolicy(
-        request: ReservationBlocksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationBlocksClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func list(
-        request: ReservationBlocksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationBlocksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReservationBlocksListResponse
 
       func performMaintenance(
         request: ReservationBlocksClient.PerformMaintenanceRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: ReservationBlocksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: ReservationBlocksClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
         request: ReservationBlocksClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: ZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

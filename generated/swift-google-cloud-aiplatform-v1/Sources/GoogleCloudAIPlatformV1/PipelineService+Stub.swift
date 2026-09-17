@@ -17,100 +17,100 @@
 #if PipelineService
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol PipelineServiceStub: Sendable {
       func createTrainingPipeline(
-        request: CreateTrainingPipelineRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTrainingPipelineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TrainingPipeline
 
       func getTrainingPipeline(
-        request: GetTrainingPipelineRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTrainingPipelineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TrainingPipeline
 
       func listTrainingPipelines(
-        request: ListTrainingPipelinesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTrainingPipelinesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListTrainingPipelinesResponse
 
       func deleteTrainingPipeline(
-        request: DeleteTrainingPipelineRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteTrainingPipelineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelTrainingPipeline(
-        request: CancelTrainingPipelineRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelTrainingPipelineRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func createPipelineJob(
-        request: CreatePipelineJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreatePipelineJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.PipelineJob
 
       func getPipelineJob(
-        request: GetPipelineJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetPipelineJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.PipelineJob
 
       func listPipelineJobs(
-        request: ListPipelineJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListPipelineJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListPipelineJobsResponse
 
       func deletePipelineJob(
-        request: DeletePipelineJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeletePipelineJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func batchDeletePipelineJobs(
-        request: BatchDeletePipelineJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchDeletePipelineJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelPipelineJob(
-        request: CancelPipelineJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelPipelineJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func batchCancelPipelineJobs(
-        request: BatchCancelPipelineJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchCancelPipelineJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }

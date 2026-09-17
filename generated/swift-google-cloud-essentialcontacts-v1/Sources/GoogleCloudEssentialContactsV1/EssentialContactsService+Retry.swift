@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class EssentialContactsServiceRetry: EssentialContactsServiceStub {
     let inner: any EssentialContactsServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any EssentialContactsServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any EssentialContactsServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func createContact(
-      request: CreateContactRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateContactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.Contact {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateContactRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateContactRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEssentialContactsV1.Contact
           in
           return try await self.inner.createContact(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func updateContact(
-      request: UpdateContactRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateContactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.Contact {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateContactRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateContactRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEssentialContactsV1.Contact
           in
           return try await self.inner.updateContact(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func listContacts(
-      request: ListContactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListContactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.ListContactsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListContactsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListContactsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEssentialContactsV1.ListContactsResponse
           in
           return try await self.inner.listContacts(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func getContact(
-      request: GetContactRequest, options: GoogleCloudGax.RequestOptions
+      request: GetContactRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.Contact {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetContactRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetContactRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEssentialContactsV1.Contact
           in
           return try await self.inner.getContact(request: r, options: o)
@@ -109,27 +109,26 @@ extension Clients {
     }
 
     public func deleteContact(
-      request: DeleteContactRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteContactRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeleteContactRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteContactRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteContact(request: r, options: o)
         })
     }
 
     public func computeContacts(
-      request: ComputeContactsRequest, options: GoogleCloudGax.RequestOptions
+      request: ComputeContactsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEssentialContactsV1.ComputeContactsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ComputeContactsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ComputeContactsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudEssentialContactsV1.ComputeContactsResponse
           in
           return try await self.inner.computeContacts(request: r, options: o)
@@ -137,14 +136,13 @@ extension Clients {
     }
 
     public func sendTestMessage(
-      request: SendTestMessageRequest, options: GoogleCloudGax.RequestOptions
+      request: SendTestMessageRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: SendTestMessageRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: SendTestMessageRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.sendTestMessage(request: r, options: o)
         })
     }

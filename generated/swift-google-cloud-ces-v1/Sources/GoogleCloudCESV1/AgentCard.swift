@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AgentCard conveys key information about a remote agent.
 /// It is a trimmed version of the AgentCard defined in the A2A protocol
 /// https://a2a-protocol.org/dev/specification/#441-agentcard
-public struct AgentCard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AgentCard: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. A human-readable name for the agent.
@@ -41,7 +41,7 @@ public struct AgentCard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// agent is highly likely to succeed at.
   public var skills: [AgentSkill] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AgentCard`.
   public init() {}
@@ -101,7 +101,7 @@ public struct AgentCard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -120,10 +120,10 @@ public struct AgentCard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.AgentCard"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

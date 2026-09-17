@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func generateAccessToken(
-      request: GenerateAccessTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateAccessTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.GenerateAccessTokenResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "generateAccessToken",
         action: {
-          (r: GenerateAccessTokenRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GenerateAccessTokenRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMCredentialsV1.GenerateAccessTokenResponse
           in
           return try await self.inner.generateAccessToken(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func generateIdToken(
-      request: GenerateIdTokenRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateIdTokenRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.GenerateIdTokenResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "generateIdToken",
         action: {
-          (r: GenerateIdTokenRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GenerateIdTokenRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMCredentialsV1.GenerateIdTokenResponse
           in
           return try await self.inner.generateIdToken(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func signBlob(
-      request: SignBlobRequest, options: GoogleCloudGax.RequestOptions
+      request: SignBlobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.SignBlobResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "signBlob",
         action: {
-          (r: SignBlobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SignBlobRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMCredentialsV1.SignBlobResponse
           in
           return try await self.inner.signBlob(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func signJwt(
-      request: SignJwtRequest, options: GoogleCloudGax.RequestOptions
+      request: SignJwtRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMCredentialsV1.SignJwtResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "signJwt",
         action: {
-          (r: SignJwtRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SignJwtRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMCredentialsV1.SignJwtResponse
           in
           return try await self.inner.signJwt(request: r, options: o)

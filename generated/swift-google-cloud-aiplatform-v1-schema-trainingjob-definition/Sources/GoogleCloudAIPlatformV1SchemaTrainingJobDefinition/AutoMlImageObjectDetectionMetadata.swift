@@ -15,9 +15,9 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct AutoMlImageObjectDetectionMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutoMlImageObjectDetectionMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The actual training cost of creating this model, expressed in
@@ -30,7 +30,7 @@ public struct AutoMlImageObjectDetectionMetadata: Codable, Equatable, GoogleClou
   public var successfulStopReason: AutoMlImageObjectDetectionMetadata.SuccessfulStopReason =
     AutoMlImageObjectDetectionMetadata.SuccessfulStopReason()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutoMlImageObjectDetectionMetadata`.
   public init() {}
@@ -75,7 +75,7 @@ public struct AutoMlImageObjectDetectionMetadata: Codable, Equatable, GoogleClou
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -197,10 +197,10 @@ public struct AutoMlImageObjectDetectionMetadata: Codable, Equatable, GoogleClou
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.trainingjob.definition.AutoMlImageObjectDetectionMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

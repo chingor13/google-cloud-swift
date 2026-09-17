@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a transaction initiated by a client.
-public struct ClientTransaction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ClientTransaction: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The transaction sender.
@@ -67,7 +67,7 @@ public struct ClientTransaction: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The client transaction-specific message.
   public var kind: OneOf_Kind? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ClientTransaction`.
   public init() {}
@@ -210,11 +210,10 @@ public struct ClientTransaction: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       kind = $0
     }
-    if let app = try container.decodeIfPresent(GoogleCloudWKT.`Any`?.self, forKey: .app) {
+    if let app = try container.decodeIfPresent(GoogleWKT.`Any`?.self, forKey: .app) {
       try kindCheckAndSet(.app(app))
     }
-    if let operational = try container.decodeIfPresent(
-      GoogleCloudWKT.`Any`?.self, forKey: .operational)
+    if let operational = try container.decodeIfPresent(GoogleWKT.`Any`?.self, forKey: .operational)
     {
       try kindCheckAndSet(.operational(operational))
     }
@@ -349,7 +348,7 @@ public struct ClientTransaction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.kind = kind
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -486,7 +485,7 @@ public struct ClientTransaction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// [google.cloud.universalledger.v1.TransferCurrencyOperator]: <doc:TransferCurrencyOperator>
     /// [google.cloud.universalledger.v1.TransferPlatformOperator]: <doc:TransferPlatformOperator>
     @available(*, deprecated)
-    indirect case app(GoogleCloudWKT.`Any`?)
+    indirect case app(GoogleWKT.`Any`?)
     /// Optional. An operational transaction message. Note this can only be sent
     /// by the platform operator. Should be any one of:
     ///
@@ -499,7 +498,7 @@ public struct ClientTransaction: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// -->
     ///
     /// [google.cloud.universalledger.v1.CreateSnapshot]: <doc:CreateSnapshot>
-    indirect case operational(GoogleCloudWKT.`Any`?)
+    indirect case operational(GoogleWKT.`Any`?)
     /// Optional. Message for transferring the platform operator role to a new
     /// account.
     indirect case transferPlatformOperatorTransaction(TransferPlatformOperator?)
@@ -567,10 +566,10 @@ public struct ClientTransaction: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.ClientTransaction"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

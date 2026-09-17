@@ -16,101 +16,101 @@
 
 #if Routers
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RoutersStub: Sendable {
       func aggregatedList(
-        request: RoutersClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterAggregatedList
 
       func delete(
-        request: RoutersClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deleteNamedSet(
-        request: RoutersClient.DeleteNamedSetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteNamedSetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deleteRoutePolicy(
-        request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.DeleteRoutePolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RoutersClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Router
 
       func getNamedSet(
-        request: RoutersClient.GetNamedSetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNamedSetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersGetNamedSetResponse
 
       func getNatIpInfo(
-        request: RoutersClient.GetNatIpInfoRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNatIpInfoRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NatIpInfoResponse
 
       func getNatMappingInfo(
-        request: RoutersClient.GetNatMappingInfoRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetNatMappingInfoRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.VmEndpointNatMappingsList
 
       func getRoutePolicy(
-        request: RoutersClient.GetRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRoutePolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersGetRoutePolicyResponse
 
       func getRouterStatus(
-        request: RoutersClient.GetRouterStatusRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.GetRouterStatusRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterStatusResponse
 
       func insert(
-        request: RoutersClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RoutersClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RouterList
 
       func listBgpRoutes(
-        request: RoutersClient.ListBgpRoutesRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListBgpRoutesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListBgpRoutes
 
       func listNamedSets(
-        request: RoutersClient.ListNamedSetsRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListNamedSetsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListNamedSets
 
       func listRoutePolicies(
-        request: RoutersClient.ListRoutePoliciesRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.ListRoutePoliciesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersListRoutePolicies
 
       func patch(
-        request: RoutersClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patchNamedSet(
-        request: RoutersClient.PatchNamedSetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchNamedSetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func patchRoutePolicy(
-        request: RoutersClient.PatchRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PatchRoutePolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func preview(
-        request: RoutersClient.PreviewRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.PreviewRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RoutersPreviewResponse
 
       func update(
-        request: RoutersClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateNamedSet(
-        request: RoutersClient.UpdateNamedSetRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateNamedSetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func updateRoutePolicy(
-        request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: RoutersClient.UpdateRoutePolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

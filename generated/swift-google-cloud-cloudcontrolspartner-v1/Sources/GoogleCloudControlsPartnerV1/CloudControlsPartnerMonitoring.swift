@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources
 ///
@@ -30,7 +30,7 @@ public final class CloudControlsPartnerMonitoringClient: Clients
   let inner: any Clients.CloudControlsPartnerMonitoringStub
 
   /// Creates a new `CloudControlsPartnerMonitoringClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CloudControlsPartnerMonitoringStub =
       try Clients.CloudControlsPartnerMonitoringTransport(options)
     inner = Clients.CloudControlsPartnerMonitoringRetry(inner, options: options)
@@ -50,7 +50,7 @@ public final class CloudControlsPartnerMonitoringClient: Clients
   ///
   /// @Snippet(path: "CloudControlsPartnerMonitoring_ListViolations")
   public func listViolations(
-    request: ListViolationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListViolationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudControlsPartnerV1.ListViolationsResponse {
     try await self.inner.listViolations(request: request, options: options)
   }
@@ -65,7 +65,7 @@ public final class CloudControlsPartnerMonitoringClient: Clients
   ///
   /// @Snippet(path: "CloudControlsPartnerMonitoring_ListViolations")
   public func listViolations(
-    byItem: ListViolationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListViolationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Violation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudControlsPartnerV1.ListViolationsResponse in
@@ -73,14 +73,14 @@ public final class CloudControlsPartnerMonitoringClient: Clients
       request.pageToken = token
       return try await self.listViolations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Violation.
   ///
   /// @Snippet(path: "CloudControlsPartnerMonitoring_GetViolation")
   public func getViolation(
-    request: GetViolationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetViolationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudControlsPartnerV1.Violation {
     try await self.inner.getViolation(request: request, options: options)
   }
@@ -118,17 +118,17 @@ extension Clients {
 
     /// See `CloudControlsPartnerMonitoringClient.listViolations`.
     func listViolations(
-      request: ListViolationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListViolationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.ListViolationsResponse
 
     /// See `CloudControlsPartnerMonitoringClient.listViolations`.
     func listViolations(
-      byItem: ListViolationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListViolationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Violation, Swift.Error>
 
     /// See `CloudControlsPartnerMonitoringClient.getViolation`.
     func getViolation(
-      request: GetViolationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetViolationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudControlsPartnerV1.Violation
   }
 }
@@ -142,9 +142,9 @@ extension Clients.CloudControlsPartnerMonitoringProtocol {
   }
 
   public func listViolations(
-    request: ListViolationsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListViolationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudControlsPartnerV1.ListViolationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listViolations(
@@ -154,13 +154,13 @@ extension Clients.CloudControlsPartnerMonitoringProtocol {
   }
 
   public func listViolations(
-    byItem: ListViolationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListViolationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Violation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudControlsPartnerV1.ListViolationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listViolations(
@@ -179,9 +179,9 @@ extension Clients.CloudControlsPartnerMonitoringProtocol {
   }
 
   public func getViolation(
-    request: GetViolationRequest, options: GoogleCloudGax.RequestOptions
+    request: GetViolationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudControlsPartnerV1.Violation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getViolation(

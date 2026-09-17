@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudSpeechV2
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: SpeechClient, projectId: String, locationId: String) async throws {
   let response = try await client.updateConfig(
@@ -30,7 +30,7 @@ func sample(client: SpeechClient, projectId: String, locationId: String) async t
         $0.config = Config().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/config"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

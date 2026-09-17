@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudTextToSpeechV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: TextToSpeechClient) async throws {
   let response = try await client.listVoices(

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Push contains filter properties for matching GitHub git pushes.
-public struct PushFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PushFilter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// When true, only trigger a build if the revision regex does NOT match the
@@ -29,7 +29,7 @@ public struct PushFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// A modified refs are the refs modified by a git push operation.
   public var gitRef: OneOf_GitRef? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PushFilter`.
   public init() {}
@@ -89,7 +89,7 @@ public struct PushFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.gitRef = gitRef
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -128,10 +128,10 @@ public struct PushFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.PushFilter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

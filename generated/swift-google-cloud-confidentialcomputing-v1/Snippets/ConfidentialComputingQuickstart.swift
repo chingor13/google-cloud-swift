@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudConfidentialComputingV1
 import GoogleCloudLocation
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudConfidentialComputingV1.ConfidentialComputingClient()

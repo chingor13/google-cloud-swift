@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleStorageTransferV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, agentPoolId: String, ) async throws {
   let client = try GoogleStorageTransferV1.StorageTransferServiceClient()
@@ -30,7 +30,7 @@ func sample(projectId: String, agentPoolId: String, ) async throws {
         $0.agentPool = AgentPool().with {
           $0.name = "projects/\(projectId)/agentPools/\(agentPoolId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

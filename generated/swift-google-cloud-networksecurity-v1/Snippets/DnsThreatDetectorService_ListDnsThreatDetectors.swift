@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudNetworkSecurityV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: DnsThreatDetectorServiceClient, projectId: String, locationId: String)
   async throws

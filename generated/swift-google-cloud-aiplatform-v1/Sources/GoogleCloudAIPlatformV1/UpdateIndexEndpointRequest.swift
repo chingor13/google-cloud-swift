@@ -16,13 +16,13 @@
 
 #if IndexEndpointService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [IndexEndpointService.UpdateIndexEndpoint][google.cloud.aiplatform.v1.IndexEndpointService.UpdateIndexEndpoint].
   ///
   /// [google.cloud.aiplatform.v1.IndexEndpointService.UpdateIndexEndpoint]: <doc:IndexEndpointServiceClient/updateIndexEndpoint(request:options:)>
-  public struct UpdateIndexEndpointRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UpdateIndexEndpointRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The IndexEndpoint which replaces the resource on the server.
@@ -31,10 +31,10 @@
     /// Required. The update mask applies to the resource. See
     /// [google.protobuf.FieldMask][google.protobuf.FieldMask].
     ///
-    /// [google.protobuf.FieldMask]: https://www.google.com/search?q=Swift+google.protobuf+GoogleCloudWKT.FieldMask
-    public var updateMask: GoogleCloudWKT.FieldMask? = nil
+    /// [google.protobuf.FieldMask]: https://www.google.com/search?q=Swift+google.protobuf+GoogleWKT.FieldMask
+    public var updateMask: GoogleWKT.FieldMask? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpdateIndexEndpointRequest`.
     public init() {}
@@ -70,11 +70,10 @@
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.indexEndpoint = try container.decodeIfPresent(IndexEndpoint.self, forKey: .indexEndpoint)
-      self.updateMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+      self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -90,11 +89,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.UpdateIndexEndpointRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

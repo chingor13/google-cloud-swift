@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The output of a task with output type "LINEAGE".
 ///
@@ -24,7 +24,7 @@ import Foundation
 /// this message contains only metadata: processing status, errors, etc.
 ///
 /// [google.cloud.bigquery.migration.v2.LineageOutput.webapp_uri]: <doc:LineageOutput/webappUri>
-public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LineageOutput: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The URI of the webapp that visualizes the lineage.
@@ -46,7 +46,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// stage.
   public var processingProgressReports: [LineageOutput.ProgressReport] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LineageOutput`.
   public init() {}
@@ -98,7 +98,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,7 +118,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// If you expected to process more of the given input, verify your input was
   /// uploaded and is in the correct format and the request to generate lineage
   /// correctly specified the input location.
-  public struct RecognizedInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RecognizedInput: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The type of the input.
@@ -128,7 +128,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// type.
     public var uncompressedSizeBytes: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RecognizedInput`.
     public init() {}
@@ -174,7 +174,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -302,16 +302,16 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.migration.v2.LineageOutput.RecognizedInput"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Breaks down processing progress of work.
-  public struct ProgressReport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ProgressReport: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The processing stage this progress report describes.
@@ -325,7 +325,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// summaries.
     public var workSummaries: [LineageOutput.ProgressReport.WorkSummary] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ProgressReport`.
     public init() {}
@@ -372,7 +372,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -386,7 +386,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Summary of work in the given state.
-    public struct WorkSummary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct WorkSummary: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The state of the work this summary describes.
@@ -402,7 +402,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Output only. Human-readable comment.
       public var comment: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `WorkSummary`.
       public init() {}
@@ -452,7 +452,7 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -592,11 +592,11 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport.WorkSummary"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -708,21 +708,21 @@ public struct LineageOutput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.migration.v2.LineageOutput.ProgressReport"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.migration.v2.LineageOutput"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

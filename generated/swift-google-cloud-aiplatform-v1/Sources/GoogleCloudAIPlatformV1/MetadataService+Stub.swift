@@ -17,180 +17,180 @@
 #if MetadataService
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol MetadataServiceStub: Sendable {
       func createMetadataStore(
-        request: CreateMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateMetadataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func getMetadataStore(
-        request: GetMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: GetMetadataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.MetadataStore
 
       func listMetadataStores(
-        request: ListMetadataStoresRequest, options: GoogleCloudGax.RequestOptions
+        request: ListMetadataStoresRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListMetadataStoresResponse
 
       func deleteMetadataStore(
-        request: DeleteMetadataStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteMetadataStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func createArtifact(
-        request: CreateArtifactRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateArtifactRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Artifact
 
       func getArtifact(
-        request: GetArtifactRequest, options: GoogleCloudGax.RequestOptions
+        request: GetArtifactRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Artifact
 
       func listArtifacts(
-        request: ListArtifactsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListArtifactsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListArtifactsResponse
 
       func updateArtifact(
-        request: UpdateArtifactRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateArtifactRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Artifact
 
       func deleteArtifact(
-        request: DeleteArtifactRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteArtifactRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func purgeArtifacts(
-        request: PurgeArtifactsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeArtifactsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func createContext(
-        request: CreateContextRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateContextRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Context
 
       func getContext(
-        request: GetContextRequest, options: GoogleCloudGax.RequestOptions
+        request: GetContextRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Context
 
       func listContexts(
-        request: ListContextsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListContextsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListContextsResponse
 
       func updateContext(
-        request: UpdateContextRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateContextRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Context
 
       func deleteContext(
-        request: DeleteContextRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteContextRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func purgeContexts(
-        request: PurgeContextsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeContextsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func addContextArtifactsAndExecutions(
-        request: AddContextArtifactsAndExecutionsRequest, options: GoogleCloudGax.RequestOptions
+        request: AddContextArtifactsAndExecutionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.AddContextArtifactsAndExecutionsResponse
 
       func addContextChildren(
-        request: AddContextChildrenRequest, options: GoogleCloudGax.RequestOptions
+        request: AddContextChildrenRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.AddContextChildrenResponse
 
       func removeContextChildren(
-        request: RemoveContextChildrenRequest, options: GoogleCloudGax.RequestOptions
+        request: RemoveContextChildrenRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.RemoveContextChildrenResponse
 
       func queryContextLineageSubgraph(
-        request: QueryContextLineageSubgraphRequest, options: GoogleCloudGax.RequestOptions
+        request: QueryContextLineageSubgraphRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph
 
       func createExecution(
-        request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateExecutionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Execution
 
       func getExecution(
-        request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetExecutionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Execution
 
       func listExecutions(
-        request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListExecutionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListExecutionsResponse
 
       func updateExecution(
-        request: UpdateExecutionRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateExecutionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Execution
 
       func deleteExecution(
-        request: DeleteExecutionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteExecutionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func purgeExecutions(
-        request: PurgeExecutionsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeExecutionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func addExecutionEvents(
-        request: AddExecutionEventsRequest, options: GoogleCloudGax.RequestOptions
+        request: AddExecutionEventsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.AddExecutionEventsResponse
 
       func queryExecutionInputsAndOutputs(
-        request: QueryExecutionInputsAndOutputsRequest, options: GoogleCloudGax.RequestOptions
+        request: QueryExecutionInputsAndOutputsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph
 
       func createMetadataSchema(
-        request: CreateMetadataSchemaRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateMetadataSchemaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.MetadataSchema
 
       func getMetadataSchema(
-        request: GetMetadataSchemaRequest, options: GoogleCloudGax.RequestOptions
+        request: GetMetadataSchemaRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.MetadataSchema
 
       func listMetadataSchemas(
-        request: ListMetadataSchemasRequest, options: GoogleCloudGax.RequestOptions
+        request: ListMetadataSchemasRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListMetadataSchemasResponse
 
       func queryArtifactLineageSubgraph(
-        request: QueryArtifactLineageSubgraphRequest, options: GoogleCloudGax.RequestOptions
+        request: QueryArtifactLineageSubgraphRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.LineageSubgraph
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }

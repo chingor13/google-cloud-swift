@@ -16,11 +16,11 @@
 
 #if BackendServices || RegionBackendServices
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The information about the HTTP Cookie on which the hash function is based
   /// for load balancing policies that use a consistent hash.
-  public struct ConsistentHashLoadBalancerSettingsHttpCookie: Codable, Equatable, GoogleCloudWKT
+  public struct ConsistentHashLoadBalancerSettingsHttpCookie: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -33,7 +33,7 @@
     /// Lifetime of the cookie.
     public var ttl: Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConsistentHashLoadBalancerSettingsHttpCookie`.
     public init() {}
@@ -75,7 +75,7 @@
       self.ttl = try container.decodeIfPresent(Duration.self, forKey: .ttl)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -93,11 +93,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.ConsistentHashLoadBalancerSettingsHttpCookie"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

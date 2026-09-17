@@ -15,20 +15,20 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Output format for Personal Protective Equipment Detection Operator.
-public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, GoogleCloudWKT
+public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
   /// Current timestamp.
-  public var currentTime: GoogleCloudWKT.Timestamp? = nil
+  public var currentTime: GoogleWKT.Timestamp? = nil
 
   /// A list of DetectedPersons.
   public var detectedPersons: [PersonalProtectiveEquipmentDetectionOutput.DetectedPerson] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PersonalProtectiveEquipmentDetectionOutput`.
   public init() {}
@@ -63,8 +63,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.currentTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .currentTime)
+    self.currentTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .currentTime)
     if let value = try container.decodeIfPresent(
       [PersonalProtectiveEquipmentDetectionOutput.DetectedPerson].self, forKey: .detectedPersons)
     {
@@ -72,7 +71,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,13 +85,13 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
   }
 
   /// The entity info for annotations from person detection prediction result.
-  public struct PersonEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PersonEntity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Entity id.
     public var personEntityId: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PersonEntity`.
     public init() {}
@@ -130,7 +129,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -146,16 +145,16 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       return
         "type.googleapis.com/google.cloud.visionai.v1.PersonalProtectiveEquipmentDetectionOutput.PersonEntity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The entity info for annotations from PPE detection prediction result.
-  public struct PPEEntity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PPEEntity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Label id.
@@ -171,7 +170,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
     /// Entity id.
     public var ppeEntityId: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PPEEntity`.
     public init() {}
@@ -227,7 +226,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -246,16 +245,16 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       return
         "type.googleapis.com/google.cloud.visionai.v1.PersonalProtectiveEquipmentDetectionOutput.PPEEntity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Bounding Box in the normalized coordinates.
-  public struct NormalizedBoundingBox: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NormalizedBoundingBox: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Min in x coordinate.
@@ -270,7 +269,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
     /// Height of the bounding box.
     public var height: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NormalizedBoundingBox`.
     public init() {}
@@ -323,7 +322,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -342,17 +341,17 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       return
         "type.googleapis.com/google.cloud.visionai.v1.PersonalProtectiveEquipmentDetectionOutput.NormalizedBoundingBox"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// PersonIdentified box contains the location and the entity info of the
   /// person.
-  public struct PersonIdentifiedBox: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PersonIdentifiedBox: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// An unique id for this box.
@@ -368,7 +367,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
     /// Person entity info.
     public var personEntity: PersonalProtectiveEquipmentDetectionOutput.PersonEntity? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PersonIdentifiedBox`.
     public init() {}
@@ -420,7 +419,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
         PersonalProtectiveEquipmentDetectionOutput.PersonEntity.self, forKey: .personEntity)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -439,16 +438,16 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       return
         "type.googleapis.com/google.cloud.visionai.v1.PersonalProtectiveEquipmentDetectionOutput.PersonIdentifiedBox"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// PPEIdentified box contains the location and the entity info of the PPE.
-  public struct PPEIdentifiedBox: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PPEIdentifiedBox: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// An unique id for this box.
@@ -464,7 +463,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
     /// PPE entity info.
     public var ppeEntity: PersonalProtectiveEquipmentDetectionOutput.PPEEntity? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PPEIdentifiedBox`.
     public init() {}
@@ -516,7 +515,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
         PersonalProtectiveEquipmentDetectionOutput.PPEEntity.self, forKey: .ppeEntity)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -535,17 +534,17 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       return
         "type.googleapis.com/google.cloud.visionai.v1.PersonalProtectiveEquipmentDetectionOutput.PPEIdentifiedBox"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Detected Person contains the detected person and their associated
   /// ppes and their protecting information.
-  public struct DetectedPerson: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DetectedPerson: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The id of detected person.
@@ -578,7 +577,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
     /// Coverage score for feet.
     public var feetCoverageScore: Swift.Float? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DetectedPerson`.
     public init() {}
@@ -654,7 +653,7 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
         Swift.Float.self, forKey: .feetCoverageScore)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -679,21 +678,21 @@ public struct PersonalProtectiveEquipmentDetectionOutput: Codable, Equatable, Go
       return
         "type.googleapis.com/google.cloud.visionai.v1.PersonalProtectiveEquipmentDetectionOutput.DetectedPerson"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.PersonalProtectiveEquipmentDetectionOutput"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

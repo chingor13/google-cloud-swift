@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [HsmManagement.CreateSingleTenantHsmInstanceProposal][google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceProposal].
 ///
 /// [google.cloud.kms.v1.HsmManagement.CreateSingleTenantHsmInstanceProposal]: <doc:HsmManagementClient/createSingleTenantHsmInstanceProposal(request:options:)>
-public struct CreateSingleTenantHsmInstanceProposalRequest: Codable, Equatable, GoogleCloudWKT
+public struct CreateSingleTenantHsmInstanceProposalRequest: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -46,7 +46,7 @@ public struct CreateSingleTenantHsmInstanceProposalRequest: Codable, Equatable, 
   /// [google.cloud.kms.v1.SingleTenantHsmInstanceProposal]: <doc:SingleTenantHsmInstanceProposal>
   public var singleTenantHsmInstanceProposal: SingleTenantHsmInstanceProposal? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateSingleTenantHsmInstanceProposalRequest`.
   public init() {}
@@ -97,7 +97,7 @@ public struct CreateSingleTenantHsmInstanceProposalRequest: Codable, Equatable, 
       SingleTenantHsmInstanceProposal.self, forKey: .singleTenantHsmInstanceProposal)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -116,10 +116,10 @@ public struct CreateSingleTenantHsmInstanceProposalRequest: Codable, Equatable, 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.CreateSingleTenantHsmInstanceProposalRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

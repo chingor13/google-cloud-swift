@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Workload object for managing highly regulated workloads of cloud
 /// customers.
-public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Workload: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. The resource name of the workload.
@@ -47,7 +47,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var complianceRegime: Workload.ComplianceRegime = Workload.ComplianceRegime()
 
   /// Output only. Immutable. The Workload creation timestamp.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The billing account used for the resources which are
   /// direct children of workload. This billing account is initially associated
@@ -108,7 +108,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Compliance Regime associated with this workload.
   public var partner: Workload.Partner = Workload.Partner()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Workload`.
   public init() {}
@@ -186,8 +186,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.complianceRegime = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .billingAccount) {
       self.billingAccount = value
     }
@@ -231,7 +230,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -260,7 +259,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Represent the resources that are children of this Workload.
-  public struct ResourceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ResourceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Resource identifier.
@@ -271,7 +270,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var resourceType: Workload.ResourceInfo.ResourceType = Workload.ResourceInfo
       .ResourceType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourceInfo`.
     public init() {}
@@ -316,7 +315,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -456,11 +455,11 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.assuredworkloads.v1.Workload.ResourceInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -469,19 +468,19 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// In order to create a Keyring, callers should specify,
   /// ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
   @available(*, deprecated)
-  public struct KMSSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct KMSSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Input only. Immutable. The time at which the Key Management Service will automatically create a
     /// new version of the crypto key and mark it as the primary.
-    public var nextRotationTime: GoogleCloudWKT.Timestamp? = nil
+    public var nextRotationTime: GoogleWKT.Timestamp? = nil
 
     /// Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key
     /// Management Service automatically rotates a key. Must be at least 24 hours
     /// and at most 876,000 hours.
-    public var rotationPeriod: GoogleCloudWKT.Duration? = nil
+    public var rotationPeriod: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `KMSSettings`.
     public init() {}
@@ -517,12 +516,12 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.nextRotationTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .nextRotationTime)
+        GoogleWKT.Timestamp.self, forKey: .nextRotationTime)
       self.rotationPeriod = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .rotationPeriod)
+        GoogleWKT.Duration.self, forKey: .rotationPeriod)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -538,16 +537,16 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.assuredworkloads.v1.Workload.KMSSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represent the custom settings for the resources to be created.
-  public struct ResourceSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ResourceSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Resource identifier.
@@ -568,7 +567,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// name.
     public var displayName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ResourceSettings`.
     public init() {}
@@ -618,7 +617,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -635,16 +634,16 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.assuredworkloads.v1.Workload.ResourceSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Signed Access Approvals (SAA) enrollment response.
-  public struct SaaEnrollmentResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SaaEnrollmentResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates SAA enrollment status of a given workload.
@@ -653,7 +652,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Indicates SAA enrollment setup error if any.
     public var setupErrors: [Workload.SaaEnrollmentResponse.SetupError] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SaaEnrollmentResponse`.
     public init() {}
@@ -697,7 +696,7 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -942,11 +941,11 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1334,10 +1333,10 @@ public struct Workload: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.assuredworkloads.v1.Workload"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

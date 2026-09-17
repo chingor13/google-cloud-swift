@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// CertificateIssuanceConfig specifies how to issue and manage a certificate.
-public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CertificateIssuanceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A user-defined name of the certificate issuance config.
@@ -27,10 +27,10 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
   public var name: Swift.String = Swift.String()
 
   /// Output only. The creation timestamp of a CertificateIssuanceConfig.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last update timestamp of a CertificateIssuanceConfig.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Set of labels associated with a CertificateIssuanceConfig.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -43,7 +43,7 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
   public var certificateAuthorityConfig: CertificateIssuanceConfig.CertificateAuthorityConfig? = nil
 
   /// Required. Workload certificate lifetime requested.
-  public var lifetime: GoogleCloudWKT.Duration? = nil
+  public var lifetime: GoogleWKT.Duration? = nil
 
   /// Required. Specifies the percentage of elapsed time of the certificate
   /// lifetime to wait before renewing the certificate. Must be a number between
@@ -54,7 +54,7 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
   public var keyAlgorithm: CertificateIssuanceConfig.KeyAlgorithm =
     CertificateIssuanceConfig.KeyAlgorithm()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CertificateIssuanceConfig`.
   public init() {}
@@ -106,10 +106,8 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -120,7 +118,7 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
     self.certificateAuthorityConfig = try container.decodeIfPresent(
       CertificateIssuanceConfig.CertificateAuthorityConfig.self, forKey: .certificateAuthorityConfig
     )
-    self.lifetime = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .lifetime)
+    self.lifetime = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .lifetime)
     if let value = try container.decodeIfPresent(
       Swift.Int32.self, forKey: .rotationWindowPercentage)
     {
@@ -133,7 +131,7 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -156,12 +154,12 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
 
   /// The CA that issues the workload certificate. It includes CA address, type,
   /// authentication to CA service, etc.
-  public struct CertificateAuthorityConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CertificateAuthorityConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var kind: OneOf_Kind? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CertificateAuthorityConfig`.
     public init() {}
@@ -215,7 +213,7 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
       self.kind = kind
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -234,8 +232,7 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
     }
 
     /// Contains information required to contact CA service.
-    public struct CertificateAuthorityServiceConfig: Codable, Equatable, GoogleCloudWKT
-        ._AnyPackable,
+    public struct CertificateAuthorityServiceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. A CA pool resource used to issue a certificate.
@@ -243,7 +240,7 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
       /// "projects/{project}/locations/{location}/caPools/{ca_pool}".
       public var caPool: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `CertificateAuthorityServiceConfig`.
       public init() {}
@@ -281,7 +278,7 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -297,11 +294,11 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
         return
           "type.googleapis.com/google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig.CertificateAuthorityServiceConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -315,11 +312,11 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
       return
         "type.googleapis.com/google.cloud.certificatemanager.v1.CertificateIssuanceConfig.CertificateAuthorityConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -431,10 +428,10 @@ public struct CertificateIssuanceConfig: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.certificatemanager.v1.CertificateIssuanceConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

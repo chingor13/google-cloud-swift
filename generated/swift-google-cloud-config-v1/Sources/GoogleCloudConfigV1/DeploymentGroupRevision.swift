@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A DeploymentGroupRevision represents a snapshot of a
 /// [DeploymentGroup][google.cloud.config.v1.DeploymentGroup] at a given point in
 /// time, created when a DeploymentGroup is provisioned or deprovisioned.
 ///
 /// [google.cloud.config.v1.DeploymentGroup]: <doc:DeploymentGroup>
-public struct DeploymentGroupRevision: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DeploymentGroupRevision: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the deployment group revision.
@@ -34,12 +34,12 @@ public struct DeploymentGroupRevision: Codable, Equatable, GoogleCloudWKT._AnyPa
   public var snapshot: DeploymentGroup? = nil
 
   /// Output only. Time when the deployment group revision was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The alternative IDs of the deployment group revision.
   public var alternativeIds: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DeploymentGroupRevision`.
   public init() {}
@@ -82,14 +82,13 @@ public struct DeploymentGroupRevision: Codable, Equatable, GoogleCloudWKT._AnyPa
       self.name = value
     }
     self.snapshot = try container.decodeIfPresent(DeploymentGroup.self, forKey: .snapshot)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .alternativeIds) {
       self.alternativeIds = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -107,10 +106,10 @@ public struct DeploymentGroupRevision: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.config.v1.DeploymentGroupRevision"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Manages TPU nodes and other resources
 ///
@@ -31,11 +31,11 @@ import GoogleCloudGax
 /// @Snippet(path: "TpuQuickstart")
 public final class TpuClient: Clients.TpuProtocol, Sendable {
   let inner: any Clients.TpuStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `TpuClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.TpuStub = try Clients.TpuTransport(options)
     inner = Clients.TpuRetry(inner, options: options)
     if let logger = options.logger {
@@ -50,7 +50,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListNodes")
   public func listNodes(
-    request: ListNodesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListNodesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.ListNodesResponse {
     try await self.inner.listNodes(request: request, options: options)
   }
@@ -59,21 +59,21 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListNodes")
   public func listNodes(
-    byItem: ListNodesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListNodesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Node, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudTpuV2.ListNodesResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listNodes(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the details of a node.
   ///
   /// @Snippet(path: "Tpu_GetNode")
   public func getNode(
-    request: GetNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.Node {
     try await self.inner.getNode(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_CreateNode")
   public func createNode(
-    request: CreateNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createNode(request: request, options: options)
   }
@@ -91,21 +91,20 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_CreateNode")
   public func createNode(
-    withPolling: CreateNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
+    withPolling: CreateNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Node>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Node>.State in
       return try op._extractStatus(Node.self)
     }
     let rawOp = try await self.createNode(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Node>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Node>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -117,7 +116,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_DeleteNode")
   public func deleteNode(
-    request: DeleteNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteNode(request: request, options: options)
   }
@@ -126,21 +125,21 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_DeleteNode")
   public func deleteNode(
-    withPolling: DeleteNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteNode(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -152,7 +151,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_StopNode")
   public func stopNode(
-    request: StopNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: StopNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.stopNode(request: request, options: options)
   }
@@ -161,21 +160,20 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_StopNode")
   public func stopNode(
-    withPolling: StopNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
+    withPolling: StopNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Node>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Node>.State in
       return try op._extractStatus(Node.self)
     }
     let rawOp = try await self.stopNode(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Node>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Node>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -187,7 +185,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_StartNode")
   public func startNode(
-    request: StartNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: StartNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.startNode(request: request, options: options)
   }
@@ -196,21 +194,20 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_StartNode")
   public func startNode(
-    withPolling: StartNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
+    withPolling: StartNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Node>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Node>.State in
       return try op._extractStatus(Node.self)
     }
     let rawOp = try await self.startNode(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Node>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Node>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -222,7 +219,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_UpdateNode")
   public func updateNode(
-    request: UpdateNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateNode(request: request, options: options)
   }
@@ -231,21 +228,20 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_UpdateNode")
   public func updateNode(
-    withPolling: UpdateNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
+    withPolling: UpdateNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Node>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Node>.State in
       return try op._extractStatus(Node.self)
     }
     let rawOp = try await self.updateNode(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Node>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Node>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -257,7 +253,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListQueuedResources")
   public func listQueuedResources(
-    request: ListQueuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQueuedResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse {
     try await self.inner.listQueuedResources(request: request, options: options)
   }
@@ -266,7 +262,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListQueuedResources")
   public func listQueuedResources(
-    byItem: ListQueuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQueuedResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QueuedResource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse in
@@ -274,14 +270,14 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
       request.pageToken = token
       return try await self.listQueuedResources(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a queued resource.
   ///
   /// @Snippet(path: "Tpu_GetQueuedResource")
   public func getQueuedResource(
-    request: GetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQueuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.QueuedResource {
     try await self.inner.getQueuedResource(request: request, options: options)
   }
@@ -290,7 +286,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_CreateQueuedResource")
   public func createQueuedResource(
-    request: CreateQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQueuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createQueuedResource(request: request, options: options)
   }
@@ -299,21 +295,21 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_CreateQueuedResource")
   public func createQueuedResource(
-    withPolling: CreateQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource> {
+    withPolling: CreateQueuedResourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<QueuedResource> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<QueuedResource>.State in
+        -> GoogleGax._PollableOperationImpl<QueuedResource>.State in
       return try op._extractStatus(QueuedResource.self)
     }
     let rawOp = try await self.createQueuedResource(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<QueuedResource>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<QueuedResource>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -325,7 +321,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_DeleteQueuedResource")
   public func deleteQueuedResource(
-    request: DeleteQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQueuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteQueuedResource(request: request, options: options)
   }
@@ -334,21 +330,21 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_DeleteQueuedResource")
   public func deleteQueuedResource(
-    withPolling: DeleteQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteQueuedResourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteQueuedResource(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -360,7 +356,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ResetQueuedResource")
   public func resetQueuedResource(
-    request: ResetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: ResetQueuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.resetQueuedResource(request: request, options: options)
   }
@@ -369,21 +365,21 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ResetQueuedResource")
   public func resetQueuedResource(
-    withPolling: ResetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource> {
+    withPolling: ResetQueuedResourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<QueuedResource> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<QueuedResource>.State in
+        -> GoogleGax._PollableOperationImpl<QueuedResource>.State in
       return try op._extractStatus(QueuedResource.self)
     }
     let rawOp = try await self.resetQueuedResource(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<QueuedResource>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<QueuedResource>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -395,7 +391,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_GenerateServiceIdentity")
   public func generateServiceIdentity(
-    request: GenerateServiceIdentityRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateServiceIdentityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.GenerateServiceIdentityResponse {
     try await self.inner.generateServiceIdentity(request: request, options: options)
   }
@@ -404,7 +400,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListAcceleratorTypes")
   public func listAcceleratorTypes(
-    request: ListAcceleratorTypesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAcceleratorTypesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse {
     try await self.inner.listAcceleratorTypes(request: request, options: options)
   }
@@ -413,7 +409,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListAcceleratorTypes")
   public func listAcceleratorTypes(
-    byItem: ListAcceleratorTypesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAcceleratorTypesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse in
@@ -421,14 +417,14 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
       request.pageToken = token
       return try await self.listAcceleratorTypes(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets AcceleratorType.
   ///
   /// @Snippet(path: "Tpu_GetAcceleratorType")
   public func getAcceleratorType(
-    request: GetAcceleratorTypeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAcceleratorTypeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.AcceleratorType {
     try await self.inner.getAcceleratorType(request: request, options: options)
   }
@@ -437,7 +433,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListRuntimeVersions")
   public func listRuntimeVersions(
-    request: ListRuntimeVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRuntimeVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse {
     try await self.inner.listRuntimeVersions(request: request, options: options)
   }
@@ -446,7 +442,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListRuntimeVersions")
   public func listRuntimeVersions(
-    byItem: ListRuntimeVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRuntimeVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RuntimeVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse in
@@ -454,14 +450,14 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
       request.pageToken = token
       return try await self.listRuntimeVersions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a runtime version.
   ///
   /// @Snippet(path: "Tpu_GetRuntimeVersion")
   public func getRuntimeVersion(
-    request: GetRuntimeVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRuntimeVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.RuntimeVersion {
     try await self.inner.getRuntimeVersion(request: request, options: options)
   }
@@ -470,7 +466,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_GetGuestAttributes")
   public func getGuestAttributes(
-    request: GetGuestAttributesRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGuestAttributesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.GetGuestAttributesResponse {
     try await self.inner.getGuestAttributes(request: request, options: options)
   }
@@ -479,7 +475,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -488,7 +484,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -496,14 +492,14 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "Tpu_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -514,7 +510,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -525,7 +521,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -533,7 +529,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -542,7 +538,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -553,7 +549,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -564,7 +560,7 @@ public final class TpuClient: Clients.TpuProtocol, Sendable {
   ///
   /// @Snippet(path: "Tpu_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -602,54 +598,59 @@ extension Clients {
     func createNode(request: CreateNodeRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.createNode`.
-    func createNode(withPolling: CreateNodeRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Node>
+    func createNode(withPolling: CreateNodeRequest) async throws -> any GoogleGax.PollableOperation<
+      Node
+    >
 
     /// See `TpuClient.createNode`.
     func createNode(
       parent: Swift.String,
       node: Node?,
       nodeId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Node>
+    ) async throws -> any GoogleGax.PollableOperation<Node>
 
     /// See `TpuClient.deleteNode`.
     func deleteNode(request: DeleteNodeRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.deleteNode`.
-    func deleteNode(withPolling: DeleteNodeRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Swift.Void>
+    func deleteNode(withPolling: DeleteNodeRequest) async throws -> any GoogleGax.PollableOperation<
+      Swift.Void
+    >
 
     /// See `TpuClient.deleteNode`.
     func deleteNode(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `TpuClient.stopNode`.
     func stopNode(request: StopNodeRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.stopNode`.
-    func stopNode(withPolling: StopNodeRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Node>
+    func stopNode(withPolling: StopNodeRequest) async throws -> any GoogleGax.PollableOperation<
+      Node
+    >
 
     /// See `TpuClient.startNode`.
     func startNode(request: StartNodeRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.startNode`.
-    func startNode(withPolling: StartNodeRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Node>
+    func startNode(withPolling: StartNodeRequest) async throws -> any GoogleGax.PollableOperation<
+      Node
+    >
 
     /// See `TpuClient.updateNode`.
     func updateNode(request: UpdateNodeRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.updateNode`.
-    func updateNode(withPolling: UpdateNodeRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Node>
+    func updateNode(withPolling: UpdateNodeRequest) async throws -> any GoogleGax.PollableOperation<
+      Node
+    >
 
     /// See `TpuClient.updateNode`.
     func updateNode(
       node: Node?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Node>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Node>
 
     /// See `TpuClient.listQueuedResources`.
     func listQueuedResources(request: ListQueuedResourcesRequest) async throws
@@ -680,14 +681,14 @@ extension Clients {
 
     /// See `TpuClient.createQueuedResource`.
     func createQueuedResource(withPolling: CreateQueuedResourceRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<QueuedResource>
+      -> any GoogleGax.PollableOperation<QueuedResource>
 
     /// See `TpuClient.createQueuedResource`.
     func createQueuedResource(
       parent: Swift.String,
       queuedResource: QueuedResource?,
       queuedResourceId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource>
+    ) async throws -> any GoogleGax.PollableOperation<QueuedResource>
 
     /// See `TpuClient.deleteQueuedResource`.
     func deleteQueuedResource(request: DeleteQueuedResourceRequest) async throws
@@ -695,25 +696,25 @@ extension Clients {
 
     /// See `TpuClient.deleteQueuedResource`.
     func deleteQueuedResource(withPolling: DeleteQueuedResourceRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `TpuClient.deleteQueuedResource`.
     func deleteQueuedResource(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `TpuClient.resetQueuedResource`.
     func resetQueuedResource(request: ResetQueuedResourceRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `TpuClient.resetQueuedResource`.
-    func resetQueuedResource(withPolling: ResetQueuedResourceRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<QueuedResource>
+    func resetQueuedResource(withPolling: ResetQueuedResourceRequest) async throws -> any GoogleGax
+      .PollableOperation<QueuedResource>
 
     /// See `TpuClient.resetQueuedResource`.
     func resetQueuedResource(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource>
+    ) async throws -> any GoogleGax.PollableOperation<QueuedResource>
 
     /// See `TpuClient.generateServiceIdentity`.
     func generateServiceIdentity(request: GenerateServiceIdentityRequest) async throws
@@ -815,187 +816,187 @@ extension Clients {
 
     /// See `TpuClient.listNodes`.
     func listNodes(
-      request: ListNodesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNodesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.ListNodesResponse
 
     /// See `TpuClient.listNodes`.
     func listNodes(
-      byItem: ListNodesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListNodesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Node, Swift.Error>
 
     /// See `TpuClient.getNode`.
     func getNode(
-      request: GetNodeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.Node
 
     /// See `TpuClient.createNode`.
     func createNode(
-      request: CreateNodeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.createNode`.
     func createNode(
-      withPolling: CreateNodeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Node>
+      withPolling: CreateNodeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Node>
 
     /// See `TpuClient.deleteNode`.
     func deleteNode(
-      request: DeleteNodeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.deleteNode`.
     func deleteNode(
-      withPolling: DeleteNodeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteNodeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `TpuClient.stopNode`.
     func stopNode(
-      request: StopNodeRequest, options: GoogleCloudGax.RequestOptions
+      request: StopNodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.stopNode`.
     func stopNode(
-      withPolling: StopNodeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Node>
+      withPolling: StopNodeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Node>
 
     /// See `TpuClient.startNode`.
     func startNode(
-      request: StartNodeRequest, options: GoogleCloudGax.RequestOptions
+      request: StartNodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.startNode`.
     func startNode(
-      withPolling: StartNodeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Node>
+      withPolling: StartNodeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Node>
 
     /// See `TpuClient.updateNode`.
     func updateNode(
-      request: UpdateNodeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNodeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.updateNode`.
     func updateNode(
-      withPolling: UpdateNodeRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Node>
+      withPolling: UpdateNodeRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Node>
 
     /// See `TpuClient.listQueuedResources`.
     func listQueuedResources(
-      request: ListQueuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQueuedResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse
 
     /// See `TpuClient.listQueuedResources`.
     func listQueuedResources(
-      byItem: ListQueuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListQueuedResourcesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<QueuedResource, Swift.Error>
 
     /// See `TpuClient.getQueuedResource`.
     func getQueuedResource(
-      request: GetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQueuedResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.QueuedResource
 
     /// See `TpuClient.createQueuedResource`.
     func createQueuedResource(
-      request: CreateQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQueuedResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.createQueuedResource`.
     func createQueuedResource(
-      withPolling: CreateQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource>
+      withPolling: CreateQueuedResourceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<QueuedResource>
 
     /// See `TpuClient.deleteQueuedResource`.
     func deleteQueuedResource(
-      request: DeleteQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQueuedResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.deleteQueuedResource`.
     func deleteQueuedResource(
-      withPolling: DeleteQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteQueuedResourceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `TpuClient.resetQueuedResource`.
     func resetQueuedResource(
-      request: ResetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetQueuedResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `TpuClient.resetQueuedResource`.
     func resetQueuedResource(
-      withPolling: ResetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource>
+      withPolling: ResetQueuedResourceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<QueuedResource>
 
     /// See `TpuClient.generateServiceIdentity`.
     func generateServiceIdentity(
-      request: GenerateServiceIdentityRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateServiceIdentityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.GenerateServiceIdentityResponse
 
     /// See `TpuClient.listAcceleratorTypes`.
     func listAcceleratorTypes(
-      request: ListAcceleratorTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAcceleratorTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse
 
     /// See `TpuClient.listAcceleratorTypes`.
     func listAcceleratorTypes(
-      byItem: ListAcceleratorTypesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAcceleratorTypesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AcceleratorType, Swift.Error>
 
     /// See `TpuClient.getAcceleratorType`.
     func getAcceleratorType(
-      request: GetAcceleratorTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAcceleratorTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.AcceleratorType
 
     /// See `TpuClient.listRuntimeVersions`.
     func listRuntimeVersions(
-      request: ListRuntimeVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuntimeVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse
 
     /// See `TpuClient.listRuntimeVersions`.
     func listRuntimeVersions(
-      byItem: ListRuntimeVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRuntimeVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<RuntimeVersion, Swift.Error>
 
     /// See `TpuClient.getRuntimeVersion`.
     func getRuntimeVersion(
-      request: GetRuntimeVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRuntimeVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.RuntimeVersion
 
     /// See `TpuClient.getGuestAttributes`.
     func getGuestAttributes(
-      request: GetGuestAttributesRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGuestAttributesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTpuV2.GetGuestAttributesResponse
 
     /// See `TpuClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `TpuClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `TpuClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `TpuClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `TpuClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `TpuClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `TpuClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -1009,9 +1010,9 @@ extension Clients.TpuProtocol {
   }
 
   public func listNodes(
-    request: ListNodesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListNodesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.ListNodesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listNodes(
@@ -1021,12 +1022,12 @@ extension Clients.TpuProtocol {
   }
 
   public func listNodes(
-    byItem: ListNodesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListNodesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Node, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudTpuV2.ListNodesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listNodes(
@@ -1043,9 +1044,9 @@ extension Clients.TpuProtocol {
   }
 
   public func getNode(
-    request: GetNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.Node {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getNode(
@@ -1062,24 +1063,24 @@ extension Clients.TpuProtocol {
   }
 
   public func createNode(
-    request: CreateNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createNode(withPolling: CreateNodeRequest) async throws -> any GoogleCloudGax
+  public func createNode(withPolling: CreateNodeRequest) async throws -> any GoogleGax
     .PollableOperation<Node>
   {
     try await self.createNode(withPolling: withPolling, options: .init())
   }
 
   public func createNode(
-    withPolling: CreateNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Node>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Node>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1087,7 +1088,7 @@ extension Clients.TpuProtocol {
     parent: Swift.String,
     node: Node?,
     nodeId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
     let request = CreateNodeRequest().with {
       $0.parent = parent
       $0.node = node
@@ -1101,30 +1102,30 @@ extension Clients.TpuProtocol {
   }
 
   public func deleteNode(
-    request: DeleteNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteNode(withPolling: DeleteNodeRequest) async throws -> any GoogleCloudGax
+  public func deleteNode(withPolling: DeleteNodeRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteNode(withPolling: withPolling, options: .init())
   }
 
   public func deleteNode(
-    withPolling: DeleteNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteNode(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteNodeRequest().with {
       $0.name = name
     }
@@ -1136,24 +1137,24 @@ extension Clients.TpuProtocol {
   }
 
   public func stopNode(
-    request: StopNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: StopNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func stopNode(withPolling: StopNodeRequest) async throws -> any GoogleCloudGax
+  public func stopNode(withPolling: StopNodeRequest) async throws -> any GoogleGax
     .PollableOperation<Node>
   {
     try await self.stopNode(withPolling: withPolling, options: .init())
   }
 
   public func stopNode(
-    withPolling: StopNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Node>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: StopNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Node>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1162,24 +1163,24 @@ extension Clients.TpuProtocol {
   }
 
   public func startNode(
-    request: StartNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: StartNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func startNode(withPolling: StartNodeRequest) async throws -> any GoogleCloudGax
+  public func startNode(withPolling: StartNodeRequest) async throws -> any GoogleGax
     .PollableOperation<Node>
   {
     try await self.startNode(withPolling: withPolling, options: .init())
   }
 
   public func startNode(
-    withPolling: StartNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Node>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: StartNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Node>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1188,31 +1189,31 @@ extension Clients.TpuProtocol {
   }
 
   public func updateNode(
-    request: UpdateNodeRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateNodeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateNode(withPolling: UpdateNodeRequest) async throws -> any GoogleCloudGax
+  public func updateNode(withPolling: UpdateNodeRequest) async throws -> any GoogleGax
     .PollableOperation<Node>
   {
     try await self.updateNode(withPolling: withPolling, options: .init())
   }
 
   public func updateNode(
-    withPolling: UpdateNodeRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Node>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateNodeRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Node>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateNode(
     node: Node?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Node> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Node> {
     let request = UpdateNodeRequest().with {
       $0.node = node
       $0.updateMask = updateMask
@@ -1227,9 +1228,9 @@ extension Clients.TpuProtocol {
   }
 
   public func listQueuedResources(
-    request: ListQueuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListQueuedResourcesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listQueuedResources(
@@ -1239,13 +1240,13 @@ extension Clients.TpuProtocol {
   }
 
   public func listQueuedResources(
-    byItem: ListQueuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListQueuedResourcesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<QueuedResource, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudTpuV2.ListQueuedResourcesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listQueuedResources(
@@ -1264,9 +1265,9 @@ extension Clients.TpuProtocol {
   }
 
   public func getQueuedResource(
-    request: GetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetQueuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.QueuedResource {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getQueuedResource(
@@ -1285,24 +1286,24 @@ extension Clients.TpuProtocol {
   }
 
   public func createQueuedResource(
-    request: CreateQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateQueuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createQueuedResource(withPolling: CreateQueuedResourceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<QueuedResource>
+    -> any GoogleGax.PollableOperation<QueuedResource>
   {
     try await self.createQueuedResource(withPolling: withPolling, options: .init())
   }
 
   public func createQueuedResource(
-    withPolling: CreateQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<QueuedResource>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateQueuedResourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<QueuedResource> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<QueuedResource>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1310,7 +1311,7 @@ extension Clients.TpuProtocol {
     parent: Swift.String,
     queuedResource: QueuedResource?,
     queuedResourceId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource> {
+  ) async throws -> any GoogleGax.PollableOperation<QueuedResource> {
     let request = CreateQueuedResourceRequest().with {
       $0.parent = parent
       $0.queuedResource = queuedResource
@@ -1326,30 +1327,30 @@ extension Clients.TpuProtocol {
   }
 
   public func deleteQueuedResource(
-    request: DeleteQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteQueuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteQueuedResource(withPolling: DeleteQueuedResourceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteQueuedResource(withPolling: withPolling, options: .init())
   }
 
   public func deleteQueuedResource(
-    withPolling: DeleteQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteQueuedResourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteQueuedResource(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteQueuedResourceRequest().with {
       $0.name = name
     }
@@ -1363,30 +1364,30 @@ extension Clients.TpuProtocol {
   }
 
   public func resetQueuedResource(
-    request: ResetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
+    request: ResetQueuedResourceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func resetQueuedResource(withPolling: ResetQueuedResourceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<QueuedResource>
+    -> any GoogleGax.PollableOperation<QueuedResource>
   {
     try await self.resetQueuedResource(withPolling: withPolling, options: .init())
   }
 
   public func resetQueuedResource(
-    withPolling: ResetQueuedResourceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<QueuedResource>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ResetQueuedResourceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<QueuedResource> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<QueuedResource>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func resetQueuedResource(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<QueuedResource> {
+  ) async throws -> any GoogleGax.PollableOperation<QueuedResource> {
     let request = ResetQueuedResourceRequest().with {
       $0.name = name
     }
@@ -1400,9 +1401,9 @@ extension Clients.TpuProtocol {
   }
 
   public func generateServiceIdentity(
-    request: GenerateServiceIdentityRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateServiceIdentityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.GenerateServiceIdentityResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAcceleratorTypes(request: ListAcceleratorTypesRequest) async throws
@@ -1412,9 +1413,9 @@ extension Clients.TpuProtocol {
   }
 
   public func listAcceleratorTypes(
-    request: ListAcceleratorTypesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAcceleratorTypesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAcceleratorTypes(
@@ -1424,13 +1425,13 @@ extension Clients.TpuProtocol {
   }
 
   public func listAcceleratorTypes(
-    byItem: ListAcceleratorTypesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAcceleratorTypesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AcceleratorType, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudTpuV2.ListAcceleratorTypesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAcceleratorTypes(
@@ -1449,9 +1450,9 @@ extension Clients.TpuProtocol {
   }
 
   public func getAcceleratorType(
-    request: GetAcceleratorTypeRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAcceleratorTypeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.AcceleratorType {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAcceleratorType(
@@ -1470,9 +1471,9 @@ extension Clients.TpuProtocol {
   }
 
   public func listRuntimeVersions(
-    request: ListRuntimeVersionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRuntimeVersionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRuntimeVersions(
@@ -1482,13 +1483,13 @@ extension Clients.TpuProtocol {
   }
 
   public func listRuntimeVersions(
-    byItem: ListRuntimeVersionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRuntimeVersionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<RuntimeVersion, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudTpuV2.ListRuntimeVersionsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRuntimeVersions(
@@ -1507,9 +1508,9 @@ extension Clients.TpuProtocol {
   }
 
   public func getRuntimeVersion(
-    request: GetRuntimeVersionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRuntimeVersionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.RuntimeVersion {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRuntimeVersion(
@@ -1528,9 +1529,9 @@ extension Clients.TpuProtocol {
   }
 
   public func getGuestAttributes(
-    request: GetGuestAttributesRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGuestAttributesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudTpuV2.GetGuestAttributesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -1540,9 +1541,9 @@ extension Clients.TpuProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1552,13 +1553,13 @@ extension Clients.TpuProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1568,9 +1569,9 @@ extension Clients.TpuProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1580,9 +1581,9 @@ extension Clients.TpuProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1592,13 +1593,13 @@ extension Clients.TpuProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1619,9 +1620,9 @@ extension Clients.TpuProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1638,9 +1639,9 @@ extension Clients.TpuProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1657,9 +1658,9 @@ extension Clients.TpuProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

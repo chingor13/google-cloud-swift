@@ -16,72 +16,72 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol HsmManagementStub: Sendable {
     func listSingleTenantHsmInstances(
-      request: ListSingleTenantHsmInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSingleTenantHsmInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListSingleTenantHsmInstancesResponse
 
     func getSingleTenantHsmInstance(
-      request: GetSingleTenantHsmInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSingleTenantHsmInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.SingleTenantHsmInstance
 
     func createSingleTenantHsmInstance(
-      request: CreateSingleTenantHsmInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSingleTenantHsmInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createSingleTenantHsmInstanceProposal(
-      request: CreateSingleTenantHsmInstanceProposalRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSingleTenantHsmInstanceProposalRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func approveSingleTenantHsmInstanceProposal(
-      request: ApproveSingleTenantHsmInstanceProposalRequest, options: GoogleCloudGax.RequestOptions
+      request: ApproveSingleTenantHsmInstanceProposalRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ApproveSingleTenantHsmInstanceProposalResponse
 
     func executeSingleTenantHsmInstanceProposal(
-      request: ExecuteSingleTenantHsmInstanceProposalRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecuteSingleTenantHsmInstanceProposalRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getSingleTenantHsmInstanceProposal(
-      request: GetSingleTenantHsmInstanceProposalRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSingleTenantHsmInstanceProposalRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.SingleTenantHsmInstanceProposal
 
     func listSingleTenantHsmInstanceProposals(
-      request: ListSingleTenantHsmInstanceProposalsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSingleTenantHsmInstanceProposalsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListSingleTenantHsmInstanceProposalsResponse
 
     func deleteSingleTenantHsmInstanceProposal(
-      request: DeleteSingleTenantHsmInstanceProposalRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSingleTenantHsmInstanceProposalRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

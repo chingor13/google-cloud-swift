@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// The service that a client application uses to manage Apache Kafka clusters,
 /// topics and consumer groups.
@@ -30,11 +30,11 @@ import GoogleCloudGax
 /// @Snippet(path: "ManagedKafkaQuickstart")
 public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   let inner: any Clients.ManagedKafkaStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `ManagedKafkaClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ManagedKafkaStub = try Clients.ManagedKafkaTransport(options)
     inner = Clients.ManagedKafkaRetry(inner, options: options)
     if let logger = options.logger {
@@ -49,7 +49,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListClusters")
   public func listClusters(
-    request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ListClustersResponse {
     try await self.inner.listClusters(request: request, options: options)
   }
@@ -58,7 +58,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListClusters")
   public func listClusters(
-    byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListClustersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Cluster, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedKafkaV1.ListClustersResponse in
@@ -66,14 +66,14 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
       request.pageToken = token
       return try await self.listClusters(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the properties of a single cluster.
   ///
   /// @Snippet(path: "ManagedKafka_GetCluster")
   public func getCluster(
-    request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Cluster {
     try await self.inner.getCluster(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_CreateCluster")
   public func createCluster(
-    request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCluster(request: request, options: options)
   }
@@ -91,21 +91,20 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_CreateCluster")
   public func createCluster(
-    withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.createCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -117,7 +116,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_UpdateCluster")
   public func updateCluster(
-    request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCluster(request: request, options: options)
   }
@@ -126,21 +125,20 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_UpdateCluster")
   public func updateCluster(
-    withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.updateCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -152,7 +150,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_DeleteCluster")
   public func deleteCluster(
-    request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCluster(request: request, options: options)
   }
@@ -161,21 +159,21 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_DeleteCluster")
   public func deleteCluster(
-    withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -187,7 +185,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListTopics")
   public func listTopics(
-    request: ListTopicsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTopicsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ListTopicsResponse {
     try await self.inner.listTopics(request: request, options: options)
   }
@@ -196,7 +194,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListTopics")
   public func listTopics(
-    byItem: ListTopicsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTopicsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Topic, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedKafkaV1.ListTopicsResponse in
@@ -204,14 +202,14 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
       request.pageToken = token
       return try await self.listTopics(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the properties of a single topic.
   ///
   /// @Snippet(path: "ManagedKafka_GetTopic")
   public func getTopic(
-    request: GetTopicRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTopicRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Topic {
     try await self.inner.getTopic(request: request, options: options)
   }
@@ -220,7 +218,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_CreateTopic")
   public func createTopic(
-    request: CreateTopicRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTopicRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Topic {
     try await self.inner.createTopic(request: request, options: options)
   }
@@ -229,7 +227,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_UpdateTopic")
   public func updateTopic(
-    request: UpdateTopicRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTopicRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Topic {
     try await self.inner.updateTopic(request: request, options: options)
   }
@@ -238,7 +236,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_DeleteTopic")
   public func deleteTopic(
-    request: DeleteTopicRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTopicRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteTopic(request: request, options: options)
   }
@@ -247,7 +245,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListConsumerGroups")
   public func listConsumerGroups(
-    request: ListConsumerGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConsumerGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ListConsumerGroupsResponse {
     try await self.inner.listConsumerGroups(request: request, options: options)
   }
@@ -256,7 +254,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListConsumerGroups")
   public func listConsumerGroups(
-    byItem: ListConsumerGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConsumerGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ConsumerGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedKafkaV1.ListConsumerGroupsResponse in
@@ -264,14 +262,14 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
       request.pageToken = token
       return try await self.listConsumerGroups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the properties of a single consumer group.
   ///
   /// @Snippet(path: "ManagedKafka_GetConsumerGroup")
   public func getConsumerGroup(
-    request: GetConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConsumerGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup {
     try await self.inner.getConsumerGroup(request: request, options: options)
   }
@@ -280,7 +278,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_UpdateConsumerGroup")
   public func updateConsumerGroup(
-    request: UpdateConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConsumerGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup {
     try await self.inner.updateConsumerGroup(request: request, options: options)
   }
@@ -289,7 +287,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_DeleteConsumerGroup")
   public func deleteConsumerGroup(
-    request: DeleteConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConsumerGroupRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteConsumerGroup(request: request, options: options)
   }
@@ -298,7 +296,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListAcls")
   public func listAcls(
-    request: ListAclsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAclsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ListAclsResponse {
     try await self.inner.listAcls(request: request, options: options)
   }
@@ -307,7 +305,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListAcls")
   public func listAcls(
-    byItem: ListAclsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAclsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Acl, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedKafkaV1.ListAclsResponse in
@@ -315,14 +313,14 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
       request.pageToken = token
       return try await self.listAcls(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the properties of a single acl.
   ///
   /// @Snippet(path: "ManagedKafka_GetAcl")
   public func getAcl(
-    request: GetAclRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Acl {
     try await self.inner.getAcl(request: request, options: options)
   }
@@ -331,7 +329,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_CreateAcl")
   public func createAcl(
-    request: CreateAclRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Acl {
     try await self.inner.createAcl(request: request, options: options)
   }
@@ -340,7 +338,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_UpdateAcl")
   public func updateAcl(
-    request: UpdateAclRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Acl {
     try await self.inner.updateAcl(request: request, options: options)
   }
@@ -349,7 +347,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_DeleteAcl")
   public func deleteAcl(
-    request: DeleteAclRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAclRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteAcl(request: request, options: options)
   }
@@ -359,7 +357,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_AddAclEntry")
   public func addAclEntry(
-    request: AddAclEntryRequest, options: GoogleCloudGax.RequestOptions
+    request: AddAclEntryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.AddAclEntryResponse {
     try await self.inner.addAclEntry(request: request, options: options)
   }
@@ -370,7 +368,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_RemoveAclEntry")
   public func removeAclEntry(
-    request: RemoveAclEntryRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveAclEntryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.RemoveAclEntryResponse {
     try await self.inner.removeAclEntry(request: request, options: options)
   }
@@ -379,7 +377,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -388,7 +386,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -396,14 +394,14 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "ManagedKafka_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -414,7 +412,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -425,7 +423,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -433,7 +431,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -442,7 +440,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -453,7 +451,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -464,7 +462,7 @@ public final class ManagedKafkaClient: Clients.ManagedKafkaProtocol, Sendable {
   ///
   /// @Snippet(path: "ManagedKafka_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -503,7 +501,7 @@ extension Clients {
     func createCluster(request: CreateClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedKafkaClient.createCluster`.
-    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `ManagedKafkaClient.createCluster`.
@@ -511,32 +509,32 @@ extension Clients {
       parent: Swift.String,
       cluster: Cluster?,
       clusterId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `ManagedKafkaClient.updateCluster`.
     func updateCluster(request: UpdateClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedKafkaClient.updateCluster`.
-    func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleCloudGax
+    func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `ManagedKafkaClient.updateCluster`.
     func updateCluster(
       cluster: Cluster?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `ManagedKafkaClient.deleteCluster`.
     func deleteCluster(request: DeleteClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedKafkaClient.deleteCluster`.
-    func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
+    func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `ManagedKafkaClient.deleteCluster`.
     func deleteCluster(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ManagedKafkaClient.listTopics`.
     func listTopics(request: ListTopicsRequest) async throws
@@ -576,7 +574,7 @@ extension Clients {
     /// See `ManagedKafkaClient.updateTopic`.
     func updateTopic(
       topic: Topic?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudManagedKafkaV1.Topic
 
     /// See `ManagedKafkaClient.deleteTopic`.
@@ -617,7 +615,7 @@ extension Clients {
     /// See `ManagedKafkaClient.updateConsumerGroup`.
     func updateConsumerGroup(
       consumerGroup: ConsumerGroup?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup
 
     /// See `ManagedKafkaClient.deleteConsumerGroup`.
@@ -666,7 +664,7 @@ extension Clients {
     /// See `ManagedKafkaClient.updateAcl`.
     func updateAcl(
       acl: Acl?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudManagedKafkaV1.Acl
 
     /// See `ManagedKafkaClient.deleteAcl`.
@@ -743,177 +741,177 @@ extension Clients {
 
     /// See `ManagedKafkaClient.listClusters`.
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ListClustersResponse
 
     /// See `ManagedKafkaClient.listClusters`.
     func listClusters(
-      byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListClustersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Cluster, Swift.Error>
 
     /// See `ManagedKafkaClient.getCluster`.
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Cluster
 
     /// See `ManagedKafkaClient.createCluster`.
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedKafkaClient.createCluster`.
     func createCluster(
-      withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `ManagedKafkaClient.updateCluster`.
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedKafkaClient.updateCluster`.
     func updateCluster(
-      withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `ManagedKafkaClient.deleteCluster`.
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `ManagedKafkaClient.deleteCluster`.
     func deleteCluster(
-      withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `ManagedKafkaClient.listTopics`.
     func listTopics(
-      request: ListTopicsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTopicsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ListTopicsResponse
 
     /// See `ManagedKafkaClient.listTopics`.
     func listTopics(
-      byItem: ListTopicsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTopicsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Topic, Swift.Error>
 
     /// See `ManagedKafkaClient.getTopic`.
     func getTopic(
-      request: GetTopicRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTopicRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Topic
 
     /// See `ManagedKafkaClient.createTopic`.
     func createTopic(
-      request: CreateTopicRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTopicRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Topic
 
     /// See `ManagedKafkaClient.updateTopic`.
     func updateTopic(
-      request: UpdateTopicRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTopicRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Topic
 
     /// See `ManagedKafkaClient.deleteTopic`.
     func deleteTopic(
-      request: DeleteTopicRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTopicRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ManagedKafkaClient.listConsumerGroups`.
     func listConsumerGroups(
-      request: ListConsumerGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConsumerGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ListConsumerGroupsResponse
 
     /// See `ManagedKafkaClient.listConsumerGroups`.
     func listConsumerGroups(
-      byItem: ListConsumerGroupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListConsumerGroupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ConsumerGroup, Swift.Error>
 
     /// See `ManagedKafkaClient.getConsumerGroup`.
     func getConsumerGroup(
-      request: GetConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConsumerGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup
 
     /// See `ManagedKafkaClient.updateConsumerGroup`.
     func updateConsumerGroup(
-      request: UpdateConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConsumerGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup
 
     /// See `ManagedKafkaClient.deleteConsumerGroup`.
     func deleteConsumerGroup(
-      request: DeleteConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConsumerGroupRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ManagedKafkaClient.listAcls`.
     func listAcls(
-      request: ListAclsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAclsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.ListAclsResponse
 
     /// See `ManagedKafkaClient.listAcls`.
     func listAcls(
-      byItem: ListAclsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAclsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Acl, Swift.Error>
 
     /// See `ManagedKafkaClient.getAcl`.
     func getAcl(
-      request: GetAclRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Acl
 
     /// See `ManagedKafkaClient.createAcl`.
     func createAcl(
-      request: CreateAclRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Acl
 
     /// See `ManagedKafkaClient.updateAcl`.
     func updateAcl(
-      request: UpdateAclRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAclRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.Acl
 
     /// See `ManagedKafkaClient.deleteAcl`.
     func deleteAcl(
-      request: DeleteAclRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAclRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ManagedKafkaClient.addAclEntry`.
     func addAclEntry(
-      request: AddAclEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: AddAclEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.AddAclEntryResponse
 
     /// See `ManagedKafkaClient.removeAclEntry`.
     func removeAclEntry(
-      request: RemoveAclEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveAclEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudManagedKafkaV1.RemoveAclEntryResponse
 
     /// See `ManagedKafkaClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `ManagedKafkaClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `ManagedKafkaClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `ManagedKafkaClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `ManagedKafkaClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `ManagedKafkaClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `ManagedKafkaClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -927,9 +925,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listClusters(
-    request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ListClustersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listClusters(
@@ -939,13 +937,13 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listClusters(
-    byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListClustersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Cluster, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedKafkaV1.ListClustersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listClusters(
@@ -964,9 +962,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func getCluster(
-    request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Cluster {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCluster(
@@ -985,24 +983,24 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func createCluster(
-    request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+  public func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.createCluster(withPolling: withPolling, options: .init())
   }
 
   public func createCluster(
-    withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1010,7 +1008,7 @@ extension Clients.ManagedKafkaProtocol {
     parent: Swift.String,
     cluster: Cluster?,
     clusterId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = CreateClusterRequest().with {
       $0.parent = parent
       $0.cluster = cluster
@@ -1026,31 +1024,31 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func updateCluster(
-    request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleCloudGax
+  public func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.updateCluster(withPolling: withPolling, options: .init())
   }
 
   public func updateCluster(
-    withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCluster(
     cluster: Cluster?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = UpdateClusterRequest().with {
       $0.cluster = cluster
       $0.updateMask = updateMask
@@ -1065,30 +1063,30 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func deleteCluster(
-    request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
+  public func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteCluster(withPolling: withPolling, options: .init())
   }
 
   public func deleteCluster(
-    withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCluster(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteClusterRequest().with {
       $0.name = name
     }
@@ -1102,9 +1100,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listTopics(
-    request: ListTopicsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTopicsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ListTopicsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTopics(
@@ -1114,13 +1112,13 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listTopics(
-    byItem: ListTopicsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTopicsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Topic, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedKafkaV1.ListTopicsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTopics(
@@ -1137,9 +1135,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func getTopic(
-    request: GetTopicRequest, options: GoogleCloudGax.RequestOptions
+    request: GetTopicRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Topic {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getTopic(
@@ -1158,9 +1156,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func createTopic(
-    request: CreateTopicRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateTopicRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Topic {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createTopic(
@@ -1183,14 +1181,14 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func updateTopic(
-    request: UpdateTopicRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateTopicRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Topic {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateTopic(
     topic: Topic?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudManagedKafkaV1.Topic {
     let request = UpdateTopicRequest().with {
       $0.topic = topic
@@ -1204,9 +1202,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func deleteTopic(
-    request: DeleteTopicRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteTopicRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteTopic(
@@ -1225,9 +1223,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listConsumerGroups(
-    request: ListConsumerGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListConsumerGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ListConsumerGroupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listConsumerGroups(
@@ -1237,13 +1235,13 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listConsumerGroups(
-    byItem: ListConsumerGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListConsumerGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ConsumerGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedKafkaV1.ListConsumerGroupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listConsumerGroups(
@@ -1262,9 +1260,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func getConsumerGroup(
-    request: GetConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConsumerGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConsumerGroup(
@@ -1283,14 +1281,14 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func updateConsumerGroup(
-    request: UpdateConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateConsumerGroupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateConsumerGroup(
     consumerGroup: ConsumerGroup?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudManagedKafkaV1.ConsumerGroup {
     let request = UpdateConsumerGroupRequest().with {
       $0.consumerGroup = consumerGroup
@@ -1304,9 +1302,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func deleteConsumerGroup(
-    request: DeleteConsumerGroupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteConsumerGroupRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteConsumerGroup(
@@ -1325,9 +1323,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listAcls(
-    request: ListAclsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAclsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.ListAclsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAcls(
@@ -1337,13 +1335,13 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listAcls(
-    byItem: ListAclsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAclsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Acl, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudManagedKafkaV1.ListAclsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAcls(
@@ -1360,9 +1358,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func getAcl(
-    request: GetAclRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Acl {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAcl(
@@ -1379,9 +1377,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func createAcl(
-    request: CreateAclRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Acl {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createAcl(
@@ -1402,14 +1400,14 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func updateAcl(
-    request: UpdateAclRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAclRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.Acl {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAcl(
     acl: Acl?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudManagedKafkaV1.Acl {
     let request = UpdateAclRequest().with {
       $0.acl = acl
@@ -1423,9 +1421,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func deleteAcl(
-    request: DeleteAclRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAclRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAcl(
@@ -1444,9 +1442,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func addAclEntry(
-    request: AddAclEntryRequest, options: GoogleCloudGax.RequestOptions
+    request: AddAclEntryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.AddAclEntryResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func addAclEntry(
@@ -1467,9 +1465,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func removeAclEntry(
-    request: RemoveAclEntryRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveAclEntryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudManagedKafkaV1.RemoveAclEntryResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func removeAclEntry(
@@ -1490,9 +1488,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -1502,13 +1500,13 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1518,9 +1516,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1530,9 +1528,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -1542,13 +1540,13 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1569,9 +1567,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1588,9 +1586,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1607,9 +1605,9 @@ extension Clients.ManagedKafkaProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

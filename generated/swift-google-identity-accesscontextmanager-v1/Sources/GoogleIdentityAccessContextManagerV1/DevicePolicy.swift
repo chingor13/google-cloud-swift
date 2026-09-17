@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIdentityAccessContextManagerType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `DevicePolicy` specifies device specific restrictions necessary to acquire a
 /// given access level. A `DevicePolicy` specifies requirements for requests from
@@ -27,7 +27,7 @@ import GoogleIdentityAccessContextManagerType
 /// DESKTOP_LINUX, encryption_status: ENCRYPTED}, then the DevicePolicy will be
 /// true for requests originating from encrypted Linux desktops and encrypted
 /// Windows desktops.
-public struct DevicePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DevicePolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Whether or not screenlock is required for the DevicePolicy to be true.
@@ -52,7 +52,7 @@ public struct DevicePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Whether the device needs to be corp owned.
   public var requireCorpOwned: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DevicePolicy`.
   public init() {}
@@ -122,7 +122,7 @@ public struct DevicePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -142,10 +142,10 @@ public struct DevicePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.identity.accesscontextmanager.v1.DevicePolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

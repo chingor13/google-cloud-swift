@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request for sending an AdaptiveMt translation query.
-public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Location to make a regional call.
@@ -44,7 +44,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
   /// an INVALID_ARGUMENT (400) error is returned.
   public var glossaryConfig: AdaptiveMtTranslateRequest.GlossaryConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AdaptiveMtTranslateRequest`.
   public init() {}
@@ -105,7 +105,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       AdaptiveMtTranslateRequest.GlossaryConfig.self, forKey: .glossaryConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -123,7 +123,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
   }
 
   /// A pair of sentences used as reference in source and target languages.
-  public struct ReferenceSentencePair: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReferenceSentencePair: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Source sentence in the sentence pair.
@@ -132,7 +132,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
     /// Target sentence in the sentence pair.
     public var targetSentence: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReferenceSentencePair`.
     public init() {}
@@ -175,7 +175,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -192,22 +192,22 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePair"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A list of reference sentence pairs.
-  public struct ReferenceSentencePairList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReferenceSentencePairList: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Reference sentence pairs.
     public var referenceSentencePairs: [AdaptiveMtTranslateRequest.ReferenceSentencePair] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReferenceSentencePairList`.
     public init() {}
@@ -247,7 +247,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -263,16 +263,16 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentencePairList"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Message of caller-provided reference configuration.
-  public struct ReferenceSentenceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReferenceSentenceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Reference sentences pair lists. Each list will be used as the references
@@ -288,7 +288,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
     /// Target language code.
     public var targetLanguageCode: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReferenceSentenceConfig`.
     public init() {}
@@ -339,7 +339,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -357,18 +357,18 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.translation.v3.AdaptiveMtTranslateRequest.ReferenceSentenceConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configures which glossary is used for a specific target language and
   /// defines
   /// options for applying that glossary.
-  public struct GlossaryConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GlossaryConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The `glossary` to be applied for this translation.
@@ -387,7 +387,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
     /// translation.
     public var contextualTranslationEnabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GlossaryConfig`.
     public init() {}
@@ -438,7 +438,7 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -456,21 +456,21 @@ public struct AdaptiveMtTranslateRequest: Codable, Equatable, GoogleCloudWKT._An
       return
         "type.googleapis.com/google.cloud.translation.v3.AdaptiveMtTranslateRequest.GlossaryConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.translation.v3.AdaptiveMtTranslateRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

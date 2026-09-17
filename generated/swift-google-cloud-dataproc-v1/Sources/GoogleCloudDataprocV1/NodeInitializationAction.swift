@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Specifies an executable to run on a fully configured node and a
 /// timeout period for executable completion.
-public struct NodeInitializationAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NodeInitializationAction: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Cloud Storage URI of executable file.
@@ -32,9 +32,9 @@ public struct NodeInitializationAction: Codable, Equatable, GoogleCloudWKT._AnyP
   /// Cluster creation fails with an explanatory error message (the
   /// name of the executable that caused the error and the exceeded timeout
   /// period) if the executable is not completed at end of the timeout period.
-  public var executionTimeout: GoogleCloudWKT.Duration? = nil
+  public var executionTimeout: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NodeInitializationAction`.
   public init() {}
@@ -73,10 +73,10 @@ public struct NodeInitializationAction: Codable, Equatable, GoogleCloudWKT._AnyP
       self.executableFile = value
     }
     self.executionTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .executionTimeout)
+      GoogleWKT.Duration.self, forKey: .executionTimeout)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +92,10 @@ public struct NodeInitializationAction: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.NodeInitializationAction"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

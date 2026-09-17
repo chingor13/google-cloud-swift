@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The state of ConfigSync's deployment on a cluster
-public struct ConfigSyncDeploymentState: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ConfigSyncDeploymentState: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Deployment state of the importer pod
@@ -42,7 +42,7 @@ public struct ConfigSyncDeploymentState: Codable, Equatable, GoogleCloudWKT._Any
   /// Deployment state of admission-webhook
   public var admissionWebhook: DeploymentState = DeploymentState()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ConfigSyncDeploymentState`.
   public init() {}
@@ -110,7 +110,7 @@ public struct ConfigSyncDeploymentState: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -131,10 +131,10 @@ public struct ConfigSyncDeploymentState: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.configmanagement.v1.ConfigSyncDeploymentState"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

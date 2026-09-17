@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SnoozeServiceStub: Sendable {
     func createSnooze(
-      request: CreateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze
 
     func listSnoozes(
-      request: ListSnoozesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSnoozesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListSnoozesResponse
 
     func getSnooze(
-      request: GetSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze
 
     func updateSnooze(
-      request: UpdateSnoozeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSnoozeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Snooze
   }
 }

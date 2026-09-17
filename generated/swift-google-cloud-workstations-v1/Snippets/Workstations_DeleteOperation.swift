@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudWorkstationsV1
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: WorkstationsClient) async throws {
   try await client.deleteOperation(

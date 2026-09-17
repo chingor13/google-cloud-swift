@@ -16,7 +16,7 @@
 
 #if IdentityMappingStoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// IdentityMappingEntry LongRunningOperation metadata for
   /// [IdentityMappingStoreService.ImportIdentityMappings][google.cloud.discoveryengine.v1.IdentityMappingStoreService.ImportIdentityMappings]
@@ -25,8 +25,7 @@
   ///
   /// [google.cloud.discoveryengine.v1.IdentityMappingStoreService.ImportIdentityMappings]: <doc:IdentityMappingStoreServiceClient/importIdentityMappings(request:options:)>
   /// [google.cloud.discoveryengine.v1.IdentityMappingStoreService.PurgeIdentityMappings]: <doc:IdentityMappingStoreServiceClient/purgeIdentityMappings(request:options:)>
-  public struct IdentityMappingEntryOperationMetadata: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct IdentityMappingEntryOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of IdentityMappingEntries that were successfully processed.
@@ -38,7 +37,7 @@
     /// The total number of IdentityMappingEntries that were processed.
     public var totalCount: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IdentityMappingEntryOperationMetadata`.
     public init() {}
@@ -86,7 +85,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -104,11 +103,11 @@
       return
         "type.googleapis.com/google.cloud.discoveryengine.v1.IdentityMappingEntryOperationMetadata"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

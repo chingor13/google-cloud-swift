@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Contains an operation for a resource loosely based on the JSON-PATCH format
 /// with support for:
@@ -26,7 +26,7 @@ import Foundation
 ///   described.
 /// * Allows extension to custom operations not natively supported by RFC6902.
 /// See https://tools.ietf.org/html/rfc6902 for details on the original RFC.
-public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Type of this operation. Contains one of 'add', 'remove', 'replace', 'move',
@@ -87,7 +87,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// ```
   /// When both path_filters and path_value_matchers are set, an implicit AND
   /// must be performed.
-  public var pathFilters: [Swift.String: GoogleCloudWKT.Value] = [:]
+  public var pathFilters: [Swift.String: GoogleWKT.Value] = [:]
 
   /// Similar to path_filters, this contains set of filters to apply if `path`
   /// field refers to array elements. This is meant to support value matching
@@ -100,7 +100,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// describe a value for 'path' field.
   public var pathValue: OneOf_PathValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Operation`.
   public init() {}
@@ -170,7 +170,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.sourcePath = value
     }
     if let value = try container.decodeIfPresent(
-      [Swift.String: GoogleCloudWKT.Value].self, forKey: .pathFilters)
+      [Swift.String: GoogleWKT.Value].self, forKey: .pathFilters)
     {
       self.pathFilters = value
     }
@@ -190,7 +190,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       pathValue = $0
     }
-    if let value = try container.decodeIfPresent(GoogleCloudWKT.Value?.self, forKey: .value) {
+    if let value = try container.decodeIfPresent(GoogleWKT.Value?.self, forKey: .value) {
       try pathValueCheckAndSet(.value(value))
     }
     if let valueMatcher = try container.decodeIfPresent(ValueMatcher?.self, forKey: .valueMatcher) {
@@ -199,7 +199,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.pathValue = pathValue
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -233,7 +233,7 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Value for the `path` field. Will be set for actions:'add'/'replace'.
     /// Maybe set for action: 'test'. Either this or `value_matcher` will be set
     /// for 'test' operation. An exact match must be performed.
-    indirect case value(GoogleCloudWKT.Value?)
+    indirect case value(GoogleWKT.Value?)
     /// Can be set for action 'test' for advanced matching for the value of
     /// 'path' field. Either this or `value` will be set for 'test' operation.
     indirect case valueMatcher(ValueMatcher?)
@@ -242,10 +242,10 @@ public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recommender.v1.Operation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -17,8 +17,8 @@ import GRPCCore
 import GRPCNIOTransportHTTP2Posix
 import GRPCProtobuf
 import GoogleAuth
-@_spi(GoogleCloudInternal) import GoogleCloudGax
-@_spi(GoogleCloudInternal) @testable import GoogleCloudGaxGRPC
+@_spi(GoogleCloudInternal) import GoogleGax
+@_spi(GoogleCloudInternal) @testable import GoogleGaxGRPC
 import GoogleRpc
 import SwiftProtobuf
 import Testing

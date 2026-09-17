@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudTelcoAutomationV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: TelcoAutomationClient, projectId: String, locationId: String,
@@ -34,7 +34,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/orchestrationClusters/\(orchestrationClusterId)/deployments/\(deploymentId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

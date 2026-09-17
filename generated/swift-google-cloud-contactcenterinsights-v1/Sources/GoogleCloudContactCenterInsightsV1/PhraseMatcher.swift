@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The phrase matcher resource.
-public struct PhraseMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PhraseMatcher: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the phrase matcher.
@@ -38,7 +38,7 @@ public struct PhraseMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The timestamp of when the revision was created. It is also the
   /// create time when a new matcher is added.
-  public var revisionCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var revisionCreateTime: GoogleWKT.Timestamp? = nil
 
   /// The human-readable name of the phrase matcher.
   public var displayName: Swift.String = Swift.String()
@@ -54,7 +54,7 @@ public struct PhraseMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. The most recent time at which the activation status was
   /// updated.
-  public var activationUpdateTime: GoogleCloudWKT.Timestamp? = nil
+  public var activationUpdateTime: GoogleWKT.Timestamp? = nil
 
   /// The role whose utterances the phrase matcher should be matched
   /// against. If the role is ROLE_UNSPECIFIED it will be matched against any
@@ -62,9 +62,9 @@ public struct PhraseMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var roleMatch: ConversationParticipant.Role = ConversationParticipant.Role()
 
   /// Output only. The most recent time at which the phrase matcher was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PhraseMatcher`.
   public init() {}
@@ -127,7 +127,7 @@ public struct PhraseMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.versionTag = value
     }
     self.revisionCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .revisionCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .revisionCreateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .displayName) {
       self.displayName = value
     }
@@ -145,17 +145,16 @@ public struct PhraseMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.phraseMatchRuleGroups = value
     }
     self.activationUpdateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .activationUpdateTime)
+      GoogleWKT.Timestamp.self, forKey: .activationUpdateTime)
     if let value = try container.decodeIfPresent(
       ConversationParticipant.Role.self, forKey: .roleMatch)
     {
       self.roleMatch = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -286,10 +285,10 @@ public struct PhraseMatcher: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.PhraseMatcher"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

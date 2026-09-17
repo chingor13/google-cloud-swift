@@ -16,10 +16,10 @@
 
 #if SqlFlagsService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A flag resource.
-  public struct Flag: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Flag: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This is the name of the flag. Flag names always use underscores, not
@@ -47,20 +47,20 @@
     public var allowedStringValues: [Swift.String] = []
 
     /// For `INTEGER` flags, the minimum allowed value.
-    public var minValue: GoogleCloudWKT.Int64Value? = nil
+    public var minValue: GoogleWKT.Int64Value? = nil
 
     /// For `INTEGER` flags, the maximum allowed value.
-    public var maxValue: GoogleCloudWKT.Int64Value? = nil
+    public var maxValue: GoogleWKT.Int64Value? = nil
 
     /// Indicates whether changing this flag will trigger a database restart. Only
     /// applicable to Second Generation instances.
-    public var requiresRestart: GoogleCloudWKT.BoolValue? = nil
+    public var requiresRestart: GoogleWKT.BoolValue? = nil
 
     /// This is always `sql#flag`.
     public var kind: Swift.String = Swift.String()
 
     /// Whether or not the flag is considered in beta.
-    public var inBeta: GoogleCloudWKT.BoolValue? = nil
+    public var inBeta: GoogleWKT.BoolValue? = nil
 
     /// Use this field if only certain integers are accepted. Can be combined
     /// with min_value and max_value to add additional values.
@@ -72,7 +72,7 @@
     /// Recommended flag value for UI display.
     public var recommendedValue: OneOf_RecommendedValue? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Flag`.
     public init() {}
@@ -143,16 +143,14 @@
       {
         self.allowedStringValues = value
       }
-      self.minValue = try container.decodeIfPresent(
-        GoogleCloudWKT.Int64Value.self, forKey: .minValue)
-      self.maxValue = try container.decodeIfPresent(
-        GoogleCloudWKT.Int64Value.self, forKey: .maxValue)
+      self.minValue = try container.decodeIfPresent(GoogleWKT.Int64Value.self, forKey: .minValue)
+      self.maxValue = try container.decodeIfPresent(GoogleWKT.Int64Value.self, forKey: .maxValue)
       self.requiresRestart = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .requiresRestart)
+        GoogleWKT.BoolValue.self, forKey: .requiresRestart)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .kind) {
         self.kind = value
       }
-      self.inBeta = try container.decodeIfPresent(GoogleCloudWKT.BoolValue.self, forKey: .inBeta)
+      self.inBeta = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .inBeta)
       if let value = try container.decodeIfPresent([Swift.Int64].self, forKey: .allowedIntValues) {
         self.allowedIntValues = value
       }
@@ -176,14 +174,14 @@
         try recommendedValueCheckAndSet(.recommendedStringValue(recommendedStringValue))
       }
       if let recommendedIntValue = try container.decodeIfPresent(
-        GoogleCloudWKT.Int64Value?.self, forKey: .recommendedIntValue)
+        GoogleWKT.Int64Value?.self, forKey: .recommendedIntValue)
       {
         try recommendedValueCheckAndSet(.recommendedIntValue(recommendedIntValue))
       }
       self.recommendedValue = recommendedValue
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -219,17 +217,17 @@
       /// Recommended string value in string format for UI display.
       case recommendedStringValue(Swift.String)
       /// Recommended int value in integer format for UI display.
-      indirect case recommendedIntValue(GoogleCloudWKT.Int64Value?)
+      indirect case recommendedIntValue(GoogleWKT.Int64Value?)
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.Flag"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

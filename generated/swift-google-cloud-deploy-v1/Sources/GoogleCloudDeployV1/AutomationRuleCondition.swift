@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `AutomationRuleCondition` contains conditions relevant to an
 /// `Automation` rule.
-public struct AutomationRuleCondition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutomationRuleCondition: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Details around targets enumerated in the rule.
@@ -28,7 +28,7 @@ public struct AutomationRuleCondition: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// Details specific to the automation rule type.
   public var ruleTypeCondition: OneOf_RuleTypeCondition? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutomationRuleCondition`.
   public init() {}
@@ -85,7 +85,7 @@ public struct AutomationRuleCondition: Codable, Equatable, GoogleCloudWKT._AnyPa
     self.ruleTypeCondition = ruleTypeCondition
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,10 +114,10 @@ public struct AutomationRuleCondition: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.AutomationRuleCondition"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

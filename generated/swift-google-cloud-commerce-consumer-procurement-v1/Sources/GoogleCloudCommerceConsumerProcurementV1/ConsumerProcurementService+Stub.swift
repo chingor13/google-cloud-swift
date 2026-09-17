@@ -15,35 +15,35 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ConsumerProcurementServiceStub: Sendable {
     func placeOrder(
-      request: PlaceOrderRequest, options: GoogleCloudGax.RequestOptions
+      request: PlaceOrderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOrder(
-      request: GetOrderRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOrderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.Order
 
     func listOrders(
-      request: ListOrdersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrdersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudCommerceConsumerProcurementV1.ListOrdersResponse
 
     func modifyOrder(
-      request: ModifyOrderRequest, options: GoogleCloudGax.RequestOptions
+      request: ModifyOrderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOrder(
-      request: CancelOrderRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelOrderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

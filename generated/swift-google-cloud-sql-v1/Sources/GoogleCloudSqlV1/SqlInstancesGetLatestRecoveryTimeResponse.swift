@@ -16,10 +16,10 @@
 
 #if SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Instance get latest recovery time response.
-  public struct SqlInstancesGetLatestRecoveryTimeResponse: Codable, Equatable, GoogleCloudWKT
+  public struct SqlInstancesGetLatestRecoveryTimeResponse: Codable, Equatable, GoogleWKT
       ._AnyPackable,
     Sendable
   {
@@ -27,12 +27,12 @@
     public var kind: Swift.String = Swift.String()
 
     /// Timestamp, identifies the latest recovery time of the source instance.
-    public var latestRecoveryTime: GoogleCloudWKT.Timestamp? = nil
+    public var latestRecoveryTime: GoogleWKT.Timestamp? = nil
 
     /// Timestamp, identifies the earliest recovery time of the source instance.
-    public var earliestRecoveryTime: GoogleCloudWKT.Timestamp? = nil
+    public var earliestRecoveryTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SqlInstancesGetLatestRecoveryTimeResponse`.
     public init() {}
@@ -73,12 +73,12 @@
         self.kind = value
       }
       self.latestRecoveryTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .latestRecoveryTime)
+        GoogleWKT.Timestamp.self, forKey: .latestRecoveryTime)
       self.earliestRecoveryTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .earliestRecoveryTime)
+        GoogleWKT.Timestamp.self, forKey: .earliestRecoveryTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -95,11 +95,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SqlInstancesGetLatestRecoveryTimeResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Conditions that determine which objects are transferred. Applies only
 /// to Cloud Data Sources such as S3, Azure, and Cloud Storage.
@@ -36,7 +36,7 @@ import Foundation
 /// source or destination don't support `ObjectConditions`.
 ///
 /// [google.storagetransfer.v1.PosixFilesystem]: <doc:PosixFilesystem>
-public struct ObjectConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ObjectConditions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Ensures that objects are not transferred until a specific minimum time
@@ -51,7 +51,7 @@ public struct ObjectConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.storagetransfer.v1.TransferOperation]: <doc:TransferOperation>
   /// [google.storagetransfer.v1.TransferOperation.start_time]: <doc:TransferOperation/startTime>
-  public var minTimeElapsedSinceLastModification: GoogleCloudWKT.Duration? = nil
+  public var minTimeElapsedSinceLastModification: GoogleWKT.Duration? = nil
 
   /// Ensures that objects are not transferred if a specific maximum time
   /// has elapsed since the "last modification time".
@@ -65,7 +65,7 @@ public struct ObjectConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.storagetransfer.v1.TransferOperation]: <doc:TransferOperation>
   /// [google.storagetransfer.v1.TransferOperation.start_time]: <doc:TransferOperation/startTime>
-  public var maxTimeElapsedSinceLastModification: GoogleCloudWKT.Duration? = nil
+  public var maxTimeElapsedSinceLastModification: GoogleWKT.Duration? = nil
 
   /// If you specify `include_prefixes`, Storage Transfer Service uses the items
   /// in the `include_prefixes` array to determine which objects to include in a
@@ -147,14 +147,14 @@ public struct ObjectConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// *  `last_modified_since` to the start of the day
   ///
   /// *  `last_modified_before` to the end of the day
-  public var lastModifiedSince: GoogleCloudWKT.Timestamp? = nil
+  public var lastModifiedSince: GoogleWKT.Timestamp? = nil
 
   /// If specified, only objects with a "last modification time" before this
   /// timestamp and objects that don't have a "last modification time" are
   /// transferred.
-  public var lastModifiedBefore: GoogleCloudWKT.Timestamp? = nil
+  public var lastModifiedBefore: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ObjectConditions`.
   public init() {}
@@ -200,9 +200,9 @@ public struct ObjectConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.minTimeElapsedSinceLastModification = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .minTimeElapsedSinceLastModification)
+      GoogleWKT.Duration.self, forKey: .minTimeElapsedSinceLastModification)
     self.maxTimeElapsedSinceLastModification = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxTimeElapsedSinceLastModification)
+      GoogleWKT.Duration.self, forKey: .maxTimeElapsedSinceLastModification)
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .includePrefixes) {
       self.includePrefixes = value
     }
@@ -210,12 +210,12 @@ public struct ObjectConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.excludePrefixes = value
     }
     self.lastModifiedSince = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastModifiedSince)
+      GoogleWKT.Timestamp.self, forKey: .lastModifiedSince)
     self.lastModifiedBefore = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastModifiedBefore)
+      GoogleWKT.Timestamp.self, forKey: .lastModifiedBefore)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -237,10 +237,10 @@ public struct ObjectConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.storagetransfer.v1.ObjectConditions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

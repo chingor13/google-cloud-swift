@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class SqlConnectServiceRetry: SqlConnectServiceStub {
       let inner: any SqlConnectServiceStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any SqlConnectServiceStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any SqlConnectServiceStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func getConnectSettings(
-        request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConnectSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GetConnectSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetConnectSettingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.ConnectSettings
             in
             return try await self.inner.getConnectSettings(request: r, options: o)
@@ -65,14 +65,14 @@
       }
 
       public func resolveConnectSettings(
-        request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ResolveConnectSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: ResolveConnectSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ResolveConnectSettingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.ConnectSettings
             in
             return try await self.inner.resolveConnectSettings(request: r, options: o)
@@ -80,14 +80,14 @@
       }
 
       public func generateEphemeralCert(
-        request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateEphemeralCertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: GenerateEphemeralCertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GenerateEphemeralCertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
             in
             return try await self.inner.generateEphemeralCert(request: r, options: o)

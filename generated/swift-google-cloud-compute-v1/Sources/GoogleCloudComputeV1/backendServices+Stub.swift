@@ -16,87 +16,83 @@
 
 #if BackendServices
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol BackendServicesStub: Sendable {
       func addSignedUrlKey(
-        request: BackendServicesClient.AddSignedUrlKeyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.AddSignedUrlKeyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: BackendServicesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendServiceAggregatedList
 
       func delete(
-        request: BackendServicesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func deleteSignedUrlKey(
-        request: BackendServicesClient.DeleteSignedUrlKeyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.DeleteSignedUrlKeyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: BackendServicesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendService
 
       func getEffectiveSecurityPolicies(
         request: BackendServicesClient.GetEffectiveSecurityPoliciesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws
 
       func getHealth(
-        request: BackendServicesClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.GetHealthRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendServiceGroupHealth
 
       func getIamPolicy(
-        request: BackendServicesClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: BackendServicesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: BackendServicesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendServiceList
 
       func listUsable(
-        request: BackendServicesClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.ListUsableRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.BackendServiceListUsable
 
       func patch(
-        request: BackendServicesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setEdgeSecurityPolicy(
         request: BackendServicesClient.SetEdgeSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: BackendServicesClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setSecurityPolicy(
-        request: BackendServicesClient.SetSecurityPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.SetSecurityPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: BackendServicesClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func update(
-        request: BackendServicesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: BackendServicesClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

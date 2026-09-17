@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An event issued when an end user interacts with the application that
 /// implements Cloud Talent Solution. Providing this information improves the
 /// quality of results for the API clients, enabling the
 /// service to perform optimally. The number of events sent must be consistent
 /// with other calls, such as job searches, issued to the service by the client.
-public struct ClientEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ClientEvent: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Strongly recommended for the best service experience.
@@ -37,7 +37,7 @@ public struct ClientEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var eventId: Swift.String = Swift.String()
 
   /// Required. The timestamp of the event.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Notes about the event provided by recruiters or other users, for example,
   /// feedback on why a job was bookmarked.
@@ -48,7 +48,7 @@ public struct ClientEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The detail information of a specific event type.
   public var event: OneOf_Event? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ClientEvent`.
   public init() {}
@@ -95,8 +95,7 @@ public struct ClientEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .eventId) {
       self.eventId = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .eventNotes) {
       self.eventNotes = value
     }
@@ -117,7 +116,7 @@ public struct ClientEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.event = event
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -151,10 +150,10 @@ public struct ClientEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.ClientEvent"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Egress control config for connector runtime. These configurations define the
 /// rules to identify which outbound domains/hosts needs to be whitelisted. It
 /// may be a static information for a particular connector version or it is
 /// derived from the configurations provided by the customer in Connection
 /// resource.
-public struct EgressControlConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EgressControlConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var oneofBackends: OneOf_OneofBackends? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EgressControlConfig`.
   public init() {}
@@ -84,7 +84,7 @@ public struct EgressControlConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.oneofBackends = oneofBackends
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -117,10 +117,10 @@ public struct EgressControlConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.connectors.v1.EgressControlConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

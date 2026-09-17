@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents what's commonly known as an _indicator of compromise_ (IoC) in
 /// computer forensics. This is an artifact observed on a network or in an
 /// operating system that, with high confidence, indicates a computer intrusion.
 /// For more information, see [Indicator of
 /// compromise](https://en.wikipedia.org/wiki/Indicator_of_compromise).
-public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Indicator: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The list of IP addresses that are associated with the finding.
@@ -38,7 +38,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The list of URIs associated to the Findings.
   public var uris: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Indicator`.
   public init() {}
@@ -93,7 +93,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,7 +109,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Indicates what signature matched this process.
-  public struct ProcessSignature: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ProcessSignature: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Describes the type of resource associated with the signature.
@@ -119,7 +119,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The signature.
     public var signature: OneOf_Signature? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ProcessSignature`.
     public init() {}
@@ -185,7 +185,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.signature = signature
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -207,7 +207,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// A signature corresponding to memory page hashes.
-    public struct MemoryHashSignature: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MemoryHashSignature: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The binary family.
@@ -217,7 +217,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// match.
       public var detections: [Indicator.ProcessSignature.MemoryHashSignature.Detection] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MemoryHashSignature`.
       public init() {}
@@ -262,7 +262,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -276,7 +276,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
 
       /// Memory hash detection contributing to the binary family match.
-      public struct Detection: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Detection: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// The name of the binary associated with the memory hash
@@ -287,8 +287,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         /// that were matched.
         public var percentPagesMatched: Swift.Double = Swift.Double()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Detection`.
         public init() {}
@@ -333,7 +332,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -350,11 +349,11 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.cloud.securitycenter.v2.Indicator.ProcessSignature.MemoryHashSignature.Detection"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -362,22 +361,22 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.securitycenter.v2.Indicator.ProcessSignature.MemoryHashSignature"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// A signature corresponding to a YARA rule.
-    public struct YaraRuleSignature: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct YaraRuleSignature: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the YARA rule.
       public var yaraRule: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `YaraRuleSignature`.
       public init() {}
@@ -415,7 +414,7 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -431,11 +430,11 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.securitycenter.v2.Indicator.ProcessSignature.YaraRuleSignature"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -555,21 +554,21 @@ public struct Indicator: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.Indicator.ProcessSignature"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.Indicator"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

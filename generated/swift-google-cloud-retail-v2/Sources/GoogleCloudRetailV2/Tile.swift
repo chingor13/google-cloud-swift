@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// This field specifies the tile information including an attribute key,
 /// attribute value. More fields will be added in the future, eg: product id
 /// or product counts, etc.
-public struct Tile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Tile: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The representative product id for this tile.
@@ -29,7 +29,7 @@ public struct Tile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The attribute key and value for the tile.
   public var productAttribute: OneOf_ProductAttribute? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Tile`.
   public init() {}
@@ -95,7 +95,7 @@ public struct Tile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.productAttribute = productAttribute
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -127,10 +127,10 @@ public struct Tile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.Tile"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

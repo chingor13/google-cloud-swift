@@ -16,62 +16,62 @@
 
 #if Subnetworks
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SubnetworksStub: Sendable {
       func aggregatedList(
-        request: SubnetworksClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SubnetworkAggregatedList
 
       func delete(
-        request: SubnetworksClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func expandIpCidrRange(
-        request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ExpandIpCidrRangeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: SubnetworksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Subnetwork
 
       func getIamPolicy(
-        request: SubnetworksClient.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: SubnetworksClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: SubnetworksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SubnetworkList
 
       func listUsable(
-        request: SubnetworksClient.ListUsableRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.ListUsableRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UsableSubnetworksAggregatedList
 
       func patch(
-        request: SubnetworksClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: SubnetworksClient.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func setPrivateIpGoogleAccess(
         request: SubnetworksClient.SetPrivateIpGoogleAccessRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: SubnetworksClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

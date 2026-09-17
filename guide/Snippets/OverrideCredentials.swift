@@ -17,7 +17,7 @@
 // snippet.imports
 import Foundation
 import GoogleAuth
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudLanguageV2
 // snippet.end
 

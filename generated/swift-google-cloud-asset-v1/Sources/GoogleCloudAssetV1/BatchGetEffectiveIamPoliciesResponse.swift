@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIAMV1
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A response message for
 /// [AssetService.BatchGetEffectiveIamPolicies][google.cloud.asset.v1.AssetService.BatchGetEffectiveIamPolicies].
 ///
 /// [google.cloud.asset.v1.AssetService.BatchGetEffectiveIamPolicies]: <doc:AssetServiceClient/batchGetEffectiveIamPolicies(request:options:)>
-public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The effective policies for a batch of resources. Note that the results
@@ -36,7 +36,7 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
   /// [google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.policies]: <doc:BatchGetEffectiveIamPoliciesResponse/EffectiveIamPolicy/policies>
   public var policyResults: [BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchGetEffectiveIamPoliciesResponse`.
   public init() {}
@@ -76,7 +76,7 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -89,7 +89,7 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
   }
 
   /// The effective IAM policies on one resource.
-  public struct EffectiveIamPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EffectiveIamPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The [full_resource_name]
@@ -130,7 +130,7 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
     /// [google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.full_resource_name]: <doc:BatchGetEffectiveIamPoliciesResponse/EffectiveIamPolicy/fullResourceName>
     public var policies: [BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EffectiveIamPolicy`.
     public init() {}
@@ -175,7 +175,7 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -189,7 +189,7 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
     }
 
     /// The IAM policy and its attached resource.
-    public struct PolicyInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PolicyInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The full resource name the
@@ -205,7 +205,7 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
       /// [google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo.attached_resource]: <doc:BatchGetEffectiveIamPoliciesResponse/EffectiveIamPolicy/PolicyInfo/attachedResource>
       public var policy: GoogleIAMV1.Policy? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PolicyInfo`.
       public init() {}
@@ -246,7 +246,7 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
         self.policy = try container.decodeIfPresent(GoogleIAMV1.Policy.self, forKey: .policy)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -263,11 +263,11 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
         return
           "type.googleapis.com/google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -275,21 +275,21 @@ public struct BatchGetEffectiveIamPoliciesResponse: Codable, Equatable, GoogleCl
       return
         "type.googleapis.com/google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

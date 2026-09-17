@@ -16,18 +16,18 @@
 
 #if DatasetService || DeploymentResourcePoolService || EndpointService || JobService || ModelService || PipelineService || PredictionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Noise sigma by features. Noise sigma represents the standard deviation of the
   /// gaussian kernel that will be used to add noise to interpolated inputs prior
   /// to computing gradients.
-  public struct FeatureNoiseSigma: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FeatureNoiseSigma: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Noise sigma per feature. No noise is added to features that are not set.
     public var noiseSigma: [FeatureNoiseSigma.NoiseSigmaForFeature] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FeatureNoiseSigma`.
     public init() {}
@@ -67,7 +67,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -80,7 +80,7 @@
     }
 
     /// Noise sigma for a single feature.
-    public struct NoiseSigmaForFeature: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct NoiseSigmaForFeature: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The name of the input feature for which noise sigma is provided. The
@@ -99,7 +99,7 @@
       /// [google.cloud.aiplatform.v1.SmoothGradConfig.noise_sigma]: <doc:SmoothGradConfig/OneOf_GradientNoiseSigma/noiseSigma(_:)>
       public var sigma: Swift.Float = Swift.Float()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `NoiseSigmaForFeature`.
       public init() {}
@@ -142,7 +142,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -159,22 +159,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeatureNoiseSigma.NoiseSigmaForFeature"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureNoiseSigma"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

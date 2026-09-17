@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A step in the build pipeline.
-public struct BuildStep: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BuildStep: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the container image that will run this particular
@@ -106,7 +106,7 @@ public struct BuildStep: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Time limit for executing this build step. If not defined, the step has no
   /// time limit and will be allowed to continue to run until either it completes
   /// or the build itself times out.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
   /// Output only. Status of the build step. At this time, build step status is
   /// only updated on build completion; step status is not updated in real-time
@@ -138,7 +138,7 @@ public struct BuildStep: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// in BuildOption.
   public var automapSubstitutions: Swift.Bool? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BuildStep`.
   public init() {}
@@ -234,7 +234,7 @@ public struct BuildStep: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.timing = try container.decodeIfPresent(TimeSpan.self, forKey: .timing)
     self.pullTiming = try container.decodeIfPresent(TimeSpan.self, forKey: .pullTiming)
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     if let value = try container.decodeIfPresent(Build.Status.self, forKey: .status) {
       self.status = value
     }
@@ -254,7 +254,7 @@ public struct BuildStep: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Swift.Bool.self, forKey: .automapSubstitutions)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -286,10 +286,10 @@ public struct BuildStep: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.BuildStep"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

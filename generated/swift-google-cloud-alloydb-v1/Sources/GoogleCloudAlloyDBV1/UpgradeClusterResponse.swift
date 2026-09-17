@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// UpgradeClusterResponse contains the response for upgrade cluster operation.
-public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpgradeClusterResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Status of upgrade operation.
@@ -32,7 +32,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// clusters associated with this cluster.
   public var clusterUpgradeDetails: [UpgradeClusterResponse.ClusterUpgradeDetails] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpgradeClusterResponse`.
   public init() {}
@@ -84,7 +84,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,7 +99,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   }
 
   /// Stage information for different stages in the upgrade process.
-  public struct StageInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct StageInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The stage.
@@ -113,7 +113,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// PG_UPGRADE_CHECK, PRIMARY_INSTANCE_UPGRADE.
     public var logsUrl: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `StageInfo`.
     public init() {}
@@ -165,7 +165,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -182,16 +182,16 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterResponse.StageInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Details regarding the upgrade of instances associated with a cluster.
-  public struct InstanceUpgradeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct InstanceUpgradeDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Normalized name of the instance.
@@ -203,7 +203,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// Instance type.
     public var instanceType: Instance.InstanceType = Instance.InstanceType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstanceUpgradeDetails`.
     public init() {}
@@ -255,7 +255,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -273,16 +273,16 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterResponse.InstanceUpgradeDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Upgrade details of a cluster. This cluster can be primary or secondary.
-  public struct ClusterUpgradeDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ClusterUpgradeDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Normalized name of the cluster
@@ -305,7 +305,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// Upgrade details of the instances directly associated with this cluster.
     public var instanceUpgradeDetails: [UpgradeClusterResponse.InstanceUpgradeDetails] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ClusterUpgradeDetails`.
     public init() {}
@@ -374,7 +374,7 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -395,11 +395,11 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterResponse.ClusterUpgradeDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -686,10 +686,10 @@ public struct UpgradeClusterResponse: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.UpgradeClusterResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

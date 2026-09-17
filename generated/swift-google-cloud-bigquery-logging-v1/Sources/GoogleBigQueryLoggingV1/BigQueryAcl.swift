@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An access control list.
-public struct BigQueryAcl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BigQueryAcl: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Access control entry list.
   public var entries: [BigQueryAcl.Entry] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BigQueryAcl`.
   public init() {}
@@ -62,7 +62,7 @@ public struct BigQueryAcl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -75,7 +75,7 @@ public struct BigQueryAcl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Access control entry.
-  public struct Entry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Entry: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The granted role, which can be `READER`, `WRITER`, or `OWNER`.
@@ -97,7 +97,7 @@ public struct BigQueryAcl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Grants access to a BigQuery View.
     public var viewName: TableName? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Entry`.
     public init() {}
@@ -158,7 +158,7 @@ public struct BigQueryAcl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.viewName = try container.decodeIfPresent(TableName.self, forKey: .viewName)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -178,21 +178,21 @@ public struct BigQueryAcl: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.logging.v1.BigQueryAcl.Entry"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.logging.v1.BigQueryAcl"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

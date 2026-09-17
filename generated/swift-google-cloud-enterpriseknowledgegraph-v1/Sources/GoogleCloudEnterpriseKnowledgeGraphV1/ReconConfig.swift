@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Recon configs
-public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReconConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Extra options that affect entity clustering behavior.
@@ -30,7 +30,7 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Choice of clustering algorithm. Default is ConnectedComponentsConfig.
   public var clusteringConfig: OneOf_ClusteringConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReconConfig`.
   public init() {}
@@ -96,7 +96,7 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.clusteringConfig = clusteringConfig
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -119,7 +119,7 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Options for experimental changes on entity clustering behavior.
-  public struct Options: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Options: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// If true, separate clusters by their geographic region (from geocoding).
@@ -131,7 +131,7 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Warning: processing will no longer be regionalized!
     public var enableGeocodingSeparation: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Options`.
     public init() {}
@@ -171,7 +171,7 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -186,16 +186,16 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.enterpriseknowledgegraph.v1.ReconConfig.Options"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Model Configs
-  public struct ModelConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ModelConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Model name. Refer to external documentation for valid names.
@@ -206,7 +206,7 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// If unspecified, it defaults to the one mentioned in the documentation.
     public var versionTag: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ModelConfig`.
     public init() {}
@@ -249,7 +249,7 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -265,11 +265,11 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.enterpriseknowledgegraph.v1.ReconConfig.ModelConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -284,10 +284,10 @@ public struct ReconConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.enterpriseknowledgegraph.v1.ReconConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service to manage file attachments for Google Cloud support cases.
 ///
@@ -28,7 +28,7 @@ public final class CaseAttachmentServiceClient: Clients.CaseAttachmentServicePro
   let inner: any Clients.CaseAttachmentServiceStub
 
   /// Creates a new `CaseAttachmentServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CaseAttachmentServiceStub = try Clients.CaseAttachmentServiceTransport(
       options)
     inner = Clients.CaseAttachmentServiceRetry(inner, options: options)
@@ -42,7 +42,7 @@ public final class CaseAttachmentServiceClient: Clients.CaseAttachmentServicePro
   ///
   /// @Snippet(path: "CaseAttachmentService_ListAttachments")
   public func listAttachments(
-    request: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAttachmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.ListAttachmentsResponse {
     try await self.inner.listAttachments(request: request, options: options)
   }
@@ -51,7 +51,7 @@ public final class CaseAttachmentServiceClient: Clients.CaseAttachmentServicePro
   ///
   /// @Snippet(path: "CaseAttachmentService_ListAttachments")
   public func listAttachments(
-    byItem: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAttachmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Attachment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSupportV2.ListAttachmentsResponse in
@@ -59,7 +59,7 @@ public final class CaseAttachmentServiceClient: Clients.CaseAttachmentServicePro
       request.pageToken = token
       return try await self.listAttachments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Retrieve an attachment associated with a support case.
@@ -96,7 +96,7 @@ public final class CaseAttachmentServiceClient: Clients.CaseAttachmentServicePro
   ///
   /// @Snippet(path: "CaseAttachmentService_GetAttachment")
   public func getAttachment(
-    request: GetAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.Attachment {
     try await self.inner.getAttachment(request: request, options: options)
   }
@@ -134,17 +134,17 @@ extension Clients {
 
     /// See `CaseAttachmentServiceClient.listAttachments`.
     func listAttachments(
-      request: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttachmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListAttachmentsResponse
 
     /// See `CaseAttachmentServiceClient.listAttachments`.
     func listAttachments(
-      byItem: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAttachmentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Attachment, Swift.Error>
 
     /// See `CaseAttachmentServiceClient.getAttachment`.
     func getAttachment(
-      request: GetAttachmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttachmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Attachment
   }
 }
@@ -158,9 +158,9 @@ extension Clients.CaseAttachmentServiceProtocol {
   }
 
   public func listAttachments(
-    request: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAttachmentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.ListAttachmentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAttachments(
@@ -170,13 +170,13 @@ extension Clients.CaseAttachmentServiceProtocol {
   }
 
   public func listAttachments(
-    byItem: ListAttachmentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAttachmentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Attachment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSupportV2.ListAttachmentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAttachments(
@@ -195,9 +195,9 @@ extension Clients.CaseAttachmentServiceProtocol {
   }
 
   public func getAttachment(
-    request: GetAttachmentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAttachmentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSupportV2.Attachment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAttachment(

@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [EntityTypes][google.cloud.dialogflow.cx.v3.EntityType].
   ///
@@ -32,11 +32,11 @@
   /// @Snippet(path: "EntityTypesQuickstart")
   public final class EntityTypesClient: Clients.EntityTypesProtocol, Sendable {
     let inner: any Clients.EntityTypesStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `EntityTypesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.EntityTypesStub = try Clients.EntityTypesTransport(options)
       inner = Clients.EntityTypesRetry(inner, options: options)
       if let logger = options.logger {
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "EntityTypes_GetEntityType")
     public func getEntityType(
-      request: GetEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntityTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.EntityType {
       try await self.inner.getEntityType(request: request, options: options)
     }
@@ -64,7 +64,7 @@
     ///
     /// @Snippet(path: "EntityTypes_CreateEntityType")
     public func createEntityType(
-      request: CreateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntityTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.EntityType {
       try await self.inner.createEntityType(request: request, options: options)
     }
@@ -77,7 +77,7 @@
     ///
     /// @Snippet(path: "EntityTypes_UpdateEntityType")
     public func updateEntityType(
-      request: UpdateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntityTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.EntityType {
       try await self.inner.updateEntityType(request: request, options: options)
     }
@@ -90,7 +90,7 @@
     ///
     /// @Snippet(path: "EntityTypes_DeleteEntityType")
     public func deleteEntityType(
-      request: DeleteEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntityTypeRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteEntityType(request: request, options: options)
     }
@@ -99,7 +99,7 @@
     ///
     /// @Snippet(path: "EntityTypes_ListEntityTypes")
     public func listEntityTypes(
-      request: ListEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntityTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListEntityTypesResponse {
       try await self.inner.listEntityTypes(request: request, options: options)
     }
@@ -108,7 +108,7 @@
     ///
     /// @Snippet(path: "EntityTypes_ListEntityTypes")
     public func listEntityTypes(
-      byItem: ListEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEntityTypesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<EntityType, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListEntityTypesResponse in
@@ -116,14 +116,14 @@
         request.pageToken = token
         return try await self.listEntityTypes(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Exports the selected entity types.
     ///
     /// @Snippet(path: "EntityTypes_ExportEntityTypes")
     public func exportEntityTypes(
-      request: ExportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportEntityTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.exportEntityTypes(request: request, options: options)
     }
@@ -132,22 +132,22 @@
     ///
     /// @Snippet(path: "EntityTypes_ExportEntityTypes")
     public func exportEntityTypes(
-      withPolling: ExportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportEntityTypesResponse> {
+      withPolling: ExportEntityTypesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportEntityTypesResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ExportEntityTypesResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ExportEntityTypesResponse>.State in
         return try op._extractStatus(ExportEntityTypesResponse.self)
       }
       let rawOp = try await self.exportEntityTypes(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportEntityTypesResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ExportEntityTypesResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -159,7 +159,7 @@
     ///
     /// @Snippet(path: "EntityTypes_ImportEntityTypes")
     public func importEntityTypes(
-      request: ImportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportEntityTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.importEntityTypes(request: request, options: options)
     }
@@ -168,22 +168,22 @@
     ///
     /// @Snippet(path: "EntityTypes_ImportEntityTypes")
     public func importEntityTypes(
-      withPolling: ImportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportEntityTypesResponse> {
+      withPolling: ImportEntityTypesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportEntityTypesResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportEntityTypesResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ImportEntityTypesResponse>.State in
         return try op._extractStatus(ImportEntityTypesResponse.self)
       }
       let rawOp = try await self.importEntityTypes(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportEntityTypesResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ImportEntityTypesResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -212,7 +212,7 @@
     ///
     /// @Snippet(path: "EntityTypes_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -238,7 +238,7 @@
     ///
     /// @Snippet(path: "EntityTypes_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -246,14 +246,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "EntityTypes_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -264,7 +264,7 @@
     ///
     /// @Snippet(path: "EntityTypes_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -275,7 +275,7 @@
     ///
     /// @Snippet(path: "EntityTypes_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -283,7 +283,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -292,7 +292,7 @@
     ///
     /// @Snippet(path: "EntityTypes_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -303,7 +303,7 @@
     ///
     /// @Snippet(path: "EntityTypes_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -342,7 +342,7 @@
       /// See `EntityTypesClient.updateEntityType`.
       func updateEntityType(
         entityType: EntityType?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.EntityType
 
       /// See `EntityTypesClient.deleteEntityType`.
@@ -372,16 +372,16 @@
         -> GoogleLongRunning.Operation
 
       /// See `EntityTypesClient.exportEntityTypes`.
-      func exportEntityTypes(withPolling: ExportEntityTypesRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<ExportEntityTypesResponse>
+      func exportEntityTypes(withPolling: ExportEntityTypesRequest) async throws -> any GoogleGax
+        .PollableOperation<ExportEntityTypesResponse>
 
       /// See `EntityTypesClient.importEntityTypes`.
       func importEntityTypes(request: ImportEntityTypesRequest) async throws
         -> GoogleLongRunning.Operation
 
       /// See `EntityTypesClient.importEntityTypes`.
-      func importEntityTypes(withPolling: ImportEntityTypesRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<ImportEntityTypesResponse>
+      func importEntityTypes(withPolling: ImportEntityTypesRequest) async throws -> any GoogleGax
+        .PollableOperation<ImportEntityTypesResponse>
 
       /// See `EntityTypesClient.listLocations`.
       func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -421,82 +421,82 @@
 
       /// See `EntityTypesClient.getEntityType`.
       func getEntityType(
-        request: GetEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: GetEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.EntityType
 
       /// See `EntityTypesClient.createEntityType`.
       func createEntityType(
-        request: CreateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.EntityType
 
       /// See `EntityTypesClient.updateEntityType`.
       func updateEntityType(
-        request: UpdateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.EntityType
 
       /// See `EntityTypesClient.deleteEntityType`.
       func deleteEntityType(
-        request: DeleteEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteEntityTypeRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `EntityTypesClient.listEntityTypes`.
       func listEntityTypes(
-        request: ListEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListEntityTypesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListEntityTypesResponse
 
       /// See `EntityTypesClient.listEntityTypes`.
       func listEntityTypes(
-        byItem: ListEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListEntityTypesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<EntityType, Swift.Error>
 
       /// See `EntityTypesClient.exportEntityTypes`.
       func exportEntityTypes(
-        request: ExportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportEntityTypesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `EntityTypesClient.exportEntityTypes`.
       func exportEntityTypes(
-        withPolling: ExportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ExportEntityTypesResponse>
+        withPolling: ExportEntityTypesRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ExportEntityTypesResponse>
 
       /// See `EntityTypesClient.importEntityTypes`.
       func importEntityTypes(
-        request: ImportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportEntityTypesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `EntityTypesClient.importEntityTypes`.
       func importEntityTypes(
-        withPolling: ImportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportEntityTypesResponse>
+        withPolling: ImportEntityTypesRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ImportEntityTypesResponse>
 
       /// See `EntityTypesClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `EntityTypesClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `EntityTypesClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `EntityTypesClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `EntityTypesClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `EntityTypesClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -510,9 +510,9 @@
     }
 
     public func getEntityType(
-      request: GetEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntityTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.EntityType {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getEntityType(
@@ -531,9 +531,9 @@
     }
 
     public func createEntityType(
-      request: CreateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntityTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.EntityType {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createEntityType(
@@ -554,14 +554,14 @@
     }
 
     public func updateEntityType(
-      request: UpdateEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntityTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.EntityType {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateEntityType(
       entityType: EntityType?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.EntityType {
       let request = UpdateEntityTypeRequest().with {
         $0.entityType = entityType
@@ -575,9 +575,9 @@
     }
 
     public func deleteEntityType(
-      request: DeleteEntityTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntityTypeRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteEntityType(
@@ -596,9 +596,9 @@
     }
 
     public func listEntityTypes(
-      request: ListEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntityTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListEntityTypesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listEntityTypes(
@@ -608,13 +608,13 @@
     }
 
     public func listEntityTypes(
-      byItem: ListEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEntityTypesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<EntityType, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListEntityTypesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listEntityTypes(
@@ -633,25 +633,25 @@
     }
 
     public func exportEntityTypes(
-      request: ExportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportEntityTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func exportEntityTypes(withPolling: ExportEntityTypesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ExportEntityTypesResponse>
+      -> any GoogleGax.PollableOperation<ExportEntityTypesResponse>
     {
       try await self.exportEntityTypes(withPolling: withPolling, options: .init())
     }
 
     public func exportEntityTypes(
-      withPolling: ExportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportEntityTypesResponse> {
+      withPolling: ExportEntityTypesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportEntityTypesResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportEntityTypesResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ExportEntityTypesResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -662,25 +662,25 @@
     }
 
     public func importEntityTypes(
-      request: ImportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportEntityTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func importEntityTypes(withPolling: ImportEntityTypesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ImportEntityTypesResponse>
+      -> any GoogleGax.PollableOperation<ImportEntityTypesResponse>
     {
       try await self.importEntityTypes(withPolling: withPolling, options: .init())
     }
 
     public func importEntityTypes(
-      withPolling: ImportEntityTypesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportEntityTypesResponse> {
+      withPolling: ImportEntityTypesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportEntityTypesResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportEntityTypesResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ImportEntityTypesResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -691,9 +691,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -703,13 +703,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -719,9 +719,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -731,9 +731,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -743,13 +743,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -770,9 +770,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -789,9 +789,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

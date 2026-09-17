@@ -16,24 +16,24 @@
 
 #if Advice
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Specifies a flexible time range with flexible start time and duration.
   ///
   /// It is possible to specify a contradictory time range that cannot be matched
   /// by any Interval. This causes a validation error.
-  public struct FlexibleTimeRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FlexibleTimeRange: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    public var maxDuration: GoogleCloudWKT.Duration? = nil
+    public var maxDuration: GoogleWKT.Duration? = nil
 
-    public var minDuration: GoogleCloudWKT.Duration? = nil
+    public var minDuration: GoogleWKT.Duration? = nil
 
-    public var startTimeNotEarlierThan: GoogleCloudWKT.Timestamp? = nil
+    public var startTimeNotEarlierThan: GoogleWKT.Timestamp? = nil
 
-    public var startTimeNotLaterThan: GoogleCloudWKT.Timestamp? = nil
+    public var startTimeNotLaterThan: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FlexibleTimeRange`.
     public init() {}
@@ -73,16 +73,16 @@
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.maxDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .maxDuration)
+        GoogleWKT.Duration.self, forKey: .maxDuration)
       self.minDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .minDuration)
+        GoogleWKT.Duration.self, forKey: .minDuration)
       self.startTimeNotEarlierThan = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTimeNotEarlierThan)
+        GoogleWKT.Timestamp.self, forKey: .startTimeNotEarlierThan)
       self.startTimeNotLaterThan = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTimeNotLaterThan)
+        GoogleWKT.Timestamp.self, forKey: .startTimeNotLaterThan)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -100,11 +100,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.FlexibleTimeRange"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

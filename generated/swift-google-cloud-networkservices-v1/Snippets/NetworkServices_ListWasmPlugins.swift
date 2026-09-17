@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudNetworkServicesV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: NetworkServicesClient, projectId: String, locationId: String) async throws {
   let items = try client.listWasmPlugins(

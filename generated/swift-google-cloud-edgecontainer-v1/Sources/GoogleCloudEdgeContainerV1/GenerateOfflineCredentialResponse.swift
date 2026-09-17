@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An offline credential for a cluster.
-public struct GenerateOfflineCredentialResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GenerateOfflineCredentialResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Client certificate to authenticate to k8s api-server.
@@ -31,9 +31,9 @@ public struct GenerateOfflineCredentialResponse: Codable, Equatable, GoogleCloud
   public var userId: Swift.String = Swift.String()
 
   /// Output only. Timestamp at which this credential will expire.
-  public var expireTime: GoogleCloudWKT.Timestamp? = nil
+  public var expireTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GenerateOfflineCredentialResponse`.
   public init() {}
@@ -81,11 +81,10 @@ public struct GenerateOfflineCredentialResponse: Codable, Equatable, GoogleCloud
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .userId) {
       self.userId = value
     }
-    self.expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expireTime)
+    self.expireTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expireTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,10 +102,10 @@ public struct GenerateOfflineCredentialResponse: Codable, Equatable, GoogleCloud
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.edgecontainer.v1.GenerateOfflineCredentialResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

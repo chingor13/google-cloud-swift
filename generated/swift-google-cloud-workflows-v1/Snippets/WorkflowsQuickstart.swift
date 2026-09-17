@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudWorkflowsV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudWorkflowsV1.WorkflowsClient()

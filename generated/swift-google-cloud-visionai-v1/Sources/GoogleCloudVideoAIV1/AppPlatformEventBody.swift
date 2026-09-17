@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message of content of appPlatform event
-public struct AppPlatformEventBody: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AppPlatformEventBody: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Human readable string of the event like "There are more than 6 people in
@@ -27,7 +27,7 @@ public struct AppPlatformEventBody: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   /// For the case of Pub/Sub, it will be stored in the message attributes.
   /// ​​pubsub.proto
-  public var payload: GoogleCloudWKT.Struct? = nil
+  public var payload: GoogleWKT.Struct? = nil
 
   /// User defined Event Id, used to classify event, within a delivery interval,
   /// events from the same application instance with the same id will be
@@ -35,7 +35,7 @@ public struct AppPlatformEventBody: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// treated as "".
   public var eventId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AppPlatformEventBody`.
   public init() {}
@@ -75,13 +75,13 @@ public struct AppPlatformEventBody: Codable, Equatable, GoogleCloudWKT._AnyPacka
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .eventMessage) {
       self.eventMessage = value
     }
-    self.payload = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .payload)
+    self.payload = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .payload)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .eventId) {
       self.eventId = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,10 +98,10 @@ public struct AppPlatformEventBody: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.AppPlatformEventBody"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

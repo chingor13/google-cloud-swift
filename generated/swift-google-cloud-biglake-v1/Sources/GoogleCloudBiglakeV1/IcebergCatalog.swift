@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The Iceberg REST Catalog information.
-public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IcebergCatalog: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The catalog name, `projects/my-project/catalogs/my-catalog`.
@@ -65,10 +65,10 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var storageRegions: [Swift.String] = []
 
   /// Output only. When the catalog was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. When the catalog was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The replicas for the catalog metadata.
   public var replicas: [IcebergCatalog.Replica] = []
@@ -91,7 +91,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Configuration options for federated catalogs.
   public var federatedCatalogOptions: IcebergCatalog.FederatedCatalogOptions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IcebergCatalog`.
   public init() {}
@@ -176,10 +176,8 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([Swift.String].self, forKey: .storageRegions) {
       self.storageRegions = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([IcebergCatalog.Replica].self, forKey: .replicas) {
       self.replicas = value
     }
@@ -192,7 +190,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       IcebergCatalog.FederatedCatalogOptions.self, forKey: .federatedCatalogOptions)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -218,7 +216,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// The replica of the Catalog.
-  public struct Replica: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Replica: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The region of the replica. For example "us-east1"
@@ -227,7 +225,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. The current state of the replica.
     public var state: IcebergCatalog.Replica.State = IcebergCatalog.Replica.State()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Replica`.
     public init() {}
@@ -272,7 +270,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -402,16 +400,16 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.Replica"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration of location restrictions.
-  public struct RestrictedLocationsConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RestrictedLocationsConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Additional Google Cloud Storage buckets and locations (e.g.,
@@ -424,7 +422,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// allowed.
     public var restrictedLocations: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RestrictedLocationsConfig`.
     public init() {}
@@ -464,7 +462,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -479,16 +477,16 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.RestrictedLocationsConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration options for a federated catalog.
-  public struct FederatedCatalogOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FederatedCatalogOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The secret resource name in Secret Manager, in the format
@@ -521,7 +519,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Info specific to a remote Iceberg REST catalog.
     public var remoteCatalogInfo: OneOf_RemoteCatalogInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FederatedCatalogOptions`.
     public init() {}
@@ -603,7 +601,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.remoteCatalogInfo = remoteCatalogInfo
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -630,7 +628,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Unity Catalog info.
-    public struct UnityCatalogInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UnityCatalogInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The instance name is the first part of the URL when logging
@@ -647,7 +645,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// flow.
       public var servicePrincipalApplicationId: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UnityCatalogInfo`.
       public init() {}
@@ -691,7 +689,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           Swift.String.self, forKey: .servicePrincipalApplicationId)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -710,17 +708,17 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.UnityCatalogInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// AWS Glue Catalog info. We support regional AWS Glue default account
     /// catalog and S3 Table Buckets.
-    public struct GlueCatalogInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GlueCatalogInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Immutable. The warehouse to connect to a regional AWS Glue
@@ -743,7 +741,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// updated.
       public var awsRoleArn: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GlueCatalogInfo`.
       public init() {}
@@ -785,7 +783,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.awsRoleArn = try container.decodeIfPresent(Swift.String.self, forKey: .awsRoleArn)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -803,16 +801,16 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.GlueCatalogInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Snowflake Catalog info.
-    public struct SnowflakeCatalogInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SnowflakeCatalogInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The account identifier in Snowflake (See:
@@ -840,7 +838,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// the Snowflake service user mapped to the BigLake service account.
       public var snowflakeRole: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SnowflakeCatalogInfo`.
       public init() {}
@@ -884,7 +882,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           Swift.String.self, forKey: .snowflakeRole)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -902,16 +900,16 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.SnowflakeCatalogInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Schedule defines if and when metadata refresh should be scheduled.
-    public struct RefreshSchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RefreshSchedule: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The interval for refreshing metadata from the remote catalog.
@@ -919,9 +917,9 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// disabled. If this field is updated for an existing federated catalog,
       /// the previous background refresh must complete before the new refresh
       /// interval will take effect.
-      public var refreshInterval: GoogleCloudWKT.Duration? = nil
+      public var refreshInterval: GoogleWKT.Duration? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RefreshSchedule`.
       public init() {}
@@ -955,10 +953,10 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.refreshInterval = try container.decodeIfPresent(
-          GoogleCloudWKT.Duration.self, forKey: .refreshInterval)
+          GoogleWKT.Duration.self, forKey: .refreshInterval)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -974,16 +972,16 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.RefreshSchedule"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The scope defines a subset of namespaces to be refreshed.
-    public struct RefreshScope: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RefreshScope: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Filters to determine which namespaces are included in the
@@ -994,7 +992,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The maximum number of namespace filters allowed is 32.
       public var namespaceFilters: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RefreshScope`.
       public init() {}
@@ -1033,7 +1031,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1049,16 +1047,16 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.RefreshScope"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Refresh configuration.
-    public struct RefreshOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RefreshOptions: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. Schedule defines if and when metadata refresh should be
@@ -1068,7 +1066,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Optional. Refresh scope configurations.
       public var refreshScope: IcebergCatalog.FederatedCatalogOptions.RefreshScope? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RefreshOptions`.
       public init() {}
@@ -1109,7 +1107,7 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           IcebergCatalog.FederatedCatalogOptions.RefreshScope.self, forKey: .refreshScope)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1126,31 +1124,31 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.RefreshOptions"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Remote catalog background refresh status.
-    public struct RefreshStatus: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RefreshStatus: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. When the catalog refresh has started, including
       /// in-progress refreshes.
-      public var startTime: GoogleCloudWKT.Timestamp? = nil
+      public var startTime: GoogleWKT.Timestamp? = nil
 
       /// Output only. When the catalog refresh has ended, unset for in-progress
       /// refreshes.
-      public var endTime: GoogleCloudWKT.Timestamp? = nil
+      public var endTime: GoogleWKT.Timestamp? = nil
 
       /// Output only. The status of the last background refresh operation, unset
       /// for in-progress refreshes.
       public var status: GoogleRpc.Status? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RefreshStatus`.
       public init() {}
@@ -1187,14 +1185,12 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
       public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.startTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-        self.endTime = try container.decodeIfPresent(
-          GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+        self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+        self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
         self.status = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .status)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1212,11 +1208,11 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions.RefreshStatus"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1234,11 +1230,11 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog.FederatedCatalogOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1474,10 +1470,10 @@ public struct IcebergCatalog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.biglake.v1.IcebergCatalog"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

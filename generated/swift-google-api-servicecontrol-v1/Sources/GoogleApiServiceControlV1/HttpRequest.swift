@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A common proto for logging HTTP requests. Only contains semantics
 /// defined by the HTTP specification. Product-specific logging
 /// information MUST be defined in a separate message.
-public struct HttpRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct HttpRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`.
@@ -63,7 +63,7 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The request processing latency on the server, from the time the request was
   /// received until the response was sent.
-  public var latency: GoogleCloudWKT.Duration? = nil
+  public var latency: GoogleWKT.Duration? = nil
 
   /// Whether or not a cache lookup was attempted.
   public var cacheLookup: Swift.Bool = Swift.Bool()
@@ -84,7 +84,7 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket"
   public var `protocol`: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `HttpRequest`.
   public init() {}
@@ -173,7 +173,7 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .referer) {
       self.referer = value
     }
-    self.latency = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .latency)
+    self.latency = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .latency)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .cacheLookup) {
       self.cacheLookup = value
     }
@@ -193,7 +193,7 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -223,10 +223,10 @@ public struct HttpRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicecontrol.v1.HttpRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

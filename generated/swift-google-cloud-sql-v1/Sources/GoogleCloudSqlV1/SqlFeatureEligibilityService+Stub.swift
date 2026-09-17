@@ -16,8 +16,8 @@
 
 #if SqlFeatureEligibilityService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlFeatureEligibilityServiceStub: Sendable {

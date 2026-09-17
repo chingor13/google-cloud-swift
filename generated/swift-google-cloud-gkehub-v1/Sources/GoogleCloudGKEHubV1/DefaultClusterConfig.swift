@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DefaultClusterConfig describes the default cluster configurations to be
 /// applied to all clusters born-in-fleet.
-public struct DefaultClusterConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DefaultClusterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Enable/Disable Security Posture features for the cluster.
@@ -33,7 +33,7 @@ public struct DefaultClusterConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Users are not allowed for partial updates through field mask.
   public var compliancePostureConfig: CompliancePostureConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DefaultClusterConfig`.
   public init() {}
@@ -78,7 +78,7 @@ public struct DefaultClusterConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
       CompliancePostureConfig.self, forKey: .compliancePostureConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,10 +96,10 @@ public struct DefaultClusterConfig: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkehub.v1.DefaultClusterConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

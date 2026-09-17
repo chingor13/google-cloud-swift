@@ -19,28 +19,28 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class MetadataServiceRetry: MetadataServiceStub {
     let inner: any MetadataServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any MetadataServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any MetadataServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -52,14 +52,14 @@ extension Clients {
     }
 
     public func createEntity(
-      request: CreateEntityRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entity {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateEntityRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateEntityRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataplexV1.Entity
           in
           return try await self.inner.createEntity(request: r, options: o)
@@ -67,14 +67,14 @@ extension Clients {
     }
 
     public func updateEntity(
-      request: UpdateEntityRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entity {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: UpdateEntityRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateEntityRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataplexV1.Entity
           in
           return try await self.inner.updateEntity(request: r, options: o)
@@ -82,26 +82,26 @@ extension Clients {
     }
 
     public func deleteEntity(
-      request: DeleteEntityRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntityRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: { (r: DeleteEntityRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteEntityRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteEntity(request: r, options: o)
         })
     }
 
     public func getEntity(
-      request: GetEntityRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entity {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetEntityRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEntityRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataplexV1.Entity
           in
           return try await self.inner.getEntity(request: r, options: o)
@@ -109,14 +109,14 @@ extension Clients {
     }
 
     public func listEntities(
-      request: ListEntitiesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListEntitiesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListEntitiesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEntitiesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataplexV1.ListEntitiesResponse
           in
           return try await self.inner.listEntities(request: r, options: o)
@@ -124,14 +124,14 @@ extension Clients {
     }
 
     public func createPartition(
-      request: CreatePartitionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePartitionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Partition {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreatePartitionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreatePartitionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataplexV1.Partition
           in
           return try await self.inner.createPartition(request: r, options: o)
@@ -139,27 +139,26 @@ extension Clients {
     }
 
     public func deletePartition(
-      request: DeletePartitionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePartitionRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeletePartitionRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeletePartitionRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deletePartition(request: r, options: o)
         })
     }
 
     public func getPartition(
-      request: GetPartitionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPartitionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Partition {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetPartitionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPartitionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataplexV1.Partition
           in
           return try await self.inner.getPartition(request: r, options: o)
@@ -167,14 +166,14 @@ extension Clients {
     }
 
     public func listPartitions(
-      request: ListPartitionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPartitionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListPartitionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListPartitionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListPartitionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataplexV1.ListPartitionsResponse
           in
           return try await self.inner.listPartitions(request: r, options: o)
@@ -182,29 +181,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
@@ -212,14 +211,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -227,14 +226,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -242,14 +241,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -257,29 +256,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -287,29 +286,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

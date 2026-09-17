@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The Storage Batch Operations Job description.
-public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Job: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the Job. job_id is unique
@@ -36,13 +36,13 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var loggingConfig: LoggingConfig? = nil
 
   /// Output only. The time that the job was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time that the job was scheduled.
-  public var scheduleTime: GoogleCloudWKT.Timestamp? = nil
+  public var scheduleTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time that the job was completed.
-  public var completeTime: GoogleCloudWKT.Timestamp? = nil
+  public var completeTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Information about the progress of the job.
   public var counters: Counters? = nil
@@ -68,7 +68,7 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Operation to be performed on the objects.
   public var transformation: OneOf_Transformation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Job`.
   public init() {}
@@ -140,12 +140,11 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.description = value
     }
     self.loggingConfig = try container.decodeIfPresent(LoggingConfig.self, forKey: .loggingConfig)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.scheduleTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .scheduleTime)
+      GoogleWKT.Timestamp.self, forKey: .scheduleTime)
     self.completeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .completeTime)
+      GoogleWKT.Timestamp.self, forKey: .completeTime)
     self.counters = try container.decodeIfPresent(Counters.self, forKey: .counters)
     if let value = try container.decodeIfPresent([ErrorSummary].self, forKey: .errorSummaries) {
       self.errorSummaries = value
@@ -209,7 +208,7 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.transformation = transformation
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -404,10 +403,10 @@ public struct Job: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.storagebatchoperations.v1.Job"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudCommerceConsumerProcurementV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: LicenseManagementServiceClient) async throws {
   let response = try await client.getLicensePool(

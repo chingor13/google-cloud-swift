@@ -20,22 +20,22 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// A service for creating and managing GenAI Tuning Jobs.
   ///
   /// @Snippet(path: "GenAiTuningServiceQuickstart")
   public final class GenAiTuningServiceClient: Clients.GenAiTuningServiceProtocol, Sendable {
     let inner: any Clients.GenAiTuningServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `GenAiTuningServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.GenAiTuningServiceStub = try Clients.GenAiTuningServiceTransport(
         options)
       inner = Clients.GenAiTuningServiceRetry(inner, options: options)
@@ -52,7 +52,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_CreateTuningJob")
     public func createTuningJob(
-      request: CreateTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.TuningJob {
       try await self.inner.createTuningJob(request: request, options: options)
     }
@@ -61,7 +61,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_GetTuningJob")
     public func getTuningJob(
-      request: GetTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.TuningJob {
       try await self.inner.getTuningJob(request: request, options: options)
     }
@@ -70,7 +70,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_ListTuningJobs")
     public func listTuningJobs(
-      request: ListTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTuningJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListTuningJobsResponse {
       try await self.inner.listTuningJobs(request: request, options: options)
     }
@@ -79,7 +79,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_ListTuningJobs")
     public func listTuningJobs(
-      byItem: ListTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTuningJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TuningJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListTuningJobsResponse in
@@ -87,7 +87,7 @@
         request.pageToken = token
         return try await self.listTuningJobs(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Cancels a TuningJob.
@@ -110,7 +110,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_CancelTuningJob")
     public func cancelTuningJob(
-      request: CancelTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelTuningJob(request: request, options: options)
     }
@@ -119,7 +119,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_RebaseTunedModel")
     public func rebaseTunedModel(
-      request: RebaseTunedModelRequest, options: GoogleCloudGax.RequestOptions
+      request: RebaseTunedModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.rebaseTunedModel(request: request, options: options)
     }
@@ -128,21 +128,21 @@
     ///
     /// @Snippet(path: "GenAiTuningService_RebaseTunedModel")
     public func rebaseTunedModel(
-      withPolling: RebaseTunedModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TuningJob> {
+      withPolling: RebaseTunedModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TuningJob> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<TuningJob>.State in
+          -> GoogleGax._PollableOperationImpl<TuningJob>.State in
         return try op._extractStatus(TuningJob.self)
       }
       let rawOp = try await self.rebaseTunedModel(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TuningJob>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<TuningJob>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -154,7 +154,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -163,7 +163,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -171,14 +171,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "GenAiTuningService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -191,7 +191,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -201,7 +201,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -216,7 +216,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -227,7 +227,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -238,7 +238,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -246,7 +246,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -255,7 +255,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -266,7 +266,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -277,7 +277,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -288,7 +288,7 @@
     ///
     /// @Snippet(path: "GenAiTuningService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -347,14 +347,14 @@
         -> GoogleLongRunning.Operation
 
       /// See `GenAiTuningServiceClient.rebaseTunedModel`.
-      func rebaseTunedModel(withPolling: RebaseTunedModelRequest) async throws -> any GoogleCloudGax
+      func rebaseTunedModel(withPolling: RebaseTunedModelRequest) async throws -> any GoogleGax
         .PollableOperation<TuningJob>
 
       /// See `GenAiTuningServiceClient.rebaseTunedModel`.
       func rebaseTunedModel(
         parent: Swift.String,
         tunedModelRef: TunedModelRef?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<TuningJob>
+      ) async throws -> any GoogleGax.PollableOperation<TuningJob>
 
       /// See `GenAiTuningServiceClient.listLocations`.
       func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -416,92 +416,92 @@
 
       /// See `GenAiTuningServiceClient.createTuningJob`.
       func createTuningJob(
-        request: CreateTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TuningJob
 
       /// See `GenAiTuningServiceClient.getTuningJob`.
       func getTuningJob(
-        request: GetTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.TuningJob
 
       /// See `GenAiTuningServiceClient.listTuningJobs`.
       func listTuningJobs(
-        request: ListTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTuningJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListTuningJobsResponse
 
       /// See `GenAiTuningServiceClient.listTuningJobs`.
       func listTuningJobs(
-        byItem: ListTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListTuningJobsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<TuningJob, Swift.Error>
 
       /// See `GenAiTuningServiceClient.cancelTuningJob`.
       func cancelTuningJob(
-        request: CancelTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `GenAiTuningServiceClient.rebaseTunedModel`.
       func rebaseTunedModel(
-        request: RebaseTunedModelRequest, options: GoogleCloudGax.RequestOptions
+        request: RebaseTunedModelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `GenAiTuningServiceClient.rebaseTunedModel`.
       func rebaseTunedModel(
-        withPolling: RebaseTunedModelRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<TuningJob>
+        withPolling: RebaseTunedModelRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<TuningJob>
 
       /// See `GenAiTuningServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `GenAiTuningServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `GenAiTuningServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `GenAiTuningServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `GenAiTuningServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `GenAiTuningServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `GenAiTuningServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `GenAiTuningServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `GenAiTuningServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `GenAiTuningServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `GenAiTuningServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -515,9 +515,9 @@
     }
 
     public func createTuningJob(
-      request: CreateTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.TuningJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createTuningJob(
@@ -538,9 +538,9 @@
     }
 
     public func getTuningJob(
-      request: GetTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.TuningJob {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getTuningJob(
@@ -559,9 +559,9 @@
     }
 
     public func listTuningJobs(
-      request: ListTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTuningJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListTuningJobsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listTuningJobs(
@@ -571,13 +571,13 @@
     }
 
     public func listTuningJobs(
-      byItem: ListTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTuningJobsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TuningJob, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListTuningJobsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listTuningJobs(
@@ -594,9 +594,9 @@
     }
 
     public func cancelTuningJob(
-      request: CancelTuningJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelTuningJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelTuningJob(
@@ -615,31 +615,31 @@
     }
 
     public func rebaseTunedModel(
-      request: RebaseTunedModelRequest, options: GoogleCloudGax.RequestOptions
+      request: RebaseTunedModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func rebaseTunedModel(withPolling: RebaseTunedModelRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<TuningJob>
+    public func rebaseTunedModel(withPolling: RebaseTunedModelRequest) async throws -> any GoogleGax
+      .PollableOperation<TuningJob>
     {
       try await self.rebaseTunedModel(withPolling: withPolling, options: .init())
     }
 
     public func rebaseTunedModel(
-      withPolling: RebaseTunedModelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TuningJob> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<TuningJob>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: RebaseTunedModelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TuningJob> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<TuningJob>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func rebaseTunedModel(
       parent: Swift.String,
       tunedModelRef: TunedModelRef?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<TuningJob> {
+    ) async throws -> any GoogleGax.PollableOperation<TuningJob> {
       let request = RebaseTunedModelRequest().with {
         $0.parent = parent
         $0.tunedModelRef = tunedModelRef
@@ -654,9 +654,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -666,13 +666,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -682,9 +682,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -694,9 +694,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -706,9 +706,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -718,9 +718,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -730,9 +730,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -742,13 +742,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -769,9 +769,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -788,9 +788,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -807,9 +807,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -828,9 +828,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

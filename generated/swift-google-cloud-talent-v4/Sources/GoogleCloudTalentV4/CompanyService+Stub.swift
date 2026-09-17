@@ -15,34 +15,34 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CompanyServiceStub: Sendable {
     func createCompany(
-      request: CreateCompanyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCompanyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Company
 
     func getCompany(
-      request: GetCompanyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCompanyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Company
 
     func updateCompany(
-      request: UpdateCompanyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCompanyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Company
 
     func deleteCompany(
-      request: DeleteCompanyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCompanyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listCompanies(
-      request: ListCompaniesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCompaniesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.ListCompaniesResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

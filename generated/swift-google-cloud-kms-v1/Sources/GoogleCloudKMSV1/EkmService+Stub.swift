@@ -16,63 +16,63 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol EkmServiceStub: Sendable {
     func listEkmConnections(
-      request: ListEkmConnectionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEkmConnectionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ListEkmConnectionsResponse
 
     func getEkmConnection(
-      request: GetEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEkmConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConnection
 
     func createEkmConnection(
-      request: CreateEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEkmConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConnection
 
     func updateEkmConnection(
-      request: UpdateEkmConnectionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEkmConnectionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConnection
 
     func getEkmConfig(
-      request: GetEkmConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEkmConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConfig
 
     func updateEkmConfig(
-      request: UpdateEkmConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEkmConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.EkmConfig
 
     func verifyConnectivity(
-      request: VerifyConnectivityRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyConnectivityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.VerifyConnectivityResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

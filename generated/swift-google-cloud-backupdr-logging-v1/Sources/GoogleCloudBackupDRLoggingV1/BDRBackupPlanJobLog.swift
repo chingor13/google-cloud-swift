@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Log entry for BDRBackupPlanJobLog for resources using BackupPlan
 /// based protection.
-public struct BDRBackupPlanJobLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BDRBackupPlanJobLog: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The job_id field displays the identifier of the job being reported.
@@ -52,10 +52,10 @@ public struct BDRBackupPlanJobLog: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var newBackupPlanRevisionName: Swift.String = Swift.String()
 
   /// Start time of the job.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// End time of the job.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The total number of workloads affected by the job.
   public var workloadsAffectedCount: Swift.Int32 = Swift.Int32()
@@ -76,7 +76,7 @@ public struct BDRBackupPlanJobLog: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// The user readable error message. Only populated in error scenarios.
   public var errorMessage: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BDRBackupPlanJobLog`.
   public init() {}
@@ -178,9 +178,8 @@ public struct BDRBackupPlanJobLog: Codable, Equatable, GoogleCloudWKT._AnyPackab
     {
       self.newBackupPlanRevisionName = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .workloadsAffectedCount)
     {
       self.workloadsAffectedCount = value
@@ -206,7 +205,7 @@ public struct BDRBackupPlanJobLog: Codable, Equatable, GoogleCloudWKT._AnyPackab
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -238,10 +237,10 @@ public struct BDRBackupPlanJobLog: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.logging.v1.BDRBackupPlanJobLog"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

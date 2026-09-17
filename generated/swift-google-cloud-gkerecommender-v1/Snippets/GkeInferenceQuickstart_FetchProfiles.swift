@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudGKERecommenderV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: GkeInferenceQuickstartClient) async throws {
   let items = try client.fetchProfiles(

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func `get`(
-        request: ReliabilityRisksClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ReliabilityRisksClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReliabilityRisk {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: ReliabilityRisksClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReliabilityRisksClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.ReliabilityRisk
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -73,14 +73,14 @@
       }
 
       public func list(
-        request: ReliabilityRisksClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ReliabilityRisksClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ReliabilityRisksListResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: ReliabilityRisksClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ReliabilityRisksClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.ReliabilityRisksListResponse
             in
             return try await self.inner.list(request: r, options: o)

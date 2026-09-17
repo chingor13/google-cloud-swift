@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A [KeyUsage][google.cloud.security.privateca.v1.KeyUsage] describes key usage
 /// values that may appear in an X.509 certificate.
 ///
 /// [google.cloud.security.privateca.v1.KeyUsage]: <doc:KeyUsage>
-public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct KeyUsage: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Describes high-level ways in which a key may be used.
@@ -37,7 +37,7 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions]: <doc:KeyUsage/ExtendedKeyUsageOptions>
   public var unknownExtendedKeyUsages: [ObjectId] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `KeyUsage`.
   public init() {}
@@ -84,7 +84,7 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -103,7 +103,7 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// https://tools.ietf.org/html/rfc5280#section-4.2.1.3.
   ///
   /// [google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions]: <doc:KeyUsage/KeyUsageOptions>
-  public struct KeyUsageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct KeyUsageOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The key may be used for digital signatures.
@@ -134,7 +134,7 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The key may be used to decipher only.
     public var decipherOnly: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `KeyUsageOptions`.
     public init() {}
@@ -212,7 +212,7 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -235,11 +235,11 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.KeyUsage.KeyUsageOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -248,7 +248,7 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// as an extended key usage value.
   ///
   /// [google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions]: <doc:KeyUsage/ExtendedKeyUsageOptions>
-  public struct ExtendedKeyUsageOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExtendedKeyUsageOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Corresponds to OID 1.3.6.1.5.5.7.3.1. Officially described as "TLS WWW
@@ -275,7 +275,7 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// OCSP responses".
     public var ocspSigning: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExtendedKeyUsageOptions`.
     public init() {}
@@ -338,7 +338,7 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -359,21 +359,21 @@ public struct KeyUsage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.security.privateca.v1.KeyUsage.ExtendedKeyUsageOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.KeyUsage"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

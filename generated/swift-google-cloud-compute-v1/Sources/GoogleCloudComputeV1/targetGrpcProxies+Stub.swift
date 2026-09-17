@@ -16,33 +16,33 @@
 
 #if TargetGrpcProxies
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol TargetGrpcProxiesStub: Sendable {
       func delete(
-        request: TargetGrpcProxiesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: TargetGrpcProxiesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetGrpcProxy
 
       func insert(
-        request: TargetGrpcProxiesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: TargetGrpcProxiesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetGrpcProxyList
 
       func patch(
-        request: TargetGrpcProxiesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetGrpcProxiesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

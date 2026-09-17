@@ -16,47 +16,47 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AutokeyAdminStub: Sendable {
     func updateAutokeyConfig(
-      request: UpdateAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAutokeyConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AutokeyConfig
 
     func getAutokeyConfig(
-      request: GetAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutokeyConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.AutokeyConfig
 
     func showEffectiveAutokeyConfig(
-      request: ShowEffectiveAutokeyConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: ShowEffectiveAutokeyConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudKMSV1.ShowEffectiveAutokeyConfigResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

@@ -18,28 +18,28 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class TagBindingsRetry: TagBindingsStub {
     let inner: any TagBindingsStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any TagBindingsStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any TagBindingsStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +51,14 @@ extension Clients {
     }
 
     public func listTagBindings(
-      request: ListTagBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTagBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.ListTagBindingsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListTagBindingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTagBindingsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudResourceManagerV3.ListTagBindingsResponse
           in
           return try await self.inner.listTagBindings(request: r, options: o)
@@ -66,14 +66,14 @@ extension Clients {
     }
 
     public func createTagBinding(
-      request: CreateTagBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTagBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateTagBindingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateTagBindingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createTagBinding(request: r, options: o)
@@ -81,14 +81,14 @@ extension Clients {
     }
 
     public func deleteTagBinding(
-      request: DeleteTagBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTagBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteTagBindingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteTagBindingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteTagBinding(request: r, options: o)
@@ -96,14 +96,14 @@ extension Clients {
     }
 
     public func listEffectiveTags(
-      request: ListEffectiveTagsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEffectiveTagsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudResourceManagerV3.ListEffectiveTagsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListEffectiveTagsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEffectiveTagsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudResourceManagerV3.ListEffectiveTagsResponse
           in
           return try await self.inner.listEffectiveTags(request: r, options: o)
@@ -111,14 +111,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

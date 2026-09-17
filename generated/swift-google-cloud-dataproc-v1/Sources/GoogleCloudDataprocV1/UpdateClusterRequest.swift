@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A request to update a cluster.
-public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateClusterRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The ID of the Google Cloud Platform project the
@@ -43,7 +43,7 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json)).
   ///
   /// Only supported on Dataproc image versions 1.2 and higher.
-  public var gracefulDecommissionTimeout: GoogleCloudWKT.Duration? = nil
+  public var gracefulDecommissionTimeout: GoogleWKT.Duration? = nil
 
   /// Required. Specifies the path, relative to `Cluster`, of
   /// the field to update. For example, to change the number of workers
@@ -96,7 +96,7 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   ///  </tr>
   ///  </tbody>
   ///  </table>
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Optional. A unique ID used to identify the request. If the server
   /// receives two
@@ -114,7 +114,7 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// [google.longrunning.Operation]: https://www.google.com/search?q=Swift+google.longrunning+GoogleLongRunning.Operation
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateClusterRequest`.
   public init() {}
@@ -170,15 +170,14 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     self.cluster = try container.decodeIfPresent(Cluster.self, forKey: .cluster)
     self.gracefulDecommissionTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .gracefulDecommissionTimeout)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+      GoogleWKT.Duration.self, forKey: .gracefulDecommissionTimeout)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
       self.requestId = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -200,10 +199,10 @@ public struct UpdateClusterRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.UpdateClusterRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

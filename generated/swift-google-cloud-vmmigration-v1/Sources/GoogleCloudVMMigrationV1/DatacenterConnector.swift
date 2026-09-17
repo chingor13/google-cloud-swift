@@ -15,22 +15,22 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DatacenterConnector message describes a connector between the Source and
 /// Google Cloud, which is installed on a vmware datacenter (an OVA vm installed
 /// by the user) to connect the Datacenter to Google Cloud and support vm
 /// migration data transfer.
-public struct DatacenterConnector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DatacenterConnector: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The time the connector was created (as an API call, not when
   /// it was actually installed).
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last time the connector was updated with an API call.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The connector's name.
   public var name: Swift.String = Swift.String()
@@ -57,7 +57,7 @@ public struct DatacenterConnector: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public var state: DatacenterConnector.State = DatacenterConnector.State()
 
   /// Output only. The time the state was last set.
-  public var stateTime: GoogleCloudWKT.Timestamp? = nil
+  public var stateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Provides details on the state of the Datacenter Connector in
   /// case of an error.
@@ -79,7 +79,7 @@ public struct DatacenterConnector: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Output only. The status of the current / last upgradeAppliance operation.
   public var upgradeStatus: UpgradeStatus? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DatacenterConnector`.
   public init() {}
@@ -139,10 +139,8 @@ public struct DatacenterConnector: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
@@ -161,8 +159,7 @@ public struct DatacenterConnector: Codable, Equatable, GoogleCloudWKT._AnyPackab
     if let value = try container.decodeIfPresent(DatacenterConnector.State.self, forKey: .state) {
       self.state = value
     }
-    self.stateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .stateTime)
+    self.stateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .stateTime)
     self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
     if let value = try container.decodeIfPresent(
       Swift.String.self, forKey: .applianceInfrastructureVersion)
@@ -179,7 +176,7 @@ public struct DatacenterConnector: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.upgradeStatus = try container.decodeIfPresent(UpgradeStatus.self, forKey: .upgradeStatus)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -330,10 +327,10 @@ public struct DatacenterConnector: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vmmigration.v1.DatacenterConnector"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

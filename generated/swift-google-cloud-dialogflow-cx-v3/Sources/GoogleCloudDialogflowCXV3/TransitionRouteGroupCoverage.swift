@@ -16,12 +16,12 @@
 
 #if TestCases
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Transition route group coverage represents the percentage of all possible
   /// transition routes present within any of a parent's test cases. The results
   /// are grouped by the transition route group.
-  public struct TransitionRouteGroupCoverage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TransitionRouteGroupCoverage: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Transition route group coverages.
@@ -31,7 +31,7 @@
     /// are covered.
     public var coverageScore: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TransitionRouteGroupCoverage`.
     public init() {}
@@ -76,7 +76,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -90,7 +90,7 @@
     }
 
     /// Coverage result message for one transition route group.
-    public struct Coverage: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Coverage: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Transition route group metadata. Only name and displayName will be set.
@@ -103,7 +103,7 @@
       /// covered.
       public var coverageScore: Swift.Float = Swift.Float()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Coverage`.
       public init() {}
@@ -152,7 +152,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -167,7 +167,7 @@
       }
 
       /// A transition coverage in a transition route group.
-      public struct Transition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Transition: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Intent route or condition route.
@@ -177,8 +177,7 @@
         /// agent's test cases.
         public var covered: Swift.Bool = Swift.Bool()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Transition`.
         public init() {}
@@ -220,7 +219,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -237,11 +236,11 @@
           return
             "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionRouteGroupCoverage.Coverage.Transition"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -249,22 +248,22 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionRouteGroupCoverage.Coverage"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.TransitionRouteGroupCoverage"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -16,13 +16,13 @@
 
 #if FeaturestoreOnlineServingService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for
   /// [FeaturestoreOnlineServingService.ReadFeatureValues][google.cloud.aiplatform.v1.FeaturestoreOnlineServingService.ReadFeatureValues].
   ///
   /// [google.cloud.aiplatform.v1.FeaturestoreOnlineServingService.ReadFeatureValues]: <doc:FeaturestoreOnlineServingServiceClient/readFeatureValues(request:options:)>
-  public struct ReadFeatureValuesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ReadFeatureValuesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Response header.
@@ -34,7 +34,7 @@
     /// requested.
     public var entityView: ReadFeatureValuesResponse.EntityView? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ReadFeatureValuesResponse`.
     public init() {}
@@ -75,7 +75,7 @@
         ReadFeatureValuesResponse.EntityView.self, forKey: .entityView)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -89,13 +89,13 @@
     }
 
     /// Metadata for requested Features.
-    public struct FeatureDescriptor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FeatureDescriptor: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Feature ID.
       public var id: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FeatureDescriptor`.
       public init() {}
@@ -133,7 +133,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -149,11 +149,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse.FeatureDescriptor"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -162,7 +162,7 @@
     /// and Features.
     ///
     /// [google.cloud.aiplatform.v1.ReadFeatureValuesRequest.entity_type]: <doc:ReadFeatureValuesRequest/entityType>
-    public struct Header: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Header: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The resource name of the EntityType from the
@@ -179,7 +179,7 @@
       /// [google.cloud.aiplatform.v1.ReadFeatureValuesResponse.EntityView.data]: <doc:ReadFeatureValuesResponse/EntityView/data>
       public var featureDescriptors: [ReadFeatureValuesResponse.FeatureDescriptor] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Header`.
       public init() {}
@@ -224,7 +224,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -240,16 +240,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse.Header"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Entity view with Feature values.
-    public struct EntityView: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EntityView: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// ID of the requested entity.
@@ -265,7 +265,7 @@
       /// [google.cloud.aiplatform.v1.ReadFeatureValuesResponse.header]: <doc:ReadFeatureValuesResponse/header>
       public var data: [ReadFeatureValuesResponse.EntityView.Data] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EntityView`.
       public init() {}
@@ -310,7 +310,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -325,13 +325,12 @@
 
       /// Container to hold value(s), successive in time, for one Feature from the
       /// request.
-      public struct Data: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Data: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         public var data: OneOf_Data? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Data`.
         public init() {}
@@ -386,7 +385,7 @@
           self.data = data
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -420,33 +419,33 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse.EntityView.Data"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse.EntityView"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ReadFeatureValuesResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

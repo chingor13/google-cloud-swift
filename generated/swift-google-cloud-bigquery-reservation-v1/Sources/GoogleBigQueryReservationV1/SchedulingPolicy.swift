@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The scheduling policy controls how a reservation's resources are distributed.
-public struct SchedulingPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SchedulingPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. If present and > 0, the reservation will attempt to limit the
@@ -35,7 +35,7 @@ public struct SchedulingPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// This feature is not yet generally available.
   public var maxSlots: Swift.Int64? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SchedulingPolicy`.
   public init() {}
@@ -74,7 +74,7 @@ public struct SchedulingPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.maxSlots = try container.decodeIfPresent(Swift.Int64.self, forKey: .maxSlots)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -90,10 +90,10 @@ public struct SchedulingPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.reservation.v1.SchedulingPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

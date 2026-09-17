@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [KeyManagementService.RawEncrypt][google.cloud.kms.v1.KeyManagementService.RawEncrypt].
 ///
 /// [google.cloud.kms.v1.KeyManagementService.RawEncrypt]: <doc:KeyManagementServiceClient/rawEncrypt(request:options:)>
-public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RawEncryptResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The encrypted data. In the case of AES-GCM, the authentication tag
@@ -55,7 +55,7 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// downconverted to uint32 in languages that support this type.
   ///
   /// [google.cloud.kms.v1.RawEncryptResponse.ciphertext]: <doc:RawEncryptResponse/ciphertext>
-  public var ciphertextCrc32C: GoogleCloudWKT.Int64Value? = nil
+  public var ciphertextCrc32C: GoogleWKT.Int64Value? = nil
 
   /// Integrity verification field. A CRC32C checksum of the returned
   /// [RawEncryptResponse.initialization_vector][google.cloud.kms.v1.RawEncryptResponse.initialization_vector].
@@ -69,7 +69,7 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// can be safely downconverted to uint32 in languages that support this type.
   ///
   /// [google.cloud.kms.v1.RawEncryptResponse.initialization_vector]: <doc:RawEncryptResponse/initializationVector>
-  public var initializationVectorCrc32C: GoogleCloudWKT.Int64Value? = nil
+  public var initializationVectorCrc32C: GoogleWKT.Int64Value? = nil
 
   /// Integrity verification field. A flag indicating whether
   /// [RawEncryptRequest.plaintext_crc32c][google.cloud.kms.v1.RawEncryptRequest.plaintext_crc32c]
@@ -141,7 +141,7 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// [google.cloud.kms.v1.ProtectionLevel]: <doc:ProtectionLevel>
   public var protectionLevel: ProtectionLevel = ProtectionLevel()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RawEncryptResponse`.
   public init() {}
@@ -206,9 +206,9 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.tagLength = value
     }
     self.ciphertextCrc32C = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .ciphertextCrc32C)
+      GoogleWKT.Int64Value.self, forKey: .ciphertextCrc32C)
     self.initializationVectorCrc32C = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .initializationVectorCrc32C)
+      GoogleWKT.Int64Value.self, forKey: .initializationVectorCrc32C)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .verifiedPlaintextCrc32C)
     {
       self.verifiedPlaintextCrc32C = value
@@ -231,7 +231,7 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -259,10 +259,10 @@ public struct RawEncryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.RawEncryptResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

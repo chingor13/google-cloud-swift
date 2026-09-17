@@ -15,29 +15,29 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol AlertPolicyServiceStub: Sendable {
     func listAlertPolicies(
-      request: ListAlertPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAlertPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListAlertPoliciesResponse
 
     func getAlertPolicy(
-      request: GetAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy
 
     func createAlertPolicy(
-      request: CreateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy
 
     func deleteAlertPolicy(
-      request: DeleteAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateAlertPolicy(
-      request: UpdateAlertPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAlertPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.AlertPolicy
   }
 }

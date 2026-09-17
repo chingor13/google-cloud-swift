@@ -16,17 +16,17 @@
 
 #if NetworkProfiles
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol NetworkProfilesStub: Sendable {
       func `get`(
-        request: NetworkProfilesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfile
 
       func list(
-        request: NetworkProfilesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NetworkProfilesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkProfilesListResponse
     }
   }

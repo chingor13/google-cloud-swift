@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Tether provides a way for the control plane to send HTTP API requests to
 /// services in data planes that runs in a remote datacenter without
@@ -30,7 +30,7 @@ public final class TetherClient: Clients.TetherProtocol, Sendable {
   let inner: any Clients.TetherStub
 
   /// Creates a new `TetherClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.TetherStub = try Clients.TetherTransport(options)
     inner = Clients.TetherRetry(inner, options: options)
     if let logger = options.logger {

@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudApiHubV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: ApiHubClient, projectId: String, locationId: String, externalApiId: String)
   async throws
@@ -31,7 +31,7 @@ func sample(client: ApiHubClient, projectId: String, locationId: String, externa
         $0.externalApi = ExternalApi().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/externalApis/\(externalApiId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

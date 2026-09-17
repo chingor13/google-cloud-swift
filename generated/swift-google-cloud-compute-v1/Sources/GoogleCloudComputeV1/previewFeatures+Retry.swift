@@ -19,26 +19,26 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  @_spi(GoogleCloudInternal) import GoogleCloudGax
+  import GoogleWKT
+  @_spi(GoogleCloudInternal) import GoogleGax
 
   extension Clients {
     final class PreviewFeaturesRetry: PreviewFeaturesStub {
       let inner: any PreviewFeaturesStub
-      let options: GoogleCloudGax.ClientOptions
+      let options: GoogleGax.ClientOptions
 
-      public init(_ inner: any PreviewFeaturesStub, options: GoogleCloudGax.ClientOptions) {
+      public init(_ inner: any PreviewFeaturesStub, options: GoogleGax.ClientOptions) {
         self.inner = inner
         self.options = options
       }
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         idempotent: Swift.Bool,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
-        let loop = GoogleCloudGax._RetryLoop(
+        let loop = GoogleGax._RetryLoop(
           options: options, withDefault: self.options, idempotent: idempotent,
         )
         let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@
       }
 
       public func `get`(
-        request: PreviewFeaturesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeature {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: PreviewFeaturesClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: PreviewFeaturesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.PreviewFeature
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -65,14 +65,14 @@
       }
 
       public func list(
-        request: PreviewFeaturesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.PreviewFeatureList {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: PreviewFeaturesClient.ListRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: PreviewFeaturesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.PreviewFeatureList
             in
             return try await self.inner.list(request: r, options: o)
@@ -80,14 +80,14 @@
       }
 
       public func update(
-        request: PreviewFeaturesClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: PreviewFeaturesClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: false,
           action: {
-            (r: PreviewFeaturesClient.UpdateRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: PreviewFeaturesClient.UpdateRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.update(request: r, options: o)
@@ -95,14 +95,14 @@
       }
 
       public func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           idempotent: true,
           action: {
-            (r: GlobalOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GlobalOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

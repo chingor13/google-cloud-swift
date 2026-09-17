@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Word-specific information for recognized words. Word information is only
 /// included in the response when certain request parameters are set, such
 /// as `enable_word_time_offsets`.
-public struct WordInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WordInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Time offset relative to the beginning of the audio, and
   /// corresponding to the start of the spoken word. This field is only set if
   /// `enable_word_time_offsets=true` and only in the top hypothesis. This is an
   /// experimental feature and the accuracy of the time offset can vary.
-  public var startTime: GoogleCloudWKT.Duration? = nil
+  public var startTime: GoogleWKT.Duration? = nil
 
   /// Time offset relative to the beginning of the audio, and
   /// corresponding to the end of the spoken word. This field is only set if
   /// `enable_word_time_offsets=true` and only in the top hypothesis. This is an
   /// experimental feature and the accuracy of the time offset can vary.
-  public var endTime: GoogleCloudWKT.Duration? = nil
+  public var endTime: GoogleWKT.Duration? = nil
 
   /// The word corresponding to this set of information.
   public var word: Swift.String = Swift.String()
@@ -52,7 +52,7 @@ public struct WordInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// and is only set if speaker diarization is enabled.
   public var speakerTag: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WordInfo`.
   public init() {}
@@ -93,8 +93,8 @@ public struct WordInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.startTime = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .word) {
       self.word = value
     }
@@ -106,7 +106,7 @@ public struct WordInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -125,10 +125,10 @@ public struct WordInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.videointelligence.v1.WordInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

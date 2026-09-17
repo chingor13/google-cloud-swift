@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A chart that displays data on a 2D (X and Y axes) plane.
-public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct XyChart: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The data displayed in this chart.
@@ -29,7 +29,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// (e.g., week-over-week metrics).
   /// The duration must be positive, and it can only be applied to charts with
   /// data sets of LINE plot type.
-  public var timeshiftDuration: GoogleCloudWKT.Duration? = nil
+  public var timeshiftDuration: GoogleWKT.Duration? = nil
 
   /// Threshold lines drawn horizontally across the chart.
   public var thresholds: [Threshold] = []
@@ -46,7 +46,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Display options for the chart.
   public var chartOptions: ChartOptions? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `XyChart`.
   public init() {}
@@ -95,7 +95,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.dataSets = value
     }
     self.timeshiftDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .timeshiftDuration)
+      GoogleWKT.Duration.self, forKey: .timeshiftDuration)
     if let value = try container.decodeIfPresent([Threshold].self, forKey: .thresholds) {
       self.thresholds = value
     }
@@ -105,7 +105,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.chartOptions = try container.decodeIfPresent(ChartOptions.self, forKey: .chartOptions)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -124,7 +124,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Groups a time series query definition with charting options.
-  public struct DataSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataSet: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Fields for querying time series data from the
@@ -144,12 +144,12 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// series query For example, if the data is published once every 10 minutes,
     /// the `min_alignment_period` should be at least 10 minutes. It would not
     /// make sense to fetch and align data at one minute intervals.
-    public var minAlignmentPeriod: GoogleCloudWKT.Duration? = nil
+    public var minAlignmentPeriod: GoogleWKT.Duration? = nil
 
     /// Optional. The target axis to use for plotting the metric.
     public var targetAxis: XyChart.DataSet.TargetAxis = XyChart.DataSet.TargetAxis()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataSet`.
     public init() {}
@@ -200,7 +200,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.legendTemplate = value
       }
       self.minAlignmentPeriod = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .minAlignmentPeriod)
+        GoogleWKT.Duration.self, forKey: .minAlignmentPeriod)
       if let value = try container.decodeIfPresent(
         XyChart.DataSet.TargetAxis.self, forKey: .targetAxis)
       {
@@ -208,7 +208,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -460,16 +460,16 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.dashboard.v1.XyChart.DataSet"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A chart axis.
-  public struct Axis: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Axis: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The label of the axis.
@@ -478,7 +478,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The axis scale. By default, a linear scale is used.
     public var scale: XyChart.Axis.Scale = XyChart.Axis.Scale()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Axis`.
     public init() {}
@@ -521,7 +521,7 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -642,21 +642,21 @@ public struct XyChart: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.dashboard.v1.XyChart.Axis"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.dashboard.v1.XyChart"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

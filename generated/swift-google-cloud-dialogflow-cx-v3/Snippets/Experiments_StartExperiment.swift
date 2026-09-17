@@ -20,8 +20,8 @@
   import Foundation
   import GoogleCloudDialogflowCXV3
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
+  import GoogleWKT
 
   func sample(client: ExperimentsClient) async throws {
     let response = try await client.startExperiment(

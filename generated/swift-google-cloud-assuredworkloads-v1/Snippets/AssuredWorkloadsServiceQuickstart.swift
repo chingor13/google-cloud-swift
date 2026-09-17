@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudAssuredWorkloadsV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(organizationId: String, locationId: String, ) async throws {
   let client = try GoogleCloudAssuredWorkloadsV1.AssuredWorkloadsServiceClient()

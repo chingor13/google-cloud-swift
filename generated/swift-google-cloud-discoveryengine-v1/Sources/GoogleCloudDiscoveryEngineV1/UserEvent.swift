@@ -16,11 +16,11 @@
 
 #if RecommendationService || UserEventService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// UserEvent captures all metadata information Discovery Engine API needs to
   /// know about how end users interact with your website.
-  public struct UserEvent: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UserEvent: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. User event type. Allowed values are:
@@ -115,7 +115,7 @@
     /// method. Timestamp of when the user event happened.
     ///
     /// [google.cloud.discoveryengine.v1.UserEventService.ImportUserEvents]: <doc:UserEventServiceClient/importUserEvents(request:options:)>
-    public var eventTime: GoogleCloudWKT.Timestamp? = nil
+    public var eventTime: GoogleWKT.Timestamp? = nil
 
     /// Information about the end user.
     public var userInfo: UserInfo? = nil
@@ -298,7 +298,7 @@
     /// Used for page-level impression data.
     public var panels: [PanelInfo] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UserEvent`.
     public init() {}
@@ -388,8 +388,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .dataStore) {
         self.dataStore = value
       }
-      self.eventTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .eventTime)
+      self.eventTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .eventTime)
       self.userInfo = try container.decodeIfPresent(UserInfo.self, forKey: .userInfo)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .directUserRequest) {
         self.directUserRequest = value
@@ -430,7 +429,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -466,11 +465,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.UserEvent"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

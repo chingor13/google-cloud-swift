@@ -16,200 +16,200 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CatalogServiceStub: Sendable {
     func createEntryType(
-      request: CreateEntryTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntryTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateEntryType(
-      request: UpdateEntryTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntryTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteEntryType(
-      request: DeleteEntryTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntryTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listEntryTypes(
-      request: ListEntryTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntryTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListEntryTypesResponse
 
     func getEntryType(
-      request: GetEntryTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntryTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.EntryType
 
     func createAspectType(
-      request: CreateAspectTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAspectTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAspectType(
-      request: UpdateAspectTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAspectTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAspectType(
-      request: DeleteAspectTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAspectTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAspectTypes(
-      request: ListAspectTypesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAspectTypesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListAspectTypesResponse
 
     func getAspectType(
-      request: GetAspectTypeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAspectTypeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.AspectType
 
     func createEntryGroup(
-      request: CreateEntryGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntryGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateEntryGroup(
-      request: UpdateEntryGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntryGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteEntryGroup(
-      request: DeleteEntryGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntryGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listEntryGroups(
-      request: ListEntryGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntryGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListEntryGroupsResponse
 
     func getEntryGroup(
-      request: GetEntryGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntryGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.EntryGroup
 
     func createEntry(
-      request: CreateEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entry
 
     func updateEntry(
-      request: UpdateEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entry
 
     func deleteEntry(
-      request: DeleteEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entry
 
     func listEntries(
-      request: ListEntriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListEntriesResponse
 
     func getEntry(
-      request: GetEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entry
 
     func lookupEntry(
-      request: LookupEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entry
 
     func modifyEntry(
-      request: ModifyEntryRequest, options: GoogleCloudGax.RequestOptions
+      request: ModifyEntryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.Entry
 
     func searchEntries(
-      request: SearchEntriesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchEntriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.SearchEntriesResponse
 
     func createMetadataJob(
-      request: CreateMetadataJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetadataJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getMetadataJob(
-      request: GetMetadataJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetadataJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.MetadataJob
 
     func listMetadataJobs(
-      request: ListMetadataJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetadataJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListMetadataJobsResponse
 
     func cancelMetadataJob(
-      request: CancelMetadataJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelMetadataJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createEntryLink(
-      request: CreateEntryLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntryLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.EntryLink
 
     func updateEntryLink(
-      request: UpdateEntryLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEntryLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.EntryLink
 
     func deleteEntryLink(
-      request: DeleteEntryLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEntryLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.EntryLink
 
     func lookupEntryLinks(
-      request: LookupEntryLinksRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupEntryLinksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.LookupEntryLinksResponse
 
     func lookupContext(
-      request: LookupContextRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupContextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.LookupContextResponse
 
     func getEntryLink(
-      request: GetEntryLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntryLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.EntryLink
 
     func createMetadataFeed(
-      request: CreateMetadataFeedRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMetadataFeedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getMetadataFeed(
-      request: GetMetadataFeedRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetadataFeedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.MetadataFeed
 
     func listMetadataFeeds(
-      request: ListMetadataFeedsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetadataFeedsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataplexV1.ListMetadataFeedsResponse
 
     func deleteMetadataFeed(
-      request: DeleteMetadataFeedRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMetadataFeedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMetadataFeed(
-      request: UpdateMetadataFeedRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMetadataFeedRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -19,10 +19,10 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A service that enables testing of unary and server streaming calls
 /// by specifying a specific, predictable sequence of responses from the service
@@ -32,7 +32,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   let inner: any Clients.SequenceServiceStub
 
   /// Creates a new `SequenceServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SequenceServiceStub = try Clients.SequenceServiceTransport(options)
     inner = Clients.SequenceServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_CreateSequence")
   public func createSequence(
-    request: CreateSequenceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSequenceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Sequence {
     try await self.inner.createSequence(request: request, options: options)
   }
@@ -54,7 +54,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_CreateStreamingSequence")
   public func createStreamingSequence(
-    request: CreateStreamingSequenceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateStreamingSequenceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.StreamingSequence {
     try await self.inner.createStreamingSequence(request: request, options: options)
   }
@@ -64,7 +64,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_GetSequenceReport")
   public func getSequenceReport(
-    request: GetSequenceReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSequenceReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.SequenceReport {
     try await self.inner.getSequenceReport(request: request, options: options)
   }
@@ -74,7 +74,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_GetStreamingSequenceReport")
   public func getStreamingSequenceReport(
-    request: GetStreamingSequenceReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStreamingSequenceReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.StreamingSequenceReport {
     try await self.inner.getStreamingSequenceReport(request: request, options: options)
   }
@@ -83,7 +83,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_AttemptSequence")
   public func attemptSequence(
-    request: AttemptSequenceRequest, options: GoogleCloudGax.RequestOptions
+    request: AttemptSequenceRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.attemptSequence(request: request, options: options)
   }
@@ -95,7 +95,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_AttemptStreamingSequence")
   public func attemptStreamingSequence(
-    request: AttemptStreamingSequenceRequest, options: GoogleCloudGax.RequestOptions
+    request: AttemptStreamingSequenceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.AttemptStreamingSequenceResponse {
     try await self.inner.attemptStreamingSequence(request: request, options: options)
   }
@@ -106,7 +106,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -117,7 +117,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -125,7 +125,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Locations][google.cloud.location.Locations] service functionality in this service.
@@ -134,7 +134,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -145,7 +145,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -156,7 +156,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -167,7 +167,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -178,7 +178,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -189,7 +189,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -197,7 +197,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -206,7 +206,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -217,7 +217,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -228,7 +228,7 @@ public final class SequenceServiceClient: Clients.SequenceServiceProtocol, Senda
   ///
   /// @Snippet(path: "SequenceService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -350,82 +350,82 @@ extension Clients {
 
     /// See `SequenceServiceClient.createSequence`.
     func createSequence(
-      request: CreateSequenceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSequenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Sequence
 
     /// See `SequenceServiceClient.createStreamingSequence`.
     func createStreamingSequence(
-      request: CreateStreamingSequenceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateStreamingSequenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.StreamingSequence
 
     /// See `SequenceServiceClient.getSequenceReport`.
     func getSequenceReport(
-      request: GetSequenceReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSequenceReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.SequenceReport
 
     /// See `SequenceServiceClient.getStreamingSequenceReport`.
     func getStreamingSequenceReport(
-      request: GetStreamingSequenceReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetStreamingSequenceReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.StreamingSequenceReport
 
     /// See `SequenceServiceClient.attemptSequence`.
     func attemptSequence(
-      request: AttemptSequenceRequest, options: GoogleCloudGax.RequestOptions
+      request: AttemptSequenceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SequenceServiceClient.attemptStreamingSequence`.
     func attemptStreamingSequence(
-      request: AttemptStreamingSequenceRequest, options: GoogleCloudGax.RequestOptions
+      request: AttemptStreamingSequenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.AttemptStreamingSequenceResponse
 
     /// See `SequenceServiceClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `SequenceServiceClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `SequenceServiceClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `SequenceServiceClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SequenceServiceClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SequenceServiceClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `SequenceServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `SequenceServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `SequenceServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SequenceServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -439,9 +439,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func createSequence(
-    request: CreateSequenceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSequenceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Sequence {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSequence(
@@ -460,9 +460,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func createStreamingSequence(
-    request: CreateStreamingSequenceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateStreamingSequenceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.StreamingSequence {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createStreamingSequence(
@@ -481,9 +481,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func getSequenceReport(
-    request: GetSequenceReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetSequenceReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.SequenceReport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getSequenceReport(
@@ -502,9 +502,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func getStreamingSequenceReport(
-    request: GetStreamingSequenceReportRequest, options: GoogleCloudGax.RequestOptions
+    request: GetStreamingSequenceReportRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.StreamingSequenceReport {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getStreamingSequenceReport(
@@ -521,9 +521,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func attemptSequence(
-    request: AttemptSequenceRequest, options: GoogleCloudGax.RequestOptions
+    request: AttemptSequenceRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func attemptSequence(
@@ -542,9 +542,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func attemptStreamingSequence(
-    request: AttemptStreamingSequenceRequest, options: GoogleCloudGax.RequestOptions
+    request: AttemptStreamingSequenceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.AttemptStreamingSequenceResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func attemptStreamingSequence(
@@ -563,9 +563,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -575,13 +575,13 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -591,9 +591,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -603,9 +603,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -615,9 +615,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -627,9 +627,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -639,9 +639,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -651,13 +651,13 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -678,9 +678,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -697,9 +697,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -716,9 +716,9 @@ extension Clients.SequenceServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

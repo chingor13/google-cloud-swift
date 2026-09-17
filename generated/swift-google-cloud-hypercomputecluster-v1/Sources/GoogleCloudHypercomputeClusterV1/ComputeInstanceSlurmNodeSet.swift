@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// When set in a
 /// [SlurmNodeSet][google.cloud.hypercomputecluster.v1.SlurmNodeSet], indicates
 /// that the nodeset should be backed by Compute Engine VM instances.
 ///
 /// [google.cloud.hypercomputecluster.v1.SlurmNodeSet]: <doc:SlurmNodeSet>
-public struct ComputeInstanceSlurmNodeSet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ComputeInstanceSlurmNodeSet: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. [Startup
@@ -38,7 +38,7 @@ public struct ComputeInstanceSlurmNodeSet: Codable, Equatable, GoogleCloudWKT._A
   /// Optional. Boot disk for the compute instance
   public var bootDisk: BootDisk? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ComputeInstanceSlurmNodeSet`.
   public init() {}
@@ -85,7 +85,7 @@ public struct ComputeInstanceSlurmNodeSet: Codable, Equatable, GoogleCloudWKT._A
     self.bootDisk = try container.decodeIfPresent(BootDisk.self, forKey: .bootDisk)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,10 +102,10 @@ public struct ComputeInstanceSlurmNodeSet: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.hypercomputecluster.v1.ComputeInstanceSlurmNodeSet"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,188 +15,188 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SecurityCenterStub: Sendable {
     func batchCreateResourceValueConfigs(
-      request: BatchCreateResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateResourceValueConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BatchCreateResourceValueConfigsResponse
 
     func bulkMuteFindings(
-      request: BulkMuteFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkMuteFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createBigQueryExport(
-      request: CreateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport
 
     func createFinding(
-      request: CreateFindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     func createMuteConfig(
-      request: CreateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig
 
     func createNotificationConfig(
-      request: CreateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig
 
     func createSource(
-      request: CreateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source
 
     func deleteBigQueryExport(
-      request: DeleteBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func deleteMuteConfig(
-      request: DeleteMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func deleteNotificationConfig(
-      request: DeleteNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func deleteResourceValueConfig(
-      request: DeleteResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getBigQueryExport(
-      request: GetBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport
 
     func getSimulation(
-      request: GetSimulationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSimulationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Simulation
 
     func getValuedResource(
-      request: GetValuedResourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetValuedResourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ValuedResource
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getMuteConfig(
-      request: GetMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig
 
     func getNotificationConfig(
-      request: GetNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig
 
     func getResourceValueConfig(
-      request: GetResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig
 
     func getSource(
-      request: GetSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source
 
     func groupFindings(
-      request: GroupFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GroupFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.GroupFindingsResponse
 
     func listAttackPaths(
-      request: ListAttackPathsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAttackPathsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListAttackPathsResponse
 
     func listBigQueryExports(
-      request: ListBigQueryExportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBigQueryExportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListBigQueryExportsResponse
 
     func listFindings(
-      request: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListFindingsResponse
 
     func listMuteConfigs(
-      request: ListMuteConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMuteConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListMuteConfigsResponse
 
     func listNotificationConfigs(
-      request: ListNotificationConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotificationConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListNotificationConfigsResponse
 
     func listResourceValueConfigs(
-      request: ListResourceValueConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceValueConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListResourceValueConfigsResponse
 
     func listSources(
-      request: ListSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListSourcesResponse
 
     func listValuedResources(
-      request: ListValuedResourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListValuedResourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ListValuedResourcesResponse
 
     func setFindingState(
-      request: SetFindingStateRequest, options: GoogleCloudGax.RequestOptions
+      request: SetFindingStateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setMute(
-      request: SetMuteRequest, options: GoogleCloudGax.RequestOptions
+      request: SetMuteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func updateBigQueryExport(
-      request: UpdateBigQueryExportRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBigQueryExportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.BigQueryExport
 
     func updateExternalSystem(
-      request: UpdateExternalSystemRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateExternalSystemRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ExternalSystem
 
     func updateFinding(
-      request: UpdateFindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Finding
 
     func updateMuteConfig(
-      request: UpdateMuteConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMuteConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.MuteConfig
 
     func updateNotificationConfig(
-      request: UpdateNotificationConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNotificationConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.NotificationConfig
 
     func updateResourceValueConfig(
-      request: UpdateResourceValueConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateResourceValueConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.ResourceValueConfig
 
     func updateSecurityMarks(
-      request: UpdateSecurityMarksRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityMarksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.SecurityMarks
 
     func updateSource(
-      request: UpdateSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecurityCenterV2.Source
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

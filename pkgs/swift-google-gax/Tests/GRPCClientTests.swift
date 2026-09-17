@@ -15,8 +15,8 @@
 import Foundation
 import Testing
 import GoogleAuth
-import GoogleCloudGax
-@_spi(GoogleCloudInternal) @testable import GoogleCloudGaxGRPC
+import GoogleGax
+@_spi(GoogleCloudInternal) @testable import GoogleGaxGRPC
 
 @Suite struct GRPCClientTests {
   @Test func defaultEndpoint() throws {

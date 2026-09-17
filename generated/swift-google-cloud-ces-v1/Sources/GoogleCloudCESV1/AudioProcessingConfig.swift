@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Configuration for how the input and output audio should be processed and
 /// delivered.
-public struct AudioProcessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AudioProcessingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Configuration of how the agent response should be synthesized,
@@ -42,13 +42,13 @@ public struct AudioProcessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// Optional. The duration of user inactivity (no speech or interaction) before
   /// the agent prompts the user for reengagement. If not set, the agent will not
   /// prompt the user for reengagement.
-  public var inactivityTimeout: GoogleCloudWKT.Duration? = nil
+  public var inactivityTimeout: GoogleWKT.Duration? = nil
 
   /// Optional. Configuration for the ambient sound to be played with the
   /// synthesized agent response, to enhance the naturalness of the conversation.
   public var ambientSoundConfig: AmbientSoundConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AudioProcessingConfig`.
   public init() {}
@@ -94,12 +94,12 @@ public struct AudioProcessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     self.bargeInConfig = try container.decodeIfPresent(BargeInConfig.self, forKey: .bargeInConfig)
     self.inactivityTimeout = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .inactivityTimeout)
+      GoogleWKT.Duration.self, forKey: .inactivityTimeout)
     self.ambientSoundConfig = try container.decodeIfPresent(
       AmbientSoundConfig.self, forKey: .ambientSoundConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -117,10 +117,10 @@ public struct AudioProcessingConfig: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.AudioProcessingConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

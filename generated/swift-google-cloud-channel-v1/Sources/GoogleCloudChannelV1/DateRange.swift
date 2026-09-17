@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A representation of usage or invoice date ranges.
 @available(*, deprecated)
-public struct DateRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DateRange: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The earliest usage date time (inclusive).
@@ -51,7 +51,7 @@ public struct DateRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the last day of the given month.
   public var invoiceEndDate: GoogleType.Date? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DateRange`.
   public init() {}
@@ -100,7 +100,7 @@ public struct DateRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       GoogleType.Date.self, forKey: .invoiceEndDate)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +118,10 @@ public struct DateRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.channel.v1.DateRange"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

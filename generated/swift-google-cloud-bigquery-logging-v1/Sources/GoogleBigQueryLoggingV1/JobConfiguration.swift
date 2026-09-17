@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Job configuration information.
 /// See the [Jobs](/bigquery/docs/reference/v2/jobs) API resource
 /// for more details on individual fields.
-public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct JobConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// If true, don't actually run the job. Just check that it would run.
@@ -32,7 +32,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Job configuration information.
   public var configuration: OneOf_Configuration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `JobConfiguration`.
   public init() {}
@@ -111,7 +111,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.configuration = configuration
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -138,7 +138,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Describes a query job, which executes a SQL-like query.
-  public struct Query: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Query: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The SQL query to run.
@@ -173,7 +173,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Type of the statement (e.g. SELECT, INSERT, CREATE_TABLE, CREATE_MODEL..)
     public var statementType: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Query`.
     public init() {}
@@ -249,7 +249,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -273,17 +273,17 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.logging.v1.JobConfiguration.Query"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describes a load job, which loads data from an external source via
   /// the  import pipeline.
-  public struct Load: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Load: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// URIs for the data to be imported. Only Google Cloud Storage URIs are
@@ -308,7 +308,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// used.
     public var destinationTableEncryption: EncryptionInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Load`.
     public init() {}
@@ -369,7 +369,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         EncryptionInfo.self, forKey: .destinationTableEncryption)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -390,17 +390,17 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.logging.v1.JobConfiguration.Load"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describes an extract job, which exports data to an external source
   /// via the  export pipeline.
-  public struct Extract: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Extract: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Google Cloud Storage URIs where extracted data should be written.
@@ -409,7 +409,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The source table.
     public var sourceTable: TableName? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Extract`.
     public init() {}
@@ -450,7 +450,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.sourceTable = try container.decodeIfPresent(TableName.self, forKey: .sourceTable)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -466,16 +466,16 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.logging.v1.JobConfiguration.Extract"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describes a copy job, which copies an existing table to another table.
-  public struct TableCopy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TableCopy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Source tables.
@@ -496,7 +496,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// used.
     public var destinationTableEncryption: EncryptionInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TableCopy`.
     public init() {}
@@ -552,7 +552,7 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         EncryptionInfo.self, forKey: .destinationTableEncryption)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -572,11 +572,11 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.bigquery.logging.v1.JobConfiguration.TableCopy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -595,10 +595,10 @@ public struct JobConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.logging.v1.JobConfiguration"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

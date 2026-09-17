@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Settings specific to keys that can be used by websites.
-public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WebKeySettings: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. If set to true, it means allowed_domains are not enforced.
@@ -50,7 +50,7 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Challenge settings.
   public var challengeSettings: WebKeySettings.ChallengeSettings? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WebKeySettings`.
   public init() {}
@@ -116,7 +116,7 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       WebKeySettings.ChallengeSettings.self, forKey: .challengeSettings)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,14 +134,14 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Per-action challenge settings.
-  public struct ActionSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ActionSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. A challenge is triggered if the end-user score is below that
     /// threshold. Value must be between 0 and 1 (inclusive).
     public var scoreThreshold: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ActionSettings`.
     public init() {}
@@ -179,7 +179,7 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -194,17 +194,17 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.WebKeySettings.ActionSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Settings for POLICY_BASED_CHALLENGE keys to control when a challenge is
   /// triggered.
-  public struct ChallengeSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ChallengeSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Defines when a challenge is triggered (unless the default
@@ -220,7 +220,7 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// An action name has a maximum length of 100.
     public var actionSettings: [Swift.String: WebKeySettings.ActionSettings] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ChallengeSettings`.
     public init() {}
@@ -264,7 +264,7 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -281,11 +281,11 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.recaptchaenterprise.v1.WebKeySettings.ChallengeSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -532,10 +532,10 @@ public struct WebKeySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recaptchaenterprise.v1.WebKeySettings"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

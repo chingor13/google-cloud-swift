@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,29 +57,28 @@ extension Clients {
     }
 
     public func getCase(
-      request: GetCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case {
       try await self._intercept(
         request: request,
         options: options,
         name: "getCase",
         action: {
-          (r: GetCaseRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleCloudSupportV2.Case
+          (r: GetCaseRequest, o: GoogleGax.RequestOptions) async throws -> GoogleCloudSupportV2.Case
           in
           return try await self.inner.getCase(request: r, options: o)
         })
     }
 
     public func listCases(
-      request: ListCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.ListCasesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listCases",
         action: {
-          (r: ListCasesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListCasesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.ListCasesResponse
           in
           return try await self.inner.listCases(request: r, options: o)
@@ -87,14 +86,14 @@ extension Clients {
     }
 
     public func searchCases(
-      request: SearchCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SearchCasesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "searchCases",
         action: {
-          (r: SearchCasesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchCasesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.SearchCasesResponse
           in
           return try await self.inner.searchCases(request: r, options: o)
@@ -102,14 +101,14 @@ extension Clients {
     }
 
     public func createCase(
-      request: CreateCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case {
       try await self._intercept(
         request: request,
         options: options,
         name: "createCase",
         action: {
-          (r: CreateCaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateCaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.Case
           in
           return try await self.inner.createCase(request: r, options: o)
@@ -117,14 +116,14 @@ extension Clients {
     }
 
     public func updateCase(
-      request: UpdateCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateCase",
         action: {
-          (r: UpdateCaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateCaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.Case
           in
           return try await self.inner.updateCase(request: r, options: o)
@@ -132,14 +131,14 @@ extension Clients {
     }
 
     public func escalateCase(
-      request: EscalateCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: EscalateCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case {
       try await self._intercept(
         request: request,
         options: options,
         name: "escalateCase",
         action: {
-          (r: EscalateCaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: EscalateCaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.Case
           in
           return try await self.inner.escalateCase(request: r, options: o)
@@ -147,14 +146,14 @@ extension Clients {
     }
 
     public func closeCase(
-      request: CloseCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CloseCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.Case {
       try await self._intercept(
         request: request,
         options: options,
         name: "closeCase",
         action: {
-          (r: CloseCaseRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CloseCaseRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.Case
           in
           return try await self.inner.closeCase(request: r, options: o)
@@ -162,14 +161,14 @@ extension Clients {
     }
 
     public func searchCaseClassifications(
-      request: SearchCaseClassificationsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchCaseClassificationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSupportV2.SearchCaseClassificationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "searchCaseClassifications",
         action: {
-          (r: SearchCaseClassificationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchCaseClassificationsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudSupportV2.SearchCaseClassificationsResponse
           in
           return try await self.inner.searchCaseClassifications(request: r, options: o)

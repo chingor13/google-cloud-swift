@@ -18,28 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class TimeseriesInsightsControllerRetry: TimeseriesInsightsControllerStub {
     let inner: any TimeseriesInsightsControllerStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(
-      _ inner: any TimeseriesInsightsControllerStub, options: GoogleCloudGax.ClientOptions
-    ) {
+    public init(_ inner: any TimeseriesInsightsControllerStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +49,14 @@ extension Clients {
     }
 
     public func listDataSets(
-      request: ListDataSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.ListDataSetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListDataSetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDataSetsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTimeseriesInsightsV1.ListDataSetsResponse
           in
           return try await self.inner.listDataSets(request: r, options: o)
@@ -66,14 +64,14 @@ extension Clients {
     }
 
     public func createDataSet(
-      request: CreateDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.DataSet {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateDataSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDataSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTimeseriesInsightsV1.DataSet
           in
           return try await self.inner.createDataSet(request: r, options: o)
@@ -81,27 +79,26 @@ extension Clients {
     }
 
     public func deleteDataSet(
-      request: DeleteDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeleteDataSetRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteDataSetRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteDataSet(request: r, options: o)
         })
     }
 
     public func appendEvents(
-      request: AppendEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: AppendEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.AppendEventsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: AppendEventsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: AppendEventsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTimeseriesInsightsV1.AppendEventsResponse
           in
           return try await self.inner.appendEvents(request: r, options: o)
@@ -109,14 +106,14 @@ extension Clients {
     }
 
     public func queryDataSet(
-      request: QueryDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.QueryDataSetResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: QueryDataSetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: QueryDataSetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTimeseriesInsightsV1.QueryDataSetResponse
           in
           return try await self.inner.queryDataSet(request: r, options: o)
@@ -124,14 +121,14 @@ extension Clients {
     }
 
     public func evaluateSlice(
-      request: EvaluateSliceRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateSliceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: EvaluateSliceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: EvaluateSliceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice
           in
           return try await self.inner.evaluateSlice(request: r, options: o)
@@ -139,14 +136,14 @@ extension Clients {
     }
 
     public func evaluateTimeseries(
-      request: EvaluateTimeseriesRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateTimeseriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: EvaluateTimeseriesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: EvaluateTimeseriesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice
           in
           return try await self.inner.evaluateTimeseries(request: r, options: o)

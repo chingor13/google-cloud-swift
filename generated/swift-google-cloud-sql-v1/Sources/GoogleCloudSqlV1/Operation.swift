@@ -16,12 +16,12 @@
 
 #if SqlBackupRunsService || SqlBackupsService || SqlDatabasesService || SqlInstancesService || SqlOperationsService || SqlSslCertsService || SqlUsersService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// An Operation resource.&nbsp;For successful operations that return an
   /// Operation resource, only the fields relevant to the operation are populated
   /// in the resource.
-  public struct Operation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Operation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This is always `sql#operation`.
@@ -38,17 +38,17 @@
     /// The time this operation was enqueued in UTC timezone in [RFC
     /// 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var insertTime: GoogleCloudWKT.Timestamp? = nil
+    public var insertTime: GoogleWKT.Timestamp? = nil
 
     /// The time this operation actually started in UTC timezone in [RFC
     /// 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// The time this operation finished in UTC timezone in [RFC
     /// 3339](https://tools.ietf.org/html/rfc3339) format, for example
     /// `2012-11-15T16:19:00.094Z`.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
     /// If errors occurred during processing of this operation, this field will be
     /// populated.
@@ -108,7 +108,7 @@
     /// Optional. The sub operation based on the operation type.
     public var subOperationType: SqlSubOperationType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Operation`.
     public init() {}
@@ -194,11 +194,9 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .user) {
         self.user = value
       }
-      self.insertTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .insertTime)
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+      self.insertTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .insertTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
       self.error = try container.decodeIfPresent(OperationErrors.self, forKey: .error)
       self.apiWarning = try container.decodeIfPresent(ApiWarning.self, forKey: .apiWarning)
       if let value = try container.decodeIfPresent(
@@ -229,7 +227,7 @@
         SqlSubOperationType.self, forKey: .subOperationType)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -864,11 +862,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.Operation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

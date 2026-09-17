@@ -16,21 +16,21 @@
 
 #if NodeTypes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol NodeTypesStub: Sendable {
       func aggregatedList(
-        request: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList
 
       func `get`(
-        request: NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeType
 
       func list(
-        request: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeList
     }
   }

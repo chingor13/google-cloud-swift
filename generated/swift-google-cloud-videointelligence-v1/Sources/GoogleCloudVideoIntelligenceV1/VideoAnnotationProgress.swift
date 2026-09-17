@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Annotation progress for a single video.
-public struct VideoAnnotationProgress: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VideoAnnotationProgress: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Video file location in
@@ -30,10 +30,10 @@ public struct VideoAnnotationProgress: Codable, Equatable, GoogleCloudWKT._AnyPa
   public var progressPercent: Swift.Int32 = Swift.Int32()
 
   /// Time when the request was received.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Time of the most recent update.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Specifies which feature is being tracked if the request contains more than
   /// one feature.
@@ -43,7 +43,7 @@ public struct VideoAnnotationProgress: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// one segment.
   public var segment: VideoSegment? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoAnnotationProgress`.
   public init() {}
@@ -92,17 +92,15 @@ public struct VideoAnnotationProgress: Codable, Equatable, GoogleCloudWKT._AnyPa
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .progressPercent) {
       self.progressPercent = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Feature.self, forKey: .feature) {
       self.feature = value
     }
     self.segment = try container.decodeIfPresent(VideoSegment.self, forKey: .segment)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -122,10 +120,10 @@ public struct VideoAnnotationProgress: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.videointelligence.v1.VideoAnnotationProgress"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

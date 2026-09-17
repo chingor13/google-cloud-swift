@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Generic Object Detection.
-public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Current timestamp.
-  public var currentTime: GoogleCloudWKT.Timestamp? = nil
+  public var currentTime: GoogleWKT.Timestamp? = nil
 
   /// A list of identified boxes.
   public var identifiedBoxes: [ObjectDetectionPredictionResult.IdentifiedBox] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ObjectDetectionPredictionResult`.
   public init() {}
@@ -62,8 +62,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.currentTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .currentTime)
+    self.currentTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .currentTime)
     if let value = try container.decodeIfPresent(
       [ObjectDetectionPredictionResult.IdentifiedBox].self, forKey: .identifiedBoxes)
     {
@@ -71,7 +70,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,7 +84,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
   }
 
   /// The entity info for annotations from object detection prediction result.
-  public struct Entity: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Entity: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Label id.
@@ -94,7 +93,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
     /// Human readable string of the label.
     public var labelString: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Entity`.
     public init() {}
@@ -137,7 +136,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -153,16 +152,16 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.visionai.v1.ObjectDetectionPredictionResult.Entity"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Identified box contains location and the entity of the object.
-  public struct IdentifiedBox: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IdentifiedBox: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// An unique id for this box.
@@ -178,7 +177,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
     /// Entity of this box.
     public var entity: ObjectDetectionPredictionResult.Entity? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IdentifiedBox`.
     public init() {}
@@ -230,7 +229,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
         ObjectDetectionPredictionResult.Entity.self, forKey: .entity)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -246,7 +245,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
     }
 
     /// Bounding Box in the normalized coordinates.
-    public struct NormalizedBoundingBox: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct NormalizedBoundingBox: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Min in x coordinate.
@@ -261,7 +260,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
       /// Height of the bounding box.
       public var height: Swift.Float = Swift.Float()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `NormalizedBoundingBox`.
       public init() {}
@@ -314,7 +313,7 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -333,11 +332,11 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
         return
           "type.googleapis.com/google.cloud.visionai.v1.ObjectDetectionPredictionResult.IdentifiedBox.NormalizedBoundingBox"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -345,21 +344,21 @@ public struct ObjectDetectionPredictionResult: Codable, Equatable, GoogleCloudWK
       return
         "type.googleapis.com/google.cloud.visionai.v1.ObjectDetectionPredictionResult.IdentifiedBox"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.ObjectDetectionPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

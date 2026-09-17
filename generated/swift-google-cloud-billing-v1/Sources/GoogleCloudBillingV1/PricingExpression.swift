@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Expresses a mathematical pricing formula. For Example:-
 ///
@@ -28,7 +28,7 @@ import GoogleType
 /// The above expresses a pricing formula where the first 20GB is free, the
 /// next 80GB is priced at $10 per GB followed by $5 per GB for additional
 /// usage.
-public struct PricingExpression: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PricingExpression: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The short hand for unit of usage this pricing is specified in.
@@ -69,7 +69,7 @@ public struct PricingExpression: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// base_unit.
   public var baseUnitConversionFactor: Swift.Double = Swift.Double()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PricingExpression`.
   public init() {}
@@ -141,7 +141,7 @@ public struct PricingExpression: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -160,7 +160,7 @@ public struct PricingExpression: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// The price rate indicating starting usage and its corresponding price.
-  public struct TierRate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TierRate: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Usage is priced at this rate only after this amount.
@@ -172,7 +172,7 @@ public struct PricingExpression: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// Example: unit_price of amount $10 indicates that each unit will cost $10.
     public var unitPrice: GoogleType.Money? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TierRate`.
     public init() {}
@@ -213,7 +213,7 @@ public struct PricingExpression: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.unitPrice = try container.decodeIfPresent(GoogleType.Money.self, forKey: .unitPrice)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -229,21 +229,21 @@ public struct PricingExpression: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.billing.v1.PricingExpression.TierRate"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.billing.v1.PricingExpression"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

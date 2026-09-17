@@ -16,25 +16,25 @@
 
 #if SqlSslCertsService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlSslCertsServiceStub: Sendable {
       func delete(
-        request: SqlSslCertsDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       func `get`(
-        request: SqlSslCertsGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCert
 
       func insert(
-        request: SqlSslCertsInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCertsInsertResponse
 
       func list(
-        request: SqlSslCertsListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlSslCertsListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.SslCertsListResponse
     }
   }

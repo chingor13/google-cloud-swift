@@ -18,11 +18,11 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// API for setting [access levels]
 /// [google.identity.accesscontextmanager.v1.AccessLevel] and [service
@@ -39,11 +39,11 @@ import GoogleCloudGax
 /// @Snippet(path: "AccessContextManagerQuickstart")
 public final class AccessContextManagerClient: Clients.AccessContextManagerProtocol, Sendable {
   let inner: any Clients.AccessContextManagerStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `AccessContextManagerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AccessContextManagerStub = try Clients.AccessContextManagerTransport(
       options)
     inner = Clients.AccessContextManagerRetry(inner, options: options)
@@ -61,7 +61,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ListAccessPolicies")
   public func listAccessPolicies(
-    request: ListAccessPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAccessPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ListAccessPoliciesResponse {
     try await self.inner.listAccessPolicies(request: request, options: options)
   }
@@ -72,7 +72,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ListAccessPolicies")
   public func listAccessPolicies(
-    byItem: ListAccessPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAccessPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AccessPolicy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -81,7 +81,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
       request.pageToken = token
       return try await self.listAccessPolicies(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns an [access policy]
@@ -89,7 +89,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_GetAccessPolicy")
   public func getAccessPolicy(
-    request: GetAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAccessPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.AccessPolicy {
     try await self.inner.getAccessPolicy(request: request, options: options)
   }
@@ -102,7 +102,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CreateAccessPolicy")
   public func createAccessPolicy(
-    request: AccessPolicy, options: GoogleCloudGax.RequestOptions
+    request: AccessPolicy, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createAccessPolicy(request: request, options: options)
   }
@@ -115,21 +115,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CreateAccessPolicy")
   public func createAccessPolicy(
-    withPolling: AccessPolicy, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessPolicy> {
+    withPolling: AccessPolicy, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AccessPolicy> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AccessPolicy>.State in
+        -> GoogleGax._PollableOperationImpl<AccessPolicy>.State in
       return try op._extractStatus(AccessPolicy.self)
     }
     let rawOp = try await self.createAccessPolicy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AccessPolicy>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AccessPolicy>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -146,7 +146,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_UpdateAccessPolicy")
   public func updateAccessPolicy(
-    request: UpdateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAccessPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateAccessPolicy(request: request, options: options)
   }
@@ -160,21 +160,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_UpdateAccessPolicy")
   public func updateAccessPolicy(
-    withPolling: UpdateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessPolicy> {
+    withPolling: UpdateAccessPolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AccessPolicy> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AccessPolicy>.State in
+        -> GoogleGax._PollableOperationImpl<AccessPolicy>.State in
       return try op._extractStatus(AccessPolicy.self)
     }
     let rawOp = try await self.updateAccessPolicy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AccessPolicy>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AccessPolicy>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -190,7 +190,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_DeleteAccessPolicy")
   public func deleteAccessPolicy(
-    request: DeleteAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAccessPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteAccessPolicy(request: request, options: options)
   }
@@ -203,21 +203,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_DeleteAccessPolicy")
   public func deleteAccessPolicy(
-    withPolling: DeleteAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteAccessPolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteAccessPolicy(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -231,7 +231,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ListAccessLevels")
   public func listAccessLevels(
-    request: ListAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAccessLevelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ListAccessLevelsResponse {
     try await self.inner.listAccessLevels(request: request, options: options)
   }
@@ -242,7 +242,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ListAccessLevels")
   public func listAccessLevels(
-    byItem: ListAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAccessLevelsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AccessLevel, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -251,7 +251,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
       request.pageToken = token
       return try await self.listAccessLevels(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets an [access level]
@@ -260,7 +260,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_GetAccessLevel")
   public func getAccessLevel(
-    request: GetAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAccessLevelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.AccessLevel {
     try await self.inner.getAccessLevel(request: request, options: options)
   }
@@ -275,7 +275,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CreateAccessLevel")
   public func createAccessLevel(
-    request: CreateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAccessLevelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createAccessLevel(request: request, options: options)
   }
@@ -290,21 +290,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CreateAccessLevel")
   public func createAccessLevel(
-    withPolling: CreateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel> {
+    withPolling: CreateAccessLevelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AccessLevel> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AccessLevel>.State in
+        -> GoogleGax._PollableOperationImpl<AccessLevel>.State in
       return try op._extractStatus(AccessLevel.self)
     }
     let rawOp = try await self.createAccessLevel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AccessLevel>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AccessLevel>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -323,7 +323,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_UpdateAccessLevel")
   public func updateAccessLevel(
-    request: UpdateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAccessLevelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateAccessLevel(request: request, options: options)
   }
@@ -339,21 +339,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_UpdateAccessLevel")
   public func updateAccessLevel(
-    withPolling: UpdateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel> {
+    withPolling: UpdateAccessLevelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AccessLevel> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<AccessLevel>.State in
+        -> GoogleGax._PollableOperationImpl<AccessLevel>.State in
       return try op._extractStatus(AccessLevel.self)
     }
     let rawOp = try await self.updateAccessLevel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AccessLevel>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AccessLevel>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -370,7 +370,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_DeleteAccessLevel")
   public func deleteAccessLevel(
-    request: DeleteAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAccessLevelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteAccessLevel(request: request, options: options)
   }
@@ -384,21 +384,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_DeleteAccessLevel")
   public func deleteAccessLevel(
-    withPolling: DeleteAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteAccessLevelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteAccessLevel(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -426,7 +426,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ReplaceAccessLevels")
   public func replaceAccessLevels(
-    request: ReplaceAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ReplaceAccessLevelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.replaceAccessLevels(request: request, options: options)
   }
@@ -451,22 +451,22 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ReplaceAccessLevels")
   public func replaceAccessLevels(
-    withPolling: ReplaceAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReplaceAccessLevelsResponse> {
+    withPolling: ReplaceAccessLevelsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ReplaceAccessLevelsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ReplaceAccessLevelsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ReplaceAccessLevelsResponse>.State in
       return try op._extractStatus(ReplaceAccessLevelsResponse.self)
     }
     let rawOp = try await self.replaceAccessLevels(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ReplaceAccessLevelsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ReplaceAccessLevelsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -480,7 +480,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ListServicePerimeters")
   public func listServicePerimeters(
-    request: ListServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServicePerimetersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ListServicePerimetersResponse {
     try await self.inner.listServicePerimeters(request: request, options: options)
   }
@@ -491,7 +491,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ListServicePerimeters")
   public func listServicePerimeters(
-    byItem: ListServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServicePerimetersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ServicePerimeter, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -500,7 +500,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
       request.pageToken = token
       return try await self.listServicePerimeters(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets a [service perimeter]
@@ -509,7 +509,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_GetServicePerimeter")
   public func getServicePerimeter(
-    request: GetServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServicePerimeterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ServicePerimeter {
     try await self.inner.getServicePerimeter(request: request, options: options)
   }
@@ -525,7 +525,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CreateServicePerimeter")
   public func createServicePerimeter(
-    request: CreateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateServicePerimeterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createServicePerimeter(request: request, options: options)
   }
@@ -541,21 +541,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CreateServicePerimeter")
   public func createServicePerimeter(
-    withPolling: CreateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter> {
+    withPolling: CreateServicePerimeterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ServicePerimeter>.State in
+        -> GoogleGax._PollableOperationImpl<ServicePerimeter>.State in
       return try op._extractStatus(ServicePerimeter.self)
     }
     let rawOp = try await self.createServicePerimeter(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ServicePerimeter>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ServicePerimeter>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -574,7 +574,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_UpdateServicePerimeter")
   public func updateServicePerimeter(
-    request: UpdateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateServicePerimeterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateServicePerimeter(request: request, options: options)
   }
@@ -590,21 +590,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_UpdateServicePerimeter")
   public func updateServicePerimeter(
-    withPolling: UpdateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter> {
+    withPolling: UpdateServicePerimeterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ServicePerimeter>.State in
+        -> GoogleGax._PollableOperationImpl<ServicePerimeter>.State in
       return try op._extractStatus(ServicePerimeter.self)
     }
     let rawOp = try await self.updateServicePerimeter(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ServicePerimeter>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ServicePerimeter>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -621,7 +621,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_DeleteServicePerimeter")
   public func deleteServicePerimeter(
-    request: DeleteServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteServicePerimeterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteServicePerimeter(request: request, options: options)
   }
@@ -635,21 +635,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_DeleteServicePerimeter")
   public func deleteServicePerimeter(
-    withPolling: DeleteServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteServicePerimeterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteServicePerimeter(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -673,7 +673,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ReplaceServicePerimeters")
   public func replaceServicePerimeters(
-    request: ReplaceServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+    request: ReplaceServicePerimetersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.replaceServicePerimeters(request: request, options: options)
   }
@@ -694,23 +694,22 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ReplaceServicePerimeters")
   public func replaceServicePerimeters(
-    withPolling: ReplaceServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReplaceServicePerimetersResponse> {
+    withPolling: ReplaceServicePerimetersRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ReplaceServicePerimetersResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ReplaceServicePerimetersResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ReplaceServicePerimetersResponse>.State in
       return try op._extractStatus(ReplaceServicePerimetersResponse.self)
     }
     let rawOp = try await self.replaceServicePerimeters(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<ReplaceServicePerimetersResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ReplaceServicePerimetersResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -738,7 +737,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CommitServicePerimeters")
   public func commitServicePerimeters(
-    request: CommitServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+    request: CommitServicePerimetersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.commitServicePerimeters(request: request, options: options)
   }
@@ -763,23 +762,22 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CommitServicePerimeters")
   public func commitServicePerimeters(
-    withPolling: CommitServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CommitServicePerimetersResponse> {
+    withPolling: CommitServicePerimetersRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CommitServicePerimetersResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<CommitServicePerimetersResponse>.State in
+        -> GoogleGax._PollableOperationImpl<CommitServicePerimetersResponse>.State in
       return try op._extractStatus(CommitServicePerimetersResponse.self)
     }
     let rawOp = try await self.commitServicePerimeters(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<CommitServicePerimetersResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<CommitServicePerimetersResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -793,7 +791,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ListGcpUserAccessBindings")
   public func listGcpUserAccessBindings(
-    request: ListGcpUserAccessBindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGcpUserAccessBindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ListGcpUserAccessBindingsResponse {
     try await self.inner.listGcpUserAccessBindings(request: request, options: options)
   }
@@ -804,7 +802,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_ListGcpUserAccessBindings")
   public func listGcpUserAccessBindings(
-    byItem: ListGcpUserAccessBindingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGcpUserAccessBindingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GcpUserAccessBinding, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -813,7 +811,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
       request.pageToken = token
       return try await self.listGcpUserAccessBindings(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets the [GcpUserAccessBinding]
@@ -822,7 +820,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_GetGcpUserAccessBinding")
   public func getGcpUserAccessBinding(
-    request: GetGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.GcpUserAccessBinding {
     try await self.inner.getGcpUserAccessBinding(request: request, options: options)
   }
@@ -840,7 +838,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CreateGcpUserAccessBinding")
   public func createGcpUserAccessBinding(
-    request: CreateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createGcpUserAccessBinding(request: request, options: options)
   }
@@ -858,22 +856,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_CreateGcpUserAccessBinding")
   public func createGcpUserAccessBinding(
-    withPolling: CreateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding> {
+    withPolling: CreateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<GcpUserAccessBinding>.State in
+        -> GoogleGax._PollableOperationImpl<GcpUserAccessBinding>.State in
       return try op._extractStatus(GcpUserAccessBinding.self)
     }
     let rawOp = try await self.createGcpUserAccessBinding(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GcpUserAccessBinding>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<GcpUserAccessBinding>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -889,7 +886,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_UpdateGcpUserAccessBinding")
   public func updateGcpUserAccessBinding(
-    request: UpdateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateGcpUserAccessBinding(request: request, options: options)
   }
@@ -902,22 +899,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_UpdateGcpUserAccessBinding")
   public func updateGcpUserAccessBinding(
-    withPolling: UpdateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding> {
+    withPolling: UpdateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<GcpUserAccessBinding>.State in
+        -> GoogleGax._PollableOperationImpl<GcpUserAccessBinding>.State in
       return try op._extractStatus(GcpUserAccessBinding.self)
     }
     let rawOp = try await self.updateGcpUserAccessBinding(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GcpUserAccessBinding>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<GcpUserAccessBinding>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -933,7 +929,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_DeleteGcpUserAccessBinding")
   public func deleteGcpUserAccessBinding(
-    request: DeleteGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteGcpUserAccessBinding(request: request, options: options)
   }
@@ -946,21 +942,21 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_DeleteGcpUserAccessBinding")
   public func deleteGcpUserAccessBinding(
-    withPolling: DeleteGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteGcpUserAccessBinding(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -979,7 +975,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -991,7 +987,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -1008,7 +1004,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -1019,7 +1015,7 @@ public final class AccessContextManagerClient: Clients.AccessContextManagerProto
   ///
   /// @Snippet(path: "AccessContextManager_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -1054,7 +1050,7 @@ extension Clients {
     func createAccessPolicy(request: AccessPolicy) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.createAccessPolicy`.
-    func createAccessPolicy(withPolling: AccessPolicy) async throws -> any GoogleCloudGax
+    func createAccessPolicy(withPolling: AccessPolicy) async throws -> any GoogleGax
       .PollableOperation<AccessPolicy>
 
     /// See `AccessContextManagerClient.updateAccessPolicy`.
@@ -1062,27 +1058,27 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.updateAccessPolicy`.
-    func updateAccessPolicy(withPolling: UpdateAccessPolicyRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<AccessPolicy>
+    func updateAccessPolicy(withPolling: UpdateAccessPolicyRequest) async throws -> any GoogleGax
+      .PollableOperation<AccessPolicy>
 
     /// See `AccessContextManagerClient.updateAccessPolicy`.
     func updateAccessPolicy(
       policy: AccessPolicy?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AccessPolicy>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<AccessPolicy>
 
     /// See `AccessContextManagerClient.deleteAccessPolicy`.
     func deleteAccessPolicy(request: DeleteAccessPolicyRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.deleteAccessPolicy`.
-    func deleteAccessPolicy(withPolling: DeleteAccessPolicyRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteAccessPolicy(withPolling: DeleteAccessPolicyRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.deleteAccessPolicy`.
     func deleteAccessPolicy(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.listAccessLevels`.
     func listAccessLevels(request: ListAccessLevelsRequest) async throws
@@ -1112,49 +1108,49 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.createAccessLevel`.
-    func createAccessLevel(withPolling: CreateAccessLevelRequest) async throws -> any GoogleCloudGax
+    func createAccessLevel(withPolling: CreateAccessLevelRequest) async throws -> any GoogleGax
       .PollableOperation<AccessLevel>
 
     /// See `AccessContextManagerClient.createAccessLevel`.
     func createAccessLevel(
       parent: Swift.String,
       accessLevel: AccessLevel?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel>
+    ) async throws -> any GoogleGax.PollableOperation<AccessLevel>
 
     /// See `AccessContextManagerClient.updateAccessLevel`.
     func updateAccessLevel(request: UpdateAccessLevelRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.updateAccessLevel`.
-    func updateAccessLevel(withPolling: UpdateAccessLevelRequest) async throws -> any GoogleCloudGax
+    func updateAccessLevel(withPolling: UpdateAccessLevelRequest) async throws -> any GoogleGax
       .PollableOperation<AccessLevel>
 
     /// See `AccessContextManagerClient.updateAccessLevel`.
     func updateAccessLevel(
       accessLevel: AccessLevel?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<AccessLevel>
 
     /// See `AccessContextManagerClient.deleteAccessLevel`.
     func deleteAccessLevel(request: DeleteAccessLevelRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.deleteAccessLevel`.
-    func deleteAccessLevel(withPolling: DeleteAccessLevelRequest) async throws -> any GoogleCloudGax
+    func deleteAccessLevel(withPolling: DeleteAccessLevelRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.deleteAccessLevel`.
     func deleteAccessLevel(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.replaceAccessLevels`.
     func replaceAccessLevels(request: ReplaceAccessLevelsRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.replaceAccessLevels`.
-    func replaceAccessLevels(withPolling: ReplaceAccessLevelsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ReplaceAccessLevelsResponse>
+    func replaceAccessLevels(withPolling: ReplaceAccessLevelsRequest) async throws -> any GoogleGax
+      .PollableOperation<ReplaceAccessLevelsResponse>
 
     /// See `AccessContextManagerClient.listServicePerimeters`.
     func listServicePerimeters(request: ListServicePerimetersRequest) async throws
@@ -1185,13 +1181,13 @@ extension Clients {
 
     /// See `AccessContextManagerClient.createServicePerimeter`.
     func createServicePerimeter(withPolling: CreateServicePerimeterRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ServicePerimeter>
+      -> any GoogleGax.PollableOperation<ServicePerimeter>
 
     /// See `AccessContextManagerClient.createServicePerimeter`.
     func createServicePerimeter(
       parent: Swift.String,
       servicePerimeter: ServicePerimeter?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter>
+    ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter>
 
     /// See `AccessContextManagerClient.updateServicePerimeter`.
     func updateServicePerimeter(request: UpdateServicePerimeterRequest) async throws
@@ -1199,13 +1195,13 @@ extension Clients {
 
     /// See `AccessContextManagerClient.updateServicePerimeter`.
     func updateServicePerimeter(withPolling: UpdateServicePerimeterRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ServicePerimeter>
+      -> any GoogleGax.PollableOperation<ServicePerimeter>
 
     /// See `AccessContextManagerClient.updateServicePerimeter`.
     func updateServicePerimeter(
       servicePerimeter: ServicePerimeter?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter>
 
     /// See `AccessContextManagerClient.deleteServicePerimeter`.
     func deleteServicePerimeter(request: DeleteServicePerimeterRequest) async throws
@@ -1213,12 +1209,12 @@ extension Clients {
 
     /// See `AccessContextManagerClient.deleteServicePerimeter`.
     func deleteServicePerimeter(withPolling: DeleteServicePerimeterRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.deleteServicePerimeter`.
     func deleteServicePerimeter(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.replaceServicePerimeters`.
     func replaceServicePerimeters(request: ReplaceServicePerimetersRequest) async throws
@@ -1226,7 +1222,7 @@ extension Clients {
 
     /// See `AccessContextManagerClient.replaceServicePerimeters`.
     func replaceServicePerimeters(withPolling: ReplaceServicePerimetersRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ReplaceServicePerimetersResponse>
+      -> any GoogleGax.PollableOperation<ReplaceServicePerimetersResponse>
 
     /// See `AccessContextManagerClient.commitServicePerimeters`.
     func commitServicePerimeters(request: CommitServicePerimetersRequest) async throws
@@ -1234,7 +1230,7 @@ extension Clients {
 
     /// See `AccessContextManagerClient.commitServicePerimeters`.
     func commitServicePerimeters(withPolling: CommitServicePerimetersRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<CommitServicePerimetersResponse>
+      -> any GoogleGax.PollableOperation<CommitServicePerimetersResponse>
 
     /// See `AccessContextManagerClient.listGcpUserAccessBindings`.
     func listGcpUserAccessBindings(request: ListGcpUserAccessBindingsRequest) async throws
@@ -1265,13 +1261,13 @@ extension Clients {
 
     /// See `AccessContextManagerClient.createGcpUserAccessBinding`.
     func createGcpUserAccessBinding(withPolling: CreateGcpUserAccessBindingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding>
+      -> any GoogleGax.PollableOperation<GcpUserAccessBinding>
 
     /// See `AccessContextManagerClient.createGcpUserAccessBinding`.
     func createGcpUserAccessBinding(
       parent: Swift.String,
       gcpUserAccessBinding: GcpUserAccessBinding?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding>
+    ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding>
 
     /// See `AccessContextManagerClient.updateGcpUserAccessBinding`.
     func updateGcpUserAccessBinding(request: UpdateGcpUserAccessBindingRequest) async throws
@@ -1279,13 +1275,13 @@ extension Clients {
 
     /// See `AccessContextManagerClient.updateGcpUserAccessBinding`.
     func updateGcpUserAccessBinding(withPolling: UpdateGcpUserAccessBindingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding>
+      -> any GoogleGax.PollableOperation<GcpUserAccessBinding>
 
     /// See `AccessContextManagerClient.updateGcpUserAccessBinding`.
     func updateGcpUserAccessBinding(
       gcpUserAccessBinding: GcpUserAccessBinding?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding>
 
     /// See `AccessContextManagerClient.deleteGcpUserAccessBinding`.
     func deleteGcpUserAccessBinding(request: DeleteGcpUserAccessBindingRequest) async throws
@@ -1293,12 +1289,12 @@ extension Clients {
 
     /// See `AccessContextManagerClient.deleteGcpUserAccessBinding`.
     func deleteGcpUserAccessBinding(withPolling: DeleteGcpUserAccessBindingRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.deleteGcpUserAccessBinding`.
     func deleteGcpUserAccessBinding(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.setIamPolicy`.
     func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws -> GoogleIAMV1.Policy
@@ -1312,227 +1308,227 @@ extension Clients {
 
     /// See `AccessContextManagerClient.listAccessPolicies`.
     func listAccessPolicies(
-      request: ListAccessPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAccessPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ListAccessPoliciesResponse
 
     /// See `AccessContextManagerClient.listAccessPolicies`.
     func listAccessPolicies(
-      byItem: ListAccessPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAccessPoliciesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AccessPolicy, Swift.Error>
 
     /// See `AccessContextManagerClient.getAccessPolicy`.
     func getAccessPolicy(
-      request: GetAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.AccessPolicy
 
     /// See `AccessContextManagerClient.createAccessPolicy`.
     func createAccessPolicy(
-      request: AccessPolicy, options: GoogleCloudGax.RequestOptions
+      request: AccessPolicy, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.createAccessPolicy`.
     func createAccessPolicy(
-      withPolling: AccessPolicy, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AccessPolicy>
+      withPolling: AccessPolicy, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AccessPolicy>
 
     /// See `AccessContextManagerClient.updateAccessPolicy`.
     func updateAccessPolicy(
-      request: UpdateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.updateAccessPolicy`.
     func updateAccessPolicy(
-      withPolling: UpdateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AccessPolicy>
+      withPolling: UpdateAccessPolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AccessPolicy>
 
     /// See `AccessContextManagerClient.deleteAccessPolicy`.
     func deleteAccessPolicy(
-      request: DeleteAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAccessPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.deleteAccessPolicy`.
     func deleteAccessPolicy(
-      withPolling: DeleteAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteAccessPolicyRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.listAccessLevels`.
     func listAccessLevels(
-      request: ListAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAccessLevelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ListAccessLevelsResponse
 
     /// See `AccessContextManagerClient.listAccessLevels`.
     func listAccessLevels(
-      byItem: ListAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAccessLevelsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<AccessLevel, Swift.Error>
 
     /// See `AccessContextManagerClient.getAccessLevel`.
     func getAccessLevel(
-      request: GetAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAccessLevelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.AccessLevel
 
     /// See `AccessContextManagerClient.createAccessLevel`.
     func createAccessLevel(
-      request: CreateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAccessLevelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.createAccessLevel`.
     func createAccessLevel(
-      withPolling: CreateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel>
+      withPolling: CreateAccessLevelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AccessLevel>
 
     /// See `AccessContextManagerClient.updateAccessLevel`.
     func updateAccessLevel(
-      request: UpdateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAccessLevelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.updateAccessLevel`.
     func updateAccessLevel(
-      withPolling: UpdateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel>
+      withPolling: UpdateAccessLevelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<AccessLevel>
 
     /// See `AccessContextManagerClient.deleteAccessLevel`.
     func deleteAccessLevel(
-      request: DeleteAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAccessLevelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.deleteAccessLevel`.
     func deleteAccessLevel(
-      withPolling: DeleteAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteAccessLevelRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.replaceAccessLevels`.
     func replaceAccessLevels(
-      request: ReplaceAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceAccessLevelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.replaceAccessLevels`.
     func replaceAccessLevels(
-      withPolling: ReplaceAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ReplaceAccessLevelsResponse>
+      withPolling: ReplaceAccessLevelsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ReplaceAccessLevelsResponse>
 
     /// See `AccessContextManagerClient.listServicePerimeters`.
     func listServicePerimeters(
-      request: ListServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicePerimetersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ListServicePerimetersResponse
 
     /// See `AccessContextManagerClient.listServicePerimeters`.
     func listServicePerimeters(
-      byItem: ListServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListServicePerimetersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ServicePerimeter, Swift.Error>
 
     /// See `AccessContextManagerClient.getServicePerimeter`.
     func getServicePerimeter(
-      request: GetServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServicePerimeterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ServicePerimeter
 
     /// See `AccessContextManagerClient.createServicePerimeter`.
     func createServicePerimeter(
-      request: CreateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServicePerimeterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.createServicePerimeter`.
     func createServicePerimeter(
-      withPolling: CreateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter>
+      withPolling: CreateServicePerimeterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter>
 
     /// See `AccessContextManagerClient.updateServicePerimeter`.
     func updateServicePerimeter(
-      request: UpdateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServicePerimeterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.updateServicePerimeter`.
     func updateServicePerimeter(
-      withPolling: UpdateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter>
+      withPolling: UpdateServicePerimeterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter>
 
     /// See `AccessContextManagerClient.deleteServicePerimeter`.
     func deleteServicePerimeter(
-      request: DeleteServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServicePerimeterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.deleteServicePerimeter`.
     func deleteServicePerimeter(
-      withPolling: DeleteServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteServicePerimeterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.replaceServicePerimeters`.
     func replaceServicePerimeters(
-      request: ReplaceServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceServicePerimetersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.replaceServicePerimeters`.
     func replaceServicePerimeters(
-      withPolling: ReplaceServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ReplaceServicePerimetersResponse>
+      withPolling: ReplaceServicePerimetersRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ReplaceServicePerimetersResponse>
 
     /// See `AccessContextManagerClient.commitServicePerimeters`.
     func commitServicePerimeters(
-      request: CommitServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+      request: CommitServicePerimetersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.commitServicePerimeters`.
     func commitServicePerimeters(
-      withPolling: CommitServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<CommitServicePerimetersResponse>
+      withPolling: CommitServicePerimetersRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<CommitServicePerimetersResponse>
 
     /// See `AccessContextManagerClient.listGcpUserAccessBindings`.
     func listGcpUserAccessBindings(
-      request: ListGcpUserAccessBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGcpUserAccessBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.ListGcpUserAccessBindingsResponse
 
     /// See `AccessContextManagerClient.listGcpUserAccessBindings`.
     func listGcpUserAccessBindings(
-      byItem: ListGcpUserAccessBindingsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListGcpUserAccessBindingsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GcpUserAccessBinding, Swift.Error>
 
     /// See `AccessContextManagerClient.getGcpUserAccessBinding`.
     func getGcpUserAccessBinding(
-      request: GetGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIdentityAccessContextManagerV1.GcpUserAccessBinding
 
     /// See `AccessContextManagerClient.createGcpUserAccessBinding`.
     func createGcpUserAccessBinding(
-      request: CreateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.createGcpUserAccessBinding`.
     func createGcpUserAccessBinding(
-      withPolling: CreateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding>
+      withPolling: CreateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding>
 
     /// See `AccessContextManagerClient.updateGcpUserAccessBinding`.
     func updateGcpUserAccessBinding(
-      request: UpdateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.updateGcpUserAccessBinding`.
     func updateGcpUserAccessBinding(
-      withPolling: UpdateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding>
+      withPolling: UpdateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding>
 
     /// See `AccessContextManagerClient.deleteGcpUserAccessBinding`.
     func deleteGcpUserAccessBinding(
-      request: DeleteGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AccessContextManagerClient.deleteGcpUserAccessBinding`.
     func deleteGcpUserAccessBinding(
-      withPolling: DeleteGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AccessContextManagerClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `AccessContextManagerClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `AccessContextManagerClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
   }
 }
@@ -1546,9 +1542,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func listAccessPolicies(
-    request: ListAccessPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAccessPoliciesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ListAccessPoliciesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAccessPolicies(
@@ -1558,14 +1554,14 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func listAccessPolicies(
-    byItem: ListAccessPoliciesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAccessPoliciesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AccessPolicy, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleIdentityAccessContextManagerV1.ListAccessPoliciesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getAccessPolicy(request: GetAccessPolicyRequest) async throws
@@ -1575,9 +1571,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func getAccessPolicy(
-    request: GetAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAccessPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.AccessPolicy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAccessPolicy(
@@ -1595,24 +1591,24 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func createAccessPolicy(
-    request: AccessPolicy, options: GoogleCloudGax.RequestOptions
+    request: AccessPolicy, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createAccessPolicy(withPolling: AccessPolicy) async throws -> any GoogleCloudGax
+  public func createAccessPolicy(withPolling: AccessPolicy) async throws -> any GoogleGax
     .PollableOperation<AccessPolicy>
   {
     try await self.createAccessPolicy(withPolling: withPolling, options: .init())
   }
 
   public func createAccessPolicy(
-    withPolling: AccessPolicy, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessPolicy> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AccessPolicy>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: AccessPolicy, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AccessPolicy> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AccessPolicy>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1623,31 +1619,31 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func updateAccessPolicy(
-    request: UpdateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAccessPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAccessPolicy(withPolling: UpdateAccessPolicyRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AccessPolicy>
+    -> any GoogleGax.PollableOperation<AccessPolicy>
   {
     try await self.updateAccessPolicy(withPolling: withPolling, options: .init())
   }
 
   public func updateAccessPolicy(
-    withPolling: UpdateAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessPolicy> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AccessPolicy>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateAccessPolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AccessPolicy> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AccessPolicy>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateAccessPolicy(
     policy: AccessPolicy?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessPolicy> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<AccessPolicy> {
     let request = UpdateAccessPolicyRequest().with {
       $0.policy = policy
       $0.updateMask = updateMask
@@ -1662,30 +1658,30 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func deleteAccessPolicy(
-    request: DeleteAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAccessPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteAccessPolicy(withPolling: DeleteAccessPolicyRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteAccessPolicy(withPolling: withPolling, options: .init())
   }
 
   public func deleteAccessPolicy(
-    withPolling: DeleteAccessPolicyRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteAccessPolicyRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteAccessPolicy(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteAccessPolicyRequest().with {
       $0.name = name
     }
@@ -1699,9 +1695,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func listAccessLevels(
-    request: ListAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListAccessLevelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ListAccessLevelsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listAccessLevels(
@@ -1711,14 +1707,14 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func listAccessLevels(
-    byItem: ListAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListAccessLevelsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<AccessLevel, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleIdentityAccessContextManagerV1.ListAccessLevelsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listAccessLevels(
@@ -1737,9 +1733,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func getAccessLevel(
-    request: GetAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAccessLevelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.AccessLevel {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAccessLevel(
@@ -1758,31 +1754,31 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func createAccessLevel(
-    request: CreateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateAccessLevelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createAccessLevel(withPolling: CreateAccessLevelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AccessLevel>
+  public func createAccessLevel(withPolling: CreateAccessLevelRequest) async throws -> any GoogleGax
+    .PollableOperation<AccessLevel>
   {
     try await self.createAccessLevel(withPolling: withPolling, options: .init())
   }
 
   public func createAccessLevel(
-    withPolling: CreateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AccessLevel>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateAccessLevelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AccessLevel> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AccessLevel>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createAccessLevel(
     parent: Swift.String,
     accessLevel: AccessLevel?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel> {
+  ) async throws -> any GoogleGax.PollableOperation<AccessLevel> {
     let request = CreateAccessLevelRequest().with {
       $0.parent = parent
       $0.accessLevel = accessLevel
@@ -1797,31 +1793,31 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func updateAccessLevel(
-    request: UpdateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAccessLevelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateAccessLevel(withPolling: UpdateAccessLevelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<AccessLevel>
+  public func updateAccessLevel(withPolling: UpdateAccessLevelRequest) async throws -> any GoogleGax
+    .PollableOperation<AccessLevel>
   {
     try await self.updateAccessLevel(withPolling: withPolling, options: .init())
   }
 
   public func updateAccessLevel(
-    withPolling: UpdateAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<AccessLevel>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateAccessLevelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<AccessLevel> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<AccessLevel>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateAccessLevel(
     accessLevel: AccessLevel?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<AccessLevel> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<AccessLevel> {
     let request = UpdateAccessLevelRequest().with {
       $0.accessLevel = accessLevel
       $0.updateMask = updateMask
@@ -1836,30 +1832,30 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func deleteAccessLevel(
-    request: DeleteAccessLevelRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteAccessLevelRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteAccessLevel(withPolling: DeleteAccessLevelRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteAccessLevel(withPolling: DeleteAccessLevelRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteAccessLevel(withPolling: withPolling, options: .init())
   }
 
   public func deleteAccessLevel(
-    withPolling: DeleteAccessLevelRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteAccessLevelRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteAccessLevel(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteAccessLevelRequest().with {
       $0.name = name
     }
@@ -1873,25 +1869,25 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func replaceAccessLevels(
-    request: ReplaceAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
+    request: ReplaceAccessLevelsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func replaceAccessLevels(withPolling: ReplaceAccessLevelsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ReplaceAccessLevelsResponse>
+    -> any GoogleGax.PollableOperation<ReplaceAccessLevelsResponse>
   {
     try await self.replaceAccessLevels(withPolling: withPolling, options: .init())
   }
 
   public func replaceAccessLevels(
-    withPolling: ReplaceAccessLevelsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReplaceAccessLevelsResponse> {
+    withPolling: ReplaceAccessLevelsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ReplaceAccessLevelsResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ReplaceAccessLevelsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ReplaceAccessLevelsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -1902,9 +1898,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func listServicePerimeters(
-    request: ListServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListServicePerimetersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ListServicePerimetersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listServicePerimeters(
@@ -1914,14 +1910,14 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func listServicePerimeters(
-    byItem: ListServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListServicePerimetersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ServicePerimeter, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleIdentityAccessContextManagerV1.ListServicePerimetersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listServicePerimeters(
@@ -1940,9 +1936,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func getServicePerimeter(
-    request: GetServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetServicePerimeterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ServicePerimeter {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getServicePerimeter(
@@ -1961,31 +1957,31 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func createServicePerimeter(
-    request: CreateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateServicePerimeterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createServicePerimeter(withPolling: CreateServicePerimeterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ServicePerimeter>
+    -> any GoogleGax.PollableOperation<ServicePerimeter>
   {
     try await self.createServicePerimeter(withPolling: withPolling, options: .init())
   }
 
   public func createServicePerimeter(
-    withPolling: CreateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ServicePerimeter>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateServicePerimeterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ServicePerimeter>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createServicePerimeter(
     parent: Swift.String,
     servicePerimeter: ServicePerimeter?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter> {
+  ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter> {
     let request = CreateServicePerimeterRequest().with {
       $0.parent = parent
       $0.servicePerimeter = servicePerimeter
@@ -2000,31 +1996,31 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func updateServicePerimeter(
-    request: UpdateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateServicePerimeterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateServicePerimeter(withPolling: UpdateServicePerimeterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ServicePerimeter>
+    -> any GoogleGax.PollableOperation<ServicePerimeter>
   {
     try await self.updateServicePerimeter(withPolling: withPolling, options: .init())
   }
 
   public func updateServicePerimeter(
-    withPolling: UpdateServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<ServicePerimeter>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateServicePerimeterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ServicePerimeter>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateServicePerimeter(
     servicePerimeter: ServicePerimeter?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ServicePerimeter> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<ServicePerimeter> {
     let request = UpdateServicePerimeterRequest().with {
       $0.servicePerimeter = servicePerimeter
       $0.updateMask = updateMask
@@ -2039,30 +2035,30 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func deleteServicePerimeter(
-    request: DeleteServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteServicePerimeterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteServicePerimeter(withPolling: DeleteServicePerimeterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteServicePerimeter(withPolling: withPolling, options: .init())
   }
 
   public func deleteServicePerimeter(
-    withPolling: DeleteServicePerimeterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteServicePerimeterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteServicePerimeter(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteServicePerimeterRequest().with {
       $0.name = name
     }
@@ -2076,26 +2072,25 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func replaceServicePerimeters(
-    request: ReplaceServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+    request: ReplaceServicePerimetersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func replaceServicePerimeters(withPolling: ReplaceServicePerimetersRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ReplaceServicePerimetersResponse>
+    -> any GoogleGax.PollableOperation<ReplaceServicePerimetersResponse>
   {
     try await self.replaceServicePerimeters(withPolling: withPolling, options: .init())
   }
 
   public func replaceServicePerimeters(
-    withPolling: ReplaceServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ReplaceServicePerimetersResponse> {
+    withPolling: ReplaceServicePerimetersRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ReplaceServicePerimetersResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<ReplaceServicePerimetersResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ReplaceServicePerimetersResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2106,26 +2101,25 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func commitServicePerimeters(
-    request: CommitServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
+    request: CommitServicePerimetersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func commitServicePerimeters(withPolling: CommitServicePerimetersRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<CommitServicePerimetersResponse>
+    -> any GoogleGax.PollableOperation<CommitServicePerimetersResponse>
   {
     try await self.commitServicePerimeters(withPolling: withPolling, options: .init())
   }
 
   public func commitServicePerimeters(
-    withPolling: CommitServicePerimetersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<CommitServicePerimetersResponse> {
+    withPolling: CommitServicePerimetersRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<CommitServicePerimetersResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<CommitServicePerimetersResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<CommitServicePerimetersResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2136,9 +2130,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func listGcpUserAccessBindings(
-    request: ListGcpUserAccessBindingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListGcpUserAccessBindingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.ListGcpUserAccessBindingsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listGcpUserAccessBindings(
@@ -2148,14 +2142,14 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func listGcpUserAccessBindings(
-    byItem: ListGcpUserAccessBindingsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListGcpUserAccessBindingsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GcpUserAccessBinding, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleIdentityAccessContextManagerV1.ListGcpUserAccessBindingsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listGcpUserAccessBindings(
@@ -2174,9 +2168,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func getGcpUserAccessBinding(
-    request: GetGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: GetGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIdentityAccessContextManagerV1.GcpUserAccessBinding {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getGcpUserAccessBinding(
@@ -2195,32 +2189,31 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func createGcpUserAccessBinding(
-    request: CreateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createGcpUserAccessBinding(withPolling: CreateGcpUserAccessBindingRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding>
+    async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding>
   {
     try await self.createGcpUserAccessBinding(withPolling: withPolling, options: .init())
   }
 
   public func createGcpUserAccessBinding(
-    withPolling: CreateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GcpUserAccessBinding>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<GcpUserAccessBinding>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createGcpUserAccessBinding(
     parent: Swift.String,
     gcpUserAccessBinding: GcpUserAccessBinding?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding> {
+  ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding> {
     let request = CreateGcpUserAccessBindingRequest().with {
       $0.parent = parent
       $0.gcpUserAccessBinding = gcpUserAccessBinding
@@ -2235,32 +2228,31 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func updateGcpUserAccessBinding(
-    request: UpdateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateGcpUserAccessBinding(withPolling: UpdateGcpUserAccessBindingRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding>
+    async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding>
   {
     try await self.updateGcpUserAccessBinding(withPolling: withPolling, options: .init())
   }
 
   public func updateGcpUserAccessBinding(
-    withPolling: UpdateGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<GcpUserAccessBinding>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<GcpUserAccessBinding>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateGcpUserAccessBinding(
     gcpUserAccessBinding: GcpUserAccessBinding?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<GcpUserAccessBinding> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<GcpUserAccessBinding> {
     let request = UpdateGcpUserAccessBindingRequest().with {
       $0.gcpUserAccessBinding = gcpUserAccessBinding
       $0.updateMask = updateMask
@@ -2275,30 +2267,30 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func deleteGcpUserAccessBinding(
-    request: DeleteGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteGcpUserAccessBinding(withPolling: DeleteGcpUserAccessBindingRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    async throws -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteGcpUserAccessBinding(withPolling: withPolling, options: .init())
   }
 
   public func deleteGcpUserAccessBinding(
-    withPolling: DeleteGcpUserAccessBindingRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteGcpUserAccessBindingRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteGcpUserAccessBinding(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteGcpUserAccessBindingRequest().with {
       $0.name = name
     }
@@ -2312,9 +2304,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -2324,9 +2316,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -2336,9 +2328,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(request: GoogleLongRunning.GetOperationRequest) async throws
@@ -2348,9 +2340,9 @@ extension Clients.AccessContextManagerProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

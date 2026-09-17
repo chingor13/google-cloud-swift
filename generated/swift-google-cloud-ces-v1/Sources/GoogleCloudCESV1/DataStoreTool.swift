@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Tool to retrieve from Vertex AI Search datastore or engine for grounding.
 /// Accepts either a datastore or an engine, but not both.
 /// See Vertex AI Search:
 /// https://cloud.google.com/generative-ai-app-builder/docs/enterprise-search-introduction.
-public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataStoreTool: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The data store tool name.
@@ -43,7 +43,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Defines the search source, either a single DataStore or an Engine.
   public var searchSource: OneOf_SearchSource? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataStoreTool`.
   public init() {}
@@ -133,7 +133,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.searchSource = searchSource
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -159,7 +159,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Rewriter configuration.
-  public struct RewriterConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RewriterConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Configurations for the LLM model.
@@ -171,7 +171,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Whether the rewriter is disabled.
     public var disabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RewriterConfig`.
     public init() {}
@@ -217,7 +217,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -234,16 +234,16 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.RewriterConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Summarization configuration.
-  public struct SummarizationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SummarizationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Configurations for the LLM model.
@@ -255,7 +255,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Whether summarization is disabled.
     public var disabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SummarizationConfig`.
     public init() {}
@@ -301,7 +301,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -318,16 +318,16 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.SummarizationConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Grounding configuration.
-  public struct GroundingConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GroundingConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The groundedness threshold of the answer based on the retrieved
@@ -343,7 +343,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. Whether grounding is disabled.
     public var disabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GroundingConfig`.
     public init() {}
@@ -386,7 +386,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -402,16 +402,16 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.GroundingConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for searching within a specific DataStore.
-  public struct DataStoreSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataStoreSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Filter specification for the DataStore.
@@ -422,7 +422,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The data store.
     public var dataStore: DataStore? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataStoreSource`.
     public init() {}
@@ -463,7 +463,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.dataStore = try container.decodeIfPresent(DataStore.self, forKey: .dataStore)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -479,17 +479,17 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.DataStoreSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for searching within an Engine, potentially targeting
   /// specific DataStores.
-  public struct EngineSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EngineSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Full resource name of the Engine.
@@ -507,7 +507,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// https://cloud.google.com/generative-ai-app-builder/docs/filter-search-metadata
     public var filter: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EngineSource`.
     public init() {}
@@ -557,7 +557,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -574,18 +574,18 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.EngineSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Boost specifications to boost certain documents.
   /// For more information, please refer to
   /// https://cloud.google.com/generative-ai-app-builder/docs/boosting.
-  public struct BoostSpecs: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BoostSpecs: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The Data Store where the boosting configuration is applied.
@@ -596,7 +596,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. A list of boosting specifications.
     public var spec: [DataStoreTool.BoostSpec] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BoostSpecs`.
     public init() {}
@@ -639,7 +639,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -655,22 +655,22 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.BoostSpecs"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Boost specification to boost certain documents.
-  public struct BoostSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BoostSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. A list of boosting specifications.
     public var conditionBoostSpecs: [DataStoreTool.BoostSpec.ConditionBoostSpec] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BoostSpec`.
     public init() {}
@@ -710,7 +710,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -723,7 +723,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Boost specification for a condition.
-    public struct ConditionBoostSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ConditionBoostSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. An expression which specifies a boost condition. The syntax
@@ -750,7 +750,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public var boostControlSpec: DataStoreTool.BoostSpec.ConditionBoostSpec.BoostControlSpec? =
         nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ConditionBoostSpec`.
       public init() {}
@@ -798,7 +798,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           forKey: .boostControlSpec)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -815,7 +815,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Specification for custom ranking based on customer specified attribute
       /// value. It provides more controls for customized ranking than the simple
       /// (condition, boost) combination above.
-      public struct BoostControlSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct BoostControlSpec: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The name of the field whose value will be used to determine
@@ -844,8 +844,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         public var controlPoints:
           [DataStoreTool.BoostSpec.ConditionBoostSpec.BoostControlSpec.ControlPoint] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `BoostControlSpec`.
         public init() {}
@@ -907,7 +906,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -925,7 +924,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         /// The control points used to define the curve. The curve defined
         /// through these control points can only be monotonically increasing
         /// or decreasing(constant values are acceptable).
-        public struct ControlPoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct ControlPoint: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Optional. Can be one of:
@@ -940,8 +939,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           /// the attribute_value evaluates to the value specified above.
           public var boostAmount: Swift.Float = Swift.Float()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `ControlPoint`.
           public init() {}
@@ -985,7 +983,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -1002,11 +1000,11 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
             return
               "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.BoostSpec.ConditionBoostSpec.BoostControlSpec.ControlPoint"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -1228,39 +1226,39 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.BoostSpec.ConditionBoostSpec.BoostControlSpec"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.BoostSpec.ConditionBoostSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.BoostSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// If specified, will apply the given configuration for the specified
   /// modality.
-  public struct ModalityConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ModalityConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The modality type.
@@ -1276,7 +1274,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The grounding configuration.
     public var groundingConfig: DataStoreTool.GroundingConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ModalityConfig`.
     public init() {}
@@ -1328,7 +1326,7 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         DataStoreTool.GroundingConfig.self, forKey: .groundingConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1451,11 +1449,11 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool.ModalityConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1580,10 +1578,10 @@ public struct DataStoreTool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.DataStoreTool"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

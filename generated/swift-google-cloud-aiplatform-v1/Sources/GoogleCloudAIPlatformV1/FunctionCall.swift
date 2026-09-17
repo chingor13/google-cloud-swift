@@ -16,12 +16,12 @@
 
 #if DataFoundryService || EvaluationService || GenAiCacheService || GenAiTuningService || LlmUtilityService || PredictionService || SessionService || VertexRagService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A predicted [FunctionCall] returned from the model that contains a string
   /// representing the [FunctionDeclaration.name] and a structured JSON object
   /// containing the parameters and their values.
-  public struct FunctionCall: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FunctionCall: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The name of the function to call.
@@ -30,7 +30,7 @@
 
     /// Optional. The function parameters and values in JSON object format.
     /// See [FunctionDeclaration.parameters] for parameter details.
-    public var args: GoogleCloudWKT.Struct? = nil
+    public var args: GoogleWKT.Struct? = nil
 
     /// Optional. The partial argument value of the function call.
     /// If provided, represents the arguments/fields that are streamed
@@ -42,7 +42,7 @@
     /// to follow.
     public var willContinue: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FunctionCall`.
     public init() {}
@@ -84,7 +84,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
         self.name = value
       }
-      self.args = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .args)
+      self.args = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .args)
       if let value = try container.decodeIfPresent([PartialArg].self, forKey: .partialArgs) {
         self.partialArgs = value
       }
@@ -93,7 +93,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -111,11 +111,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FunctionCall"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

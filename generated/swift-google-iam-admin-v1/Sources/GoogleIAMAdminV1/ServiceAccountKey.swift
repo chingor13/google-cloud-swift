@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a service account key.
 ///
@@ -41,7 +41,7 @@ import Foundation
 ///
 /// Public keys for all service accounts are also published at the OAuth2
 /// Service Account API.
-public struct ServiceAccountKey: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ServiceAccountKey: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the service account key in the following format
@@ -72,13 +72,13 @@ public struct ServiceAccountKey: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var publicKeyData: Foundation.Data = Foundation.Data()
 
   /// The key can be used after this timestamp.
-  public var validAfterTime: GoogleCloudWKT.Timestamp? = nil
+  public var validAfterTime: GoogleWKT.Timestamp? = nil
 
   /// The key can be used before this timestamp.
   /// For system-managed key pairs, this timestamp is the end time for the
   /// private key signing operation. The public key could still be used
   /// for verification for a few hours after this time.
-  public var validBeforeTime: GoogleCloudWKT.Timestamp? = nil
+  public var validBeforeTime: GoogleWKT.Timestamp? = nil
 
   /// The key origin.
   public var keyOrigin: ServiceAccountKeyOrigin = ServiceAccountKeyOrigin()
@@ -90,7 +90,7 @@ public struct ServiceAccountKey: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The key status.
   public var disabled: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ServiceAccountKey`.
   public init() {}
@@ -161,9 +161,9 @@ public struct ServiceAccountKey: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.publicKeyData = value
     }
     self.validAfterTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .validAfterTime)
+      GoogleWKT.Timestamp.self, forKey: .validAfterTime)
     self.validBeforeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .validBeforeTime)
+      GoogleWKT.Timestamp.self, forKey: .validBeforeTime)
     if let value = try container.decodeIfPresent(ServiceAccountKeyOrigin.self, forKey: .keyOrigin) {
       self.keyOrigin = value
     }
@@ -177,7 +177,7 @@ public struct ServiceAccountKey: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -201,10 +201,10 @@ public struct ServiceAccountKey: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.iam.admin.v1.ServiceAccountKey"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

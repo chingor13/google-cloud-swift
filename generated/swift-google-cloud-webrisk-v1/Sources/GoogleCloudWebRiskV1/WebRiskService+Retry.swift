@@ -18,28 +18,28 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class WebRiskServiceRetry: WebRiskServiceStub {
     let inner: any WebRiskServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any WebRiskServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any WebRiskServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +51,14 @@ extension Clients {
     }
 
     public func computeThreatListDiff(
-      request: ComputeThreatListDiffRequest, options: GoogleCloudGax.RequestOptions
+      request: ComputeThreatListDiffRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebRiskV1.ComputeThreatListDiffResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ComputeThreatListDiffRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ComputeThreatListDiffRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebRiskV1.ComputeThreatListDiffResponse
           in
           return try await self.inner.computeThreatListDiff(request: r, options: o)
@@ -66,14 +66,14 @@ extension Clients {
     }
 
     public func searchUris(
-      request: SearchUrisRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchUrisRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebRiskV1.SearchUrisResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: SearchUrisRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchUrisRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebRiskV1.SearchUrisResponse
           in
           return try await self.inner.searchUris(request: r, options: o)
@@ -81,14 +81,14 @@ extension Clients {
     }
 
     public func searchHashes(
-      request: SearchHashesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchHashesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebRiskV1.SearchHashesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: SearchHashesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchHashesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebRiskV1.SearchHashesResponse
           in
           return try await self.inner.searchHashes(request: r, options: o)
@@ -96,14 +96,14 @@ extension Clients {
     }
 
     public func createSubmission(
-      request: CreateSubmissionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSubmissionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebRiskV1.Submission {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateSubmissionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateSubmissionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudWebRiskV1.Submission
           in
           return try await self.inner.createSubmission(request: r, options: o)
@@ -111,14 +111,14 @@ extension Clients {
     }
 
     public func submitUri(
-      request: SubmitUriRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitUriRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SubmitUriRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SubmitUriRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.submitUri(request: r, options: o)
@@ -126,29 +126,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -156,29 +156,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

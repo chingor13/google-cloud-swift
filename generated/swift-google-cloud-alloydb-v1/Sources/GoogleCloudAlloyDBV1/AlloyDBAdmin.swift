@@ -19,21 +19,21 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service describing handlers for resources
 ///
 /// @Snippet(path: "AlloyDBAdminQuickstart")
 public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   let inner: any Clients.AlloyDBAdminStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `AlloyDBAdminClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AlloyDBAdminStub = try Clients.AlloyDBAdminTransport(options)
     inner = Clients.AlloyDBAdminRetry(inner, options: options)
     if let logger = options.logger {
@@ -48,7 +48,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListClusters")
   public func listClusters(
-    request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListClustersResponse {
     try await self.inner.listClusters(request: request, options: options)
   }
@@ -57,7 +57,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListClusters")
   public func listClusters(
-    byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListClustersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Cluster, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListClustersResponse in
@@ -65,14 +65,14 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
       request.pageToken = token
       return try await self.listClusters(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Cluster.
   ///
   /// @Snippet(path: "AlloyDBAdmin_GetCluster")
   public func getCluster(
-    request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.Cluster {
     try await self.inner.getCluster(request: request, options: options)
   }
@@ -81,7 +81,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateCluster")
   public func createCluster(
-    request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createCluster(request: request, options: options)
   }
@@ -90,21 +90,20 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateCluster")
   public func createCluster(
-    withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.createCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -116,7 +115,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpdateCluster")
   public func updateCluster(
-    request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateCluster(request: request, options: options)
   }
@@ -125,21 +124,20 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpdateCluster")
   public func updateCluster(
-    withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.updateCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -152,7 +150,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ExportCluster")
   public func exportCluster(
-    request: ExportClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.exportCluster(request: request, options: options)
   }
@@ -162,22 +160,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ExportCluster")
   public func exportCluster(
-    withPolling: ExportClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportClusterResponse> {
+    withPolling: ExportClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportClusterResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ExportClusterResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ExportClusterResponse>.State in
       return try op._extractStatus(ExportClusterResponse.self)
     }
     let rawOp = try await self.exportCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportClusterResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportClusterResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -190,7 +187,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ImportCluster")
   public func importCluster(
-    request: ImportClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.importCluster(request: request, options: options)
   }
@@ -200,22 +197,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ImportCluster")
   public func importCluster(
-    withPolling: ImportClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportClusterResponse> {
+    withPolling: ImportClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportClusterResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ImportClusterResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ImportClusterResponse>.State in
       return try op._extractStatus(ImportClusterResponse.self)
     }
     let rawOp = try await self.importCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportClusterResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportClusterResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -228,7 +224,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpgradeCluster")
   public func upgradeCluster(
-    request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpgradeClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.upgradeCluster(request: request, options: options)
   }
@@ -238,22 +234,22 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpgradeCluster")
   public func upgradeCluster(
-    withPolling: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<UpgradeClusterResponse> {
+    withPolling: UpgradeClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<UpgradeClusterResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<UpgradeClusterResponse>.State in
+        -> GoogleGax._PollableOperationImpl<UpgradeClusterResponse>.State in
       return try op._extractStatus(UpgradeClusterResponse.self)
     }
     let rawOp = try await self.upgradeCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<UpgradeClusterResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<UpgradeClusterResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -265,7 +261,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_DeleteCluster")
   public func deleteCluster(
-    request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteCluster(request: request, options: options)
   }
@@ -274,21 +270,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_DeleteCluster")
   public func deleteCluster(
-    withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -303,7 +299,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_PromoteCluster")
   public func promoteCluster(
-    request: PromoteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: PromoteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.promoteCluster(request: request, options: options)
   }
@@ -315,21 +311,20 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_PromoteCluster")
   public func promoteCluster(
-    withPolling: PromoteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: PromoteClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.promoteCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -343,7 +338,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_SwitchoverCluster")
   public func switchoverCluster(
-    request: SwitchoverClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: SwitchoverClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.switchoverCluster(request: request, options: options)
   }
@@ -354,21 +349,20 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_SwitchoverCluster")
   public func switchoverCluster(
-    withPolling: SwitchoverClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: SwitchoverClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.switchoverCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -382,7 +376,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_RestoreCluster")
   public func restoreCluster(
-    request: RestoreClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: RestoreClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.restoreCluster(request: request, options: options)
   }
@@ -393,21 +387,20 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_RestoreCluster")
   public func restoreCluster(
-    withPolling: RestoreClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: RestoreClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.restoreCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -420,7 +413,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateSecondaryCluster")
   public func createSecondaryCluster(
-    request: CreateSecondaryClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSecondaryClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createSecondaryCluster(request: request, options: options)
   }
@@ -430,21 +423,20 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateSecondaryCluster")
   public func createSecondaryCluster(
-    withPolling: CreateSecondaryClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    withPolling: CreateSecondaryClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       return try op._extractStatus(Cluster.self)
     }
     let rawOp = try await self.createSecondaryCluster(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -456,7 +448,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListInstances")
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListInstancesResponse {
     try await self.inner.listInstances(request: request, options: options)
   }
@@ -465,7 +457,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListInstances")
   public func listInstances(
-    byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListInstancesResponse in
@@ -473,14 +465,14 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
       request.pageToken = token
       return try await self.listInstances(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Instance.
   ///
   /// @Snippet(path: "AlloyDBAdmin_GetInstance")
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.Instance {
     try await self.inner.getInstance(request: request, options: options)
   }
@@ -489,7 +481,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateInstance")
   public func createInstance(
-    request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createInstance(request: request, options: options)
   }
@@ -498,21 +490,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateInstance")
   public func createInstance(
-    withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.createInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -524,7 +516,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateSecondaryInstance")
   public func createSecondaryInstance(
-    request: CreateSecondaryInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSecondaryInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createSecondaryInstance(request: request, options: options)
   }
@@ -533,21 +525,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateSecondaryInstance")
   public func createSecondaryInstance(
-    withPolling: CreateSecondaryInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: CreateSecondaryInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.createSecondaryInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -568,7 +560,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_BatchCreateInstances")
   public func batchCreateInstances(
-    request: BatchCreateInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchCreateInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.batchCreateInstances(request: request, options: options)
   }
@@ -586,23 +578,22 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_BatchCreateInstances")
   public func batchCreateInstances(
-    withPolling: BatchCreateInstancesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchCreateInstancesResponse> {
+    withPolling: BatchCreateInstancesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchCreateInstancesResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchCreateInstancesResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BatchCreateInstancesResponse>.State in
       return try op._extractStatus(BatchCreateInstancesResponse.self)
     }
     let rawOp = try await self.batchCreateInstances(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BatchCreateInstancesResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<BatchCreateInstancesResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -614,7 +605,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpdateInstance")
   public func updateInstance(
-    request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateInstance(request: request, options: options)
   }
@@ -623,21 +614,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpdateInstance")
   public func updateInstance(
-    withPolling: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: UpdateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.updateInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -649,7 +640,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_DeleteInstance")
   public func deleteInstance(
-    request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteInstance(request: request, options: options)
   }
@@ -658,21 +649,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_DeleteInstance")
   public func deleteInstance(
-    withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -686,7 +677,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_FailoverInstance")
   public func failoverInstance(
-    request: FailoverInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: FailoverInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.failoverInstance(request: request, options: options)
   }
@@ -697,21 +688,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_FailoverInstance")
   public func failoverInstance(
-    withPolling: FailoverInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: FailoverInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.failoverInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -724,7 +715,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_InjectFault")
   public func injectFault(
-    request: InjectFaultRequest, options: GoogleCloudGax.RequestOptions
+    request: InjectFaultRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.injectFault(request: request, options: options)
   }
@@ -734,21 +725,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_InjectFault")
   public func injectFault(
-    withPolling: InjectFaultRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: InjectFaultRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.injectFault(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -761,7 +752,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_RestartInstance")
   public func restartInstance(
-    request: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: RestartInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.restartInstance(request: request, options: options)
   }
@@ -771,21 +762,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_RestartInstance")
   public func restartInstance(
-    withPolling: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: RestartInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.restartInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -797,7 +788,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ExecuteSql")
   public func executeSql(
-    request: ExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+    request: ExecuteSqlRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ExecuteSqlResponse {
     try await self.inner.executeSql(request: request, options: options)
   }
@@ -806,7 +797,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListBackups")
   public func listBackups(
-    request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBackupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListBackupsResponse {
     try await self.inner.listBackups(request: request, options: options)
   }
@@ -815,7 +806,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListBackups")
   public func listBackups(
-    byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBackupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Backup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListBackupsResponse in
@@ -823,14 +814,14 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
       request.pageToken = token
       return try await self.listBackups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single Backup.
   ///
   /// @Snippet(path: "AlloyDBAdmin_GetBackup")
   public func getBackup(
-    request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.Backup {
     try await self.inner.getBackup(request: request, options: options)
   }
@@ -839,7 +830,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateBackup")
   public func createBackup(
-    request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createBackup(request: request, options: options)
   }
@@ -848,21 +839,20 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateBackup")
   public func createBackup(
-    withPolling: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+    withPolling: CreateBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Backup>.State in
       return try op._extractStatus(Backup.self)
     }
     let rawOp = try await self.createBackup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Backup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -874,7 +864,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpdateBackup")
   public func updateBackup(
-    request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateBackup(request: request, options: options)
   }
@@ -883,21 +873,20 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpdateBackup")
   public func updateBackup(
-    withPolling: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+    withPolling: UpdateBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Backup>.State in
       return try op._extractStatus(Backup.self)
     }
     let rawOp = try await self.updateBackup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Backup>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -909,7 +898,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_DeleteBackup")
   public func deleteBackup(
-    request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteBackup(request: request, options: options)
   }
@@ -918,21 +907,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_DeleteBackup")
   public func deleteBackup(
-    withPolling: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteBackup(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -944,7 +933,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListSupportedDatabaseFlags")
   public func listSupportedDatabaseFlags(
-    request: ListSupportedDatabaseFlagsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSupportedDatabaseFlagsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListSupportedDatabaseFlagsResponse {
     try await self.inner.listSupportedDatabaseFlags(request: request, options: options)
   }
@@ -953,7 +942,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListSupportedDatabaseFlags")
   public func listSupportedDatabaseFlags(
-    byItem: ListSupportedDatabaseFlagsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSupportedDatabaseFlagsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SupportedDatabaseFlag, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListSupportedDatabaseFlagsResponse
@@ -962,7 +951,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
       request.pageToken = token
       return try await self.listSupportedDatabaseFlags(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Generate a client certificate signed by a Cluster CA.
@@ -973,7 +962,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_GenerateClientCertificate")
   public func generateClientCertificate(
-    request: GenerateClientCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateClientCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.GenerateClientCertificateResponse {
     try await self.inner.generateClientCertificate(request: request, options: options)
   }
@@ -982,7 +971,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_GetConnectionInfo")
   public func getConnectionInfo(
-    request: GetConnectionInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConnectionInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ConnectionInfo {
     try await self.inner.getConnectionInfo(request: request, options: options)
   }
@@ -991,7 +980,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListUsers")
   public func listUsers(
-    request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUsersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListUsersResponse {
     try await self.inner.listUsers(request: request, options: options)
   }
@@ -1000,21 +989,21 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListUsers")
   public func listUsers(
-    byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUsersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<User, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListUsersResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listUsers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single User.
   ///
   /// @Snippet(path: "AlloyDBAdmin_GetUser")
   public func getUser(
-    request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.User {
     try await self.inner.getUser(request: request, options: options)
   }
@@ -1023,7 +1012,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CreateUser")
   public func createUser(
-    request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.User {
     try await self.inner.createUser(request: request, options: options)
   }
@@ -1032,7 +1021,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_UpdateUser")
   public func updateUser(
-    request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.User {
     try await self.inner.updateUser(request: request, options: options)
   }
@@ -1041,7 +1030,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_DeleteUser")
   public func deleteUser(
-    request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteUser(request: request, options: options)
   }
@@ -1050,7 +1039,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListDatabases")
   public func listDatabases(
-    request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDatabasesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListDatabasesResponse {
     try await self.inner.listDatabases(request: request, options: options)
   }
@@ -1059,7 +1048,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListDatabases")
   public func listDatabases(
-    byItem: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDatabasesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Database, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListDatabasesResponse in
@@ -1067,14 +1056,14 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
       request.pageToken = token
       return try await self.listDatabases(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists information about the supported locations for this service.
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -1083,7 +1072,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -1091,14 +1080,14 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "AlloyDBAdmin_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -1109,7 +1098,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -1120,7 +1109,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -1128,7 +1117,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -1137,7 +1126,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -1148,7 +1137,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -1159,7 +1148,7 @@ public final class AlloyDBAdminClient: Clients.AlloyDBAdminProtocol, Sendable {
   ///
   /// @Snippet(path: "AlloyDBAdmin_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -1198,7 +1187,7 @@ extension Clients {
     func createCluster(request: CreateClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.createCluster`.
-    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+    func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.createCluster`.
@@ -1206,26 +1195,26 @@ extension Clients {
       parent: Swift.String,
       cluster: Cluster?,
       clusterId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.updateCluster`.
     func updateCluster(request: UpdateClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.updateCluster`.
-    func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleCloudGax
+    func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.updateCluster`.
     func updateCluster(
       cluster: Cluster?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.exportCluster`.
     func exportCluster(request: ExportClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.exportCluster`.
-    func exportCluster(withPolling: ExportClusterRequest) async throws -> any GoogleCloudGax
+    func exportCluster(withPolling: ExportClusterRequest) async throws -> any GoogleGax
       .PollableOperation<ExportClusterResponse>
 
     /// See `AlloyDBAdminClient.exportCluster`.
@@ -1235,13 +1224,13 @@ extension Clients {
       database: Swift.String,
       csvExportOptions: ExportClusterRequest.CsvExportOptions?,
       sqlExportOptions: ExportClusterRequest.SqlExportOptions?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportClusterResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ExportClusterResponse>
 
     /// See `AlloyDBAdminClient.importCluster`.
     func importCluster(request: ImportClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.importCluster`.
-    func importCluster(withPolling: ImportClusterRequest) async throws -> any GoogleCloudGax
+    func importCluster(withPolling: ImportClusterRequest) async throws -> any GoogleGax
       .PollableOperation<ImportClusterResponse>
 
     /// See `AlloyDBAdminClient.importCluster`.
@@ -1250,63 +1239,63 @@ extension Clients {
       gcsUri: Swift.String,
       database: Swift.String,
       user: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportClusterResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ImportClusterResponse>
 
     /// See `AlloyDBAdminClient.upgradeCluster`.
     func upgradeCluster(request: UpgradeClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.upgradeCluster`.
-    func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleCloudGax
+    func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleGax
       .PollableOperation<UpgradeClusterResponse>
 
     /// See `AlloyDBAdminClient.upgradeCluster`.
     func upgradeCluster(
       name: Swift.String,
       version: DatabaseVersion,
-    ) async throws -> any GoogleCloudGax.PollableOperation<UpgradeClusterResponse>
+    ) async throws -> any GoogleGax.PollableOperation<UpgradeClusterResponse>
 
     /// See `AlloyDBAdminClient.deleteCluster`.
     func deleteCluster(request: DeleteClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.deleteCluster`.
-    func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
+    func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.deleteCluster`.
     func deleteCluster(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.promoteCluster`.
     func promoteCluster(request: PromoteClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.promoteCluster`.
-    func promoteCluster(withPolling: PromoteClusterRequest) async throws -> any GoogleCloudGax
+    func promoteCluster(withPolling: PromoteClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.promoteCluster`.
     func promoteCluster(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.switchoverCluster`.
     func switchoverCluster(request: SwitchoverClusterRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.switchoverCluster`.
-    func switchoverCluster(withPolling: SwitchoverClusterRequest) async throws -> any GoogleCloudGax
+    func switchoverCluster(withPolling: SwitchoverClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.switchoverCluster`.
     func switchoverCluster(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.restoreCluster`.
     func restoreCluster(request: RestoreClusterRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.restoreCluster`.
-    func restoreCluster(withPolling: RestoreClusterRequest) async throws -> any GoogleCloudGax
+    func restoreCluster(withPolling: RestoreClusterRequest) async throws -> any GoogleGax
       .PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.createSecondaryCluster`.
@@ -1315,14 +1304,14 @@ extension Clients {
 
     /// See `AlloyDBAdminClient.createSecondaryCluster`.
     func createSecondaryCluster(withPolling: CreateSecondaryClusterRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Cluster>
+      -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.createSecondaryCluster`.
     func createSecondaryCluster(
       parent: Swift.String,
       cluster: Cluster?,
       clusterId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.listInstances`.
     func listInstances(request: ListInstancesRequest) async throws
@@ -1350,7 +1339,7 @@ extension Clients {
     func createInstance(request: CreateInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.createInstance`.
-    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.createInstance`.
@@ -1358,7 +1347,7 @@ extension Clients {
       parent: Swift.String,
       instance: Instance?,
       instanceId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.createSecondaryInstance`.
     func createSecondaryInstance(request: CreateSecondaryInstanceRequest) async throws
@@ -1366,14 +1355,14 @@ extension Clients {
 
     /// See `AlloyDBAdminClient.createSecondaryInstance`.
     func createSecondaryInstance(withPolling: CreateSecondaryInstanceRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Instance>
+      -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.createSecondaryInstance`.
     func createSecondaryInstance(
       parent: Swift.String,
       instance: Instance?,
       instanceId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.batchCreateInstances`.
     func batchCreateInstances(request: BatchCreateInstancesRequest) async throws
@@ -1381,71 +1370,71 @@ extension Clients {
 
     /// See `AlloyDBAdminClient.batchCreateInstances`.
     func batchCreateInstances(withPolling: BatchCreateInstancesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BatchCreateInstancesResponse>
+      -> any GoogleGax.PollableOperation<BatchCreateInstancesResponse>
 
     /// See `AlloyDBAdminClient.updateInstance`.
     func updateInstance(request: UpdateInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.updateInstance`.
-    func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleCloudGax
+    func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.updateInstance`.
     func updateInstance(
       instance: Instance?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.deleteInstance`.
     func deleteInstance(request: DeleteInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.deleteInstance`.
-    func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
+    func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.deleteInstance`.
     func deleteInstance(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.failoverInstance`.
     func failoverInstance(request: FailoverInstanceRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.failoverInstance`.
-    func failoverInstance(withPolling: FailoverInstanceRequest) async throws -> any GoogleCloudGax
+    func failoverInstance(withPolling: FailoverInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.failoverInstance`.
     func failoverInstance(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.injectFault`.
     func injectFault(request: InjectFaultRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.injectFault`.
-    func injectFault(withPolling: InjectFaultRequest) async throws -> any GoogleCloudGax
+    func injectFault(withPolling: InjectFaultRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.injectFault`.
     func injectFault(
       faultType: InjectFaultRequest.FaultType,
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.restartInstance`.
     func restartInstance(request: RestartInstanceRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.restartInstance`.
-    func restartInstance(withPolling: RestartInstanceRequest) async throws -> any GoogleCloudGax
+    func restartInstance(withPolling: RestartInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.restartInstance`.
     func restartInstance(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.executeSql`.
     func executeSql(request: ExecuteSqlRequest) async throws
@@ -1486,7 +1475,7 @@ extension Clients {
     func createBackup(request: CreateBackupRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.createBackup`.
-    func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleCloudGax
+    func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleGax
       .PollableOperation<Backup>
 
     /// See `AlloyDBAdminClient.createBackup`.
@@ -1494,32 +1483,32 @@ extension Clients {
       parent: Swift.String,
       backup: Backup?,
       backupId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+    ) async throws -> any GoogleGax.PollableOperation<Backup>
 
     /// See `AlloyDBAdminClient.updateBackup`.
     func updateBackup(request: UpdateBackupRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.updateBackup`.
-    func updateBackup(withPolling: UpdateBackupRequest) async throws -> any GoogleCloudGax
+    func updateBackup(withPolling: UpdateBackupRequest) async throws -> any GoogleGax
       .PollableOperation<Backup>
 
     /// See `AlloyDBAdminClient.updateBackup`.
     func updateBackup(
       backup: Backup?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Backup>
 
     /// See `AlloyDBAdminClient.deleteBackup`.
     func deleteBackup(request: DeleteBackupRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.deleteBackup`.
-    func deleteBackup(withPolling: DeleteBackupRequest) async throws -> any GoogleCloudGax
+    func deleteBackup(withPolling: DeleteBackupRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.deleteBackup`.
     func deleteBackup(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.listSupportedDatabaseFlags`.
     func listSupportedDatabaseFlags(request: ListSupportedDatabaseFlagsRequest) async throws
@@ -1590,7 +1579,7 @@ extension Clients {
     /// See `AlloyDBAdminClient.updateUser`.
     func updateUser(
       user: User?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudAlloyDBV1.User
 
     /// See `AlloyDBAdminClient.deleteUser`.
@@ -1661,357 +1650,357 @@ extension Clients {
 
     /// See `AlloyDBAdminClient.listClusters`.
     func listClusters(
-      request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListClustersResponse
 
     /// See `AlloyDBAdminClient.listClusters`.
     func listClusters(
-      byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListClustersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Cluster, Swift.Error>
 
     /// See `AlloyDBAdminClient.getCluster`.
     func getCluster(
-      request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.Cluster
 
     /// See `AlloyDBAdminClient.createCluster`.
     func createCluster(
-      request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.createCluster`.
     func createCluster(
-      withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.updateCluster`.
     func updateCluster(
-      request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.updateCluster`.
     func updateCluster(
-      withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.exportCluster`.
     func exportCluster(
-      request: ExportClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.exportCluster`.
     func exportCluster(
-      withPolling: ExportClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportClusterResponse>
+      withPolling: ExportClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportClusterResponse>
 
     /// See `AlloyDBAdminClient.importCluster`.
     func importCluster(
-      request: ImportClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.importCluster`.
     func importCluster(
-      withPolling: ImportClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportClusterResponse>
+      withPolling: ImportClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportClusterResponse>
 
     /// See `AlloyDBAdminClient.upgradeCluster`.
     func upgradeCluster(
-      request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpgradeClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.upgradeCluster`.
     func upgradeCluster(
-      withPolling: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<UpgradeClusterResponse>
+      withPolling: UpgradeClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<UpgradeClusterResponse>
 
     /// See `AlloyDBAdminClient.deleteCluster`.
     func deleteCluster(
-      request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.deleteCluster`.
     func deleteCluster(
-      withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.promoteCluster`.
     func promoteCluster(
-      request: PromoteClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: PromoteClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.promoteCluster`.
     func promoteCluster(
-      withPolling: PromoteClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: PromoteClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.switchoverCluster`.
     func switchoverCluster(
-      request: SwitchoverClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: SwitchoverClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.switchoverCluster`.
     func switchoverCluster(
-      withPolling: SwitchoverClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: SwitchoverClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.restoreCluster`.
     func restoreCluster(
-      request: RestoreClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.restoreCluster`.
     func restoreCluster(
-      withPolling: RestoreClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: RestoreClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.createSecondaryCluster`.
     func createSecondaryCluster(
-      request: CreateSecondaryClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecondaryClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.createSecondaryCluster`.
     func createSecondaryCluster(
-      withPolling: CreateSecondaryClusterRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Cluster>
+      withPolling: CreateSecondaryClusterRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Cluster>
 
     /// See `AlloyDBAdminClient.listInstances`.
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListInstancesResponse
 
     /// See `AlloyDBAdminClient.listInstances`.
     func listInstances(
-      byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Instance, Swift.Error>
 
     /// See `AlloyDBAdminClient.getInstance`.
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.Instance
 
     /// See `AlloyDBAdminClient.createInstance`.
     func createInstance(
-      request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.createInstance`.
     func createInstance(
-      withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.createSecondaryInstance`.
     func createSecondaryInstance(
-      request: CreateSecondaryInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecondaryInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.createSecondaryInstance`.
     func createSecondaryInstance(
-      withPolling: CreateSecondaryInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: CreateSecondaryInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.batchCreateInstances`.
     func batchCreateInstances(
-      request: BatchCreateInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.batchCreateInstances`.
     func batchCreateInstances(
-      withPolling: BatchCreateInstancesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchCreateInstancesResponse>
+      withPolling: BatchCreateInstancesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchCreateInstancesResponse>
 
     /// See `AlloyDBAdminClient.updateInstance`.
     func updateInstance(
-      request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.updateInstance`.
     func updateInstance(
-      withPolling: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: UpdateInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.deleteInstance`.
     func deleteInstance(
-      request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.deleteInstance`.
     func deleteInstance(
-      withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.failoverInstance`.
     func failoverInstance(
-      request: FailoverInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: FailoverInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.failoverInstance`.
     func failoverInstance(
-      withPolling: FailoverInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: FailoverInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.injectFault`.
     func injectFault(
-      request: InjectFaultRequest, options: GoogleCloudGax.RequestOptions
+      request: InjectFaultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.injectFault`.
     func injectFault(
-      withPolling: InjectFaultRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: InjectFaultRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.restartInstance`.
     func restartInstance(
-      request: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: RestartInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.restartInstance`.
     func restartInstance(
-      withPolling: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: RestartInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `AlloyDBAdminClient.executeSql`.
     func executeSql(
-      request: ExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecuteSqlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ExecuteSqlResponse
 
     /// See `AlloyDBAdminClient.listBackups`.
     func listBackups(
-      request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBackupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListBackupsResponse
 
     /// See `AlloyDBAdminClient.listBackups`.
     func listBackups(
-      byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBackupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Backup, Swift.Error>
 
     /// See `AlloyDBAdminClient.getBackup`.
     func getBackup(
-      request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.Backup
 
     /// See `AlloyDBAdminClient.createBackup`.
     func createBackup(
-      request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.createBackup`.
     func createBackup(
-      withPolling: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+      withPolling: CreateBackupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Backup>
 
     /// See `AlloyDBAdminClient.updateBackup`.
     func updateBackup(
-      request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.updateBackup`.
     func updateBackup(
-      withPolling: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Backup>
+      withPolling: UpdateBackupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Backup>
 
     /// See `AlloyDBAdminClient.deleteBackup`.
     func deleteBackup(
-      request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBackupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AlloyDBAdminClient.deleteBackup`.
     func deleteBackup(
-      withPolling: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteBackupRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `AlloyDBAdminClient.listSupportedDatabaseFlags`.
     func listSupportedDatabaseFlags(
-      request: ListSupportedDatabaseFlagsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSupportedDatabaseFlagsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListSupportedDatabaseFlagsResponse
 
     /// See `AlloyDBAdminClient.listSupportedDatabaseFlags`.
     func listSupportedDatabaseFlags(
-      byItem: ListSupportedDatabaseFlagsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSupportedDatabaseFlagsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SupportedDatabaseFlag, Swift.Error>
 
     /// See `AlloyDBAdminClient.generateClientCertificate`.
     func generateClientCertificate(
-      request: GenerateClientCertificateRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateClientCertificateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.GenerateClientCertificateResponse
 
     /// See `AlloyDBAdminClient.getConnectionInfo`.
     func getConnectionInfo(
-      request: GetConnectionInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConnectionInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ConnectionInfo
 
     /// See `AlloyDBAdminClient.listUsers`.
     func listUsers(
-      request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUsersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListUsersResponse
 
     /// See `AlloyDBAdminClient.listUsers`.
     func listUsers(
-      byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListUsersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<User, Swift.Error>
 
     /// See `AlloyDBAdminClient.getUser`.
     func getUser(
-      request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.User
 
     /// See `AlloyDBAdminClient.createUser`.
     func createUser(
-      request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.User
 
     /// See `AlloyDBAdminClient.updateUser`.
     func updateUser(
-      request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUserRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.User
 
     /// See `AlloyDBAdminClient.deleteUser`.
     func deleteUser(
-      request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUserRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AlloyDBAdminClient.listDatabases`.
     func listDatabases(
-      request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatabasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAlloyDBV1.ListDatabasesResponse
 
     /// See `AlloyDBAdminClient.listDatabases`.
     func listDatabases(
-      byItem: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDatabasesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Database, Swift.Error>
 
     /// See `AlloyDBAdminClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `AlloyDBAdminClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `AlloyDBAdminClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `AlloyDBAdminClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `AlloyDBAdminClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `AlloyDBAdminClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `AlloyDBAdminClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -2025,9 +2014,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listClusters(
-    request: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListClustersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListClustersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listClusters(
@@ -2037,13 +2026,13 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listClusters(
-    byItem: ListClustersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListClustersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Cluster, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListClustersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listClusters(
@@ -2060,9 +2049,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func getCluster(
-    request: GetClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: GetClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.Cluster {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCluster(
@@ -2081,24 +2070,24 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func createCluster(
-    request: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleCloudGax
+  public func createCluster(withPolling: CreateClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.createCluster(withPolling: withPolling, options: .init())
   }
 
   public func createCluster(
-    withPolling: CreateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2106,7 +2095,7 @@ extension Clients.AlloyDBAdminProtocol {
     parent: Swift.String,
     cluster: Cluster?,
     clusterId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = CreateClusterRequest().with {
       $0.parent = parent
       $0.cluster = cluster
@@ -2122,31 +2111,31 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func updateCluster(
-    request: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleCloudGax
+  public func updateCluster(withPolling: UpdateClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.updateCluster(withPolling: withPolling, options: .init())
   }
 
   public func updateCluster(
-    withPolling: UpdateClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateCluster(
     cluster: Cluster?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = UpdateClusterRequest().with {
       $0.cluster = cluster
       $0.updateMask = updateMask
@@ -2161,25 +2150,24 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func exportCluster(
-    request: ExportClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func exportCluster(withPolling: ExportClusterRequest) async throws -> any GoogleCloudGax
+  public func exportCluster(withPolling: ExportClusterRequest) async throws -> any GoogleGax
     .PollableOperation<ExportClusterResponse>
   {
     try await self.exportCluster(withPolling: withPolling, options: .init())
   }
 
   public func exportCluster(
-    withPolling: ExportClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportClusterResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportClusterResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ExportClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportClusterResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportClusterResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2189,7 +2177,7 @@ extension Clients.AlloyDBAdminProtocol {
     database: Swift.String,
     csvExportOptions: ExportClusterRequest.CsvExportOptions?,
     sqlExportOptions: ExportClusterRequest.SqlExportOptions?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportClusterResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ExportClusterResponse> {
     let request = ExportClusterRequest().with {
       $0.name = name
       $0.destination = gcsDestination.map { .gcsDestination($0) }
@@ -2207,25 +2195,24 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func importCluster(
-    request: ImportClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func importCluster(withPolling: ImportClusterRequest) async throws -> any GoogleCloudGax
+  public func importCluster(withPolling: ImportClusterRequest) async throws -> any GoogleGax
     .PollableOperation<ImportClusterResponse>
   {
     try await self.importCluster(withPolling: withPolling, options: .init())
   }
 
   public func importCluster(
-    withPolling: ImportClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportClusterResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ImportClusterResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ImportClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ImportClusterResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportClusterResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2234,7 +2221,7 @@ extension Clients.AlloyDBAdminProtocol {
     gcsUri: Swift.String,
     database: Swift.String,
     user: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<ImportClusterResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ImportClusterResponse> {
     let request = ImportClusterRequest().with {
       $0.name = name
       $0.gcsUri = gcsUri
@@ -2251,32 +2238,32 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func upgradeCluster(
-    request: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: UpgradeClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleCloudGax
+  public func upgradeCluster(withPolling: UpgradeClusterRequest) async throws -> any GoogleGax
     .PollableOperation<UpgradeClusterResponse>
   {
     try await self.upgradeCluster(withPolling: withPolling, options: .init())
   }
 
   public func upgradeCluster(
-    withPolling: UpgradeClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<UpgradeClusterResponse> {
+    withPolling: UpgradeClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<UpgradeClusterResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<UpgradeClusterResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<UpgradeClusterResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func upgradeCluster(
     name: Swift.String,
     version: DatabaseVersion,
-  ) async throws -> any GoogleCloudGax.PollableOperation<UpgradeClusterResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<UpgradeClusterResponse> {
     let request = UpgradeClusterRequest().with {
       $0.name = name
       $0.version = version
@@ -2291,30 +2278,30 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func deleteCluster(
-    request: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleCloudGax
+  public func deleteCluster(withPolling: DeleteClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteCluster(withPolling: withPolling, options: .init())
   }
 
   public func deleteCluster(
-    withPolling: DeleteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteCluster(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteClusterRequest().with {
       $0.name = name
     }
@@ -2328,30 +2315,30 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func promoteCluster(
-    request: PromoteClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: PromoteClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func promoteCluster(withPolling: PromoteClusterRequest) async throws -> any GoogleCloudGax
+  public func promoteCluster(withPolling: PromoteClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.promoteCluster(withPolling: withPolling, options: .init())
   }
 
   public func promoteCluster(
-    withPolling: PromoteClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: PromoteClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func promoteCluster(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = PromoteClusterRequest().with {
       $0.name = name
     }
@@ -2365,30 +2352,30 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func switchoverCluster(
-    request: SwitchoverClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: SwitchoverClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func switchoverCluster(withPolling: SwitchoverClusterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Cluster>
+  public func switchoverCluster(withPolling: SwitchoverClusterRequest) async throws -> any GoogleGax
+    .PollableOperation<Cluster>
   {
     try await self.switchoverCluster(withPolling: withPolling, options: .init())
   }
 
   public func switchoverCluster(
-    withPolling: SwitchoverClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: SwitchoverClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func switchoverCluster(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = SwitchoverClusterRequest().with {
       $0.name = name
     }
@@ -2402,24 +2389,24 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func restoreCluster(
-    request: RestoreClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: RestoreClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func restoreCluster(withPolling: RestoreClusterRequest) async throws -> any GoogleCloudGax
+  public func restoreCluster(withPolling: RestoreClusterRequest) async throws -> any GoogleGax
     .PollableOperation<Cluster>
   {
     try await self.restoreCluster(withPolling: withPolling, options: .init())
   }
 
   public func restoreCluster(
-    withPolling: RestoreClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RestoreClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2430,24 +2417,24 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func createSecondaryCluster(
-    request: CreateSecondaryClusterRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSecondaryClusterRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSecondaryCluster(withPolling: CreateSecondaryClusterRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Cluster>
+    -> any GoogleGax.PollableOperation<Cluster>
   {
     try await self.createSecondaryCluster(withPolling: withPolling, options: .init())
   }
 
   public func createSecondaryCluster(
-    withPolling: CreateSecondaryClusterRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Cluster>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateSecondaryClusterRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Cluster>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2455,7 +2442,7 @@ extension Clients.AlloyDBAdminProtocol {
     parent: Swift.String,
     cluster: Cluster?,
     clusterId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Cluster> {
+  ) async throws -> any GoogleGax.PollableOperation<Cluster> {
     let request = CreateSecondaryClusterRequest().with {
       $0.parent = parent
       $0.cluster = cluster
@@ -2471,9 +2458,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListInstancesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listInstances(
@@ -2483,13 +2470,13 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listInstances(
-    byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListInstancesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listInstances(
@@ -2507,9 +2494,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.Instance {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getInstance(
@@ -2528,24 +2515,24 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func createInstance(
-    request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+  public func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Instance>
   {
     try await self.createInstance(withPolling: withPolling, options: .init())
   }
 
   public func createInstance(
-    withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2553,7 +2540,7 @@ extension Clients.AlloyDBAdminProtocol {
     parent: Swift.String,
     instance: Instance?,
     instanceId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = CreateInstanceRequest().with {
       $0.parent = parent
       $0.instance = instance
@@ -2569,24 +2556,24 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func createSecondaryInstance(
-    request: CreateSecondaryInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateSecondaryInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createSecondaryInstance(withPolling: CreateSecondaryInstanceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Instance>
+    -> any GoogleGax.PollableOperation<Instance>
   {
     try await self.createSecondaryInstance(withPolling: withPolling, options: .init())
   }
 
   public func createSecondaryInstance(
-    withPolling: CreateSecondaryInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateSecondaryInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2594,7 +2581,7 @@ extension Clients.AlloyDBAdminProtocol {
     parent: Swift.String,
     instance: Instance?,
     instanceId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = CreateSecondaryInstanceRequest().with {
       $0.parent = parent
       $0.instance = instance
@@ -2610,26 +2597,25 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func batchCreateInstances(
-    request: BatchCreateInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchCreateInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchCreateInstances(withPolling: BatchCreateInstancesRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BatchCreateInstancesResponse>
+    -> any GoogleGax.PollableOperation<BatchCreateInstancesResponse>
   {
     try await self.batchCreateInstances(withPolling: withPolling, options: .init())
   }
 
   public func batchCreateInstances(
-    withPolling: BatchCreateInstancesRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchCreateInstancesResponse> {
+    withPolling: BatchCreateInstancesRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchCreateInstancesResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<BatchCreateInstancesResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<BatchCreateInstancesResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2640,31 +2626,31 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func updateInstance(
-    request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleCloudGax
+  public func updateInstance(withPolling: UpdateInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Instance>
   {
     try await self.updateInstance(withPolling: withPolling, options: .init())
   }
 
   public func updateInstance(
-    withPolling: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateInstance(
     instance: Instance?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = UpdateInstanceRequest().with {
       $0.instance = instance
       $0.updateMask = updateMask
@@ -2679,30 +2665,30 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func deleteInstance(
-    request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
+  public func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteInstance(withPolling: withPolling, options: .init())
   }
 
   public func deleteInstance(
-    withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteInstance(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteInstanceRequest().with {
       $0.name = name
     }
@@ -2716,30 +2702,30 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func failoverInstance(
-    request: FailoverInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: FailoverInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func failoverInstance(withPolling: FailoverInstanceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Instance>
+  public func failoverInstance(withPolling: FailoverInstanceRequest) async throws -> any GoogleGax
+    .PollableOperation<Instance>
   {
     try await self.failoverInstance(withPolling: withPolling, options: .init())
   }
 
   public func failoverInstance(
-    withPolling: FailoverInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: FailoverInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func failoverInstance(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = FailoverInstanceRequest().with {
       $0.name = name
     }
@@ -2751,31 +2737,31 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func injectFault(
-    request: InjectFaultRequest, options: GoogleCloudGax.RequestOptions
+    request: InjectFaultRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func injectFault(withPolling: InjectFaultRequest) async throws -> any GoogleCloudGax
+  public func injectFault(withPolling: InjectFaultRequest) async throws -> any GoogleGax
     .PollableOperation<Instance>
   {
     try await self.injectFault(withPolling: withPolling, options: .init())
   }
 
   public func injectFault(
-    withPolling: InjectFaultRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: InjectFaultRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func injectFault(
     faultType: InjectFaultRequest.FaultType,
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = InjectFaultRequest().with {
       $0.faultType = faultType
       $0.name = name
@@ -2790,30 +2776,30 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func restartInstance(
-    request: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: RestartInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func restartInstance(withPolling: RestartInstanceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Instance>
+  public func restartInstance(withPolling: RestartInstanceRequest) async throws -> any GoogleGax
+    .PollableOperation<Instance>
   {
     try await self.restartInstance(withPolling: withPolling, options: .init())
   }
 
   public func restartInstance(
-    withPolling: RestartInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RestartInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func restartInstance(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = RestartInstanceRequest().with {
       $0.name = name
     }
@@ -2827,9 +2813,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func executeSql(
-    request: ExecuteSqlRequest, options: GoogleCloudGax.RequestOptions
+    request: ExecuteSqlRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ExecuteSqlResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func executeSql(
@@ -2856,9 +2842,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listBackups(
-    request: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBackupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListBackupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listBackups(
@@ -2868,13 +2854,13 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listBackups(
-    byItem: ListBackupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBackupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Backup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListBackupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listBackups(
@@ -2891,9 +2877,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func getBackup(
-    request: GetBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.Backup {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBackup(
@@ -2911,24 +2897,24 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func createBackup(
-    request: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleCloudGax
+  public func createBackup(withPolling: CreateBackupRequest) async throws -> any GoogleGax
     .PollableOperation<Backup>
   {
     try await self.createBackup(withPolling: withPolling, options: .init())
   }
 
   public func createBackup(
-    withPolling: CreateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Backup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2936,7 +2922,7 @@ extension Clients.AlloyDBAdminProtocol {
     parent: Swift.String,
     backup: Backup?,
     backupId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
     let request = CreateBackupRequest().with {
       $0.parent = parent
       $0.backup = backup
@@ -2951,31 +2937,31 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func updateBackup(
-    request: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateBackup(withPolling: UpdateBackupRequest) async throws -> any GoogleCloudGax
+  public func updateBackup(withPolling: UpdateBackupRequest) async throws -> any GoogleGax
     .PollableOperation<Backup>
   {
     try await self.updateBackup(withPolling: withPolling, options: .init())
   }
 
   public func updateBackup(
-    withPolling: UpdateBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Backup>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Backup>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateBackup(
     backup: Backup?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Backup> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Backup> {
     let request = UpdateBackupRequest().with {
       $0.backup = backup
       $0.updateMask = updateMask
@@ -2989,30 +2975,30 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func deleteBackup(
-    request: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBackupRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteBackup(withPolling: DeleteBackupRequest) async throws -> any GoogleCloudGax
+  public func deleteBackup(withPolling: DeleteBackupRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteBackup(withPolling: withPolling, options: .init())
   }
 
   public func deleteBackup(
-    withPolling: DeleteBackupRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteBackupRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteBackup(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteBackupRequest().with {
       $0.name = name
     }
@@ -3026,9 +3012,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listSupportedDatabaseFlags(
-    request: ListSupportedDatabaseFlagsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSupportedDatabaseFlagsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListSupportedDatabaseFlagsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSupportedDatabaseFlags(
@@ -3038,14 +3024,14 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listSupportedDatabaseFlags(
-    byItem: ListSupportedDatabaseFlagsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSupportedDatabaseFlagsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SupportedDatabaseFlag, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListSupportedDatabaseFlagsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSupportedDatabaseFlags(
@@ -3064,9 +3050,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func generateClientCertificate(
-    request: GenerateClientCertificateRequest, options: GoogleCloudGax.RequestOptions
+    request: GenerateClientCertificateRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.GenerateClientCertificateResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func generateClientCertificate(
@@ -3085,9 +3071,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func getConnectionInfo(
-    request: GetConnectionInfoRequest, options: GoogleCloudGax.RequestOptions
+    request: GetConnectionInfoRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ConnectionInfo {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getConnectionInfo(
@@ -3106,9 +3092,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listUsers(
-    request: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListUsersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListUsersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listUsers(
@@ -3118,12 +3104,12 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listUsers(
-    byItem: ListUsersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListUsersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<User, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListUsersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listUsers(
@@ -3140,9 +3126,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func getUser(
-    request: GetUserRequest, options: GoogleCloudGax.RequestOptions
+    request: GetUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.User {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getUser(
@@ -3159,9 +3145,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func createUser(
-    request: CreateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.User {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createUser(
@@ -3182,14 +3168,14 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func updateUser(
-    request: UpdateUserRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateUserRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.User {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateUser(
     user: User?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudAlloyDBV1.User {
     let request = UpdateUserRequest().with {
       $0.user = user
@@ -3203,9 +3189,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func deleteUser(
-    request: DeleteUserRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteUserRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteUser(
@@ -3224,9 +3210,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listDatabases(
-    request: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListDatabasesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudAlloyDBV1.ListDatabasesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listDatabases(
@@ -3236,13 +3222,13 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listDatabases(
-    byItem: ListDatabasesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListDatabasesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Database, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudAlloyDBV1.ListDatabasesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listDatabases(
@@ -3261,9 +3247,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -3273,13 +3259,13 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -3289,9 +3275,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -3301,9 +3287,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -3313,13 +3299,13 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -3340,9 +3326,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -3359,9 +3345,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -3378,9 +3364,9 @@ extension Clients.AlloyDBAdminProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

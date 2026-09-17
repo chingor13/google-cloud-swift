@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `nodeTypes` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.NodeTypesStub
 
     /// Creates a new `NodeTypesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.NodeTypesStub = try Clients.NodeTypesTransport(options)
       inner = Clients.NodeTypesRetry(inner, options: options)
       if let logger = options.logger {
@@ -45,7 +45,7 @@
     ///
     /// @Snippet(path: "nodeTypes_aggregatedList")
     public func aggregatedList(
-      request: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList {
       try await self.inner.aggregatedList(request: request, options: options)
     }
@@ -57,7 +57,7 @@
     ///
     /// @Snippet(path: "nodeTypes_aggregatedList")
     public func aggregatedList(
-      byItem: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NodeTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NodeTypesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList in
@@ -65,14 +65,14 @@
         request.pageToken = token
         return try await self.aggregatedList(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Returns the specified node type.
     ///
     /// @Snippet(path: "nodeTypes_get")
     public func `get`(
-      request: NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTypesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeType {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -82,7 +82,7 @@
     ///
     /// @Snippet(path: "nodeTypes_list")
     public func list(
-      request: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeTypeList {
       try await self.inner.list(request: request, options: options)
     }
@@ -92,14 +92,14 @@
     ///
     /// @Snippet(path: "nodeTypes_list")
     public func list(
-      byItem: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NodeTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NodeType, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeTypeList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -151,27 +151,27 @@
 
       /// See `NodeTypesClient.aggregatedList`.
       func aggregatedList(
-        request: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList
 
       /// See `NodeTypesClient.aggregatedList`.
       func aggregatedList(
-        byItem: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: NodeTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<(Swift.String, NodeTypesScopedList), Swift.Error>
 
       /// See `NodeTypesClient.`get``.
       func `get`(
-        request: NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeType
 
       /// See `NodeTypesClient.list`.
       func list(
-        request: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: NodeTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NodeTypeList
 
       /// See `NodeTypesClient.list`.
       func list(
-        byItem: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: NodeTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<NodeType, Swift.Error>
     }
   }
@@ -185,9 +185,9 @@
     }
 
     public func aggregatedList(
-      request: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func aggregatedList(
@@ -197,13 +197,13 @@
     }
 
     public func aggregatedList(
-      byItem: NodeTypesClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NodeTypesClient.AggregatedListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<(Swift.String, NodeTypesScopedList), Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeTypeAggregatedList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func aggregatedList(
@@ -222,9 +222,9 @@
     }
 
     public func `get`(
-      request: NodeTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTypesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeType {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -247,9 +247,9 @@
     }
 
     public func list(
-      request: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: NodeTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.NodeTypeList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -259,12 +259,12 @@
     }
 
     public func list(
-      byItem: NodeTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: NodeTypesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<NodeType, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.NodeTypeList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

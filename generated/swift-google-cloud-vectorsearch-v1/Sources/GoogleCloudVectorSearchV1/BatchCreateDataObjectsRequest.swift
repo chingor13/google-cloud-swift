@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [DataObjectService.BatchCreateDataObjects][google.cloud.vectorsearch.v1.DataObjectService.BatchCreateDataObjects].
 ///
 /// [google.cloud.vectorsearch.v1.DataObjectService.BatchCreateDataObjects]: <doc:DataObjectServiceClient/batchCreateDataObjects(request:options:)>
-public struct BatchCreateDataObjectsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchCreateDataObjectsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the Collection to create the DataObjects in.
@@ -34,7 +34,7 @@ public struct BatchCreateDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
   /// A maximum of 1000 DataObjects can be created in a batch.
   public var requests: [CreateDataObjectRequest] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchCreateDataObjectsRequest`.
   public init() {}
@@ -78,7 +78,7 @@ public struct BatchCreateDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,10 +94,10 @@ public struct BatchCreateDataObjectsRequest: Codable, Equatable, GoogleCloudWKT.
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.vectorsearch.v1.BatchCreateDataObjectsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

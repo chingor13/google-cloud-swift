@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func getBillingAccount(
-      request: GetBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount {
       try await self._intercept(
         request: request,
         options: options,
         name: "getBillingAccount",
         action: {
-          (r: GetBillingAccountRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetBillingAccountRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.BillingAccount
           in
           return try await self.inner.getBillingAccount(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func listBillingAccounts(
-      request: ListBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBillingAccountsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListBillingAccountsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listBillingAccounts",
         action: {
-          (r: ListBillingAccountsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListBillingAccountsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.ListBillingAccountsResponse
           in
           return try await self.inner.listBillingAccounts(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func updateBillingAccount(
-      request: UpdateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateBillingAccount",
         action: {
-          (r: UpdateBillingAccountRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateBillingAccountRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.BillingAccount
           in
           return try await self.inner.updateBillingAccount(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func createBillingAccount(
-      request: CreateBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount {
       try await self._intercept(
         request: request,
         options: options,
         name: "createBillingAccount",
         action: {
-          (r: CreateBillingAccountRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateBillingAccountRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.BillingAccount
           in
           return try await self.inner.createBillingAccount(request: r, options: o)
@@ -118,14 +118,14 @@ extension Clients {
     }
 
     public func listProjectBillingInfo(
-      request: ListProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ListProjectBillingInfoResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listProjectBillingInfo",
         action: {
-          (r: ListProjectBillingInfoRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListProjectBillingInfoRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.ListProjectBillingInfoResponse
           in
           return try await self.inner.listProjectBillingInfo(request: r, options: o)
@@ -133,14 +133,14 @@ extension Clients {
     }
 
     public func getProjectBillingInfo(
-      request: GetProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo {
       try await self._intercept(
         request: request,
         options: options,
         name: "getProjectBillingInfo",
         action: {
-          (r: GetProjectBillingInfoRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetProjectBillingInfoRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.ProjectBillingInfo
           in
           return try await self.inner.getProjectBillingInfo(request: r, options: o)
@@ -148,14 +148,14 @@ extension Clients {
     }
 
     public func updateProjectBillingInfo(
-      request: UpdateProjectBillingInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProjectBillingInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.ProjectBillingInfo {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateProjectBillingInfo",
         action: {
-          (r: UpdateProjectBillingInfoRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateProjectBillingInfoRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.ProjectBillingInfo
           in
           return try await self.inner.updateProjectBillingInfo(request: r, options: o)
@@ -163,14 +163,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -178,14 +178,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -193,14 +193,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -208,14 +208,14 @@ extension Clients {
     }
 
     public func moveBillingAccount(
-      request: MoveBillingAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveBillingAccountRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingV1.BillingAccount {
       try await self._intercept(
         request: request,
         options: options,
         name: "moveBillingAccount",
         action: {
-          (r: MoveBillingAccountRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: MoveBillingAccountRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudBillingV1.BillingAccount
           in
           return try await self.inner.moveBillingAccount(request: r, options: o)

@@ -16,49 +16,49 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CloudSchedulerStub: Sendable {
     func listJobs(
-      request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.ListJobsResponse
 
     func getJob(
-      request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     func createJob(
-      request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     func updateJob(
-      request: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     func deleteJob(
-      request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func pauseJob(
-      request: PauseJobRequest, options: GoogleCloudGax.RequestOptions
+      request: PauseJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     func resumeJob(
-      request: ResumeJobRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumeJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     func runJob(
-      request: RunJobRequest, options: GoogleCloudGax.RequestOptions
+      request: RunJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSchedulerV1.Job
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

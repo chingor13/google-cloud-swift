@@ -16,11 +16,11 @@
 
 #if SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The context to perform a point-in-time recovery of an instance managed by
   /// Backup and Disaster Recovery (DR) Service.
-  public struct PointInTimeRestoreContext: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PointInTimeRestoreContext: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The Backup and Disaster Recovery (DR) Service Datasource URI.
@@ -29,7 +29,7 @@
     public var datasource: Swift.String? = nil
 
     /// Required. The date and time to which you want to restore the instance.
-    public var pointInTime: GoogleCloudWKT.Timestamp? = nil
+    public var pointInTime: GoogleWKT.Timestamp? = nil
 
     /// Target instance name.
     public var targetInstance: Swift.String? = nil
@@ -70,7 +70,7 @@
     /// restored. For example: "us-central1".
     public var region: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PointInTimeRestoreContext`.
     public init() {}
@@ -124,7 +124,7 @@
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.datasource = try container.decodeIfPresent(Swift.String.self, forKey: .datasource)
       self.pointInTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .pointInTime)
+        GoogleWKT.Timestamp.self, forKey: .pointInTime)
       self.targetInstance = try container.decodeIfPresent(
         Swift.String.self, forKey: .targetInstance)
       self.privateNetwork = try container.decodeIfPresent(
@@ -144,7 +144,7 @@
       self.region = try container.decodeIfPresent(Swift.String.self, forKey: .region)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -169,11 +169,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.PointInTimeRestoreContext"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

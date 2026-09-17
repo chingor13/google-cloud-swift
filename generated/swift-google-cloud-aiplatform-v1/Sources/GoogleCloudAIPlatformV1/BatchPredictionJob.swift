@@ -16,8 +16,8 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A job that uses a
   /// [Model][google.cloud.aiplatform.v1.BatchPredictionJob.model] to produce
@@ -28,7 +28,7 @@
   ///
   /// [google.cloud.aiplatform.v1.BatchPredictionJob.input_config]: <doc:BatchPredictionJob/inputConfig>
   /// [google.cloud.aiplatform.v1.BatchPredictionJob.model]: <doc:BatchPredictionJob/model>
-  public struct BatchPredictionJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BatchPredictionJob: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Resource name of the BatchPredictionJob.
@@ -89,7 +89,7 @@
     /// [google.cloud.aiplatform.v1.BatchPredictionJob.model]: <doc:BatchPredictionJob/model>
     /// [google.cloud.aiplatform.v1.Model.predict_schemata]: <doc:Model/predictSchemata>
     /// [google.cloud.aiplatform.v1.PredictSchemata.parameters_schema_uri]: <doc:PredictSchemata/parametersSchemaUri>
-    public var modelParameters: GoogleCloudWKT.Value? = nil
+    public var modelParameters: GoogleWKT.Value? = nil
 
     /// Required. The Configuration specifying where output predictions should
     /// be written.
@@ -209,18 +209,18 @@
     public var completionStats: CompletionStats? = nil
 
     /// Output only. Time when the BatchPredictionJob was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Time when the BatchPredictionJob for the first time entered
     /// the `JOB_STATE_RUNNING` state.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Time when the BatchPredictionJob entered any of the following
     /// states: `JOB_STATE_SUCCEEDED`, `JOB_STATE_FAILED`, `JOB_STATE_CANCELLED`.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Time when the BatchPredictionJob was most recently updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// The labels with user-defined metadata to organize BatchPredictionJobs.
     ///
@@ -251,7 +251,7 @@
     /// Output only. Reserved for future use.
     public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BatchPredictionJob`.
     public init() {}
@@ -360,7 +360,7 @@
       self.instanceConfig = try container.decodeIfPresent(
         BatchPredictionJob.InstanceConfig.self, forKey: .instanceConfig)
       self.modelParameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Value.self, forKey: .modelParameters)
+        GoogleWKT.Value.self, forKey: .modelParameters)
       self.outputConfig = try container.decodeIfPresent(
         BatchPredictionJob.OutputConfig.self, forKey: .outputConfig)
       self.dedicatedResources = try container.decodeIfPresent(
@@ -390,13 +390,10 @@
         ResourcesConsumed.self, forKey: .resourcesConsumed)
       self.completionStats = try container.decodeIfPresent(
         CompletionStats.self, forKey: .completionStats)
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(
         [Swift.String: Swift.String].self, forKey: .labels)
       {
@@ -417,7 +414,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -466,7 +463,7 @@
     ///
     /// [google.cloud.aiplatform.v1.BatchPredictionJob]: <doc:BatchPredictionJob>
     /// [google.cloud.aiplatform.v1.Model.supported_input_storage_formats]: <doc:Model/supportedInputStorageFormats>
-    public struct InputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The format in which instances are given, must be one of the
@@ -480,7 +477,7 @@
       /// Required. The source of the input.
       public var source: OneOf_Source? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InputConfig`.
       public init() {}
@@ -550,7 +547,7 @@
         self.source = source
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -591,17 +588,17 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob.InputConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Configuration defining how to transform batch prediction input instances to
     /// the instances that the Model accepts.
-    public struct InstanceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InstanceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The format of the instance that the Model accepts. Vertex AI will
@@ -709,7 +706,7 @@
       /// [google.cloud.aiplatform.v1.BatchPredictionJob.InstanceConfig.key_field]: <doc:BatchPredictionJob/InstanceConfig/keyField>
       public var excludedFields: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InstanceConfig`.
       public init() {}
@@ -762,7 +759,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -780,11 +777,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob.InstanceConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -796,7 +793,7 @@
     ///
     /// [google.cloud.aiplatform.v1.BatchPredictionJob]: <doc:BatchPredictionJob>
     /// [google.cloud.aiplatform.v1.Model.supported_output_storage_formats]: <doc:Model/supportedOutputStorageFormats>
-    public struct OutputConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OutputConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The format in which Vertex AI gives the predictions, must be
@@ -810,7 +807,7 @@
       /// Required. The destination of the output.
       public var destination: OneOf_Destination? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OutputConfig`.
       public init() {}
@@ -884,7 +881,7 @@
         self.destination = destination
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -970,11 +967,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob.OutputConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -983,7 +980,7 @@
     /// [output_config][google.cloud.aiplatform.v1.BatchPredictionJob.output_config].
     ///
     /// [google.cloud.aiplatform.v1.BatchPredictionJob.output_config]: <doc:BatchPredictionJob/outputConfig>
-    public struct OutputInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct OutputInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The name of the BigQuery table created, in
@@ -995,7 +992,7 @@
       /// The output location into which prediction output is written.
       public var outputLocation: OneOf_OutputLocation? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `OutputInfo`.
       public init() {}
@@ -1069,7 +1066,7 @@
         self.outputLocation = outputLocation
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1110,22 +1107,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob.OutputInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.BatchPredictionJob"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

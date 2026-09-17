@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A framework audit.
-public struct FrameworkAudit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct FrameworkAudit: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Identifier. The name of the framework audit.
@@ -37,10 +37,10 @@ public struct FrameworkAudit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var frameworkAuditDestination: FrameworkAuditDestination? = nil
 
   /// Output only. The time that the audit started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time that the audit finished.
-  public var finishTime: GoogleCloudWKT.Timestamp? = nil
+  public var finishTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The overall compliance state of the audit.
   public var complianceState: ComplianceState = ComplianceState()
@@ -60,7 +60,7 @@ public struct FrameworkAudit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The framework audit state of the audit.
   public var state: FrameworkAudit.State = FrameworkAudit.State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `FrameworkAudit`.
   public init() {}
@@ -132,10 +132,8 @@ public struct FrameworkAudit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.frameworkAuditDestination = try container.decodeIfPresent(
       FrameworkAuditDestination.self, forKey: .frameworkAuditDestination)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.finishTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .finishTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.finishTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .finishTime)
     if let value = try container.decodeIfPresent(ComplianceState.self, forKey: .complianceState) {
       self.complianceState = value
     }
@@ -158,7 +156,7 @@ public struct FrameworkAudit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -312,10 +310,10 @@ public struct FrameworkAudit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.cloudsecuritycompliance.v1.FrameworkAudit"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

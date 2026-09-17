@@ -15,41 +15,41 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol IdentityAwareProxyOAuthServiceStub: Sendable {
     func listBrands(
-      request: ListBrandsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBrandsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.ListBrandsResponse
 
     func createBrand(
-      request: CreateBrandRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBrandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.Brand
 
     func getBrand(
-      request: GetBrandRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBrandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.Brand
 
     func createIdentityAwareProxyClient(
-      request: CreateIdentityAwareProxyClientRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIdentityAwareProxyClientRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IdentityAwareProxyClient
 
     func listIdentityAwareProxyClients(
-      request: ListIdentityAwareProxyClientsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIdentityAwareProxyClientsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.ListIdentityAwareProxyClientsResponse
 
     func getIdentityAwareProxyClient(
-      request: GetIdentityAwareProxyClientRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIdentityAwareProxyClientRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IdentityAwareProxyClient
 
     func resetIdentityAwareProxyClientSecret(
-      request: ResetIdentityAwareProxyClientSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetIdentityAwareProxyClientSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudIAPV1.IdentityAwareProxyClient
 
     func deleteIdentityAwareProxyClient(
-      request: DeleteIdentityAwareProxyClientRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIdentityAwareProxyClientRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

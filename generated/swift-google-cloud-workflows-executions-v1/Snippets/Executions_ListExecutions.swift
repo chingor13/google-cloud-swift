@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudWorkflowsExecutionsV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: ExecutionsClient, parent: String) async throws {
   let items = try client.listExecutions(

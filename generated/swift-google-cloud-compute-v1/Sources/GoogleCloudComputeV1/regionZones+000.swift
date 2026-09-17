@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `regionZones` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.RegionZonesStub
 
     /// Creates a new `RegionZonesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.RegionZonesStub = try Clients.RegionZonesTransport(options)
       inner = Clients.RegionZonesRetry(inner, options: options)
       if let logger = options.logger {
@@ -43,7 +43,7 @@
     ///
     /// @Snippet(path: "regionZones_list")
     public func list(
-      request: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ZoneList {
       try await self.inner.list(request: request, options: options)
     }
@@ -53,14 +53,14 @@
     ///
     /// @Snippet(path: "regionZones_list")
     public func list(
-      byItem: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Zone, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.ZoneList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -88,12 +88,12 @@
 
       /// See `RegionZonesClient.list`.
       func list(
-        request: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionZonesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList
 
       /// See `RegionZonesClient.list`.
       func list(
-        byItem: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: RegionZonesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Zone, Swift.Error>
     }
   }
@@ -107,9 +107,9 @@
     }
 
     public func list(
-      request: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: RegionZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ZoneList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -119,12 +119,12 @@
     }
 
     public func list(
-      byItem: RegionZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: RegionZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Zone, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.ZoneList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

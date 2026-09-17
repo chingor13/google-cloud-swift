@@ -15,57 +15,57 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol OrgPolicyStub: Sendable {
     func listConstraints(
-      request: ListConstraintsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConstraintsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListConstraintsResponse
 
     func listPolicies(
-      request: ListPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListPoliciesResponse
 
     func getPolicy(
-      request: GetPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy
 
     func getEffectivePolicy(
-      request: GetEffectivePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEffectivePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy
 
     func createPolicy(
-      request: CreatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy
 
     func updatePolicy(
-      request: UpdatePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.Policy
 
     func deletePolicy(
-      request: DeletePolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePolicyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createCustomConstraint(
-      request: CreateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint
 
     func updateCustomConstraint(
-      request: UpdateCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint
 
     func getCustomConstraint(
-      request: GetCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.CustomConstraint
 
     func listCustomConstraints(
-      request: ListCustomConstraintsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomConstraintsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrgPolicyV2.ListCustomConstraintsResponse
 
     func deleteCustomConstraint(
-      request: DeleteCustomConstraintRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomConstraintRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

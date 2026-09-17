@@ -15,26 +15,26 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Video Classification.
-public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The beginning, inclusive, of the video's time segment in which the
   /// classifications have been identified.
-  public var segmentStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var segmentStartTime: GoogleWKT.Timestamp? = nil
 
   /// The end, inclusive, of the video's time segment in which the
   /// classifications have been identified. Particularly, if the end is the same
   /// as the start, it means the identification happens on a specific video
   /// frame.
-  public var segmentEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var segmentEndTime: GoogleWKT.Timestamp? = nil
 
   /// All of the classifications identified in the time range.
   public var classifications: [VideoClassificationPredictionResult.IdentifiedClassification] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoClassificationPredictionResult`.
   public init() {}
@@ -72,9 +72,9 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.segmentStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .segmentStartTime)
+      GoogleWKT.Timestamp.self, forKey: .segmentStartTime)
     self.segmentEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .segmentEndTime)
+      GoogleWKT.Timestamp.self, forKey: .segmentEndTime)
     if let value = try container.decodeIfPresent(
       [VideoClassificationPredictionResult.IdentifiedClassification].self, forKey: .classifications)
     {
@@ -82,7 +82,7 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,7 +99,7 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
   /// Each IdentifiedClassification is one particular identification of an
   /// classification specified with the AnnotationSpec id and display_name,
   /// and the associated confidence score.
-  public struct IdentifiedClassification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IdentifiedClassification: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The resource ID of the AnnotationSpec that had been identified.
@@ -112,7 +112,7 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
     /// value means higher confidence.
     public var confidence: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IdentifiedClassification`.
     public init() {}
@@ -160,7 +160,7 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -178,21 +178,21 @@ public struct VideoClassificationPredictionResult: Codable, Equatable, GoogleClo
       return
         "type.googleapis.com/google.cloud.visionai.v1.VideoClassificationPredictionResult.IdentifiedClassification"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.VideoClassificationPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

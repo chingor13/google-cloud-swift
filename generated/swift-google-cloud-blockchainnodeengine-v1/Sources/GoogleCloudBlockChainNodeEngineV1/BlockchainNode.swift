@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A representation of a blockchain node.
-public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BlockchainNode: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The fully qualified name of the blockchain node.
@@ -26,10 +26,10 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The timestamp at which the blockchain node was first created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp at which the blockchain node was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// User-provided key-value pairs.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -54,7 +54,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Information that is specific to a particular blockchain type.
   public var blockchainTypeDetails: OneOf_BlockchainTypeDetails? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BlockchainNode`.
   public init() {}
@@ -107,10 +107,8 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -146,7 +144,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.blockchainTypeDetails = blockchainTypeDetails
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -174,7 +172,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// The connection information through which to interact with a blockchain
   /// node.
-  public struct ConnectionInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConnectionInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The endpoint information through which to interact with a
@@ -186,7 +184,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// projects/{project}/regions/{region}/serviceAttachments/{service_attachment_name}
     public var serviceAttachment: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConnectionInfo`.
     public init() {}
@@ -228,7 +226,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -243,7 +241,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Contains endpoint information through which to interact with a blockchain
     /// node.
-    public struct EndpointInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EndpointInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The assigned URL for the node JSON-RPC API endpoint.
@@ -252,7 +250,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Output only. The assigned URL for the node WebSockets API endpoint.
       public var websocketsApiEndpoint: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EndpointInfo`.
       public init() {}
@@ -298,7 +296,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -315,11 +313,11 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.blockchainnodeengine.v1.BlockchainNode.ConnectionInfo.EndpointInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -327,16 +325,16 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.blockchainnodeengine.v1.BlockchainNode.ConnectionInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Ethereum-specific blockchain node details.
-  public struct EthereumDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EthereumDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. The Ethereum environment being accessed.
@@ -369,7 +367,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Options for the execution client.
     public var executionClientDetails: OneOf_ExecutionClientDetails? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EthereumDetails`.
     public init() {}
@@ -451,7 +449,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.executionClientDetails = executionClientDetails
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -482,14 +480,14 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// See [Command-line
     /// Options](https://geth.ethereum.org/docs/fundamentals/command-line-options)
     /// for more details.
-    public struct GethDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct GethDetails: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Immutable. Blockchain garbage collection mode.
       public var garbageCollectionMode:
         BlockchainNode.EthereumDetails.GethDetails.GarbageCollectionMode? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `GethDetails`.
       public init() {}
@@ -527,7 +525,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           forKey: .garbageCollectionMode)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -656,16 +654,16 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.blockchainnodeengine.v1.BlockchainNode.EthereumDetails.GethDetails"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Contains endpoint information specific to Ethereum nodes.
-    public struct EthereumEndpoints: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct EthereumEndpoints: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The assigned URL for the node's Beacon API endpoint.
@@ -681,7 +679,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Prometheus metrics endpoint.
       public var executionClientPrometheusMetricsApiEndpoint: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `EthereumEndpoints`.
       public init() {}
@@ -736,7 +734,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -757,17 +755,17 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.blockchainnodeengine.v1.BlockchainNode.EthereumDetails.EthereumEndpoints"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Configuration for validator-related parameters on the beacon client,
     /// and for any GCP-managed validator client.
-    public struct ValidatorConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ValidatorConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// URLs for MEV-relay services to use for block building. When set, a
@@ -791,7 +789,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// considered enforced.
       public var beaconFeeRecipient: Swift.String? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ValidatorConfig`.
       public init() {}
@@ -840,7 +838,7 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           Swift.String.self, forKey: .beaconFeeRecipient)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -858,11 +856,11 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.blockchainnodeengine.v1.BlockchainNode.EthereumDetails.ValidatorConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1344,11 +1342,11 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.blockchainnodeengine.v1.BlockchainNode.EthereumDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1607,10 +1605,10 @@ public struct BlockchainNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.blockchainnodeengine.v1.BlockchainNode"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

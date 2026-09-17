@@ -16,10 +16,10 @@
 
 #if Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents the action to take for a tool call that requires confirmation.
-  public struct SuggestionInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SuggestionInput: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Format: `projects/<Project ID>/locations/<Location
@@ -29,7 +29,7 @@
 
     /// Optional. Parameters to be used for the tool call.  If not provided, the
     /// tool will be called without any parameters.
-    public var parameters: GoogleCloudWKT.Struct? = nil
+    public var parameters: GoogleWKT.Struct? = nil
 
     /// Optional. The type of action to take with the tool.
     public var action: SuggestionInput.Action = SuggestionInput.Action()
@@ -37,9 +37,9 @@
     /// Optional. Time when the current suggest input is sent. For tool calls, this
     /// timestamp (along with the answer record) will be included in the
     /// corresponding tool call result so that it can be identified.
-    public var sendTime: GoogleCloudWKT.Timestamp? = nil
+    public var sendTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SuggestionInput`.
     public init() {}
@@ -81,16 +81,14 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .answerRecord) {
         self.answerRecord = value
       }
-      self.parameters = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .parameters)
+      self.parameters = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .parameters)
       if let value = try container.decodeIfPresent(SuggestionInput.Action.self, forKey: .action) {
         self.action = value
       }
-      self.sendTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .sendTime)
+      self.sendTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .sendTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -224,11 +222,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.SuggestionInput"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

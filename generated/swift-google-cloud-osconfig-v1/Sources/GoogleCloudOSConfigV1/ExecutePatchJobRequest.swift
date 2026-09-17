@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A request message to initiate patching across Compute Engine
 /// instances.
-public struct ExecutePatchJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExecutePatchJobRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The project in which to run this patch in the form `projects/*`
@@ -39,7 +39,7 @@ public struct ExecutePatchJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   /// Duration of the patch job. After the duration ends, the patch job
   /// times out.
-  public var duration: GoogleCloudWKT.Duration? = nil
+  public var duration: GoogleWKT.Duration? = nil
 
   /// If this patch is a dry-run only, instances are contacted but
   /// will do nothing.
@@ -51,7 +51,7 @@ public struct ExecutePatchJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Rollout strategy of the patch job.
   public var rollout: PatchRollout? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExecutePatchJobRequest`.
   public init() {}
@@ -107,7 +107,7 @@ public struct ExecutePatchJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.instanceFilter = try container.decodeIfPresent(
       PatchInstanceFilter.self, forKey: .instanceFilter)
     self.patchConfig = try container.decodeIfPresent(PatchConfig.self, forKey: .patchConfig)
-    self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+    self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .dryRun) {
       self.dryRun = value
     }
@@ -117,7 +117,7 @@ public struct ExecutePatchJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
     self.rollout = try container.decodeIfPresent(PatchRollout.self, forKey: .rollout)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -139,10 +139,10 @@ public struct ExecutePatchJobRequest: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.osconfig.v1.ExecutePatchJobRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

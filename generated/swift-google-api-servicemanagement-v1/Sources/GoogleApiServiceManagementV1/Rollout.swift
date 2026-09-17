@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A rollout resource that defines how service configuration versions are pushed
 /// to control plane systems. Typically, you create a new version of the
 /// service config, and then create a Rollout to push the service config.
-public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Rollout: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Unique identifier of this Rollout. Must be no longer than 63
@@ -35,7 +35,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var rolloutId: Swift.String = Swift.String()
 
   /// Creation time of the rollout. Readonly.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The user who created the Rollout. Readonly.
   public var createdBy: Swift.String = Swift.String()
@@ -53,7 +53,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// and how they should be used at runtime.
   public var strategy: OneOf_Strategy? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Rollout`.
   public init() {}
@@ -101,8 +101,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .rolloutId) {
       self.rolloutId = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .createdBy) {
       self.createdBy = value
     }
@@ -136,7 +135,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.strategy = strategy
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -191,7 +190,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///         }
   ///       }
   ///     }
-  public struct TrafficPercentStrategy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TrafficPercentStrategy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Maps service configuration IDs to their corresponding traffic percentage.
@@ -199,7 +198,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// which must be greater than 0.0 and the sum must equal to 100.0.
     public var percentages: [Swift.String: Swift.Double] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TrafficPercentStrategy`.
     public init() {}
@@ -239,7 +238,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -254,20 +253,20 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.servicemanagement.v1.Rollout.TrafficPercentStrategy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Strategy used to delete a service. This strategy is a placeholder only
   /// used by the system generated rollout to delete a service.
-  public struct DeleteServiceStrategy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeleteServiceStrategy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeleteServiceStrategy`.
     public init() {}
@@ -298,7 +297,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -312,11 +311,11 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.servicemanagement.v1.Rollout.DeleteServiceStrategy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -470,10 +469,10 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicemanagement.v1.Rollout"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

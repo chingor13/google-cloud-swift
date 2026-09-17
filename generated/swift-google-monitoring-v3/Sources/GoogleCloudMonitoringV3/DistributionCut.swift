@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A `DistributionCut` defines a `TimeSeries` and thresholds used for measuring
 /// good service and total service. The `TimeSeries` must have `ValueType =
 /// DISTRIBUTION` and `MetricKind = DELTA` or `MetricKind = CUMULATIVE`. The
 /// computed `good_service` will be the estimated count of values in the
 /// `Distribution` that fall within the specified `min` and `max`.
-public struct DistributionCut: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DistributionCut: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A [monitoring filter](https://cloud.google.com/monitoring/api/v3/filters)
@@ -34,7 +34,7 @@ public struct DistributionCut: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// an infinite value.
   public var range: Range? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DistributionCut`.
   public init() {}
@@ -75,7 +75,7 @@ public struct DistributionCut: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.range = try container.decodeIfPresent(Range.self, forKey: .range)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -91,10 +91,10 @@ public struct DistributionCut: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.DistributionCut"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

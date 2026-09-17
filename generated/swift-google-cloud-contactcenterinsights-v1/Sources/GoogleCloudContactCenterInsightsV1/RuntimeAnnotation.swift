@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An annotation that was generated during the customer and agent interaction.
-public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RuntimeAnnotation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The unique identifier of the annotation.
@@ -27,7 +27,7 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var annotationId: Swift.String = Swift.String()
 
   /// The time at which this annotation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The boundary in the conversation where the annotation starts, inclusive.
   public var startBoundary: AnnotationBoundary? = nil
@@ -44,7 +44,7 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The data in the annotation.
   public var data: OneOf_Data? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RuntimeAnnotation`.
   public init() {}
@@ -103,8 +103,7 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .annotationId) {
       self.annotationId = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.startBoundary = try container.decodeIfPresent(
       AnnotationBoundary.self, forKey: .startBoundary)
     self.endBoundary = try container.decodeIfPresent(AnnotationBoundary.self, forKey: .endBoundary)
@@ -152,7 +151,7 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.data = data
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -187,7 +186,7 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Explicit input used for generating the answer
-  public struct UserInput: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UserInput: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Query text. Article Search uses this to store the input query used
@@ -202,7 +201,7 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public var querySource: RuntimeAnnotation.UserInput.QuerySource = RuntimeAnnotation.UserInput
       .QuerySource()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UserInput`.
     public init() {}
@@ -252,7 +251,7 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -375,11 +374,11 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.contactcenterinsights.v1.RuntimeAnnotation.UserInput"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -402,10 +401,10 @@ public struct RuntimeAnnotation: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.RuntimeAnnotation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

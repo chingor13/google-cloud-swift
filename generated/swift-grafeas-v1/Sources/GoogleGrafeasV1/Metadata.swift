@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Other properties of the build.
-public struct Metadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Metadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifies the particular build invocation, which can be useful for finding
@@ -27,10 +27,10 @@ public struct Metadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var buildInvocationId: Swift.String = Swift.String()
 
   /// The timestamp of when the build started.
-  public var buildStartedOn: GoogleCloudWKT.Timestamp? = nil
+  public var buildStartedOn: GoogleWKT.Timestamp? = nil
 
   /// The timestamp of when the build completed.
-  public var buildFinishedOn: GoogleCloudWKT.Timestamp? = nil
+  public var buildFinishedOn: GoogleWKT.Timestamp? = nil
 
   /// Indicates that the builder claims certain fields in this message to be
   /// complete.
@@ -40,7 +40,7 @@ public struct Metadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// produce bit-for-bit identical output.
   public var reproducible: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Metadata`.
   public init() {}
@@ -85,16 +85,16 @@ public struct Metadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.buildInvocationId = value
     }
     self.buildStartedOn = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .buildStartedOn)
+      GoogleWKT.Timestamp.self, forKey: .buildStartedOn)
     self.buildFinishedOn = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .buildFinishedOn)
+      GoogleWKT.Timestamp.self, forKey: .buildFinishedOn)
     self.completeness = try container.decodeIfPresent(Completeness.self, forKey: .completeness)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .reproducible) {
       self.reproducible = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,10 +113,10 @@ public struct Metadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/grafeas.v1.Metadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

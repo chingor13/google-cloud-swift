@@ -15,37 +15,37 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TimeseriesInsightsControllerStub: Sendable {
     func listDataSets(
-      request: ListDataSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.ListDataSetsResponse
 
     func createDataSet(
-      request: CreateDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.DataSet
 
     func deleteDataSet(
-      request: DeleteDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func appendEvents(
-      request: AppendEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: AppendEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.AppendEventsResponse
 
     func queryDataSet(
-      request: QueryDataSetRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDataSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.QueryDataSetResponse
 
     func evaluateSlice(
-      request: EvaluateSliceRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateSliceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice
 
     func evaluateTimeseries(
-      request: EvaluateTimeseriesRequest, options: GoogleCloudGax.RequestOptions
+      request: EvaluateTimeseriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTimeseriesInsightsV1.EvaluatedSlice
   }
 }

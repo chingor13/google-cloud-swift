@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudAssuredWorkloadsV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: AssuredWorkloadsServiceClient) async throws {
   let response = try await client.restrictAllowedResources(

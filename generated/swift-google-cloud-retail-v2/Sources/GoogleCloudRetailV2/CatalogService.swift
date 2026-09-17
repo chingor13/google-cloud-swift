@@ -18,9 +18,9 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for managing catalog configuration.
 ///
@@ -29,7 +29,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   let inner: any Clients.CatalogServiceStub
 
   /// Creates a new `CatalogServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CatalogServiceStub = try Clients.CatalogServiceTransport(options)
     inner = Clients.CatalogServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_ListCatalogs")
   public func listCatalogs(
-    request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCatalogsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.ListCatalogsResponse {
     try await self.inner.listCatalogs(request: request, options: options)
   }
@@ -57,7 +57,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_ListCatalogs")
   public func listCatalogs(
-    byItem: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCatalogsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Catalog, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudRetailV2.ListCatalogsResponse in
@@ -65,7 +65,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
       request.pageToken = token
       return try await self.listCatalogs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates the [Catalog][google.cloud.retail.v2.Catalog]s.
@@ -74,7 +74,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_UpdateCatalog")
   public func updateCatalog(
-    request: UpdateCatalogRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCatalogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.Catalog {
     try await self.inner.updateCatalog(request: request, options: options)
   }
@@ -121,7 +121,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_SetDefaultBranch")
   public func setDefaultBranch(
-    request: SetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+    request: SetDefaultBranchRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.setDefaultBranch(request: request, options: options)
   }
@@ -134,7 +134,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_GetDefaultBranch")
   public func getDefaultBranch(
-    request: GetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDefaultBranchRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.GetDefaultBranchResponse {
     try await self.inner.getDefaultBranch(request: request, options: options)
   }
@@ -145,7 +145,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_GetCompletionConfig")
   public func getCompletionConfig(
-    request: GetCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCompletionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.CompletionConfig {
     try await self.inner.getCompletionConfig(request: request, options: options)
   }
@@ -156,7 +156,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_UpdateCompletionConfig")
   public func updateCompletionConfig(
-    request: UpdateCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCompletionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.CompletionConfig {
     try await self.inner.updateCompletionConfig(request: request, options: options)
   }
@@ -167,7 +167,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_GetAttributesConfig")
   public func getAttributesConfig(
-    request: GetAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAttributesConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
     try await self.inner.getAttributesConfig(request: request, options: options)
   }
@@ -185,7 +185,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_UpdateAttributesConfig")
   public func updateAttributesConfig(
-    request: UpdateAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAttributesConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
     try await self.inner.updateAttributesConfig(request: request, options: options)
   }
@@ -202,7 +202,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_AddCatalogAttribute")
   public func addCatalogAttribute(
-    request: AddCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: AddCatalogAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
     try await self.inner.addCatalogAttribute(request: request, options: options)
   }
@@ -219,7 +219,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_RemoveCatalogAttribute")
   public func removeCatalogAttribute(
-    request: RemoveCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveCatalogAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
     try await self.inner.removeCatalogAttribute(request: request, options: options)
   }
@@ -239,7 +239,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_ReplaceCatalogAttribute")
   public func replaceCatalogAttribute(
-    request: ReplaceCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: ReplaceCatalogAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
     try await self.inner.replaceCatalogAttribute(request: request, options: options)
   }
@@ -250,7 +250,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -261,7 +261,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -269,7 +269,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -278,7 +278,7 @@ public final class CatalogServiceClient: Clients.CatalogServiceProtocol, Sendabl
   ///
   /// @Snippet(path: "CatalogService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -311,7 +311,7 @@ extension Clients {
     /// See `CatalogServiceClient.updateCatalog`.
     func updateCatalog(
       catalog: Catalog?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudRetailV2.Catalog
 
     /// See `CatalogServiceClient.setDefaultBranch`.
@@ -347,7 +347,7 @@ extension Clients {
     /// See `CatalogServiceClient.updateCompletionConfig`.
     func updateCompletionConfig(
       completionConfig: CompletionConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudRetailV2.CompletionConfig
 
     /// See `CatalogServiceClient.getAttributesConfig`.
@@ -366,7 +366,7 @@ extension Clients {
     /// See `CatalogServiceClient.updateAttributesConfig`.
     func updateAttributesConfig(
       attributesConfig: AttributesConfig?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     /// See `CatalogServiceClient.addCatalogAttribute`.
@@ -398,72 +398,72 @@ extension Clients {
 
     /// See `CatalogServiceClient.listCatalogs`.
     func listCatalogs(
-      request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCatalogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.ListCatalogsResponse
 
     /// See `CatalogServiceClient.listCatalogs`.
     func listCatalogs(
-      byItem: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCatalogsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Catalog, Swift.Error>
 
     /// See `CatalogServiceClient.updateCatalog`.
     func updateCatalog(
-      request: UpdateCatalogRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCatalogRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.Catalog
 
     /// See `CatalogServiceClient.setDefaultBranch`.
     func setDefaultBranch(
-      request: SetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+      request: SetDefaultBranchRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CatalogServiceClient.getDefaultBranch`.
     func getDefaultBranch(
-      request: GetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDefaultBranchRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.GetDefaultBranchResponse
 
     /// See `CatalogServiceClient.getCompletionConfig`.
     func getCompletionConfig(
-      request: GetCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCompletionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.CompletionConfig
 
     /// See `CatalogServiceClient.updateCompletionConfig`.
     func updateCompletionConfig(
-      request: UpdateCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCompletionConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.CompletionConfig
 
     /// See `CatalogServiceClient.getAttributesConfig`.
     func getAttributesConfig(
-      request: GetAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAttributesConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     /// See `CatalogServiceClient.updateAttributesConfig`.
     func updateAttributesConfig(
-      request: UpdateAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAttributesConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     /// See `CatalogServiceClient.addCatalogAttribute`.
     func addCatalogAttribute(
-      request: AddCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: AddCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     /// See `CatalogServiceClient.removeCatalogAttribute`.
     func removeCatalogAttribute(
-      request: RemoveCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     /// See `CatalogServiceClient.replaceCatalogAttribute`.
     func replaceCatalogAttribute(
-      request: ReplaceCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+      request: ReplaceCatalogAttributeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudRetailV2.AttributesConfig
 
     /// See `CatalogServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `CatalogServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -477,9 +477,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func listCatalogs(
-    request: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCatalogsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.ListCatalogsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCatalogs(
@@ -489,13 +489,13 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func listCatalogs(
-    byItem: ListCatalogsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCatalogsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Catalog, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudRetailV2.ListCatalogsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCatalogs(
@@ -514,14 +514,14 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func updateCatalog(
-    request: UpdateCatalogRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCatalogRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.Catalog {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCatalog(
     catalog: Catalog?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudRetailV2.Catalog {
     let request = UpdateCatalogRequest().with {
       $0.catalog = catalog
@@ -535,9 +535,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func setDefaultBranch(
-    request: SetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+    request: SetDefaultBranchRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setDefaultBranch(
@@ -556,9 +556,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func getDefaultBranch(
-    request: GetDefaultBranchRequest, options: GoogleCloudGax.RequestOptions
+    request: GetDefaultBranchRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.GetDefaultBranchResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getDefaultBranch(
@@ -577,9 +577,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func getCompletionConfig(
-    request: GetCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCompletionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.CompletionConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCompletionConfig(
@@ -598,14 +598,14 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func updateCompletionConfig(
-    request: UpdateCompletionConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCompletionConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.CompletionConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCompletionConfig(
     completionConfig: CompletionConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudRetailV2.CompletionConfig {
     let request = UpdateCompletionConfigRequest().with {
       $0.completionConfig = completionConfig
@@ -621,9 +621,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func getAttributesConfig(
-    request: GetAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetAttributesConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getAttributesConfig(
@@ -642,14 +642,14 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func updateAttributesConfig(
-    request: UpdateAttributesConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateAttributesConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateAttributesConfig(
     attributesConfig: AttributesConfig?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
     let request = UpdateAttributesConfigRequest().with {
       $0.attributesConfig = attributesConfig
@@ -665,9 +665,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func addCatalogAttribute(
-    request: AddCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: AddCatalogAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func removeCatalogAttribute(request: RemoveCatalogAttributeRequest) async throws
@@ -677,9 +677,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func removeCatalogAttribute(
-    request: RemoveCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: RemoveCatalogAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func replaceCatalogAttribute(request: ReplaceCatalogAttributeRequest) async throws
@@ -689,9 +689,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func replaceCatalogAttribute(
-    request: ReplaceCatalogAttributeRequest, options: GoogleCloudGax.RequestOptions
+    request: ReplaceCatalogAttributeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudRetailV2.AttributesConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -701,9 +701,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -713,13 +713,13 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -740,9 +740,9 @@ extension Clients.CatalogServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

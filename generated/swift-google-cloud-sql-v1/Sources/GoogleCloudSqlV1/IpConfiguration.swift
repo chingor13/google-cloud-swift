@@ -16,14 +16,14 @@
 
 #if SqlBackupsService || SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// IP Management configuration.
-  public struct IpConfiguration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IpConfiguration: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Whether the instance is assigned a public IP address or not.
-    public var ipv4Enabled: GoogleCloudWKT.BoolValue? = nil
+    public var ipv4Enabled: GoogleWKT.BoolValue? = nil
 
     /// The resource link for the VPC network from which the Cloud SQL instance is
     /// accessible for private IP. For example,
@@ -40,7 +40,7 @@
     /// valid client certificates. If you want to enforce SSL/TLS without enforcing
     /// the requirement for valid client certificates, then use the `ssl_mode` flag
     /// instead of the `require_ssl` flag.
-    public var requireSsl: GoogleCloudWKT.BoolValue? = nil
+    public var requireSsl: GoogleWKT.BoolValue? = nil
 
     /// The list of external networks that are allowed to connect to the instance
     /// using the IP. In 'CIDR' notation, also known as 'slash' notation (for
@@ -57,7 +57,7 @@
 
     /// Controls connectivity to private IP instances from Google services,
     /// such as BigQuery.
-    public var enablePrivatePathForGoogleCloudServices: GoogleCloudWKT.BoolValue? = nil
+    public var enablePrivatePathForGoogleCloudServices: GoogleWKT.BoolValue? = nil
 
     /// Specify how SSL/TLS is enforced in database connections. If you must use
     /// the `require_ssl` flag for backward compatibility, then only the following
@@ -105,7 +105,7 @@
     /// or CUSTOMER_MANAGED_CAS_CA.
     public var serverCertificateRotationMode: IpConfiguration.ServerCertificateRotationMode? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IpConfiguration`.
     public init() {}
@@ -164,12 +164,11 @@
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.ipv4Enabled = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .ipv4Enabled)
+        GoogleWKT.BoolValue.self, forKey: .ipv4Enabled)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .privateNetwork) {
         self.privateNetwork = value
       }
-      self.requireSsl = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .requireSsl)
+      self.requireSsl = try container.decodeIfPresent(GoogleWKT.BoolValue.self, forKey: .requireSsl)
       if let value = try container.decodeIfPresent([AclEntry].self, forKey: .authorizedNetworks) {
         self.authorizedNetworks = value
       }
@@ -177,7 +176,7 @@
         self.allocatedIpRange = value
       }
       self.enablePrivatePathForGoogleCloudServices = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .enablePrivatePathForGoogleCloudServices)
+        GoogleWKT.BoolValue.self, forKey: .enablePrivatePathForGoogleCloudServices)
       if let value = try container.decodeIfPresent(IpConfiguration.SslMode.self, forKey: .sslMode) {
         self.sslMode = value
       }
@@ -194,7 +193,7 @@
         IpConfiguration.ServerCertificateRotationMode.self, forKey: .serverCertificateRotationMode)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -589,11 +588,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.IpConfiguration"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

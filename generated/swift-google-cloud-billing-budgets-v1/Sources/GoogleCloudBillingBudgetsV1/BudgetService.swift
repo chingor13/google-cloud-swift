@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// BudgetService stores Cloud Billing budgets, which define a
 /// budget plan and rules to execute as we track spend against that plan.
@@ -29,7 +29,7 @@ public final class BudgetServiceClient: Clients.BudgetServiceProtocol, Sendable 
   let inner: any Clients.BudgetServiceStub
 
   /// Creates a new `BudgetServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.BudgetServiceStub = try Clients.BudgetServiceTransport(options)
     inner = Clients.BudgetServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -44,7 +44,7 @@ public final class BudgetServiceClient: Clients.BudgetServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "BudgetService_CreateBudget")
   public func createBudget(
-    request: CreateBudgetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBudgetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
     try await self.inner.createBudget(request: request, options: options)
   }
@@ -57,7 +57,7 @@ public final class BudgetServiceClient: Clients.BudgetServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "BudgetService_UpdateBudget")
   public func updateBudget(
-    request: UpdateBudgetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBudgetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
     try await self.inner.updateBudget(request: request, options: options)
   }
@@ -71,7 +71,7 @@ public final class BudgetServiceClient: Clients.BudgetServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "BudgetService_GetBudget")
   public func getBudget(
-    request: GetBudgetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBudgetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
     try await self.inner.getBudget(request: request, options: options)
   }
@@ -85,7 +85,7 @@ public final class BudgetServiceClient: Clients.BudgetServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "BudgetService_ListBudgets")
   public func listBudgets(
-    request: ListBudgetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBudgetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingBudgetsV1.ListBudgetsResponse {
     try await self.inner.listBudgets(request: request, options: options)
   }
@@ -99,7 +99,7 @@ public final class BudgetServiceClient: Clients.BudgetServiceProtocol, Sendable 
   ///
   /// @Snippet(path: "BudgetService_ListBudgets")
   public func listBudgets(
-    byItem: ListBudgetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBudgetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Budget, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBillingBudgetsV1.ListBudgetsResponse in
@@ -107,14 +107,14 @@ public final class BudgetServiceClient: Clients.BudgetServiceProtocol, Sendable 
       request.pageToken = token
       return try await self.listBudgets(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Deletes a budget. Returns successfully if already deleted.
   ///
   /// @Snippet(path: "BudgetService_DeleteBudget")
   public func deleteBudget(
-    request: DeleteBudgetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBudgetRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteBudget(request: request, options: options)
   }
@@ -144,7 +144,7 @@ extension Clients {
     /// See `BudgetServiceClient.updateBudget`.
     func updateBudget(
       budget: Budget?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget
 
     /// See `BudgetServiceClient.getBudget`.
@@ -179,32 +179,32 @@ extension Clients {
 
     /// See `BudgetServiceClient.createBudget`.
     func createBudget(
-      request: CreateBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget
 
     /// See `BudgetServiceClient.updateBudget`.
     func updateBudget(
-      request: UpdateBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget
 
     /// See `BudgetServiceClient.getBudget`.
     func getBudget(
-      request: GetBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.Budget
 
     /// See `BudgetServiceClient.listBudgets`.
     func listBudgets(
-      request: ListBudgetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBudgetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBillingBudgetsV1.ListBudgetsResponse
 
     /// See `BudgetServiceClient.listBudgets`.
     func listBudgets(
-      byItem: ListBudgetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBudgetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Budget, Swift.Error>
 
     /// See `BudgetServiceClient.deleteBudget`.
     func deleteBudget(
-      request: DeleteBudgetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBudgetRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -218,9 +218,9 @@ extension Clients.BudgetServiceProtocol {
   }
 
   public func createBudget(
-    request: CreateBudgetRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBudgetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createBudget(
@@ -241,14 +241,14 @@ extension Clients.BudgetServiceProtocol {
   }
 
   public func updateBudget(
-    request: UpdateBudgetRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBudgetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateBudget(
     budget: Budget?,
-    updateMask: GoogleCloudWKT.FieldMask?,
+    updateMask: GoogleWKT.FieldMask?,
   ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
     let request = UpdateBudgetRequest().with {
       $0.budget = budget
@@ -264,9 +264,9 @@ extension Clients.BudgetServiceProtocol {
   }
 
   public func getBudget(
-    request: GetBudgetRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBudgetRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingBudgetsV1.Budget {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBudget(
@@ -285,9 +285,9 @@ extension Clients.BudgetServiceProtocol {
   }
 
   public func listBudgets(
-    request: ListBudgetsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBudgetsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudBillingBudgetsV1.ListBudgetsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listBudgets(
@@ -297,13 +297,13 @@ extension Clients.BudgetServiceProtocol {
   }
 
   public func listBudgets(
-    byItem: ListBudgetsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBudgetsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Budget, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudBillingBudgetsV1.ListBudgetsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listBudgets(
@@ -320,9 +320,9 @@ extension Clients.BudgetServiceProtocol {
   }
 
   public func deleteBudget(
-    request: DeleteBudgetRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBudgetRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteBudget(

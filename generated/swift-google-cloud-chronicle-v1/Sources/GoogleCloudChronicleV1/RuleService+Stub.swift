@@ -15,79 +15,79 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol RuleServiceStub: Sendable {
     func createRule(
-      request: CreateRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Rule
 
     func getRule(
-      request: GetRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Rule
 
     func listRules(
-      request: ListRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListRulesResponse
 
     func updateRule(
-      request: UpdateRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Rule
 
     func deleteRule(
-      request: DeleteRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRuleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func verifyRuleText(
-      request: VerifyRuleTextRequest, options: GoogleCloudGax.RequestOptions
+      request: VerifyRuleTextRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.VerifyRuleTextResponse
 
     func listRuleRevisions(
-      request: ListRuleRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuleRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListRuleRevisionsResponse
 
     func createRetrohunt(
-      request: CreateRetrohuntRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRetrohuntRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getRetrohunt(
-      request: GetRetrohuntRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRetrohuntRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.Retrohunt
 
     func listRetrohunts(
-      request: ListRetrohuntsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRetrohuntsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListRetrohuntsResponse
 
     func getRuleDeployment(
-      request: GetRuleDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRuleDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.RuleDeployment
 
     func listRuleDeployments(
-      request: ListRuleDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuleDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListRuleDeploymentsResponse
 
     func updateRuleDeployment(
-      request: UpdateRuleDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRuleDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.RuleDeployment
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

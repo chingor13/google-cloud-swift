@@ -20,9 +20,9 @@
   import Foundation
   import GoogleCloudDialogflowV2
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(client: IntentsClient, projectId: String, intentId: String) async throws {
     let response = try await client.updateIntent(
@@ -31,7 +31,7 @@
           $0.intent = Intent().with {
             $0.name = "projects/\(projectId)/agent/intents/\(intentId)"
           }
-          $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+          $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
         }
     )
     print("Success: \(response)")

@@ -20,10 +20,10 @@
   import Foundation
   import GoogleCloudAIPlatformV1
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(parent: String, ) async throws {
     let client = try GoogleCloudAIPlatformV1.DatasetServiceClient()

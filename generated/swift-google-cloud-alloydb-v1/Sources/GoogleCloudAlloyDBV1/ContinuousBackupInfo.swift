@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ContinuousBackupInfo describes the continuous backup properties of a
 /// cluster.
-public struct ContinuousBackupInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ContinuousBackupInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The encryption information for the WALs and backups required
@@ -29,7 +29,7 @@ public struct ContinuousBackupInfo: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   /// Output only. When ContinuousBackup was most recently enabled. Set to null
   /// if ContinuousBackup is not enabled.
-  public var enabledTime: GoogleCloudWKT.Timestamp? = nil
+  public var enabledTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Days of the week on which a continuous backup is taken.
   public var schedule: [GoogleType.DayOfWeek] = []
@@ -44,9 +44,9 @@ public struct ContinuousBackupInfo: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// 3:23:00PM with a 14d recovery window, the earliest restorable time would be
   /// 04/02/2025 3:23:00PM. This field is only visible if the
   /// CLUSTER_VIEW_CONTINUOUS_BACKUP cluster view is provided.
-  public var earliestRestorableTime: GoogleCloudWKT.Timestamp? = nil
+  public var earliestRestorableTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ContinuousBackupInfo`.
   public init() {}
@@ -87,16 +87,15 @@ public struct ContinuousBackupInfo: Codable, Equatable, GoogleCloudWKT._AnyPacka
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.encryptionInfo = try container.decodeIfPresent(
       EncryptionInfo.self, forKey: .encryptionInfo)
-    self.enabledTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .enabledTime)
+    self.enabledTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .enabledTime)
     if let value = try container.decodeIfPresent([GoogleType.DayOfWeek].self, forKey: .schedule) {
       self.schedule = value
     }
     self.earliestRestorableTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .earliestRestorableTime)
+      GoogleWKT.Timestamp.self, forKey: .earliestRestorableTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -114,10 +113,10 @@ public struct ContinuousBackupInfo: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.ContinuousBackupInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

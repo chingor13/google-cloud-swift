@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudNetAppV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudNetAppV1.NetAppClient()

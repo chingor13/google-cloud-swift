@@ -16,11 +16,10 @@
 
 #if GenAiTuningService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Dataset distribution for Supervised Tuning.
-  public struct SupervisedTuningDatasetDistribution: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct SupervisedTuningDatasetDistribution: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Sum of a given population of values.
@@ -50,7 +49,7 @@
     /// Output only. Defines the histogram bucket.
     public var buckets: [SupervisedTuningDatasetDistribution.DatasetBucket] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SupervisedTuningDatasetDistribution`.
     public init() {}
@@ -130,7 +129,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -152,7 +151,7 @@
 
     /// Dataset bucket used to create a histogram for the distribution given a
     /// population of values.
-    public struct DatasetBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DatasetBucket: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Number of values in the bucket.
@@ -164,7 +163,7 @@
       /// Output only. Right bound of the bucket.
       public var `right`: Swift.Double = Swift.Double()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DatasetBucket`.
       public init() {}
@@ -212,7 +211,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -230,22 +229,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.SupervisedTuningDatasetDistribution.DatasetBucket"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.SupervisedTuningDatasetDistribution"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

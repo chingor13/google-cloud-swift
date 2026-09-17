@@ -16,11 +16,11 @@
 
 #if DeploymentResourcePoolService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// A description of resources that can be shared by multiple DeployedModels,
   /// whose underlying specification consists of a DedicatedResources.
-  public struct DeploymentResourcePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeploymentResourcePool: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. The resource name of the DeploymentResourcePool.
@@ -56,7 +56,7 @@
     public var disableContainerLogging: Swift.Bool = Swift.Bool()
 
     /// Output only. Timestamp when this DeploymentResourcePool was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Reserved for future use.
     public var satisfiesPzs: Swift.Bool = Swift.Bool()
@@ -64,7 +64,7 @@
     /// Output only. Reserved for future use.
     public var satisfiesPzi: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeploymentResourcePool`.
     public init() {}
@@ -126,8 +126,7 @@
       {
         self.disableContainerLogging = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .satisfiesPzs) {
         self.satisfiesPzs = value
       }
@@ -136,7 +135,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -158,11 +157,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DeploymentResourcePool"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

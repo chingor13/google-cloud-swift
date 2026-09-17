@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The representation of a Security Health Analytics custom module at a
 /// specified level of the resource hierarchy: organization, folder, or project.
@@ -24,7 +24,7 @@ import Foundation
 /// to `INHERITED`. For example, if the module is enabled in an organization or
 /// folder, then the effective enablement state for the module is `ENABLED` in
 /// all descendant folders or projects.
-public struct EffectiveSecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleCloudWKT
+public struct EffectiveSecurityHealthAnalyticsCustomModule: Codable, Equatable, GoogleWKT
     ._AnyPackable,
   Sendable
 {
@@ -49,7 +49,7 @@ public struct EffectiveSecurityHealthAnalyticsCustomModule: Codable, Equatable, 
   /// alphanumeric characters or underscores only.
   public var displayName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EffectiveSecurityHealthAnalyticsCustomModule`.
   public init() {}
@@ -102,7 +102,7 @@ public struct EffectiveSecurityHealthAnalyticsCustomModule: Codable, Equatable, 
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -226,10 +226,10 @@ public struct EffectiveSecurityHealthAnalyticsCustomModule: Codable, Equatable, 
     return
       "type.googleapis.com/google.cloud.securitycentermanagement.v1.EffectiveSecurityHealthAnalyticsCustomModule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

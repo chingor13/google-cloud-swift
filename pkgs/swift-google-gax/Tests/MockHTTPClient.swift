@@ -14,7 +14,7 @@
 
 import struct AsyncHTTPClient.HTTPClientRequest
 import struct AsyncHTTPClient.HTTPClientResponse
-@_spi(GoogleCloudInternal) @testable import GoogleCloudGax
+@_spi(GoogleCloudInternal) @testable import GoogleGax
 
 /// A mock implementation of `_HTTPClientProtocol`.
 final class MockHTTPClient: _HTTPClientProtocol, Sendable {

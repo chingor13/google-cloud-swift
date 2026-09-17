@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudBinaryAuthorizationV1
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(client: BinauthzManagementServiceV1Client, parent: String) async throws {
   let items = try client.listAttestors(

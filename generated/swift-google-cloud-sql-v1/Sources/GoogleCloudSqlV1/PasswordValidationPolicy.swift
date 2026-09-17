@@ -16,43 +16,43 @@
 
 #if SqlBackupsService || SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Database instance local user password validation policy.
   /// This message defines the password policy for local database users.
   /// When enabled, it enforces constraints on password complexity, length,
   /// and reuse. Keep this policy enabled to help prevent unauthorized access.
-  public struct PasswordValidationPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PasswordValidationPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Minimum number of characters allowed.
-    public var minLength: GoogleCloudWKT.Int32Value? = nil
+    public var minLength: GoogleWKT.Int32Value? = nil
 
     /// The complexity of the password.
     public var complexity: PasswordValidationPolicy.Complexity =
       PasswordValidationPolicy.Complexity()
 
     /// Number of previous passwords that cannot be reused.
-    public var reuseInterval: GoogleCloudWKT.Int32Value? = nil
+    public var reuseInterval: GoogleWKT.Int32Value? = nil
 
     /// Disallow username as a part of the password.
-    public var disallowUsernameSubstring: GoogleCloudWKT.BoolValue? = nil
+    public var disallowUsernameSubstring: GoogleWKT.BoolValue? = nil
 
     /// Minimum interval after which the password can be changed. This flag is only
     /// supported for PostgreSQL.
-    public var passwordChangeInterval: GoogleCloudWKT.Duration? = nil
+    public var passwordChangeInterval: GoogleWKT.Duration? = nil
 
     /// Whether to enable the password policy or not. When enabled, passwords must
     /// meet complexity requirements. Keep this policy enabled to help prevent
     /// unauthorized access. Disabling this policy allows weak passwords.
-    public var enablePasswordPolicy: GoogleCloudWKT.BoolValue? = nil
+    public var enablePasswordPolicy: GoogleWKT.BoolValue? = nil
 
     /// This field is deprecated and will be removed in a future version of the
     /// API.
     @available(*, deprecated)
-    public var disallowCompromisedCredentials: GoogleCloudWKT.BoolValue? = nil
+    public var disallowCompromisedCredentials: GoogleWKT.BoolValue? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PasswordValidationPolicy`.
     public init() {}
@@ -98,26 +98,25 @@
 
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
-      self.minLength = try container.decodeIfPresent(
-        GoogleCloudWKT.Int32Value.self, forKey: .minLength)
+      self.minLength = try container.decodeIfPresent(GoogleWKT.Int32Value.self, forKey: .minLength)
       if let value = try container.decodeIfPresent(
         PasswordValidationPolicy.Complexity.self, forKey: .complexity)
       {
         self.complexity = value
       }
       self.reuseInterval = try container.decodeIfPresent(
-        GoogleCloudWKT.Int32Value.self, forKey: .reuseInterval)
+        GoogleWKT.Int32Value.self, forKey: .reuseInterval)
       self.disallowUsernameSubstring = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .disallowUsernameSubstring)
+        GoogleWKT.BoolValue.self, forKey: .disallowUsernameSubstring)
       self.passwordChangeInterval = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .passwordChangeInterval)
+        GoogleWKT.Duration.self, forKey: .passwordChangeInterval)
       self.enablePasswordPolicy = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .enablePasswordPolicy)
+        GoogleWKT.BoolValue.self, forKey: .enablePasswordPolicy)
       self.disallowCompromisedCredentials = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .disallowCompromisedCredentials)
+        GoogleWKT.BoolValue.self, forKey: .disallowCompromisedCredentials)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -239,11 +238,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.PasswordValidationPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

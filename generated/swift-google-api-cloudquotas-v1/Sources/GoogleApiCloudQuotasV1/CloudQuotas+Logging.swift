@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func listQuotaInfos(
-      request: ListQuotaInfosRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQuotaInfosRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listQuotaInfos",
         action: {
-          (r: ListQuotaInfosRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListQuotaInfosRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiCloudQuotasV1.ListQuotaInfosResponse
           in
           return try await self.inner.listQuotaInfos(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func getQuotaInfo(
-      request: GetQuotaInfoRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQuotaInfoRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaInfo {
       try await self._intercept(
         request: request,
         options: options,
         name: "getQuotaInfo",
         action: {
-          (r: GetQuotaInfoRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetQuotaInfoRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiCloudQuotasV1.QuotaInfo
           in
           return try await self.inner.getQuotaInfo(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func listQuotaPreferences(
-      request: ListQuotaPreferencesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQuotaPreferencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listQuotaPreferences",
         action: {
-          (r: ListQuotaPreferencesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListQuotaPreferencesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiCloudQuotasV1.ListQuotaPreferencesResponse
           in
           return try await self.inner.listQuotaPreferences(request: r, options: o)
@@ -102,14 +102,14 @@ extension Clients {
     }
 
     public func getQuotaPreference(
-      request: GetQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQuotaPreferenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
       try await self._intercept(
         request: request,
         options: options,
         name: "getQuotaPreference",
         action: {
-          (r: GetQuotaPreferenceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetQuotaPreferenceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiCloudQuotasV1.QuotaPreference
           in
           return try await self.inner.getQuotaPreference(request: r, options: o)
@@ -117,14 +117,14 @@ extension Clients {
     }
 
     public func createQuotaPreference(
-      request: CreateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQuotaPreferenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
       try await self._intercept(
         request: request,
         options: options,
         name: "createQuotaPreference",
         action: {
-          (r: CreateQuotaPreferenceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateQuotaPreferenceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiCloudQuotasV1.QuotaPreference
           in
           return try await self.inner.createQuotaPreference(request: r, options: o)
@@ -132,14 +132,14 @@ extension Clients {
     }
 
     public func updateQuotaPreference(
-      request: UpdateQuotaPreferenceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQuotaPreferenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiCloudQuotasV1.QuotaPreference {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateQuotaPreference",
         action: {
-          (r: UpdateQuotaPreferenceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateQuotaPreferenceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiCloudQuotasV1.QuotaPreference
           in
           return try await self.inner.updateQuotaPreference(request: r, options: o)

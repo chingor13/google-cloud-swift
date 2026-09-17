@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Execution that represents a single run of an Evaluation.
-public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Execution: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of execution resource. The format is
@@ -26,13 +26,13 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. [Output only] Start time stamp.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. [Output only] End time stamp.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. [Output only] Inventory time stamp.
-  public var inventoryTime: GoogleCloudWKT.Timestamp? = nil
+  public var inventoryTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. [Output only] State.
   public var state: Execution.State = Execution.State()
@@ -62,7 +62,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. [Output only] Result summary for the execution.
   public var resultSummary: Execution.Summary? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Execution`.
   public init() {}
@@ -122,11 +122,10 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.inventoryTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .inventoryTime)
+      GoogleWKT.Timestamp.self, forKey: .inventoryTime)
     if let value = try container.decodeIfPresent(Execution.State.self, forKey: .state) {
       self.state = value
     }
@@ -158,7 +157,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       Execution.Summary.self, forKey: .resultSummary)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -183,7 +182,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// External data sources for an execution.
-  public struct ExternalDataSources: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExternalDataSources: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Name of external data source. The name will be used inside the
@@ -204,7 +203,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// the user.
     public var assetType: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExternalDataSources`.
     public init() {}
@@ -259,7 +258,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -375,22 +374,22 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workloadmanager.v1.Execution.ExternalDataSources"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Additional information generated by an execution.
-  public struct Notice: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Notice: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Message of the notice.
     public var message: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Notice`.
     public init() {}
@@ -428,7 +427,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -443,16 +442,16 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workloadmanager.v1.Execution.Notice"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Execution summary.
-  public struct Summary: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Summary: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Number of failures.
@@ -464,7 +463,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. Number of new fixes compared to the previous execution.
     public var newFixes: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Summary`.
     public init() {}
@@ -512,7 +511,7 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -529,11 +528,11 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.workloadmanager.v1.Execution.Summary"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -862,10 +861,10 @@ public struct Execution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.workloadmanager.v1.Execution"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

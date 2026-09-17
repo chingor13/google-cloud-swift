@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response message used for the EchoErrorDetails method.
-public struct EchoErrorDetailsResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EchoErrorDetailsResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var singleDetail: EchoErrorDetailsResponse.SingleDetail? = nil
 
   public var multipleDetails: EchoErrorDetailsResponse.MultipleDetails? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EchoErrorDetailsResponse`.
   public init() {}
@@ -66,7 +66,7 @@ public struct EchoErrorDetailsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
       EchoErrorDetailsResponse.MultipleDetails.self, forKey: .multipleDetails)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -79,12 +79,12 @@ public struct EchoErrorDetailsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
     }
   }
 
-  public struct SingleDetail: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SingleDetail: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var error: ErrorWithSingleDetail? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SingleDetail`.
     public init() {}
@@ -120,7 +120,7 @@ public struct EchoErrorDetailsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
       self.error = try container.decodeIfPresent(ErrorWithSingleDetail.self, forKey: .error)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -135,20 +135,20 @@ public struct EchoErrorDetailsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.showcase.v1beta1.EchoErrorDetailsResponse.SingleDetail"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
-  public struct MultipleDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MultipleDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     public var error: ErrorWithMultipleDetails? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MultipleDetails`.
     public init() {}
@@ -184,7 +184,7 @@ public struct EchoErrorDetailsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
       self.error = try container.decodeIfPresent(ErrorWithMultipleDetails.self, forKey: .error)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -199,21 +199,21 @@ public struct EchoErrorDetailsResponse: Codable, Equatable, GoogleCloudWKT._AnyP
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.showcase.v1beta1.EchoErrorDetailsResponse.MultipleDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.showcase.v1beta1.EchoErrorDetailsResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

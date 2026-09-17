@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A collection of virtual machines and connected resources forming a
 /// high-performance computing cluster capable of running large-scale, tightly
@@ -23,7 +23,7 @@ import Foundation
 /// computations, storage resources that contain inputs and store outputs, an
 /// orchestrator that is responsible for assigning jobs to compute resources, and
 /// network resources that connect everything together.
-public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Cluster: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. [Relative resource name](https://google.aip.dev/122) of the
@@ -41,10 +41,10 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. Time that the cluster was originally created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time that the cluster was most recently updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Indicates whether changes to the cluster are currently in
   /// flight. If this is `true`, then the current state might not match the
@@ -74,7 +74,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// on the cluster.
   public var orchestrator: Orchestrator? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Cluster`.
   public init() {}
@@ -135,10 +135,8 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.labels = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .reconciling) {
       self.reconciling = value
     }
@@ -160,7 +158,7 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.orchestrator = try container.decodeIfPresent(Orchestrator.self, forKey: .orchestrator)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -184,10 +182,10 @@ public struct Cluster: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.hypercomputecluster.v1.Cluster"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,7 +16,7 @@
 
 #if ControlService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Defines a conditioned behavior to employ during serving.
   /// Must be attached to a
@@ -24,7 +24,7 @@
   /// considered at serving time. Permitted actions dependent on `SolutionType`.
   ///
   /// [google.cloud.discoveryengine.v1.ServingConfig]: <doc:ServingConfig>
-  public struct Control: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Control: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. Fully qualified name
@@ -73,7 +73,7 @@
     /// Required.
     public var action: OneOf_Action? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Control`.
     public init() {}
@@ -185,7 +185,7 @@
       self.action = action
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -218,7 +218,7 @@
     }
 
     /// Adjusts order of products in returned list.
-    public struct BoostAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BoostAction: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Strength of the boost, which should be in [-1, 1]. Negative
@@ -243,7 +243,7 @@
       /// Constant value boost or custom ranking based boost specifications.
       public var boostSpec: OneOf_BoostSpec? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BoostAction`.
       public init() {}
@@ -315,7 +315,7 @@
         self.boostSpec = boostSpec
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -341,7 +341,7 @@
       /// Specification for custom ranking based on customer specified attribute
       /// value. It provides more controls for customized ranking than the simple
       /// (condition, boost) combination above.
-      public struct InterpolationBoostSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct InterpolationBoostSpec: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Optional. The name of the field whose value will be used to determine
@@ -366,8 +366,7 @@
         /// the control points listed here.
         public var controlPoints: [Control.BoostAction.InterpolationBoostSpec.ControlPoint] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `InterpolationBoostSpec`.
         public init() {}
@@ -427,7 +426,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -445,7 +444,7 @@
         /// The control points used to define the curve. The curve defined
         /// through these control points can only be monotonically increasing
         /// or decreasing(constant values are acceptable).
-        public struct ControlPoint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct ControlPoint: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Optional. Can be one of:
@@ -460,8 +459,7 @@
           /// the attribute_value evaluates to the value specified above.
           public var boostAmount: Swift.Float = Swift.Float()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `ControlPoint`.
           public init() {}
@@ -505,7 +503,7 @@
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -522,11 +520,11 @@
             return
               "type.googleapis.com/google.cloud.discoveryengine.v1.Control.BoostAction.InterpolationBoostSpec.ControlPoint"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -748,11 +746,11 @@
           return
             "type.googleapis.com/google.cloud.discoveryengine.v1.Control.BoostAction.InterpolationBoostSpec"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -769,17 +767,17 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Control.BoostAction"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Specified which products may be included in results.
     /// Uses same filter as boost.
-    public struct FilterAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FilterAction: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. A filter to apply on the matching condition results.
@@ -796,7 +794,7 @@
       /// projects/123/locations/global/collections/default_collection/dataStores/default_data_store
       public var dataStore: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FilterAction`.
       public init() {}
@@ -839,7 +837,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -855,16 +853,16 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Control.FilterAction"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Redirects a shopper to the provided URI.
-    public struct RedirectAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct RedirectAction: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. The URI to which the shopper will be redirected.
@@ -874,7 +872,7 @@
       /// Otherwise an INVALID ARGUMENT error is thrown.
       public var redirectUri: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `RedirectAction`.
       public init() {}
@@ -912,7 +910,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -927,11 +925,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Control.RedirectAction"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -939,7 +937,7 @@
     ///
     /// Example: "happy" will also be considered as "glad", "glad" will also be
     /// considered as "happy".
-    public struct SynonymsAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SynonymsAction: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Defines a set of synonyms.
@@ -948,7 +946,7 @@
       /// thrown.
       public var synonyms: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SynonymsAction`.
       public init() {}
@@ -986,7 +984,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1001,11 +999,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Control.SynonymsAction"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1013,7 +1011,7 @@
     ///
     /// Example: Promote shoe store link when searching for `shoe` keyword.
     /// The link can be outside of associated data store.
-    public struct PromoteAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PromoteAction: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Data store with which this promotion is attached to.
@@ -1022,7 +1020,7 @@
       /// Required. Promotion attached to this action.
       public var searchLinkPromotion: SearchLinkPromotion? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PromoteAction`.
       public init() {}
@@ -1064,7 +1062,7 @@
           SearchLinkPromotion.self, forKey: .searchLinkPromotion)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1080,11 +1078,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.discoveryengine.v1.Control.PromoteAction"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1108,11 +1106,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.discoveryengine.v1.Control"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

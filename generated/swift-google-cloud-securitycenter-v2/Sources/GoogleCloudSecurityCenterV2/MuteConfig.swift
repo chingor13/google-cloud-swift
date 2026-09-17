@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A mute config is a Cloud SCC resource that contains the configuration
 /// to mute create/update events of findings.
-public struct MuteConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MuteConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. This field will be ignored if provided on config creation. The
@@ -62,12 +62,12 @@ public struct MuteConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The time at which the mute config was created.
   /// This field is set by the server and will be ignored if provided on config
   /// creation.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The most recent time at which the mute config was updated.
   /// This field is set by the server and will be ignored if provided on config
   /// creation or update.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Email address of the user who last edited the mute config.
   /// This field is set by the server and will be ignored if provided on config
@@ -81,9 +81,9 @@ public struct MuteConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. The expiry of the mute config. Only applicable for dynamic
   /// configs. If the expiry is set, when the config expires, it is removed from
   /// all findings.
-  public var expiryTime: GoogleCloudWKT.Timestamp? = nil
+  public var expiryTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MuteConfig`.
   public init() {}
@@ -139,21 +139,18 @@ public struct MuteConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .filter) {
       self.filter = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .mostRecentEditor) {
       self.mostRecentEditor = value
     }
     if let value = try container.decodeIfPresent(MuteConfig.MuteConfigType.self, forKey: .type) {
       self.type = value
     }
-    self.expiryTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expiryTime)
+    self.expiryTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expiryTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -287,10 +284,10 @@ public struct MuteConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.MuteConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

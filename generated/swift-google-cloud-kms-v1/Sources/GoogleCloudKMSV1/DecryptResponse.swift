@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Response message for
 /// [KeyManagementService.Decrypt][google.cloud.kms.v1.KeyManagementService.Decrypt].
 ///
 /// [google.cloud.kms.v1.KeyManagementService.Decrypt]: <doc:KeyManagementServiceClient/decrypt(request:options:)>
-public struct DecryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DecryptResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The decrypted data originally supplied in
@@ -51,7 +51,7 @@ public struct DecryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.kms.v1.DecryptRequest.ciphertext]: <doc:DecryptRequest/ciphertext>
   /// [google.cloud.kms.v1.DecryptResponse.plaintext]: <doc:DecryptResponse/plaintext>
   /// [google.cloud.kms.v1.KeyManagementService]: <doc:KeyManagementServiceClient>
-  public var plaintextCrc32C: GoogleCloudWKT.Int64Value? = nil
+  public var plaintextCrc32C: GoogleWKT.Int64Value? = nil
 
   /// Whether the Decryption was performed using the primary key version.
   public var usedPrimary: Swift.Bool = Swift.Bool()
@@ -64,7 +64,7 @@ public struct DecryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.kms.v1.ProtectionLevel]: <doc:ProtectionLevel>
   public var protectionLevel: ProtectionLevel = ProtectionLevel()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DecryptResponse`.
   public init() {}
@@ -107,7 +107,7 @@ public struct DecryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.plaintext = value
     }
     self.plaintextCrc32C = try container.decodeIfPresent(
-      GoogleCloudWKT.Int64Value.self, forKey: .plaintextCrc32C)
+      GoogleWKT.Int64Value.self, forKey: .plaintextCrc32C)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .usedPrimary) {
       self.usedPrimary = value
     }
@@ -116,7 +116,7 @@ public struct DecryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,10 +134,10 @@ public struct DecryptResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.kms.v1.DecryptResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

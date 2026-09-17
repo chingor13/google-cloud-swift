@@ -16,13 +16,13 @@
 
 #if InterconnectAttachmentGroups
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// [Output Only] The zones that Attachments in this group are present
   /// in, in the given facilities.  This is inherited from their
   /// Interconnects.
   public struct InterconnectAttachmentGroupLogicalStructureRegionMetroFacilityZone: Codable,
-    Equatable, GoogleCloudWKT._AnyPackable,
+    Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. [Output Only] URLs of Attachments in the given zone, to the given
@@ -33,7 +33,7 @@
     /// Output only. [Output Only] The name of a zone, either "zone1" or "zone2".
     public var zone: Swift.String? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InterconnectAttachmentGroupLogicalStructureRegionMetroFacilityZone`.
     public init() {}
@@ -74,7 +74,7 @@
       self.zone = try container.decodeIfPresent(Swift.String.self, forKey: .zone)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -91,11 +91,11 @@
       return
         "type.googleapis.com/google.cloud.compute.v1.InterconnectAttachmentGroupLogicalStructureRegionMetroFacilityZone"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

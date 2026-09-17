@@ -16,21 +16,21 @@
 
 #if InstanceGroupManagers || RegionInstanceGroupManagers
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct ManagedInstanceScheduling: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ManagedInstanceScheduling: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The timestamp at which the underlying instance will be
     /// triggered for graceful shutdown if it is configured. This is in RFC3339 text format.
-    public var gracefulShutdownTimestamp: GoogleCloudWKT.Timestamp? = nil
+    public var gracefulShutdownTimestamp: GoogleWKT.Timestamp? = nil
 
     /// Output only. The timestamp at which the managed instance will be terminated. This is
     /// in RFC3339 text
     /// format.
-    public var terminationTimestamp: GoogleCloudWKT.Timestamp? = nil
+    public var terminationTimestamp: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ManagedInstanceScheduling`.
     public init() {}
@@ -66,12 +66,12 @@
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.gracefulShutdownTimestamp = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .gracefulShutdownTimestamp)
+        GoogleWKT.Timestamp.self, forKey: .gracefulShutdownTimestamp)
       self.terminationTimestamp = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .terminationTimestamp)
+        GoogleWKT.Timestamp.self, forKey: .terminationTimestamp)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -88,11 +88,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.ManagedInstanceScheduling"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

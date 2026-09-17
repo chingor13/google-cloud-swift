@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a key-value pair of NameMappingKey to NameMappingValue to
 /// represent the mapping of SQL names from the input value to desired output.
-public struct ObjectNameMapping: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ObjectNameMapping: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the object in source that is being mapped.
@@ -28,7 +28,7 @@ public struct ObjectNameMapping: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The desired target name of the object that is being mapped.
   public var target: NameMappingValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ObjectNameMapping`.
   public init() {}
@@ -67,7 +67,7 @@ public struct ObjectNameMapping: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.target = try container.decodeIfPresent(NameMappingValue.self, forKey: .target)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -83,10 +83,10 @@ public struct ObjectNameMapping: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.migration.v2.ObjectNameMapping"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

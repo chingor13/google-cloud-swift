@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// `WeekDayOfMonth` defines the week day of the month on which the backups will
 /// run. The message combines a `WeekOfMonth` and `DayOfWeek` to produce values
 /// like `FIRST`/`MONDAY` or `LAST`/`FRIDAY`.
-public struct WeekDayOfMonth: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct WeekDayOfMonth: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Specifies the week of the month.
@@ -30,7 +30,7 @@ public struct WeekDayOfMonth: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Required. Specifies the day of the week.
   public var dayOfWeek: GoogleType.DayOfWeek = GoogleType.DayOfWeek()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `WeekDayOfMonth`.
   public init() {}
@@ -75,7 +75,7 @@ public struct WeekDayOfMonth: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -218,10 +218,10 @@ public struct WeekDayOfMonth: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.backupdr.v1.WeekDayOfMonth"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

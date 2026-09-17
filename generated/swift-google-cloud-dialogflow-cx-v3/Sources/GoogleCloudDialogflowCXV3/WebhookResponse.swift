@@ -16,10 +16,10 @@
 
 #if Agents && Changelogs && Deployments && EntityTypes && Environments && Examples && Experiments && Flows && Generators && Intents && Pages && Playbooks && SecuritySettingsService && SessionEntityTypes && Sessions && TestCases && Tools && TransitionRouteGroups && Versions && Webhooks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The response message for a webhook call.
-  public struct WebhookResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct WebhookResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The fulfillment response to send to the user. This field can be omitted by
@@ -38,14 +38,14 @@
     /// [QueryResult.webhook_payloads][google.cloud.dialogflow.cx.v3.QueryResult.webhook_payloads].
     ///
     /// [google.cloud.dialogflow.cx.v3.QueryResult.webhook_payloads]: <doc:QueryResult/webhookPayloads>
-    public var payload: GoogleCloudWKT.Struct? = nil
+    public var payload: GoogleWKT.Struct? = nil
 
     /// The target to transition to. This can be set optionally to indicate an
     /// immediate transition to a different page in the same host flow, or a
     /// different flow in the same agent.
     public var transition: OneOf_Transition? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `WebhookResponse`.
     public init() {}
@@ -92,7 +92,7 @@
         WebhookResponse.FulfillmentResponse.self, forKey: .fulfillmentResponse)
       self.pageInfo = try container.decodeIfPresent(PageInfo.self, forKey: .pageInfo)
       self.sessionInfo = try container.decodeIfPresent(SessionInfo.self, forKey: .sessionInfo)
-      self.payload = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .payload)
+      self.payload = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .payload)
 
       var transition: OneOf_Transition? = nil
       let transitionCheckAndSet = {
@@ -113,7 +113,7 @@
       self.transition = transition
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -138,7 +138,7 @@
     }
 
     /// Represents a fulfillment response to the user.
-    public struct FulfillmentResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct FulfillmentResponse: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The list of rich message responses to present to the user.
@@ -148,7 +148,7 @@
       public var mergeBehavior: WebhookResponse.FulfillmentResponse.MergeBehavior = WebhookResponse
         .FulfillmentResponse.MergeBehavior()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `FulfillmentResponse`.
       public init() {}
@@ -193,7 +193,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -317,11 +317,11 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.WebhookResponse.FulfillmentResponse"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -342,11 +342,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.WebhookResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

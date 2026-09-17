@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Make a snapshot once a month e.g. at 2nd 04:00, 7th 05:20, 24th 23:50
-public struct MonthlySchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MonthlySchedule: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The maximum number of Snapshots to keep for the hourly schedule
@@ -35,7 +35,7 @@ public struct MonthlySchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// comma separated number of days. Defaults to '1'.
   public var daysOfMonth: Swift.String? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MonthlySchedule`.
   public init() {}
@@ -81,7 +81,7 @@ public struct MonthlySchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.daysOfMonth = try container.decodeIfPresent(Swift.String.self, forKey: .daysOfMonth)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -99,10 +99,10 @@ public struct MonthlySchedule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.netapp.v1.MonthlySchedule"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

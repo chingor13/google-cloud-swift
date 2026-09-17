@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// NodePool contains the name and configuration for a cluster's node pool.
 /// Node pools are a set of nodes (i.e. VM's), with a common configuration and
@@ -23,7 +23,7 @@ import Foundation
 /// of Kubernetes labels applied to them, which may be used to reference them
 /// during pod scheduling. They may also be resized up or down, to accommodate
 /// the workload.
-public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct NodePool: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the node pool.
@@ -126,7 +126,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. Contains expiry information about the kubelet certificate.
   public var kubeletCertInfo: NodePool.KubeletCertInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `NodePool`.
   public init() {}
@@ -262,7 +262,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       NodePool.KubeletCertInfo.self, forKey: .kubeletCertInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -343,7 +343,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// time after each batch gets drained.
   /// 2. node_pool_soak_duration is the soak time after all blue nodes are
   /// drained. After this period, the blue pool nodes will be deleted.
-  public struct UpgradeSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UpgradeSettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The maximum number of nodes that can be created beyond the current size
@@ -361,7 +361,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Settings for blue-green upgrade strategy.
     public var blueGreenSettings: BlueGreenSettings? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpgradeSettings`.
     public init() {}
@@ -411,7 +411,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         BlueGreenSettings.self, forKey: .blueGreenSettings)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -429,23 +429,23 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodePool.UpgradeSettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// UpdateInfo contains resource (instance groups, etc), status and other
   /// intermediate information relevant to a node pool upgrade.
-  public struct UpdateInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UpdateInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Information of a blue-green upgrade.
     public var blueGreenInfo: NodePool.UpdateInfo.BlueGreenInfo? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UpdateInfo`.
     public init() {}
@@ -482,7 +482,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         NodePool.UpdateInfo.BlueGreenInfo.self, forKey: .blueGreenInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -495,7 +495,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Information relevant to blue-green upgrade.
-    public struct BlueGreenInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BlueGreenInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Current blue-green upgrade phase.
@@ -519,7 +519,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Version of green pool.
       public var greenPoolVersion: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BlueGreenInfo`.
       public init() {}
@@ -585,7 +585,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -744,27 +744,27 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.container.v1.NodePool.UpdateInfo.BlueGreenInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodePool.UpdateInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// PlacementPolicy defines the placement policy used by the node pool.
-  public struct PlacementPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PlacementPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The type of placement.
@@ -779,7 +779,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// node pool. If not found, InvalidArgument error is returned.
     public var policyName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PlacementPolicy`.
     public init() {}
@@ -829,7 +829,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -946,16 +946,16 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodePool.PlacementPolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// QueuedProvisioning defines the queued provisioning used by the node pool.
-  public struct QueuedProvisioning: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QueuedProvisioning: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Denotes that this node pool is QRM specific, meaning nodes can be only
@@ -963,7 +963,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// API.
     public var enabled: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QueuedProvisioning`.
     public init() {}
@@ -1001,7 +1001,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1016,29 +1016,29 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodePool.QueuedProvisioning"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// NodeDrainConfig contains the node drain related configurations for this
   /// node pool.
-  public struct NodeDrainConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NodeDrainConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The duration of the PDB timeout period for node drain.
-    public var pdbTimeoutDuration: GoogleCloudWKT.Duration? = nil
+    public var pdbTimeoutDuration: GoogleWKT.Duration? = nil
 
     /// The duration of the grace termination period for node drain.
-    public var graceTerminationDuration: GoogleCloudWKT.Duration? = nil
+    public var graceTerminationDuration: GoogleWKT.Duration? = nil
 
     /// Whether to respect PDB during node pool deletion.
     public var respectPdbDuringNodePoolDeletion: Swift.Bool? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NodeDrainConfig`.
     public init() {}
@@ -1077,14 +1077,14 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.pdbTimeoutDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .pdbTimeoutDuration)
+        GoogleWKT.Duration.self, forKey: .pdbTimeoutDuration)
       self.graceTerminationDuration = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .graceTerminationDuration)
+        GoogleWKT.Duration.self, forKey: .graceTerminationDuration)
       self.respectPdbDuringNodePoolDeletion = try container.decodeIfPresent(
         Swift.Bool.self, forKey: .respectPdbDuringNodePoolDeletion)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1103,16 +1103,16 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodePool.NodeDrainConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines the maintenance exclusion for the node pool.
-  public struct ExclusionUntilEndOfSupport: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExclusionUntilEndOfSupport: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Indicates whether the exclusion is enabled.
@@ -1120,15 +1120,15 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// Output only. The start time of the maintenance exclusion. It is output
     /// only. It is the exclusion creation time.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. The end time of the maintenance exclusion. It is output
     /// only. It is the cluster control plane version's end of support time, or
     /// end of extended support time when the cluster is on extended support
     /// channel.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExclusionUntilEndOfSupport`.
     public init() {}
@@ -1168,12 +1168,11 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .enabled) {
         self.enabled = value
       }
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1190,22 +1189,22 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodePool.ExclusionUntilEndOfSupport"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines the maintenance policy for the node pool.
-  public struct NodePoolMaintenancePolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NodePoolMaintenancePolicy: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The exclusion until end of support for the node pool.
     public var exclusionUntilEndOfSupport: NodePool.ExclusionUntilEndOfSupport? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NodePoolMaintenancePolicy`.
     public init() {}
@@ -1242,7 +1241,7 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         NodePool.ExclusionUntilEndOfSupport.self, forKey: .exclusionUntilEndOfSupport)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1258,25 +1257,25 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodePool.NodePoolMaintenancePolicy"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Contains expiry information about the kubelet certificate.
-  public struct KubeletCertInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct KubeletCertInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only.
-    public var tpmBootstrapCertExpireTime: GoogleCloudWKT.Timestamp? = nil
+    public var tpmBootstrapCertExpireTime: GoogleWKT.Timestamp? = nil
 
     /// Output only.
-    public var nonTpmBootstrapCertExpireTime: GoogleCloudWKT.Timestamp? = nil
+    public var nonTpmBootstrapCertExpireTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `KubeletCertInfo`.
     public init() {}
@@ -1313,12 +1312,12 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.tpmBootstrapCertExpireTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .tpmBootstrapCertExpireTime)
+        GoogleWKT.Timestamp.self, forKey: .tpmBootstrapCertExpireTime)
       self.nonTpmBootstrapCertExpireTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .nonTpmBootstrapCertExpireTime)
+        GoogleWKT.Timestamp.self, forKey: .nonTpmBootstrapCertExpireTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1336,11 +1335,11 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.container.v1.NodePool.KubeletCertInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1487,10 +1486,10 @@ public struct NodePool: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.NodePool"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

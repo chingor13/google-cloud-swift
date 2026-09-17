@@ -16,7 +16,7 @@
 
 #if FeatureRegistryService || FeaturestoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [FeaturestoreService.ListFeatures][google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures].
@@ -25,7 +25,7 @@
   ///
   /// [google.cloud.aiplatform.v1.FeatureRegistryService.ListFeatures]: <doc:FeatureRegistryServiceClient/listFeatures(request:options:)>
   /// [google.cloud.aiplatform.v1.FeaturestoreService.ListFeatures]: <doc:FeaturestoreServiceClient/listFeatures(request:options:)>
-  public struct ListFeaturesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ListFeaturesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the Location to list Features.
@@ -90,7 +90,7 @@
     public var orderBy: Swift.String = Swift.String()
 
     /// Mask specifying which fields to read.
-    public var readMask: GoogleCloudWKT.FieldMask? = nil
+    public var readMask: GoogleWKT.FieldMask? = nil
 
     /// Only applicable for Vertex AI Feature Store (Legacy).
     /// If set, return the most recent
@@ -103,7 +103,7 @@
     /// [google.cloud.aiplatform.v1.ListFeaturesRequest.latest_stats_count]: <doc:ListFeaturesRequest/latestStatsCount>
     public var latestStatsCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListFeaturesRequest`.
     public init() {}
@@ -163,14 +163,13 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .orderBy) {
         self.orderBy = value
       }
-      self.readMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .readMask)
+      self.readMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .readMask)
       if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .latestStatsCount) {
         self.latestStatsCount = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -191,11 +190,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ListFeaturesRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

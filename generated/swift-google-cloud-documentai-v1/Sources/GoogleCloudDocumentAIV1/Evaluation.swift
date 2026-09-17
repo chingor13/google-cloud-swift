@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An evaluation of a ProcessorVersion's performance.
-public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Evaluation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the evaluation.
@@ -27,7 +27,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// The time that the evaluation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Counters for the documents used in the evaluation.
   public var documentCounters: Evaluation.Counters? = nil
@@ -44,7 +44,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The KMS key version with which data is encrypted.
   public var kmsKeyVersionName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Evaluation`.
   public init() {}
@@ -92,8 +92,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     self.documentCounters = try container.decodeIfPresent(
       Evaluation.Counters.self, forKey: .documentCounters)
     self.allEntitiesMetrics = try container.decodeIfPresent(
@@ -111,7 +110,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -130,7 +129,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Evaluation counters for the documents that were used.
-  public struct Counters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Counters: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// How many documents were sent for evaluation.
@@ -147,7 +146,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// How many documents were used in the evaluation.
     public var evaluatedDocumentsCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Counters`.
     public init() {}
@@ -204,7 +203,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -222,16 +221,16 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.Evaluation.Counters"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Evaluation metrics, either in aggregate or about a specific entity.
-  public struct Metrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Metrics: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The calculated precision.
@@ -267,7 +266,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The amount of documents that had an occurrence of this label.
     public var totalDocumentsCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Metrics`.
     public init() {}
@@ -364,7 +363,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -389,16 +388,16 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.Evaluation.Metrics"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Evaluations metrics, at a specific confidence level.
-  public struct ConfidenceLevelMetrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConfidenceLevelMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The confidence level.
@@ -407,7 +406,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The metrics at the specific confidence level.
     public var metrics: Evaluation.Metrics? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConfidenceLevelMetrics`.
     public init() {}
@@ -448,7 +447,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.metrics = try container.decodeIfPresent(Evaluation.Metrics.self, forKey: .metrics)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -464,16 +463,16 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.Evaluation.ConfidenceLevelMetrics"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Metrics across multiple confidence levels.
-  public struct MultiConfidenceMetrics: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct MultiConfidenceMetrics: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Metrics across confidence levels with fuzzy matching enabled.
@@ -502,7 +501,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var metricsType: Evaluation.MultiConfidenceMetrics.MetricsType = Evaluation
       .MultiConfidenceMetrics.MetricsType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `MultiConfidenceMetrics`.
     public init() {}
@@ -582,7 +581,7 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -708,21 +707,21 @@ public struct Evaluation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.documentai.v1.Evaluation.MultiConfidenceMetrics"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.documentai.v1.Evaluation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

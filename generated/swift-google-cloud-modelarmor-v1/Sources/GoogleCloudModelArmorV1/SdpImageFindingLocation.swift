@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Location of the finding within an image.
-public struct SdpImageFindingLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SdpImageFindingLocation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Bounding boxes locating the pixels within the image containing the finding.
   public var boundingBoxes: [SdpImageFindingLocation.SdpBoundingBox] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SdpImageFindingLocation`.
   public init() {}
@@ -64,7 +64,7 @@ public struct SdpImageFindingLocation: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -77,7 +77,7 @@ public struct SdpImageFindingLocation: Codable, Equatable, GoogleCloudWKT._AnyPa
   }
 
   /// Bounding box encompassing a finding within an image.
-  public struct SdpBoundingBox: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SdpBoundingBox: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Top coordinate of the bounding box. (0,0) is upper left.
@@ -92,7 +92,7 @@ public struct SdpImageFindingLocation: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// Height of the bounding box in pixels.
     public var height: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SdpBoundingBox`.
     public init() {}
@@ -145,7 +145,7 @@ public struct SdpImageFindingLocation: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -163,21 +163,21 @@ public struct SdpImageFindingLocation: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.modelarmor.v1.SdpImageFindingLocation.SdpBoundingBox"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.modelarmor.v1.SdpImageFindingLocation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

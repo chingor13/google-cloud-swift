@@ -16,17 +16,17 @@
 
 #if RegionDiskTypes
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionDiskTypesStub: Sendable {
       func `get`(
-        request: RegionDiskTypesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDiskTypesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.DiskType
 
       func list(
-        request: RegionDiskTypesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionDiskTypesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionDiskTypeList
     }
   }

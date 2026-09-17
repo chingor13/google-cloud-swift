@@ -19,9 +19,9 @@
   // snippet.show
   import Foundation
   import GoogleCloudDiscoveryEngineV1
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
+  import GoogleWKT
 
   func sample(
     client: DataStoreServiceClient, projectId: String, locationId: String, dataStoreId: String
@@ -32,7 +32,7 @@
           $0.dataStore = DataStore().with {
             $0.name = "projects/\(projectId)/locations/\(locationId)/dataStores/\(dataStoreId)"
           }
-          $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+          $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
         }
     )
     print("Success: \(response)")

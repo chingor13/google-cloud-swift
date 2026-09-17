@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudSecurityComplianceV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: ConfigClient, organizationId: String, locationId: String) async throws {
   let response = try await client.createCloudControl(

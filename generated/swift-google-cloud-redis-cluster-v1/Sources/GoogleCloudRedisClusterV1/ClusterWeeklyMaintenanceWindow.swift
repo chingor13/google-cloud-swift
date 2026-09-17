@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Time window specified for weekly operations.
-public struct ClusterWeeklyMaintenanceWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ClusterWeeklyMaintenanceWindow: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Allows to define schedule that runs specified day of the week.
@@ -28,7 +28,7 @@ public struct ClusterWeeklyMaintenanceWindow: Codable, Equatable, GoogleCloudWKT
   /// Start time of the window in UTC.
   public var startTime: GoogleType.TimeOfDay? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ClusterWeeklyMaintenanceWindow`.
   public init() {}
@@ -69,7 +69,7 @@ public struct ClusterWeeklyMaintenanceWindow: Codable, Equatable, GoogleCloudWKT
     self.startTime = try container.decodeIfPresent(GoogleType.TimeOfDay.self, forKey: .startTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -85,10 +85,10 @@ public struct ClusterWeeklyMaintenanceWindow: Codable, Equatable, GoogleCloudWKT
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.redis.cluster.v1.ClusterWeeklyMaintenanceWindow"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

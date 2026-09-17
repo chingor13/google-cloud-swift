@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request message for the UpdateGoogleChannelConfig method.
-public struct UpdateGoogleChannelConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateGoogleChannelConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The config to be updated.
@@ -27,9 +27,9 @@ public struct UpdateGoogleChannelConfigRequest: Codable, Equatable, GoogleCloudW
   /// The fields to be updated; only fields explicitly provided are updated.
   /// If no field mask is provided, all provided fields in the request are
   /// updated. To update all fields, provide a field mask of "*".
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateGoogleChannelConfigRequest`.
   public init() {}
@@ -66,11 +66,10 @@ public struct UpdateGoogleChannelConfigRequest: Codable, Equatable, GoogleCloudW
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.googleChannelConfig = try container.decodeIfPresent(
       GoogleChannelConfig.self, forKey: .googleChannelConfig)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,10 +85,10 @@ public struct UpdateGoogleChannelConfigRequest: Codable, Equatable, GoogleCloudW
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.eventarc.v1.UpdateGoogleChannelConfigRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

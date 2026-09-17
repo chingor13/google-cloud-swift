@@ -15,32 +15,32 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol MetricsScopesStub: Sendable {
     func getMetricsScope(
-      request: GetMetricsScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMetricsScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringMetricsScopeV1.MetricsScope
 
     func listMetricsScopesByMonitoredProject(
-      request: ListMetricsScopesByMonitoredProjectRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMetricsScopesByMonitoredProjectRequest, options: GoogleGax.RequestOptions
     ) async throws
       -> GoogleCloudMonitoringMetricsScopeV1.ListMetricsScopesByMonitoredProjectResponse
 
     func createMonitoredProject(
-      request: CreateMonitoredProjectRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMonitoredProjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMonitoredProject(
-      request: DeleteMonitoredProjectRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMonitoredProjectRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

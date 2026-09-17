@@ -20,11 +20,11 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// A service that manages the DeploymentResourcePool resource.
   ///
@@ -33,11 +33,11 @@
       .DeploymentResourcePoolServiceProtocol, Sendable
   {
     let inner: any Clients.DeploymentResourcePoolServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `DeploymentResourcePoolServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.DeploymentResourcePoolServiceStub =
         try Clients.DeploymentResourcePoolServiceTransport(options)
       inner = Clients.DeploymentResourcePoolServiceRetry(inner, options: options)
@@ -53,7 +53,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_CreateDeploymentResourcePool")
     public func createDeploymentResourcePool(
-      request: CreateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createDeploymentResourcePool(request: request, options: options)
     }
@@ -62,23 +62,23 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_CreateDeploymentResourcePool")
     public func createDeploymentResourcePool(
-      withPolling: CreateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool> {
+      withPolling: CreateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<DeploymentResourcePool>.State in
+          -> GoogleGax._PollableOperationImpl<DeploymentResourcePool>.State in
         return try op._extractStatus(DeploymentResourcePool.self)
       }
       let rawOp = try await self.createDeploymentResourcePool(
         request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentResourcePool>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<DeploymentResourcePool>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -90,7 +90,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_GetDeploymentResourcePool")
     public func getDeploymentResourcePool(
-      request: GetDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DeploymentResourcePool {
       try await self.inner.getDeploymentResourcePool(request: request, options: options)
     }
@@ -99,7 +99,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_ListDeploymentResourcePools")
     public func listDeploymentResourcePools(
-      request: ListDeploymentResourcePoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentResourcePoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDeploymentResourcePoolsResponse {
       try await self.inner.listDeploymentResourcePools(request: request, options: options)
     }
@@ -108,7 +108,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_ListDeploymentResourcePools")
     public func listDeploymentResourcePools(
-      byItem: ListDeploymentResourcePoolsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeploymentResourcePoolsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DeploymentResourcePool, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
@@ -117,14 +117,14 @@
         request.pageToken = token
         return try await self.listDeploymentResourcePools(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Update a DeploymentResourcePool.
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_UpdateDeploymentResourcePool")
     public func updateDeploymentResourcePool(
-      request: UpdateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.updateDeploymentResourcePool(request: request, options: options)
     }
@@ -133,23 +133,23 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_UpdateDeploymentResourcePool")
     public func updateDeploymentResourcePool(
-      withPolling: UpdateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool> {
+      withPolling: UpdateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<DeploymentResourcePool>.State in
+          -> GoogleGax._PollableOperationImpl<DeploymentResourcePool>.State in
         return try op._extractStatus(DeploymentResourcePool.self)
       }
       let rawOp = try await self.updateDeploymentResourcePool(
         request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentResourcePool>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<DeploymentResourcePool>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -161,7 +161,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_DeleteDeploymentResourcePool")
     public func deleteDeploymentResourcePool(
-      request: DeleteDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteDeploymentResourcePool(request: request, options: options)
     }
@@ -170,22 +170,22 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_DeleteDeploymentResourcePool")
     public func deleteDeploymentResourcePool(
-      withPolling: DeleteDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteDeploymentResourcePool(
         request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -197,7 +197,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_QueryDeployedModels")
     public func queryDeployedModels(
-      request: QueryDeployedModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDeployedModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.QueryDeployedModelsResponse {
       try await self.inner.queryDeployedModels(request: request, options: options)
     }
@@ -206,7 +206,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_QueryDeployedModels")
     public func queryDeployedModels(
-      byItem: QueryDeployedModelsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: QueryDeployedModelsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DeployedModel, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.QueryDeployedModelsResponse in
@@ -214,14 +214,14 @@
         request.pageToken = token
         return try await self.queryDeployedModels(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Lists information about the supported locations for this service.
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -230,7 +230,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -238,14 +238,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -258,7 +258,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -268,7 +268,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -283,7 +283,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -294,7 +294,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -305,7 +305,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -313,7 +313,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -322,7 +322,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -333,7 +333,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -344,7 +344,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -355,7 +355,7 @@
     ///
     /// @Snippet(path: "DeploymentResourcePoolService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -374,14 +374,14 @@
 
       /// See `DeploymentResourcePoolServiceClient.createDeploymentResourcePool`.
       func createDeploymentResourcePool(withPolling: CreateDeploymentResourcePoolRequest)
-        async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool>
+        async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool>
 
       /// See `DeploymentResourcePoolServiceClient.createDeploymentResourcePool`.
       func createDeploymentResourcePool(
         parent: Swift.String,
         deploymentResourcePool: DeploymentResourcePool?,
         deploymentResourcePoolId: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool>
+      ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool>
 
       /// See `DeploymentResourcePoolServiceClient.getDeploymentResourcePool`.
       func getDeploymentResourcePool(request: GetDeploymentResourcePoolRequest) async throws
@@ -412,13 +412,13 @@
 
       /// See `DeploymentResourcePoolServiceClient.updateDeploymentResourcePool`.
       func updateDeploymentResourcePool(withPolling: UpdateDeploymentResourcePoolRequest)
-        async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool>
+        async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool>
 
       /// See `DeploymentResourcePoolServiceClient.updateDeploymentResourcePool`.
       func updateDeploymentResourcePool(
         deploymentResourcePool: DeploymentResourcePool?,
-        updateMask: GoogleCloudWKT.FieldMask?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool>
+        updateMask: GoogleWKT.FieldMask?,
+      ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool>
 
       /// See `DeploymentResourcePoolServiceClient.deleteDeploymentResourcePool`.
       func deleteDeploymentResourcePool(request: DeleteDeploymentResourcePoolRequest) async throws
@@ -426,12 +426,12 @@
 
       /// See `DeploymentResourcePoolServiceClient.deleteDeploymentResourcePool`.
       func deleteDeploymentResourcePool(withPolling: DeleteDeploymentResourcePoolRequest)
-        async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DeploymentResourcePoolServiceClient.deleteDeploymentResourcePool`.
       func deleteDeploymentResourcePool(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DeploymentResourcePoolServiceClient.queryDeployedModels`.
       func queryDeployedModels(request: QueryDeployedModelsRequest) async throws
@@ -507,112 +507,112 @@
 
       /// See `DeploymentResourcePoolServiceClient.createDeploymentResourcePool`.
       func createDeploymentResourcePool(
-        request: CreateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DeploymentResourcePoolServiceClient.createDeploymentResourcePool`.
       func createDeploymentResourcePool(
-        withPolling: CreateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool>
+        withPolling: CreateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool>
 
       /// See `DeploymentResourcePoolServiceClient.getDeploymentResourcePool`.
       func getDeploymentResourcePool(
-        request: GetDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DeploymentResourcePool
 
       /// See `DeploymentResourcePoolServiceClient.listDeploymentResourcePools`.
       func listDeploymentResourcePools(
-        request: ListDeploymentResourcePoolsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDeploymentResourcePoolsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListDeploymentResourcePoolsResponse
 
       /// See `DeploymentResourcePoolServiceClient.listDeploymentResourcePools`.
       func listDeploymentResourcePools(
-        byItem: ListDeploymentResourcePoolsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListDeploymentResourcePoolsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<DeploymentResourcePool, Swift.Error>
 
       /// See `DeploymentResourcePoolServiceClient.updateDeploymentResourcePool`.
       func updateDeploymentResourcePool(
-        request: UpdateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DeploymentResourcePoolServiceClient.updateDeploymentResourcePool`.
       func updateDeploymentResourcePool(
-        withPolling: UpdateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool>
+        withPolling: UpdateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool>
 
       /// See `DeploymentResourcePoolServiceClient.deleteDeploymentResourcePool`.
       func deleteDeploymentResourcePool(
-        request: DeleteDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DeploymentResourcePoolServiceClient.deleteDeploymentResourcePool`.
       func deleteDeploymentResourcePool(
-        withPolling: DeleteDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DeploymentResourcePoolServiceClient.queryDeployedModels`.
       func queryDeployedModels(
-        request: QueryDeployedModelsRequest, options: GoogleCloudGax.RequestOptions
+        request: QueryDeployedModelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.QueryDeployedModelsResponse
 
       /// See `DeploymentResourcePoolServiceClient.queryDeployedModels`.
       func queryDeployedModels(
-        byItem: QueryDeployedModelsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: QueryDeployedModelsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<DeployedModel, Swift.Error>
 
       /// See `DeploymentResourcePoolServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `DeploymentResourcePoolServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `DeploymentResourcePoolServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `DeploymentResourcePoolServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `DeploymentResourcePoolServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `DeploymentResourcePoolServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `DeploymentResourcePoolServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `DeploymentResourcePoolServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `DeploymentResourcePoolServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `DeploymentResourcePoolServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `DeploymentResourcePoolServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -626,25 +626,25 @@
     }
 
     public func createDeploymentResourcePool(
-      request: CreateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createDeploymentResourcePool(withPolling: CreateDeploymentResourcePoolRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool>
+      async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool>
     {
       try await self.createDeploymentResourcePool(withPolling: withPolling, options: .init())
     }
 
     public func createDeploymentResourcePool(
-      withPolling: CreateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool> {
+      withPolling: CreateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentResourcePool>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<DeploymentResourcePool>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -652,7 +652,7 @@
       parent: Swift.String,
       deploymentResourcePool: DeploymentResourcePool?,
       deploymentResourcePoolId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool> {
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool> {
       let request = CreateDeploymentResourcePoolRequest().with {
         $0.parent = parent
         $0.deploymentResourcePool = deploymentResourcePool
@@ -668,9 +668,9 @@
     }
 
     public func getDeploymentResourcePool(
-      request: GetDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DeploymentResourcePool {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getDeploymentResourcePool(
@@ -689,9 +689,9 @@
     }
 
     public func listDeploymentResourcePools(
-      request: ListDeploymentResourcePoolsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentResourcePoolsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDeploymentResourcePoolsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listDeploymentResourcePools(
@@ -701,14 +701,14 @@
     }
 
     public func listDeploymentResourcePools(
-      byItem: ListDeploymentResourcePoolsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDeploymentResourcePoolsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DeploymentResourcePool, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws
           -> GoogleCloudAIPlatformV1.ListDeploymentResourcePoolsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listDeploymentResourcePools(
@@ -727,32 +727,32 @@
     }
 
     public func updateDeploymentResourcePool(
-      request: UpdateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateDeploymentResourcePool(withPolling: UpdateDeploymentResourcePoolRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool>
+      async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool>
     {
       try await self.updateDeploymentResourcePool(withPolling: withPolling, options: .init())
     }
 
     public func updateDeploymentResourcePool(
-      withPolling: UpdateDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool> {
+      withPolling: UpdateDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<DeploymentResourcePool>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<DeploymentResourcePool>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func updateDeploymentResourcePool(
       deploymentResourcePool: DeploymentResourcePool?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DeploymentResourcePool> {
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<DeploymentResourcePool> {
       let request = UpdateDeploymentResourcePoolRequest().with {
         $0.deploymentResourcePool = deploymentResourcePool
         $0.updateMask = updateMask
@@ -767,30 +767,30 @@
     }
 
     public func deleteDeploymentResourcePool(
-      request: DeleteDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteDeploymentResourcePool(withPolling: DeleteDeploymentResourcePoolRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      async throws -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteDeploymentResourcePool(withPolling: withPolling, options: .init())
     }
 
     public func deleteDeploymentResourcePool(
-      withPolling: DeleteDeploymentResourcePoolRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteDeploymentResourcePoolRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteDeploymentResourcePool(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteDeploymentResourcePoolRequest().with {
         $0.name = name
       }
@@ -804,9 +804,9 @@
     }
 
     public func queryDeployedModels(
-      request: QueryDeployedModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDeployedModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.QueryDeployedModelsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func queryDeployedModels(
@@ -816,13 +816,13 @@
     }
 
     public func queryDeployedModels(
-      byItem: QueryDeployedModelsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: QueryDeployedModelsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DeployedModel, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.QueryDeployedModelsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func queryDeployedModels(
@@ -841,9 +841,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -853,13 +853,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -869,9 +869,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -881,9 +881,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -893,9 +893,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -905,9 +905,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -917,9 +917,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -929,13 +929,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -956,9 +956,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -975,9 +975,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -994,9 +994,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -1015,9 +1015,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

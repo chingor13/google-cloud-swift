@@ -13,7 +13,7 @@
 // limitations under the License.
 
 // [START storage_quota_project]
-import GoogleCloudGax
+import GoogleGax
 import GoogleCloudStorage
 
 public func quotaProject(bucketId: String, projectId: String) async throws {

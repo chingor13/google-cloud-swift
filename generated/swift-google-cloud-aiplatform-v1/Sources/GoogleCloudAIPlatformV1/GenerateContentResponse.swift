@@ -16,10 +16,10 @@
 
 #if PredictionService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Response message for [PredictionService.GenerateContent].
-  public struct GenerateContentResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GenerateContentResponse: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Generated candidates.
@@ -29,7 +29,7 @@
     public var modelVersion: Swift.String = Swift.String()
 
     /// Output only. Timestamp when the request is made to the server.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. response_id is used to identify each response. It is the
     /// encoding of the event_id.
@@ -43,7 +43,7 @@
     /// Usage metadata about the response(s).
     public var usageMetadata: GenerateContentResponse.UsageMetadata? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GenerateContentResponse`.
     public init() {}
@@ -92,8 +92,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .modelVersion) {
         self.modelVersion = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .responseId) {
         self.responseId = value
       }
@@ -103,7 +102,7 @@
         GenerateContentResponse.UsageMetadata.self, forKey: .usageMetadata)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -121,7 +120,7 @@
     }
 
     /// Content filter results for a prompt sent in the request.
-    public struct PromptFeedback: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PromptFeedback: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Blocked reason.
@@ -134,7 +133,7 @@
       /// Output only. A readable block reason message.
       public var blockReasonMessage: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PromptFeedback`.
       public init() {}
@@ -185,7 +184,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -337,16 +336,16 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.GenerateContentResponse.PromptFeedback"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Usage metadata about response(s).
-    public struct UsageMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct UsageMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Number of tokens in the request. When `cached_content` is set, this is
@@ -386,7 +385,7 @@
       public var trafficType: GenerateContentResponse.UsageMetadata.TrafficType =
         GenerateContentResponse.UsageMetadata.TrafficType()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `UsageMetadata`.
       public init() {}
@@ -485,7 +484,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -630,22 +629,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.GenerateContentResponse.UsageMetadata"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.GenerateContentResponse"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

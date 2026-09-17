@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudContentWarehouseV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: DocumentSchemaServiceClient, parent: String) async throws {
   let response = try await client.createDocumentSchema(

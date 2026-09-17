@@ -16,13 +16,13 @@
 
 #if BackendBuckets || RegionBackendBuckets
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a Cloud Storage Bucket resource.
   ///
   /// This Cloud Storage bucket resource is referenced by a URL map of a load
   /// balancer. For more information, readBackend Buckets.
-  public struct BackendBucket: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BackendBucket: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Cloud Storage bucket name.
@@ -92,7 +92,7 @@
     /// Output only. [Output Only] List of resources referencing that backend bucket.
     public var usedBy: [BackendBucketUsedBy] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BackendBucket`.
     public init() {}
@@ -184,7 +184,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -417,11 +417,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.BackendBucket"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

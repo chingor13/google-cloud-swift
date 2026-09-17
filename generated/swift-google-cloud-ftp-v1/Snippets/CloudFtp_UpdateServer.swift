@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudFTPV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudFtpClient, projectId: String, locationId: String, serverId: String)
   async throws
@@ -32,7 +32,7 @@ func sample(client: CloudFtpClient, projectId: String, locationId: String, serve
         $0.server = Server().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/servers/\(serverId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

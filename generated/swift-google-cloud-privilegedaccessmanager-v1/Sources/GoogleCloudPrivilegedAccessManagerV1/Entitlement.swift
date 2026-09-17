@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An entitlement defines the eligibility of a set of users to obtain
 /// predefined access for some time possibly after going through an approval
 /// workflow.
-public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Entitlement: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the entitlement.
@@ -32,10 +32,10 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. Create time stamp.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Update time stamp.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Who can create grants using this entitlement. This list should
   /// contain at most one entry.
@@ -50,7 +50,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Required. The maximum amount of time that access is granted for a request.
   /// A requester can ask for a duration less than this, but never more.
-  public var maxRequestDuration: GoogleCloudWKT.Duration? = nil
+  public var maxRequestDuration: GoogleWKT.Duration? = nil
 
   /// Output only. Current state of this entitlement.
   public var state: Entitlement.State = Entitlement.State()
@@ -70,7 +70,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// updating an entitlement, then the server rejects the request.
   public var etag: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Entitlement`.
   public init() {}
@@ -128,10 +128,8 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([AccessControlEntry].self, forKey: .eligibleUsers)
     {
       self.eligibleUsers = value
@@ -141,7 +139,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.privilegedAccess = try container.decodeIfPresent(
       PrivilegedAccess.self, forKey: .privilegedAccess)
     self.maxRequestDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .maxRequestDuration)
+      GoogleWKT.Duration.self, forKey: .maxRequestDuration)
     if let value = try container.decodeIfPresent(Entitlement.State.self, forKey: .state) {
       self.state = value
     }
@@ -154,7 +152,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -180,14 +178,14 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Defines how a requester must provide a justification when requesting
   /// access.
-  public struct RequesterJustificationConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RequesterJustificationConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This is a required field and the user must explicitly opt out if a
     /// justification from the requester isn't mandatory.
     public var justificationType: OneOf_JustificationType? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RequesterJustificationConfig`.
     public init() {}
@@ -246,7 +244,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.justificationType = justificationType
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -268,10 +266,10 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
     /// The justification is not mandatory but can be provided in any of the
     /// supported formats.
-    public struct NotMandatory: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct NotMandatory: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `NotMandatory`.
       public init() {}
@@ -302,7 +300,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -317,19 +315,19 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.Entitlement.RequesterJustificationConfig.NotMandatory"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The requester has to provide a justification in the form of a string.
-    public struct Unstructured: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Unstructured: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Unstructured`.
       public init() {}
@@ -360,7 +358,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         let container = try decoder.container(keyedBy: CodingKeys.self)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -375,11 +373,11 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.Entitlement.RequesterJustificationConfig.Unstructured"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -399,16 +397,16 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.Entitlement.RequesterJustificationConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// `AdditionalNotificationTargets` includes email addresses to be notified.
-  public struct AdditionalNotificationTargets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AdditionalNotificationTargets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Additional email addresses to be notified when a principal
@@ -419,7 +417,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// entitlement.
     public var requesterEmailRecipients: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AdditionalNotificationTargets`.
     public init() {}
@@ -466,7 +464,7 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -483,11 +481,11 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.Entitlement.AdditionalNotificationTargets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -620,10 +618,10 @@ public struct Entitlement: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.privilegedaccessmanager.v1.Entitlement"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

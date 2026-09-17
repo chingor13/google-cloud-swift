@@ -19,28 +19,28 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class LivestreamServiceRetry: LivestreamServiceStub {
     let inner: any LivestreamServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any LivestreamServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any LivestreamServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -52,14 +52,14 @@ extension Clients {
     }
 
     public func createChannel(
-      request: CreateChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createChannel(request: r, options: o)
@@ -67,14 +67,14 @@ extension Clients {
     }
 
     public func listChannels(
-      request: ListChannelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.ListChannelsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListChannelsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListChannelsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.ListChannelsResponse
           in
           return try await self.inner.listChannels(request: r, options: o)
@@ -82,14 +82,14 @@ extension Clients {
     }
 
     public func getChannel(
-      request: GetChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.Channel {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.Channel
           in
           return try await self.inner.getChannel(request: r, options: o)
@@ -97,14 +97,14 @@ extension Clients {
     }
 
     public func deleteChannel(
-      request: DeleteChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteChannel(request: r, options: o)
@@ -112,14 +112,14 @@ extension Clients {
     }
 
     public func updateChannel(
-      request: UpdateChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateChannel(request: r, options: o)
@@ -127,14 +127,14 @@ extension Clients {
     }
 
     public func startChannel(
-      request: StartChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: StartChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: StartChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StartChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.startChannel(request: r, options: o)
@@ -142,14 +142,14 @@ extension Clients {
     }
 
     public func stopChannel(
-      request: StopChannelRequest, options: GoogleCloudGax.RequestOptions
+      request: StopChannelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: StopChannelRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StopChannelRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.stopChannel(request: r, options: o)
@@ -157,14 +157,14 @@ extension Clients {
     }
 
     public func startDistribution(
-      request: StartDistributionRequest, options: GoogleCloudGax.RequestOptions
+      request: StartDistributionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: StartDistributionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StartDistributionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.startDistribution(request: r, options: o)
@@ -172,14 +172,14 @@ extension Clients {
     }
 
     public func stopDistribution(
-      request: StopDistributionRequest, options: GoogleCloudGax.RequestOptions
+      request: StopDistributionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: StopDistributionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StopDistributionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.stopDistribution(request: r, options: o)
@@ -187,14 +187,14 @@ extension Clients {
     }
 
     public func createInput(
-      request: CreateInputRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInputRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateInputRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateInputRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createInput(request: r, options: o)
@@ -202,14 +202,14 @@ extension Clients {
     }
 
     public func listInputs(
-      request: ListInputsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInputsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.ListInputsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListInputsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListInputsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.ListInputsResponse
           in
           return try await self.inner.listInputs(request: r, options: o)
@@ -217,14 +217,14 @@ extension Clients {
     }
 
     public func getInput(
-      request: GetInputRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInputRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.Input {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetInputRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetInputRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.Input
           in
           return try await self.inner.getInput(request: r, options: o)
@@ -232,14 +232,14 @@ extension Clients {
     }
 
     public func deleteInput(
-      request: DeleteInputRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInputRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteInputRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteInputRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteInput(request: r, options: o)
@@ -247,14 +247,14 @@ extension Clients {
     }
 
     public func updateInput(
-      request: UpdateInputRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInputRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateInputRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateInputRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateInput(request: r, options: o)
@@ -262,14 +262,14 @@ extension Clients {
     }
 
     public func previewInput(
-      request: PreviewInputRequest, options: GoogleCloudGax.RequestOptions
+      request: PreviewInputRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.PreviewInputResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: PreviewInputRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: PreviewInputRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.PreviewInputResponse
           in
           return try await self.inner.previewInput(request: r, options: o)
@@ -277,14 +277,14 @@ extension Clients {
     }
 
     public func createEvent(
-      request: CreateEventRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.Event {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateEventRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateEventRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.Event
           in
           return try await self.inner.createEvent(request: r, options: o)
@@ -292,14 +292,14 @@ extension Clients {
     }
 
     public func listEvents(
-      request: ListEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.ListEventsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListEventsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListEventsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.ListEventsResponse
           in
           return try await self.inner.listEvents(request: r, options: o)
@@ -307,14 +307,14 @@ extension Clients {
     }
 
     public func getEvent(
-      request: GetEventRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.Event {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetEventRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetEventRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.Event
           in
           return try await self.inner.getEvent(request: r, options: o)
@@ -322,26 +322,26 @@ extension Clients {
     }
 
     public func deleteEvent(
-      request: DeleteEventRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEventRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: { (r: DeleteEventRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteEventRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteEvent(request: r, options: o)
         })
     }
 
     public func listClips(
-      request: ListClipsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListClipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.ListClipsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListClipsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListClipsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.ListClipsResponse
           in
           return try await self.inner.listClips(request: r, options: o)
@@ -349,14 +349,14 @@ extension Clients {
     }
 
     public func getClip(
-      request: GetClipRequest, options: GoogleCloudGax.RequestOptions
+      request: GetClipRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.Clip {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetClipRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetClipRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.Clip
           in
           return try await self.inner.getClip(request: r, options: o)
@@ -364,14 +364,14 @@ extension Clients {
     }
 
     public func createClip(
-      request: CreateClipRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateClipRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateClipRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateClipRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createClip(request: r, options: o)
@@ -379,14 +379,14 @@ extension Clients {
     }
 
     public func deleteClip(
-      request: DeleteClipRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteClipRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteClipRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteClipRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteClip(request: r, options: o)
@@ -394,14 +394,14 @@ extension Clients {
     }
 
     public func createDvrSession(
-      request: CreateDvrSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDvrSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateDvrSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateDvrSessionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createDvrSession(request: r, options: o)
@@ -409,14 +409,14 @@ extension Clients {
     }
 
     public func listDvrSessions(
-      request: ListDvrSessionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDvrSessionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.ListDvrSessionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListDvrSessionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDvrSessionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.ListDvrSessionsResponse
           in
           return try await self.inner.listDvrSessions(request: r, options: o)
@@ -424,14 +424,14 @@ extension Clients {
     }
 
     public func getDvrSession(
-      request: GetDvrSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDvrSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.DvrSession {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetDvrSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDvrSessionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.DvrSession
           in
           return try await self.inner.getDvrSession(request: r, options: o)
@@ -439,14 +439,14 @@ extension Clients {
     }
 
     public func deleteDvrSession(
-      request: DeleteDvrSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDvrSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteDvrSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteDvrSessionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteDvrSession(request: r, options: o)
@@ -454,14 +454,14 @@ extension Clients {
     }
 
     public func updateDvrSession(
-      request: UpdateDvrSessionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDvrSessionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateDvrSessionRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateDvrSessionRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateDvrSession(request: r, options: o)
@@ -469,14 +469,14 @@ extension Clients {
     }
 
     public func createAsset(
-      request: CreateAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateAssetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAssetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createAsset(request: r, options: o)
@@ -484,14 +484,14 @@ extension Clients {
     }
 
     public func deleteAsset(
-      request: DeleteAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteAssetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteAssetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteAsset(request: r, options: o)
@@ -499,14 +499,14 @@ extension Clients {
     }
 
     public func getAsset(
-      request: GetAssetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAssetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.Asset {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetAssetRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAssetRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.Asset
           in
           return try await self.inner.getAsset(request: r, options: o)
@@ -514,14 +514,14 @@ extension Clients {
     }
 
     public func listAssets(
-      request: ListAssetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAssetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.ListAssetsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListAssetsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAssetsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.ListAssetsResponse
           in
           return try await self.inner.listAssets(request: r, options: o)
@@ -529,14 +529,14 @@ extension Clients {
     }
 
     public func getPool(
-      request: GetPoolRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoLiveStreamV1.Pool {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetPoolRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetPoolRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoLiveStreamV1.Pool
           in
           return try await self.inner.getPool(request: r, options: o)
@@ -544,14 +544,14 @@ extension Clients {
     }
 
     public func updatePool(
-      request: UpdatePoolRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePoolRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdatePoolRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdatePoolRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updatePool(request: r, options: o)
@@ -559,29 +559,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
@@ -589,29 +589,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -619,29 +619,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

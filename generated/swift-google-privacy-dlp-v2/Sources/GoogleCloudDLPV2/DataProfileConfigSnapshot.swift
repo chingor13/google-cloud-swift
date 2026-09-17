@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Snapshot of the configurations used to generate the profile.
-public struct DataProfileConfigSnapshot: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataProfileConfigSnapshot: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A copy of the inspection config used to generate this profile. This
@@ -40,9 +40,9 @@ public struct DataProfileConfigSnapshot: Codable, Equatable, GoogleCloudWKT._Any
   public var inspectTemplateName: Swift.String = Swift.String()
 
   /// Timestamp when the template was modified
-  public var inspectTemplateModifiedTime: GoogleCloudWKT.Timestamp? = nil
+  public var inspectTemplateModifiedTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataProfileConfigSnapshot`.
   public init() {}
@@ -92,10 +92,10 @@ public struct DataProfileConfigSnapshot: Codable, Equatable, GoogleCloudWKT._Any
       self.inspectTemplateName = value
     }
     self.inspectTemplateModifiedTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .inspectTemplateModifiedTime)
+      GoogleWKT.Timestamp.self, forKey: .inspectTemplateModifiedTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -115,10 +115,10 @@ public struct DataProfileConfigSnapshot: Codable, Equatable, GoogleCloudWKT._Any
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DataProfileConfigSnapshot"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

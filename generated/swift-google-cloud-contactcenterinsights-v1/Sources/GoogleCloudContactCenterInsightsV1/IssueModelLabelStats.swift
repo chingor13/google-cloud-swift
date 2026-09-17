@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Aggregated statistics about an issue model.
-public struct IssueModelLabelStats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IssueModelLabelStats: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Number of conversations the issue model has analyzed at this point in time.
@@ -31,7 +31,7 @@ public struct IssueModelLabelStats: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Statistics on each issue. Key is the issue's resource name.
   public var issueStats: [Swift.String: IssueModelLabelStats.IssueStats] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IssueModelLabelStats`.
   public init() {}
@@ -86,7 +86,7 @@ public struct IssueModelLabelStats: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -102,7 +102,7 @@ public struct IssueModelLabelStats: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Aggregated statistics about an issue.
-  public struct IssueStats: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IssueStats: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Issue resource.
@@ -116,7 +116,7 @@ public struct IssueModelLabelStats: Codable, Equatable, GoogleCloudWKT._AnyPacka
     /// Display name of the issue.
     public var displayName: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IssueStats`.
     public init() {}
@@ -166,7 +166,7 @@ public struct IssueModelLabelStats: Codable, Equatable, GoogleCloudWKT._AnyPacka
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -184,21 +184,21 @@ public struct IssueModelLabelStats: Codable, Equatable, GoogleCloudWKT._AnyPacka
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.IssueModelLabelStats.IssueStats"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.IssueModelLabelStats"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// QueryAssets request.
-public struct QueryAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QueryAssetsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The relative name of the root asset. This can only be an
@@ -56,7 +56,7 @@ public struct QueryAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// is not complete.
   ///
   /// The field will be ignored when [output_config] is specified.
-  public var timeout: GoogleCloudWKT.Duration? = nil
+  public var timeout: GoogleWKT.Duration? = nil
 
   /// Optional. Destination where the query results will be saved.
   ///
@@ -80,7 +80,7 @@ public struct QueryAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// it will simply return a valid response with no rows.
   public var time: OneOf_Time? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QueryAssetsRequest`.
   public init() {}
@@ -138,7 +138,7 @@ public struct QueryAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .pageToken) {
       self.pageToken = value
     }
-    self.timeout = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .timeout)
+    self.timeout = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .timeout)
     self.outputConfig = try container.decodeIfPresent(
       QueryAssetsOutputConfig.self, forKey: .outputConfig)
 
@@ -174,15 +174,13 @@ public struct QueryAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     {
       try timeCheckAndSet(.readTimeWindow(readTimeWindow))
     }
-    if let readTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp?.self, forKey: .readTime)
-    {
+    if let readTime = try container.decodeIfPresent(GoogleWKT.Timestamp?.self, forKey: .readTime) {
       try timeCheckAndSet(.readTime(readTime))
     }
     self.time = time
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -239,16 +237,16 @@ public struct QueryAssetsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     indirect case readTimeWindow(TimeWindow?)
     /// Optional. Queries cloud assets as they appeared at the specified point in
     /// time.
-    indirect case readTime(GoogleCloudWKT.Timestamp?)
+    indirect case readTime(GoogleWKT.Timestamp?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.QueryAssetsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

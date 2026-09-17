@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A mosaic layout divides the available space into a grid of blocks, and
 /// overlays the grid with tiles. Unlike `GridLayout`, tiles may span multiple
 /// grid blocks and can be placed at arbitrary locations in the grid.
-public struct MosaicLayout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MosaicLayout: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The number of columns in the mosaic grid. The number of columns must be
@@ -30,7 +30,7 @@ public struct MosaicLayout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The tiles to display.
   public var tiles: [MosaicLayout.Tile] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MosaicLayout`.
   public init() {}
@@ -73,7 +73,7 @@ public struct MosaicLayout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -88,7 +88,7 @@ public struct MosaicLayout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A single tile in the mosaic. The placement and size of the tile are
   /// configurable.
-  public struct Tile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Tile: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The zero-indexed position of the tile in grid blocks relative to the
@@ -111,7 +111,7 @@ public struct MosaicLayout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The informational widget contained in the tile. For example an `XyChart`.
     public var widget: Widget? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Tile`.
     public init() {}
@@ -167,7 +167,7 @@ public struct MosaicLayout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.widget = try container.decodeIfPresent(Widget.self, forKey: .widget)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -186,21 +186,21 @@ public struct MosaicLayout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.dashboard.v1.MosaicLayout.Tile"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.dashboard.v1.MosaicLayout"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

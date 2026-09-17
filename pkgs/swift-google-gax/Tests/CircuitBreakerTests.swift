@@ -15,7 +15,7 @@
 import Foundation
 import Testing
 
-import GoogleCloudGax
+import GoogleGax
 
 @Suite struct CircuitBreakerTests {
   @Test func construction() throws {

@@ -17,194 +17,194 @@
 #if JobService
   import Foundation
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol JobServiceStub: Sendable {
       func createCustomJob(
-        request: CreateCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.CustomJob
 
       func getCustomJob(
-        request: GetCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.CustomJob
 
       func listCustomJobs(
-        request: ListCustomJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListCustomJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListCustomJobsResponse
 
       func deleteCustomJob(
-        request: DeleteCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelCustomJob(
-        request: CancelCustomJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelCustomJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func createDataLabelingJob(
-        request: CreateDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob
 
       func getDataLabelingJob(
-        request: GetDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DataLabelingJob
 
       func listDataLabelingJobs(
-        request: ListDataLabelingJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDataLabelingJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListDataLabelingJobsResponse
 
       func deleteDataLabelingJob(
-        request: DeleteDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelDataLabelingJob(
-        request: CancelDataLabelingJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelDataLabelingJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func createHyperparameterTuningJob(
-        request: CreateHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob
 
       func getHyperparameterTuningJob(
-        request: GetHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.HyperparameterTuningJob
 
       func listHyperparameterTuningJobs(
-        request: ListHyperparameterTuningJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListHyperparameterTuningJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListHyperparameterTuningJobsResponse
 
       func deleteHyperparameterTuningJob(
-        request: DeleteHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelHyperparameterTuningJob(
-        request: CancelHyperparameterTuningJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelHyperparameterTuningJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func createNasJob(
-        request: CreateNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasJob
 
       func getNasJob(
-        request: GetNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasJob
 
       func listNasJobs(
-        request: ListNasJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNasJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNasJobsResponse
 
       func deleteNasJob(
-        request: DeleteNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelNasJob(
-        request: CancelNasJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelNasJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func getNasTrialDetail(
-        request: GetNasTrialDetailRequest, options: GoogleCloudGax.RequestOptions
+        request: GetNasTrialDetailRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.NasTrialDetail
 
       func listNasTrialDetails(
-        request: ListNasTrialDetailsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListNasTrialDetailsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListNasTrialDetailsResponse
 
       func createBatchPredictionJob(
-        request: CreateBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob
 
       func getBatchPredictionJob(
-        request: GetBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.BatchPredictionJob
 
       func listBatchPredictionJobs(
-        request: ListBatchPredictionJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListBatchPredictionJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListBatchPredictionJobsResponse
 
       func deleteBatchPredictionJob(
-        request: DeleteBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelBatchPredictionJob(
-        request: CancelBatchPredictionJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CancelBatchPredictionJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func createModelDeploymentMonitoringJob(
-        request: CreateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob
 
       func searchModelDeploymentMonitoringStatsAnomalies(
         request: SearchModelDeploymentMonitoringStatsAnomaliesRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws
         -> GoogleCloudAIPlatformV1.SearchModelDeploymentMonitoringStatsAnomaliesResponse
 
       func getModelDeploymentMonitoringJob(
-        request: GetModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: GetModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ModelDeploymentMonitoringJob
 
       func listModelDeploymentMonitoringJobs(
-        request: ListModelDeploymentMonitoringJobsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListModelDeploymentMonitoringJobsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListModelDeploymentMonitoringJobsResponse
 
       func updateModelDeploymentMonitoringJob(
-        request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteModelDeploymentMonitoringJob(
-        request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func pauseModelDeploymentMonitoringJob(
-        request: PauseModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: PauseModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func resumeModelDeploymentMonitoringJob(
-        request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleCloudGax.RequestOptions
+        request: ResumeModelDeploymentMonitoringJobRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }

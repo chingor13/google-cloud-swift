@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents one mapping from a source SQL to a target SQL.
-public struct SourceTargetMapping: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SourceTargetMapping: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The source SQL or the path to it.
@@ -27,7 +27,7 @@ public struct SourceTargetMapping: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// The target SQL or the path for it.
   public var targetSpec: TargetSpec? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SourceTargetMapping`.
   public init() {}
@@ -66,7 +66,7 @@ public struct SourceTargetMapping: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.targetSpec = try container.decodeIfPresent(TargetSpec.self, forKey: .targetSpec)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -82,10 +82,10 @@ public struct SourceTargetMapping: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.bigquery.migration.v2.SourceTargetMapping"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

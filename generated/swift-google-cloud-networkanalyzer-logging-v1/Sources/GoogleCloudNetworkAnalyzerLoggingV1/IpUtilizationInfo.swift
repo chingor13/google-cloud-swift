@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct IpUtilizationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IpUtilizationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   public var subnetIpUtilization: [IpUtilizationInfo.SubnetIpUtilization] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IpUtilizationInfo`.
   public init() {}
@@ -62,7 +62,7 @@ public struct IpUtilizationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -74,7 +74,7 @@ public struct IpUtilizationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
   }
 
-  public struct SubnetIpUtilization: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SubnetIpUtilization: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// URI of subnet.
@@ -90,7 +90,7 @@ public struct IpUtilizationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// The ratio of allocated IP addresses from the total usable addresses.
     public var allocationRatio: Swift.Double = Swift.Double()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SubnetIpUtilization`.
     public init() {}
@@ -144,7 +144,7 @@ public struct IpUtilizationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -163,21 +163,21 @@ public struct IpUtilizationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.networkanalyzer.logging.v1.IpUtilizationInfo.SubnetIpUtilization"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkanalyzer.logging.v1.IpUtilizationInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

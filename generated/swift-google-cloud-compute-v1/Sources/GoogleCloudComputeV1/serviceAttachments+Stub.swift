@@ -16,53 +16,50 @@
 
 #if ServiceAttachments
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ServiceAttachmentsStub: Sendable {
       func aggregatedList(
-        request: ServiceAttachmentsClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachmentAggregatedList
 
       func delete(
-        request: ServiceAttachmentsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: ServiceAttachmentsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachment
 
       func getIamPolicy(
-        request: ServiceAttachmentsClient.GetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func insert(
-        request: ServiceAttachmentsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: ServiceAttachmentsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ServiceAttachmentList
 
       func patch(
-        request: ServiceAttachmentsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setIamPolicy(
-        request: ServiceAttachmentsClient.SetIamPolicyRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: ServiceAttachmentsClient.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Policy
 
       func testIamPermissions(
         request: ServiceAttachmentsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

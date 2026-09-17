@@ -17,13 +17,13 @@
 #if PredictionService
   import Foundation
   import GoogleApi
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [PredictionService.RawPredict][google.cloud.aiplatform.v1.PredictionService.RawPredict].
   ///
   /// [google.cloud.aiplatform.v1.PredictionService.RawPredict]: <doc:PredictionServiceClient/rawPredict(request:options:)>
-  public struct RawPredictRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RawPredictRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the Endpoint requested to serve the prediction.
@@ -54,7 +54,7 @@
     /// [google.cloud.aiplatform.v1.PredictionService.RawPredict]: <doc:PredictionServiceClient/rawPredict(request:options:)>
     public var httpBody: GoogleApi.HttpBody? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RawPredictRequest`.
     public init() {}
@@ -95,7 +95,7 @@
       self.httpBody = try container.decodeIfPresent(GoogleApi.HttpBody.self, forKey: .httpBody)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -111,11 +111,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.RawPredictRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

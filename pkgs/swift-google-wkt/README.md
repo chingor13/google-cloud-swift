@@ -4,7 +4,7 @@ Idiomatic Swift implementations of Protocol Buffers Well-Known Types.
 
 ## Overview
 
-`GoogleCloudWKT` provides Swift implementations of Well-Known Types (WKT) for
+`GoogleWKT` provides Swift implementations of Well-Known Types (WKT) for
 [Protocol Buffers](https://protobuf.dev/reference/protobuf/google.protobuf/)
 and [Discovery](https://docs.cloud.google.com/docs/discovery/type-format)
 used across Google Cloud APIs.
@@ -51,10 +51,10 @@ Add `swift-google-wkt` as a package dependency:
 swift package add-dependency https://github.com/googleapis/swift-google-wkt.git --from 0.1.0
 ```
 
-Then add `GoogleCloudWKT` to your target's dependencies:
+Then add `GoogleWKT` to your target's dependencies:
 
 ```bash
-swift package add-target-dependency GoogleCloudWKT <target-name> --package swift-google-wkt
+swift package add-target-dependency GoogleWKT <target-name> --package swift-google-wkt
 ```
 
 ## Usage
@@ -65,7 +65,7 @@ swift package add-target-dependency GoogleCloudWKT <target-name> --package swift
 
 ```swift
 import Foundation
-import GoogleCloudWKT
+import GoogleWKT
 
 // Create a Timestamp with seconds and nanoseconds
 let timestamp = try Timestamp(seconds: 1_700_000_000, nanos: 500_000_000)
@@ -84,7 +84,7 @@ let decoded = try JSONDecoder().decode(Timestamp.self, from: data)
 
 ```swift
 import Foundation
-import GoogleCloudWKT
+import GoogleWKT
 
 // Create a Duration of 45.25 seconds
 let duration = try Duration(seconds: 45, nanos: 250_000_000)
@@ -100,7 +100,7 @@ let decoded = try JSONDecoder().decode(Duration.self, from: data)
 
 ```swift
 import Foundation
-import GoogleCloudWKT
+import GoogleWKT
 
 // Specify the paths to update
 let mask = FieldMask(paths: ["display_name", "billing_account.id"])

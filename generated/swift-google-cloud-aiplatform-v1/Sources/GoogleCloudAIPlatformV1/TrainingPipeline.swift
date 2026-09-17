@@ -16,8 +16,8 @@
 
 #if PipelineService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// The TrainingPipeline orchestrates tasks associated with training a Model. It
   /// always executes the training task, and optionally may also
@@ -26,7 +26,7 @@
   /// Vertex AI, and evaluate the Model.
   ///
   /// [google.cloud.aiplatform.v1.ModelService.UploadModel]: <doc:ModelServiceClient/uploadModel(request:options:)>
-  public struct TrainingPipeline: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TrainingPipeline: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Resource name of the TrainingPipeline.
@@ -63,7 +63,7 @@
     /// `inputs`.
     ///
     /// [google.cloud.aiplatform.v1.TrainingPipeline.training_task_definition]: <doc:TrainingPipeline/trainingTaskDefinition>
-    public var trainingTaskInputs: GoogleCloudWKT.Value? = nil
+    public var trainingTaskInputs: GoogleWKT.Value? = nil
 
     /// Output only. The metadata information as specified in the
     /// [training_task_definition][google.cloud.aiplatform.v1.TrainingPipeline.training_task_definition]'s
@@ -75,7 +75,7 @@
     /// contains `metadata` object.
     ///
     /// [google.cloud.aiplatform.v1.TrainingPipeline.training_task_definition]: <doc:TrainingPipeline/trainingTaskDefinition>
-    public var trainingTaskMetadata: GoogleCloudWKT.Value? = nil
+    public var trainingTaskMetadata: GoogleWKT.Value? = nil
 
     /// Describes the Model that may be uploaded (via
     /// [ModelService.UploadModel][google.cloud.aiplatform.v1.ModelService.UploadModel])
@@ -119,19 +119,19 @@
     public var error: GoogleRpc.Status? = nil
 
     /// Output only. Time when the TrainingPipeline was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Time when the TrainingPipeline for the first time entered the
     /// `PIPELINE_STATE_RUNNING` state.
-    public var startTime: GoogleCloudWKT.Timestamp? = nil
+    public var startTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Time when the TrainingPipeline entered any of the following
     /// states: `PIPELINE_STATE_SUCCEEDED`, `PIPELINE_STATE_FAILED`,
     /// `PIPELINE_STATE_CANCELLED`.
-    public var endTime: GoogleCloudWKT.Timestamp? = nil
+    public var endTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Time when the TrainingPipeline was most recently updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// The labels with user-defined metadata to organize TrainingPipelines.
     ///
@@ -152,7 +152,7 @@
     /// [google.cloud.aiplatform.v1.TrainingPipeline.encryption_spec]: <doc:TrainingPipeline/encryptionSpec>
     public var encryptionSpec: EncryptionSpec? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TrainingPipeline`.
     public init() {}
@@ -231,9 +231,9 @@
         self.trainingTaskDefinition = value
       }
       self.trainingTaskInputs = try container.decodeIfPresent(
-        GoogleCloudWKT.Value.self, forKey: .trainingTaskInputs)
+        GoogleWKT.Value.self, forKey: .trainingTaskInputs)
       self.trainingTaskMetadata = try container.decodeIfPresent(
-        GoogleCloudWKT.Value.self, forKey: .trainingTaskMetadata)
+        GoogleWKT.Value.self, forKey: .trainingTaskMetadata)
       self.modelToUpload = try container.decodeIfPresent(Model.self, forKey: .modelToUpload)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .modelId) {
         self.modelId = value
@@ -245,13 +245,10 @@
         self.state = value
       }
       self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.startTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-      self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+      self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(
         [Swift.String: Swift.String].self, forKey: .labels)
       {
@@ -261,7 +258,7 @@
         EncryptionSpec.self, forKey: .encryptionSpec)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -292,11 +289,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.TrainingPipeline"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

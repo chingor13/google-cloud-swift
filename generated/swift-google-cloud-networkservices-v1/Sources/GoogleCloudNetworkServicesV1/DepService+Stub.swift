@@ -16,128 +16,128 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DepServiceStub: Sendable {
     func listLbTrafficExtensions(
-      request: ListLbTrafficExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLbTrafficExtensionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.ListLbTrafficExtensionsResponse
 
     func getLbTrafficExtension(
-      request: GetLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.LbTrafficExtension
 
     func createLbTrafficExtension(
-      request: CreateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateLbTrafficExtension(
-      request: UpdateLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteLbTrafficExtension(
-      request: DeleteLbTrafficExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLbTrafficExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLbRouteExtensions(
-      request: ListLbRouteExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLbRouteExtensionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.ListLbRouteExtensionsResponse
 
     func getLbRouteExtension(
-      request: GetLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLbRouteExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.LbRouteExtension
 
     func createLbRouteExtension(
-      request: CreateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateLbRouteExtension(
-      request: UpdateLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLbRouteExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteLbRouteExtension(
-      request: DeleteLbRouteExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLbRouteExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLbEdgeExtensions(
-      request: ListLbEdgeExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLbEdgeExtensionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.ListLbEdgeExtensionsResponse
 
     func getLbEdgeExtension(
-      request: GetLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.LbEdgeExtension
 
     func createLbEdgeExtension(
-      request: CreateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateLbEdgeExtension(
-      request: UpdateLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteLbEdgeExtension(
-      request: DeleteLbEdgeExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLbEdgeExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listAuthzExtensions(
-      request: ListAuthzExtensionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAuthzExtensionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.ListAuthzExtensionsResponse
 
     func getAuthzExtension(
-      request: GetAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAuthzExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkServicesV1.AuthzExtension
 
     func createAuthzExtension(
-      request: CreateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAuthzExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateAuthzExtension(
-      request: UpdateAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAuthzExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteAuthzExtension(
-      request: DeleteAuthzExtensionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAuthzExtensionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

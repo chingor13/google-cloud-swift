@@ -15,21 +15,21 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol PublisherStub: Sendable {
     func publishChannelConnectionEvents(
-      request: PublishChannelConnectionEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: PublishChannelConnectionEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcPublishingV1.PublishChannelConnectionEventsResponse
 
     func publishEvents(
-      request: PublishEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: PublishEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcPublishingV1.PublishEventsResponse
 
     func publish(
-      request: PublishRequest, options: GoogleCloudGax.RequestOptions
+      request: PublishRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudEventarcPublishingV1.PublishResponse
   }
 }

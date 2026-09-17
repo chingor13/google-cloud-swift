@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `zones` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.ZonesStub
 
     /// Creates a new `ZonesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.ZonesStub = try Clients.ZonesTransport(options)
       inner = Clients.ZonesRetry(inner, options: options)
       if let logger = options.logger {
@@ -42,7 +42,7 @@
     ///
     /// @Snippet(path: "zones_get")
     public func `get`(
-      request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZonesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Zone {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "zones_list")
     public func list(
-      request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ZoneList {
       try await self.inner.list(request: request, options: options)
     }
@@ -60,14 +60,14 @@
     ///
     /// @Snippet(path: "zones_list")
     public func list(
-      byItem: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Zone, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.ZoneList in
         var request = byItem
         request.pageToken = token
         return try await self.list(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
   }
 
@@ -102,17 +102,17 @@
 
       /// See `ZonesClient.`get``.
       func `get`(
-        request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ZonesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Zone
 
       /// See `ZonesClient.list`.
       func list(
-        request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: ZonesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ZoneList
 
       /// See `ZonesClient.list`.
       func list(
-        byItem: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ZonesClient.ListRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Zone, Swift.Error>
     }
   }
@@ -124,9 +124,9 @@
     }
 
     public func `get`(
-      request: ZonesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ZonesClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.Zone {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(
@@ -146,9 +146,9 @@
     }
 
     public func list(
-      request: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.ZoneList {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(
@@ -158,12 +158,12 @@
     }
 
     public func list(
-      byItem: ZonesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ZonesClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Zone, Swift.Error> {
       let listRpc = { (token: Swift.String) async throws -> GoogleCloudComputeV1.ZoneList in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func list(

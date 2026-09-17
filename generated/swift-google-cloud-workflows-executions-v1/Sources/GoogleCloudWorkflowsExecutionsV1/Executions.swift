@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Executions is used to start and manage running instances of
 /// [Workflows][google.cloud.workflows.v1.Workflow] called executions.
@@ -29,7 +29,7 @@ public final class ExecutionsClient: Clients.ExecutionsProtocol, Sendable {
   let inner: any Clients.ExecutionsStub
 
   /// Creates a new `ExecutionsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ExecutionsStub = try Clients.ExecutionsTransport(options)
     inner = Clients.ExecutionsRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class ExecutionsClient: Clients.ExecutionsProtocol, Sendable {
   ///
   /// @Snippet(path: "Executions_ListExecutions")
   public func listExecutions(
-    request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListExecutionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse {
     try await self.inner.listExecutions(request: request, options: options)
   }
@@ -57,7 +57,7 @@ public final class ExecutionsClient: Clients.ExecutionsProtocol, Sendable {
   ///
   /// @Snippet(path: "Executions_ListExecutions")
   public func listExecutions(
-    byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Execution, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse
@@ -66,14 +66,14 @@ public final class ExecutionsClient: Clients.ExecutionsProtocol, Sendable {
       request.pageToken = token
       return try await self.listExecutions(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a new execution using the latest revision of the given workflow.
   ///
   /// @Snippet(path: "Executions_CreateExecution")
   public func createExecution(
-    request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
     try await self.inner.createExecution(request: request, options: options)
   }
@@ -82,7 +82,7 @@ public final class ExecutionsClient: Clients.ExecutionsProtocol, Sendable {
   ///
   /// @Snippet(path: "Executions_GetExecution")
   public func getExecution(
-    request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
     try await self.inner.getExecution(request: request, options: options)
   }
@@ -91,7 +91,7 @@ public final class ExecutionsClient: Clients.ExecutionsProtocol, Sendable {
   ///
   /// @Snippet(path: "Executions_CancelExecution")
   public func cancelExecution(
-    request: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
     try await self.inner.cancelExecution(request: request, options: options)
   }
@@ -148,27 +148,27 @@ extension Clients {
 
     /// See `ExecutionsClient.listExecutions`.
     func listExecutions(
-      request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse
 
     /// See `ExecutionsClient.listExecutions`.
     func listExecutions(
-      byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Execution, Swift.Error>
 
     /// See `ExecutionsClient.createExecution`.
     func createExecution(
-      request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution
 
     /// See `ExecutionsClient.getExecution`.
     func getExecution(
-      request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution
 
     /// See `ExecutionsClient.cancelExecution`.
     func cancelExecution(
-      request: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelExecutionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution
   }
 }
@@ -182,9 +182,9 @@ extension Clients.ExecutionsProtocol {
   }
 
   public func listExecutions(
-    request: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListExecutionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listExecutions(
@@ -194,14 +194,14 @@ extension Clients.ExecutionsProtocol {
   }
 
   public func listExecutions(
-    byItem: ListExecutionsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListExecutionsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Execution, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudWorkflowsExecutionsV1.ListExecutionsResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listExecutions(
@@ -220,9 +220,9 @@ extension Clients.ExecutionsProtocol {
   }
 
   public func createExecution(
-    request: CreateExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createExecution(
@@ -243,9 +243,9 @@ extension Clients.ExecutionsProtocol {
   }
 
   public func getExecution(
-    request: GetExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: GetExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getExecution(
@@ -264,9 +264,9 @@ extension Clients.ExecutionsProtocol {
   }
 
   public func cancelExecution(
-    request: CancelExecutionRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelExecutionRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudWorkflowsExecutionsV1.Execution {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelExecution(

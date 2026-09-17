@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudEventarcPublishingV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudEventarcPublishingV1.PublisherClient()

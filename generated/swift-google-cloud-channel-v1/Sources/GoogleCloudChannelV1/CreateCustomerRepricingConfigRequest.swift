@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [CloudChannelService.CreateCustomerRepricingConfig][google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig].
 ///
 /// [google.cloud.channel.v1.CloudChannelService.CreateCustomerRepricingConfig]: <doc:CloudChannelServiceClient/createCustomerRepricingConfig(request:options:)>
-public struct CreateCustomerRepricingConfigRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateCustomerRepricingConfigRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The resource name of the customer that will receive this
@@ -32,7 +32,7 @@ public struct CreateCustomerRepricingConfigRequest: Codable, Equatable, GoogleCl
   /// Required. The CustomerRepricingConfig object to update.
   public var customerRepricingConfig: CustomerRepricingConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateCustomerRepricingConfigRequest`.
   public init() {}
@@ -74,7 +74,7 @@ public struct CreateCustomerRepricingConfigRequest: Codable, Equatable, GoogleCl
       CustomerRepricingConfig.self, forKey: .customerRepricingConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -90,10 +90,10 @@ public struct CreateCustomerRepricingConfigRequest: Codable, Equatable, GoogleCl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.channel.v1.CreateCustomerRepricingConfigRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

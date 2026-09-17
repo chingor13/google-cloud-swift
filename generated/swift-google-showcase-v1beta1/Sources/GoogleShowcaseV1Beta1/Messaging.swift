@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// A simple messaging service that implements chat rooms and profile posts.
 ///
@@ -33,11 +33,11 @@ import GoogleCloudGax
 /// @Snippet(path: "MessagingQuickstart")
 public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   let inner: any Clients.MessagingStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `MessagingClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.MessagingStub = try Clients.MessagingTransport(options)
     inner = Clients.MessagingRetry(inner, options: options)
     if let logger = options.logger {
@@ -52,7 +52,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_CreateRoom")
   public func createRoom(
-    request: CreateRoomRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRoomRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Room {
     try await self.inner.createRoom(request: request, options: options)
   }
@@ -61,7 +61,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_GetRoom")
   public func getRoom(
-    request: GetRoomRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRoomRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Room {
     try await self.inner.getRoom(request: request, options: options)
   }
@@ -70,7 +70,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_UpdateRoom")
   public func updateRoom(
-    request: UpdateRoomRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateRoomRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Room {
     try await self.inner.updateRoom(request: request, options: options)
   }
@@ -79,7 +79,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_DeleteRoom")
   public func deleteRoom(
-    request: DeleteRoomRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRoomRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteRoom(request: request, options: options)
   }
@@ -88,7 +88,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_ListRooms")
   public func listRooms(
-    request: ListRoomsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRoomsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.ListRoomsResponse {
     try await self.inner.listRooms(request: request, options: options)
   }
@@ -97,14 +97,14 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_ListRooms")
   public func listRooms(
-    byItem: ListRoomsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRoomsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Room, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.ListRoomsResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listRooms(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a blurb. If the parent is a room, the blurb is understood to be a
@@ -113,7 +113,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_CreateBlurb")
   public func createBlurb(
-    request: CreateBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Blurb {
     try await self.inner.createBlurb(request: request, options: options)
   }
@@ -122,7 +122,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_GetBlurb")
   public func getBlurb(
-    request: GetBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Blurb {
     try await self.inner.getBlurb(request: request, options: options)
   }
@@ -131,7 +131,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_UpdateBlurb")
   public func updateBlurb(
-    request: UpdateBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Blurb {
     try await self.inner.updateBlurb(request: request, options: options)
   }
@@ -140,7 +140,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_DeleteBlurb")
   public func deleteBlurb(
-    request: DeleteBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteBlurb(request: request, options: options)
   }
@@ -150,7 +150,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_ListBlurbs")
   public func listBlurbs(
-    request: ListBlurbsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBlurbsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.ListBlurbsResponse {
     try await self.inner.listBlurbs(request: request, options: options)
   }
@@ -160,7 +160,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_ListBlurbs")
   public func listBlurbs(
-    byItem: ListBlurbsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBlurbsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Blurb, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.ListBlurbsResponse in
@@ -168,7 +168,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
       request.pageToken = token
       return try await self.listBlurbs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// This method searches through all blurbs across all rooms and profiles
@@ -177,7 +177,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_SearchBlurbs")
   public func searchBlurbs(
-    request: SearchBlurbsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchBlurbsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.searchBlurbs(request: request, options: options)
   }
@@ -188,22 +188,21 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_SearchBlurbs")
   public func searchBlurbs(
-    withPolling: SearchBlurbsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SearchBlurbsResponse> {
+    withPolling: SearchBlurbsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SearchBlurbsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<SearchBlurbsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<SearchBlurbsResponse>.State in
       return try op._extractStatus(SearchBlurbsResponse.self)
     }
     let rawOp = try await self.searchBlurbs(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SearchBlurbsResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SearchBlurbsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -216,7 +215,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_StreamBlurbs")
   public func streamBlurbs(
-    request: StreamBlurbsRequest, options: GoogleCloudGax.RequestOptions
+    request: StreamBlurbsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.StreamBlurbsResponse {
     try await self.inner.streamBlurbs(request: request, options: options)
   }
@@ -226,7 +225,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_SendBlurbs")
   public func sendBlurbs(
-    request: CreateBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.SendBlurbsResponse {
     try await self.inner.sendBlurbs(request: request, options: options)
   }
@@ -237,7 +236,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -248,7 +247,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -256,7 +255,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Locations][google.cloud.location.Locations] service functionality in this service.
@@ -265,7 +264,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -276,7 +275,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -287,7 +286,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -298,7 +297,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -309,7 +308,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -320,7 +319,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -328,7 +327,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -337,7 +336,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -348,7 +347,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -359,7 +358,7 @@ public final class MessagingClient: Clients.MessagingProtocol, Sendable {
   ///
   /// @Snippet(path: "Messaging_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -443,14 +442,14 @@ extension Clients {
     func searchBlurbs(request: SearchBlurbsRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `MessagingClient.searchBlurbs`.
-    func searchBlurbs(withPolling: SearchBlurbsRequest) async throws -> any GoogleCloudGax
+    func searchBlurbs(withPolling: SearchBlurbsRequest) async throws -> any GoogleGax
       .PollableOperation<SearchBlurbsResponse>
 
     /// See `MessagingClient.searchBlurbs`.
     func searchBlurbs(
       parent: Swift.String,
       query: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<SearchBlurbsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<SearchBlurbsResponse>
 
     /// See `MessagingClient.streamBlurbs`.
     func streamBlurbs(request: StreamBlurbsRequest) async throws
@@ -516,132 +515,132 @@ extension Clients {
 
     /// See `MessagingClient.createRoom`.
     func createRoom(
-      request: CreateRoomRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRoomRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Room
 
     /// See `MessagingClient.getRoom`.
     func getRoom(
-      request: GetRoomRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRoomRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Room
 
     /// See `MessagingClient.updateRoom`.
     func updateRoom(
-      request: UpdateRoomRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRoomRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Room
 
     /// See `MessagingClient.deleteRoom`.
     func deleteRoom(
-      request: DeleteRoomRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRoomRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MessagingClient.listRooms`.
     func listRooms(
-      request: ListRoomsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRoomsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.ListRoomsResponse
 
     /// See `MessagingClient.listRooms`.
     func listRooms(
-      byItem: ListRoomsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRoomsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Room, Swift.Error>
 
     /// See `MessagingClient.createBlurb`.
     func createBlurb(
-      request: CreateBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Blurb
 
     /// See `MessagingClient.getBlurb`.
     func getBlurb(
-      request: GetBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Blurb
 
     /// See `MessagingClient.updateBlurb`.
     func updateBlurb(
-      request: UpdateBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Blurb
 
     /// See `MessagingClient.deleteBlurb`.
     func deleteBlurb(
-      request: DeleteBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MessagingClient.listBlurbs`.
     func listBlurbs(
-      request: ListBlurbsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBlurbsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.ListBlurbsResponse
 
     /// See `MessagingClient.listBlurbs`.
     func listBlurbs(
-      byItem: ListBlurbsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBlurbsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Blurb, Swift.Error>
 
     /// See `MessagingClient.searchBlurbs`.
     func searchBlurbs(
-      request: SearchBlurbsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchBlurbsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `MessagingClient.searchBlurbs`.
     func searchBlurbs(
-      withPolling: SearchBlurbsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<SearchBlurbsResponse>
+      withPolling: SearchBlurbsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<SearchBlurbsResponse>
 
     /// See `MessagingClient.streamBlurbs`.
     func streamBlurbs(
-      request: StreamBlurbsRequest, options: GoogleCloudGax.RequestOptions
+      request: StreamBlurbsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.StreamBlurbsResponse
 
     /// See `MessagingClient.sendBlurbs`.
     func sendBlurbs(
-      request: CreateBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.SendBlurbsResponse
 
     /// See `MessagingClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `MessagingClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `MessagingClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `MessagingClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `MessagingClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `MessagingClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `MessagingClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `MessagingClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `MessagingClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `MessagingClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -653,9 +652,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func createRoom(
-    request: CreateRoomRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRoomRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Room {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRoom(request: GetRoomRequest) async throws -> GoogleShowcaseV1Beta1.Room {
@@ -663,9 +662,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func getRoom(
-    request: GetRoomRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRoomRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Room {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRoom(
@@ -682,9 +681,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func updateRoom(
-    request: UpdateRoomRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateRoomRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Room {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteRoom(request: DeleteRoomRequest) async throws {
@@ -692,9 +691,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func deleteRoom(
-    request: DeleteRoomRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRoomRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteRoom(
@@ -713,9 +712,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func listRooms(
-    request: ListRoomsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRoomsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.ListRoomsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRooms(
@@ -725,12 +724,12 @@ extension Clients.MessagingProtocol {
   }
 
   public func listRooms(
-    byItem: ListRoomsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRoomsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Room, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.ListRoomsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func createBlurb(request: CreateBlurbRequest) async throws -> GoogleShowcaseV1Beta1.Blurb {
@@ -738,9 +737,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func createBlurb(
-    request: CreateBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Blurb {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBlurb(request: GetBlurbRequest) async throws -> GoogleShowcaseV1Beta1.Blurb {
@@ -748,9 +747,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func getBlurb(
-    request: GetBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Blurb {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBlurb(
@@ -767,9 +766,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func updateBlurb(
-    request: UpdateBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.Blurb {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteBlurb(request: DeleteBlurbRequest) async throws {
@@ -777,9 +776,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func deleteBlurb(
-    request: DeleteBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteBlurb(
@@ -798,9 +797,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func listBlurbs(
-    request: ListBlurbsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBlurbsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.ListBlurbsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listBlurbs(
@@ -810,13 +809,13 @@ extension Clients.MessagingProtocol {
   }
 
   public func listBlurbs(
-    byItem: ListBlurbsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBlurbsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Blurb, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleShowcaseV1Beta1.ListBlurbsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listBlurbs(
@@ -834,32 +833,31 @@ extension Clients.MessagingProtocol {
   }
 
   public func searchBlurbs(
-    request: SearchBlurbsRequest, options: GoogleCloudGax.RequestOptions
+    request: SearchBlurbsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func searchBlurbs(withPolling: SearchBlurbsRequest) async throws -> any GoogleCloudGax
+  public func searchBlurbs(withPolling: SearchBlurbsRequest) async throws -> any GoogleGax
     .PollableOperation<SearchBlurbsResponse>
   {
     try await self.searchBlurbs(withPolling: withPolling, options: .init())
   }
 
   public func searchBlurbs(
-    withPolling: SearchBlurbsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<SearchBlurbsResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<SearchBlurbsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: SearchBlurbsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<SearchBlurbsResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<SearchBlurbsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func searchBlurbs(
     parent: Swift.String,
     query: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<SearchBlurbsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<SearchBlurbsResponse> {
     let request = SearchBlurbsRequest().with {
       $0.parent = parent
       $0.query = query
@@ -874,9 +872,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func streamBlurbs(
-    request: StreamBlurbsRequest, options: GoogleCloudGax.RequestOptions
+    request: StreamBlurbsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.StreamBlurbsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func sendBlurbs(request: CreateBlurbRequest) async throws
@@ -886,9 +884,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func sendBlurbs(
-    request: CreateBlurbRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBlurbRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleShowcaseV1Beta1.SendBlurbsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -898,9 +896,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -910,13 +908,13 @@ extension Clients.MessagingProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -926,9 +924,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -938,9 +936,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -950,9 +948,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -962,9 +960,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -974,9 +972,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -986,13 +984,13 @@ extension Clients.MessagingProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -1013,9 +1011,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -1032,9 +1030,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -1051,9 +1049,9 @@ extension Clients.MessagingProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

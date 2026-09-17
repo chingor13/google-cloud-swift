@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// AgentGateway represents the agent gateway resource.
-public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AgentGateway: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the AgentGateway resource. It matches pattern
@@ -26,10 +26,10 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var name: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the resource was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Set of label tags associated with the AgentGateway resource.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -64,7 +64,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `oneof` must be set.
   public var deploymentMode: OneOf_DeploymentMode? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AgentGateway`.
   public init() {}
@@ -122,10 +122,8 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -171,7 +169,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.deploymentMode = deploymentMode
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -203,14 +201,14 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Configuration for Google Managed deployment mode.
   /// Proxy is orchestrated and managed by GoogleCloud in a tenant project.
-  public struct GoogleManaged: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct GoogleManaged: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Operating Mode of Agent Gateway.
     public var governedAccessPath: AgentGateway.GoogleManaged.GovernedAccessPath = AgentGateway
       .GoogleManaged.GovernedAccessPath()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `GoogleManaged`.
     public init() {}
@@ -250,7 +248,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -370,17 +368,17 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.AgentGateway.GoogleManaged"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for Self Managed deployment mode.
   /// Attach to existing Application Load Balancers or Secure Web Proxies.
-  public struct SelfManaged: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SelfManaged: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. A supported Google Cloud networking proxy in the Project and
@@ -392,7 +390,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// resource_uris is mutually exclusive with resource_uri.
     public var resourceUris: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SelfManaged`.
     public init() {}
@@ -435,7 +433,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -451,16 +449,16 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.AgentGateway.SelfManaged"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// NetworkConfig contains network configurations for the AgentGateway.
-  public struct NetworkConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NetworkConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Optional PSC-Interface network attachment for connectivity to
@@ -471,7 +469,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// private VPC network.
     public var dnsPeeringConfig: AgentGateway.NetworkConfig.DnsPeeringConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NetworkConfig`.
     public init() {}
@@ -512,7 +510,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         AgentGateway.NetworkConfig.DnsPeeringConfig.self, forKey: .dnsPeeringConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -526,7 +524,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Configuration for Egress
-    public struct Egress: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Egress: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Optional. The URI of the Network Attachment resource.
@@ -535,7 +533,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Optional. TrustConfig defines the trust configuration for egress.
       public var trustConfig: AgentGateway.NetworkConfig.Egress.TrustConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Egress`.
       public init() {}
@@ -578,7 +576,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           AgentGateway.NetworkConfig.Egress.TrustConfig.self, forKey: .trustConfig)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -592,15 +590,14 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
 
       /// TrustConfig defines the trust configuration for egress.
-      public struct TrustConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct TrustConfig: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. PEM encoded root certificates used to validate the identity
         /// of the upstream servers/destinations during egress connections.
         public var pemCertificates: [Swift.String] = []
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `TrustConfig`.
         public init() {}
@@ -640,7 +637,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -656,11 +653,11 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
           return
             "type.googleapis.com/google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress.TrustConfig"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -668,16 +665,16 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networkservices.v1.AgentGateway.NetworkConfig.Egress"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// DNS peering config for the user VPC network.
-    public struct DnsPeeringConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DnsPeeringConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Required. Domain names for which DNS queries should be forwarded to the
@@ -694,7 +691,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// `projects/{project}/global/networks/{network}`.
       public var targetNetwork: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DnsPeeringConfig`.
       public init() {}
@@ -742,7 +739,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -760,27 +757,27 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.networkservices.v1.AgentGateway.NetworkConfig.DnsPeeringConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.networkservices.v1.AgentGateway.NetworkConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// AgentGatewayOutputCard contains informational output-only fields
-  public struct AgentGatewayOutputCard: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AgentGatewayOutputCard: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. mTLS Endpoint associated with this AgentGateway
@@ -792,7 +789,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Output only. Service Account used by Service Extensions to operate.
     public var serviceExtensionsServiceAccount: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AgentGatewayOutputCard`.
     public init() {}
@@ -843,7 +840,7 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -862,11 +859,11 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.networkservices.v1.AgentGateway.AgentGatewayOutputCard"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -982,10 +979,10 @@ public struct AgentGateway: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networkservices.v1.AgentGateway"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

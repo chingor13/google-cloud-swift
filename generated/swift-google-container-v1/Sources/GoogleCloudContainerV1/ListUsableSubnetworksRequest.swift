@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ListUsableSubnetworksRequest requests the list of usable subnetworks
 /// available to a user for creating clusters.
-public struct ListUsableSubnetworksRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ListUsableSubnetworksRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The parent project where subnetworks are usable.
@@ -42,7 +42,7 @@ public struct ListUsableSubnetworksRequest: Codable, Equatable, GoogleCloudWKT._
   /// previous list requests to get the next page of results.
   public var pageToken: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ListUsableSubnetworksRequest`.
   public init() {}
@@ -95,7 +95,7 @@ public struct ListUsableSubnetworksRequest: Codable, Equatable, GoogleCloudWKT._
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,10 +113,10 @@ public struct ListUsableSubnetworksRequest: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.ListUsableSubnetworksRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

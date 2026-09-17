@@ -15,9 +15,9 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Test: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the test.
@@ -37,7 +37,7 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// signal that the test case was exercised.
   public var blueprints: [Test.Blueprint] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Test`.
   public init() {}
@@ -92,7 +92,7 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,7 +111,7 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// to be made to test this specific test case. Ideally this would be represented
   /// by something more robust like CEL, but as of writing this, I am unsure if CEL
   /// is ready.
-  public struct Blueprint: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Blueprint: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of this blueprint.
@@ -126,7 +126,7 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// An ordered list of method calls that can be called to trigger this test.
     public var additionalRequests: [Test.Blueprint.Invocation] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Blueprint`.
     public init() {}
@@ -179,7 +179,7 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -195,7 +195,7 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// A message representing a method invocation.
-    public struct Invocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Invocation: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The fully qualified name of the showcase method to be invoked.
@@ -204,7 +204,7 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// The request to be made if a specific request is necessary.
       public var serializedRequest: Foundation.Data = Foundation.Data()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Invocation`.
       public init() {}
@@ -249,7 +249,7 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -265,22 +265,22 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.showcase.v1beta1.Test.Blueprint.Invocation"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.showcase.v1beta1.Test.Blueprint"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -411,10 +411,10 @@ public struct Test: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.showcase.v1beta1.Test"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

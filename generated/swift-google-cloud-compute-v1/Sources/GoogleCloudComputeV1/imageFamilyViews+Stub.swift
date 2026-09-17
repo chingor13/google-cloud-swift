@@ -16,13 +16,13 @@
 
 #if ImageFamilyViews
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ImageFamilyViewsStub: Sendable {
       func `get`(
-        request: ImageFamilyViewsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: ImageFamilyViewsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.ImageFamilyView
     }
   }

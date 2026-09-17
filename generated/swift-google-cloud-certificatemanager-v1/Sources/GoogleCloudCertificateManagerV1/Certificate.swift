@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Defines TLS certificate.
-public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Certificate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A user-defined name of the certificate. Certificate names must be unique
@@ -29,10 +29,10 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var description: Swift.String = Swift.String()
 
   /// Output only. The creation timestamp of a Certificate.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The last update timestamp of a Certificate.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Set of labels associated with a Certificate.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -47,14 +47,14 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var pemCertificate: Swift.String = Swift.String()
 
   /// Output only. The expiry timestamp of a Certificate.
-  public var expireTime: GoogleCloudWKT.Timestamp? = nil
+  public var expireTime: GoogleWKT.Timestamp? = nil
 
   /// Immutable. The scope of the certificate.
   public var scope: Certificate.Scope = Certificate.Scope()
 
   public var type: OneOf_Type? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Certificate`.
   public init() {}
@@ -113,10 +113,8 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -127,8 +125,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .pemCertificate) {
       self.pemCertificate = value
     }
-    self.expireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expireTime)
+    self.expireTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expireTime)
     if let value = try container.decodeIfPresent(Certificate.Scope.self, forKey: .scope) {
       self.scope = value
     }
@@ -156,7 +153,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.type = type
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -188,7 +185,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Certificate data for a SelfManaged Certificate.
   /// SelfManaged Certificates are uploaded by the user. Updating such
   /// certificates before they expire remains the user's responsibility.
-  public struct SelfManagedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SelfManagedCertificate: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Input only. The PEM-encoded certificate chain.
@@ -198,7 +195,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Input only. The PEM-encoded private key of the leaf certificate.
     public var pemPrivateKey: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SelfManagedCertificate`.
     public init() {}
@@ -241,7 +238,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -258,18 +255,18 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       return
         "type.googleapis.com/google.cloud.certificatemanager.v1.Certificate.SelfManagedCertificate"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration and state of a Managed Certificate.
   /// Certificate Manager provisions and renews Managed Certificates
   /// automatically, for as long as it's authorized to do so.
-  public struct ManagedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ManagedCertificate: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. The domains for which a managed SSL certificate will be
@@ -304,7 +301,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public var authorizationAttemptInfo: [Certificate.ManagedCertificate.AuthorizationAttemptInfo] =
       []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ManagedCertificate`.
     public init() {}
@@ -372,7 +369,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -390,7 +387,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// Information about issues with provisioning a Managed Certificate.
-    public struct ProvisioningIssue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ProvisioningIssue: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Reason for provisioning failures.
@@ -402,7 +399,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// programmatic access use Reason enum.
       public var details: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ProvisioningIssue`.
       public init() {}
@@ -447,7 +444,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -573,17 +570,17 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.ProvisioningIssue"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// State of the latest attempt to authorize a domain for certificate
     /// issuance.
-    public struct AuthorizationAttemptInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AuthorizationAttemptInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Domain name of the authorization attempt.
@@ -604,7 +601,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// stable. For programmatic access use FailureReason enum.
       public var details: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AuthorizationAttemptInfo`.
       public init() {}
@@ -662,7 +659,7 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -911,11 +908,11 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.AuthorizationAttemptInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1040,11 +1037,11 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.certificatemanager.v1.Certificate.ManagedCertificate"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1167,10 +1164,10 @@ public struct Certificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.certificatemanager.v1.Certificate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

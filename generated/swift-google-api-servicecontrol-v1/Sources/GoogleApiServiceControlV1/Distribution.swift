@@ -16,7 +16,7 @@
 
 import Foundation
 import GoogleApi
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Distribution represents a frequency distribution of double-valued sample
 /// points. It contains the size of the population of sample points plus
@@ -26,7 +26,7 @@ import GoogleApi
 /// * the minimum and maximum of the samples
 /// * the sum-squared-deviation of the samples, used to compute variance
 /// * a histogram of the values of the sample points
-public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Distribution: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The total number of samples in the distribution. Must be >= 0.
@@ -89,7 +89,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// bucket.
   public var bucketOption: OneOf_BucketOption? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Distribution`.
   public init() {}
@@ -193,7 +193,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.bucketOption = bucketOption
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -223,7 +223,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Describing buckets with constant width.
-  public struct LinearBuckets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LinearBuckets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of finite buckets. With the underflow and overflow buckets,
@@ -242,7 +242,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// where i ranges from 1 to num_finite_buckets, inclusive.
     public var offset: Swift.Double = Swift.Double()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LinearBuckets`.
     public init() {}
@@ -290,7 +290,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -307,16 +307,16 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.servicecontrol.v1.Distribution.LinearBuckets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describing buckets with exponentially growing width.
-  public struct ExponentialBuckets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExponentialBuckets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The number of finite buckets. With the underflow and overflow buckets,
@@ -336,7 +336,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Must be > 0.
     public var scale: Swift.Double = Swift.Double()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExponentialBuckets`.
     public init() {}
@@ -384,7 +384,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -401,16 +401,16 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.servicecontrol.v1.Distribution.ExponentialBuckets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describing buckets with arbitrary user-provided width.
-  public struct ExplicitBuckets: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ExplicitBuckets: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// 'bound' is a list of strictly increasing boundaries between
@@ -430,7 +430,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     ///  i == bound_size() (overflow)    bound[i-1]     +inf
     public var bounds: [Swift.Double] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ExplicitBuckets`.
     public init() {}
@@ -468,7 +468,7 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -483,11 +483,11 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.servicecontrol.v1.Distribution.ExplicitBuckets"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -526,10 +526,10 @@ public struct Distribution: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.servicecontrol.v1.Distribution"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

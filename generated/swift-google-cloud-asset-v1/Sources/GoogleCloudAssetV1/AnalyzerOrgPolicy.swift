@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// This organization policy message is a modified version of the one defined in
 /// the Organization Policy system. This message contains several fields defined
 /// in the original organization policy with some new fields for analysis
 /// purpose.
-public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The [full resource name]
@@ -60,7 +60,7 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// must be set to false.
   public var reset: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AnalyzerOrgPolicy`.
   public init() {}
@@ -118,7 +118,7 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -138,7 +138,7 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Organization Policy system. In addition to the fields defined in the
   /// original organization policy, it contains additional field(s) under
   /// specific circumstances to support analysis results.
-  public struct Rule: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Rule: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The evaluating condition for this rule.
@@ -168,7 +168,7 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
     public var kind: OneOf_Kind? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Rule`.
     public init() {}
@@ -242,7 +242,7 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
       self.kind = kind
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -269,7 +269,7 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
 
     /// The string values for the list constraints.
-    public struct StringValues: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct StringValues: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// List of values allowed at this resource.
@@ -278,7 +278,7 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
       /// List of values denied at this resource.
       public var deniedValues: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `StringValues`.
       public init() {}
@@ -321,7 +321,7 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -337,11 +337,11 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.asset.v1.AnalyzerOrgPolicy.Rule.StringValues"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -364,21 +364,21 @@ public struct AnalyzerOrgPolicy: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.AnalyzerOrgPolicy.Rule"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.AnalyzerOrgPolicy"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

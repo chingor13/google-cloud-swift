@@ -16,10 +16,9 @@
 
 #if InstanceGroupManagerResizeRequests || RegionInstanceGroupManagerResizeRequests
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct InstanceGroupManagerResizeRequestStatus: Codable, Equatable, GoogleCloudWKT
-      ._AnyPackable,
+  public struct InstanceGroupManagerResizeRequestStatus: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Fatal errors encountered during the queueing or provisioning phases of
@@ -38,7 +37,7 @@
     /// "error" field only.
     public var lastAttempt: InstanceGroupManagerResizeRequestStatusLastAttempt? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `InstanceGroupManagerResizeRequestStatus`.
     public init() {}
@@ -79,7 +78,7 @@
         InstanceGroupManagerResizeRequestStatusLastAttempt.self, forKey: .lastAttempt)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -95,14 +94,14 @@
     /// The message type for the [error][google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error] field.
     ///
     /// [google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error]: <doc:InstanceGroupManagerResizeRequestStatus/Error>
-    public struct Error: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Error: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// [Output Only] The array of errors encountered while processing this
       /// operation.
       public var errors: [InstanceGroupManagerResizeRequestStatus.Error.Errors] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Error`.
       public init() {}
@@ -142,7 +141,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -157,7 +156,7 @@
       /// The message type for the [errors][google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error.errors] field.
       ///
       /// [google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error.errors]: <doc:InstanceGroupManagerResizeRequestStatus/Error/Errors>
-      public struct Errors: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Errors: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// [Output Only] The error type identifier for this error.
@@ -178,8 +177,7 @@
         /// [Output Only] An optional, human-readable error message.
         public var message: Swift.String? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Errors`.
         public init() {}
@@ -229,7 +227,7 @@
           self.message = try container.decodeIfPresent(Swift.String.self, forKey: .message)
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -247,7 +245,7 @@
         /// The message type for the [errorDetails][google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error.errors.errorDetails] field.
         ///
         /// [google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error.errors.errorDetails]: <doc:InstanceGroupManagerResizeRequestStatus/Error/Errors/ErrorDetails>
-        public struct ErrorDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct ErrorDetails: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Error information containing structured domain, reason, and metadata.
@@ -262,8 +260,7 @@
           /// Details about quota limits and metrics when a quota is exceeded.
           public var quotaInfo: QuotaExceededInfo? = nil
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `ErrorDetails`.
           public init() {}
@@ -310,7 +307,7 @@
               QuotaExceededInfo.self, forKey: .quotaInfo)
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -329,11 +326,11 @@
             return
               "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error.errors.errorDetails"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -341,11 +338,11 @@
           return
             "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error.errors"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -353,22 +350,22 @@
         return
           "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus.error"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.InstanceGroupManagerResizeRequestStatus"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

@@ -16,16 +16,16 @@
 
 #if IndexEndpointService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Used to set up the auth on the DeployedIndex's private endpoint.
-  public struct DeployedIndexAuthConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DeployedIndexAuthConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Defines the authentication provider that the DeployedIndex uses.
     public var authProvider: DeployedIndexAuthConfig.AuthProvider? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DeployedIndexAuthConfig`.
     public init() {}
@@ -62,7 +62,7 @@
         DeployedIndexAuthConfig.AuthProvider.self, forKey: .authProvider)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -77,7 +77,7 @@
     /// Configuration for an authentication provider, including support for
     /// [JSON Web Token
     /// (JWT)](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32).
-    public struct AuthProvider: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AuthProvider: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The list of JWT
@@ -92,7 +92,7 @@
       /// `service-account-name@project-id.iam.gserviceaccount.com`
       public var allowedIssuers: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AuthProvider`.
       public init() {}
@@ -135,7 +135,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -151,22 +151,22 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.DeployedIndexAuthConfig.AuthProvider"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DeployedIndexAuthConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

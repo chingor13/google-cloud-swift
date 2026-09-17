@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func optimizeTours(
-      request: OptimizeToursRequest, options: GoogleCloudGax.RequestOptions
+      request: OptimizeToursRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOptimizationV1.OptimizeToursResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "optimizeTours",
         action: {
-          (r: OptimizeToursRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: OptimizeToursRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOptimizationV1.OptimizeToursResponse
           in
           return try await self.inner.optimizeTours(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func batchOptimizeTours(
-      request: BatchOptimizeToursRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchOptimizeToursRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchOptimizeTours",
         action: {
-          (r: BatchOptimizeToursRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchOptimizeToursRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.batchOptimizeTours(request: r, options: o)
@@ -89,14 +89,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

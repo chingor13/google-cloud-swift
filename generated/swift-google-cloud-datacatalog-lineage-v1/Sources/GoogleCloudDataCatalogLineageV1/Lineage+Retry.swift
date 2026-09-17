@@ -18,28 +18,28 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class LineageRetry: LineageStub {
     let inner: any LineageStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any LineageStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any LineageStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -51,14 +51,14 @@ extension Clients {
     }
 
     public func processOpenLineageRunEvent(
-      request: ProcessOpenLineageRunEventRequest, options: GoogleCloudGax.RequestOptions
+      request: ProcessOpenLineageRunEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.ProcessOpenLineageRunEventResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ProcessOpenLineageRunEventRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ProcessOpenLineageRunEventRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.ProcessOpenLineageRunEventResponse
           in
           return try await self.inner.processOpenLineageRunEvent(request: r, options: o)
@@ -66,14 +66,14 @@ extension Clients {
     }
 
     public func createProcess(
-      request: CreateProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Process {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateProcessRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateProcessRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.Process
           in
           return try await self.inner.createProcess(request: r, options: o)
@@ -81,14 +81,14 @@ extension Clients {
     }
 
     public func updateProcess(
-      request: UpdateProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Process {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateProcessRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateProcessRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.Process
           in
           return try await self.inner.updateProcess(request: r, options: o)
@@ -96,14 +96,14 @@ extension Clients {
     }
 
     public func getProcess(
-      request: GetProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Process {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetProcessRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetProcessRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.Process
           in
           return try await self.inner.getProcess(request: r, options: o)
@@ -111,14 +111,14 @@ extension Clients {
     }
 
     public func listProcesses(
-      request: ListProcessesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProcessesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.ListProcessesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListProcessesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListProcessesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.ListProcessesResponse
           in
           return try await self.inner.listProcesses(request: r, options: o)
@@ -126,14 +126,14 @@ extension Clients {
     }
 
     public func deleteProcess(
-      request: DeleteProcessRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteProcessRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteProcessRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteProcessRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteProcess(request: r, options: o)
@@ -141,14 +141,14 @@ extension Clients {
     }
 
     public func createRun(
-      request: CreateRunRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Run {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateRunRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.Run
           in
           return try await self.inner.createRun(request: r, options: o)
@@ -156,14 +156,14 @@ extension Clients {
     }
 
     public func updateRun(
-      request: UpdateRunRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Run {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateRunRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.Run
           in
           return try await self.inner.updateRun(request: r, options: o)
@@ -171,14 +171,14 @@ extension Clients {
     }
 
     public func getRun(
-      request: GetRunRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.Run {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetRunRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.Run
           in
           return try await self.inner.getRun(request: r, options: o)
@@ -186,14 +186,14 @@ extension Clients {
     }
 
     public func listRuns(
-      request: ListRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.ListRunsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListRunsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListRunsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.ListRunsResponse
           in
           return try await self.inner.listRuns(request: r, options: o)
@@ -201,14 +201,14 @@ extension Clients {
     }
 
     public func deleteRun(
-      request: DeleteRunRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteRunRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteRun(request: r, options: o)
@@ -216,14 +216,14 @@ extension Clients {
     }
 
     public func createLineageEvent(
-      request: CreateLineageEventRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateLineageEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.LineageEvent {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateLineageEventRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateLineageEventRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.LineageEvent
           in
           return try await self.inner.createLineageEvent(request: r, options: o)
@@ -231,14 +231,14 @@ extension Clients {
     }
 
     public func getLineageEvent(
-      request: GetLineageEventRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLineageEventRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.LineageEvent {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetLineageEventRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetLineageEventRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.LineageEvent
           in
           return try await self.inner.getLineageEvent(request: r, options: o)
@@ -246,14 +246,14 @@ extension Clients {
     }
 
     public func listLineageEvents(
-      request: ListLineageEventsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLineageEventsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.ListLineageEventsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListLineageEventsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListLineageEventsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.ListLineageEventsResponse
           in
           return try await self.inner.listLineageEvents(request: r, options: o)
@@ -261,27 +261,27 @@ extension Clients {
     }
 
     public func deleteLineageEvent(
-      request: DeleteLineageEventRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteLineageEventRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteLineageEventRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeleteLineageEventRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteLineageEvent(request: r, options: o)
         })
     }
 
     public func searchLinks(
-      request: SearchLinksRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchLinksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.SearchLinksResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SearchLinksRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchLinksRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.SearchLinksResponse
           in
           return try await self.inner.searchLinks(request: r, options: o)
@@ -289,14 +289,14 @@ extension Clients {
     }
 
     public func batchSearchLinkProcesses(
-      request: BatchSearchLinkProcessesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchSearchLinkProcessesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.BatchSearchLinkProcessesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: BatchSearchLinkProcessesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchSearchLinkProcessesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.BatchSearchLinkProcessesResponse
           in
           return try await self.inner.batchSearchLinkProcesses(request: r, options: o)
@@ -304,14 +304,14 @@ extension Clients {
     }
 
     public func searchLineageStreaming(
-      request: SearchLineageStreamingRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchLineageStreamingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataCatalogLineageV1.SearchLineageStreamingResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: SearchLineageStreamingRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: SearchLineageStreamingRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataCatalogLineageV1.SearchLineageStreamingResponse
           in
           return try await self.inner.searchLineageStreaming(request: r, options: o)
@@ -319,29 +319,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -349,29 +349,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

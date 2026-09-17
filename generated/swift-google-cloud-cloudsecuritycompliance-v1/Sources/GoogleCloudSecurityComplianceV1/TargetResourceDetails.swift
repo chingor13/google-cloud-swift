@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The details for a target resource.
-public struct TargetResourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct TargetResourceDetails: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The framework deployment name for the target resource.
@@ -36,10 +36,10 @@ public struct TargetResourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPack
   public var targetResource: Swift.String = Swift.String()
 
   /// The create time of the target resource.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The update time of the target resource.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The major revision ID of the framework for the target resource.
   public var majorRevisionId: Swift.Int64 = Swift.Int64()
@@ -47,7 +47,7 @@ public struct TargetResourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// The minor revision ID of the framework for the target resource.
   public var minorRevisionId: Swift.Int64 = Swift.Int64()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `TargetResourceDetails`.
   public init() {}
@@ -103,10 +103,8 @@ public struct TargetResourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPack
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .targetResource) {
       self.targetResource = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .majorRevisionId) {
       self.majorRevisionId = value
     }
@@ -115,7 +113,7 @@ public struct TargetResourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -136,10 +134,10 @@ public struct TargetResourceDetails: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.cloudsecuritycompliance.v1.TargetResourceDetails"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func addRule(
-        request: RegionSecurityPoliciesClient.AddRuleRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.AddRuleRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "addRule",
           action: {
-            (r: RegionSecurityPoliciesClient.AddRuleRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionSecurityPoliciesClient.AddRuleRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.addRule(request: r, options: o)
@@ -73,14 +73,14 @@
       }
 
       public func delete(
-        request: RegionSecurityPoliciesClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: RegionSecurityPoliciesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionSecurityPoliciesClient.DeleteRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -88,29 +88,29 @@
       }
 
       public func `get`(
-        request: RegionSecurityPoliciesClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicy {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: RegionSecurityPoliciesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.SecurityPolicy
+            (r: RegionSecurityPoliciesClient.GetRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.SecurityPolicy
             in
             return try await self.inner.`get`(request: r, options: o)
           })
       }
 
       public func getRule(
-        request: RegionSecurityPoliciesClient.GetRuleRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.GetRuleRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyRule {
         try await self._intercept(
           request: request,
           options: options,
           name: "getRule",
           action: {
-            (r: RegionSecurityPoliciesClient.GetRuleRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionSecurityPoliciesClient.GetRuleRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.SecurityPolicyRule
             in
             return try await self.inner.getRule(request: r, options: o)
@@ -118,14 +118,14 @@
       }
 
       public func insert(
-        request: RegionSecurityPoliciesClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: RegionSecurityPoliciesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionSecurityPoliciesClient.InsertRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -133,45 +133,44 @@
       }
 
       public func list(
-        request: RegionSecurityPoliciesClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.SecurityPolicyList {
         try await self._intercept(
           request: request,
           options: options,
           name: "list",
           action: {
-            (r: RegionSecurityPoliciesClient.ListRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.SecurityPolicyList
+            (r: RegionSecurityPoliciesClient.ListRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.SecurityPolicyList
             in
             return try await self.inner.list(request: r, options: o)
           })
       }
 
       public func patch(
-        request: RegionSecurityPoliciesClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: RegionSecurityPoliciesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudComputeV1.Operation
+            (r: RegionSecurityPoliciesClient.PatchRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
           })
       }
 
       public func patchRule(
-        request: RegionSecurityPoliciesClient.PatchRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.PatchRuleRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patchRule",
           action: {
-            (r: RegionSecurityPoliciesClient.PatchRuleRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionSecurityPoliciesClient.PatchRuleRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patchRule(request: r, options: o)
@@ -179,15 +178,14 @@
       }
 
       public func removeRule(
-        request: RegionSecurityPoliciesClient.RemoveRuleRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.RemoveRuleRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "removeRule",
           action: {
-            (r: RegionSecurityPoliciesClient.RemoveRuleRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionSecurityPoliciesClient.RemoveRuleRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.removeRule(request: r, options: o)
@@ -195,15 +193,14 @@
       }
 
       public func setLabels(
-        request: RegionSecurityPoliciesClient.SetLabelsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionSecurityPoliciesClient.SetLabelsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "setLabels",
           action: {
-            (r: RegionSecurityPoliciesClient.SetLabelsRequest, o: GoogleCloudGax.RequestOptions)
+            (r: RegionSecurityPoliciesClient.SetLabelsRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.setLabels(request: r, options: o)
@@ -211,14 +208,14 @@
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A filter for a budget, limiting the scope of the cost to calculate.
-public struct Filter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Filter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. A set of projects of the form `projects/{project}`,
@@ -78,14 +78,14 @@ public struct Filter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   ///  _Currently, multiple entries or multiple values per entry are not
   ///  allowed._
-  public var labels: [Swift.String: GoogleCloudWKT.ListValue] = [:]
+  public var labels: [Swift.String: GoogleWKT.ListValue] = [:]
 
   /// Multiple options to choose the budget's time period, specifying that only
   /// usage that occurs during this time period should be included in the budget.
   /// If not set, the <code>usage_period</code> defaults to CalendarPeriod.MONTH.
   public var usagePeriod: OneOf_UsagePeriod? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Filter`.
   public init() {}
@@ -155,7 +155,7 @@ public struct Filter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.subaccounts = value
     }
     if let value = try container.decodeIfPresent(
-      [Swift.String: GoogleCloudWKT.ListValue].self, forKey: .labels)
+      [Swift.String: GoogleWKT.ListValue].self, forKey: .labels)
     {
       self.labels = value
     }
@@ -181,7 +181,7 @@ public struct Filter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.usagePeriod = usagePeriod
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -347,10 +347,10 @@ public struct Filter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.billing.budgets.v1.Filter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

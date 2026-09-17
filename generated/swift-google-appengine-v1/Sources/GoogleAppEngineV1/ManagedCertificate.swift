@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A certificate managed by App Engine.
-public struct ManagedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ManagedCertificate: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Time at which the certificate was last renewed. The renewal process is
@@ -26,7 +26,7 @@ public struct ManagedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// certificate expires. Renewal errors can be tracked via `ManagementStatus`.
   ///
   /// @OutputOnly
-  public var lastRenewalTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastRenewalTime: GoogleWKT.Timestamp? = nil
 
   /// Status of certificate management. Refers to the most recent certificate
   /// acquisition or renewal attempt.
@@ -34,7 +34,7 @@ public struct ManagedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// @OutputOnly
   public var status: ManagementStatus = ManagementStatus()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ManagedCertificate`.
   public init() {}
@@ -70,13 +70,13 @@ public struct ManagedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.lastRenewalTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastRenewalTime)
+      GoogleWKT.Timestamp.self, forKey: .lastRenewalTime)
     if let value = try container.decodeIfPresent(ManagementStatus.self, forKey: .status) {
       self.status = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -92,10 +92,10 @@ public struct ManagedCertificate: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.ManagedCertificate"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

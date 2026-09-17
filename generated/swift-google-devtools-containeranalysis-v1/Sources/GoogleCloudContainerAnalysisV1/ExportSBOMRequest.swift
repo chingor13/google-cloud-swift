@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request to generate and export SBOM. Target must be specified for the
 /// request.
-public struct ExportSBOMRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExportSBOMRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The name of the resource in the form of
@@ -29,7 +29,7 @@ public struct ExportSBOMRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// The location of the SBOM export.
   public var target: OneOf_Target? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExportSBOMRequest`.
   public init() {}
@@ -86,7 +86,7 @@ public struct ExportSBOMRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.target = target
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -107,10 +107,10 @@ public struct ExportSBOMRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
 
   /// Empty placeholder to denote that this is a Google Cloud Storage
   /// export request.
-  public struct CloudStorageLocation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CloudStorageLocation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CloudStorageLocation`.
     public init() {}
@@ -141,7 +141,7 @@ public struct ExportSBOMRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -156,11 +156,11 @@ public struct ExportSBOMRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.devtools.containeranalysis.v1.ExportSBOMRequest.CloudStorageLocation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -174,10 +174,10 @@ public struct ExportSBOMRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.containeranalysis.v1.ExportSBOMRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

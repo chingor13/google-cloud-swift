@@ -20,9 +20,9 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing
   /// [KnowledgeBases][google.cloud.dialogflow.v2.KnowledgeBase].
@@ -34,7 +34,7 @@
     let inner: any Clients.KnowledgeBasesStub
 
     /// Creates a new `KnowledgeBasesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.KnowledgeBasesStub = try Clients.KnowledgeBasesTransport(options)
       inner = Clients.KnowledgeBasesRetry(inner, options: options)
       if let logger = options.logger {
@@ -47,7 +47,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_ListKnowledgeBases")
     public func listKnowledgeBases(
-      request: ListKnowledgeBasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKnowledgeBasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListKnowledgeBasesResponse {
       try await self.inner.listKnowledgeBases(request: request, options: options)
     }
@@ -56,7 +56,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_ListKnowledgeBases")
     public func listKnowledgeBases(
-      byItem: ListKnowledgeBasesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListKnowledgeBasesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<KnowledgeBase, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowV2.ListKnowledgeBasesResponse in
@@ -64,14 +64,14 @@
         request.pageToken = token
         return try await self.listKnowledgeBases(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified knowledge base.
     ///
     /// @Snippet(path: "KnowledgeBases_GetKnowledgeBase")
     public func getKnowledgeBase(
-      request: GetKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKnowledgeBaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase {
       try await self.inner.getKnowledgeBase(request: request, options: options)
     }
@@ -80,7 +80,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_CreateKnowledgeBase")
     public func createKnowledgeBase(
-      request: CreateKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKnowledgeBaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase {
       try await self.inner.createKnowledgeBase(request: request, options: options)
     }
@@ -89,7 +89,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_DeleteKnowledgeBase")
     public func deleteKnowledgeBase(
-      request: DeleteKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteKnowledgeBaseRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteKnowledgeBase(request: request, options: options)
     }
@@ -98,7 +98,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_UpdateKnowledgeBase")
     public func updateKnowledgeBase(
-      request: UpdateKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateKnowledgeBaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase {
       try await self.inner.updateKnowledgeBase(request: request, options: options)
     }
@@ -124,7 +124,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -150,7 +150,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -158,14 +158,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "KnowledgeBases_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -176,7 +176,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -187,7 +187,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -195,7 +195,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -204,7 +204,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -215,7 +215,7 @@
     ///
     /// @Snippet(path: "KnowledgeBases_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -276,7 +276,7 @@
       /// See `KnowledgeBasesClient.updateKnowledgeBase`.
       func updateKnowledgeBase(
         knowledgeBase: KnowledgeBase?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase
 
       /// See `KnowledgeBasesClient.listLocations`.
@@ -317,62 +317,62 @@
 
       /// See `KnowledgeBasesClient.listKnowledgeBases`.
       func listKnowledgeBases(
-        request: ListKnowledgeBasesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListKnowledgeBasesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.ListKnowledgeBasesResponse
 
       /// See `KnowledgeBasesClient.listKnowledgeBases`.
       func listKnowledgeBases(
-        byItem: ListKnowledgeBasesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListKnowledgeBasesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<KnowledgeBase, Swift.Error>
 
       /// See `KnowledgeBasesClient.getKnowledgeBase`.
       func getKnowledgeBase(
-        request: GetKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+        request: GetKnowledgeBaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase
 
       /// See `KnowledgeBasesClient.createKnowledgeBase`.
       func createKnowledgeBase(
-        request: CreateKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateKnowledgeBaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase
 
       /// See `KnowledgeBasesClient.deleteKnowledgeBase`.
       func deleteKnowledgeBase(
-        request: DeleteKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteKnowledgeBaseRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `KnowledgeBasesClient.updateKnowledgeBase`.
       func updateKnowledgeBase(
-        request: UpdateKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateKnowledgeBaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase
 
       /// See `KnowledgeBasesClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `KnowledgeBasesClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `KnowledgeBasesClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `KnowledgeBasesClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `KnowledgeBasesClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `KnowledgeBasesClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -386,9 +386,9 @@
     }
 
     public func listKnowledgeBases(
-      request: ListKnowledgeBasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKnowledgeBasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.ListKnowledgeBasesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listKnowledgeBases(
@@ -398,13 +398,13 @@
     }
 
     public func listKnowledgeBases(
-      byItem: ListKnowledgeBasesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListKnowledgeBasesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<KnowledgeBase, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowV2.ListKnowledgeBasesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listKnowledgeBases(
@@ -423,9 +423,9 @@
     }
 
     public func getKnowledgeBase(
-      request: GetKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKnowledgeBaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getKnowledgeBase(
@@ -444,9 +444,9 @@
     }
 
     public func createKnowledgeBase(
-      request: CreateKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKnowledgeBaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createKnowledgeBase(
@@ -465,9 +465,9 @@
     }
 
     public func deleteKnowledgeBase(
-      request: DeleteKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteKnowledgeBaseRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteKnowledgeBase(
@@ -486,14 +486,14 @@
     }
 
     public func updateKnowledgeBase(
-      request: UpdateKnowledgeBaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateKnowledgeBaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateKnowledgeBase(
       knowledgeBase: KnowledgeBase?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowV2.KnowledgeBase {
       let request = UpdateKnowledgeBaseRequest().with {
         $0.knowledgeBase = knowledgeBase
@@ -509,9 +509,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -521,13 +521,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -537,9 +537,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -549,9 +549,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -561,13 +561,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -588,9 +588,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -607,9 +607,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

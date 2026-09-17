@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleApi
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func listGroups(
-      request: ListGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListGroupsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGroups",
         action: {
-          (r: ListGroupsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListGroupsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListGroupsResponse
           in
           return try await self.inner.listGroups(request: r, options: o)
@@ -73,14 +73,14 @@ extension Clients {
     }
 
     public func getGroup(
-      request: GetGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Group {
       try await self._intercept(
         request: request,
         options: options,
         name: "getGroup",
         action: {
-          (r: GetGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Group
           in
           return try await self.inner.getGroup(request: r, options: o)
@@ -88,14 +88,14 @@ extension Clients {
     }
 
     public func createGroup(
-      request: CreateGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Group {
       try await self._intercept(
         request: request,
         options: options,
         name: "createGroup",
         action: {
-          (r: CreateGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Group
           in
           return try await self.inner.createGroup(request: r, options: o)
@@ -103,14 +103,14 @@ extension Clients {
     }
 
     public func updateGroup(
-      request: UpdateGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Group {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateGroup",
         action: {
-          (r: UpdateGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Group
           in
           return try await self.inner.updateGroup(request: r, options: o)
@@ -118,26 +118,26 @@ extension Clients {
     }
 
     public func deleteGroup(
-      request: DeleteGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteGroupRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteGroup",
-        action: { (r: DeleteGroupRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteGroupRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteGroup(request: r, options: o)
         })
     }
 
     public func listGroupMembers(
-      request: ListGroupMembersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListGroupMembersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListGroupMembersResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listGroupMembers",
         action: {
-          (r: ListGroupMembersRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListGroupMembersRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListGroupMembersResponse
           in
           return try await self.inner.listGroupMembers(request: r, options: o)

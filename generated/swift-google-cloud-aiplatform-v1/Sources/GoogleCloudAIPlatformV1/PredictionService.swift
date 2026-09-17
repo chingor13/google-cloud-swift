@@ -21,10 +21,10 @@
   #endif
   import GoogleApi
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// A service for online predictions and explanations.
   ///
@@ -33,7 +33,7 @@
     let inner: any Clients.PredictionServiceStub
 
     /// Creates a new `PredictionServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.PredictionServiceStub = try Clients.PredictionServiceTransport(options)
       inner = Clients.PredictionServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -46,7 +46,7 @@
     ///
     /// @Snippet(path: "PredictionService_Predict")
     public func predict(
-      request: PredictRequest, options: GoogleCloudGax.RequestOptions
+      request: PredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.PredictResponse {
       try await self.inner.predict(request: request, options: options)
     }
@@ -68,7 +68,7 @@
     ///
     /// @Snippet(path: "PredictionService_RawPredict")
     public func rawPredict(
-      request: RawPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: RawPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
       try await self.inner.rawPredict(request: request, options: options)
     }
@@ -77,7 +77,7 @@
     ///
     /// @Snippet(path: "PredictionService_StreamRawPredict")
     public func streamRawPredict(
-      request: StreamRawPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: StreamRawPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
       try await self.inner.streamRawPredict(request: request, options: options)
     }
@@ -87,7 +87,7 @@
     ///
     /// @Snippet(path: "PredictionService_DirectPredict")
     public func directPredict(
-      request: DirectPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: DirectPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DirectPredictResponse {
       try await self.inner.directPredict(request: request, options: options)
     }
@@ -97,7 +97,7 @@
     ///
     /// @Snippet(path: "PredictionService_DirectRawPredict")
     public func directRawPredict(
-      request: DirectRawPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: DirectRawPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DirectRawPredictResponse {
       try await self.inner.directRawPredict(request: request, options: options)
     }
@@ -107,7 +107,7 @@
     ///
     /// @Snippet(path: "PredictionService_ServerStreamingPredict")
     public func serverStreamingPredict(
-      request: StreamingPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: StreamingPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.StreamingPredictResponse {
       try await self.inner.serverStreamingPredict(request: request, options: options)
     }
@@ -129,7 +129,7 @@
     ///
     /// @Snippet(path: "PredictionService_Explain")
     public func explain(
-      request: ExplainRequest, options: GoogleCloudGax.RequestOptions
+      request: ExplainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ExplainResponse {
       try await self.inner.explain(request: request, options: options)
     }
@@ -138,7 +138,7 @@
     ///
     /// @Snippet(path: "PredictionService_GenerateContent")
     public func generateContent(
-      request: GenerateContentRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.GenerateContentResponse {
       try await self.inner.generateContent(request: request, options: options)
     }
@@ -147,7 +147,7 @@
     ///
     /// @Snippet(path: "PredictionService_StreamGenerateContent")
     public func streamGenerateContent(
-      request: GenerateContentRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.GenerateContentResponse {
       try await self.inner.streamGenerateContent(request: request, options: options)
     }
@@ -156,7 +156,7 @@
     ///
     /// @Snippet(path: "PredictionService_EmbedContent")
     public func embedContent(
-      request: EmbedContentRequest, options: GoogleCloudGax.RequestOptions
+      request: EmbedContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.EmbedContentResponse {
       try await self.inner.embedContent(request: request, options: options)
     }
@@ -165,7 +165,7 @@
     ///
     /// @Snippet(path: "PredictionService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -174,7 +174,7 @@
     ///
     /// @Snippet(path: "PredictionService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -182,14 +182,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "PredictionService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -202,7 +202,7 @@
     ///
     /// @Snippet(path: "PredictionService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -212,7 +212,7 @@
     ///
     /// @Snippet(path: "PredictionService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -227,7 +227,7 @@
     ///
     /// @Snippet(path: "PredictionService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -238,7 +238,7 @@
     ///
     /// @Snippet(path: "PredictionService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -249,7 +249,7 @@
     ///
     /// @Snippet(path: "PredictionService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -257,7 +257,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -266,7 +266,7 @@
     ///
     /// @Snippet(path: "PredictionService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -277,7 +277,7 @@
     ///
     /// @Snippet(path: "PredictionService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -288,7 +288,7 @@
     ///
     /// @Snippet(path: "PredictionService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -299,7 +299,7 @@
     ///
     /// @Snippet(path: "PredictionService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -318,8 +318,8 @@
       /// See `PredictionServiceClient.predict`.
       func predict(
         endpoint: Swift.String,
-        instances: [GoogleCloudWKT.Value],
-        parameters: GoogleCloudWKT.Value?,
+        instances: [GoogleWKT.Value],
+        parameters: GoogleWKT.Value?,
       ) async throws -> GoogleCloudAIPlatformV1.PredictResponse
 
       /// See `PredictionServiceClient.rawPredict`.
@@ -358,8 +358,8 @@
       /// See `PredictionServiceClient.explain`.
       func explain(
         endpoint: Swift.String,
-        instances: [GoogleCloudWKT.Value],
-        parameters: GoogleCloudWKT.Value?,
+        instances: [GoogleWKT.Value],
+        parameters: GoogleWKT.Value?,
         deployedModelId: Swift.String,
       ) async throws -> GoogleCloudAIPlatformV1.ExplainResponse
 
@@ -453,107 +453,107 @@
 
       /// See `PredictionServiceClient.predict`.
       func predict(
-        request: PredictRequest, options: GoogleCloudGax.RequestOptions
+        request: PredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.PredictResponse
 
       /// See `PredictionServiceClient.rawPredict`.
       func rawPredict(
-        request: RawPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: RawPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleApi.HttpBody
 
       /// See `PredictionServiceClient.streamRawPredict`.
       func streamRawPredict(
-        request: StreamRawPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: StreamRawPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleApi.HttpBody
 
       /// See `PredictionServiceClient.directPredict`.
       func directPredict(
-        request: DirectPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: DirectPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DirectPredictResponse
 
       /// See `PredictionServiceClient.directRawPredict`.
       func directRawPredict(
-        request: DirectRawPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: DirectRawPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DirectRawPredictResponse
 
       /// See `PredictionServiceClient.serverStreamingPredict`.
       func serverStreamingPredict(
-        request: StreamingPredictRequest, options: GoogleCloudGax.RequestOptions
+        request: StreamingPredictRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.StreamingPredictResponse
 
       /// See `PredictionServiceClient.explain`.
       func explain(
-        request: ExplainRequest, options: GoogleCloudGax.RequestOptions
+        request: ExplainRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ExplainResponse
 
       /// See `PredictionServiceClient.generateContent`.
       func generateContent(
-        request: GenerateContentRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.GenerateContentResponse
 
       /// See `PredictionServiceClient.streamGenerateContent`.
       func streamGenerateContent(
-        request: GenerateContentRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.GenerateContentResponse
 
       /// See `PredictionServiceClient.embedContent`.
       func embedContent(
-        request: EmbedContentRequest, options: GoogleCloudGax.RequestOptions
+        request: EmbedContentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.EmbedContentResponse
 
       /// See `PredictionServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `PredictionServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `PredictionServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `PredictionServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `PredictionServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `PredictionServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `PredictionServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `PredictionServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `PredictionServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `PredictionServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `PredictionServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -567,15 +567,15 @@
     }
 
     public func predict(
-      request: PredictRequest, options: GoogleCloudGax.RequestOptions
+      request: PredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.PredictResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func predict(
       endpoint: Swift.String,
-      instances: [GoogleCloudWKT.Value],
-      parameters: GoogleCloudWKT.Value?,
+      instances: [GoogleWKT.Value],
+      parameters: GoogleWKT.Value?,
     ) async throws -> GoogleCloudAIPlatformV1.PredictResponse {
       let request = PredictRequest().with {
         $0.endpoint = endpoint
@@ -590,9 +590,9 @@
     }
 
     public func rawPredict(
-      request: RawPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: RawPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func rawPredict(
@@ -613,9 +613,9 @@
     }
 
     public func streamRawPredict(
-      request: StreamRawPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: StreamRawPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApi.HttpBody {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func streamRawPredict(
@@ -636,9 +636,9 @@
     }
 
     public func directPredict(
-      request: DirectPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: DirectPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DirectPredictResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func directRawPredict(request: DirectRawPredictRequest) async throws
@@ -648,9 +648,9 @@
     }
 
     public func directRawPredict(
-      request: DirectRawPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: DirectRawPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DirectRawPredictResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func serverStreamingPredict(request: StreamingPredictRequest) async throws
@@ -660,9 +660,9 @@
     }
 
     public func serverStreamingPredict(
-      request: StreamingPredictRequest, options: GoogleCloudGax.RequestOptions
+      request: StreamingPredictRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.StreamingPredictResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func explain(request: ExplainRequest) async throws
@@ -672,15 +672,15 @@
     }
 
     public func explain(
-      request: ExplainRequest, options: GoogleCloudGax.RequestOptions
+      request: ExplainRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ExplainResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func explain(
       endpoint: Swift.String,
-      instances: [GoogleCloudWKT.Value],
-      parameters: GoogleCloudWKT.Value?,
+      instances: [GoogleWKT.Value],
+      parameters: GoogleWKT.Value?,
       deployedModelId: Swift.String,
     ) async throws -> GoogleCloudAIPlatformV1.ExplainResponse {
       let request = ExplainRequest().with {
@@ -699,9 +699,9 @@
     }
 
     public func generateContent(
-      request: GenerateContentRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.GenerateContentResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func generateContent(
@@ -722,9 +722,9 @@
     }
 
     public func streamGenerateContent(
-      request: GenerateContentRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.GenerateContentResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func streamGenerateContent(
@@ -745,9 +745,9 @@
     }
 
     public func embedContent(
-      request: EmbedContentRequest, options: GoogleCloudGax.RequestOptions
+      request: EmbedContentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.EmbedContentResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func embedContent(
@@ -768,9 +768,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -780,13 +780,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -796,9 +796,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -808,9 +808,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -820,9 +820,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -832,9 +832,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -844,9 +844,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -856,13 +856,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -883,9 +883,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -902,9 +902,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -921,9 +921,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -942,9 +942,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

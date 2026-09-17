@@ -16,68 +16,68 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol FunctionServiceStub: Sendable {
     func getFunction(
-      request: GetFunctionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFunctionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFunctionsV2.Function
 
     func listFunctions(
-      request: ListFunctionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFunctionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFunctionsV2.ListFunctionsResponse
 
     func createFunction(
-      request: CreateFunctionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFunctionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateFunction(
-      request: UpdateFunctionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFunctionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteFunction(
-      request: DeleteFunctionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFunctionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateUploadUrl(
-      request: GenerateUploadUrlRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateUploadUrlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFunctionsV2.GenerateUploadUrlResponse
 
     func generateDownloadUrl(
-      request: GenerateDownloadUrlRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateDownloadUrlRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFunctionsV2.GenerateDownloadUrlResponse
 
     func listRuntimes(
-      request: ListRuntimesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRuntimesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudFunctionsV2.ListRuntimesResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudRapidMigrationAssessmentV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: RapidMigrationAssessmentClient) async throws {
   let poller = try await client.resumeCollector(

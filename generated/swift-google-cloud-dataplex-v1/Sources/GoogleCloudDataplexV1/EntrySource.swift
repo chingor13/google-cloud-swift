@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Information related to the source system of the data resource that is
 /// represented by the entry.
-public struct EntrySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EntrySource: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name of the resource in the source system.
@@ -51,13 +51,13 @@ public struct EntrySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var ancestors: [EntrySource.Ancestor] = []
 
   /// The time when the resource was created in the source system.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The time when the resource was last updated in the source system. If the
   /// entry exists in the system and its `EntrySource` has `update_time`
   /// populated, further updates to the `EntrySource` of the entry must provide
   /// incremental updates to its `update_time`.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Location of the resource in the source system. You can search
   /// the entry by this location. By default, this should match the location of
@@ -65,7 +65,7 @@ public struct EntrySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// the source location for data external to Google Cloud.
   public var location: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EntrySource`.
   public init() {}
@@ -138,16 +138,14 @@ public struct EntrySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent([EntrySource.Ancestor].self, forKey: .ancestors) {
       self.ancestors = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .location) {
       self.location = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -170,7 +168,7 @@ public struct EntrySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Information about individual items in the hierarchy that is associated with
   /// the data resource.
-  public struct Ancestor: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Ancestor: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The name of the ancestor resource.
@@ -179,7 +177,7 @@ public struct EntrySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Optional. The type of the ancestor resource.
     public var type: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Ancestor`.
     public init() {}
@@ -222,7 +220,7 @@ public struct EntrySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -238,21 +236,21 @@ public struct EntrySource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.EntrySource.Ancestor"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.EntrySource"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

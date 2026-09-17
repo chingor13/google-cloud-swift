@@ -15,203 +15,203 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol GkeHubStub: Sendable {
     func listMemberships(
-      request: ListMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMembershipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListMembershipsResponse
 
     func listBoundMemberships(
-      request: ListBoundMembershipsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBoundMembershipsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListBoundMembershipsResponse
 
     func listFeatures(
-      request: ListFeaturesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeaturesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListFeaturesResponse
 
     func getMembership(
-      request: GetMembershipRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMembershipRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.Membership
 
     func getFeature(
-      request: GetFeatureRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeatureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.Feature
 
     func createMembership(
-      request: CreateMembershipRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMembershipRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createFeature(
-      request: CreateFeatureRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFeatureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMembership(
-      request: DeleteMembershipRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMembershipRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteFeature(
-      request: DeleteFeatureRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFeatureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMembership(
-      request: UpdateMembershipRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMembershipRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateFeature(
-      request: UpdateFeatureRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFeatureRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func generateConnectManifest(
-      request: GenerateConnectManifestRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateConnectManifestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.GenerateConnectManifestResponse
 
     func createFleet(
-      request: CreateFleetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFleetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getFleet(
-      request: GetFleetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFleetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.Fleet
 
     func updateFleet(
-      request: UpdateFleetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFleetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteFleet(
-      request: DeleteFleetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFleetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listFleets(
-      request: ListFleetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFleetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListFleetsResponse
 
     func getScopeNamespace(
-      request: GetScopeNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetScopeNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.Namespace
 
     func createScopeNamespace(
-      request: CreateScopeNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateScopeNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateScopeNamespace(
-      request: UpdateScopeNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateScopeNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteScopeNamespace(
-      request: DeleteScopeNamespaceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteScopeNamespaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listScopeNamespaces(
-      request: ListScopeNamespacesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListScopeNamespacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListScopeNamespacesResponse
 
     func getScopeRbacroleBinding(
-      request: GetScopeRBACRoleBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetScopeRBACRoleBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.RBACRoleBinding
 
     func createScopeRbacroleBinding(
-      request: CreateScopeRBACRoleBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateScopeRBACRoleBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateScopeRbacroleBinding(
-      request: UpdateScopeRBACRoleBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateScopeRBACRoleBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteScopeRbacroleBinding(
-      request: DeleteScopeRBACRoleBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteScopeRBACRoleBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listScopeRbacroleBindings(
-      request: ListScopeRBACRoleBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListScopeRBACRoleBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListScopeRBACRoleBindingsResponse
 
     func getScope(
-      request: GetScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.Scope
 
     func createScope(
-      request: CreateScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateScope(
-      request: UpdateScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteScope(
-      request: DeleteScopeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteScopeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listScopes(
-      request: ListScopesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListScopesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListScopesResponse
 
     func listPermittedScopes(
-      request: ListPermittedScopesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPermittedScopesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListPermittedScopesResponse
 
     func getMembershipBinding(
-      request: GetMembershipBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMembershipBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.MembershipBinding
 
     func createMembershipBinding(
-      request: CreateMembershipBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMembershipBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMembershipBinding(
-      request: UpdateMembershipBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMembershipBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMembershipBinding(
-      request: DeleteMembershipBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMembershipBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listMembershipBindings(
-      request: ListMembershipBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMembershipBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListMembershipBindingsResponse
 
     func getMembershipRbacroleBinding(
-      request: GetMembershipRBACRoleBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetMembershipRBACRoleBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.RBACRoleBinding
 
     func createMembershipRbacroleBinding(
-      request: CreateMembershipRBACRoleBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateMembershipRBACRoleBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateMembershipRbacroleBinding(
-      request: UpdateMembershipRBACRoleBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateMembershipRBACRoleBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteMembershipRbacroleBinding(
-      request: DeleteMembershipRBACRoleBindingRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteMembershipRBACRoleBindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listMembershipRbacroleBindings(
-      request: ListMembershipRBACRoleBindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListMembershipRBACRoleBindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.ListMembershipRBACRoleBindingsResponse
 
     func generateMembershipRbacroleBindingYaml(
-      request: GenerateMembershipRBACRoleBindingYAMLRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateMembershipRBACRoleBindingYAMLRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEHubV1.GenerateMembershipRBACRoleBindingYAMLResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

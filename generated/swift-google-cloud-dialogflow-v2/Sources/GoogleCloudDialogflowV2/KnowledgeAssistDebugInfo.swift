@@ -16,10 +16,10 @@
 
 #if Participants
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Debug information related to Knowledge Assist feature.
-  public struct KnowledgeAssistDebugInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct KnowledgeAssistDebugInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Reason for query generation.
@@ -48,9 +48,9 @@
     public var queryGenerationDebugInfo: KnowledgeAssistDebugInfo.QueryGenerationDebugInfo? = nil
 
     /// Debug information from CES runtime API.
-    public var cesDebugInfo: GoogleCloudWKT.Struct? = nil
+    public var cesDebugInfo: GoogleWKT.Struct? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `KnowledgeAssistDebugInfo`.
     public init() {}
@@ -126,10 +126,10 @@
       self.queryGenerationDebugInfo = try container.decodeIfPresent(
         KnowledgeAssistDebugInfo.QueryGenerationDebugInfo.self, forKey: .queryGenerationDebugInfo)
       self.cesDebugInfo = try container.decodeIfPresent(
-        GoogleCloudWKT.Struct.self, forKey: .cesDebugInfo)
+        GoogleWKT.Struct.self, forKey: .cesDebugInfo)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -152,7 +152,7 @@
     }
 
     /// Configured behaviors for Knowedge Assist.
-    public struct KnowledgeAssistBehavior: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct KnowledgeAssistBehavior: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Whether data store agent rewriter was turned off for the request.
@@ -213,7 +213,7 @@
       /// The number of search contexts appended to the query.
       public var appendedSearchContextCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `KnowledgeAssistBehavior`.
       public init() {}
@@ -369,7 +369,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -408,16 +408,16 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.KnowledgeAssistBehavior"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Token usage metadata for query generation.
-    public struct QueryGenerationDebugInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct QueryGenerationDebugInfo: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The total number of tokens in the prompt.
@@ -429,7 +429,7 @@
       /// The total number of tokens for the entire request.
       public var totalTokenCount: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `QueryGenerationDebugInfo`.
       public init() {}
@@ -479,7 +479,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -497,11 +497,11 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo.QueryGenerationDebugInfo"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -803,11 +803,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.v2.KnowledgeAssistDebugInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

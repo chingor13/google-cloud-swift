@@ -15,11 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction input format for Video Action Recognition.
-public struct VideoActionRecognitionPredictionInstance: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct VideoActionRecognitionPredictionInstance: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The Google Cloud Storage location of the video on which to perform the
@@ -43,7 +42,7 @@ public struct VideoActionRecognitionPredictionInstance: Codable, Equatable, Goog
   /// means the end of the video.
   public var timeSegmentEnd: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoActionRecognitionPredictionInstance`.
   public init() {}
@@ -96,7 +95,7 @@ public struct VideoActionRecognitionPredictionInstance: Codable, Equatable, Goog
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -115,10 +114,10 @@ public struct VideoActionRecognitionPredictionInstance: Codable, Equatable, Goog
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.predict.instance.VideoActionRecognitionPredictionInstance"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,199 +16,199 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol BareMetalSolutionStub: Sendable {
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListInstancesResponse
 
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.Instance
 
     func updateInstance(
-      request: UpdateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func renameInstance(
-      request: RenameInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.Instance
 
     func resetInstance(
-      request: ResetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func startInstance(
-      request: StartInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: StartInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func stopInstance(
-      request: StopInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: StopInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func enableInteractiveSerialConsole(
-      request: EnableInteractiveSerialConsoleRequest, options: GoogleCloudGax.RequestOptions
+      request: EnableInteractiveSerialConsoleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func disableInteractiveSerialConsole(
-      request: DisableInteractiveSerialConsoleRequest, options: GoogleCloudGax.RequestOptions
+      request: DisableInteractiveSerialConsoleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func detachLun(
-      request: DetachLunRequest, options: GoogleCloudGax.RequestOptions
+      request: DetachLunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listSshkeys(
-      request: ListSSHKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSSHKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListSSHKeysResponse
 
     func createSshkey(
-      request: CreateSSHKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSSHKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.SSHKey
 
     func deleteSshkey(
-      request: DeleteSSHKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSSHKeyRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listVolumes(
-      request: ListVolumesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVolumesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListVolumesResponse
 
     func getVolume(
-      request: GetVolumeRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVolumeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.Volume
 
     func updateVolume(
-      request: UpdateVolumeRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVolumeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func renameVolume(
-      request: RenameVolumeRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameVolumeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.Volume
 
     func evictVolume(
-      request: EvictVolumeRequest, options: GoogleCloudGax.RequestOptions
+      request: EvictVolumeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func resizeVolume(
-      request: ResizeVolumeRequest, options: GoogleCloudGax.RequestOptions
+      request: ResizeVolumeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listNetworks(
-      request: ListNetworksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNetworksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListNetworksResponse
 
     func listNetworkUsage(
-      request: ListNetworkUsageRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNetworkUsageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListNetworkUsageResponse
 
     func getNetwork(
-      request: GetNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.Network
 
     func updateNetwork(
-      request: UpdateNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createVolumeSnapshot(
-      request: CreateVolumeSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVolumeSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.VolumeSnapshot
 
     func restoreVolumeSnapshot(
-      request: RestoreVolumeSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreVolumeSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteVolumeSnapshot(
-      request: DeleteVolumeSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVolumeSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getVolumeSnapshot(
-      request: GetVolumeSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVolumeSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.VolumeSnapshot
 
     func listVolumeSnapshots(
-      request: ListVolumeSnapshotsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVolumeSnapshotsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListVolumeSnapshotsResponse
 
     func getLun(
-      request: GetLunRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.Lun
 
     func listLuns(
-      request: ListLunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListLunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListLunsResponse
 
     func evictLun(
-      request: EvictLunRequest, options: GoogleCloudGax.RequestOptions
+      request: EvictLunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getNfsShare(
-      request: GetNfsShareRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNfsShareRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.NfsShare
 
     func listNfsShares(
-      request: ListNfsSharesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNfsSharesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListNfsSharesResponse
 
     func updateNfsShare(
-      request: UpdateNfsShareRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNfsShareRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createNfsShare(
-      request: CreateNfsShareRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNfsShareRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func renameNfsShare(
-      request: RenameNfsShareRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameNfsShareRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.NfsShare
 
     func deleteNfsShare(
-      request: DeleteNfsShareRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNfsShareRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listProvisioningQuotas(
-      request: ListProvisioningQuotasRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProvisioningQuotasRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListProvisioningQuotasResponse
 
     func submitProvisioningConfig(
-      request: SubmitProvisioningConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: SubmitProvisioningConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.SubmitProvisioningConfigResponse
 
     func getProvisioningConfig(
-      request: GetProvisioningConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetProvisioningConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ProvisioningConfig
 
     func createProvisioningConfig(
-      request: CreateProvisioningConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateProvisioningConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ProvisioningConfig
 
     func updateProvisioningConfig(
-      request: UpdateProvisioningConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateProvisioningConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ProvisioningConfig
 
     func renameNetwork(
-      request: RenameNetworkRequest, options: GoogleCloudGax.RequestOptions
+      request: RenameNetworkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.Network
 
     func listOsimages(
-      request: ListOSImagesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOSImagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudBareMetalSolutionV2.ListOSImagesResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

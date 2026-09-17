@@ -15,17 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The response message for [CalculateEffectiveCmEnrollment][].
-public struct CalculateEffectiveCmEnrollmentResponse: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct CalculateEffectiveCmEnrollmentResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The effective Compliance Manager enrollment for the resource.
   public var cmEnrollment: CmEnrollment? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CalculateEffectiveCmEnrollmentResponse`.
   public init() {}
@@ -61,7 +60,7 @@ public struct CalculateEffectiveCmEnrollmentResponse: Codable, Equatable, Google
     self.cmEnrollment = try container.decodeIfPresent(CmEnrollment.self, forKey: .cmEnrollment)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -77,10 +76,10 @@ public struct CalculateEffectiveCmEnrollmentResponse: Codable, Equatable, Google
     return
       "type.googleapis.com/google.cloud.cloudsecuritycompliance.v1.CalculateEffectiveCmEnrollmentResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

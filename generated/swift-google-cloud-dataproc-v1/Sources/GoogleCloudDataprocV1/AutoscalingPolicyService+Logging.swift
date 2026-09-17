@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func createAutoscalingPolicy(
-      request: CreateAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
       try await self._intercept(
         request: request,
         options: options,
         name: "createAutoscalingPolicy",
         action: {
-          (r: CreateAutoscalingPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateAutoscalingPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataprocV1.AutoscalingPolicy
           in
           return try await self.inner.createAutoscalingPolicy(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func updateAutoscalingPolicy(
-      request: UpdateAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateAutoscalingPolicy",
         action: {
-          (r: UpdateAutoscalingPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateAutoscalingPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataprocV1.AutoscalingPolicy
           in
           return try await self.inner.updateAutoscalingPolicy(request: r, options: o)
@@ -89,14 +89,14 @@ extension Clients {
     }
 
     public func getAutoscalingPolicy(
-      request: GetAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.AutoscalingPolicy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getAutoscalingPolicy",
         action: {
-          (r: GetAutoscalingPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetAutoscalingPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataprocV1.AutoscalingPolicy
           in
           return try await self.inner.getAutoscalingPolicy(request: r, options: o)
@@ -104,14 +104,14 @@ extension Clients {
     }
 
     public func listAutoscalingPolicies(
-      request: ListAutoscalingPoliciesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAutoscalingPoliciesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataprocV1.ListAutoscalingPoliciesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listAutoscalingPolicies",
         action: {
-          (r: ListAutoscalingPoliciesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListAutoscalingPoliciesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudDataprocV1.ListAutoscalingPoliciesResponse
           in
           return try await self.inner.listAutoscalingPolicies(request: r, options: o)
@@ -119,28 +119,27 @@ extension Clients {
     }
 
     public func deleteAutoscalingPolicy(
-      request: DeleteAutoscalingPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAutoscalingPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteAutoscalingPolicy",
         action: {
-          (r: DeleteAutoscalingPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-          in
+          (r: DeleteAutoscalingPolicyRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteAutoscalingPolicy(request: r, options: o)
         })
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -148,14 +147,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -163,14 +162,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -178,29 +177,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -208,29 +207,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOperation",
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

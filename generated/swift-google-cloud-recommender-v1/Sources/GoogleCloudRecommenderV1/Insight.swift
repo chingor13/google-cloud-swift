@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An insight along with the information used to derive the insight. The insight
 /// may have associated recommendations as well.
-public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Insight: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the insight.
@@ -37,15 +37,15 @@ public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// A struct of custom fields to explain the insight.
   /// Example: "grantedPermissionsCount": "1000"
-  public var content: GoogleCloudWKT.Struct? = nil
+  public var content: GoogleWKT.Struct? = nil
 
   /// Timestamp of the latest data used to generate the insight.
-  public var lastRefreshTime: GoogleCloudWKT.Timestamp? = nil
+  public var lastRefreshTime: GoogleWKT.Timestamp? = nil
 
   /// Observation period that led to the insight. The source data used to
   /// generate the insight ends at last_refresh_time and begins at
   /// (last_refresh_time - observation_period).
-  public var observationPeriod: GoogleCloudWKT.Duration? = nil
+  public var observationPeriod: GoogleWKT.Duration? = nil
 
   /// Information state and metadata.
   public var stateInfo: InsightStateInfo? = nil
@@ -63,7 +63,7 @@ public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Recommendations derived from this insight.
   public var associatedRecommendations: [Insight.RecommendationReference] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Insight`.
   public init() {}
@@ -130,11 +130,11 @@ public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .insightSubtype) {
       self.insightSubtype = value
     }
-    self.content = try container.decodeIfPresent(GoogleCloudWKT.Struct.self, forKey: .content)
+    self.content = try container.decodeIfPresent(GoogleWKT.Struct.self, forKey: .content)
     self.lastRefreshTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .lastRefreshTime)
+      GoogleWKT.Timestamp.self, forKey: .lastRefreshTime)
     self.observationPeriod = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .observationPeriod)
+      GoogleWKT.Duration.self, forKey: .observationPeriod)
     self.stateInfo = try container.decodeIfPresent(InsightStateInfo.self, forKey: .stateInfo)
     if let value = try container.decodeIfPresent(Insight.Category.self, forKey: .category) {
       self.category = value
@@ -152,7 +152,7 @@ public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -176,14 +176,14 @@ public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Reference to an associated recommendation.
-  public struct RecommendationReference: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RecommendationReference: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Recommendation resource name, e.g.
     /// projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/recommendations/[RECOMMENDATION_ID]
     public var recommendation: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RecommendationReference`.
     public init() {}
@@ -221,7 +221,7 @@ public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -236,11 +236,11 @@ public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.recommender.v1.Insight.RecommendationReference"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -499,10 +499,10 @@ public struct Insight: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recommender.v1.Insight"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

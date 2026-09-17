@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// DataProfileResult defines the output of DataProfileScan. Each field of the
 /// table will have field type specific profile result.
-public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DataProfileResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The count of rows scanned.
@@ -38,7 +38,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Catalog metadata.
   public var catalogPublishingStatus: DataScanCatalogPublishingStatus? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DataProfileResult`.
   public init() {}
@@ -90,7 +90,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       DataScanCatalogPublishingStatus.self, forKey: .catalogPublishingStatus)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -107,14 +107,14 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Contains name, type, mode and field type specific profile information.
-  public struct Profile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Profile: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. List of fields with structural and profile information for
     /// each field.
     public var fields: [DataProfileResult.Profile.Field] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Profile`.
     public init() {}
@@ -154,7 +154,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -167,7 +167,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
 
     /// A field within a table.
-    public struct Field: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Field: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The name of the field.
@@ -191,7 +191,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       /// Output only. Profile information for the corresponding field.
       public var profile: DataProfileResult.Profile.Field.ProfileInfo? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Field`.
       public init() {}
@@ -243,7 +243,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
           DataProfileResult.Profile.Field.ProfileInfo.self, forKey: .profile)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -259,7 +259,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
 
       /// The profile information for each field type.
-      public struct ProfileInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct ProfileInfo: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Output only. Ratio of rows with null value against total scanned
@@ -283,8 +283,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         /// available, if mode is REPEATABLE.
         public var fieldInfo: OneOf_FieldInfo? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `ProfileInfo`.
         public init() {}
@@ -370,7 +369,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
           self.fieldInfo = fieldInfo
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -396,7 +395,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         }
 
         /// The profile information for a string type field.
-        public struct StringFieldInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct StringFieldInfo: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Output only. Minimum length of non-null values in the scanned data.
@@ -408,8 +407,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
           /// Output only. Average length of non-null values in the scanned data.
           public var averageLength: Swift.Double = Swift.Double()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `StringFieldInfo`.
           public init() {}
@@ -458,7 +456,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -476,16 +474,16 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
             return
               "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.Profile.Field.ProfileInfo.StringFieldInfo"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         /// The profile information for an integer type field.
-        public struct IntegerFieldInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct IntegerFieldInfo: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Output only. Average of non-null values in the scanned data. NaN,
@@ -518,8 +516,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
           /// if the field has a NaN.
           public var max: Swift.Int64 = Swift.Int64()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `IntegerFieldInfo`.
           public init() {}
@@ -579,7 +576,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -599,16 +596,16 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
             return
               "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.Profile.Field.ProfileInfo.IntegerFieldInfo"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         /// The profile information for a double type field.
-        public struct DoubleFieldInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct DoubleFieldInfo: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Output only. Average of non-null values in the scanned data. NaN,
@@ -641,8 +638,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
           /// if the field has a NaN.
           public var max: Swift.Double = Swift.Double()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `DoubleFieldInfo`.
           public init() {}
@@ -702,7 +698,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -722,16 +718,16 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
             return
               "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.Profile.Field.ProfileInfo.DoubleFieldInfo"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
         /// Top N non-null values in the scanned data.
-        public struct TopNValue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+        public struct TopNValue: Codable, Equatable, GoogleWKT._AnyPackable,
           Sendable
         {
           /// Output only. String value of a top N non-null value.
@@ -744,8 +740,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
           /// the total number of rows in the scanned data.
           public var ratio: Swift.Double = Swift.Double()
 
-          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-            .init()
+          @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
           /// Initialize a new instance of `TopNValue`.
           public init() {}
@@ -793,7 +788,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
             }
             for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
               self._unknownFields.json[key.stringValue] = try container.decode(
-                GoogleCloudWKT.Value.self, forKey: key)
+                GoogleWKT.Value.self, forKey: key)
             }
           }
 
@@ -811,11 +806,11 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
             return
               "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.Profile.Field.ProfileInfo.TopNValue"
           }
-          public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-            self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+          public init(fromAny any: GoogleWKT.`Any`) throws {
+            self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
           }
-          public func _pack() throws -> GoogleCloudWKT.Struct {
-            return try GoogleCloudWKT._slowAnySerialize(message: self)
+          public func _pack() throws -> GoogleWKT.Struct {
+            return try GoogleWKT._slowAnySerialize(message: self)
           }
         }
 
@@ -835,45 +830,45 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
           return
             "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.Profile.Field.ProfileInfo"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.Profile.Field"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.Profile"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The result of post scan actions of DataProfileScan job.
-  public struct PostScanActionsResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PostScanActionsResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The result of BigQuery export post scan action.
     public var bigqueryExportResult: DataProfileResult.PostScanActionsResult.BigQueryExportResult? =
       nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PostScanActionsResult`.
     public init() {}
@@ -911,7 +906,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         forKey: .bigqueryExportResult)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -924,7 +919,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
 
     /// The result of BigQuery export post scan action.
-    public struct BigQueryExportResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct BigQueryExportResult: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. Execution state for the BigQuery exporting.
@@ -934,7 +929,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       /// Output only. Additional information about the BigQuery exporting.
       public var message: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `BigQueryExportResult`.
       public init() {}
@@ -979,7 +974,7 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1109,32 +1104,32 @@ public struct DataProfileResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         return
           "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.PostScanActionsResult.BigQueryExportResult"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult.PostScanActionsResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataplex.v1.DataProfileResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

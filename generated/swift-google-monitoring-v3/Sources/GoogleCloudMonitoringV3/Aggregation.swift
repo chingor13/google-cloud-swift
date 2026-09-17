@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes how to combine multiple time series to provide a different view of
 /// the data.  Aggregation of time series is done in two steps. First, each time
@@ -43,7 +43,7 @@ import Foundation
 /// individual time series data is still available for later drilldown. For more
 /// details, see [Filtering and
 /// aggregation](https://cloud.google.com/monitoring/api/v3/aggregation).
-public struct Aggregation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Aggregation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The `alignment_period` specifies a time interval, in seconds, that is used
@@ -61,7 +61,7 @@ public struct Aggregation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// charts, and 90,000 seconds (25 hours) for alerting policies.
   ///
   /// [google.monitoring.v3.TimeSeries]: <doc:TimeSeries>
-  public var alignmentPeriod: GoogleCloudWKT.Duration? = nil
+  public var alignmentPeriod: GoogleWKT.Duration? = nil
 
   /// An `Aligner` describes how to bring the data points in a single
   /// time series into temporal alignment. Except for `ALIGN_NONE`, all
@@ -113,7 +113,7 @@ public struct Aggregation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// defined, this field is ignored.
   public var groupByFields: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Aggregation`.
   public init() {}
@@ -153,7 +153,7 @@ public struct Aggregation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.alignmentPeriod = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .alignmentPeriod)
+      GoogleWKT.Duration.self, forKey: .alignmentPeriod)
     if let value = try container.decodeIfPresent(
       Aggregation.Aligner.self, forKey: .perSeriesAligner)
     {
@@ -169,7 +169,7 @@ public struct Aggregation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -742,10 +742,10 @@ public struct Aggregation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.Aggregation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

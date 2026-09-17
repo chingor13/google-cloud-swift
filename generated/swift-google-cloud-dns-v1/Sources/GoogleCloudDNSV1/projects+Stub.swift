@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ProjectsStub: Sendable {
     func `get`(
-      request: ProjectsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ProjectsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Project
   }
 }

@@ -15,67 +15,67 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol OsConfigZonalServiceStub: Sendable {
     func createOspolicyAssignment(
-      request: CreateOSPolicyAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOSPolicyAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateOspolicyAssignment(
-      request: UpdateOSPolicyAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateOSPolicyAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOspolicyAssignment(
-      request: GetOSPolicyAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOSPolicyAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.OSPolicyAssignment
 
     func listOspolicyAssignments(
-      request: ListOSPolicyAssignmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOSPolicyAssignmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.ListOSPolicyAssignmentsResponse
 
     func listOspolicyAssignmentRevisions(
-      request: ListOSPolicyAssignmentRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOSPolicyAssignmentRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.ListOSPolicyAssignmentRevisionsResponse
 
     func deleteOspolicyAssignment(
-      request: DeleteOSPolicyAssignmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOSPolicyAssignmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getOspolicyAssignmentReport(
-      request: GetOSPolicyAssignmentReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOSPolicyAssignmentReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.OSPolicyAssignmentReport
 
     func listOspolicyAssignmentReports(
-      request: ListOSPolicyAssignmentReportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOSPolicyAssignmentReportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.ListOSPolicyAssignmentReportsResponse
 
     func getInventory(
-      request: GetInventoryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInventoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.Inventory
 
     func listInventories(
-      request: ListInventoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInventoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.ListInventoriesResponse
 
     func getVulnerabilityReport(
-      request: GetVulnerabilityReportRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVulnerabilityReportRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.VulnerabilityReport
 
     func listVulnerabilityReports(
-      request: ListVulnerabilityReportsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVulnerabilityReportsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSConfigV1.ListVulnerabilityReportsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

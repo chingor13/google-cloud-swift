@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A `Rollout` resource in the Cloud Deploy API.
 ///
 /// A `Rollout` contains information around a specific deployment to a `Target`.
-public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Rollout: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Name of the `Rollout`. Format is
@@ -55,19 +55,19 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var labels: [Swift.String: Swift.String] = [:]
 
   /// Output only. Time at which the `Rollout` was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time at which the `Rollout` was approved.
-  public var approveTime: GoogleCloudWKT.Timestamp? = nil
+  public var approveTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time at which the `Rollout` was enqueued.
-  public var enqueueTime: GoogleCloudWKT.Timestamp? = nil
+  public var enqueueTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time at which the `Rollout` started deploying.
-  public var deployStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var deployStartTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Time at which the `Rollout` finished deploying.
-  public var deployEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var deployEndTime: GoogleWKT.Timestamp? = nil
 
   /// Required. The ID of Target to which this `Rollout` is deploying.
   public var targetId: Swift.String = Swift.String()
@@ -116,7 +116,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The AutomationRun actively repairing the rollout.
   public var activeRepairAutomationRun: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Rollout`.
   public init() {}
@@ -211,16 +211,13 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.labels = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.approveTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .approveTime)
-    self.enqueueTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .enqueueTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.approveTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .approveTime)
+    self.enqueueTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .enqueueTime)
     self.deployStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deployStartTime)
+      GoogleWKT.Timestamp.self, forKey: .deployStartTime)
     self.deployEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deployEndTime)
+      GoogleWKT.Timestamp.self, forKey: .deployEndTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .targetId) {
       self.targetId = value
     }
@@ -266,7 +263,7 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -736,10 +733,10 @@ public struct Rollout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.Rollout"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

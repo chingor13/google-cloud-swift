@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@
       }
 
       public func getConnectSettings(
-        request: GetConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConnectSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings {
         try await self._intercept(
           request: request,
           options: options,
           name: "getConnectSettings",
           action: {
-            (r: GetConnectSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetConnectSettingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.ConnectSettings
             in
             return try await self.inner.getConnectSettings(request: r, options: o)
@@ -73,14 +73,14 @@
       }
 
       public func resolveConnectSettings(
-        request: ResolveConnectSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ResolveConnectSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.ConnectSettings {
         try await self._intercept(
           request: request,
           options: options,
           name: "resolveConnectSettings",
           action: {
-            (r: ResolveConnectSettingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ResolveConnectSettingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.ConnectSettings
             in
             return try await self.inner.resolveConnectSettings(request: r, options: o)
@@ -88,14 +88,14 @@
       }
 
       public func generateEphemeralCert(
-        request: GenerateEphemeralCertRequest, options: GoogleCloudGax.RequestOptions
+        request: GenerateEphemeralCertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.GenerateEphemeralCertResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "generateEphemeralCert",
           action: {
-            (r: GenerateEphemeralCertRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GenerateEphemeralCertRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudSqlV1.GenerateEphemeralCertResponse
             in
             return try await self.inner.generateEphemeralCert(request: r, options: o)

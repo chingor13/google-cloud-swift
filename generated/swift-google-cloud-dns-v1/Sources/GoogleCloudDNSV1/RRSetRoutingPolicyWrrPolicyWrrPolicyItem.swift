@@ -15,11 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A routing block which contains the routing information for one WRR item.
-public struct RRSetRoutingPolicyWrrPolicyWrrPolicyItem: Codable, Equatable, GoogleCloudWKT
-    ._AnyPackable,
+public struct RRSetRoutingPolicyWrrPolicyWrrPolicyItem: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Endpoints that are health checked before making the routing decision. The unhealthy endpoints are omitted from the result. If all endpoints within a bucket are unhealthy, we choose a different bucket (sampled with respect to its weight) for responding. If DNSSEC is enabled for this zone, only one of `rrdata` or `health_checked_targets` can be set.
@@ -35,7 +34,7 @@ public struct RRSetRoutingPolicyWrrPolicyWrrPolicyItem: Codable, Equatable, Goog
   /// The weight corresponding to this `WrrPolicyItem` object. When multiple `WrrPolicyItem` objects are configured, the probability of returning an `WrrPolicyItem` object's data is proportional to its weight relative to the sum of weights configured for all items. This weight must be non-negative.
   public var weight: Swift.Double? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RRSetRoutingPolicyWrrPolicyWrrPolicyItem`.
   public init() {}
@@ -88,7 +87,7 @@ public struct RRSetRoutingPolicyWrrPolicyWrrPolicyItem: Codable, Equatable, Goog
     self.weight = try container.decodeIfPresent(Swift.Double.self, forKey: .weight)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -107,10 +106,10 @@ public struct RRSetRoutingPolicyWrrPolicyWrrPolicyItem: Codable, Equatable, Goog
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.RRSetRoutingPolicyWrrPolicyWrrPolicyItem"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

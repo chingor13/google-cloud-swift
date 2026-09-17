@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata about the service in a location.
-public struct LocationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct LocationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The versions of Hive Metastore that can be used when creating a new
@@ -26,7 +26,7 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// `HiveMetastoreVersion` in the list will set `is_default`.
   public var supportedHiveMetastoreVersions: [LocationMetadata.HiveMetastoreVersion] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `LocationMetadata`.
   public init() {}
@@ -67,7 +67,7 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -81,7 +81,7 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// A specification of a supported version of the Hive Metastore software.
-  public struct HiveMetastoreVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct HiveMetastoreVersion: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The semantic version of the Hive Metastore software.
@@ -91,7 +91,7 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// created with a `HiveMetastoreConfig` that omits the `version`.
     public var isDefault: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `HiveMetastoreVersion`.
     public init() {}
@@ -134,7 +134,7 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -150,21 +150,21 @@ public struct LocationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.metastore.v1.LocationMetadata.HiveMetastoreVersion"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.metastore.v1.LocationMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,30 +15,30 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleIAMV1
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ContainerAnalysisStub: Sendable {
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func getVulnerabilityOccurrencesSummary(
-      request: GetVulnerabilityOccurrencesSummaryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVulnerabilityOccurrencesSummaryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerAnalysisV1.VulnerabilityOccurrencesSummary
 
     func exportSbom(
-      request: ExportSBOMRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportSBOMRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContainerAnalysisV1.ExportSBOMResponse
   }
 }

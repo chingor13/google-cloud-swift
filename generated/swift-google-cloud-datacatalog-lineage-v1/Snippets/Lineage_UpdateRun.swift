@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudDataCatalogLineageV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: LineageClient, projectId: String, locationId: String, processId: String, runId: String
@@ -32,7 +32,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/processes/\(processId)/runs/\(runId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Logging configuration of the service.
 ///
@@ -46,7 +46,7 @@ import Foundation
 ///       - monitored_resource: library.googleapis.com/branch
 ///         logs:
 ///         - activity_history
-public struct Logging: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Logging: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Logging configurations for sending logs to the producer project.
@@ -61,7 +61,7 @@ public struct Logging: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// one consumer destination.
   public var consumerDestinations: [Logging.LoggingDestination] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Logging`.
   public init() {}
@@ -108,7 +108,7 @@ public struct Logging: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -123,7 +123,7 @@ public struct Logging: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Configuration of a specific logging destination (the producer project
   /// or the consumer project).
-  public struct LoggingDestination: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LoggingDestination: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The monitored resource type. The type must be defined in the
@@ -141,7 +141,7 @@ public struct Logging: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.api.Service.logs]: <doc:Service/logs>
     public var logs: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LoggingDestination`.
     public init() {}
@@ -184,7 +184,7 @@ public struct Logging: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -200,21 +200,21 @@ public struct Logging: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.api.Logging.LoggingDestination"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.api.Logging"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

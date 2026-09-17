@@ -16,12 +16,12 @@
 
 #if SecuritySettingsService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents the settings related to security issues, such as data redaction
   /// and data retention. It may take hours for updates on the settings to
   /// propagate to all the related components and take effect.
-  public struct SecuritySettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SecuritySettings: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Resource name of the settings.
@@ -129,7 +129,7 @@
     /// a few days without allowing direct readings.
     public var dataRetention: OneOf_DataRetention? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SecuritySettings`.
     public init() {}
@@ -237,7 +237,7 @@
       self.dataRetention = dataRetention
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -267,7 +267,7 @@
     }
 
     /// Settings for exporting audio.
-    public struct AudioExportSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AudioExportSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Cloud Storage bucket to export audio record to.
@@ -297,7 +297,7 @@
       /// is not exported.
       public var storeTtsAudio: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AudioExportSettings`.
       public init() {}
@@ -359,7 +359,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -492,24 +492,24 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.SecuritySettings.AudioExportSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Settings for exporting conversations to
     /// [Insights](https://cloud.google.com/contact-center/insights/docs).
-    public struct InsightsExportSettings: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct InsightsExportSettings: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// If enabled, we will automatically exports
       /// conversations to Insights and Insights runs its analyzers.
       public var enableInsightsExport: Swift.Bool = Swift.Bool()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `InsightsExportSettings`.
       public init() {}
@@ -548,7 +548,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -564,11 +564,11 @@
         return
           "type.googleapis.com/google.cloud.dialogflow.cx.v3.SecuritySettings.InsightsExportSettings"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -992,11 +992,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.SecuritySettings"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

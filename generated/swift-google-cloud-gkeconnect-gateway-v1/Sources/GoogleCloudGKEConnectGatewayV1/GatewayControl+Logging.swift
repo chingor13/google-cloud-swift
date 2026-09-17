@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func generateCredentials(
-      request: GenerateCredentialsRequest, options: GoogleCloudGax.RequestOptions
+      request: GenerateCredentialsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudGKEConnectGatewayV1.GenerateCredentialsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "generateCredentials",
         action: {
-          (r: GenerateCredentialsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GenerateCredentialsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudGKEConnectGatewayV1.GenerateCredentialsResponse
           in
           return try await self.inner.generateCredentials(request: r, options: o)

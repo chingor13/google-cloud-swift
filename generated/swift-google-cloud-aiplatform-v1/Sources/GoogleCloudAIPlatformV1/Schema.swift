@@ -16,13 +16,13 @@
 
 #if GenAiCacheService || GenAiTuningService || LlmUtilityService || PredictionService || VertexRagService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Schema is used to define the format of input/output data. Represents a select
   /// subset of an [OpenAPI 3.0 schema
   /// object](https://spec.openapis.org/oas/v3.0.3#schema-object). More fields may
   /// be added in the future as needed.
-  public struct Schema: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Schema: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The type of the data.
@@ -45,11 +45,11 @@
     public var nullable: Swift.Bool = Swift.Bool()
 
     /// Optional. Default value of the data.
-    public var `default`: GoogleCloudWKT.Value? = nil
+    public var `default`: GoogleWKT.Value? = nil
 
     /// Optional. SCHEMA FIELDS FOR TYPE ARRAY
     /// Schema of the elements of Type.ARRAY.
-    public var items: GoogleCloudWKT.Recursive<Schema>? = nil
+    public var items: GoogleWKT.Recursive<Schema>? = nil
 
     /// Optional. Minimum number of the elements for Type.ARRAY.
     public var minItems: Swift.Int64 = Swift.Int64()
@@ -103,7 +103,7 @@
 
     /// Optional. Example of the object. Will only populated when the object is the
     /// root.
-    public var example: GoogleCloudWKT.Value? = nil
+    public var example: GoogleWKT.Value? = nil
 
     /// Optional. The value should be validated against any (one or more) of the
     /// subschemas in the list.
@@ -111,7 +111,7 @@
 
     /// Optional. Can either be a boolean or an object; controls the presence of
     /// additional properties.
-    public var additionalProperties: GoogleCloudWKT.Value? = nil
+    public var additionalProperties: GoogleWKT.Value? = nil
 
     /// Optional. Allows indirect references between schema nodes. The value should
     /// be a valid reference to a child of the root `defs`.
@@ -140,7 +140,7 @@
     /// Only allowed at the root of the schema.
     public var defs: [Swift.String: Schema] = [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Schema`.
     public init() {}
@@ -236,9 +236,8 @@
       if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .nullable) {
         self.nullable = value
       }
-      self.`default` = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .`default`)
-      self.items = try container.decodeIfPresent(
-        GoogleCloudWKT.Recursive<Schema>.self, forKey: .items)
+      self.`default` = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .`default`)
+      self.items = try container.decodeIfPresent(GoogleWKT.Recursive<Schema>.self, forKey: .items)
       if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .minItems) {
         self.minItems = value
       }
@@ -279,12 +278,12 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .pattern) {
         self.pattern = value
       }
-      self.example = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .example)
+      self.example = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .example)
       if let value = try container.decodeIfPresent([Schema].self, forKey: .anyOf) {
         self.anyOf = value
       }
       self.additionalProperties = try container.decodeIfPresent(
-        GoogleCloudWKT.Value.self, forKey: .additionalProperties)
+        GoogleWKT.Value.self, forKey: .additionalProperties)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .ref) {
         self.ref = value
       }
@@ -293,7 +292,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -332,11 +331,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Schema"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

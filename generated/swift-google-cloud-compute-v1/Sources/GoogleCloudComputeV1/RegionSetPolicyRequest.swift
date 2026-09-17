@@ -16,9 +16,9 @@
 
 #if NetworkAttachments || NodeTemplates || RegionBackendBuckets || RegionBackendServices || RegionDisks || RegionInstantSnapshotGroups || RegionInstantSnapshots || RegionNetworkFirewallPolicies || RegionSnapshots || ResourcePolicies || ServiceAttachments || Subnetworks
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
-  public struct RegionSetPolicyRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct RegionSetPolicyRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Flatten Policy to create a backwacd compatible wire-format.
@@ -34,7 +34,7 @@
     /// valid policy but certain services (like Projects) might reject them.
     public var policy: Policy? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `RegionSetPolicyRequest`.
     public init() {}
@@ -75,7 +75,7 @@
         self.bindings = value
       }
       if let s = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -86,7 +86,7 @@
       self.policy = try container.decodeIfPresent(Policy.self, forKey: .policy)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -95,7 +95,7 @@
       try container.encode(self.bindings, forKey: .bindings)
       if let v = etag {
         try container.encode(
-          GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .etag
+          GoogleWKT._DiscoveryBase64.encode(v), forKey: .etag
         )
       }
       try container.encodeIfPresent(self.policy, forKey: .policy)
@@ -107,11 +107,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.RegionSetPolicyRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

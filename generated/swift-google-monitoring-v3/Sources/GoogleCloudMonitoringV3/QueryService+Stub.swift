@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol QueryServiceStub: Sendable {
     func queryTimeSeries(
-      request: QueryTimeSeriesRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryTimeSeriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.QueryTimeSeriesResponse
   }
 }

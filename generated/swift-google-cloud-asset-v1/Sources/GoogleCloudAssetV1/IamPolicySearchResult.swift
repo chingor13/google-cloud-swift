@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleIAMV1
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A result of IAM Policy search, containing information of an IAM policy.
-public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IamPolicySearchResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The full resource name of the resource associated with this IAM policy.
@@ -95,7 +95,7 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// information to explain why the search result matches the query.
   public var explanation: IamPolicySearchResult.Explanation? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IamPolicySearchResult`.
   public init() {}
@@ -160,7 +160,7 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPack
       IamPolicySearchResult.Explanation.self, forKey: .explanation)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -179,7 +179,7 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPack
   }
 
   /// Explanation about the IAM policy search result.
-  public struct Explanation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Explanation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The map from roles to their included permissions that match the
@@ -192,7 +192,7 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPack
     public var matchedPermissions: [Swift.String: IamPolicySearchResult.Explanation.Permissions] =
       [:]
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Explanation`.
     public init() {}
@@ -233,7 +233,7 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPack
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -246,13 +246,13 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPack
     }
 
     /// IAM permissions
-    public struct Permissions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct Permissions: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// A list of permissions. A sample permission string: `compute.disk.get`.
       public var permissions: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `Permissions`.
       public init() {}
@@ -290,7 +290,7 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPack
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -306,32 +306,32 @@ public struct IamPolicySearchResult: Codable, Equatable, GoogleCloudWKT._AnyPack
         return
           "type.googleapis.com/google.cloud.asset.v1.IamPolicySearchResult.Explanation.Permissions"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.asset.v1.IamPolicySearchResult.Explanation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.asset.v1.IamPolicySearchResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

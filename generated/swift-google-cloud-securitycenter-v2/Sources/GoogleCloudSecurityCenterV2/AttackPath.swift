@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A path that an attacker could take to reach an exposed resource.
-public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AttackPath: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The attack path name, for example,
@@ -31,7 +31,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// A list of the edges between nodes in this attack path.
   public var edges: [AttackPath.AttackPathEdge] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AttackPath`.
   public init() {}
@@ -81,7 +81,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Represents one point that an attacker passes through in this attack path.
-  public struct AttackPathNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AttackPathNode: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the resource at this point in the attack path.
@@ -121,7 +121,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// A list of attack step nodes that exist in this attack path node.
     public var attackSteps: [AttackPath.AttackPathNode.AttackStepNode] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AttackPathNode`.
     public init() {}
@@ -188,7 +188,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -206,7 +206,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
 
     /// A finding that is associated with this node in the attack path.
-    public struct PathNodeAssociatedFinding: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct PathNodeAssociatedFinding: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Canonical name of the associated findings. Example:
@@ -219,7 +219,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Full resource name of the finding.
       public var name: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `PathNodeAssociatedFinding`.
       public init() {}
@@ -267,7 +267,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -285,16 +285,16 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.securitycenter.v2.AttackPath.AttackPathNode.PathNodeAssociatedFinding"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Detailed steps the attack can take between path nodes.
-    public struct AttackStepNode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct AttackStepNode: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Unique ID for one Node
@@ -312,7 +312,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       /// Attack step description
       public var description: Swift.String = Swift.String()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `AttackStepNode`.
       public init() {}
@@ -374,7 +374,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -394,11 +394,11 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         return
           "type.googleapis.com/google.cloud.securitycenter.v2.AttackPath.AttackPathNode.AttackStepNode"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -524,17 +524,17 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.AttackPath.AttackPathNode"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents a connection between a source node and a destination node in
   /// this attack path.
-  public struct AttackPathEdge: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AttackPathEdge: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The attack node uuid of the source node.
@@ -543,7 +543,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The attack node uuid of the destination node.
     public var destination: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AttackPathEdge`.
     public init() {}
@@ -586,7 +586,7 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -602,21 +602,21 @@ public struct AttackPath: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.securitycenter.v2.AttackPath.AttackPathEdge"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.AttackPath"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,78 +16,78 @@
 
 #if ConversationalSearchService
   import Foundation
-  import GoogleCloudWKT
   import GoogleLongRunning
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol ConversationalSearchServiceStub: Sendable {
       func converseConversation(
-        request: ConverseConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: ConverseConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ConverseConversationResponse
 
       func createConversation(
-        request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation
 
       func deleteConversation(
-        request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteConversationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func updateConversation(
-        request: UpdateConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation
 
       func getConversation(
-        request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+        request: GetConversationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Conversation
 
       func listConversations(
-        request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListConversationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListConversationsResponse
 
       func answerQuery(
-        request: AnswerQueryRequest, options: GoogleCloudGax.RequestOptions
+        request: AnswerQueryRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.AnswerQueryResponse
 
       func streamAnswerQuery(
-        request: AnswerQueryRequest, options: GoogleCloudGax.RequestOptions
+        request: AnswerQueryRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.AnswerQueryResponse
 
       func getAnswer(
-        request: GetAnswerRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAnswerRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Answer
 
       func createSession(
-        request: CreateSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session
 
       func deleteSession(
-        request: DeleteSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSessionRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       func updateSession(
-        request: UpdateSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session
 
       func getSession(
-        request: GetSessionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetSessionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Session
 
       func listSessions(
-        request: ListSessionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListSessionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListSessionsResponse
 
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }

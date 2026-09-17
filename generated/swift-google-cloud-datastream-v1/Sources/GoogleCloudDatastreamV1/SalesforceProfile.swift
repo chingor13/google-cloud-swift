@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Salesforce profile
-public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SalesforceProfile: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Domain endpoint for the Salesforce connection.
@@ -27,7 +27,7 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// Credentials for Salesforce connection.
   public var credentials: OneOf_Credentials? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SalesforceProfile`.
   public init() {}
@@ -91,7 +91,7 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
     self.credentials = credentials
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -113,7 +113,7 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Username-password credentials.
-  public struct UserCredentials: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct UserCredentials: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Username for the Salesforce connection.
@@ -137,7 +137,7 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// `security_token` field.
     public var secretManagerStoredSecurityToken: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `UserCredentials`.
     public init() {}
@@ -201,7 +201,7 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -221,16 +221,16 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.SalesforceProfile.UserCredentials"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// OAuth2 Client Credentials.
-  public struct Oauth2ClientCredentials: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Oauth2ClientCredentials: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Client ID for Salesforce OAuth2 Client Credentials.
@@ -245,7 +245,7 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// `client_secret` field.
     public var secretManagerStoredClientSecret: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Oauth2ClientCredentials`.
     public init() {}
@@ -296,7 +296,7 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -315,11 +315,11 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.datastream.v1.SalesforceProfile.Oauth2ClientCredentials"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -334,10 +334,10 @@ public struct SalesforceProfile: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datastream.v1.SalesforceProfile"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

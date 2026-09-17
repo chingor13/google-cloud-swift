@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudHypercomputeClusterV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: HypercomputeClusterClient, projectId: String, locationId: String, clusterId: String
@@ -32,7 +32,7 @@ func sample(
         $0.cluster = Cluster().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/clusters/\(clusterId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

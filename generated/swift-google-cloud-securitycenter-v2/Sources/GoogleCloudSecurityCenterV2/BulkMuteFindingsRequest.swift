@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for bulk findings update.
 ///
@@ -23,7 +23,7 @@ import Foundation
 /// 1. If multiple bulk update requests match the same resource, the order in
 /// which they get executed is not defined.
 /// 2. Once a bulk operation is started, there is no way to stop it.
-public struct BulkMuteFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BulkMuteFindingsRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The parent, at which bulk action needs to be applied. If no
@@ -65,7 +65,7 @@ public struct BulkMuteFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// `UNDEFINED` will clear the mute state on all matching findings.
   public var muteState: BulkMuteFindingsRequest.MuteState = BulkMuteFindingsRequest.MuteState()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BulkMuteFindingsRequest`.
   public init() {}
@@ -115,7 +115,7 @@ public struct BulkMuteFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -237,10 +237,10 @@ public struct BulkMuteFindingsRequest: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.securitycenter.v2.BulkMuteFindingsRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

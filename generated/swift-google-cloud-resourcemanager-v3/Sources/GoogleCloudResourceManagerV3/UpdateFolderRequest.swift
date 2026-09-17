@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The request sent to the
 /// [UpdateFolder][google.cloud.resourcemanager.v3.Folder.UpdateFolder]
@@ -27,7 +27,7 @@ import Foundation
 /// change the `parent` field.
 ///
 /// [google.cloud.resourcemanager.v3.Folders.MoveFolder]: <doc:FoldersClient/moveFolder(request:options:)>
-public struct UpdateFolderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateFolderRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The new definition of the Folder. It must include the `name`
@@ -36,9 +36,9 @@ public struct UpdateFolderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
 
   /// Required. Fields to be updated.
   /// Only the `display_name` can be updated.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateFolderRequest`.
   public init() {}
@@ -74,11 +74,10 @@ public struct UpdateFolderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.folder = try container.decodeIfPresent(Folder.self, forKey: .folder)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -94,10 +93,10 @@ public struct UpdateFolderRequest: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.resourcemanager.v3.UpdateFolderRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -16,13 +16,13 @@
 
 #if FeaturestoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [FeaturestoreService.ListFeaturestores][google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores].
   ///
   /// [google.cloud.aiplatform.v1.FeaturestoreService.ListFeaturestores]: <doc:FeaturestoreServiceClient/listFeaturestores(request:options:)>
-  public struct ListFeaturestoresRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ListFeaturestoresRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The resource name of the Location to list Featurestores.
@@ -78,9 +78,9 @@
     public var orderBy: Swift.String = Swift.String()
 
     /// Mask specifying which fields to read.
-    public var readMask: GoogleCloudWKT.FieldMask? = nil
+    public var readMask: GoogleWKT.FieldMask? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ListFeaturestoresRequest`.
     public init() {}
@@ -138,11 +138,10 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .orderBy) {
         self.orderBy = value
       }
-      self.readMask = try container.decodeIfPresent(
-        GoogleCloudWKT.FieldMask.self, forKey: .readMask)
+      self.readMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .readMask)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -162,11 +161,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.ListFeaturestoresRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

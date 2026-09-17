@@ -24,17 +24,17 @@ let package = Package(
     .library(name: "GoogleBigQueryLoggingV1", targets: ["GoogleBigQueryLoggingV1"])
   ],
   dependencies: [
-    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
     .package(url: "https://github.com/googleapis/swift-google-iam-v1", from: "0.1.0-preview"),
     .package(url: "https://github.com/googleapis/swift-google-rpc", from: "0.1.0-preview"),
+    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
   ],
   targets: [
     .target(
       name: "GoogleBigQueryLoggingV1",
       dependencies: [
-        .product(name: "GoogleCloudWKT", package: "swift-google-wkt"),
         .product(name: "GoogleIAMV1", package: "swift-google-iam-v1"),
         .product(name: "GoogleRpc", package: "swift-google-rpc"),
+        .product(name: "GoogleWKT", package: "swift-google-wkt"),
       ],
     )
   ]

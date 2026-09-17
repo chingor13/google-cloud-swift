@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for "LivestreamService.UpdateChannel".
-public struct UpdateChannelRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct UpdateChannelRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Field mask is used to specify the fields to be overwritten in the Channel
@@ -41,7 +41,7 @@ public struct UpdateChannelRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// If the mask is not present, then each field from the list above is updated
   /// if the field appears in the request payload. To unset a field, add the
   /// field to the update mask and remove it from the request payload.
-  public var updateMask: GoogleCloudWKT.FieldMask? = nil
+  public var updateMask: GoogleWKT.FieldMask? = nil
 
   /// Required. The channel resource to be updated.
   public var channel: Channel? = nil
@@ -61,7 +61,7 @@ public struct UpdateChannelRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// not supported `(00000000-0000-0000-0000-000000000000)`.
   public var requestId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `UpdateChannelRequest`.
   public init() {}
@@ -98,15 +98,14 @@ public struct UpdateChannelRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.updateMask = try container.decodeIfPresent(
-      GoogleCloudWKT.FieldMask.self, forKey: .updateMask)
+    self.updateMask = try container.decodeIfPresent(GoogleWKT.FieldMask.self, forKey: .updateMask)
     self.channel = try container.decodeIfPresent(Channel.self, forKey: .channel)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .requestId) {
       self.requestId = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -123,10 +122,10 @@ public struct UpdateChannelRequest: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.livestream.v1.UpdateChannelRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

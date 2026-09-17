@@ -16,135 +16,135 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ConfigDeliveryStub: Sendable {
     func listResourceBundles(
-      request: ListResourceBundlesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListResourceBundlesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.ListResourceBundlesResponse
 
     func getResourceBundle(
-      request: GetResourceBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetResourceBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.ResourceBundle
 
     func createResourceBundle(
-      request: CreateResourceBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateResourceBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateResourceBundle(
-      request: UpdateResourceBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateResourceBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteResourceBundle(
-      request: DeleteResourceBundleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteResourceBundleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listFleetPackages(
-      request: ListFleetPackagesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFleetPackagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.ListFleetPackagesResponse
 
     func getFleetPackage(
-      request: GetFleetPackageRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFleetPackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.FleetPackage
 
     func createFleetPackage(
-      request: CreateFleetPackageRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFleetPackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateFleetPackage(
-      request: UpdateFleetPackageRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFleetPackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteFleetPackage(
-      request: DeleteFleetPackageRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFleetPackageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listReleases(
-      request: ListReleasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReleasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.ListReleasesResponse
 
     func getRelease(
-      request: GetReleaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReleaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.Release
 
     func createRelease(
-      request: CreateReleaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReleaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateRelease(
-      request: UpdateReleaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReleaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteRelease(
-      request: DeleteReleaseRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReleaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listVariants(
-      request: ListVariantsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListVariantsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.ListVariantsResponse
 
     func getVariant(
-      request: GetVariantRequest, options: GoogleCloudGax.RequestOptions
+      request: GetVariantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.Variant
 
     func createVariant(
-      request: CreateVariantRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateVariantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateVariant(
-      request: UpdateVariantRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateVariantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteVariant(
-      request: DeleteVariantRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteVariantRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listRollouts(
-      request: ListRolloutsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRolloutsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.ListRolloutsResponse
 
     func getRollout(
-      request: GetRolloutRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRolloutRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudConfigDeliveryV1.Rollout
 
     func suspendRollout(
-      request: SuspendRolloutRequest, options: GoogleCloudGax.RequestOptions
+      request: SuspendRolloutRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func resumeRollout(
-      request: ResumeRolloutRequest, options: GoogleCloudGax.RequestOptions
+      request: ResumeRolloutRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func abortRollout(
-      request: AbortRolloutRequest, options: GoogleCloudGax.RequestOptions
+      request: AbortRolloutRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudServiceDirectoryV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(
   client: RegistrationServiceClient, projectId: String, locationId: String, namespaceId: String
@@ -31,7 +31,7 @@ func sample(
         $0.namespace = Namespace().with {
           $0.name = "projects/\(projectId)/locations/\(locationId)/namespaces/\(namespaceId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   print("Success: \(response)")

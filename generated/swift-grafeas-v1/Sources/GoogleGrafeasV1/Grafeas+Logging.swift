@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func getOccurrence(
-      request: GetOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOccurrenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Occurrence {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOccurrence",
         action: {
-          (r: GetOccurrenceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetOccurrenceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.Occurrence
           in
           return try await self.inner.getOccurrence(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func listOccurrences(
-      request: ListOccurrencesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOccurrencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.ListOccurrencesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOccurrences",
         action: {
-          (r: ListOccurrencesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListOccurrencesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.ListOccurrencesResponse
           in
           return try await self.inner.listOccurrences(request: r, options: o)
@@ -87,27 +87,26 @@ extension Clients {
     }
 
     public func deleteOccurrence(
-      request: DeleteOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOccurrenceRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOccurrence",
-        action: {
-          (r: DeleteOccurrenceRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteOccurrenceRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteOccurrence(request: r, options: o)
         })
     }
 
     public func createOccurrence(
-      request: CreateOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOccurrenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Occurrence {
       try await self._intercept(
         request: request,
         options: options,
         name: "createOccurrence",
         action: {
-          (r: CreateOccurrenceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateOccurrenceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.Occurrence
           in
           return try await self.inner.createOccurrence(request: r, options: o)
@@ -115,14 +114,14 @@ extension Clients {
     }
 
     public func batchCreateOccurrences(
-      request: BatchCreateOccurrencesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateOccurrencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.BatchCreateOccurrencesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchCreateOccurrences",
         action: {
-          (r: BatchCreateOccurrencesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchCreateOccurrencesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.BatchCreateOccurrencesResponse
           in
           return try await self.inner.batchCreateOccurrences(request: r, options: o)
@@ -130,14 +129,14 @@ extension Clients {
     }
 
     public func updateOccurrence(
-      request: UpdateOccurrenceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateOccurrenceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Occurrence {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateOccurrence",
         action: {
-          (r: UpdateOccurrenceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateOccurrenceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.Occurrence
           in
           return try await self.inner.updateOccurrence(request: r, options: o)
@@ -145,14 +144,14 @@ extension Clients {
     }
 
     public func getOccurrenceNote(
-      request: GetOccurrenceNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOccurrenceNoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Note {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOccurrenceNote",
         action: {
-          (r: GetOccurrenceNoteRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetOccurrenceNoteRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.Note
           in
           return try await self.inner.getOccurrenceNote(request: r, options: o)
@@ -160,28 +159,28 @@ extension Clients {
     }
 
     public func getNote(
-      request: GetNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Note {
       try await self._intercept(
         request: request,
         options: options,
         name: "getNote",
         action: {
-          (r: GetNoteRequest, o: GoogleCloudGax.RequestOptions) async throws -> GoogleGrafeasV1.Note
+          (r: GetNoteRequest, o: GoogleGax.RequestOptions) async throws -> GoogleGrafeasV1.Note
           in
           return try await self.inner.getNote(request: r, options: o)
         })
     }
 
     public func listNotes(
-      request: ListNotesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNotesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.ListNotesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listNotes",
         action: {
-          (r: ListNotesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListNotesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.ListNotesResponse
           in
           return try await self.inner.listNotes(request: r, options: o)
@@ -189,41 +188,40 @@ extension Clients {
     }
 
     public func deleteNote(
-      request: DeleteNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNoteRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteNote",
-        action: { (r: DeleteNoteRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteNoteRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteNote(request: r, options: o)
         })
     }
 
     public func createNote(
-      request: CreateNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Note {
       try await self._intercept(
         request: request,
         options: options,
         name: "createNote",
         action: {
-          (r: CreateNoteRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleGrafeasV1.Note
+          (r: CreateNoteRequest, o: GoogleGax.RequestOptions) async throws -> GoogleGrafeasV1.Note
           in
           return try await self.inner.createNote(request: r, options: o)
         })
     }
 
     public func batchCreateNotes(
-      request: BatchCreateNotesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateNotesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.BatchCreateNotesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "batchCreateNotes",
         action: {
-          (r: BatchCreateNotesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: BatchCreateNotesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.BatchCreateNotesResponse
           in
           return try await self.inner.batchCreateNotes(request: r, options: o)
@@ -231,29 +229,28 @@ extension Clients {
     }
 
     public func updateNote(
-      request: UpdateNoteRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNoteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.Note {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateNote",
         action: {
-          (r: UpdateNoteRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleGrafeasV1.Note
+          (r: UpdateNoteRequest, o: GoogleGax.RequestOptions) async throws -> GoogleGrafeasV1.Note
           in
           return try await self.inner.updateNote(request: r, options: o)
         })
     }
 
     public func listNoteOccurrences(
-      request: ListNoteOccurrencesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNoteOccurrencesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleGrafeasV1.ListNoteOccurrencesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listNoteOccurrences",
         action: {
-          (r: ListNoteOccurrencesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListNoteOccurrencesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleGrafeasV1.ListNoteOccurrencesResponse
           in
           return try await self.inner.listNoteOccurrences(request: r, options: o)

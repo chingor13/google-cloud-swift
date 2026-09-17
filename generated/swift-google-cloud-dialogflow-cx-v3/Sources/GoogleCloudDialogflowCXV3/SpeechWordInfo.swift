@@ -16,10 +16,10 @@
 
 #if Sessions
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Information for a word recognized by the speech recognizer.
-  public struct SpeechWordInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SpeechWordInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The word this info is for.
@@ -28,12 +28,12 @@
     /// Time offset relative to the beginning of the audio that corresponds to the
     /// start of the spoken word. This is an experimental feature and the accuracy
     /// of the time offset can vary.
-    public var startOffset: GoogleCloudWKT.Duration? = nil
+    public var startOffset: GoogleWKT.Duration? = nil
 
     /// Time offset relative to the beginning of the audio that corresponds to the
     /// end of the spoken word. This is an experimental feature and the accuracy of
     /// the time offset can vary.
-    public var endOffset: GoogleCloudWKT.Duration? = nil
+    public var endOffset: GoogleWKT.Duration? = nil
 
     /// The Speech confidence between 0.0 and 1.0 for this word. A higher number
     /// indicates an estimated greater likelihood that the recognized word is
@@ -44,7 +44,7 @@
     /// audio input. Users should also not rely on it to always be provided.
     public var confidence: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SpeechWordInfo`.
     public init() {}
@@ -87,15 +87,14 @@
         self.word = value
       }
       self.startOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .startOffset)
-      self.endOffset = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .endOffset)
+        GoogleWKT.Duration.self, forKey: .startOffset)
+      self.endOffset = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .endOffset)
       if let value = try container.decodeIfPresent(Swift.Float.self, forKey: .confidence) {
         self.confidence = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -113,11 +112,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dialogflow.cx.v3.SpeechWordInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

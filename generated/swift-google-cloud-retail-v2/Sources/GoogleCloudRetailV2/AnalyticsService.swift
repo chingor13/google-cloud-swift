@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for managing & accessing retail search business metric.
 /// Retail recommendation business metric is currently not available.
@@ -29,11 +29,11 @@ import GoogleCloudGax
 /// @Snippet(path: "AnalyticsServiceQuickstart")
 public final class AnalyticsServiceClient: Clients.AnalyticsServiceProtocol, Sendable {
   let inner: any Clients.AnalyticsServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `AnalyticsServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.AnalyticsServiceStub = try Clients.AnalyticsServiceTransport(options)
     inner = Clients.AnalyticsServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -51,7 +51,7 @@ public final class AnalyticsServiceClient: Clients.AnalyticsServiceProtocol, Sen
   ///
   /// @Snippet(path: "AnalyticsService_ExportAnalyticsMetrics")
   public func exportAnalyticsMetrics(
-    request: ExportAnalyticsMetricsRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportAnalyticsMetricsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.exportAnalyticsMetrics(request: request, options: options)
   }
@@ -63,23 +63,22 @@ public final class AnalyticsServiceClient: Clients.AnalyticsServiceProtocol, Sen
   ///
   /// @Snippet(path: "AnalyticsService_ExportAnalyticsMetrics")
   public func exportAnalyticsMetrics(
-    withPolling: ExportAnalyticsMetricsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportAnalyticsMetricsResponse> {
+    withPolling: ExportAnalyticsMetricsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportAnalyticsMetricsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ExportAnalyticsMetricsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ExportAnalyticsMetricsResponse>.State in
       return try op._extractStatus(ExportAnalyticsMetricsResponse.self)
     }
     let rawOp = try await self.exportAnalyticsMetrics(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportAnalyticsMetricsResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<ExportAnalyticsMetricsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -93,7 +92,7 @@ public final class AnalyticsServiceClient: Clients.AnalyticsServiceProtocol, Sen
   ///
   /// @Snippet(path: "AnalyticsService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -104,7 +103,7 @@ public final class AnalyticsServiceClient: Clients.AnalyticsServiceProtocol, Sen
   ///
   /// @Snippet(path: "AnalyticsService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -112,7 +111,7 @@ public final class AnalyticsServiceClient: Clients.AnalyticsServiceProtocol, Sen
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -121,7 +120,7 @@ public final class AnalyticsServiceClient: Clients.AnalyticsServiceProtocol, Sen
   ///
   /// @Snippet(path: "AnalyticsService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -140,7 +139,7 @@ extension Clients {
 
     /// See `AnalyticsServiceClient.exportAnalyticsMetrics`.
     func exportAnalyticsMetrics(withPolling: ExportAnalyticsMetricsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ExportAnalyticsMetricsResponse>
+      -> any GoogleGax.PollableOperation<ExportAnalyticsMetricsResponse>
 
     /// See `AnalyticsServiceClient.listOperations`.
     func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -159,22 +158,22 @@ extension Clients {
 
     /// See `AnalyticsServiceClient.exportAnalyticsMetrics`.
     func exportAnalyticsMetrics(
-      request: ExportAnalyticsMetricsRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportAnalyticsMetricsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `AnalyticsServiceClient.exportAnalyticsMetrics`.
     func exportAnalyticsMetrics(
-      withPolling: ExportAnalyticsMetricsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportAnalyticsMetricsResponse>
+      withPolling: ExportAnalyticsMetricsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportAnalyticsMetricsResponse>
 
     /// See `AnalyticsServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `AnalyticsServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
   }
 }
@@ -188,26 +187,25 @@ extension Clients.AnalyticsServiceProtocol {
   }
 
   public func exportAnalyticsMetrics(
-    request: ExportAnalyticsMetricsRequest, options: GoogleCloudGax.RequestOptions
+    request: ExportAnalyticsMetricsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func exportAnalyticsMetrics(withPolling: ExportAnalyticsMetricsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<ExportAnalyticsMetricsResponse>
+    -> any GoogleGax.PollableOperation<ExportAnalyticsMetricsResponse>
   {
     try await self.exportAnalyticsMetrics(withPolling: withPolling, options: .init())
   }
 
   public func exportAnalyticsMetrics(
-    withPolling: ExportAnalyticsMetricsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ExportAnalyticsMetricsResponse> {
+    withPolling: ExportAnalyticsMetricsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ExportAnalyticsMetricsResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<ExportAnalyticsMetricsResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ExportAnalyticsMetricsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -218,9 +216,9 @@ extension Clients.AnalyticsServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -230,13 +228,13 @@ extension Clients.AnalyticsServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -257,9 +255,9 @@ extension Clients.AnalyticsServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

@@ -18,26 +18,26 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class ServiceMonitoringServiceRetry: ServiceMonitoringServiceStub {
     let inner: any ServiceMonitoringServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any ServiceMonitoringServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any ServiceMonitoringServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -49,14 +49,14 @@ extension Clients {
     }
 
     public func createService(
-      request: CreateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Service {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Service
           in
           return try await self.inner.createService(request: r, options: o)
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func getService(
-      request: GetServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Service {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Service
           in
           return try await self.inner.getService(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func listServices(
-      request: ListServicesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServicesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListServicesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListServicesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListServicesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListServicesResponse
           in
           return try await self.inner.listServices(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func updateService(
-      request: UpdateServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.Service {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateServiceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateServiceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.Service
           in
           return try await self.inner.updateService(request: r, options: o)
@@ -109,27 +109,26 @@ extension Clients {
     }
 
     public func deleteService(
-      request: DeleteServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeleteServiceRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteServiceRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteService(request: r, options: o)
         })
     }
 
     public func createServiceLevelObjective(
-      request: CreateServiceLevelObjectiveRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateServiceLevelObjectiveRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ServiceLevelObjective {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateServiceLevelObjectiveRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateServiceLevelObjectiveRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ServiceLevelObjective
           in
           return try await self.inner.createServiceLevelObjective(request: r, options: o)
@@ -137,14 +136,14 @@ extension Clients {
     }
 
     public func getServiceLevelObjective(
-      request: GetServiceLevelObjectiveRequest, options: GoogleCloudGax.RequestOptions
+      request: GetServiceLevelObjectiveRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ServiceLevelObjective {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetServiceLevelObjectiveRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetServiceLevelObjectiveRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ServiceLevelObjective
           in
           return try await self.inner.getServiceLevelObjective(request: r, options: o)
@@ -152,14 +151,14 @@ extension Clients {
     }
 
     public func listServiceLevelObjectives(
-      request: ListServiceLevelObjectivesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListServiceLevelObjectivesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ListServiceLevelObjectivesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListServiceLevelObjectivesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListServiceLevelObjectivesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ListServiceLevelObjectivesResponse
           in
           return try await self.inner.listServiceLevelObjectives(request: r, options: o)
@@ -167,14 +166,14 @@ extension Clients {
     }
 
     public func updateServiceLevelObjective(
-      request: UpdateServiceLevelObjectiveRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateServiceLevelObjectiveRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringV3.ServiceLevelObjective {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateServiceLevelObjectiveRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateServiceLevelObjectiveRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudMonitoringV3.ServiceLevelObjective
           in
           return try await self.inner.updateServiceLevelObjective(request: r, options: o)
@@ -182,15 +181,15 @@ extension Clients {
     }
 
     public func deleteServiceLevelObjective(
-      request: DeleteServiceLevelObjectiveRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteServiceLevelObjectiveRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteServiceLevelObjectiveRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> Void in
+          (r: DeleteServiceLevelObjectiveRequest, o: GoogleGax.RequestOptions) async throws -> Void
+          in
           return try await self.inner.deleteServiceLevelObjective(request: r, options: o)
         })
     }

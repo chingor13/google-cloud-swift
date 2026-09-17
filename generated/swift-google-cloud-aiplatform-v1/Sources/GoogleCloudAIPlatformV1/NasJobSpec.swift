@@ -16,10 +16,10 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents the spec of a NasJob.
-  public struct NasJobSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NasJobSpec: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The ID of the existing NasJob in the same Project and Location
@@ -34,7 +34,7 @@
     /// The Neural Architecture Search (NAS) algorithm specification.
     public var nasAlgorithmSpec: OneOf_NasAlgorithmSpec? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NasJobSpec`.
     public init() {}
@@ -96,7 +96,7 @@
       self.nasAlgorithmSpec = nasAlgorithmSpec
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -117,7 +117,7 @@
     }
 
     /// The spec of multi-trial Neural Architecture Search (NAS).
-    public struct MultiTrialAlgorithmSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MultiTrialAlgorithmSpec: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The multi-trial Neural Architecture Search (NAS) algorithm
@@ -137,7 +137,7 @@
       /// [TrainTrialSpec.frequency] trials searched.
       public var trainTrialSpec: NasJobSpec.MultiTrialAlgorithmSpec.TrainTrialSpec? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MultiTrialAlgorithmSpec`.
       public init() {}
@@ -189,7 +189,7 @@
           NasJobSpec.MultiTrialAlgorithmSpec.TrainTrialSpec.self, forKey: .trainTrialSpec)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -205,7 +205,7 @@
       }
 
       /// Represents a metric to optimize.
-      public struct MetricSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct MetricSpec: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The ID of the metric. Must not contain whitespaces.
@@ -215,8 +215,7 @@
         public var goal: NasJobSpec.MultiTrialAlgorithmSpec.MetricSpec.GoalType = NasJobSpec
           .MultiTrialAlgorithmSpec.MetricSpec.GoalType()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `MetricSpec`.
         public init() {}
@@ -261,7 +260,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -383,16 +382,16 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec.MultiTrialAlgorithmSpec.MetricSpec"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Represent spec for search trials.
-      public struct SearchTrialSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct SearchTrialSpec: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The spec of a search trial job. The same spec applies to
@@ -413,8 +412,7 @@
         /// before the whole job fails.
         public var maxFailedTrialCount: Swift.Int32 = Swift.Int32()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `SearchTrialSpec`.
         public init() {}
@@ -470,7 +468,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -489,16 +487,16 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec.MultiTrialAlgorithmSpec.SearchTrialSpec"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
       /// Represent spec for train trials.
-      public struct TrainTrialSpec: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct TrainTrialSpec: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Required. The spec of a train trial job. The same spec applies to
@@ -514,8 +512,7 @@
         /// [TrainTrialSpec.frequency] trials searched.
         public var frequency: Swift.Int32 = Swift.Int32()
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `TrainTrialSpec`.
         public init() {}
@@ -564,7 +561,7 @@
           }
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -582,11 +579,11 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec.MultiTrialAlgorithmSpec.TrainTrialSpec"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -700,11 +697,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec.MultiTrialAlgorithmSpec"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -717,11 +714,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.NasJobSpec"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

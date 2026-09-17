@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A secret version resource in the Secret Manager API.
-public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SecretVersion: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the
@@ -37,7 +37,7 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] was created.
   ///
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The time this
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion] was destroyed.
@@ -48,7 +48,7 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   /// [google.cloud.secretmanager.v1.SecretVersion.State.DESTROYED]: <doc:SecretVersion/State/destroyed>
   /// [google.cloud.secretmanager.v1.SecretVersion.state]: <doc:SecretVersion/state>
-  public var destroyTime: GoogleCloudWKT.Timestamp? = nil
+  public var destroyTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The current state of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion].
@@ -85,7 +85,7 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Secret with a valid version destroy TTL, when a secert version is
   /// destroyed, version is moved to disabled state and it is scheduled for
   /// destruction Version is destroyed only after the scheduled_destroy_time.
-  public var scheduledDestroyTime: GoogleCloudWKT.Timestamp? = nil
+  public var scheduledDestroyTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The customer-managed encryption status of the
   /// [SecretVersion][google.cloud.secretmanager.v1.SecretVersion]. Only
@@ -96,7 +96,7 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.secretmanager.v1.SecretVersion]: <doc:SecretVersion>
   public var customerManagedEncryption: CustomerManagedEncryptionStatus? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SecretVersion`.
   public init() {}
@@ -149,10 +149,8 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.destroyTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .destroyTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.destroyTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .destroyTime)
     if let value = try container.decodeIfPresent(SecretVersion.State.self, forKey: .state) {
       self.state = value
     }
@@ -167,12 +165,12 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.clientSpecifiedPayloadChecksum = value
     }
     self.scheduledDestroyTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .scheduledDestroyTime)
+      GoogleWKT.Timestamp.self, forKey: .scheduledDestroyTime)
     self.customerManagedEncryption = try container.decodeIfPresent(
       CustomerManagedEncryptionStatus.self, forKey: .customerManagedEncryption)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -327,10 +325,10 @@ public struct SecretVersion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.secretmanager.v1.SecretVersion"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

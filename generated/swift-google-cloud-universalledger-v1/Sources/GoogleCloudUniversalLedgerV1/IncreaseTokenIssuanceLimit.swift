@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Transactions for token issuance and minting.
 /// Notifies the network that the target account has deposited reserve funds and
 /// increases its token issuance limit. The sender must be a clearinghouse
 /// account.
-public struct IncreaseTokenIssuanceLimit: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct IncreaseTokenIssuanceLimit: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Deprecated: Use
@@ -43,7 +43,7 @@ public struct IncreaseTokenIssuanceLimit: Codable, Equatable, GoogleCloudWKT._An
   /// positive.
   public var amount: CurrencyValue? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `IncreaseTokenIssuanceLimit`.
   public init() {}
@@ -87,7 +87,7 @@ public struct IncreaseTokenIssuanceLimit: Codable, Equatable, GoogleCloudWKT._An
     self.amount = try container.decodeIfPresent(CurrencyValue.self, forKey: .amount)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,10 +104,10 @@ public struct IncreaseTokenIssuanceLimit: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.universalledger.v1.IncreaseTokenIssuanceLimit"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

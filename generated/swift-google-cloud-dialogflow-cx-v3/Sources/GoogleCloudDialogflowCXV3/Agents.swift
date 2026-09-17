@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Agents][google.cloud.dialogflow.cx.v3.Agent].
   ///
@@ -32,11 +32,11 @@
   /// @Snippet(path: "AgentsQuickstart")
   public final class AgentsClient: Clients.AgentsProtocol, Sendable {
     let inner: any Clients.AgentsStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `AgentsClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.AgentsStub = try Clients.AgentsTransport(options)
       inner = Clients.AgentsRetry(inner, options: options)
       if let logger = options.logger {
@@ -51,7 +51,7 @@
     ///
     /// @Snippet(path: "Agents_ListAgents")
     public func listAgents(
-      request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAgentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListAgentsResponse {
       try await self.inner.listAgents(request: request, options: options)
     }
@@ -60,7 +60,7 @@
     ///
     /// @Snippet(path: "Agents_ListAgents")
     public func listAgents(
-      byItem: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAgentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Agent, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListAgentsResponse in
@@ -68,14 +68,14 @@
         request.pageToken = token
         return try await self.listAgents(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Retrieves the specified agent.
     ///
     /// @Snippet(path: "Agents_GetAgent")
     public func getAgent(
-      request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Agent {
       try await self.inner.getAgent(request: request, options: options)
     }
@@ -88,7 +88,7 @@
     ///
     /// @Snippet(path: "Agents_CreateAgent")
     public func createAgent(
-      request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Agent {
       try await self.inner.createAgent(request: request, options: options)
     }
@@ -101,7 +101,7 @@
     ///
     /// @Snippet(path: "Agents_UpdateAgent")
     public func updateAgent(
-      request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Agent {
       try await self.inner.updateAgent(request: request, options: options)
     }
@@ -110,7 +110,7 @@
     ///
     /// @Snippet(path: "Agents_DeleteAgent")
     public func deleteAgent(
-      request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAgentRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteAgent(request: request, options: options)
     }
@@ -130,7 +130,7 @@
     ///
     /// @Snippet(path: "Agents_ExportAgent")
     public func exportAgent(
-      request: ExportAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.exportAgent(request: request, options: options)
     }
@@ -150,22 +150,21 @@
     ///
     /// @Snippet(path: "Agents_ExportAgent")
     public func exportAgent(
-      withPolling: ExportAgentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportAgentResponse> {
+      withPolling: ExportAgentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportAgentResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ExportAgentResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ExportAgentResponse>.State in
         return try op._extractStatus(ExportAgentResponse.self)
       }
       let rawOp = try await self.exportAgent(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportAgentResponse>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportAgentResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -193,7 +192,7 @@
     ///
     /// @Snippet(path: "Agents_RestoreAgent")
     public func restoreAgent(
-      request: RestoreAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.restoreAgent(request: request, options: options)
     }
@@ -218,21 +217,21 @@
     ///
     /// @Snippet(path: "Agents_RestoreAgent")
     public func restoreAgent(
-      withPolling: RestoreAgentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: RestoreAgentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.restoreAgent(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -246,7 +245,7 @@
     ///
     /// @Snippet(path: "Agents_ValidateAgent")
     public func validateAgent(
-      request: ValidateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult {
       try await self.inner.validateAgent(request: request, options: options)
     }
@@ -256,7 +255,7 @@
     ///
     /// @Snippet(path: "Agents_GetAgentValidationResult")
     public func getAgentValidationResult(
-      request: GetAgentValidationResultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAgentValidationResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult {
       try await self.inner.getAgentValidationResult(request: request, options: options)
     }
@@ -265,7 +264,7 @@
     ///
     /// @Snippet(path: "Agents_GetGenerativeSettings")
     public func getGenerativeSettings(
-      request: GetGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGenerativeSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings {
       try await self.inner.getGenerativeSettings(request: request, options: options)
     }
@@ -274,7 +273,7 @@
     ///
     /// @Snippet(path: "Agents_UpdateGenerativeSettings")
     public func updateGenerativeSettings(
-      request: UpdateGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGenerativeSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings {
       try await self.inner.updateGenerativeSettings(request: request, options: options)
     }
@@ -300,7 +299,7 @@
     ///
     /// @Snippet(path: "Agents_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -326,7 +325,7 @@
     ///
     /// @Snippet(path: "Agents_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -334,14 +333,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "Agents_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -352,7 +351,7 @@
     ///
     /// @Snippet(path: "Agents_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -363,7 +362,7 @@
     ///
     /// @Snippet(path: "Agents_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -371,7 +370,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -380,7 +379,7 @@
     ///
     /// @Snippet(path: "Agents_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -391,7 +390,7 @@
     ///
     /// @Snippet(path: "Agents_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -441,7 +440,7 @@
       /// See `AgentsClient.updateAgent`.
       func updateAgent(
         agent: Agent?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.Agent
 
       /// See `AgentsClient.deleteAgent`.
@@ -456,14 +455,14 @@
       func exportAgent(request: ExportAgentRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `AgentsClient.exportAgent`.
-      func exportAgent(withPolling: ExportAgentRequest) async throws -> any GoogleCloudGax
+      func exportAgent(withPolling: ExportAgentRequest) async throws -> any GoogleGax
         .PollableOperation<ExportAgentResponse>
 
       /// See `AgentsClient.restoreAgent`.
       func restoreAgent(request: RestoreAgentRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `AgentsClient.restoreAgent`.
-      func restoreAgent(withPolling: RestoreAgentRequest) async throws -> any GoogleCloudGax
+      func restoreAgent(withPolling: RestoreAgentRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `AgentsClient.validateAgent`.
@@ -496,7 +495,7 @@
       /// See `AgentsClient.updateGenerativeSettings`.
       func updateGenerativeSettings(
         generativeSettings: GenerativeSettings?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings
 
       /// See `AgentsClient.listLocations`.
@@ -537,102 +536,102 @@
 
       /// See `AgentsClient.listAgents`.
       func listAgents(
-        request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListAgentsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListAgentsResponse
 
       /// See `AgentsClient.listAgents`.
       func listAgents(
-        byItem: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListAgentsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Agent, Swift.Error>
 
       /// See `AgentsClient.getAgent`.
       func getAgent(
-        request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent
 
       /// See `AgentsClient.createAgent`.
       func createAgent(
-        request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent
 
       /// See `AgentsClient.updateAgent`.
       func updateAgent(
-        request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Agent
 
       /// See `AgentsClient.deleteAgent`.
       func deleteAgent(
-        request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteAgentRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `AgentsClient.exportAgent`.
       func exportAgent(
-        request: ExportAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `AgentsClient.exportAgent`.
       func exportAgent(
-        withPolling: ExportAgentRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ExportAgentResponse>
+        withPolling: ExportAgentRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ExportAgentResponse>
 
       /// See `AgentsClient.restoreAgent`.
       func restoreAgent(
-        request: RestoreAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: RestoreAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `AgentsClient.restoreAgent`.
       func restoreAgent(
-        withPolling: RestoreAgentRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: RestoreAgentRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `AgentsClient.validateAgent`.
       func validateAgent(
-        request: ValidateAgentRequest, options: GoogleCloudGax.RequestOptions
+        request: ValidateAgentRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult
 
       /// See `AgentsClient.getAgentValidationResult`.
       func getAgentValidationResult(
-        request: GetAgentValidationResultRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAgentValidationResultRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult
 
       /// See `AgentsClient.getGenerativeSettings`.
       func getGenerativeSettings(
-        request: GetGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: GetGenerativeSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings
 
       /// See `AgentsClient.updateGenerativeSettings`.
       func updateGenerativeSettings(
-        request: UpdateGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateGenerativeSettingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings
 
       /// See `AgentsClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `AgentsClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `AgentsClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `AgentsClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `AgentsClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `AgentsClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -646,9 +645,9 @@
     }
 
     public func listAgents(
-      request: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAgentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListAgentsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listAgents(
@@ -658,13 +657,13 @@
     }
 
     public func listAgents(
-      byItem: ListAgentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAgentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Agent, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListAgentsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listAgents(
@@ -681,9 +680,9 @@
     }
 
     public func getAgent(
-      request: GetAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Agent {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getAgent(
@@ -702,9 +701,9 @@
     }
 
     public func createAgent(
-      request: CreateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Agent {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createAgent(
@@ -725,14 +724,14 @@
     }
 
     public func updateAgent(
-      request: UpdateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.Agent {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateAgent(
       agent: Agent?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.Agent {
       let request = UpdateAgentRequest().with {
         $0.agent = agent
@@ -746,9 +745,9 @@
     }
 
     public func deleteAgent(
-      request: DeleteAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAgentRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteAgent(
@@ -766,25 +765,24 @@
     }
 
     public func exportAgent(
-      request: ExportAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func exportAgent(withPolling: ExportAgentRequest) async throws -> any GoogleCloudGax
+    public func exportAgent(withPolling: ExportAgentRequest) async throws -> any GoogleGax
       .PollableOperation<ExportAgentResponse>
     {
       try await self.exportAgent(withPolling: withPolling, options: .init())
     }
 
     public func exportAgent(
-      withPolling: ExportAgentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportAgentResponse> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportAgentResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: ExportAgentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportAgentResponse> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportAgentResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -795,24 +793,24 @@
     }
 
     public func restoreAgent(
-      request: RestoreAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func restoreAgent(withPolling: RestoreAgentRequest) async throws -> any GoogleCloudGax
+    public func restoreAgent(withPolling: RestoreAgentRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.restoreAgent(withPolling: withPolling, options: .init())
     }
 
     public func restoreAgent(
-      withPolling: RestoreAgentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: RestoreAgentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -823,9 +821,9 @@
     }
 
     public func validateAgent(
-      request: ValidateAgentRequest, options: GoogleCloudGax.RequestOptions
+      request: ValidateAgentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getAgentValidationResult(request: GetAgentValidationResultRequest) async throws
@@ -835,9 +833,9 @@
     }
 
     public func getAgentValidationResult(
-      request: GetAgentValidationResultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAgentValidationResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.AgentValidationResult {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getAgentValidationResult(
@@ -856,9 +854,9 @@
     }
 
     public func getGenerativeSettings(
-      request: GetGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetGenerativeSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getGenerativeSettings(
@@ -879,14 +877,14 @@
     }
 
     public func updateGenerativeSettings(
-      request: UpdateGenerativeSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateGenerativeSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateGenerativeSettings(
       generativeSettings: GenerativeSettings?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.GenerativeSettings {
       let request = UpdateGenerativeSettingsRequest().with {
         $0.generativeSettings = generativeSettings
@@ -902,9 +900,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -914,13 +912,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -930,9 +928,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -942,9 +940,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -954,13 +952,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -981,9 +979,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -1000,9 +998,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

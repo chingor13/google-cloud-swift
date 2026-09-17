@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A message with byte data.
-public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DiscoveryWithBytes: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// An map field.
@@ -30,7 +30,7 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// A repeated field.
   public var repeated: [Foundation.Data] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DiscoveryWithBytes`.
   public init() {}
@@ -70,7 +70,7 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     if let strings = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .map)
     {
       self.map = try strings.mapValues {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode($0) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode($0) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -80,7 +80,7 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
     }
     if let s = try container.decodeIfPresent(Swift.String.self, forKey: .`optional`) {
-      guard let v = GoogleCloudWKT._DiscoveryBase64.decode(s) else {
+      guard let v = GoogleWKT._DiscoveryBase64.decode(s) else {
         throw DecodingError.dataCorrupted(
           DecodingError.Context(
             codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -90,7 +90,7 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     if let strings = try container.decodeIfPresent([Swift.String].self, forKey: .repeated) {
       self.repeated = try strings.map {
-        guard let v = GoogleCloudWKT._DiscoveryBase64.decode($0) else {
+        guard let v = GoogleWKT._DiscoveryBase64.decode($0) else {
           throw DecodingError.dataCorrupted(
             DecodingError.Context(
               codingPath: decoder.codingPath, debugDescription: "Expected url-safe encoded value")
@@ -101,7 +101,7 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,17 +109,17 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     var container = encoder.container(keyedBy: CodingKeys.self)
     do {
       let transformed = self.map.mapValues {
-        GoogleCloudWKT._DiscoveryBase64.encode($0)
+        GoogleWKT._DiscoveryBase64.encode($0)
       }
       try container.encode(transformed, forKey: .map)
     }
     if let v = `optional` {
       try container.encode(
-        GoogleCloudWKT._DiscoveryBase64.encode(v), forKey: .`optional`
+        GoogleWKT._DiscoveryBase64.encode(v), forKey: .`optional`
       )
     }
     try container.encode(
-      repeated.map { GoogleCloudWKT._DiscoveryBase64.encode($0) }, forKey: .repeated
+      repeated.map { GoogleWKT._DiscoveryBase64.encode($0) }, forKey: .repeated
     )
     for (key, value) in self._unknownFields.json {
       try container.encode(value, forKey: CodingKeys(stringValue: key))
@@ -129,10 +129,10 @@ public struct DiscoveryWithBytes: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/.DiscoveryWithBytes"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Test Cases][google.cloud.dialogflow.cx.v3.TestCase] and
   /// [Test Case Results][google.cloud.dialogflow.cx.v3.TestCaseResult].
@@ -34,11 +34,11 @@
   /// @Snippet(path: "TestCasesQuickstart")
   public final class TestCasesClient: Clients.TestCasesProtocol, Sendable {
     let inner: any Clients.TestCasesStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `TestCasesClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.TestCasesStub = try Clients.TestCasesTransport(options)
       inner = Clients.TestCasesRetry(inner, options: options)
       if let logger = options.logger {
@@ -53,7 +53,7 @@
     ///
     /// @Snippet(path: "TestCases_ListTestCases")
     public func listTestCases(
-      request: ListTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListTestCasesResponse {
       try await self.inner.listTestCases(request: request, options: options)
     }
@@ -62,7 +62,7 @@
     ///
     /// @Snippet(path: "TestCases_ListTestCases")
     public func listTestCases(
-      byItem: ListTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTestCasesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TestCase, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListTestCasesResponse in
@@ -70,14 +70,14 @@
         request.pageToken = token
         return try await self.listTestCases(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Batch deletes test cases.
     ///
     /// @Snippet(path: "TestCases_BatchDeleteTestCases")
     public func batchDeleteTestCases(
-      request: BatchDeleteTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.batchDeleteTestCases(request: request, options: options)
     }
@@ -86,7 +86,7 @@
     ///
     /// @Snippet(path: "TestCases_GetTestCase")
     public func getTestCase(
-      request: GetTestCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTestCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.TestCase {
       try await self.inner.getTestCase(request: request, options: options)
     }
@@ -95,7 +95,7 @@
     ///
     /// @Snippet(path: "TestCases_CreateTestCase")
     public func createTestCase(
-      request: CreateTestCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTestCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.TestCase {
       try await self.inner.createTestCase(request: request, options: options)
     }
@@ -104,7 +104,7 @@
     ///
     /// @Snippet(path: "TestCases_UpdateTestCase")
     public func updateTestCase(
-      request: UpdateTestCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTestCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.TestCase {
       try await self.inner.updateTestCase(request: request, options: options)
     }
@@ -125,7 +125,7 @@
     ///
     /// @Snippet(path: "TestCases_RunTestCase")
     public func runTestCase(
-      request: RunTestCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RunTestCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.runTestCase(request: request, options: options)
     }
@@ -146,22 +146,21 @@
     ///
     /// @Snippet(path: "TestCases_RunTestCase")
     public func runTestCase(
-      withPolling: RunTestCaseRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RunTestCaseResponse> {
+      withPolling: RunTestCaseRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RunTestCaseResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<RunTestCaseResponse>.State in
+          -> GoogleGax._PollableOperationImpl<RunTestCaseResponse>.State in
         return try op._extractStatus(RunTestCaseResponse.self)
       }
       let rawOp = try await self.runTestCase(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<RunTestCaseResponse>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<RunTestCaseResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -185,7 +184,7 @@
     ///
     /// @Snippet(path: "TestCases_BatchRunTestCases")
     public func batchRunTestCases(
-      request: BatchRunTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchRunTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.batchRunTestCases(request: request, options: options)
     }
@@ -206,22 +205,22 @@
     ///
     /// @Snippet(path: "TestCases_BatchRunTestCases")
     public func batchRunTestCases(
-      withPolling: BatchRunTestCasesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchRunTestCasesResponse> {
+      withPolling: BatchRunTestCasesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchRunTestCasesResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<BatchRunTestCasesResponse>.State in
+          -> GoogleGax._PollableOperationImpl<BatchRunTestCasesResponse>.State in
         return try op._extractStatus(BatchRunTestCasesResponse.self)
       }
       let rawOp = try await self.batchRunTestCases(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<BatchRunTestCasesResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<BatchRunTestCasesResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -233,7 +232,7 @@
     ///
     /// @Snippet(path: "TestCases_CalculateCoverage")
     public func calculateCoverage(
-      request: CalculateCoverageRequest, options: GoogleCloudGax.RequestOptions
+      request: CalculateCoverageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.CalculateCoverageResponse {
       try await self.inner.calculateCoverage(request: request, options: options)
     }
@@ -256,7 +255,7 @@
     ///
     /// @Snippet(path: "TestCases_ImportTestCases")
     public func importTestCases(
-      request: ImportTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.importTestCases(request: request, options: options)
     }
@@ -279,22 +278,22 @@
     ///
     /// @Snippet(path: "TestCases_ImportTestCases")
     public func importTestCases(
-      withPolling: ImportTestCasesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportTestCasesResponse> {
+      withPolling: ImportTestCasesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportTestCasesResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportTestCasesResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ImportTestCasesResponse>.State in
         return try op._extractStatus(ImportTestCasesResponse.self)
       }
       let rawOp = try await self.importTestCases(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportTestCasesResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ImportTestCasesResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -319,7 +318,7 @@
     ///
     /// @Snippet(path: "TestCases_ExportTestCases")
     public func exportTestCases(
-      request: ExportTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.exportTestCases(request: request, options: options)
     }
@@ -341,22 +340,22 @@
     ///
     /// @Snippet(path: "TestCases_ExportTestCases")
     public func exportTestCases(
-      withPolling: ExportTestCasesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportTestCasesResponse> {
+      withPolling: ExportTestCasesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportTestCasesResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ExportTestCasesResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ExportTestCasesResponse>.State in
         return try op._extractStatus(ExportTestCasesResponse.self)
       }
       let rawOp = try await self.exportTestCases(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportTestCasesResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<ExportTestCasesResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -369,7 +368,7 @@
     ///
     /// @Snippet(path: "TestCases_ListTestCaseResults")
     public func listTestCaseResults(
-      request: ListTestCaseResultsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTestCaseResultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListTestCaseResultsResponse {
       try await self.inner.listTestCaseResults(request: request, options: options)
     }
@@ -379,7 +378,7 @@
     ///
     /// @Snippet(path: "TestCases_ListTestCaseResults")
     public func listTestCaseResults(
-      byItem: ListTestCaseResultsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTestCaseResultsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TestCaseResult, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListTestCaseResultsResponse
@@ -388,14 +387,14 @@
         request.pageToken = token
         return try await self.listTestCaseResults(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets a test case result.
     ///
     /// @Snippet(path: "TestCases_GetTestCaseResult")
     public func getTestCaseResult(
-      request: GetTestCaseResultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTestCaseResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.TestCaseResult {
       try await self.inner.getTestCaseResult(request: request, options: options)
     }
@@ -421,7 +420,7 @@
     ///
     /// @Snippet(path: "TestCases_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -447,7 +446,7 @@
     ///
     /// @Snippet(path: "TestCases_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -455,14 +454,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "TestCases_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -473,7 +472,7 @@
     ///
     /// @Snippet(path: "TestCases_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -484,7 +483,7 @@
     ///
     /// @Snippet(path: "TestCases_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -492,7 +491,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -501,7 +500,7 @@
     ///
     /// @Snippet(path: "TestCases_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -512,7 +511,7 @@
     ///
     /// @Snippet(path: "TestCases_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -573,14 +572,14 @@
       /// See `TestCasesClient.updateTestCase`.
       func updateTestCase(
         testCase: TestCase?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDialogflowCXV3.TestCase
 
       /// See `TestCasesClient.runTestCase`.
       func runTestCase(request: RunTestCaseRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `TestCasesClient.runTestCase`.
-      func runTestCase(withPolling: RunTestCaseRequest) async throws -> any GoogleCloudGax
+      func runTestCase(withPolling: RunTestCaseRequest) async throws -> any GoogleGax
         .PollableOperation<RunTestCaseResponse>
 
       /// See `TestCasesClient.batchRunTestCases`.
@@ -588,8 +587,8 @@
         -> GoogleLongRunning.Operation
 
       /// See `TestCasesClient.batchRunTestCases`.
-      func batchRunTestCases(withPolling: BatchRunTestCasesRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<BatchRunTestCasesResponse>
+      func batchRunTestCases(withPolling: BatchRunTestCasesRequest) async throws -> any GoogleGax
+        .PollableOperation<BatchRunTestCasesResponse>
 
       /// See `TestCasesClient.calculateCoverage`.
       func calculateCoverage(request: CalculateCoverageRequest) async throws
@@ -600,7 +599,7 @@
         -> GoogleLongRunning.Operation
 
       /// See `TestCasesClient.importTestCases`.
-      func importTestCases(withPolling: ImportTestCasesRequest) async throws -> any GoogleCloudGax
+      func importTestCases(withPolling: ImportTestCasesRequest) async throws -> any GoogleGax
         .PollableOperation<ImportTestCasesResponse>
 
       /// See `TestCasesClient.exportTestCases`.
@@ -608,7 +607,7 @@
         -> GoogleLongRunning.Operation
 
       /// See `TestCasesClient.exportTestCases`.
-      func exportTestCases(withPolling: ExportTestCasesRequest) async throws -> any GoogleCloudGax
+      func exportTestCases(withPolling: ExportTestCasesRequest) async throws -> any GoogleGax
         .PollableOperation<ExportTestCasesResponse>
 
       /// See `TestCasesClient.listTestCaseResults`.
@@ -672,122 +671,122 @@
 
       /// See `TestCasesClient.listTestCases`.
       func listTestCases(
-        request: ListTestCasesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTestCasesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListTestCasesResponse
 
       /// See `TestCasesClient.listTestCases`.
       func listTestCases(
-        byItem: ListTestCasesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListTestCasesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<TestCase, Swift.Error>
 
       /// See `TestCasesClient.batchDeleteTestCases`.
       func batchDeleteTestCases(
-        request: BatchDeleteTestCasesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchDeleteTestCasesRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `TestCasesClient.getTestCase`.
       func getTestCase(
-        request: GetTestCaseRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTestCaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.TestCase
 
       /// See `TestCasesClient.createTestCase`.
       func createTestCase(
-        request: CreateTestCaseRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateTestCaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.TestCase
 
       /// See `TestCasesClient.updateTestCase`.
       func updateTestCase(
-        request: UpdateTestCaseRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateTestCaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.TestCase
 
       /// See `TestCasesClient.runTestCase`.
       func runTestCase(
-        request: RunTestCaseRequest, options: GoogleCloudGax.RequestOptions
+        request: RunTestCaseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `TestCasesClient.runTestCase`.
       func runTestCase(
-        withPolling: RunTestCaseRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<RunTestCaseResponse>
+        withPolling: RunTestCaseRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<RunTestCaseResponse>
 
       /// See `TestCasesClient.batchRunTestCases`.
       func batchRunTestCases(
-        request: BatchRunTestCasesRequest, options: GoogleCloudGax.RequestOptions
+        request: BatchRunTestCasesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `TestCasesClient.batchRunTestCases`.
       func batchRunTestCases(
-        withPolling: BatchRunTestCasesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<BatchRunTestCasesResponse>
+        withPolling: BatchRunTestCasesRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<BatchRunTestCasesResponse>
 
       /// See `TestCasesClient.calculateCoverage`.
       func calculateCoverage(
-        request: CalculateCoverageRequest, options: GoogleCloudGax.RequestOptions
+        request: CalculateCoverageRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.CalculateCoverageResponse
 
       /// See `TestCasesClient.importTestCases`.
       func importTestCases(
-        request: ImportTestCasesRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportTestCasesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `TestCasesClient.importTestCases`.
       func importTestCases(
-        withPolling: ImportTestCasesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportTestCasesResponse>
+        withPolling: ImportTestCasesRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ImportTestCasesResponse>
 
       /// See `TestCasesClient.exportTestCases`.
       func exportTestCases(
-        request: ExportTestCasesRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportTestCasesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `TestCasesClient.exportTestCases`.
       func exportTestCases(
-        withPolling: ExportTestCasesRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ExportTestCasesResponse>
+        withPolling: ExportTestCasesRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ExportTestCasesResponse>
 
       /// See `TestCasesClient.listTestCaseResults`.
       func listTestCaseResults(
-        request: ListTestCaseResultsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListTestCaseResultsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListTestCaseResultsResponse
 
       /// See `TestCasesClient.listTestCaseResults`.
       func listTestCaseResults(
-        byItem: ListTestCaseResultsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListTestCaseResultsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<TestCaseResult, Swift.Error>
 
       /// See `TestCasesClient.getTestCaseResult`.
       func getTestCaseResult(
-        request: GetTestCaseResultRequest, options: GoogleCloudGax.RequestOptions
+        request: GetTestCaseResultRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.TestCaseResult
 
       /// See `TestCasesClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `TestCasesClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `TestCasesClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `TestCasesClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `TestCasesClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `TestCasesClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -801,9 +800,9 @@
     }
 
     public func listTestCases(
-      request: ListTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListTestCasesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listTestCases(
@@ -813,13 +812,13 @@
     }
 
     public func listTestCases(
-      byItem: ListTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTestCasesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TestCase, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListTestCasesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listTestCases(
@@ -836,9 +835,9 @@
     }
 
     public func batchDeleteTestCases(
-      request: BatchDeleteTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func batchDeleteTestCases(
@@ -857,9 +856,9 @@
     }
 
     public func getTestCase(
-      request: GetTestCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTestCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.TestCase {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getTestCase(
@@ -878,9 +877,9 @@
     }
 
     public func createTestCase(
-      request: CreateTestCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTestCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.TestCase {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createTestCase(
@@ -901,14 +900,14 @@
     }
 
     public func updateTestCase(
-      request: UpdateTestCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTestCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.TestCase {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateTestCase(
       testCase: TestCase?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDialogflowCXV3.TestCase {
       let request = UpdateTestCaseRequest().with {
         $0.testCase = testCase
@@ -923,25 +922,24 @@
     }
 
     public func runTestCase(
-      request: RunTestCaseRequest, options: GoogleCloudGax.RequestOptions
+      request: RunTestCaseRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func runTestCase(withPolling: RunTestCaseRequest) async throws -> any GoogleCloudGax
+    public func runTestCase(withPolling: RunTestCaseRequest) async throws -> any GoogleGax
       .PollableOperation<RunTestCaseResponse>
     {
       try await self.runTestCase(withPolling: withPolling, options: .init())
     }
 
     public func runTestCase(
-      withPolling: RunTestCaseRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RunTestCaseResponse> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<RunTestCaseResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: RunTestCaseRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RunTestCaseResponse> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<RunTestCaseResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -952,25 +950,25 @@
     }
 
     public func batchRunTestCases(
-      request: BatchRunTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchRunTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func batchRunTestCases(withPolling: BatchRunTestCasesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<BatchRunTestCasesResponse>
+      -> any GoogleGax.PollableOperation<BatchRunTestCasesResponse>
     {
       try await self.batchRunTestCases(withPolling: withPolling, options: .init())
     }
 
     public func batchRunTestCases(
-      withPolling: BatchRunTestCasesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchRunTestCasesResponse> {
+      withPolling: BatchRunTestCasesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchRunTestCasesResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<BatchRunTestCasesResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<BatchRunTestCasesResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -981,9 +979,9 @@
     }
 
     public func calculateCoverage(
-      request: CalculateCoverageRequest, options: GoogleCloudGax.RequestOptions
+      request: CalculateCoverageRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.CalculateCoverageResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func importTestCases(request: ImportTestCasesRequest) async throws
@@ -993,25 +991,25 @@
     }
 
     public func importTestCases(
-      request: ImportTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func importTestCases(withPolling: ImportTestCasesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ImportTestCasesResponse>
+    public func importTestCases(withPolling: ImportTestCasesRequest) async throws -> any GoogleGax
+      .PollableOperation<ImportTestCasesResponse>
     {
       try await self.importTestCases(withPolling: withPolling, options: .init())
     }
 
     public func importTestCases(
-      withPolling: ImportTestCasesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportTestCasesResponse> {
+      withPolling: ImportTestCasesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportTestCasesResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportTestCasesResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ImportTestCasesResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1022,25 +1020,25 @@
     }
 
     public func exportTestCases(
-      request: ExportTestCasesRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportTestCasesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func exportTestCases(withPolling: ExportTestCasesRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ExportTestCasesResponse>
+    public func exportTestCases(withPolling: ExportTestCasesRequest) async throws -> any GoogleGax
+      .PollableOperation<ExportTestCasesResponse>
     {
       try await self.exportTestCases(withPolling: withPolling, options: .init())
     }
 
     public func exportTestCases(
-      withPolling: ExportTestCasesRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportTestCasesResponse> {
+      withPolling: ExportTestCasesRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportTestCasesResponse> {
       let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportTestCasesResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<ExportTestCasesResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -1051,9 +1049,9 @@
     }
 
     public func listTestCaseResults(
-      request: ListTestCaseResultsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTestCaseResultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.ListTestCaseResultsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listTestCaseResults(
@@ -1063,14 +1061,14 @@
     }
 
     public func listTestCaseResults(
-      byItem: ListTestCaseResultsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTestCaseResultsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TestCaseResult, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDialogflowCXV3.ListTestCaseResultsResponse
         in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listTestCaseResults(
@@ -1089,9 +1087,9 @@
     }
 
     public func getTestCaseResult(
-      request: GetTestCaseResultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTestCaseResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowCXV3.TestCaseResult {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getTestCaseResult(
@@ -1110,9 +1108,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -1122,13 +1120,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1138,9 +1136,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1150,9 +1148,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -1162,13 +1160,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -1189,9 +1187,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -1208,9 +1206,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

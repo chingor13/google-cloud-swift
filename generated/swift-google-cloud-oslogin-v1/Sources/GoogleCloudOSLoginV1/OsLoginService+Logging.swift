@@ -19,8 +19,8 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudOSLoginCommon
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -39,9 +39,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -58,14 +58,14 @@ extension Clients {
     }
 
     public func createSshPublicKey(
-      request: CreateSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginCommon.SshPublicKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "createSshPublicKey",
         action: {
-          (r: CreateSshPublicKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateSshPublicKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOSLoginCommon.SshPublicKey
           in
           return try await self.inner.createSshPublicKey(request: r, options: o)
@@ -73,40 +73,40 @@ extension Clients {
     }
 
     public func deletePosixAccount(
-      request: DeletePosixAccountRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePosixAccountRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deletePosixAccount",
         action: {
-          (r: DeletePosixAccountRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeletePosixAccountRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deletePosixAccount(request: r, options: o)
         })
     }
 
     public func deleteSshPublicKey(
-      request: DeleteSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteSshPublicKey",
         action: {
-          (r: DeleteSshPublicKeyRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeleteSshPublicKeyRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteSshPublicKey(request: r, options: o)
         })
     }
 
     public func getLoginProfile(
-      request: GetLoginProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetLoginProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginV1.LoginProfile {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLoginProfile",
         action: {
-          (r: GetLoginProfileRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetLoginProfileRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOSLoginV1.LoginProfile
           in
           return try await self.inner.getLoginProfile(request: r, options: o)
@@ -114,14 +114,14 @@ extension Clients {
     }
 
     public func getSshPublicKey(
-      request: GetSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginCommon.SshPublicKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSshPublicKey",
         action: {
-          (r: GetSshPublicKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSshPublicKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOSLoginCommon.SshPublicKey
           in
           return try await self.inner.getSshPublicKey(request: r, options: o)
@@ -129,14 +129,14 @@ extension Clients {
     }
 
     public func importSshPublicKey(
-      request: ImportSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginV1.ImportSshPublicKeyResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "importSshPublicKey",
         action: {
-          (r: ImportSshPublicKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ImportSshPublicKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOSLoginV1.ImportSshPublicKeyResponse
           in
           return try await self.inner.importSshPublicKey(request: r, options: o)
@@ -144,14 +144,14 @@ extension Clients {
     }
 
     public func updateSshPublicKey(
-      request: UpdateSshPublicKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSshPublicKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOSLoginCommon.SshPublicKey {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSshPublicKey",
         action: {
-          (r: UpdateSshPublicKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSshPublicKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudOSLoginCommon.SshPublicKey
           in
           return try await self.inner.updateSshPublicKey(request: r, options: o)

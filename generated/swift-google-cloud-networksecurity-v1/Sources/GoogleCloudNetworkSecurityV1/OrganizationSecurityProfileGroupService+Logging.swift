@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -45,9 +45,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -64,14 +64,14 @@ extension Clients {
     }
 
     public func listSecurityProfileGroups(
-      request: ListSecurityProfileGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecurityProfileGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfileGroupsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSecurityProfileGroups",
         action: {
-          (r: ListSecurityProfileGroupsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSecurityProfileGroupsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudNetworkSecurityV1.ListSecurityProfileGroupsResponse
           in
           return try await self.inner.listSecurityProfileGroups(request: r, options: o)
@@ -79,14 +79,14 @@ extension Clients {
     }
 
     public func getSecurityProfileGroup(
-      request: GetSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfileGroup {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSecurityProfileGroup",
         action: {
-          (r: GetSecurityProfileGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSecurityProfileGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudNetworkSecurityV1.SecurityProfileGroup
           in
           return try await self.inner.getSecurityProfileGroup(request: r, options: o)
@@ -94,14 +94,14 @@ extension Clients {
     }
 
     public func createSecurityProfileGroup(
-      request: CreateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createSecurityProfileGroup",
         action: {
-          (r: CreateSecurityProfileGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateSecurityProfileGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createSecurityProfileGroup(request: r, options: o)
@@ -109,14 +109,14 @@ extension Clients {
     }
 
     public func updateSecurityProfileGroup(
-      request: UpdateSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSecurityProfileGroup",
         action: {
-          (r: UpdateSecurityProfileGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSecurityProfileGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateSecurityProfileGroup(request: r, options: o)
@@ -124,14 +124,14 @@ extension Clients {
     }
 
     public func deleteSecurityProfileGroup(
-      request: DeleteSecurityProfileGroupRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSecurityProfileGroupRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteSecurityProfileGroup",
         action: {
-          (r: DeleteSecurityProfileGroupRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteSecurityProfileGroupRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteSecurityProfileGroup(request: r, options: o)
@@ -139,14 +139,14 @@ extension Clients {
     }
 
     public func listSecurityProfiles(
-      request: ListSecurityProfilesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSecurityProfilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.ListSecurityProfilesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listSecurityProfiles",
         action: {
-          (r: ListSecurityProfilesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListSecurityProfilesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudNetworkSecurityV1.ListSecurityProfilesResponse
           in
           return try await self.inner.listSecurityProfiles(request: r, options: o)
@@ -154,14 +154,14 @@ extension Clients {
     }
 
     public func getSecurityProfile(
-      request: GetSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudNetworkSecurityV1.SecurityProfile {
       try await self._intercept(
         request: request,
         options: options,
         name: "getSecurityProfile",
         action: {
-          (r: GetSecurityProfileRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetSecurityProfileRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudNetworkSecurityV1.SecurityProfile
           in
           return try await self.inner.getSecurityProfile(request: r, options: o)
@@ -169,14 +169,14 @@ extension Clients {
     }
 
     public func createSecurityProfile(
-      request: CreateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createSecurityProfile",
         action: {
-          (r: CreateSecurityProfileRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateSecurityProfileRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createSecurityProfile(request: r, options: o)
@@ -184,14 +184,14 @@ extension Clients {
     }
 
     public func updateSecurityProfile(
-      request: UpdateSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateSecurityProfile",
         action: {
-          (r: UpdateSecurityProfileRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateSecurityProfileRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateSecurityProfile(request: r, options: o)
@@ -199,14 +199,14 @@ extension Clients {
     }
 
     public func deleteSecurityProfile(
-      request: DeleteSecurityProfileRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSecurityProfileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteSecurityProfile",
         action: {
-          (r: DeleteSecurityProfileRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteSecurityProfileRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteSecurityProfile(request: r, options: o)
@@ -214,29 +214,29 @@ extension Clients {
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listLocations",
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         name: "getLocation",
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)
@@ -244,14 +244,14 @@ extension Clients {
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "setIamPolicy",
         action: {
-          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.SetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.setIamPolicy(request: r, options: o)
@@ -259,14 +259,14 @@ extension Clients {
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self._intercept(
         request: request,
         options: options,
         name: "getIamPolicy",
         action: {
-          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.GetIamPolicyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.Policy
           in
           return try await self.inner.getIamPolicy(request: r, options: o)
@@ -274,14 +274,14 @@ extension Clients {
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "testIamPermissions",
         action: {
-          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleIAMV1.TestIamPermissionsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleIAMV1.TestIamPermissionsResponse
           in
           return try await self.inner.testIamPermissions(request: r, options: o)
@@ -289,29 +289,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)
@@ -319,29 +319,29 @@ extension Clients {
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteOperation",
         action: {
-          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.DeleteOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.deleteOperation(request: r, options: o)
         })
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "cancelOperation",
         action: {
-          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> Void in
+          (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+            -> Void in
           return try await self.inner.cancelOperation(request: r, options: o)
         })
     }

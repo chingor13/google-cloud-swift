@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Service-Level Objective (SLO) describes a level of desired good service. It
 /// consists of a service-level indicator (SLI), a performance goal, and a period
@@ -24,7 +24,7 @@ import GoogleType
 /// use SLIs defined in a number of different manners. Typical SLOs might include
 /// "99% of requests in each rolling week have latency below 200 milliseconds" or
 /// "99.5% of requests in each calendar month return successfully."
-public struct ServiceLevelObjective: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ServiceLevelObjective: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. Resource name for this `ServiceLevelObjective`. The format is:
@@ -55,7 +55,7 @@ public struct ServiceLevelObjective: Codable, Equatable, GoogleCloudWKT._AnyPack
   /// The time period over which the objective will be evaluated.
   public var period: OneOf_Period? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ServiceLevelObjective`.
   public init() {}
@@ -128,7 +128,7 @@ public struct ServiceLevelObjective: Codable, Equatable, GoogleCloudWKT._AnyPack
       period = $0
     }
     if let rollingPeriod = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration?.self, forKey: .rollingPeriod)
+      GoogleWKT.Duration?.self, forKey: .rollingPeriod)
     {
       try periodCheckAndSet(.rollingPeriod(rollingPeriod))
     }
@@ -140,7 +140,7 @@ public struct ServiceLevelObjective: Codable, Equatable, GoogleCloudWKT._AnyPack
     self.period = period
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -281,7 +281,7 @@ public struct ServiceLevelObjective: Codable, Equatable, GoogleCloudWKT._AnyPack
   public enum OneOf_Period: Codable, Equatable, Sendable {
     /// A rolling time period, semantically "in the past `<rolling_period>`".
     /// Must be an integer multiple of 1 day no larger than 30 days.
-    indirect case rollingPeriod(GoogleCloudWKT.Duration?)
+    indirect case rollingPeriod(GoogleWKT.Duration?)
     /// A calendar period, semantically "since the start of the current
     /// `<calendar_period>`". At this time, only `DAY`, `WEEK`, `FORTNIGHT`, and
     /// `MONTH` are supported.
@@ -291,10 +291,10 @@ public struct ServiceLevelObjective: Codable, Equatable, GoogleCloudWKT._AnyPack
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.v3.ServiceLevelObjective"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Links represent the data flow between **source** (upstream)
 /// and **target** (downstream) assets in transformation pipelines.
 ///
 /// Links are created when LineageEvents record data transformation between
 /// related assets.
-public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Link: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Immutable. The name of the link. Format:
@@ -36,16 +36,16 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var target: EntityReference? = nil
 
   /// The start of the first event establishing this link.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// The end of the last event establishing this link.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. The dependency info of the link (applies only to column level
   /// links).
   public var dependencyInfo: [Link.DependencyInfo] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Link`.
   public init() {}
@@ -93,9 +93,8 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     self.source = try container.decodeIfPresent(EntityReference.self, forKey: .source)
     self.target = try container.decodeIfPresent(EntityReference.self, forKey: .target)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     if let value = try container.decodeIfPresent(
       [Link.DependencyInfo].self, forKey: .dependencyInfo)
     {
@@ -103,7 +102,7 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -121,13 +120,13 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Dependency info describes how one entity depends on another.
-  public struct DependencyInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DependencyInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The type of dependency.
     public var dependencyType: DependencyType = DependencyType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DependencyInfo`.
     public init() {}
@@ -165,7 +164,7 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -180,21 +179,21 @@ public struct Link: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datacatalog.lineage.v1.Link.DependencyInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datacatalog.lineage.v1.Link"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

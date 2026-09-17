@@ -16,10 +16,10 @@
 
 #if SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Instance delete request.
-  public struct SqlInstancesDeleteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SqlInstancesDeleteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Cloud SQL instance ID. This does not include the project ID.
@@ -36,7 +36,7 @@
 
     public var expiration: OneOf_Expiration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SqlInstancesDeleteRequest`.
     public init() {}
@@ -109,14 +109,14 @@
         try expirationCheckAndSet(.finalBackupTtlDays(finalBackupTtlDays))
       }
       if let finalBackupExpiryTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp?.self, forKey: .finalBackupExpiryTime)
+        GoogleWKT.Timestamp?.self, forKey: .finalBackupExpiryTime)
       {
         try expirationCheckAndSet(.finalBackupExpiryTime(finalBackupExpiryTime))
       }
       self.expiration = expiration
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -145,17 +145,17 @@
       case finalBackupTtlDays(Swift.Int64)
       /// Optional. Final Backup expiration time.
       /// Timestamp in UTC of when this resource is considered expired.
-      indirect case finalBackupExpiryTime(GoogleCloudWKT.Timestamp?)
+      indirect case finalBackupExpiryTime(GoogleWKT.Timestamp?)
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.SqlInstancesDeleteRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

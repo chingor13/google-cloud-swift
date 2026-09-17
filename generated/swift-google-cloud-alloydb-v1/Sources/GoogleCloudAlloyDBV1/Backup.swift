@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Message describing Backup object
-public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The name of the backup resource with the format:
@@ -40,19 +40,19 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var uid: Swift.String = Swift.String()
 
   /// Output only. Create time stamp
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Update time stamp
   ///
   /// Users should not infer any meaning from this field. Its value is generally
   /// unrelated to the timing of the backup creation operation.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Delete time stamp
-  public var deleteTime: GoogleCloudWKT.Timestamp? = nil
+  public var deleteTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp when the resource finished being created.
-  public var createCompletionTime: GoogleCloudWKT.Timestamp? = nil
+  public var createCompletionTime: GoogleWKT.Timestamp? = nil
 
   /// Labels as key value pairs
   public var labels: [Swift.String: Swift.String] = [:]
@@ -103,7 +103,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The time at which after the backup is eligible to be garbage
   /// collected. It is the duration specified by the backup's retention policy,
   /// added to the backup's create_time.
-  public var expiryTime: GoogleCloudWKT.Timestamp? = nil
+  public var expiryTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The QuantityBasedExpiry of the backup, specified by the
   /// backup's retention policy. Once the expiry quantity is over retention, the
@@ -126,7 +126,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// ```
   public var tags: [Swift.String: Swift.String] = [:]
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Backup`.
   public init() {}
@@ -214,14 +214,11 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .uid) {
       self.uid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.deleteTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .deleteTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.deleteTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .deleteTime)
     self.createCompletionTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createCompletionTime)
+      GoogleWKT.Timestamp.self, forKey: .createCompletionTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -259,8 +256,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .sizeBytes) {
       self.sizeBytes = value
     }
-    self.expiryTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .expiryTime)
+    self.expiryTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expiryTime)
     self.expiryQuantity = try container.decodeIfPresent(
       Backup.QuantityBasedExpiry.self, forKey: .expiryQuantity)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .satisfiesPzs) {
@@ -274,7 +270,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -321,7 +317,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// Safe: backup_5 (1, 3), backup_4, (2, 3), backup_3 (3, 3).
   /// Awaiting garbage collection: backup_2 (4, 3), backup_1 (5, 3)
-  public struct QuantityBasedExpiry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QuantityBasedExpiry: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The backup's position among its backups with the same source
@@ -333,7 +329,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// backup's retention policy.
     public var totalRetentionCount: Swift.Int32 = Swift.Int32()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QuantityBasedExpiry`.
     public init() {}
@@ -376,7 +372,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -392,11 +388,11 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.alloydb.v1.Backup.QuantityBasedExpiry"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -637,10 +633,10 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.Backup"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,11 +19,11 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Secure Source Manager API
 ///
@@ -32,11 +32,11 @@ import GoogleCloudGax
 /// @Snippet(path: "SecureSourceManagerQuickstart")
 public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtocol, Sendable {
   let inner: any Clients.SecureSourceManagerStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `SecureSourceManagerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.SecureSourceManagerStub = try Clients.SecureSourceManagerTransport(
       options)
     inner = Clients.SecureSourceManagerRetry(inner, options: options)
@@ -52,7 +52,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListInstances")
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListInstancesResponse {
     try await self.inner.listInstances(request: request, options: options)
   }
@@ -61,7 +61,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListInstances")
   public func listInstances(
-    byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.ListInstancesResponse
@@ -70,14 +70,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listInstances(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets details of a single instance.
   ///
   /// @Snippet(path: "SecureSourceManager_GetInstance")
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.Instance {
     try await self.inner.getInstance(request: request, options: options)
   }
@@ -86,7 +86,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateInstance")
   public func createInstance(
-    request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createInstance(request: request, options: options)
   }
@@ -95,21 +95,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateInstance")
   public func createInstance(
-    withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+    withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Instance>.State
+      in
       return try op._extractStatus(Instance.self)
     }
     let rawOp = try await self.createInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -121,7 +121,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteInstance")
   public func deleteInstance(
-    request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteInstance(request: request, options: options)
   }
@@ -130,21 +130,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteInstance")
   public func deleteInstance(
-    withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteInstance(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -159,7 +159,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListRepositories")
   public func listRepositories(
-    request: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRepositoriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListRepositoriesResponse {
     try await self.inner.listRepositories(request: request, options: options)
   }
@@ -171,7 +171,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListRepositories")
   public func listRepositories(
-    byItem: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRepositoriesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Repository, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -180,14 +180,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listRepositories(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets metadata of a repository.
   ///
   /// @Snippet(path: "SecureSourceManager_GetRepository")
   public func getRepository(
-    request: GetRepositoryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRepositoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.Repository {
     try await self.inner.getRepository(request: request, options: options)
   }
@@ -199,7 +199,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateRepository")
   public func createRepository(
-    request: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRepositoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createRepository(request: request, options: options)
   }
@@ -211,21 +211,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateRepository")
   public func createRepository(
-    withPolling: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Repository> {
+    withPolling: CreateRepositoryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Repository> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Repository>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Repository>.State
+      in
       return try op._extractStatus(Repository.self)
     }
     let rawOp = try await self.createRepository(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Repository>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Repository>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -237,7 +237,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateRepository")
   public func updateRepository(
-    request: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateRepository(request: request, options: options)
   }
@@ -246,21 +246,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateRepository")
   public func updateRepository(
-    withPolling: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Repository> {
+    withPolling: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Repository> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Repository>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Repository>.State
+      in
       return try op._extractStatus(Repository.self)
     }
     let rawOp = try await self.updateRepository(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Repository>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Repository>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -272,7 +272,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteRepository")
   public func deleteRepository(
-    request: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteRepository(request: request, options: options)
   }
@@ -281,21 +281,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteRepository")
   public func deleteRepository(
-    withPolling: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteRepository(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -307,7 +307,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListHooks")
   public func listHooks(
-    request: ListHooksRequest, options: GoogleCloudGax.RequestOptions
+    request: ListHooksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListHooksResponse {
     try await self.inner.listHooks(request: request, options: options)
   }
@@ -316,7 +316,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListHooks")
   public func listHooks(
-    byItem: ListHooksRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListHooksRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Hook, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.ListHooksResponse in
@@ -324,14 +324,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listHooks(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets metadata of a hook.
   ///
   /// @Snippet(path: "SecureSourceManager_GetHook")
   public func getHook(
-    request: GetHookRequest, options: GoogleCloudGax.RequestOptions
+    request: GetHookRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.Hook {
     try await self.inner.getHook(request: request, options: options)
   }
@@ -340,7 +340,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateHook")
   public func createHook(
-    request: CreateHookRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateHookRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createHook(request: request, options: options)
   }
@@ -349,21 +349,20 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateHook")
   public func createHook(
-    withPolling: CreateHookRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Hook> {
+    withPolling: CreateHookRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Hook> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Hook>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Hook>.State in
       return try op._extractStatus(Hook.self)
     }
     let rawOp = try await self.createHook(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Hook>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Hook>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -375,7 +374,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateHook")
   public func updateHook(
-    request: UpdateHookRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateHookRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateHook(request: request, options: options)
   }
@@ -384,21 +383,20 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateHook")
   public func updateHook(
-    withPolling: UpdateHookRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Hook> {
+    withPolling: UpdateHookRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Hook> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Hook>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Hook>.State in
       return try op._extractStatus(Hook.self)
     }
     let rawOp = try await self.updateHook(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Hook>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Hook>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -410,7 +408,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteHook")
   public func deleteHook(
-    request: DeleteHookRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteHookRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteHook(request: request, options: options)
   }
@@ -419,21 +417,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteHook")
   public func deleteHook(
-    withPolling: DeleteHookRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteHookRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteHook(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -445,7 +443,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_GetIamPolicyRepo")
   public func getIamPolicyRepo(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicyRepo(request: request, options: options)
   }
@@ -454,7 +452,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_SetIamPolicyRepo")
   public func setIamPolicyRepo(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicyRepo(request: request, options: options)
   }
@@ -464,7 +462,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_TestIamPermissionsRepo")
   public func testIamPermissionsRepo(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissionsRepo(request: request, options: options)
   }
@@ -473,7 +471,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateBranchRule")
   public func createBranchRule(
-    request: CreateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBranchRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createBranchRule(request: request, options: options)
   }
@@ -482,21 +480,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateBranchRule")
   public func createBranchRule(
-    withPolling: CreateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule> {
+    withPolling: CreateBranchRuleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BranchRule> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BranchRule>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<BranchRule>.State
+      in
       return try op._extractStatus(BranchRule.self)
     }
     let rawOp = try await self.createBranchRule(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<BranchRule>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<BranchRule>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -508,7 +506,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListBranchRules")
   public func listBranchRules(
-    request: ListBranchRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBranchRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListBranchRulesResponse {
     try await self.inner.listBranchRules(request: request, options: options)
   }
@@ -517,7 +515,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListBranchRules")
   public func listBranchRules(
-    byItem: ListBranchRulesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBranchRulesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<BranchRule, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.ListBranchRulesResponse
@@ -526,14 +524,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listBranchRules(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// GetBranchRule gets a branch rule.
   ///
   /// @Snippet(path: "SecureSourceManager_GetBranchRule")
   public func getBranchRule(
-    request: GetBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBranchRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.BranchRule {
     try await self.inner.getBranchRule(request: request, options: options)
   }
@@ -542,7 +540,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateBranchRule")
   public func updateBranchRule(
-    request: UpdateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBranchRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateBranchRule(request: request, options: options)
   }
@@ -551,21 +549,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateBranchRule")
   public func updateBranchRule(
-    withPolling: UpdateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule> {
+    withPolling: UpdateBranchRuleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BranchRule> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BranchRule>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<BranchRule>.State
+      in
       return try op._extractStatus(BranchRule.self)
     }
     let rawOp = try await self.updateBranchRule(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<BranchRule>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<BranchRule>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -577,7 +575,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteBranchRule")
   public func deleteBranchRule(
-    request: DeleteBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBranchRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteBranchRule(request: request, options: options)
   }
@@ -586,21 +584,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteBranchRule")
   public func deleteBranchRule(
-    withPolling: DeleteBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteBranchRuleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteBranchRule(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -612,7 +610,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreatePullRequest")
   public func createPullRequest(
-    request: CreatePullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPullRequest(request: request, options: options)
   }
@@ -621,21 +619,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreatePullRequest")
   public func createPullRequest(
-    withPolling: CreatePullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+    withPolling: CreatePullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+        -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       return try op._extractStatus(PullRequest.self)
     }
     let rawOp = try await self.createPullRequest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -647,7 +645,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_GetPullRequest")
   public func getPullRequest(
-    request: GetPullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.PullRequest {
     try await self.inner.getPullRequest(request: request, options: options)
   }
@@ -656,7 +654,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListPullRequests")
   public func listPullRequests(
-    request: ListPullRequestsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPullRequestsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestsResponse {
     try await self.inner.listPullRequests(request: request, options: options)
   }
@@ -665,7 +663,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListPullRequests")
   public func listPullRequests(
-    byItem: ListPullRequestsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPullRequestsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PullRequest, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -674,14 +672,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listPullRequests(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a pull request.
   ///
   /// @Snippet(path: "SecureSourceManager_UpdatePullRequest")
   public func updatePullRequest(
-    request: UpdatePullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updatePullRequest(request: request, options: options)
   }
@@ -690,21 +688,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdatePullRequest")
   public func updatePullRequest(
-    withPolling: UpdatePullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+    withPolling: UpdatePullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+        -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       return try op._extractStatus(PullRequest.self)
     }
     let rawOp = try await self.updatePullRequest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -716,7 +714,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_MergePullRequest")
   public func mergePullRequest(
-    request: MergePullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: MergePullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.mergePullRequest(request: request, options: options)
   }
@@ -725,21 +723,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_MergePullRequest")
   public func mergePullRequest(
-    withPolling: MergePullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+    withPolling: MergePullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+        -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       return try op._extractStatus(PullRequest.self)
     }
     let rawOp = try await self.mergePullRequest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -751,7 +749,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_OpenPullRequest")
   public func openPullRequest(
-    request: OpenPullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: OpenPullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.openPullRequest(request: request, options: options)
   }
@@ -760,21 +758,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_OpenPullRequest")
   public func openPullRequest(
-    withPolling: OpenPullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+    withPolling: OpenPullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+        -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       return try op._extractStatus(PullRequest.self)
     }
     let rawOp = try await self.openPullRequest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -786,7 +784,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ClosePullRequest")
   public func closePullRequest(
-    request: ClosePullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: ClosePullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.closePullRequest(request: request, options: options)
   }
@@ -795,21 +793,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ClosePullRequest")
   public func closePullRequest(
-    withPolling: ClosePullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+    withPolling: ClosePullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+        -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       return try op._extractStatus(PullRequest.self)
     }
     let rawOp = try await self.closePullRequest(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -821,7 +819,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListPullRequestFileDiffs")
   public func listPullRequestFileDiffs(
-    request: ListPullRequestFileDiffsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPullRequestFileDiffsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestFileDiffsResponse {
     try await self.inner.listPullRequestFileDiffs(request: request, options: options)
   }
@@ -830,7 +828,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListPullRequestFileDiffs")
   public func listPullRequestFileDiffs(
-    byItem: ListPullRequestFileDiffsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPullRequestFileDiffsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FileDiff, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -839,14 +837,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listPullRequestFileDiffs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Fetches a tree from a repository.
   ///
   /// @Snippet(path: "SecureSourceManager_FetchTree")
   public func fetchTree(
-    request: FetchTreeRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchTreeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.FetchTreeResponse {
     try await self.inner.fetchTree(request: request, options: options)
   }
@@ -855,7 +853,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_FetchTree")
   public func fetchTree(
-    byItem: FetchTreeRequest, options: GoogleCloudGax.RequestOptions
+    byItem: FetchTreeRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TreeEntry, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.FetchTreeResponse in
@@ -863,14 +861,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.fetchTree(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Fetches a blob from a repository.
   ///
   /// @Snippet(path: "SecureSourceManager_FetchBlob")
   public func fetchBlob(
-    request: FetchBlobRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchBlobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.FetchBlobResponse {
     try await self.inner.fetchBlob(request: request, options: options)
   }
@@ -879,7 +877,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateIssue")
   public func createIssue(
-    request: CreateIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createIssue(request: request, options: options)
   }
@@ -888,21 +886,20 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateIssue")
   public func createIssue(
-    withPolling: CreateIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
+    withPolling: CreateIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Issue>.State in
       return try op._extractStatus(Issue.self)
     }
     let rawOp = try await self.createIssue(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Issue>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -914,7 +911,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_GetIssue")
   public func getIssue(
-    request: GetIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.Issue {
     try await self.inner.getIssue(request: request, options: options)
   }
@@ -923,7 +920,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListIssues")
   public func listIssues(
-    request: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIssuesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListIssuesResponse {
     try await self.inner.listIssues(request: request, options: options)
   }
@@ -932,7 +929,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListIssues")
   public func listIssues(
-    byItem: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListIssuesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Issue, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.ListIssuesResponse in
@@ -940,14 +937,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listIssues(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates a issue.
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateIssue")
   public func updateIssue(
-    request: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateIssue(request: request, options: options)
   }
@@ -956,21 +953,20 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateIssue")
   public func updateIssue(
-    withPolling: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
+    withPolling: UpdateIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Issue>.State in
       return try op._extractStatus(Issue.self)
     }
     let rawOp = try await self.updateIssue(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Issue>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -982,7 +978,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteIssue")
   public func deleteIssue(
-    request: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteIssue(request: request, options: options)
   }
@@ -991,21 +987,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteIssue")
   public func deleteIssue(
-    withPolling: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteIssue(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1017,7 +1013,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_OpenIssue")
   public func openIssue(
-    request: OpenIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: OpenIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.openIssue(request: request, options: options)
   }
@@ -1026,21 +1022,20 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_OpenIssue")
   public func openIssue(
-    withPolling: OpenIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
+    withPolling: OpenIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Issue>.State in
       return try op._extractStatus(Issue.self)
     }
     let rawOp = try await self.openIssue(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Issue>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1052,7 +1047,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CloseIssue")
   public func closeIssue(
-    request: CloseIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: CloseIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.closeIssue(request: request, options: options)
   }
@@ -1061,21 +1056,20 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CloseIssue")
   public func closeIssue(
-    withPolling: CloseIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
+    withPolling: CloseIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State
-      in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Issue>.State in
       return try op._extractStatus(Issue.self)
     }
     let rawOp = try await self.closeIssue(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Issue>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1087,7 +1081,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_GetPullRequestComment")
   public func getPullRequestComment(
-    request: GetPullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPullRequestCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.PullRequestComment {
     try await self.inner.getPullRequestComment(request: request, options: options)
   }
@@ -1096,7 +1090,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListPullRequestComments")
   public func listPullRequestComments(
-    request: ListPullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestCommentsResponse {
     try await self.inner.listPullRequestComments(request: request, options: options)
   }
@@ -1105,7 +1099,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListPullRequestComments")
   public func listPullRequestComments(
-    byItem: ListPullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PullRequestComment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1114,7 +1108,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listPullRequestComments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a pull request comment. This function is used to create a single
@@ -1125,7 +1119,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreatePullRequestComment")
   public func createPullRequestComment(
-    request: CreatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePullRequestCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createPullRequestComment(request: request, options: options)
   }
@@ -1138,22 +1132,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreatePullRequestComment")
   public func createPullRequestComment(
-    withPolling: CreatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment> {
+    withPolling: CreatePullRequestCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequestComment> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PullRequestComment>.State in
+        -> GoogleGax._PollableOperationImpl<PullRequestComment>.State in
       return try op._extractStatus(PullRequestComment.self)
     }
     let rawOp = try await self.createPullRequestComment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequestComment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequestComment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1165,7 +1158,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdatePullRequestComment")
   public func updatePullRequestComment(
-    request: UpdatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePullRequestCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updatePullRequestComment(request: request, options: options)
   }
@@ -1174,22 +1167,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdatePullRequestComment")
   public func updatePullRequestComment(
-    withPolling: UpdatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment> {
+    withPolling: UpdatePullRequestCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequestComment> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<PullRequestComment>.State in
+        -> GoogleGax._PollableOperationImpl<PullRequestComment>.State in
       return try op._extractStatus(PullRequestComment.self)
     }
     let rawOp = try await self.updatePullRequestComment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequestComment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequestComment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1201,7 +1193,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeletePullRequestComment")
   public func deletePullRequestComment(
-    request: DeletePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePullRequestCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deletePullRequestComment(request: request, options: options)
   }
@@ -1210,21 +1202,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeletePullRequestComment")
   public func deletePullRequestComment(
-    withPolling: DeletePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeletePullRequestCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deletePullRequestComment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1240,7 +1232,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_BatchCreatePullRequestComments")
   public func batchCreatePullRequestComments(
-    request: BatchCreatePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchCreatePullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.batchCreatePullRequestComments(request: request, options: options)
   }
@@ -1253,11 +1245,11 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_BatchCreatePullRequestComments")
   public func batchCreatePullRequestComments(
-    withPolling: BatchCreatePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchCreatePullRequestCommentsResponse> {
+    withPolling: BatchCreatePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchCreatePullRequestCommentsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchCreatePullRequestCommentsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BatchCreatePullRequestCommentsResponse>.State in
       return try op._extractStatus(BatchCreatePullRequestCommentsResponse.self)
     }
     let rawOp = try await self.batchCreatePullRequestComments(
@@ -1265,12 +1257,12 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
     let initialState = try extractStatus(rawOp)
     let poll = {
       () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchCreatePullRequestCommentsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<BatchCreatePullRequestCommentsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1285,7 +1277,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ResolvePullRequestComments")
   public func resolvePullRequestComments(
-    request: ResolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ResolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.resolvePullRequestComments(request: request, options: options)
   }
@@ -1297,23 +1289,23 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ResolvePullRequestComments")
   public func resolvePullRequestComments(
-    withPolling: ResolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ResolvePullRequestCommentsResponse> {
+    withPolling: ResolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ResolvePullRequestCommentsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<ResolvePullRequestCommentsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<ResolvePullRequestCommentsResponse>.State in
       return try op._extractStatus(ResolvePullRequestCommentsResponse.self)
     }
     let rawOp = try await self.resolvePullRequestComments(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<ResolvePullRequestCommentsResponse>.State in
+      () async throws -> GoogleGax._PollableOperationImpl<ResolvePullRequestCommentsResponse>.State
+      in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1328,7 +1320,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UnresolvePullRequestComments")
   public func unresolvePullRequestComments(
-    request: UnresolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: UnresolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.unresolvePullRequestComments(request: request, options: options)
   }
@@ -1340,23 +1332,23 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UnresolvePullRequestComments")
   public func unresolvePullRequestComments(
-    withPolling: UnresolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<UnresolvePullRequestCommentsResponse> {
+    withPolling: UnresolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<UnresolvePullRequestCommentsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<UnresolvePullRequestCommentsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<UnresolvePullRequestCommentsResponse>.State in
       return try op._extractStatus(UnresolvePullRequestCommentsResponse.self)
     }
     let rawOp = try await self.unresolvePullRequestComments(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
       () async throws
-        -> GoogleCloudGax._PollableOperationImpl<UnresolvePullRequestCommentsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<UnresolvePullRequestCommentsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1368,7 +1360,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateIssueComment")
   public func createIssueComment(
-    request: CreateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateIssueCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createIssueComment(request: request, options: options)
   }
@@ -1377,21 +1369,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CreateIssueComment")
   public func createIssueComment(
-    withPolling: CreateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment> {
+    withPolling: CreateIssueCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<IssueComment> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<IssueComment>.State in
+        -> GoogleGax._PollableOperationImpl<IssueComment>.State in
       return try op._extractStatus(IssueComment.self)
     }
     let rawOp = try await self.createIssueComment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<IssueComment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<IssueComment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1403,7 +1395,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_GetIssueComment")
   public func getIssueComment(
-    request: GetIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIssueCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.IssueComment {
     try await self.inner.getIssueComment(request: request, options: options)
   }
@@ -1412,7 +1404,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListIssueComments")
   public func listIssueComments(
-    request: ListIssueCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIssueCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListIssueCommentsResponse {
     try await self.inner.listIssueComments(request: request, options: options)
   }
@@ -1421,7 +1413,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListIssueComments")
   public func listIssueComments(
-    byItem: ListIssueCommentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListIssueCommentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<IssueComment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1430,14 +1422,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listIssueComments(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Updates an issue comment.
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateIssueComment")
   public func updateIssueComment(
-    request: UpdateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIssueCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.updateIssueComment(request: request, options: options)
   }
@@ -1446,21 +1438,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_UpdateIssueComment")
   public func updateIssueComment(
-    withPolling: UpdateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment> {
+    withPolling: UpdateIssueCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<IssueComment> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<IssueComment>.State in
+        -> GoogleGax._PollableOperationImpl<IssueComment>.State in
       return try op._extractStatus(IssueComment.self)
     }
     let rawOp = try await self.updateIssueComment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<IssueComment>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<IssueComment>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1472,7 +1464,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteIssueComment")
   public func deleteIssueComment(
-    request: DeleteIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIssueCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.deleteIssueComment(request: request, options: options)
   }
@@ -1481,21 +1473,21 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteIssueComment")
   public func deleteIssueComment(
-    withPolling: DeleteIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: DeleteIssueCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.deleteIssueComment(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1524,7 +1516,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListLocations")
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
     try await self.inner.listLocations(request: request, options: options)
   }
@@ -1550,7 +1542,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListLocations")
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -1558,14 +1550,14 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listLocations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Gets information about a location.
   ///
   /// @Snippet(path: "SecureSourceManager_GetLocation")
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
     try await self.inner.getLocation(request: request, options: options)
   }
@@ -1578,7 +1570,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_SetIamPolicy")
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.setIamPolicy(request: request, options: options)
   }
@@ -1588,7 +1580,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_GetIamPolicy")
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
     try await self.inner.getIamPolicy(request: request, options: options)
   }
@@ -1603,7 +1595,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_TestIamPermissions")
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
     try await self.inner.testIamPermissions(request: request, options: options)
   }
@@ -1614,7 +1606,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -1625,7 +1617,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -1633,7 +1625,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -1642,7 +1634,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -1653,7 +1645,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -1664,7 +1656,7 @@ public final class SecureSourceManagerClient: Clients.SecureSourceManagerProtoco
   ///
   /// @Snippet(path: "SecureSourceManager_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -1704,7 +1696,7 @@ extension Clients {
     func createInstance(request: CreateInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createInstance`.
-    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+    func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Instance>
 
     /// See `SecureSourceManagerClient.createInstance`.
@@ -1712,19 +1704,19 @@ extension Clients {
       parent: Swift.String,
       instance: Instance?,
       instanceId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `SecureSourceManagerClient.deleteInstance`.
     func deleteInstance(request: DeleteInstanceRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteInstance`.
-    func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
+    func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.deleteInstance`.
     func deleteInstance(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.listRepositories`.
     func listRepositories(request: ListRepositoriesRequest) async throws
@@ -1754,7 +1746,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createRepository`.
-    func createRepository(withPolling: CreateRepositoryRequest) async throws -> any GoogleCloudGax
+    func createRepository(withPolling: CreateRepositoryRequest) async throws -> any GoogleGax
       .PollableOperation<Repository>
 
     /// See `SecureSourceManagerClient.createRepository`.
@@ -1762,34 +1754,34 @@ extension Clients {
       parent: Swift.String,
       repository: Repository?,
       repositoryId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Repository>
+    ) async throws -> any GoogleGax.PollableOperation<Repository>
 
     /// See `SecureSourceManagerClient.updateRepository`.
     func updateRepository(request: UpdateRepositoryRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateRepository`.
-    func updateRepository(withPolling: UpdateRepositoryRequest) async throws -> any GoogleCloudGax
+    func updateRepository(withPolling: UpdateRepositoryRequest) async throws -> any GoogleGax
       .PollableOperation<Repository>
 
     /// See `SecureSourceManagerClient.updateRepository`.
     func updateRepository(
       repository: Repository?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Repository>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Repository>
 
     /// See `SecureSourceManagerClient.deleteRepository`.
     func deleteRepository(request: DeleteRepositoryRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteRepository`.
-    func deleteRepository(withPolling: DeleteRepositoryRequest) async throws -> any GoogleCloudGax
+    func deleteRepository(withPolling: DeleteRepositoryRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.deleteRepository`.
     func deleteRepository(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.listHooks`.
     func listHooks(request: ListHooksRequest) async throws
@@ -1817,40 +1809,43 @@ extension Clients {
     func createHook(request: CreateHookRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createHook`.
-    func createHook(withPolling: CreateHookRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Hook>
+    func createHook(withPolling: CreateHookRequest) async throws -> any GoogleGax.PollableOperation<
+      Hook
+    >
 
     /// See `SecureSourceManagerClient.createHook`.
     func createHook(
       parent: Swift.String,
       hook: Hook?,
       hookId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Hook>
+    ) async throws -> any GoogleGax.PollableOperation<Hook>
 
     /// See `SecureSourceManagerClient.updateHook`.
     func updateHook(request: UpdateHookRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateHook`.
-    func updateHook(withPolling: UpdateHookRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Hook>
+    func updateHook(withPolling: UpdateHookRequest) async throws -> any GoogleGax.PollableOperation<
+      Hook
+    >
 
     /// See `SecureSourceManagerClient.updateHook`.
     func updateHook(
       hook: Hook?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Hook>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Hook>
 
     /// See `SecureSourceManagerClient.deleteHook`.
     func deleteHook(request: DeleteHookRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteHook`.
-    func deleteHook(withPolling: DeleteHookRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Swift.Void>
+    func deleteHook(withPolling: DeleteHookRequest) async throws -> any GoogleGax.PollableOperation<
+      Swift.Void
+    >
 
     /// See `SecureSourceManagerClient.deleteHook`.
     func deleteHook(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.getIamPolicyRepo`.
     func getIamPolicyRepo(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -1884,7 +1879,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createBranchRule`.
-    func createBranchRule(withPolling: CreateBranchRuleRequest) async throws -> any GoogleCloudGax
+    func createBranchRule(withPolling: CreateBranchRuleRequest) async throws -> any GoogleGax
       .PollableOperation<BranchRule>
 
     /// See `SecureSourceManagerClient.createBranchRule`.
@@ -1892,7 +1887,7 @@ extension Clients {
       parent: Swift.String,
       branchRule: BranchRule?,
       branchRuleId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule>
+    ) async throws -> any GoogleGax.PollableOperation<BranchRule>
 
     /// See `SecureSourceManagerClient.listBranchRules`.
     func listBranchRules(request: ListBranchRulesRequest) async throws
@@ -1922,41 +1917,41 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateBranchRule`.
-    func updateBranchRule(withPolling: UpdateBranchRuleRequest) async throws -> any GoogleCloudGax
+    func updateBranchRule(withPolling: UpdateBranchRuleRequest) async throws -> any GoogleGax
       .PollableOperation<BranchRule>
 
     /// See `SecureSourceManagerClient.updateBranchRule`.
     func updateBranchRule(
       branchRule: BranchRule?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<BranchRule>
 
     /// See `SecureSourceManagerClient.deleteBranchRule`.
     func deleteBranchRule(request: DeleteBranchRuleRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteBranchRule`.
-    func deleteBranchRule(withPolling: DeleteBranchRuleRequest) async throws -> any GoogleCloudGax
+    func deleteBranchRule(withPolling: DeleteBranchRuleRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.deleteBranchRule`.
     func deleteBranchRule(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.createPullRequest`.
     func createPullRequest(request: CreatePullRequestRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createPullRequest`.
-    func createPullRequest(withPolling: CreatePullRequestRequest) async throws -> any GoogleCloudGax
+    func createPullRequest(withPolling: CreatePullRequestRequest) async throws -> any GoogleGax
       .PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.createPullRequest`.
     func createPullRequest(
       parent: Swift.String,
       pullRequest: PullRequest?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.getPullRequest`.
     func getPullRequest(request: GetPullRequestRequest) async throws
@@ -1986,53 +1981,53 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updatePullRequest`.
-    func updatePullRequest(withPolling: UpdatePullRequestRequest) async throws -> any GoogleCloudGax
+    func updatePullRequest(withPolling: UpdatePullRequestRequest) async throws -> any GoogleGax
       .PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.updatePullRequest`.
     func updatePullRequest(
       pullRequest: PullRequest?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.mergePullRequest`.
     func mergePullRequest(request: MergePullRequestRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.mergePullRequest`.
-    func mergePullRequest(withPolling: MergePullRequestRequest) async throws -> any GoogleCloudGax
+    func mergePullRequest(withPolling: MergePullRequestRequest) async throws -> any GoogleGax
       .PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.mergePullRequest`.
     func mergePullRequest(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.openPullRequest`.
     func openPullRequest(request: OpenPullRequestRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.openPullRequest`.
-    func openPullRequest(withPolling: OpenPullRequestRequest) async throws -> any GoogleCloudGax
+    func openPullRequest(withPolling: OpenPullRequestRequest) async throws -> any GoogleGax
       .PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.openPullRequest`.
     func openPullRequest(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.closePullRequest`.
     func closePullRequest(request: ClosePullRequestRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.closePullRequest`.
-    func closePullRequest(withPolling: ClosePullRequestRequest) async throws -> any GoogleCloudGax
+    func closePullRequest(withPolling: ClosePullRequestRequest) async throws -> any GoogleGax
       .PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.closePullRequest`.
     func closePullRequest(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.listPullRequestFileDiffs`.
     func listPullRequestFileDiffs(request: ListPullRequestFileDiffsRequest) async throws
@@ -2065,14 +2060,14 @@ extension Clients {
     func createIssue(request: CreateIssueRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createIssue`.
-    func createIssue(withPolling: CreateIssueRequest) async throws -> any GoogleCloudGax
+    func createIssue(withPolling: CreateIssueRequest) async throws -> any GoogleGax
       .PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.createIssue`.
     func createIssue(
       parent: Swift.String,
       issue: Issue?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Issue>
+    ) async throws -> any GoogleGax.PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.getIssue`.
     func getIssue(request: GetIssueRequest) async throws -> GoogleCloudSecureSourceManagerV1.Issue
@@ -2100,50 +2095,52 @@ extension Clients {
     func updateIssue(request: UpdateIssueRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateIssue`.
-    func updateIssue(withPolling: UpdateIssueRequest) async throws -> any GoogleCloudGax
+    func updateIssue(withPolling: UpdateIssueRequest) async throws -> any GoogleGax
       .PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.updateIssue`.
     func updateIssue(
       issue: Issue?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Issue>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.deleteIssue`.
     func deleteIssue(request: DeleteIssueRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteIssue`.
-    func deleteIssue(withPolling: DeleteIssueRequest) async throws -> any GoogleCloudGax
+    func deleteIssue(withPolling: DeleteIssueRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.deleteIssue`.
     func deleteIssue(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.openIssue`.
     func openIssue(request: OpenIssueRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.openIssue`.
-    func openIssue(withPolling: OpenIssueRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Issue>
+    func openIssue(withPolling: OpenIssueRequest) async throws -> any GoogleGax.PollableOperation<
+      Issue
+    >
 
     /// See `SecureSourceManagerClient.openIssue`.
     func openIssue(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Issue>
+    ) async throws -> any GoogleGax.PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.closeIssue`.
     func closeIssue(request: CloseIssueRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.closeIssue`.
-    func closeIssue(withPolling: CloseIssueRequest) async throws -> any GoogleCloudGax
-      .PollableOperation<Issue>
+    func closeIssue(withPolling: CloseIssueRequest) async throws -> any GoogleGax.PollableOperation<
+      Issue
+    >
 
     /// See `SecureSourceManagerClient.closeIssue`.
     func closeIssue(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Issue>
+    ) async throws -> any GoogleGax.PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.getPullRequestComment`.
     func getPullRequestComment(request: GetPullRequestCommentRequest) async throws
@@ -2174,13 +2171,13 @@ extension Clients {
 
     /// See `SecureSourceManagerClient.createPullRequestComment`.
     func createPullRequestComment(withPolling: CreatePullRequestCommentRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PullRequestComment>
+      -> any GoogleGax.PollableOperation<PullRequestComment>
 
     /// See `SecureSourceManagerClient.createPullRequestComment`.
     func createPullRequestComment(
       parent: Swift.String,
       pullRequestComment: PullRequestComment?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment>
+    ) async throws -> any GoogleGax.PollableOperation<PullRequestComment>
 
     /// See `SecureSourceManagerClient.updatePullRequestComment`.
     func updatePullRequestComment(request: UpdatePullRequestCommentRequest) async throws
@@ -2188,13 +2185,13 @@ extension Clients {
 
     /// See `SecureSourceManagerClient.updatePullRequestComment`.
     func updatePullRequestComment(withPolling: UpdatePullRequestCommentRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<PullRequestComment>
+      -> any GoogleGax.PollableOperation<PullRequestComment>
 
     /// See `SecureSourceManagerClient.updatePullRequestComment`.
     func updatePullRequestComment(
       pullRequestComment: PullRequestComment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<PullRequestComment>
 
     /// See `SecureSourceManagerClient.deletePullRequestComment`.
     func deletePullRequestComment(request: DeletePullRequestCommentRequest) async throws
@@ -2202,12 +2199,12 @@ extension Clients {
 
     /// See `SecureSourceManagerClient.deletePullRequestComment`.
     func deletePullRequestComment(withPolling: DeletePullRequestCommentRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.deletePullRequestComment`.
     func deletePullRequestComment(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.batchCreatePullRequestComments`.
     func batchCreatePullRequestComments(request: BatchCreatePullRequestCommentsRequest) async throws
@@ -2215,13 +2212,13 @@ extension Clients {
 
     /// See `SecureSourceManagerClient.batchCreatePullRequestComments`.
     func batchCreatePullRequestComments(withPolling: BatchCreatePullRequestCommentsRequest)
-      async throws -> any GoogleCloudGax.PollableOperation<BatchCreatePullRequestCommentsResponse>
+      async throws -> any GoogleGax.PollableOperation<BatchCreatePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.batchCreatePullRequestComments`.
     func batchCreatePullRequestComments(
       parent: Swift.String,
       requests: [CreatePullRequestCommentRequest],
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchCreatePullRequestCommentsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<BatchCreatePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.resolvePullRequestComments`.
     func resolvePullRequestComments(request: ResolvePullRequestCommentsRequest) async throws
@@ -2229,13 +2226,13 @@ extension Clients {
 
     /// See `SecureSourceManagerClient.resolvePullRequestComments`.
     func resolvePullRequestComments(withPolling: ResolvePullRequestCommentsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<ResolvePullRequestCommentsResponse>
+      -> any GoogleGax.PollableOperation<ResolvePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.resolvePullRequestComments`.
     func resolvePullRequestComments(
       parent: Swift.String,
       names: [Swift.String],
-    ) async throws -> any GoogleCloudGax.PollableOperation<ResolvePullRequestCommentsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<ResolvePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.unresolvePullRequestComments`.
     func unresolvePullRequestComments(request: UnresolvePullRequestCommentsRequest) async throws
@@ -2243,27 +2240,27 @@ extension Clients {
 
     /// See `SecureSourceManagerClient.unresolvePullRequestComments`.
     func unresolvePullRequestComments(withPolling: UnresolvePullRequestCommentsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<UnresolvePullRequestCommentsResponse>
+      -> any GoogleGax.PollableOperation<UnresolvePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.unresolvePullRequestComments`.
     func unresolvePullRequestComments(
       parent: Swift.String,
       names: [Swift.String],
-    ) async throws -> any GoogleCloudGax.PollableOperation<UnresolvePullRequestCommentsResponse>
+    ) async throws -> any GoogleGax.PollableOperation<UnresolvePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.createIssueComment`.
     func createIssueComment(request: CreateIssueCommentRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createIssueComment`.
-    func createIssueComment(withPolling: CreateIssueCommentRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<IssueComment>
+    func createIssueComment(withPolling: CreateIssueCommentRequest) async throws -> any GoogleGax
+      .PollableOperation<IssueComment>
 
     /// See `SecureSourceManagerClient.createIssueComment`.
     func createIssueComment(
       parent: Swift.String,
       issueComment: IssueComment?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment>
+    ) async throws -> any GoogleGax.PollableOperation<IssueComment>
 
     /// See `SecureSourceManagerClient.getIssueComment`.
     func getIssueComment(request: GetIssueCommentRequest) async throws
@@ -2293,27 +2290,27 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateIssueComment`.
-    func updateIssueComment(withPolling: UpdateIssueCommentRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<IssueComment>
+    func updateIssueComment(withPolling: UpdateIssueCommentRequest) async throws -> any GoogleGax
+      .PollableOperation<IssueComment>
 
     /// See `SecureSourceManagerClient.updateIssueComment`.
     func updateIssueComment(
       issueComment: IssueComment?,
-      updateMask: GoogleCloudWKT.FieldMask?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment>
+      updateMask: GoogleWKT.FieldMask?,
+    ) async throws -> any GoogleGax.PollableOperation<IssueComment>
 
     /// See `SecureSourceManagerClient.deleteIssueComment`.
     func deleteIssueComment(request: DeleteIssueCommentRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteIssueComment`.
-    func deleteIssueComment(withPolling: DeleteIssueCommentRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    func deleteIssueComment(withPolling: DeleteIssueCommentRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.deleteIssueComment`.
     func deleteIssueComment(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.listLocations`.
     func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -2371,512 +2368,512 @@ extension Clients {
 
     /// See `SecureSourceManagerClient.listInstances`.
     func listInstances(
-      request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListInstancesResponse
 
     /// See `SecureSourceManagerClient.listInstances`.
     func listInstances(
-      byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Instance, Swift.Error>
 
     /// See `SecureSourceManagerClient.getInstance`.
     func getInstance(
-      request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.Instance
 
     /// See `SecureSourceManagerClient.createInstance`.
     func createInstance(
-      request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createInstance`.
     func createInstance(
-      withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Instance>
+      withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Instance>
 
     /// See `SecureSourceManagerClient.deleteInstance`.
     func deleteInstance(
-      request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteInstance`.
     func deleteInstance(
-      withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.listRepositories`.
     func listRepositories(
-      request: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRepositoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListRepositoriesResponse
 
     /// See `SecureSourceManagerClient.listRepositories`.
     func listRepositories(
-      byItem: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListRepositoriesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Repository, Swift.Error>
 
     /// See `SecureSourceManagerClient.getRepository`.
     func getRepository(
-      request: GetRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.Repository
 
     /// See `SecureSourceManagerClient.createRepository`.
     func createRepository(
-      request: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createRepository`.
     func createRepository(
-      withPolling: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Repository>
+      withPolling: CreateRepositoryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Repository>
 
     /// See `SecureSourceManagerClient.updateRepository`.
     func updateRepository(
-      request: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateRepository`.
     func updateRepository(
-      withPolling: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Repository>
+      withPolling: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Repository>
 
     /// See `SecureSourceManagerClient.deleteRepository`.
     func deleteRepository(
-      request: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteRepository`.
     func deleteRepository(
-      withPolling: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.listHooks`.
     func listHooks(
-      request: ListHooksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHooksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListHooksResponse
 
     /// See `SecureSourceManagerClient.listHooks`.
     func listHooks(
-      byItem: ListHooksRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListHooksRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Hook, Swift.Error>
 
     /// See `SecureSourceManagerClient.getHook`.
     func getHook(
-      request: GetHookRequest, options: GoogleCloudGax.RequestOptions
+      request: GetHookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.Hook
 
     /// See `SecureSourceManagerClient.createHook`.
     func createHook(
-      request: CreateHookRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateHookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createHook`.
     func createHook(
-      withPolling: CreateHookRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Hook>
+      withPolling: CreateHookRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Hook>
 
     /// See `SecureSourceManagerClient.updateHook`.
     func updateHook(
-      request: UpdateHookRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateHookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateHook`.
     func updateHook(
-      withPolling: UpdateHookRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Hook>
+      withPolling: UpdateHookRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Hook>
 
     /// See `SecureSourceManagerClient.deleteHook`.
     func deleteHook(
-      request: DeleteHookRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteHookRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteHook`.
     func deleteHook(
-      withPolling: DeleteHookRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteHookRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.getIamPolicyRepo`.
     func getIamPolicyRepo(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SecureSourceManagerClient.setIamPolicyRepo`.
     func setIamPolicyRepo(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SecureSourceManagerClient.testIamPermissionsRepo`.
     func testIamPermissionsRepo(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `SecureSourceManagerClient.createBranchRule`.
     func createBranchRule(
-      request: CreateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBranchRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createBranchRule`.
     func createBranchRule(
-      withPolling: CreateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule>
+      withPolling: CreateBranchRuleRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BranchRule>
 
     /// See `SecureSourceManagerClient.listBranchRules`.
     func listBranchRules(
-      request: ListBranchRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBranchRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListBranchRulesResponse
 
     /// See `SecureSourceManagerClient.listBranchRules`.
     func listBranchRules(
-      byItem: ListBranchRulesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListBranchRulesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BranchRule, Swift.Error>
 
     /// See `SecureSourceManagerClient.getBranchRule`.
     func getBranchRule(
-      request: GetBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBranchRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.BranchRule
 
     /// See `SecureSourceManagerClient.updateBranchRule`.
     func updateBranchRule(
-      request: UpdateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBranchRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateBranchRule`.
     func updateBranchRule(
-      withPolling: UpdateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule>
+      withPolling: UpdateBranchRuleRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BranchRule>
 
     /// See `SecureSourceManagerClient.deleteBranchRule`.
     func deleteBranchRule(
-      request: DeleteBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBranchRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteBranchRule`.
     func deleteBranchRule(
-      withPolling: DeleteBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteBranchRuleRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.createPullRequest`.
     func createPullRequest(
-      request: CreatePullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createPullRequest`.
     func createPullRequest(
-      withPolling: CreatePullRequestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+      withPolling: CreatePullRequestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.getPullRequest`.
     func getPullRequest(
-      request: GetPullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.PullRequest
 
     /// See `SecureSourceManagerClient.listPullRequests`.
     func listPullRequests(
-      request: ListPullRequestsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPullRequestsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestsResponse
 
     /// See `SecureSourceManagerClient.listPullRequests`.
     func listPullRequests(
-      byItem: ListPullRequestsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPullRequestsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PullRequest, Swift.Error>
 
     /// See `SecureSourceManagerClient.updatePullRequest`.
     func updatePullRequest(
-      request: UpdatePullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updatePullRequest`.
     func updatePullRequest(
-      withPolling: UpdatePullRequestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+      withPolling: UpdatePullRequestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.mergePullRequest`.
     func mergePullRequest(
-      request: MergePullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: MergePullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.mergePullRequest`.
     func mergePullRequest(
-      withPolling: MergePullRequestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+      withPolling: MergePullRequestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.openPullRequest`.
     func openPullRequest(
-      request: OpenPullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: OpenPullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.openPullRequest`.
     func openPullRequest(
-      withPolling: OpenPullRequestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+      withPolling: OpenPullRequestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.closePullRequest`.
     func closePullRequest(
-      request: ClosePullRequestRequest, options: GoogleCloudGax.RequestOptions
+      request: ClosePullRequestRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.closePullRequest`.
     func closePullRequest(
-      withPolling: ClosePullRequestRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest>
+      withPolling: ClosePullRequestRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PullRequest>
 
     /// See `SecureSourceManagerClient.listPullRequestFileDiffs`.
     func listPullRequestFileDiffs(
-      request: ListPullRequestFileDiffsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPullRequestFileDiffsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestFileDiffsResponse
 
     /// See `SecureSourceManagerClient.listPullRequestFileDiffs`.
     func listPullRequestFileDiffs(
-      byItem: ListPullRequestFileDiffsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPullRequestFileDiffsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<FileDiff, Swift.Error>
 
     /// See `SecureSourceManagerClient.fetchTree`.
     func fetchTree(
-      request: FetchTreeRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchTreeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.FetchTreeResponse
 
     /// See `SecureSourceManagerClient.fetchTree`.
     func fetchTree(
-      byItem: FetchTreeRequest, options: GoogleCloudGax.RequestOptions
+      byItem: FetchTreeRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TreeEntry, Swift.Error>
 
     /// See `SecureSourceManagerClient.fetchBlob`.
     func fetchBlob(
-      request: FetchBlobRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchBlobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.FetchBlobResponse
 
     /// See `SecureSourceManagerClient.createIssue`.
     func createIssue(
-      request: CreateIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createIssue`.
     func createIssue(
-      withPolling: CreateIssueRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Issue>
+      withPolling: CreateIssueRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.getIssue`.
     func getIssue(
-      request: GetIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.Issue
 
     /// See `SecureSourceManagerClient.listIssues`.
     func listIssues(
-      request: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIssuesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListIssuesResponse
 
     /// See `SecureSourceManagerClient.listIssues`.
     func listIssues(
-      byItem: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIssuesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Issue, Swift.Error>
 
     /// See `SecureSourceManagerClient.updateIssue`.
     func updateIssue(
-      request: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateIssue`.
     func updateIssue(
-      withPolling: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Issue>
+      withPolling: UpdateIssueRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.deleteIssue`.
     func deleteIssue(
-      request: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteIssue`.
     func deleteIssue(
-      withPolling: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteIssueRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.openIssue`.
     func openIssue(
-      request: OpenIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: OpenIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.openIssue`.
     func openIssue(
-      withPolling: OpenIssueRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Issue>
+      withPolling: OpenIssueRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.closeIssue`.
     func closeIssue(
-      request: CloseIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: CloseIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.closeIssue`.
     func closeIssue(
-      withPolling: CloseIssueRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Issue>
+      withPolling: CloseIssueRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Issue>
 
     /// See `SecureSourceManagerClient.getPullRequestComment`.
     func getPullRequestComment(
-      request: GetPullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPullRequestCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.PullRequestComment
 
     /// See `SecureSourceManagerClient.listPullRequestComments`.
     func listPullRequestComments(
-      request: ListPullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestCommentsResponse
 
     /// See `SecureSourceManagerClient.listPullRequestComments`.
     func listPullRequestComments(
-      byItem: ListPullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PullRequestComment, Swift.Error>
 
     /// See `SecureSourceManagerClient.createPullRequestComment`.
     func createPullRequestComment(
-      request: CreatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePullRequestCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createPullRequestComment`.
     func createPullRequestComment(
-      withPolling: CreatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment>
+      withPolling: CreatePullRequestCommentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PullRequestComment>
 
     /// See `SecureSourceManagerClient.updatePullRequestComment`.
     func updatePullRequestComment(
-      request: UpdatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePullRequestCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updatePullRequestComment`.
     func updatePullRequestComment(
-      withPolling: UpdatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment>
+      withPolling: UpdatePullRequestCommentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<PullRequestComment>
 
     /// See `SecureSourceManagerClient.deletePullRequestComment`.
     func deletePullRequestComment(
-      request: DeletePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePullRequestCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deletePullRequestComment`.
     func deletePullRequestComment(
-      withPolling: DeletePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeletePullRequestCommentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.batchCreatePullRequestComments`.
     func batchCreatePullRequestComments(
-      request: BatchCreatePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreatePullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.batchCreatePullRequestComments`.
     func batchCreatePullRequestComments(
-      withPolling: BatchCreatePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<BatchCreatePullRequestCommentsResponse>
+      withPolling: BatchCreatePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<BatchCreatePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.resolvePullRequestComments`.
     func resolvePullRequestComments(
-      request: ResolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ResolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.resolvePullRequestComments`.
     func resolvePullRequestComments(
-      withPolling: ResolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ResolvePullRequestCommentsResponse>
+      withPolling: ResolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ResolvePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.unresolvePullRequestComments`.
     func unresolvePullRequestComments(
-      request: UnresolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: UnresolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.unresolvePullRequestComments`.
     func unresolvePullRequestComments(
-      withPolling: UnresolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<UnresolvePullRequestCommentsResponse>
+      withPolling: UnresolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<UnresolvePullRequestCommentsResponse>
 
     /// See `SecureSourceManagerClient.createIssueComment`.
     func createIssueComment(
-      request: CreateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIssueCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.createIssueComment`.
     func createIssueComment(
-      withPolling: CreateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment>
+      withPolling: CreateIssueCommentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<IssueComment>
 
     /// See `SecureSourceManagerClient.getIssueComment`.
     func getIssueComment(
-      request: GetIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIssueCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.IssueComment
 
     /// See `SecureSourceManagerClient.listIssueComments`.
     func listIssueComments(
-      request: ListIssueCommentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIssueCommentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSecureSourceManagerV1.ListIssueCommentsResponse
 
     /// See `SecureSourceManagerClient.listIssueComments`.
     func listIssueComments(
-      byItem: ListIssueCommentsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListIssueCommentsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<IssueComment, Swift.Error>
 
     /// See `SecureSourceManagerClient.updateIssueComment`.
     func updateIssueComment(
-      request: UpdateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIssueCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.updateIssueComment`.
     func updateIssueComment(
-      withPolling: UpdateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment>
+      withPolling: UpdateIssueCommentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<IssueComment>
 
     /// See `SecureSourceManagerClient.deleteIssueComment`.
     func deleteIssueComment(
-      request: DeleteIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIssueCommentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `SecureSourceManagerClient.deleteIssueComment`.
     func deleteIssueComment(
-      withPolling: DeleteIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: DeleteIssueCommentRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `SecureSourceManagerClient.listLocations`.
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     /// See `SecureSourceManagerClient.listLocations`.
     func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
     /// See `SecureSourceManagerClient.getLocation`.
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     /// See `SecureSourceManagerClient.setIamPolicy`.
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SecureSourceManagerClient.getIamPolicy`.
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     /// See `SecureSourceManagerClient.testIamPermissions`.
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     /// See `SecureSourceManagerClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `SecureSourceManagerClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `SecureSourceManagerClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `SecureSourceManagerClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -2890,9 +2887,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listInstances(
-    request: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListInstancesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listInstances(
@@ -2902,14 +2899,14 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listInstances(
-    byItem: ListInstancesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListInstancesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Instance, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.ListInstancesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listInstances(
@@ -2928,9 +2925,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getInstance(
-    request: GetInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: GetInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.Instance {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getInstance(
@@ -2949,24 +2946,24 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func createInstance(
-    request: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleCloudGax
+  public func createInstance(withPolling: CreateInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Instance>
   {
     try await self.createInstance(withPolling: withPolling, options: .init())
   }
 
   public func createInstance(
-    withPolling: CreateInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Instance>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Instance>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -2974,7 +2971,7 @@ extension Clients.SecureSourceManagerProtocol {
     parent: Swift.String,
     instance: Instance?,
     instanceId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Instance> {
+  ) async throws -> any GoogleGax.PollableOperation<Instance> {
     let request = CreateInstanceRequest().with {
       $0.parent = parent
       $0.instance = instance
@@ -2990,30 +2987,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func deleteInstance(
-    request: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteInstanceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleCloudGax
+  public func deleteInstance(withPolling: DeleteInstanceRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteInstance(withPolling: withPolling, options: .init())
   }
 
   public func deleteInstance(
-    withPolling: DeleteInstanceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteInstanceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteInstance(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteInstanceRequest().with {
       $0.name = name
     }
@@ -3027,9 +3024,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listRepositories(
-    request: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListRepositoriesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListRepositoriesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listRepositories(
@@ -3039,14 +3036,14 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listRepositories(
-    byItem: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListRepositoriesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Repository, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecureSourceManagerV1.ListRepositoriesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listRepositories(
@@ -3065,9 +3062,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getRepository(
-    request: GetRepositoryRequest, options: GoogleCloudGax.RequestOptions
+    request: GetRepositoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.Repository {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getRepository(
@@ -3086,24 +3083,24 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func createRepository(
-    request: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateRepositoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createRepository(withPolling: CreateRepositoryRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Repository>
+  public func createRepository(withPolling: CreateRepositoryRequest) async throws -> any GoogleGax
+    .PollableOperation<Repository>
   {
     try await self.createRepository(withPolling: withPolling, options: .init())
   }
 
   public func createRepository(
-    withPolling: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Repository> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Repository>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateRepositoryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Repository> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Repository>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3111,7 +3108,7 @@ extension Clients.SecureSourceManagerProtocol {
     parent: Swift.String,
     repository: Repository?,
     repositoryId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Repository> {
+  ) async throws -> any GoogleGax.PollableOperation<Repository> {
     let request = CreateRepositoryRequest().with {
       $0.parent = parent
       $0.repository = repository
@@ -3127,31 +3124,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func updateRepository(
-    request: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateRepository(withPolling: UpdateRepositoryRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Repository>
+  public func updateRepository(withPolling: UpdateRepositoryRequest) async throws -> any GoogleGax
+    .PollableOperation<Repository>
   {
     try await self.updateRepository(withPolling: withPolling, options: .init())
   }
 
   public func updateRepository(
-    withPolling: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Repository> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Repository>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Repository> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Repository>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateRepository(
     repository: Repository?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Repository> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Repository> {
     let request = UpdateRepositoryRequest().with {
       $0.repository = repository
       $0.updateMask = updateMask
@@ -3166,30 +3163,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func deleteRepository(
-    request: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteRepository(withPolling: DeleteRepositoryRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteRepository(withPolling: DeleteRepositoryRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteRepository(withPolling: withPolling, options: .init())
   }
 
   public func deleteRepository(
-    withPolling: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteRepository(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteRepositoryRequest().with {
       $0.name = name
     }
@@ -3203,9 +3200,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listHooks(
-    request: ListHooksRequest, options: GoogleCloudGax.RequestOptions
+    request: ListHooksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListHooksResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listHooks(
@@ -3215,13 +3212,13 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listHooks(
-    byItem: ListHooksRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListHooksRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Hook, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.ListHooksResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listHooks(
@@ -3239,9 +3236,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getHook(
-    request: GetHookRequest, options: GoogleCloudGax.RequestOptions
+    request: GetHookRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.Hook {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getHook(
@@ -3258,24 +3255,24 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func createHook(
-    request: CreateHookRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateHookRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createHook(withPolling: CreateHookRequest) async throws -> any GoogleCloudGax
+  public func createHook(withPolling: CreateHookRequest) async throws -> any GoogleGax
     .PollableOperation<Hook>
   {
     try await self.createHook(withPolling: withPolling, options: .init())
   }
 
   public func createHook(
-    withPolling: CreateHookRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Hook> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Hook>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateHookRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Hook> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Hook>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3283,7 +3280,7 @@ extension Clients.SecureSourceManagerProtocol {
     parent: Swift.String,
     hook: Hook?,
     hookId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Hook> {
+  ) async throws -> any GoogleGax.PollableOperation<Hook> {
     let request = CreateHookRequest().with {
       $0.parent = parent
       $0.hook = hook
@@ -3297,31 +3294,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func updateHook(
-    request: UpdateHookRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateHookRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateHook(withPolling: UpdateHookRequest) async throws -> any GoogleCloudGax
+  public func updateHook(withPolling: UpdateHookRequest) async throws -> any GoogleGax
     .PollableOperation<Hook>
   {
     try await self.updateHook(withPolling: withPolling, options: .init())
   }
 
   public func updateHook(
-    withPolling: UpdateHookRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Hook> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Hook>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateHookRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Hook> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Hook>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateHook(
     hook: Hook?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Hook> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Hook> {
     let request = UpdateHookRequest().with {
       $0.hook = hook
       $0.updateMask = updateMask
@@ -3334,30 +3331,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func deleteHook(
-    request: DeleteHookRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteHookRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteHook(withPolling: DeleteHookRequest) async throws -> any GoogleCloudGax
+  public func deleteHook(withPolling: DeleteHookRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteHook(withPolling: withPolling, options: .init())
   }
 
   public func deleteHook(
-    withPolling: DeleteHookRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteHookRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteHook(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteHookRequest().with {
       $0.name = name
     }
@@ -3371,9 +3368,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getIamPolicyRepo(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicyRepo(
@@ -3392,9 +3389,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func setIamPolicyRepo(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicyRepo(
@@ -3413,9 +3410,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func testIamPermissionsRepo(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissionsRepo(
@@ -3434,24 +3431,24 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func createBranchRule(
-    request: CreateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateBranchRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createBranchRule(withPolling: CreateBranchRuleRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BranchRule>
+  public func createBranchRule(withPolling: CreateBranchRuleRequest) async throws -> any GoogleGax
+    .PollableOperation<BranchRule>
   {
     try await self.createBranchRule(withPolling: withPolling, options: .init())
   }
 
   public func createBranchRule(
-    withPolling: CreateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<BranchRule>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateBranchRuleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BranchRule> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<BranchRule>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3459,7 +3456,7 @@ extension Clients.SecureSourceManagerProtocol {
     parent: Swift.String,
     branchRule: BranchRule?,
     branchRuleId: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule> {
+  ) async throws -> any GoogleGax.PollableOperation<BranchRule> {
     let request = CreateBranchRuleRequest().with {
       $0.parent = parent
       $0.branchRule = branchRule
@@ -3475,9 +3472,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listBranchRules(
-    request: ListBranchRulesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListBranchRulesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListBranchRulesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listBranchRules(
@@ -3487,14 +3484,14 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listBranchRules(
-    byItem: ListBranchRulesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListBranchRulesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<BranchRule, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.ListBranchRulesResponse
       in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listBranchRules(
@@ -3513,9 +3510,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getBranchRule(
-    request: GetBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: GetBranchRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.BranchRule {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getBranchRule(
@@ -3534,31 +3531,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func updateBranchRule(
-    request: UpdateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateBranchRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateBranchRule(withPolling: UpdateBranchRuleRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<BranchRule>
+  public func updateBranchRule(withPolling: UpdateBranchRuleRequest) async throws -> any GoogleGax
+    .PollableOperation<BranchRule>
   {
     try await self.updateBranchRule(withPolling: withPolling, options: .init())
   }
 
   public func updateBranchRule(
-    withPolling: UpdateBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<BranchRule>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateBranchRuleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BranchRule> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<BranchRule>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateBranchRule(
     branchRule: BranchRule?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<BranchRule> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<BranchRule> {
     let request = UpdateBranchRuleRequest().with {
       $0.branchRule = branchRule
       $0.updateMask = updateMask
@@ -3573,30 +3570,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func deleteBranchRule(
-    request: DeleteBranchRuleRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteBranchRuleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteBranchRule(withPolling: DeleteBranchRuleRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func deleteBranchRule(withPolling: DeleteBranchRuleRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.deleteBranchRule(withPolling: withPolling, options: .init())
   }
 
   public func deleteBranchRule(
-    withPolling: DeleteBranchRuleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteBranchRuleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteBranchRule(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteBranchRuleRequest().with {
       $0.name = name
     }
@@ -3610,31 +3607,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func createPullRequest(
-    request: CreatePullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createPullRequest(withPolling: CreatePullRequestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PullRequest>
+  public func createPullRequest(withPolling: CreatePullRequestRequest) async throws -> any GoogleGax
+    .PollableOperation<PullRequest>
   {
     try await self.createPullRequest(withPolling: withPolling, options: .init())
   }
 
   public func createPullRequest(
-    withPolling: CreatePullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createPullRequest(
     parent: Swift.String,
     pullRequest: PullRequest?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let request = CreatePullRequestRequest().with {
       $0.parent = parent
       $0.pullRequest = pullRequest
@@ -3649,9 +3646,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getPullRequest(
-    request: GetPullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.PullRequest {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPullRequest(
@@ -3670,9 +3667,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listPullRequests(
-    request: ListPullRequestsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPullRequestsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPullRequests(
@@ -3682,14 +3679,14 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listPullRequests(
-    byItem: ListPullRequestsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPullRequestsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PullRequest, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecureSourceManagerV1.ListPullRequestsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPullRequests(
@@ -3708,31 +3705,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func updatePullRequest(
-    request: UpdatePullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updatePullRequest(withPolling: UpdatePullRequestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PullRequest>
+  public func updatePullRequest(withPolling: UpdatePullRequestRequest) async throws -> any GoogleGax
+    .PollableOperation<PullRequest>
   {
     try await self.updatePullRequest(withPolling: withPolling, options: .init())
   }
 
   public func updatePullRequest(
-    withPolling: UpdatePullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdatePullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updatePullRequest(
     pullRequest: PullRequest?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let request = UpdatePullRequestRequest().with {
       $0.pullRequest = pullRequest
       $0.updateMask = updateMask
@@ -3747,30 +3744,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func mergePullRequest(
-    request: MergePullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: MergePullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func mergePullRequest(withPolling: MergePullRequestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PullRequest>
+  public func mergePullRequest(withPolling: MergePullRequestRequest) async throws -> any GoogleGax
+    .PollableOperation<PullRequest>
   {
     try await self.mergePullRequest(withPolling: withPolling, options: .init())
   }
 
   public func mergePullRequest(
-    withPolling: MergePullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: MergePullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func mergePullRequest(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let request = MergePullRequestRequest().with {
       $0.name = name
     }
@@ -3784,30 +3781,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func openPullRequest(
-    request: OpenPullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: OpenPullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func openPullRequest(withPolling: OpenPullRequestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PullRequest>
+  public func openPullRequest(withPolling: OpenPullRequestRequest) async throws -> any GoogleGax
+    .PollableOperation<PullRequest>
   {
     try await self.openPullRequest(withPolling: withPolling, options: .init())
   }
 
   public func openPullRequest(
-    withPolling: OpenPullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: OpenPullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func openPullRequest(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let request = OpenPullRequestRequest().with {
       $0.name = name
     }
@@ -3821,30 +3818,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func closePullRequest(
-    request: ClosePullRequestRequest, options: GoogleCloudGax.RequestOptions
+    request: ClosePullRequestRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func closePullRequest(withPolling: ClosePullRequestRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PullRequest>
+  public func closePullRequest(withPolling: ClosePullRequestRequest) async throws -> any GoogleGax
+    .PollableOperation<PullRequest>
   {
     try await self.closePullRequest(withPolling: withPolling, options: .init())
   }
 
   public func closePullRequest(
-    withPolling: ClosePullRequestRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequest>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ClosePullRequestRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequest>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func closePullRequest(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequest> {
+  ) async throws -> any GoogleGax.PollableOperation<PullRequest> {
     let request = ClosePullRequestRequest().with {
       $0.name = name
     }
@@ -3858,9 +3855,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listPullRequestFileDiffs(
-    request: ListPullRequestFileDiffsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPullRequestFileDiffsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestFileDiffsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPullRequestFileDiffs(
@@ -3870,14 +3867,14 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listPullRequestFileDiffs(
-    byItem: ListPullRequestFileDiffsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPullRequestFileDiffsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<FileDiff, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecureSourceManagerV1.ListPullRequestFileDiffsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPullRequestFileDiffs(
@@ -3896,9 +3893,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func fetchTree(
-    request: FetchTreeRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchTreeRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.FetchTreeResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func fetchTree(
@@ -3908,13 +3905,13 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func fetchTree(
-    byItem: FetchTreeRequest, options: GoogleCloudGax.RequestOptions
+    byItem: FetchTreeRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TreeEntry, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.FetchTreeResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func fetchBlob(request: FetchBlobRequest) async throws
@@ -3924,9 +3921,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func fetchBlob(
-    request: FetchBlobRequest, options: GoogleCloudGax.RequestOptions
+    request: FetchBlobRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.FetchBlobResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createIssue(request: CreateIssueRequest) async throws -> GoogleLongRunning.Operation {
@@ -3934,31 +3931,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func createIssue(
-    request: CreateIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createIssue(withPolling: CreateIssueRequest) async throws -> any GoogleCloudGax
+  public func createIssue(withPolling: CreateIssueRequest) async throws -> any GoogleGax
     .PollableOperation<Issue>
   {
     try await self.createIssue(withPolling: withPolling, options: .init())
   }
 
   public func createIssue(
-    withPolling: CreateIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Issue>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createIssue(
     parent: Swift.String,
     issue: Issue?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
     let request = CreateIssueRequest().with {
       $0.parent = parent
       $0.issue = issue
@@ -3973,9 +3970,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getIssue(
-    request: GetIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.Issue {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIssue(
@@ -3994,9 +3991,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listIssues(
-    request: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIssuesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListIssuesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listIssues(
@@ -4006,13 +4003,13 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listIssues(
-    byItem: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListIssuesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Issue, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudSecureSourceManagerV1.ListIssuesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listIssues(
@@ -4029,31 +4026,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func updateIssue(
-    request: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func updateIssue(withPolling: UpdateIssueRequest) async throws -> any GoogleCloudGax
+  public func updateIssue(withPolling: UpdateIssueRequest) async throws -> any GoogleGax
     .PollableOperation<Issue>
   {
     try await self.updateIssue(withPolling: withPolling, options: .init())
   }
 
   public func updateIssue(
-    withPolling: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Issue>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateIssue(
     issue: Issue?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
     let request = UpdateIssueRequest().with {
       $0.issue = issue
       $0.updateMask = updateMask
@@ -4066,30 +4063,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func deleteIssue(
-    request: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func deleteIssue(withPolling: DeleteIssueRequest) async throws -> any GoogleCloudGax
+  public func deleteIssue(withPolling: DeleteIssueRequest) async throws -> any GoogleGax
     .PollableOperation<Swift.Void>
   {
     try await self.deleteIssue(withPolling: withPolling, options: .init())
   }
 
   public func deleteIssue(
-    withPolling: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteIssue(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteIssueRequest().with {
       $0.name = name
     }
@@ -4101,30 +4098,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func openIssue(
-    request: OpenIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: OpenIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func openIssue(withPolling: OpenIssueRequest) async throws -> any GoogleCloudGax
+  public func openIssue(withPolling: OpenIssueRequest) async throws -> any GoogleGax
     .PollableOperation<Issue>
   {
     try await self.openIssue(withPolling: withPolling, options: .init())
   }
 
   public func openIssue(
-    withPolling: OpenIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: OpenIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Issue>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func openIssue(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
     let request = OpenIssueRequest().with {
       $0.name = name
     }
@@ -4136,30 +4133,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func closeIssue(
-    request: CloseIssueRequest, options: GoogleCloudGax.RequestOptions
+    request: CloseIssueRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func closeIssue(withPolling: CloseIssueRequest) async throws -> any GoogleCloudGax
+  public func closeIssue(withPolling: CloseIssueRequest) async throws -> any GoogleGax
     .PollableOperation<Issue>
   {
     try await self.closeIssue(withPolling: withPolling, options: .init())
   }
 
   public func closeIssue(
-    withPolling: CloseIssueRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Issue>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CloseIssueRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Issue>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func closeIssue(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Issue> {
+  ) async throws -> any GoogleGax.PollableOperation<Issue> {
     let request = CloseIssueRequest().with {
       $0.name = name
     }
@@ -4173,9 +4170,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getPullRequestComment(
-    request: GetPullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetPullRequestCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.PullRequestComment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getPullRequestComment(
@@ -4194,9 +4191,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listPullRequestComments(
-    request: ListPullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListPullRequestCommentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPullRequestComments(
@@ -4206,14 +4203,14 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listPullRequestComments(
-    byItem: ListPullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PullRequestComment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecureSourceManagerV1.ListPullRequestCommentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPullRequestComments(
@@ -4232,32 +4229,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func createPullRequestComment(
-    request: CreatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreatePullRequestCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createPullRequestComment(withPolling: CreatePullRequestCommentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PullRequestComment>
+    -> any GoogleGax.PollableOperation<PullRequestComment>
   {
     try await self.createPullRequestComment(withPolling: withPolling, options: .init())
   }
 
   public func createPullRequestComment(
-    withPolling: CreatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequestComment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreatePullRequestCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequestComment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequestComment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createPullRequestComment(
     parent: Swift.String,
     pullRequestComment: PullRequestComment?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment> {
+  ) async throws -> any GoogleGax.PollableOperation<PullRequestComment> {
     let request = CreatePullRequestCommentRequest().with {
       $0.parent = parent
       $0.pullRequestComment = pullRequestComment
@@ -4272,32 +4268,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func updatePullRequestComment(
-    request: UpdatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdatePullRequestCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updatePullRequestComment(withPolling: UpdatePullRequestCommentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<PullRequestComment>
+    -> any GoogleGax.PollableOperation<PullRequestComment>
   {
     try await self.updatePullRequestComment(withPolling: withPolling, options: .init())
   }
 
   public func updatePullRequestComment(
-    withPolling: UpdatePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<PullRequestComment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdatePullRequestCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<PullRequestComment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<PullRequestComment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updatePullRequestComment(
     pullRequestComment: PullRequestComment?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<PullRequestComment> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<PullRequestComment> {
     let request = UpdatePullRequestCommentRequest().with {
       $0.pullRequestComment = pullRequestComment
       $0.updateMask = updateMask
@@ -4312,30 +4307,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func deletePullRequestComment(
-    request: DeletePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeletePullRequestCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deletePullRequestComment(withPolling: DeletePullRequestCommentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deletePullRequestComment(withPolling: withPolling, options: .init())
   }
 
   public func deletePullRequestComment(
-    withPolling: DeletePullRequestCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeletePullRequestCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deletePullRequestComment(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeletePullRequestCommentRequest().with {
       $0.name = name
     }
@@ -4349,33 +4344,33 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func batchCreatePullRequestComments(
-    request: BatchCreatePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: BatchCreatePullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func batchCreatePullRequestComments(withPolling: BatchCreatePullRequestCommentsRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<BatchCreatePullRequestCommentsResponse>
+    async throws -> any GoogleGax.PollableOperation<BatchCreatePullRequestCommentsResponse>
   {
     try await self.batchCreatePullRequestComments(withPolling: withPolling, options: .init())
   }
 
   public func batchCreatePullRequestComments(
-    withPolling: BatchCreatePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchCreatePullRequestCommentsResponse> {
+    withPolling: BatchCreatePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<BatchCreatePullRequestCommentsResponse> {
     let poll = {
       () async throws
-        -> GoogleCloudGax._PollableOperationImpl<BatchCreatePullRequestCommentsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+        -> GoogleGax._PollableOperationImpl<BatchCreatePullRequestCommentsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func batchCreatePullRequestComments(
     parent: Swift.String,
     requests: [CreatePullRequestCommentRequest],
-  ) async throws -> any GoogleCloudGax.PollableOperation<BatchCreatePullRequestCommentsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<BatchCreatePullRequestCommentsResponse> {
     let request = BatchCreatePullRequestCommentsRequest().with {
       $0.parent = parent
       $0.requests = requests
@@ -4390,33 +4385,33 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func resolvePullRequestComments(
-    request: ResolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ResolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func resolvePullRequestComments(withPolling: ResolvePullRequestCommentsRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<ResolvePullRequestCommentsResponse>
+    async throws -> any GoogleGax.PollableOperation<ResolvePullRequestCommentsResponse>
   {
     try await self.resolvePullRequestComments(withPolling: withPolling, options: .init())
   }
 
   public func resolvePullRequestComments(
-    withPolling: ResolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<ResolvePullRequestCommentsResponse> {
+    withPolling: ResolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<ResolvePullRequestCommentsResponse> {
     let poll = {
-      () async throws
-        -> GoogleCloudGax._PollableOperationImpl<ResolvePullRequestCommentsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<ResolvePullRequestCommentsResponse>.State
+      in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func resolvePullRequestComments(
     parent: Swift.String,
     names: [Swift.String],
-  ) async throws -> any GoogleCloudGax.PollableOperation<ResolvePullRequestCommentsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<ResolvePullRequestCommentsResponse> {
     let request = ResolvePullRequestCommentsRequest().with {
       $0.parent = parent
       $0.names = names
@@ -4431,33 +4426,33 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func unresolvePullRequestComments(
-    request: UnresolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: UnresolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func unresolvePullRequestComments(withPolling: UnresolvePullRequestCommentsRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<UnresolvePullRequestCommentsResponse>
+    async throws -> any GoogleGax.PollableOperation<UnresolvePullRequestCommentsResponse>
   {
     try await self.unresolvePullRequestComments(withPolling: withPolling, options: .init())
   }
 
   public func unresolvePullRequestComments(
-    withPolling: UnresolvePullRequestCommentsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<UnresolvePullRequestCommentsResponse> {
+    withPolling: UnresolvePullRequestCommentsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<UnresolvePullRequestCommentsResponse> {
     let poll = {
       () async throws
-        -> GoogleCloudGax._PollableOperationImpl<UnresolvePullRequestCommentsResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+        -> GoogleGax._PollableOperationImpl<UnresolvePullRequestCommentsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func unresolvePullRequestComments(
     parent: Swift.String,
     names: [Swift.String],
-  ) async throws -> any GoogleCloudGax.PollableOperation<UnresolvePullRequestCommentsResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<UnresolvePullRequestCommentsResponse> {
     let request = UnresolvePullRequestCommentsRequest().with {
       $0.parent = parent
       $0.names = names
@@ -4472,31 +4467,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func createIssueComment(
-    request: CreateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateIssueCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createIssueComment(withPolling: CreateIssueCommentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<IssueComment>
+    -> any GoogleGax.PollableOperation<IssueComment>
   {
     try await self.createIssueComment(withPolling: withPolling, options: .init())
   }
 
   public func createIssueComment(
-    withPolling: CreateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<IssueComment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateIssueCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<IssueComment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<IssueComment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func createIssueComment(
     parent: Swift.String,
     issueComment: IssueComment?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment> {
+  ) async throws -> any GoogleGax.PollableOperation<IssueComment> {
     let request = CreateIssueCommentRequest().with {
       $0.parent = parent
       $0.issueComment = issueComment
@@ -4511,9 +4506,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getIssueComment(
-    request: GetIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: GetIssueCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.IssueComment {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIssueComment(
@@ -4532,9 +4527,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listIssueComments(
-    request: ListIssueCommentsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListIssueCommentsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudSecureSourceManagerV1.ListIssueCommentsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listIssueComments(
@@ -4544,14 +4539,14 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listIssueComments(
-    byItem: ListIssueCommentsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListIssueCommentsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<IssueComment, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudSecureSourceManagerV1.ListIssueCommentsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listIssueComments(
@@ -4570,31 +4565,31 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func updateIssueComment(
-    request: UpdateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateIssueCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateIssueComment(withPolling: UpdateIssueCommentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<IssueComment>
+    -> any GoogleGax.PollableOperation<IssueComment>
   {
     try await self.updateIssueComment(withPolling: withPolling, options: .init())
   }
 
   public func updateIssueComment(
-    withPolling: UpdateIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<IssueComment>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: UpdateIssueCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<IssueComment> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<IssueComment>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func updateIssueComment(
     issueComment: IssueComment?,
-    updateMask: GoogleCloudWKT.FieldMask?,
-  ) async throws -> any GoogleCloudGax.PollableOperation<IssueComment> {
+    updateMask: GoogleWKT.FieldMask?,
+  ) async throws -> any GoogleGax.PollableOperation<IssueComment> {
     let request = UpdateIssueCommentRequest().with {
       $0.issueComment = issueComment
       $0.updateMask = updateMask
@@ -4609,30 +4604,30 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func deleteIssueComment(
-    request: DeleteIssueCommentRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteIssueCommentRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteIssueComment(withPolling: DeleteIssueCommentRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.deleteIssueComment(withPolling: withPolling, options: .init())
   }
 
   public func deleteIssueComment(
-    withPolling: DeleteIssueCommentRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: DeleteIssueCommentRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func deleteIssueComment(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let request = DeleteIssueCommentRequest().with {
       $0.name = name
     }
@@ -4646,9 +4641,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listLocations(
-    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listLocations(
@@ -4658,13 +4653,13 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listLocations(
-    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -4674,9 +4669,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getLocation(
-    request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudLocation.Location {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -4686,9 +4681,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func setIamPolicy(
-    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -4698,9 +4693,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getIamPolicy(
-    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.Policy {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -4710,9 +4705,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func testIamPermissions(
-    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -4722,9 +4717,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -4734,13 +4729,13 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -4761,9 +4756,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -4780,9 +4775,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -4799,9 +4794,9 @@ extension Clients.SecureSourceManagerProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

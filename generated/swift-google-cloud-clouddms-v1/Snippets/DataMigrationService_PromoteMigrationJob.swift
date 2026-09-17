@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudDMSV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DataMigrationServiceClient) async throws {
   let poller = try await client.promoteMigrationJob(

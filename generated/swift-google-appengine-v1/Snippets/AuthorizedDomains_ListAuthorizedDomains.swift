@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleAppEngineV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: AuthorizedDomainsClient) async throws {
   let items = try client.listAuthorizedDomains(

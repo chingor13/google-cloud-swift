@@ -15,18 +15,18 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol CompletionStub: Sendable {
     func completeQuery(
-      request: CompleteQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: CompleteQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.CompleteQueryResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

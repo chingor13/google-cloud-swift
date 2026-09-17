@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -38,9 +38,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -57,14 +57,14 @@ extension Clients {
     }
 
     public func createJob(
-      request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoTranscoderV1.Job {
       try await self._intercept(
         request: request,
         options: options,
         name: "createJob",
         action: {
-          (r: CreateJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateJobRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoTranscoderV1.Job
           in
           return try await self.inner.createJob(request: r, options: o)
@@ -72,14 +72,14 @@ extension Clients {
     }
 
     public func listJobs(
-      request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoTranscoderV1.ListJobsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listJobs",
         action: {
-          (r: ListJobsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListJobsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoTranscoderV1.ListJobsResponse
           in
           return try await self.inner.listJobs(request: r, options: o)
@@ -87,14 +87,14 @@ extension Clients {
     }
 
     public func getJob(
-      request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoTranscoderV1.Job {
       try await self._intercept(
         request: request,
         options: options,
         name: "getJob",
         action: {
-          (r: GetJobRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetJobRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoTranscoderV1.Job
           in
           return try await self.inner.getJob(request: r, options: o)
@@ -102,26 +102,26 @@ extension Clients {
     }
 
     public func deleteJob(
-      request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteJobRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteJob",
-        action: { (r: DeleteJobRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteJobRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteJob(request: r, options: o)
         })
     }
 
     public func createJobTemplate(
-      request: CreateJobTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateJobTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoTranscoderV1.JobTemplate {
       try await self._intercept(
         request: request,
         options: options,
         name: "createJobTemplate",
         action: {
-          (r: CreateJobTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateJobTemplateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoTranscoderV1.JobTemplate
           in
           return try await self.inner.createJobTemplate(request: r, options: o)
@@ -129,14 +129,14 @@ extension Clients {
     }
 
     public func listJobTemplates(
-      request: ListJobTemplatesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobTemplatesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoTranscoderV1.ListJobTemplatesResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listJobTemplates",
         action: {
-          (r: ListJobTemplatesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListJobTemplatesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoTranscoderV1.ListJobTemplatesResponse
           in
           return try await self.inner.listJobTemplates(request: r, options: o)
@@ -144,14 +144,14 @@ extension Clients {
     }
 
     public func getJobTemplate(
-      request: GetJobTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudVideoTranscoderV1.JobTemplate {
       try await self._intercept(
         request: request,
         options: options,
         name: "getJobTemplate",
         action: {
-          (r: GetJobTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetJobTemplateRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudVideoTranscoderV1.JobTemplate
           in
           return try await self.inner.getJobTemplate(request: r, options: o)
@@ -159,14 +159,13 @@ extension Clients {
     }
 
     public func deleteJobTemplate(
-      request: DeleteJobTemplateRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteJobTemplateRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteJobTemplate",
-        action: {
-          (r: DeleteJobTemplateRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteJobTemplateRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteJobTemplate(request: r, options: o)
         })
     }

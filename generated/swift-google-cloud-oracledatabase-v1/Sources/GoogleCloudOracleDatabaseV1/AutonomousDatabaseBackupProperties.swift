@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Properties of the Autonomous Database Backup resource.
-public struct AutonomousDatabaseBackupProperties: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutonomousDatabaseBackupProperties: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. OCID of the Autonomous Database backup.
@@ -76,13 +76,13 @@ public struct AutonomousDatabaseBackupProperties: Codable, Equatable, GoogleClou
   public var sizeTb: Swift.Float = Swift.Float()
 
   /// Output only. Timestamp until when the backup will be available.
-  public var availableTillTime: GoogleCloudWKT.Timestamp? = nil
+  public var availableTillTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The date and time the backup completed.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The date and time the backup started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The type of the backup.
   public var type: AutonomousDatabaseBackupProperties.Type_ =
@@ -91,7 +91,7 @@ public struct AutonomousDatabaseBackupProperties: Codable, Equatable, GoogleClou
   /// Optional. The OCID of the vault.
   public var vaultId: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutonomousDatabaseBackupProperties`.
   public init() {}
@@ -210,10 +210,9 @@ public struct AutonomousDatabaseBackupProperties: Codable, Equatable, GoogleClou
       self.sizeTb = value
     }
     self.availableTillTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .availableTillTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
+      GoogleWKT.Timestamp.self, forKey: .availableTillTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
     if let value = try container.decodeIfPresent(
       AutonomousDatabaseBackupProperties.Type_.self, forKey: .type)
     {
@@ -224,7 +223,7 @@ public struct AutonomousDatabaseBackupProperties: Codable, Equatable, GoogleClou
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -503,10 +502,10 @@ public struct AutonomousDatabaseBackupProperties: Codable, Equatable, GoogleClou
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.oracledatabase.v1.AutonomousDatabaseBackupProperties"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

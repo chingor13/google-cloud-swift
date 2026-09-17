@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// PostgreSQL SSL configuration information.
-public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PostgresqlSslConfig: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The encryption settings available for PostgreSQL connection profiles.
@@ -27,7 +27,7 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// and client verification and no TLS encryption.
   public var encryptionSetting: OneOf_EncryptionSetting? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PostgresqlSslConfig`.
   public init() {}
@@ -86,7 +86,7 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     self.encryptionSetting = encryptionSetting
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -109,7 +109,7 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// Message represents the option where Datastream will enforce the encryption
   /// and authenticate the server identity. ca_certificate must be set if user
   /// selects this option.
-  public struct ServerVerification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ServerVerification: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Input only. PEM-encoded server root CA certificate.
@@ -120,7 +120,7 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// server certificate is not validated.
     public var serverCertificateHostname: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ServerVerification`.
     public init() {}
@@ -165,7 +165,7 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -181,11 +181,11 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.datastream.v1.PostgresqlSslConfig.ServerVerification"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -193,7 +193,7 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   /// and authenticate the server identity as well as the client identity.
   /// ca_certificate, client_certificate and client_key must be set if user
   /// selects this option.
-  public struct ServerAndClientVerification: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ServerAndClientVerification: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. Input only. PEM-encoded certificate used by the source database
@@ -218,7 +218,7 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
     /// server certificate is not validated.
     public var serverCertificateHostname: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ServerAndClientVerification`.
     public init() {}
@@ -273,7 +273,7 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -292,11 +292,11 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
       return
         "type.googleapis.com/google.cloud.datastream.v1.PostgresqlSslConfig.ServerAndClientVerification"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -317,10 +317,10 @@ public struct PostgresqlSslConfig: Codable, Equatable, GoogleCloudWKT._AnyPackab
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.datastream.v1.PostgresqlSslConfig"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

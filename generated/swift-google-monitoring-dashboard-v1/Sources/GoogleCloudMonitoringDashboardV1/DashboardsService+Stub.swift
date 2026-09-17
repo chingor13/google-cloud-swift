@@ -15,29 +15,29 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DashboardsServiceStub: Sendable {
     func createDashboard(
-      request: CreateDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringDashboardV1.Dashboard
 
     func listDashboards(
-      request: ListDashboardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDashboardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringDashboardV1.ListDashboardsResponse
 
     func getDashboard(
-      request: GetDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringDashboardV1.Dashboard
 
     func deleteDashboard(
-      request: DeleteDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updateDashboard(
-      request: UpdateDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudMonitoringDashboardV1.Dashboard
   }
 }

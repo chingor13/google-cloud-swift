@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for `Firewall.BatchUpdateIngressRules`.
-public struct BatchUpdateIngressRulesRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchUpdateIngressRulesRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the Firewall collection to set.
@@ -28,7 +28,7 @@ public struct BatchUpdateIngressRulesRequest: Codable, Equatable, GoogleCloudWKT
   /// A list of FirewallRules to replace the existing set.
   public var ingressRules: [FirewallRule] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchUpdateIngressRulesRequest`.
   public init() {}
@@ -71,7 +71,7 @@ public struct BatchUpdateIngressRulesRequest: Codable, Equatable, GoogleCloudWKT
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,10 +87,10 @@ public struct BatchUpdateIngressRulesRequest: Codable, Equatable, GoogleCloudWKT
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.v1.BatchUpdateIngressRulesRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

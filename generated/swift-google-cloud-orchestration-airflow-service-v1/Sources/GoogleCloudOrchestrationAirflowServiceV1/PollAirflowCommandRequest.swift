@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Poll Airflow Command request.
-public struct PollAirflowCommandRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PollAirflowCommandRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The resource name of the environment in the form:
@@ -37,7 +37,7 @@ public struct PollAirflowCommandRequest: Codable, Equatable, GoogleCloudWKT._Any
   /// Line number from which new logs should be fetched.
   public var nextLineNumber: Swift.Int32 = Swift.Int32()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PollAirflowCommandRequest`.
   public init() {}
@@ -95,7 +95,7 @@ public struct PollAirflowCommandRequest: Codable, Equatable, GoogleCloudWKT._Any
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -115,10 +115,10 @@ public struct PollAirflowCommandRequest: Codable, Equatable, GoogleCloudWKT._Any
     return
       "type.googleapis.com/google.cloud.orchestration.airflow.service.v1.PollAirflowCommandRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

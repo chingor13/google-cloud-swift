@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request message for
 /// [GkeInferenceQuickstart.GenerateOptimizedManifest][google.cloud.gkerecommender.v1.GkeInferenceQuickstart.GenerateOptimizedManifest].
 ///
 /// [google.cloud.gkerecommender.v1.GkeInferenceQuickstart.GenerateOptimizedManifest]: <doc:GkeInferenceQuickstartClient/generateOptimizedManifest(request:options:)>
-public struct GenerateOptimizedManifestRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct GenerateOptimizedManifestRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. The model server configuration to generate the manifest for. Use
@@ -53,7 +53,7 @@ public struct GenerateOptimizedManifestRequest: Codable, Equatable, GoogleCloudW
   /// model is loaded from Huggingface.
   public var storageConfig: StorageConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `GenerateOptimizedManifestRequest`.
   public init() {}
@@ -107,7 +107,7 @@ public struct GenerateOptimizedManifestRequest: Codable, Equatable, GoogleCloudW
     self.storageConfig = try container.decodeIfPresent(StorageConfig.self, forKey: .storageConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -126,10 +126,10 @@ public struct GenerateOptimizedManifestRequest: Codable, Equatable, GoogleCloudW
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.gkerecommender.v1.GenerateOptimizedManifestRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

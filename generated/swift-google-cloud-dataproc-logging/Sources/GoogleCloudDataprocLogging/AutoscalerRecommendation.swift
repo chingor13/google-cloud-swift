@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The inputs, outputs, and detailed explanation of the Autoscaling
 /// recommendation.
-public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutoscalerRecommendation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The autoscaling algorithm inputs.
@@ -28,7 +28,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
   /// The algorithm outputs for the recommended cluster size.
   public var outputs: AutoscalerRecommendation.Outputs? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutoscalerRecommendation`.
   public init() {}
@@ -69,7 +69,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
       AutoscalerRecommendation.Outputs.self, forKey: .outputs)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -83,7 +83,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
   }
 
   /// The input values for the Autoscaling recommendation algorithm.
-  public struct Inputs: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Inputs: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The metrics collected by the Dataproc agent running on the cluster.
@@ -99,7 +99,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
     /// The maximum worker counts for each instance group.
     public var maxWorkerCounts: ClusterSize? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Inputs`.
     public init() {}
@@ -151,7 +151,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
         ClusterSize.self, forKey: .maxWorkerCounts)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -169,16 +169,16 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataproc.logging.AutoscalerRecommendation.Inputs"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Autoscaler recommendations.
-  public struct Outputs: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Outputs: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The high-level autoscaling decision, such as SCALE_UP, SCALE_DOWN,
@@ -189,7 +189,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
     public var recommendedClusterSize: ClusterSize? = nil
 
     /// The graceful decommission timeout for downscaling operations.
-    public var gracefulDecommissionTimeout: GoogleCloudWKT.Duration? = nil
+    public var gracefulDecommissionTimeout: GoogleWKT.Duration? = nil
 
     /// Reasons why the Autoscaler didn't add or remove more workers.
     public var constraintsReached: [ConstrainingFactor] = []
@@ -205,7 +205,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
     /// The metric source deciding the autoscaling recommendation.
     public var decisionMetric: MetricType = MetricType()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Outputs`.
     public init() {}
@@ -258,7 +258,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
       self.recommendedClusterSize = try container.decodeIfPresent(
         ClusterSize.self, forKey: .recommendedClusterSize)
       self.gracefulDecommissionTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .gracefulDecommissionTimeout)
+        GoogleWKT.Duration.self, forKey: .gracefulDecommissionTimeout)
       if let value = try container.decodeIfPresent(
         [ConstrainingFactor].self, forKey: .constraintsReached)
       {
@@ -277,7 +277,7 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -300,21 +300,21 @@ public struct AutoscalerRecommendation: Codable, Equatable, GoogleCloudWKT._AnyP
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataproc.logging.AutoscalerRecommendation.Outputs"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.logging.AutoscalerRecommendation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

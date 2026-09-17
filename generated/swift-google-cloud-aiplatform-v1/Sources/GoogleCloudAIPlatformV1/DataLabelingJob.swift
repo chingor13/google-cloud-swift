@@ -16,13 +16,13 @@
 
 #if JobService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
   import GoogleRpc
   import GoogleType
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// DataLabelingJob is used to trigger a human labeling job on unlabeled data
   /// from the following Dataset:
-  public struct DataLabelingJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataLabelingJob: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. Resource name of the DataLabelingJob.
@@ -65,7 +65,7 @@
     public var inputsSchemaUri: Swift.String = Swift.String()
 
     /// Required. Input config parameters for the DataLabelingJob.
-    public var inputs: GoogleCloudWKT.Value? = nil
+    public var inputs: GoogleWKT.Value? = nil
 
     /// Output only. The detailed state of the job.
     public var state: JobState = JobState()
@@ -79,10 +79,10 @@
     public var currentSpend: GoogleType.Money? = nil
 
     /// Output only. Timestamp when this DataLabelingJob was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Timestamp when this DataLabelingJob was updated most recently.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. DataLabelingJob errors. It is only populated when job's state
     /// is `JOB_STATE_FAILED` or `JOB_STATE_CANCELLED`.
@@ -120,7 +120,7 @@
     /// iteration, it will select a batch of data based on the sampling strategy.
     public var activeLearningConfig: ActiveLearningConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataLabelingJob`.
     public init() {}
@@ -210,7 +210,7 @@
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .inputsSchemaUri) {
         self.inputsSchemaUri = value
       }
-      self.inputs = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .inputs)
+      self.inputs = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .inputs)
       if let value = try container.decodeIfPresent(JobState.self, forKey: .state) {
         self.state = value
       }
@@ -219,10 +219,8 @@
       }
       self.currentSpend = try container.decodeIfPresent(
         GoogleType.Money.self, forKey: .currentSpend)
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
       if let value = try container.decodeIfPresent(
         [Swift.String: Swift.String].self, forKey: .labels)
@@ -238,7 +236,7 @@
         ActiveLearningConfig.self, forKey: .activeLearningConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -270,11 +268,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.DataLabelingJob"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

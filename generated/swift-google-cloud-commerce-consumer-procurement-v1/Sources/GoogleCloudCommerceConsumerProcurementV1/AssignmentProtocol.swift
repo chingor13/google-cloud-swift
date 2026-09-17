@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Assignment protocol for a license pool.
-public struct AssignmentProtocol: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AssignmentProtocol: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The type of assignment protocol.
   public var assignmentType: OneOf_AssignmentType? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AssignmentProtocol`.
   public init() {}
@@ -83,7 +83,7 @@ public struct AssignmentProtocol: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.assignmentType = assignmentType
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -104,10 +104,10 @@ public struct AssignmentProtocol: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// Allow manual assignments triggered by administrative operations only.
-  public struct ManualAssignmentType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ManualAssignmentType: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ManualAssignmentType`.
     public init() {}
@@ -138,7 +138,7 @@ public struct AssignmentProtocol: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -153,24 +153,24 @@ public struct AssignmentProtocol: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       return
         "type.googleapis.com/google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.ManualAssignmentType"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Configuration for automatic assignments handled by data plane operations.
-  public struct AutoAssignmentType: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AutoAssignmentType: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. The time to live for an inactive license. After this time has
     /// passed, the license will be automatically unassigned from the user. Must
     /// be at least 7 days, if set. If unset, the license will never expire.
-    public var inactiveLicenseTtl: GoogleCloudWKT.Duration? = nil
+    public var inactiveLicenseTtl: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AutoAssignmentType`.
     public init() {}
@@ -204,10 +204,10 @@ public struct AssignmentProtocol: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.inactiveLicenseTtl = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .inactiveLicenseTtl)
+        GoogleWKT.Duration.self, forKey: .inactiveLicenseTtl)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -223,11 +223,11 @@ public struct AssignmentProtocol: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       return
         "type.googleapis.com/google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol.AutoAssignmentType"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -242,10 +242,10 @@ public struct AssignmentProtocol: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.commerce.consumer.procurement.v1.AssignmentProtocol"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

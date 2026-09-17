@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Company resource represents a company in the service. A company is the
 /// entity that owns job postings, that is, the hiring entity responsible for
 /// employing applicants for the job position.
-public struct Company: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Company: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required during company update.
@@ -105,7 +105,7 @@ public struct Company: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// abusive, or spammy.
   public var suspended: Swift.Bool = Swift.Bool()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Company`.
   public init() {}
@@ -204,7 +204,7 @@ public struct Company: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -230,7 +230,7 @@ public struct Company: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Derived details about the company.
-  public struct DerivedInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DerivedInfo: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A structured headquarters location of the company, resolved from
@@ -240,7 +240,7 @@ public struct Company: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.talent.v4.Company.headquarters_address]: <doc:Company/headquartersAddress>
     public var headquartersLocation: Location? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DerivedInfo`.
     public init() {}
@@ -277,7 +277,7 @@ public struct Company: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Location.self, forKey: .headquartersLocation)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -292,21 +292,21 @@ public struct Company: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.Company.DerivedInfo"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.Company"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

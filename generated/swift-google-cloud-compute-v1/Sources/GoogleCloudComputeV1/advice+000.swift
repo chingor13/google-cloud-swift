@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for the `advice` resource.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.AdviceStub
 
     /// Creates a new `AdviceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.AdviceStub = try Clients.AdviceTransport(options)
       inner = Clients.AdviceRetry(inner, options: options)
       if let logger = options.logger {
@@ -45,7 +45,7 @@
     ///
     /// @Snippet(path: "advice_calendarMode")
     public func calendarMode(
-      request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+      request: AdviceClient.CalendarModeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
       try await self.inner.calendarMode(request: request, options: options)
     }
@@ -71,7 +71,7 @@
 
       /// See `AdviceClient.calendarMode`.
       func calendarMode(
-        request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+        request: AdviceClient.CalendarModeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse
     }
   }
@@ -85,9 +85,9 @@
     }
 
     public func calendarMode(
-      request: AdviceClient.CalendarModeRequest, options: GoogleCloudGax.RequestOptions
+      request: AdviceClient.CalendarModeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudComputeV1.CalendarModeAdviceResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func calendarMode(

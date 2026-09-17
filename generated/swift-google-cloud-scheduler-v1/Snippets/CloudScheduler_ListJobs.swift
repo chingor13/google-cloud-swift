@@ -19,7 +19,7 @@
 import Foundation
 import GoogleCloudSchedulerV1
 import GoogleCloudLocation
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: CloudSchedulerClient, projectId: String, locationId: String) async throws {
   let items = try client.listJobs(

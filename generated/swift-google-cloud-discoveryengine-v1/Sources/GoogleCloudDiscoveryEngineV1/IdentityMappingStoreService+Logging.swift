@@ -19,10 +19,10 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -41,9 +41,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -60,14 +60,14 @@
       }
 
       public func createIdentityMappingStore(
-        request: CreateIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore {
         try await self._intercept(
           request: request,
           options: options,
           name: "createIdentityMappingStore",
           action: {
-            (r: CreateIdentityMappingStoreRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreateIdentityMappingStoreRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore
             in
             return try await self.inner.createIdentityMappingStore(request: r, options: o)
@@ -75,14 +75,14 @@
       }
 
       public func getIdentityMappingStore(
-        request: GetIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: GetIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore {
         try await self._intercept(
           request: request,
           options: options,
           name: "getIdentityMappingStore",
           action: {
-            (r: GetIdentityMappingStoreRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetIdentityMappingStoreRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.IdentityMappingStore
             in
             return try await self.inner.getIdentityMappingStore(request: r, options: o)
@@ -90,14 +90,14 @@
       }
 
       public func deleteIdentityMappingStore(
-        request: DeleteIdentityMappingStoreRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteIdentityMappingStoreRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "deleteIdentityMappingStore",
           action: {
-            (r: DeleteIdentityMappingStoreRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: DeleteIdentityMappingStoreRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.deleteIdentityMappingStore(request: r, options: o)
@@ -105,14 +105,14 @@
       }
 
       public func importIdentityMappings(
-        request: ImportIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "importIdentityMappings",
           action: {
-            (r: ImportIdentityMappingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ImportIdentityMappingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.importIdentityMappings(request: r, options: o)
@@ -120,14 +120,14 @@
       }
 
       public func purgeIdentityMappings(
-        request: PurgeIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: PurgeIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "purgeIdentityMappings",
           action: {
-            (r: PurgeIdentityMappingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: PurgeIdentityMappingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.purgeIdentityMappings(request: r, options: o)
@@ -135,14 +135,14 @@
       }
 
       public func listIdentityMappings(
-        request: ListIdentityMappingsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListIdentityMappingsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listIdentityMappings",
           action: {
-            (r: ListIdentityMappingsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListIdentityMappingsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingsResponse
             in
             return try await self.inner.listIdentityMappings(request: r, options: o)
@@ -150,14 +150,14 @@
       }
 
       public func listIdentityMappingStores(
-        request: ListIdentityMappingStoresRequest, options: GoogleCloudGax.RequestOptions
+        request: ListIdentityMappingStoresRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingStoresResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listIdentityMappingStores",
           action: {
-            (r: ListIdentityMappingStoresRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListIdentityMappingStoresRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDiscoveryEngineV1.ListIdentityMappingStoresResponse
             in
             return try await self.inner.listIdentityMappingStores(request: r, options: o)
@@ -165,45 +165,45 @@
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listOperations",
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "cancelOperation",
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

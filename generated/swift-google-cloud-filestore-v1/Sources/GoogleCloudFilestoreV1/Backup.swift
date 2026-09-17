@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A Filestore backup.
-public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Backup: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. The resource name of the backup, in the format
@@ -33,7 +33,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var state: Backup.State = Backup.State()
 
   /// Output only. The time when the backup was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Resource labels to represent user provided metadata.
   public var labels: [Swift.String: Swift.String] = [:]
@@ -64,7 +64,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var downloadBytes: Swift.Int64 = Swift.Int64()
 
   /// Output only. Reserved for future use.
-  public var satisfiesPzs: GoogleCloudWKT.BoolValue? = nil
+  public var satisfiesPzs: GoogleWKT.BoolValue? = nil
 
   /// Output only. Reserved for future use.
   public var satisfiesPzi: Swift.Bool = Swift.Bool()
@@ -88,7 +88,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// this backup is created from.
   public var fileSystemProtocol: Instance.FileProtocol = Instance.FileProtocol()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Backup`.
   public init() {}
@@ -160,8 +160,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Backup.State.self, forKey: .state) {
       self.state = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -185,7 +184,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.downloadBytes = value
     }
     self.satisfiesPzs = try container.decodeIfPresent(
-      GoogleCloudWKT.BoolValue.self, forKey: .satisfiesPzs)
+      GoogleWKT.BoolValue.self, forKey: .satisfiesPzs)
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .satisfiesPzi) {
       self.satisfiesPzi = value
     }
@@ -202,7 +201,7 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -360,10 +359,10 @@ public struct Backup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.filestore.v1.Backup"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

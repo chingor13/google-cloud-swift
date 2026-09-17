@@ -16,10 +16,10 @@
 
 #if FeaturestoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Configuration of how features in Featurestore are monitored.
-  public struct FeaturestoreMonitoringConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FeaturestoreMonitoringConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The config for Snapshot Analysis Based Feature Monitoring.
@@ -46,7 +46,7 @@
     /// [google.cloud.aiplatform.v1.Feature.ValueType]: <doc:Feature/ValueType>
     public var categoricalThresholdConfig: FeaturestoreMonitoringConfig.ThresholdConfig? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FeaturestoreMonitoringConfig`.
     public init() {}
@@ -95,7 +95,7 @@
         FeaturestoreMonitoringConfig.ThresholdConfig.self, forKey: .categoricalThresholdConfig)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -116,7 +116,7 @@
     /// This type of analysis generates statistics for each Feature based on a
     /// snapshot of the latest feature value of each entities every
     /// monitoring_interval.
-    public struct SnapshotAnalysis: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SnapshotAnalysis: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The monitoring schedule for snapshot analysis.
@@ -141,7 +141,7 @@
       /// 4000 days.
       public var stalenessDays: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SnapshotAnalysis`.
       public init() {}
@@ -191,7 +191,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -209,11 +209,11 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig.SnapshotAnalysis"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -224,7 +224,7 @@
     /// operation.
     ///
     /// [google.cloud.aiplatform.v1.FeaturestoreService.ImportFeatureValues]: <doc:FeaturestoreServiceClient/importFeatureValues(request:options:)>
-    public struct ImportFeaturesAnalysis: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ImportFeaturesAnalysis: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Whether to enable / disable / inherite default hebavior for import
@@ -238,7 +238,7 @@
         FeaturestoreMonitoringConfig.ImportFeaturesAnalysis.Baseline = FeaturestoreMonitoringConfig
           .ImportFeaturesAnalysis.Baseline()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ImportFeaturesAnalysis`.
       public init() {}
@@ -286,7 +286,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -546,21 +546,21 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig.ImportFeaturesAnalysis"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// The config for Featurestore Monitoring threshold.
-    public struct ThresholdConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ThresholdConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       public var threshold: OneOf_Threshold? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ThresholdConfig`.
       public init() {}
@@ -610,7 +610,7 @@
         self.threshold = threshold
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -643,22 +643,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig.ThresholdConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

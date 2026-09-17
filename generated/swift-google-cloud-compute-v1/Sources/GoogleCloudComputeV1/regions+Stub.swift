@@ -16,17 +16,17 @@
 
 #if Regions
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionsStub: Sendable {
       func `get`(
-        request: RegionsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Region
 
       func list(
-        request: RegionsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionList
     }
   }

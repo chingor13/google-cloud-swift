@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The price information of a [Product][google.cloud.retail.v2.Product].
 ///
 /// [google.cloud.retail.v2.Product]: <doc:Product>
-public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PriceInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The 3-letter currency code defined in [ISO
@@ -89,7 +89,7 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.retail.v2.PriceInfo.original_price]: <doc:PriceInfo/originalPrice>
   /// [google.cloud.retail.v2.PriceInfo.price]: <doc:PriceInfo/price>
   /// [google.cloud.retail.v2.PriceInfo.price_effective_time]: <doc:PriceInfo/priceEffectiveTime>
-  public var priceEffectiveTime: GoogleCloudWKT.Timestamp? = nil
+  public var priceEffectiveTime: GoogleWKT.Timestamp? = nil
 
   /// The timestamp when the [price][google.cloud.retail.v2.PriceInfo.price]
   /// stops to be effective. The [price][google.cloud.retail.v2.PriceInfo.price]
@@ -107,7 +107,7 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.retail.v2.PriceInfo.original_price]: <doc:PriceInfo/originalPrice>
   /// [google.cloud.retail.v2.PriceInfo.price]: <doc:PriceInfo/price>
   /// [google.cloud.retail.v2.PriceInfo.price_expire_time]: <doc:PriceInfo/priceExpireTime>
-  public var priceExpireTime: GoogleCloudWKT.Timestamp? = nil
+  public var priceExpireTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The price range of all the child
   /// [Product.Type.VARIANT][google.cloud.retail.v2.Product.Type.VARIANT]
@@ -127,7 +127,7 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.retail.v2.ProductService.GetProduct]: <doc:ProductServiceClient/getProduct(request:options:)>
   public var priceRange: PriceInfo.PriceRange? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PriceInfo`.
   public init() {}
@@ -185,13 +185,13 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.cost = value
     }
     self.priceEffectiveTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .priceEffectiveTime)
+      GoogleWKT.Timestamp.self, forKey: .priceEffectiveTime)
     self.priceExpireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .priceExpireTime)
+      GoogleWKT.Timestamp.self, forKey: .priceExpireTime)
     self.priceRange = try container.decodeIfPresent(PriceInfo.PriceRange.self, forKey: .priceRange)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -217,7 +217,7 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.retail.v2.Product]: <doc:Product>
   /// [google.cloud.retail.v2.Product.Type.VARIANT]: <doc:Product/Type_/variant>
   /// [google.cloud.retail.v2.Product.primary_product_id]: <doc:Product/primaryProductId>
-  public struct PriceRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PriceRange: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The inclusive
@@ -244,7 +244,7 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.cloud.retail.v2.Product.primary_product_id]: <doc:Product/primaryProductId>
     public var originalPrice: Interval? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PriceRange`.
     public init() {}
@@ -283,7 +283,7 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.originalPrice = try container.decodeIfPresent(Interval.self, forKey: .originalPrice)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -299,21 +299,21 @@ public struct PriceInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.retail.v2.PriceInfo.PriceRange"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.retail.v2.PriceInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

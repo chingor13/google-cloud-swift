@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// Service for the `managedZoneOperations` resource.
 ///
@@ -28,7 +28,7 @@ public final class ManagedZoneOperationsClient: Clients.ManagedZoneOperationsPro
   let inner: any Clients.ManagedZoneOperationsStub
 
   /// Creates a new `ManagedZoneOperationsClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.ManagedZoneOperationsStub = try Clients.ManagedZoneOperationsTransport(
       options)
     inner = Clients.ManagedZoneOperationsRetry(inner, options: options)
@@ -42,7 +42,7 @@ public final class ManagedZoneOperationsClient: Clients.ManagedZoneOperationsPro
   ///
   /// @Snippet(path: "managedZoneOperations_get")
   public func `get`(
-    request: ManagedZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> Operation {
     try await self.inner.`get`(request: request, options: options)
   }
@@ -51,7 +51,7 @@ public final class ManagedZoneOperationsClient: Clients.ManagedZoneOperationsPro
   ///
   /// @Snippet(path: "managedZoneOperations_list")
   public func list(
-    request: ManagedZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ManagedZoneOperationsListResponse {
     try await self.inner.list(request: request, options: options)
   }
@@ -60,14 +60,14 @@ public final class ManagedZoneOperationsClient: Clients.ManagedZoneOperationsPro
   ///
   /// @Snippet(path: "managedZoneOperations_list")
   public func list(
-    byItem: ManagedZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ManagedZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Operation, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ManagedZoneOperationsListResponse in
       var request = byItem
       request.pageToken = token
       return try await self.list(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 }
 
@@ -105,17 +105,17 @@ extension Clients {
 
     /// See `ManagedZoneOperationsClient.`get``.
     func `get`(
-      request: ManagedZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
     ) async throws -> Operation
 
     /// See `ManagedZoneOperationsClient.list`.
     func list(
-      request: ManagedZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      request: ManagedZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) async throws -> ManagedZoneOperationsListResponse
 
     /// See `ManagedZoneOperationsClient.list`.
     func list(
-      byItem: ManagedZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ManagedZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Operation, Swift.Error>
   }
 }
@@ -127,9 +127,9 @@ extension Clients.ManagedZoneOperationsProtocol {
   }
 
   public func `get`(
-    request: ManagedZoneOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZoneOperationsClient.GetRequest, options: GoogleGax.RequestOptions
   ) async throws -> Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func `get`(
@@ -152,9 +152,9 @@ extension Clients.ManagedZoneOperationsProtocol {
   }
 
   public func list(
-    request: ManagedZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    request: ManagedZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
   ) async throws -> ManagedZoneOperationsListResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func list(
@@ -164,12 +164,12 @@ extension Clients.ManagedZoneOperationsProtocol {
   }
 
   public func list(
-    byItem: ManagedZoneOperationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ManagedZoneOperationsClient.ListRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Operation, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> ManagedZoneOperationsListResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func list(

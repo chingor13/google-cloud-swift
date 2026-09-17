@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A queue is a container of related tasks. Queues are configured to manage
 /// how those tasks are dispatched. Configurable properties include rate limits,
 /// retry options, queue types, and others.
-public struct Queue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Queue: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Caller-specified and required in
@@ -139,14 +139,14 @@ public struct Queue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   ///
   /// [google.cloud.tasks.v2.CloudTasks.PurgeQueue]: <doc:CloudTasksClient/purgeQueue(request:options:)>
   /// [google.cloud.tasks.v2.Task.create_time]: <doc:Task/createTime>
-  public var purgeTime: GoogleCloudWKT.Timestamp? = nil
+  public var purgeTime: GoogleWKT.Timestamp? = nil
 
   /// Configuration options for writing logs to
   /// [Stackdriver Logging](https://cloud.google.com/logging/docs/). If this
   /// field is unset, then no logs are written.
   public var stackdriverLoggingConfig: StackdriverLoggingConfig? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Queue`.
   public init() {}
@@ -201,13 +201,12 @@ public struct Queue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Queue.State.self, forKey: .state) {
       self.state = value
     }
-    self.purgeTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .purgeTime)
+    self.purgeTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .purgeTime)
     self.stackdriverLoggingConfig = try container.decodeIfPresent(
       StackdriverLoggingConfig.self, forKey: .stackdriverLoggingConfig)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -364,10 +363,10 @@ public struct Queue: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.tasks.v2.Queue"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -39,9 +39,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,7 +59,7 @@
 
       public func aggregatedList(
         request: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList {
         try await self._intercept(
           request: request,
@@ -68,7 +68,7 @@
           action: {
             (
               r: NetworkEdgeSecurityServicesClient.AggregatedListRequest,
-              o: GoogleCloudGax.RequestOptions
+              o: GoogleGax.RequestOptions
             ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityServiceAggregatedList
             in
             return try await self.inner.aggregatedList(request: r, options: o)
@@ -76,15 +76,14 @@
       }
 
       public func delete(
-        request: NetworkEdgeSecurityServicesClient.DeleteRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEdgeSecurityServicesClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "delete",
           action: {
-            (r: NetworkEdgeSecurityServicesClient.DeleteRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworkEdgeSecurityServicesClient.DeleteRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.delete(request: r, options: o)
@@ -92,15 +91,14 @@
       }
 
       public func `get`(
-        request: NetworkEdgeSecurityServicesClient.GetRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEdgeSecurityServicesClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService {
         try await self._intercept(
           request: request,
           options: options,
           name: "`get`",
           action: {
-            (r: NetworkEdgeSecurityServicesClient.GetRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworkEdgeSecurityServicesClient.GetRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.NetworkEdgeSecurityService
             in
             return try await self.inner.`get`(request: r, options: o)
@@ -108,15 +106,14 @@
       }
 
       public func insert(
-        request: NetworkEdgeSecurityServicesClient.InsertRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEdgeSecurityServicesClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "insert",
           action: {
-            (r: NetworkEdgeSecurityServicesClient.InsertRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworkEdgeSecurityServicesClient.InsertRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.insert(request: r, options: o)
@@ -124,15 +121,14 @@
       }
 
       public func patch(
-        request: NetworkEdgeSecurityServicesClient.PatchRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: NetworkEdgeSecurityServicesClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "patch",
           action: {
-            (r: NetworkEdgeSecurityServicesClient.PatchRequest, o: GoogleCloudGax.RequestOptions)
+            (r: NetworkEdgeSecurityServicesClient.PatchRequest, o: GoogleGax.RequestOptions)
               async throws -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.patch(request: r, options: o)
@@ -140,14 +136,14 @@
       }
 
       public func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: RegionOperationsClient.GetRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RegionOperationsClient.GetRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudComputeV1.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)

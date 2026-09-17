@@ -15,61 +15,61 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol WebSecurityScannerStub: Sendable {
     func createScanConfig(
-      request: CreateScanConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateScanConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanConfig
 
     func deleteScanConfig(
-      request: DeleteScanConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteScanConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getScanConfig(
-      request: GetScanConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetScanConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanConfig
 
     func listScanConfigs(
-      request: ListScanConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListScanConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListScanConfigsResponse
 
     func updateScanConfig(
-      request: UpdateScanConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateScanConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanConfig
 
     func startScanRun(
-      request: StartScanRunRequest, options: GoogleCloudGax.RequestOptions
+      request: StartScanRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanRun
 
     func getScanRun(
-      request: GetScanRunRequest, options: GoogleCloudGax.RequestOptions
+      request: GetScanRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanRun
 
     func listScanRuns(
-      request: ListScanRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListScanRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListScanRunsResponse
 
     func stopScanRun(
-      request: StopScanRunRequest, options: GoogleCloudGax.RequestOptions
+      request: StopScanRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ScanRun
 
     func listCrawledUrls(
-      request: ListCrawledUrlsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCrawledUrlsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListCrawledUrlsResponse
 
     func getFinding(
-      request: GetFindingRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFindingRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.Finding
 
     func listFindings(
-      request: ListFindingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFindingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListFindingsResponse
 
     func listFindingTypeStats(
-      request: ListFindingTypeStatsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFindingTypeStatsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudWebSecurityScannerV1.ListFindingTypeStatsResponse
   }
 }

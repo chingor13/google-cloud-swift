@@ -16,179 +16,179 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TelcoAutomationStub: Sendable {
     func listOrchestrationClusters(
-      request: ListOrchestrationClustersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrchestrationClustersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ListOrchestrationClustersResponse
 
     func getOrchestrationCluster(
-      request: GetOrchestrationClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOrchestrationClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.OrchestrationCluster
 
     func createOrchestrationCluster(
-      request: CreateOrchestrationClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOrchestrationClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOrchestrationCluster(
-      request: DeleteOrchestrationClusterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteOrchestrationClusterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listEdgeSlms(
-      request: ListEdgeSlmsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEdgeSlmsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ListEdgeSlmsResponse
 
     func getEdgeSlm(
-      request: GetEdgeSlmRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEdgeSlmRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.EdgeSlm
 
     func createEdgeSlm(
-      request: CreateEdgeSlmRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEdgeSlmRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteEdgeSlm(
-      request: DeleteEdgeSlmRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEdgeSlmRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createBlueprint(
-      request: CreateBlueprintRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBlueprintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Blueprint
 
     func updateBlueprint(
-      request: UpdateBlueprintRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBlueprintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Blueprint
 
     func getBlueprint(
-      request: GetBlueprintRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBlueprintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Blueprint
 
     func deleteBlueprint(
-      request: DeleteBlueprintRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBlueprintRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listBlueprints(
-      request: ListBlueprintsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBlueprintsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ListBlueprintsResponse
 
     func approveBlueprint(
-      request: ApproveBlueprintRequest, options: GoogleCloudGax.RequestOptions
+      request: ApproveBlueprintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Blueprint
 
     func proposeBlueprint(
-      request: ProposeBlueprintRequest, options: GoogleCloudGax.RequestOptions
+      request: ProposeBlueprintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Blueprint
 
     func rejectBlueprint(
-      request: RejectBlueprintRequest, options: GoogleCloudGax.RequestOptions
+      request: RejectBlueprintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Blueprint
 
     func listBlueprintRevisions(
-      request: ListBlueprintRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBlueprintRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ListBlueprintRevisionsResponse
 
     func searchBlueprintRevisions(
-      request: SearchBlueprintRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchBlueprintRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.SearchBlueprintRevisionsResponse
 
     func searchDeploymentRevisions(
-      request: SearchDeploymentRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchDeploymentRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.SearchDeploymentRevisionsResponse
 
     func discardBlueprintChanges(
-      request: DiscardBlueprintChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: DiscardBlueprintChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.DiscardBlueprintChangesResponse
 
     func listPublicBlueprints(
-      request: ListPublicBlueprintsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPublicBlueprintsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ListPublicBlueprintsResponse
 
     func getPublicBlueprint(
-      request: GetPublicBlueprintRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPublicBlueprintRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.PublicBlueprint
 
     func createDeployment(
-      request: CreateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Deployment
 
     func updateDeployment(
-      request: UpdateDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Deployment
 
     func getDeployment(
-      request: GetDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Deployment
 
     func removeDeployment(
-      request: RemoveDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listDeployments(
-      request: ListDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ListDeploymentsResponse
 
     func listDeploymentRevisions(
-      request: ListDeploymentRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDeploymentRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ListDeploymentRevisionsResponse
 
     func discardDeploymentChanges(
-      request: DiscardDeploymentChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: DiscardDeploymentChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.DiscardDeploymentChangesResponse
 
     func applyDeployment(
-      request: ApplyDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: ApplyDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Deployment
 
     func computeDeploymentStatus(
-      request: ComputeDeploymentStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: ComputeDeploymentStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ComputeDeploymentStatusResponse
 
     func rollbackDeployment(
-      request: RollbackDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: RollbackDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.Deployment
 
     func getHydratedDeployment(
-      request: GetHydratedDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetHydratedDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.HydratedDeployment
 
     func listHydratedDeployments(
-      request: ListHydratedDeploymentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListHydratedDeploymentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.ListHydratedDeploymentsResponse
 
     func updateHydratedDeployment(
-      request: UpdateHydratedDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateHydratedDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.HydratedDeployment
 
     func applyHydratedDeployment(
-      request: ApplyHydratedDeploymentRequest, options: GoogleCloudGax.RequestOptions
+      request: ApplyHydratedDeploymentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTelcoAutomationV1.HydratedDeployment
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

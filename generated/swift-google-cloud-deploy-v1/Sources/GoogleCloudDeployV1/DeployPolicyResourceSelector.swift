@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Contains information on the resources to select for a deploy policy.
 /// Attributes provided must all match the resource in order for policy
 /// restrictions to apply. For example, if delivery pipelines attributes given
 /// are an id "prod" and labels "foo: bar", a delivery pipeline resource must
 /// match both that id and have that label in order to be subject to the policy.
-public struct DeployPolicyResourceSelector: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DeployPolicyResourceSelector: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Contains attributes about a delivery pipeline.
@@ -31,7 +31,7 @@ public struct DeployPolicyResourceSelector: Codable, Equatable, GoogleCloudWKT._
   /// Optional. Contains attributes about a target.
   public var target: TargetAttribute? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DeployPolicyResourceSelector`.
   public init() {}
@@ -71,7 +71,7 @@ public struct DeployPolicyResourceSelector: Codable, Equatable, GoogleCloudWKT._
     self.target = try container.decodeIfPresent(TargetAttribute.self, forKey: .target)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -87,10 +87,10 @@ public struct DeployPolicyResourceSelector: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.deploy.v1.DeployPolicyResourceSelector"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

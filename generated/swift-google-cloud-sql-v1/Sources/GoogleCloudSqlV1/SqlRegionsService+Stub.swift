@@ -16,8 +16,8 @@
 
 #if SqlRegionsService
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol SqlRegionsServiceStub: Sendable {

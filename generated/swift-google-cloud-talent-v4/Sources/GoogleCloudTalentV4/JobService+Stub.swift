@@ -15,55 +15,55 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol JobServiceStub: Sendable {
     func createJob(
-      request: CreateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Job
 
     func batchCreateJobs(
-      request: BatchCreateJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchCreateJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getJob(
-      request: GetJobRequest, options: GoogleCloudGax.RequestOptions
+      request: GetJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Job
 
     func updateJob(
-      request: UpdateJobRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateJobRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.Job
 
     func batchUpdateJobs(
-      request: BatchUpdateJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchUpdateJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteJob(
-      request: DeleteJobRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteJobRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func batchDeleteJobs(
-      request: BatchDeleteJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchDeleteJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listJobs(
-      request: ListJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.ListJobsResponse
 
     func searchJobs(
-      request: SearchJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.SearchJobsResponse
 
     func searchJobsForAlert(
-      request: SearchJobsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchJobsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTalentV4.SearchJobsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

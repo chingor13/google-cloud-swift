@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleCloudContentWarehouseV1
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(
   client: SynonymSetServiceClient, projectId: String, locationId: String, contextId: String

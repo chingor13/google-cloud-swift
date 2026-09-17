@@ -15,14 +15,14 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An endpoint group is a consumer frontend for a deployment group (backend).
 /// In order to configure intercept for a network, consumers must create:
 /// - An association between their network and the endpoint group.
 /// - A security profile that points to the endpoint group.
 /// - A firewall rule that references the security profile (group).
-public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct InterceptEndpointGroup: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Immutable. Identifier. The resource name of this endpoint group, for
@@ -33,11 +33,11 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
 
   /// Output only. The timestamp when the resource was created.
   /// See https://google.aip.dev/148#timestamps.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the resource was most recently updated.
   /// See https://google.aip.dev/148#timestamps.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Optional. Labels are key/value pairs that help to organize and filter
   /// resources.
@@ -70,7 +70,7 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Used as additional context for the endpoint group.
   public var description: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `InterceptEndpointGroup`.
   public init() {}
@@ -124,10 +124,8 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -156,7 +154,7 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -178,7 +176,7 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
   }
 
   /// The endpoint group's view of a connected deployment group.
-  public struct ConnectedDeploymentGroup: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ConnectedDeploymentGroup: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The connected deployment group's resource name, for example:
@@ -189,7 +187,7 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
     /// Output only. The list of locations where the deployment group is present.
     public var locations: [InterceptLocation] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ConnectedDeploymentGroup`.
     public init() {}
@@ -232,7 +230,7 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -249,16 +247,16 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.networksecurity.v1.InterceptEndpointGroup.ConnectedDeploymentGroup"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// The endpoint group's view of a connected association.
-  public struct AssociationDetails: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AssociationDetails: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Output only. The connected association's resource name, for example:
@@ -275,7 +273,7 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
     public var state: InterceptEndpointGroupAssociation.State =
       InterceptEndpointGroupAssociation.State()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AssociationDetails`.
     public init() {}
@@ -325,7 +323,7 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -343,11 +341,11 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
       return
         "type.googleapis.com/google.cloud.networksecurity.v1.InterceptEndpointGroup.AssociationDetails"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -495,10 +493,10 @@ public struct InterceptEndpointGroup: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.networksecurity.v1.InterceptEndpointGroup"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

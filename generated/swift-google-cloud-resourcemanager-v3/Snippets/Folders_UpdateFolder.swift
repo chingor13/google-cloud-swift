@@ -18,10 +18,10 @@
 // snippet.show
 import Foundation
 import GoogleCloudResourceManagerV3
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: FoldersClient, folderId: String) async throws {
   let poller = try await client.updateFolder(
@@ -30,7 +30,7 @@ func sample(client: FoldersClient, folderId: String) async throws {
         $0.folder = Folder().with {
           $0.name = "folders/\(folderId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

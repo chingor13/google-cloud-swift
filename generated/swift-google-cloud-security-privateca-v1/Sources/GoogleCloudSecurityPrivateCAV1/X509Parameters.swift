@@ -15,7 +15,7 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An [X509Parameters][google.cloud.security.privateca.v1.X509Parameters] is
 /// used to describe certain fields of an X.509 certificate, such as the key
@@ -23,7 +23,7 @@ import Foundation
 /// extensions and custom extensions.
 ///
 /// [google.cloud.security.privateca.v1.X509Parameters]: <doc:X509Parameters>
-public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct X509Parameters: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Indicates the intended use for keys that correspond to a
@@ -54,7 +54,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Optional. Describes custom X.509 extensions.
   public var additionalExtensions: [X509Extension] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `X509Parameters`.
   public init() {}
@@ -115,7 +115,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -134,7 +134,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Describes the X.509 basic constraints extension, per [RFC 5280
   /// section 4.2.1.9](https://tools.ietf.org/html/rfc5280#section-4.2.1.9)
-  public struct CaOptions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CaOptions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Optional. Refers to the "CA" boolean field in the X.509 extension.
@@ -149,7 +149,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// will be omitted from the certificate.
     public var maxIssuerPathLength: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CaOptions`.
     public init() {}
@@ -189,7 +189,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         Swift.Int32.self, forKey: .maxIssuerPathLength)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -205,17 +205,17 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.X509Parameters.CaOptions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Describes the X.509 name constraints extension, per
   /// https://tools.ietf.org/html/rfc5280#section-4.2.1.10
-  public struct NameConstraints: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct NameConstraints: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates whether or not the name constraints are marked critical.
@@ -269,7 +269,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// leading period (like `.example.com`)
     public var excludedUris: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `NameConstraints`.
     public init() {}
@@ -353,7 +353,7 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -376,21 +376,21 @@ public struct X509Parameters: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.security.privateca.v1.X509Parameters.NameConstraints"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.security.privateca.v1.X509Parameters"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

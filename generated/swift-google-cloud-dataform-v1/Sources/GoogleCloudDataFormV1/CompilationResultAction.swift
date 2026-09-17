@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a single Dataform action in a compilation result.
-public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CompilationResultAction: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// This action's identifier. Unique within the compilation result.
@@ -40,7 +40,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
   /// The compiled object.
   public var compiledObject: OneOf_CompiledObject? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CompilationResultAction`.
   public init() {}
@@ -142,7 +142,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     self.compiledObject = compiledObject
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -175,7 +175,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
   }
 
   /// Represents a database relation.
-  public struct Relation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Relation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of actions that this action depends on.
@@ -247,7 +247,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// `gs://bucket/path_to_table/`.
     public var storageUri: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Relation`.
     public init() {}
@@ -382,7 +382,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -412,7 +412,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
 
     /// Contains settings for relations of type `INCREMENTAL_TABLE`.
-    public struct IncrementalTableConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct IncrementalTableConfig: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The SELECT query which returns rows which should be inserted into the
@@ -441,7 +441,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       /// relation.
       public var incrementalPostOperations: [Swift.String] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `IncrementalTableConfig`.
       public init() {}
@@ -512,7 +512,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -533,11 +533,11 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
         return
           "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Relation.IncrementalTableConfig"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -859,16 +859,16 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Relation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents a list of arbitrary database operations.
-  public struct Operations: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Operations: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of actions that this action depends on.
@@ -891,7 +891,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// Whether these operations produce an output relation.
     public var hasOutput: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Operations`.
     public init() {}
@@ -953,7 +953,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -973,17 +973,17 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Operations"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents an assertion upon a SQL query which is required return zero
   /// rows.
-  public struct Assertion: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Assertion: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of actions that this action depends on.
@@ -1007,7 +1007,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// columns.
     public var relationDescriptor: RelationDescriptor? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Assertion`.
     public init() {}
@@ -1067,7 +1067,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
         RelationDescriptor.self, forKey: .relationDescriptor)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1087,24 +1087,24 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Assertion"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents a relation which is not managed by Dataform but which may be
   /// referenced by Dataform actions.
-  public struct Declaration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Declaration: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Descriptor for the relation and its columns. Used as documentation only,
     /// i.e. values here will result in no changes to the relation's metadata.
     public var relationDescriptor: RelationDescriptor? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Declaration`.
     public init() {}
@@ -1141,7 +1141,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
         RelationDescriptor.self, forKey: .relationDescriptor)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1156,16 +1156,16 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Declaration"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Represents a notebook.
-  public struct Notebook: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Notebook: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of actions that this action depends on.
@@ -1180,7 +1180,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// Arbitrary, user-defined tags on this action.
     public var tags: [Swift.String] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Notebook`.
     public init() {}
@@ -1233,7 +1233,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1251,16 +1251,16 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.Notebook"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Defines a compiled Data Preparation entity
-  public struct DataPreparation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DataPreparation: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// A list of actions that this action depends on.
@@ -1275,7 +1275,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     /// The definition for the data preparation.
     public var definition: OneOf_Definition? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DataPreparation`.
     public init() {}
@@ -1348,7 +1348,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       self.definition = definition
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1372,7 +1372,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     }
 
     /// Definition of a SQL Data Preparation
-    public struct SqlDefinition: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct SqlDefinition: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The SQL query representing the data preparation steps. Formatted as a
@@ -1385,7 +1385,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       /// Load configuration.
       public var load: CompilationResultAction.LoadConfig? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `SqlDefinition`.
       public init() {}
@@ -1431,7 +1431,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
           CompilationResultAction.LoadConfig.self, forKey: .load)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1449,17 +1449,17 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
         return
           "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.DataPreparation.SqlDefinition"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     /// Error table information, used to write error data into a BigQuery
     /// table.
-    public struct ErrorTable: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct ErrorTable: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Error Table target.
@@ -1469,7 +1469,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       /// allowed.
       public var retentionDays: Swift.Int32 = Swift.Int32()
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `ErrorTable`.
       public init() {}
@@ -1510,7 +1510,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -1527,11 +1527,11 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
         return
           "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.DataPreparation.ErrorTable"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -1547,22 +1547,22 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.DataPreparation"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Simplified load configuration for actions
-  public struct LoadConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct LoadConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Load mode
     public var mode: OneOf_Mode? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `LoadConfig`.
     public init() {}
@@ -1635,7 +1635,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       self.mode = mode
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1676,19 +1676,19 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.LoadConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Simple load definition
-  public struct SimpleLoadMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct SimpleLoadMode: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `SimpleLoadMode`.
     public init() {}
@@ -1719,7 +1719,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       let container = try decoder.container(keyedBy: CodingKeys.self)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1733,22 +1733,22 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.SimpleLoadMode"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Load definition for incremental load modes
-  public struct IncrementalLoadMode: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct IncrementalLoadMode: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Column name for incremental load modes
     public var column: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `IncrementalLoadMode`.
     public init() {}
@@ -1786,7 +1786,7 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -1802,11 +1802,11 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
       return
         "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction.IncrementalLoadMode"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1829,10 +1829,10 @@ public struct CompilationResultAction: Codable, Equatable, GoogleCloudWKT._AnyPa
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataform.v1.CompilationResultAction"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

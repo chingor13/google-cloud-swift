@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Details about how a binding in a policy affects a principal's ability to use
 /// a permission.
-public struct BindingExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BindingExplanation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Indicates whether _this binding_ provides the specified
@@ -81,7 +81,7 @@ public struct BindingExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   /// https://cloud.google.com/iam/help/conditions/overview.
   public var condition: GoogleType.Expr? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BindingExplanation`.
   public init() {}
@@ -153,7 +153,7 @@ public struct BindingExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     self.condition = try container.decodeIfPresent(GoogleType.Expr.self, forKey: .condition)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -172,7 +172,7 @@ public struct BindingExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   }
 
   /// Details about whether the binding includes the principal.
-  public struct AnnotatedMembership: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct AnnotatedMembership: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Indicates whether the binding includes the principal.
@@ -182,7 +182,7 @@ public struct BindingExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
     /// the binding.
     public var relevance: HeuristicRelevance = HeuristicRelevance()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `AnnotatedMembership`.
     public init() {}
@@ -227,7 +227,7 @@ public struct BindingExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -244,11 +244,11 @@ public struct BindingExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       return
         "type.googleapis.com/google.cloud.policytroubleshooter.v1.BindingExplanation.AnnotatedMembership"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -493,10 +493,10 @@ public struct BindingExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.policytroubleshooter.v1.BindingExplanation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

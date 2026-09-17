@@ -19,10 +19,10 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for managing [Engine][google.cloud.discoveryengine.v1.Engine]
   /// configuration.
@@ -32,11 +32,11 @@
   /// @Snippet(path: "EngineServiceQuickstart")
   public final class EngineServiceClient: Clients.EngineServiceProtocol, Sendable {
     let inner: any Clients.EngineServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `EngineServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.EngineServiceStub = try Clients.EngineServiceTransport(options)
       inner = Clients.EngineServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -53,7 +53,7 @@
     ///
     /// @Snippet(path: "EngineService_CreateEngine")
     public func createEngine(
-      request: CreateEngineRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEngineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createEngine(request: request, options: options)
     }
@@ -64,21 +64,21 @@
     ///
     /// @Snippet(path: "EngineService_CreateEngine")
     public func createEngine(
-      withPolling: CreateEngineRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Engine> {
+      withPolling: CreateEngineRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Engine> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Engine>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Engine>.State
+        in
         return try op._extractStatus(Engine.self)
       }
       let rawOp = try await self.createEngine(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Engine>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Engine>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -92,7 +92,7 @@
     ///
     /// @Snippet(path: "EngineService_DeleteEngine")
     public func deleteEngine(
-      request: DeleteEngineRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEngineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteEngine(request: request, options: options)
     }
@@ -103,21 +103,21 @@
     ///
     /// @Snippet(path: "EngineService_DeleteEngine")
     public func deleteEngine(
-      withPolling: DeleteEngineRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteEngineRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteEngine(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -131,7 +131,7 @@
     ///
     /// @Snippet(path: "EngineService_UpdateEngine")
     public func updateEngine(
-      request: UpdateEngineRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEngineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Engine {
       try await self.inner.updateEngine(request: request, options: options)
     }
@@ -142,7 +142,7 @@
     ///
     /// @Snippet(path: "EngineService_GetEngine")
     public func getEngine(
-      request: GetEngineRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEngineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Engine {
       try await self.inner.getEngine(request: request, options: options)
     }
@@ -154,7 +154,7 @@
     ///
     /// @Snippet(path: "EngineService_ListEngines")
     public func listEngines(
-      request: ListEnginesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEnginesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListEnginesResponse {
       try await self.inner.listEngines(request: request, options: options)
     }
@@ -166,7 +166,7 @@
     ///
     /// @Snippet(path: "EngineService_ListEngines")
     public func listEngines(
-      byItem: ListEnginesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEnginesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Engine, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListEnginesResponse in
@@ -174,7 +174,7 @@
         request.pageToken = token
         return try await self.listEngines(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -183,7 +183,7 @@
     ///
     /// @Snippet(path: "EngineService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -194,7 +194,7 @@
     ///
     /// @Snippet(path: "EngineService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -202,7 +202,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -211,7 +211,7 @@
     ///
     /// @Snippet(path: "EngineService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -222,7 +222,7 @@
     ///
     /// @Snippet(path: "EngineService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -239,7 +239,7 @@
       func createEngine(request: CreateEngineRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `EngineServiceClient.createEngine`.
-      func createEngine(withPolling: CreateEngineRequest) async throws -> any GoogleCloudGax
+      func createEngine(withPolling: CreateEngineRequest) async throws -> any GoogleGax
         .PollableOperation<Engine>
 
       /// See `EngineServiceClient.createEngine`.
@@ -247,19 +247,19 @@
         parent: Swift.String,
         engine: Engine?,
         engineId: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Engine>
+      ) async throws -> any GoogleGax.PollableOperation<Engine>
 
       /// See `EngineServiceClient.deleteEngine`.
       func deleteEngine(request: DeleteEngineRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `EngineServiceClient.deleteEngine`.
-      func deleteEngine(withPolling: DeleteEngineRequest) async throws -> any GoogleCloudGax
+      func deleteEngine(withPolling: DeleteEngineRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `EngineServiceClient.deleteEngine`.
       func deleteEngine(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `EngineServiceClient.updateEngine`.
       func updateEngine(request: UpdateEngineRequest) async throws
@@ -268,7 +268,7 @@
       /// See `EngineServiceClient.updateEngine`.
       func updateEngine(
         engine: Engine?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudDiscoveryEngineV1.Engine
 
       /// See `EngineServiceClient.getEngine`.
@@ -318,57 +318,57 @@
 
       /// See `EngineServiceClient.createEngine`.
       func createEngine(
-        request: CreateEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `EngineServiceClient.createEngine`.
       func createEngine(
-        withPolling: CreateEngineRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Engine>
+        withPolling: CreateEngineRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Engine>
 
       /// See `EngineServiceClient.deleteEngine`.
       func deleteEngine(
-        request: DeleteEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `EngineServiceClient.deleteEngine`.
       func deleteEngine(
-        withPolling: DeleteEngineRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteEngineRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `EngineServiceClient.updateEngine`.
       func updateEngine(
-        request: UpdateEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Engine
 
       /// See `EngineServiceClient.getEngine`.
       func getEngine(
-        request: GetEngineRequest, options: GoogleCloudGax.RequestOptions
+        request: GetEngineRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.Engine
 
       /// See `EngineServiceClient.listEngines`.
       func listEngines(
-        request: ListEnginesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListEnginesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDiscoveryEngineV1.ListEnginesResponse
 
       /// See `EngineServiceClient.listEngines`.
       func listEngines(
-        byItem: ListEnginesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListEnginesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Engine, Swift.Error>
 
       /// See `EngineServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `EngineServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `EngineServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -382,24 +382,24 @@
     }
 
     public func createEngine(
-      request: CreateEngineRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEngineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func createEngine(withPolling: CreateEngineRequest) async throws -> any GoogleCloudGax
+    public func createEngine(withPolling: CreateEngineRequest) async throws -> any GoogleGax
       .PollableOperation<Engine>
     {
       try await self.createEngine(withPolling: withPolling, options: .init())
     }
 
     public func createEngine(
-      withPolling: CreateEngineRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Engine> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Engine>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateEngineRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Engine> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Engine>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
@@ -407,7 +407,7 @@
       parent: Swift.String,
       engine: Engine?,
       engineId: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Engine> {
+    ) async throws -> any GoogleGax.PollableOperation<Engine> {
       let request = CreateEngineRequest().with {
         $0.parent = parent
         $0.engine = engine
@@ -423,30 +423,30 @@
     }
 
     public func deleteEngine(
-      request: DeleteEngineRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEngineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteEngine(withPolling: DeleteEngineRequest) async throws -> any GoogleCloudGax
+    public func deleteEngine(withPolling: DeleteEngineRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.deleteEngine(withPolling: withPolling, options: .init())
     }
 
     public func deleteEngine(
-      withPolling: DeleteEngineRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteEngineRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteEngine(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteEngineRequest().with {
         $0.name = name
       }
@@ -460,14 +460,14 @@
     }
 
     public func updateEngine(
-      request: UpdateEngineRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEngineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Engine {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateEngine(
       engine: Engine?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudDiscoveryEngineV1.Engine {
       let request = UpdateEngineRequest().with {
         $0.engine = engine
@@ -483,9 +483,9 @@
     }
 
     public func getEngine(
-      request: GetEngineRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEngineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.Engine {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getEngine(
@@ -504,9 +504,9 @@
     }
 
     public func listEngines(
-      request: ListEnginesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEnginesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDiscoveryEngineV1.ListEnginesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listEngines(
@@ -516,13 +516,13 @@
     }
 
     public func listEngines(
-      byItem: ListEnginesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEnginesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Engine, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudDiscoveryEngineV1.ListEnginesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listEngines(
@@ -541,9 +541,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -553,13 +553,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -580,9 +580,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -599,9 +599,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

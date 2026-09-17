@@ -16,328 +16,328 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol DataformStub: Sendable {
     func getTeamFolder(
-      request: GetTeamFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTeamFolderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.TeamFolder
 
     func createTeamFolder(
-      request: CreateTeamFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTeamFolderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.TeamFolder
 
     func updateTeamFolder(
-      request: UpdateTeamFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTeamFolderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.TeamFolder
 
     func deleteTeamFolder(
-      request: DeleteTeamFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTeamFolderRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func deleteTeamFolderTree(
-      request: DeleteTeamFolderTreeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTeamFolderTreeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func queryTeamFolderContents(
-      request: QueryTeamFolderContentsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryTeamFolderContentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.QueryTeamFolderContentsResponse
 
     func searchTeamFolders(
-      request: SearchTeamFoldersRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchTeamFoldersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.SearchTeamFoldersResponse
 
     func getFolder(
-      request: GetFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFolderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Folder
 
     func createFolder(
-      request: CreateFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFolderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Folder
 
     func updateFolder(
-      request: UpdateFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFolderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Folder
 
     func deleteFolder(
-      request: DeleteFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFolderRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func deleteFolderTree(
-      request: DeleteFolderTreeRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFolderTreeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func queryFolderContents(
-      request: QueryFolderContentsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryFolderContentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.QueryFolderContentsResponse
 
     func queryUserRootContents(
-      request: QueryUserRootContentsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryUserRootContentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.QueryUserRootContentsResponse
 
     func moveFolder(
-      request: MoveFolderRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveFolderRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listRepositories(
-      request: ListRepositoriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRepositoriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ListRepositoriesResponse
 
     func getRepository(
-      request: GetRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Repository
 
     func createRepository(
-      request: CreateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Repository
 
     func updateRepository(
-      request: UpdateRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Repository
 
     func deleteRepository(
-      request: DeleteRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func moveRepository(
-      request: MoveRepositoryRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveRepositoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func commitRepositoryChanges(
-      request: CommitRepositoryChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: CommitRepositoryChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.CommitRepositoryChangesResponse
 
     func readRepositoryFile(
-      request: ReadRepositoryFileRequest, options: GoogleCloudGax.RequestOptions
+      request: ReadRepositoryFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ReadRepositoryFileResponse
 
     func queryRepositoryDirectoryContents(
-      request: QueryRepositoryDirectoryContentsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryRepositoryDirectoryContentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.QueryRepositoryDirectoryContentsResponse
 
     func fetchRepositoryHistory(
-      request: FetchRepositoryHistoryRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchRepositoryHistoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.FetchRepositoryHistoryResponse
 
     func computeRepositoryAccessTokenStatus(
-      request: ComputeRepositoryAccessTokenStatusRequest, options: GoogleCloudGax.RequestOptions
+      request: ComputeRepositoryAccessTokenStatusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ComputeRepositoryAccessTokenStatusResponse
 
     func fetchRemoteBranches(
-      request: FetchRemoteBranchesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchRemoteBranchesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.FetchRemoteBranchesResponse
 
     func listWorkspaces(
-      request: ListWorkspacesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkspacesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ListWorkspacesResponse
 
     func getWorkspace(
-      request: GetWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Workspace
 
     func createWorkspace(
-      request: CreateWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Workspace
 
     func deleteWorkspace(
-      request: DeleteWorkspaceRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkspaceRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func installNpmPackages(
-      request: InstallNpmPackagesRequest, options: GoogleCloudGax.RequestOptions
+      request: InstallNpmPackagesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.InstallNpmPackagesResponse
 
     func pullGitCommits(
-      request: PullGitCommitsRequest, options: GoogleCloudGax.RequestOptions
+      request: PullGitCommitsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.PullGitCommitsResponse
 
     func pushGitCommits(
-      request: PushGitCommitsRequest, options: GoogleCloudGax.RequestOptions
+      request: PushGitCommitsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.PushGitCommitsResponse
 
     func fetchFileGitStatuses(
-      request: FetchFileGitStatusesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchFileGitStatusesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.FetchFileGitStatusesResponse
 
     func fetchGitAheadBehind(
-      request: FetchGitAheadBehindRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchGitAheadBehindRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.FetchGitAheadBehindResponse
 
     func commitWorkspaceChanges(
-      request: CommitWorkspaceChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: CommitWorkspaceChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.CommitWorkspaceChangesResponse
 
     func resetWorkspaceChanges(
-      request: ResetWorkspaceChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ResetWorkspaceChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ResetWorkspaceChangesResponse
 
     func fetchFileDiff(
-      request: FetchFileDiffRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchFileDiffRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.FetchFileDiffResponse
 
     func queryDirectoryContents(
-      request: QueryDirectoryContentsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryDirectoryContentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.QueryDirectoryContentsResponse
 
     func searchFiles(
-      request: SearchFilesRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchFilesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.SearchFilesResponse
 
     func makeDirectory(
-      request: MakeDirectoryRequest, options: GoogleCloudGax.RequestOptions
+      request: MakeDirectoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.MakeDirectoryResponse
 
     func removeDirectory(
-      request: RemoveDirectoryRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveDirectoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.RemoveDirectoryResponse
 
     func moveDirectory(
-      request: MoveDirectoryRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveDirectoryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.MoveDirectoryResponse
 
     func readFile(
-      request: ReadFileRequest, options: GoogleCloudGax.RequestOptions
+      request: ReadFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ReadFileResponse
 
     func removeFile(
-      request: RemoveFileRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.RemoveFileResponse
 
     func moveFile(
-      request: MoveFileRequest, options: GoogleCloudGax.RequestOptions
+      request: MoveFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.MoveFileResponse
 
     func writeFile(
-      request: WriteFileRequest, options: GoogleCloudGax.RequestOptions
+      request: WriteFileRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.WriteFileResponse
 
     func listReleaseConfigs(
-      request: ListReleaseConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListReleaseConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ListReleaseConfigsResponse
 
     func getReleaseConfig(
-      request: GetReleaseConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetReleaseConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ReleaseConfig
 
     func createReleaseConfig(
-      request: CreateReleaseConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateReleaseConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ReleaseConfig
 
     func updateReleaseConfig(
-      request: UpdateReleaseConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateReleaseConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ReleaseConfig
 
     func deleteReleaseConfig(
-      request: DeleteReleaseConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteReleaseConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listCompilationResults(
-      request: ListCompilationResultsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCompilationResultsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ListCompilationResultsResponse
 
     func getCompilationResult(
-      request: GetCompilationResultRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCompilationResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.CompilationResult
 
     func createCompilationResult(
-      request: CreateCompilationResultRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCompilationResultRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.CompilationResult
 
     func queryCompilationResultActions(
-      request: QueryCompilationResultActionsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryCompilationResultActionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.QueryCompilationResultActionsResponse
 
     func listWorkflowConfigs(
-      request: ListWorkflowConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkflowConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ListWorkflowConfigsResponse
 
     func getWorkflowConfig(
-      request: GetWorkflowConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkflowConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.WorkflowConfig
 
     func createWorkflowConfig(
-      request: CreateWorkflowConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkflowConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.WorkflowConfig
 
     func updateWorkflowConfig(
-      request: UpdateWorkflowConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateWorkflowConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.WorkflowConfig
 
     func deleteWorkflowConfig(
-      request: DeleteWorkflowConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkflowConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listWorkflowInvocations(
-      request: ListWorkflowInvocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkflowInvocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.ListWorkflowInvocationsResponse
 
     func getWorkflowInvocation(
-      request: GetWorkflowInvocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetWorkflowInvocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.WorkflowInvocation
 
     func createWorkflowInvocation(
-      request: CreateWorkflowInvocationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateWorkflowInvocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.WorkflowInvocation
 
     func deleteWorkflowInvocation(
-      request: DeleteWorkflowInvocationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteWorkflowInvocationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelWorkflowInvocation(
-      request: CancelWorkflowInvocationRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelWorkflowInvocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.CancelWorkflowInvocationResponse
 
     func queryWorkflowInvocationActions(
-      request: QueryWorkflowInvocationActionsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryWorkflowInvocationActionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.QueryWorkflowInvocationActionsResponse
 
     func getConfig(
-      request: GetConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Config
 
     func updateConfig(
-      request: UpdateConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDataFormV1.Config
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudBuildV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudBuildClient, projectId: String, locationId: String) async throws {
   let response = try await client.getDefaultServiceAccount(

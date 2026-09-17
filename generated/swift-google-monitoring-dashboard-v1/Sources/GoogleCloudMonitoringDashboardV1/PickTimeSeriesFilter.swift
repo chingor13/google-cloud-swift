@@ -15,8 +15,8 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Describes a ranking-based time series filter. Each input time series is
 /// ranked with an aligner. The filter will allow up to `num_time_series` time
@@ -25,7 +25,7 @@ import GoogleType
 /// For example, if `ranking_method` is `METHOD_MEAN`,`direction` is `BOTTOM`,
 /// and `num_time_series` is 3, then the 3 times series with the lowest mean
 /// values will pass through the filter.
-public struct PickTimeSeriesFilter: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct PickTimeSeriesFilter: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// `ranking_method` is applied to each time series independently to produce
@@ -42,7 +42,7 @@ public struct PickTimeSeriesFilter: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// Select the top N streams/time series within this time interval
   public var interval: GoogleType.Interval? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `PickTimeSeriesFilter`.
   public init() {}
@@ -97,7 +97,7 @@ public struct PickTimeSeriesFilter: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.interval = try container.decodeIfPresent(GoogleType.Interval.self, forKey: .interval)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -348,10 +348,10 @@ public struct PickTimeSeriesFilter: Codable, Equatable, GoogleCloudWKT._AnyPacka
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.dashboard.v1.PickTimeSeriesFilter"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Metadata describing the Batch operation.
-public struct BatchOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct BatchOperationMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Name of the batch for the operation.
@@ -28,10 +28,10 @@ public struct BatchOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
   public var batchUuid: Swift.String = Swift.String()
 
   /// The time when the operation was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// The time when the operation finished.
-  public var doneTime: GoogleCloudWKT.Timestamp? = nil
+  public var doneTime: GoogleWKT.Timestamp? = nil
 
   /// The operation type.
   public var operationType: BatchOperationMetadata.BatchOperationType =
@@ -46,7 +46,7 @@ public struct BatchOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
   /// Warnings encountered during operation execution.
   public var warnings: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `BatchOperationMetadata`.
   public init() {}
@@ -99,9 +99,8 @@ public struct BatchOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .batchUuid) {
       self.batchUuid = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.doneTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .doneTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.doneTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .doneTime)
     if let value = try container.decodeIfPresent(
       BatchOperationMetadata.BatchOperationType.self, forKey: .operationType)
     {
@@ -119,7 +118,7 @@ public struct BatchOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -239,10 +238,10 @@ public struct BatchOperationMetadata: Codable, Equatable, GoogleCloudWKT._AnyPac
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.dataproc.v1.BatchOperationMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

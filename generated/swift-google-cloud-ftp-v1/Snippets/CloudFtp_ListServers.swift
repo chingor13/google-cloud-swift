@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudFTPV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: CloudFtpClient, projectId: String, locationId: String) async throws {
   let items = try client.listServers(

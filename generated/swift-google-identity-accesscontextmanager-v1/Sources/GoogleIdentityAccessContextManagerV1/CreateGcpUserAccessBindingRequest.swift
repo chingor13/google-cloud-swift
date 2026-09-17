@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Request of [CreateGcpUserAccessBinding]
 /// [google.identity.accesscontextmanager.v1.AccessContextManager.CreateGcpUserAccessBinding].
-public struct CreateGcpUserAccessBindingRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CreateGcpUserAccessBindingRequest: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. Example: "organizations/256"
@@ -29,7 +29,7 @@ public struct CreateGcpUserAccessBindingRequest: Codable, Equatable, GoogleCloud
   /// [google.identity.accesscontextmanager.v1.GcpUserAccessBinding]
   public var gcpUserAccessBinding: GcpUserAccessBinding? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CreateGcpUserAccessBindingRequest`.
   public init() {}
@@ -71,7 +71,7 @@ public struct CreateGcpUserAccessBindingRequest: Codable, Equatable, GoogleCloud
       GcpUserAccessBinding.self, forKey: .gcpUserAccessBinding)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -88,10 +88,10 @@ public struct CreateGcpUserAccessBindingRequest: Codable, Equatable, GoogleCloud
     return
       "type.googleapis.com/google.identity.accesscontextmanager.v1.CreateGcpUserAccessBindingRequest"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

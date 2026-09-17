@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Available recognition features specific to streaming recognition requests.
-public struct StreamingRecognitionFeatures: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct StreamingRecognitionFeatures: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// If `true`, responses with voice activity speech events will be returned as
@@ -39,7 +39,7 @@ public struct StreamingRecognitionFeatures: Codable, Equatable, GoogleCloudWKT._
   public var endpointingSensitivity: StreamingRecognitionFeatures.EndpointingSensitivity =
     StreamingRecognitionFeatures.EndpointingSensitivity()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `StreamingRecognitionFeatures`.
   public init() {}
@@ -95,7 +95,7 @@ public struct StreamingRecognitionFeatures: Codable, Equatable, GoogleCloudWKT._
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,20 +111,20 @@ public struct StreamingRecognitionFeatures: Codable, Equatable, GoogleCloudWKT._
   }
 
   /// Events that a timeout can be set on for voice activity.
-  public struct VoiceActivityTimeout: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VoiceActivityTimeout: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Duration to timeout the stream if no speech begins. If this is set and
     /// no speech is detected in this duration at the start of the stream, the
     /// server will close the stream.
-    public var speechStartTimeout: GoogleCloudWKT.Duration? = nil
+    public var speechStartTimeout: GoogleWKT.Duration? = nil
 
     /// Duration to timeout the stream after speech ends. If this is set and no
     /// speech is detected in this duration after speech was detected, the server
     /// will close the stream.
-    public var speechEndTimeout: GoogleCloudWKT.Duration? = nil
+    public var speechEndTimeout: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VoiceActivityTimeout`.
     public init() {}
@@ -160,12 +160,12 @@ public struct StreamingRecognitionFeatures: Codable, Equatable, GoogleCloudWKT._
     public init(from decoder: Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.speechStartTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .speechStartTimeout)
+        GoogleWKT.Duration.self, forKey: .speechStartTimeout)
       self.speechEndTimeout = try container.decodeIfPresent(
-        GoogleCloudWKT.Duration.self, forKey: .speechEndTimeout)
+        GoogleWKT.Duration.self, forKey: .speechEndTimeout)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -182,11 +182,11 @@ public struct StreamingRecognitionFeatures: Codable, Equatable, GoogleCloudWKT._
       return
         "type.googleapis.com/google.cloud.speech.v2.StreamingRecognitionFeatures.VoiceActivityTimeout"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -312,10 +312,10 @@ public struct StreamingRecognitionFeatures: Codable, Equatable, GoogleCloudWKT._
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.speech.v2.StreamingRecognitionFeatures"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

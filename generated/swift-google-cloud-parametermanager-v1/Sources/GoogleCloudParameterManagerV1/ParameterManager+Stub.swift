@@ -16,61 +16,61 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ParameterManagerStub: Sendable {
     func listParameters(
-      request: ListParametersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListParametersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ListParametersResponse
 
     func getParameter(
-      request: GetParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: GetParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter
 
     func createParameter(
-      request: CreateParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter
 
     func updateParameter(
-      request: UpdateParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateParameterRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.Parameter
 
     func deleteParameter(
-      request: DeleteParameterRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteParameterRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listParameterVersions(
-      request: ListParameterVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListParameterVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ListParameterVersionsResponse
 
     func getParameterVersion(
-      request: GetParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion
 
     func renderParameterVersion(
-      request: RenderParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RenderParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.RenderParameterVersionResponse
 
     func createParameterVersion(
-      request: CreateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion
 
     func updateParameterVersion(
-      request: UpdateParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudParameterManagerV1.ParameterVersion
 
     func deleteParameterVersion(
-      request: DeleteParameterVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteParameterVersionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
   }
 }

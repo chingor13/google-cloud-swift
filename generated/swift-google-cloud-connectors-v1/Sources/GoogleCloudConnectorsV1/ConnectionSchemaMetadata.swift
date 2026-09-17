@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ConnectionSchemaMetadata is the singleton resource of each connection.
 /// It includes the entity and action names of runtime resources exposed
 /// by a connection backend.
-public struct ConnectionSchemaMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ConnectionSchemaMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. List of entity names.
@@ -35,16 +35,16 @@ public struct ConnectionSchemaMetadata: Codable, Equatable, GoogleCloudWKT._AnyP
   public var name: Swift.String = Swift.String()
 
   /// Output only. Timestamp when the connection runtime schema was updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp when the connection runtime schema refresh was
   /// triggered.
-  public var refreshTime: GoogleCloudWKT.Timestamp? = nil
+  public var refreshTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The current state of runtime schema.
   public var state: ConnectionSchemaMetadata.State = ConnectionSchemaMetadata.State()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ConnectionSchemaMetadata`.
   public init() {}
@@ -96,10 +96,8 @@ public struct ConnectionSchemaMetadata: Codable, Equatable, GoogleCloudWKT._AnyP
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
-    self.refreshTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .refreshTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
+    self.refreshTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .refreshTime)
     if let value = try container.decodeIfPresent(
       ConnectionSchemaMetadata.State.self, forKey: .state)
     {
@@ -107,7 +105,7 @@ public struct ConnectionSchemaMetadata: Codable, Equatable, GoogleCloudWKT._AnyP
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -232,10 +230,10 @@ public struct ConnectionSchemaMetadata: Codable, Equatable, GoogleCloudWKT._AnyP
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.connectors.v1.ConnectionSchemaMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

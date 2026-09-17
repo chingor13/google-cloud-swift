@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Sprite sheet configuration.
-public struct SpriteSheet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SpriteSheet: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Format type. The default is `jpeg`.
@@ -79,12 +79,12 @@ public struct SpriteSheet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Start time in seconds, relative to the output file timeline. Determines the
   /// first sprite to pick. The default is `0s`.
-  public var startTimeOffset: GoogleCloudWKT.Duration? = nil
+  public var startTimeOffset: GoogleWKT.Duration? = nil
 
   /// End time in seconds, relative to the output file timeline. When
   /// `end_time_offset` is not specified, the sprites are generated until the end
   /// of the output file.
-  public var endTimeOffset: GoogleCloudWKT.Duration? = nil
+  public var endTimeOffset: GoogleWKT.Duration? = nil
 
   /// The quality of the generated sprite sheet. Enter a value between 1
   /// and 100, where 1 is the lowest quality and 100 is the highest quality.
@@ -95,7 +95,7 @@ public struct SpriteSheet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Specify either total number of sprites or interval to create sprites.
   public var extractionStrategy: OneOf_ExtractionStrategy? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SpriteSheet`.
   public init() {}
@@ -167,9 +167,9 @@ public struct SpriteSheet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.rowCount = value
     }
     self.startTimeOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .startTimeOffset)
+      GoogleWKT.Duration.self, forKey: .startTimeOffset)
     self.endTimeOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .endTimeOffset)
+      GoogleWKT.Duration.self, forKey: .endTimeOffset)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .quality) {
       self.quality = value
     }
@@ -187,15 +187,13 @@ public struct SpriteSheet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let totalCount = try container.decodeIfPresent(Swift.Int32.self, forKey: .totalCount) {
       try extractionStrategyCheckAndSet(.totalCount(totalCount))
     }
-    if let interval = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration?.self, forKey: .interval)
-    {
+    if let interval = try container.decodeIfPresent(GoogleWKT.Duration?.self, forKey: .interval) {
       try extractionStrategyCheckAndSet(.interval(interval))
     }
     self.extractionStrategy = extractionStrategy
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -232,16 +230,16 @@ public struct SpriteSheet: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     case totalCount(Swift.Int32)
     /// Starting from `0s`, create sprites at regular intervals. Specify the
     /// interval value in seconds.
-    indirect case interval(GoogleCloudWKT.Duration?)
+    indirect case interval(GoogleWKT.Duration?)
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.transcoder.v1.SpriteSheet"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

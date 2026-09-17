@@ -16,7 +16,7 @@
 
 #if PreviewFeatures
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Represents a whole or partial calendar date, such as a birthday. The time of
   /// day and time zone are either specified elsewhere or are insignificant. The
@@ -34,7 +34,7 @@
   /// * google.type.TimeOfDay
   /// * google.type.DateTime
   /// * google.protobuf.Timestamp
-  public struct Date: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Date: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Day of a month. Must be from 1 to 31 and valid for the year and month, or 0
@@ -50,7 +50,7 @@
     /// a year.
     public var year: Swift.Int32? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Date`.
     public init() {}
@@ -92,7 +92,7 @@
       self.year = try container.decodeIfPresent(Swift.Int32.self, forKey: .year)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -109,11 +109,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.compute.v1.Date"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

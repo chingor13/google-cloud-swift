@@ -16,11 +16,11 @@
 
 #if FeatureRegistryService || FeaturestoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Feature Metadata information.
   /// For example, color is a feature that describes an apple.
-  public struct Feature: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct Feature: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Immutable. Name of the Feature.
@@ -43,11 +43,11 @@
 
     /// Output only. Only applicable for Vertex AI Feature Store (Legacy).
     /// Timestamp when this EntityType was created.
-    public var createTime: GoogleCloudWKT.Timestamp? = nil
+    public var createTime: GoogleWKT.Timestamp? = nil
 
     /// Output only. Only applicable for Vertex AI Feature Store (Legacy).
     /// Timestamp when this EntityType was most recently updated.
-    public var updateTime: GoogleCloudWKT.Timestamp? = nil
+    public var updateTime: GoogleWKT.Timestamp? = nil
 
     /// Optional. The labels with user-defined metadata to organize your Features.
     ///
@@ -92,7 +92,7 @@
     /// list of email addresses or URIs.
     public var pointOfContact: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `Feature`.
     public init() {}
@@ -154,10 +154,8 @@
       if let value = try container.decodeIfPresent(Feature.ValueType.self, forKey: .valueType) {
         self.valueType = value
       }
-      self.createTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-      self.updateTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+      self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+      self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
       if let value = try container.decodeIfPresent(
         [Swift.String: Swift.String].self, forKey: .labels)
       {
@@ -182,7 +180,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -215,7 +213,7 @@
     /// [google.cloud.aiplatform.v1.FeatureStatsAnomaly.start_time]: <doc:FeatureStatsAnomaly/startTime>
     /// [google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig.ImportFeaturesAnalysis]: <doc:FeaturestoreMonitoringConfig/ImportFeaturesAnalysis>
     /// [google.cloud.aiplatform.v1.FeaturestoreMonitoringConfig.SnapshotAnalysis]: <doc:FeaturestoreMonitoringConfig/SnapshotAnalysis>
-    public struct MonitoringStatsAnomaly: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct MonitoringStatsAnomaly: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// Output only. The objective for each stats.
@@ -225,7 +223,7 @@
       /// Output only. The stats and anomalies generated at specific timestamp.
       public var featureStatsAnomaly: FeatureStatsAnomaly? = nil
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `MonitoringStatsAnomaly`.
       public init() {}
@@ -269,7 +267,7 @@
           FeatureStatsAnomaly.self, forKey: .featureStatsAnomaly)
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -393,11 +391,11 @@
       public static var _anyTypeUrl: Swift.String {
         return "type.googleapis.com/google.cloud.aiplatform.v1.Feature.MonitoringStatsAnomaly"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
@@ -566,11 +564,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.Feature"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

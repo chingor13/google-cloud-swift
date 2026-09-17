@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service to manage databases.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlDatabasesServiceStub
 
     /// Creates a new `SqlDatabasesServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlDatabasesServiceStub = try Clients.SqlDatabasesServiceTransport(
         options)
       inner = Clients.SqlDatabasesServiceRetry(inner, options: options)
@@ -43,7 +43,7 @@
     ///
     /// @Snippet(path: "SqlDatabasesService_Delete")
     public func delete(
-      request: SqlDatabasesDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.delete(request: request, options: options)
     }
@@ -53,7 +53,7 @@
     ///
     /// @Snippet(path: "SqlDatabasesService_Get")
     public func `get`(
-      request: SqlDatabasesGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Database {
       try await self.inner.`get`(request: request, options: options)
     }
@@ -65,7 +65,7 @@
     ///
     /// @Snippet(path: "SqlDatabasesService_Insert")
     public func insert(
-      request: SqlDatabasesInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.insert(request: request, options: options)
     }
@@ -74,7 +74,7 @@
     ///
     /// @Snippet(path: "SqlDatabasesService_List")
     public func list(
-      request: SqlDatabasesListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.DatabasesListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -84,7 +84,7 @@
     ///
     /// @Snippet(path: "SqlDatabasesService_Patch")
     public func patch(
-      request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.patch(request: request, options: options)
     }
@@ -94,7 +94,7 @@
     ///
     /// @Snippet(path: "SqlDatabasesService_Update")
     public func update(
-      request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
       try await self.inner.update(request: request, options: options)
     }
@@ -128,32 +128,32 @@
 
       /// See `SqlDatabasesServiceClient.delete`.
       func delete(
-        request: SqlDatabasesDeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesDeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlDatabasesServiceClient.`get``.
       func `get`(
-        request: SqlDatabasesGetRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesGetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Database
 
       /// See `SqlDatabasesServiceClient.insert`.
       func insert(
-        request: SqlDatabasesInsertRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesInsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlDatabasesServiceClient.list`.
       func list(
-        request: SqlDatabasesListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.DatabasesListResponse
 
       /// See `SqlDatabasesServiceClient.patch`.
       func patch(
-        request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
 
       /// See `SqlDatabasesServiceClient.update`.
       func update(
-        request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlDatabasesUpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.Operation
     }
   }
@@ -167,9 +167,9 @@
     }
 
     public func delete(
-      request: SqlDatabasesDeleteRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesDeleteRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func `get`(request: SqlDatabasesGetRequest) async throws -> GoogleCloudSqlV1.Database {
@@ -177,9 +177,9 @@
     }
 
     public func `get`(
-      request: SqlDatabasesGetRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesGetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Database {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func insert(request: SqlDatabasesInsertRequest) async throws
@@ -189,9 +189,9 @@
     }
 
     public func insert(
-      request: SqlDatabasesInsertRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesInsertRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func list(request: SqlDatabasesListRequest) async throws
@@ -201,9 +201,9 @@
     }
 
     public func list(
-      request: SqlDatabasesListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.DatabasesListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func patch(request: SqlDatabasesUpdateRequest) async throws -> GoogleCloudSqlV1.Operation
@@ -212,9 +212,9 @@
     }
 
     public func patch(
-      request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func update(request: SqlDatabasesUpdateRequest) async throws
@@ -224,9 +224,9 @@
     }
 
     public func update(
-      request: SqlDatabasesUpdateRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlDatabasesUpdateRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

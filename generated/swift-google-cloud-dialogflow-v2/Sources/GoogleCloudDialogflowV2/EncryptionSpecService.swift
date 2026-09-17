@@ -20,21 +20,21 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Manages encryption spec settings for Dialogflow and Agent Assist.
   ///
   /// @Snippet(path: "EncryptionSpecServiceQuickstart")
   public final class EncryptionSpecServiceClient: Clients.EncryptionSpecServiceProtocol, Sendable {
     let inner: any Clients.EncryptionSpecServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `EncryptionSpecServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.EncryptionSpecServiceStub = try Clients.EncryptionSpecServiceTransport(
         options)
       inner = Clients.EncryptionSpecServiceRetry(inner, options: options)
@@ -50,7 +50,7 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_GetEncryptionSpec")
     public func getEncryptionSpec(
-      request: GetEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEncryptionSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.EncryptionSpec {
       try await self.inner.getEncryptionSpec(request: request, options: options)
     }
@@ -63,7 +63,7 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_InitializeEncryptionSpec")
     public func initializeEncryptionSpec(
-      request: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.initializeEncryptionSpec(request: request, options: options)
     }
@@ -76,23 +76,23 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_InitializeEncryptionSpec")
     public func initializeEncryptionSpec(
-      withPolling: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse> {
+      withPolling: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
+          -> GoogleGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
         return try op._extractStatus(InitializeEncryptionSpecResponse.self)
       }
       let rawOp = try await self.initializeEncryptionSpec(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
+        () async throws -> GoogleGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State
+        in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -121,7 +121,7 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -147,7 +147,7 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -155,14 +155,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "EncryptionSpecService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -173,7 +173,7 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -184,7 +184,7 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -192,7 +192,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -201,7 +201,7 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -212,7 +212,7 @@
     ///
     /// @Snippet(path: "EncryptionSpecService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -240,12 +240,12 @@
 
       /// See `EncryptionSpecServiceClient.initializeEncryptionSpec`.
       func initializeEncryptionSpec(withPolling: InitializeEncryptionSpecRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse>
+        -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse>
 
       /// See `EncryptionSpecServiceClient.initializeEncryptionSpec`.
       func initializeEncryptionSpec(
         encryptionSpec: EncryptionSpec?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse>
+      ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse>
 
       /// See `EncryptionSpecServiceClient.listLocations`.
       func listLocations(request: GoogleCloudLocation.ListLocationsRequest) async throws
@@ -285,47 +285,47 @@
 
       /// See `EncryptionSpecServiceClient.getEncryptionSpec`.
       func getEncryptionSpec(
-        request: GetEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+        request: GetEncryptionSpecRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowV2.EncryptionSpec
 
       /// See `EncryptionSpecServiceClient.initializeEncryptionSpec`.
       func initializeEncryptionSpec(
-        request: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+        request: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `EncryptionSpecServiceClient.initializeEncryptionSpec`.
       func initializeEncryptionSpec(
-        withPolling: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse>
+        withPolling: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse>
 
       /// See `EncryptionSpecServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `EncryptionSpecServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `EncryptionSpecServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `EncryptionSpecServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `EncryptionSpecServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `EncryptionSpecServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
     }
   }
@@ -339,9 +339,9 @@
     }
 
     public func getEncryptionSpec(
-      request: GetEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEncryptionSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudDialogflowV2.EncryptionSpec {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getEncryptionSpec(
@@ -360,32 +360,32 @@
     }
 
     public func initializeEncryptionSpec(
-      request: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func initializeEncryptionSpec(withPolling: InitializeEncryptionSpecRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse>
+      -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse>
     {
       try await self.initializeEncryptionSpec(withPolling: withPolling, options: .init())
     }
 
     public func initializeEncryptionSpec(
-      withPolling: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse> {
+      withPolling: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse> {
       let poll = {
-        () async throws
-          -> GoogleCloudGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+        () async throws -> GoogleGax._PollableOperationImpl<InitializeEncryptionSpecResponse>.State
+        in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func initializeEncryptionSpec(
       encryptionSpec: EncryptionSpec?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<InitializeEncryptionSpecResponse> {
+    ) async throws -> any GoogleGax.PollableOperation<InitializeEncryptionSpecResponse> {
       let request = InitializeEncryptionSpecRequest().with {
         $0.encryptionSpec = encryptionSpec
       }
@@ -399,9 +399,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -411,13 +411,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -427,9 +427,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -439,9 +439,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -451,13 +451,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -478,9 +478,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -497,9 +497,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(

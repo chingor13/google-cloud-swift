@@ -15,319 +15,319 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol ContactCenterInsightsStub: Sendable {
     func createConversation(
-      request: CreateConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation
 
     func uploadConversation(
-      request: UploadConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: UploadConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateConversation(
-      request: UpdateConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation
 
     func getConversation(
-      request: GetConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: GetConversationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Conversation
 
     func listConversations(
-      request: ListConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListConversationsResponse
 
     func deleteConversation(
-      request: DeleteConversationRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteConversationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createAnalysis(
-      request: CreateAnalysisRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAnalysisRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getAnalysis(
-      request: GetAnalysisRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnalysisRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Analysis
 
     func listAnalyses(
-      request: ListAnalysesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAnalysesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysesResponse
 
     func deleteAnalysis(
-      request: DeleteAnalysisRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAnalysisRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func bulkAnalyzeConversations(
-      request: BulkAnalyzeConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkAnalyzeConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func bulkDeleteConversations(
-      request: BulkDeleteConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkDeleteConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func ingestConversations(
-      request: IngestConversationsRequest, options: GoogleCloudGax.RequestOptions
+      request: IngestConversationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportInsightsData(
-      request: ExportInsightsDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportInsightsDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createIssueModel(
-      request: CreateIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func updateIssueModel(
-      request: UpdateIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel
 
     func getIssueModel(
-      request: GetIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.IssueModel
 
     func listIssueModels(
-      request: ListIssueModelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIssueModelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListIssueModelsResponse
 
     func deleteIssueModel(
-      request: DeleteIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deployIssueModel(
-      request: DeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func undeployIssueModel(
-      request: UndeployIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func exportIssueModel(
-      request: ExportIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func importIssueModel(
-      request: ImportIssueModelRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportIssueModelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getIssue(
-      request: GetIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: GetIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Issue
 
     func listIssues(
-      request: ListIssuesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListIssuesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListIssuesResponse
 
     func updateIssue(
-      request: UpdateIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateIssueRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Issue
 
     func deleteIssue(
-      request: DeleteIssueRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteIssueRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func calculateIssueModelStats(
-      request: CalculateIssueModelStatsRequest, options: GoogleCloudGax.RequestOptions
+      request: CalculateIssueModelStatsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.CalculateIssueModelStatsResponse
 
     func createPhraseMatcher(
-      request: CreatePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+      request: CreatePhraseMatcherRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher
 
     func getPhraseMatcher(
-      request: GetPhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+      request: GetPhraseMatcherRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher
 
     func listPhraseMatchers(
-      request: ListPhraseMatchersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPhraseMatchersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListPhraseMatchersResponse
 
     func deletePhraseMatcher(
-      request: DeletePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+      request: DeletePhraseMatcherRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func updatePhraseMatcher(
-      request: UpdatePhraseMatcherRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdatePhraseMatcherRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.PhraseMatcher
 
     func calculateStats(
-      request: CalculateStatsRequest, options: GoogleCloudGax.RequestOptions
+      request: CalculateStatsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.CalculateStatsResponse
 
     func getSettings(
-      request: GetSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Settings
 
     func updateSettings(
-      request: UpdateSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.Settings
 
     func createAnalysisRule(
-      request: CreateAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateAnalysisRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule
 
     func getAnalysisRule(
-      request: GetAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnalysisRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule
 
     func listAnalysisRules(
-      request: ListAnalysisRulesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAnalysisRulesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListAnalysisRulesResponse
 
     func updateAnalysisRule(
-      request: UpdateAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateAnalysisRuleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.AnalysisRule
 
     func deleteAnalysisRule(
-      request: DeleteAnalysisRuleRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteAnalysisRuleRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func getEncryptionSpec(
-      request: GetEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEncryptionSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.EncryptionSpec
 
     func initializeEncryptionSpec(
-      request: InitializeEncryptionSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: InitializeEncryptionSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createView(
-      request: CreateViewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.View
 
     func getView(
-      request: GetViewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.View
 
     func listViews(
-      request: ListViewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListViewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListViewsResponse
 
     func updateView(
-      request: UpdateViewRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateViewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.View
 
     func deleteView(
-      request: DeleteViewRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteViewRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func queryMetrics(
-      request: QueryMetricsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryMetricsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createQaQuestion(
-      request: CreateQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQaQuestionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion
 
     func getQaQuestion(
-      request: GetQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQaQuestionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion
 
     func updateQaQuestion(
-      request: UpdateQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQaQuestionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaQuestion
 
     func deleteQaQuestion(
-      request: DeleteQaQuestionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQaQuestionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listQaQuestions(
-      request: ListQaQuestionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQaQuestionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaQuestionsResponse
 
     func createQaScorecard(
-      request: CreateQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQaScorecardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard
 
     func getQaScorecard(
-      request: GetQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQaScorecardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard
 
     func updateQaScorecard(
-      request: UpdateQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateQaScorecardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecard
 
     func deleteQaScorecard(
-      request: DeleteQaScorecardRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQaScorecardRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listQaScorecards(
-      request: ListQaScorecardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQaScorecardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaScorecardsResponse
 
     func createQaScorecardRevision(
-      request: CreateQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision
 
     func getQaScorecardRevision(
-      request: GetQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision
 
     func tuneQaScorecardRevision(
-      request: TuneQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: TuneQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deployQaScorecardRevision(
-      request: DeployQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeployQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision
 
     func undeployQaScorecardRevision(
-      request: UndeployQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeployQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.QaScorecardRevision
 
     func deleteQaScorecardRevision(
-      request: DeleteQaScorecardRevisionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteQaScorecardRevisionRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listQaScorecardRevisions(
-      request: ListQaScorecardRevisionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListQaScorecardRevisionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListQaScorecardRevisionsResponse
 
     func createFeedbackLabel(
-      request: CreateFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateFeedbackLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel
 
     func listFeedbackLabels(
-      request: ListFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListFeedbackLabelsResponse
 
     func getFeedbackLabel(
-      request: GetFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: GetFeedbackLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel
 
     func updateFeedbackLabel(
-      request: UpdateFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateFeedbackLabelRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.FeedbackLabel
 
     func deleteFeedbackLabel(
-      request: DeleteFeedbackLabelRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteFeedbackLabelRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listAllFeedbackLabels(
-      request: ListAllFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAllFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContactCenterInsightsV1.ListAllFeedbackLabelsResponse
 
     func bulkUploadFeedbackLabels(
-      request: BulkUploadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkUploadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func bulkDownloadFeedbackLabels(
-      request: BulkDownloadFeedbackLabelsRequest, options: GoogleCloudGax.RequestOptions
+      request: BulkDownloadFeedbackLabelsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

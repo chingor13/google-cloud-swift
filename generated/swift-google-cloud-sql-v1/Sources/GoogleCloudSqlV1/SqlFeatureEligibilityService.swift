@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service to verify the eligibility of an instance for a given operation.
   ///
@@ -31,7 +31,7 @@
     let inner: any Clients.SqlFeatureEligibilityServiceStub
 
     /// Creates a new `SqlFeatureEligibilityServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlFeatureEligibilityServiceStub =
         try Clients.SqlFeatureEligibilityServiceTransport(options)
       inner = Clients.SqlFeatureEligibilityServiceRetry(inner, options: options)

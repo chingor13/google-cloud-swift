@@ -19,9 +19,9 @@
 import Foundation
 import GoogleCloudDeveloperConnectV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: DeveloperConnectClient, projectId: String, locationId: String) async throws {
   let poller = try await client.createConnection(

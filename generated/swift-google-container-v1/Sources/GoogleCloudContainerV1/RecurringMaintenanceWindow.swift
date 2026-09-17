@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents an arbitrary window of time that recurs.
 /// Will replace RecurringTimeWindow.
-public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Optional. Specifies the date before which will not be scheduled.
@@ -34,7 +34,7 @@ public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleCloudWKT._An
   public var windowStartTime: GoogleType.TimeOfDay? = nil
 
   /// Required. Duration of the window.
-  public var windowDuration: GoogleCloudWKT.Duration? = nil
+  public var windowDuration: GoogleWKT.Duration? = nil
 
   /// Required. An RRULE (https://tools.ietf.org/html/rfc5545#section-3.8.5.3)
   /// for how this window recurs.
@@ -51,7 +51,7 @@ public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleCloudWKT._An
   /// The FREQ values of HOURLY, MINUTELY, and SECONDLY are not supported.
   public var recurrence: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RecurringMaintenanceWindow`.
   public init() {}
@@ -94,13 +94,13 @@ public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleCloudWKT._An
     self.windowStartTime = try container.decodeIfPresent(
       GoogleType.TimeOfDay.self, forKey: .windowStartTime)
     self.windowDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .windowDuration)
+      GoogleWKT.Duration.self, forKey: .windowDuration)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .recurrence) {
       self.recurrence = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -118,10 +118,10 @@ public struct RecurringMaintenanceWindow: Codable, Equatable, GoogleCloudWKT._An
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.container.v1.RecurringMaintenanceWindow"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

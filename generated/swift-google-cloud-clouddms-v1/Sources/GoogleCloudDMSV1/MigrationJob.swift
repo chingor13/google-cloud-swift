@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Represents a Database Migration Service migration job object.
-public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct MigrationJob: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The name (URI) of this migration job resource, in the form of:
@@ -29,12 +29,12 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The timestamp when the migration job resource was created.
   /// A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds.
   /// Example: "2014-10-02T15:01:23.045123456Z".
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. The timestamp when the migration job resource was last
   /// updated. A timestamp in RFC3339 UTC "Zulu" format, accurate to nanoseconds.
   /// Example: "2014-10-02T15:01:23.045123456Z".
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// The resource labels for migration job to use to annotate any related
   /// underlying resources such as Compute Engine VMs. An object containing a
@@ -73,7 +73,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. The duration of the migration job (in seconds). A duration in
   /// seconds with up to nine fractional digits, terminated by 's'. Example:
   /// "3.5s".
-  public var duration: GoogleCloudWKT.Duration? = nil
+  public var duration: GoogleWKT.Duration? = nil
 
   /// Output only. The error details in case of state FAILED.
   public var error: GoogleRpc.Status? = nil
@@ -86,7 +86,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
 
   /// Output only. If the migration job is completed, the time when it was
   /// completed.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// The conversion workspace used by the migration.
   public var conversionWorkspace: ConversionWorkspaceInfo? = nil
@@ -118,7 +118,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// The connectivity method.
   public var connectivity: OneOf_Connectivity? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `MigrationJob`.
   public init() {}
@@ -200,10 +200,8 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .name) {
       self.name = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent([Swift.String: Swift.String].self, forKey: .labels)
     {
       self.labels = value
@@ -230,12 +228,12 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .destination) {
       self.destination = value
     }
-    self.duration = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .duration)
+    self.duration = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .duration)
     self.error = try container.decodeIfPresent(GoogleRpc.Status.self, forKey: .error)
     self.sourceDatabase = try container.decodeIfPresent(DatabaseType.self, forKey: .sourceDatabase)
     self.destinationDatabase = try container.decodeIfPresent(
       DatabaseType.self, forKey: .destinationDatabase)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
     self.conversionWorkspace = try container.decodeIfPresent(
       ConversionWorkspaceInfo.self, forKey: .conversionWorkspace)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .filter) {
@@ -275,7 +273,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.connectivity = connectivity
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -319,7 +317,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Dump flag definition.
-  public struct DumpFlag: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DumpFlag: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The name of the flag
@@ -328,7 +326,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The value of the flag.
     public var value: Swift.String = Swift.String()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DumpFlag`.
     public init() {}
@@ -371,7 +369,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -387,22 +385,22 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.MigrationJob.DumpFlag"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Dump flags definition.
-  public struct DumpFlags: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DumpFlags: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The flags for the initial dump.
     public var dumpFlags: [MigrationJob.DumpFlag] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DumpFlags`.
     public init() {}
@@ -441,7 +439,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -456,23 +454,23 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.MigrationJob.DumpFlags"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Performance configuration definition.
-  public struct PerformanceConfig: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct PerformanceConfig: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Initial dump parallelism level.
     public var dumpParallelLevel: MigrationJob.PerformanceConfig.DumpParallelLevel = MigrationJob
       .PerformanceConfig.DumpParallelLevel()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `PerformanceConfig`.
     public init() {}
@@ -512,7 +510,7 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -639,11 +637,11 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.clouddms.v1.MigrationJob.PerformanceConfig"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -1089,10 +1087,10 @@ public struct MigrationJob: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.clouddms.v1.MigrationJob"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

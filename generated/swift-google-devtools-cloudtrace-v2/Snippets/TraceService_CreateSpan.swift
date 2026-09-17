@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudTraceV2
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(client: TraceServiceClient) async throws {
   let response = try await client.createSpan(

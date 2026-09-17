@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Complete log information about a single HTTP request to an App Engine
 /// application.
-public struct RequestLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct RequestLog: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Application that handled this request.
@@ -40,13 +40,13 @@ public struct RequestLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var ip: Swift.String = Swift.String()
 
   /// Time when the request started.
-  public var startTime: GoogleCloudWKT.Timestamp? = nil
+  public var startTime: GoogleWKT.Timestamp? = nil
 
   /// Time when the request finished.
-  public var endTime: GoogleCloudWKT.Timestamp? = nil
+  public var endTime: GoogleWKT.Timestamp? = nil
 
   /// Latency of the request.
-  public var latency: GoogleCloudWKT.Duration? = nil
+  public var latency: GoogleWKT.Duration? = nil
 
   /// Number of CPU megacycles used to process request.
   public var megaCycles: Swift.Int64 = Swift.Int64()
@@ -104,7 +104,7 @@ public struct RequestLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var wasLoadingRequest: Swift.Bool = Swift.Bool()
 
   /// Time this request spent in the pending request queue.
-  public var pendingTime: GoogleCloudWKT.Duration? = nil
+  public var pendingTime: GoogleWKT.Duration? = nil
 
   /// If the instance processing this request belongs to a manually scaled
   /// module, then this is the 0-based index of the instance. Otherwise, this
@@ -140,7 +140,7 @@ public struct RequestLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// distributed among multiple repositories.
   public var sourceReference: [SourceReference] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `RequestLog`.
   public init() {}
@@ -252,10 +252,9 @@ public struct RequestLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .ip) {
       self.ip = value
     }
-    self.startTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .startTime)
-    self.endTime = try container.decodeIfPresent(GoogleCloudWKT.Timestamp.self, forKey: .endTime)
-    self.latency = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .latency)
+    self.startTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .startTime)
+    self.endTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .endTime)
+    self.latency = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .latency)
     if let value = try container.decodeIfPresent(Swift.Int64.self, forKey: .megaCycles) {
       self.megaCycles = value
     }
@@ -301,8 +300,7 @@ public struct RequestLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     if let value = try container.decodeIfPresent(Swift.Bool.self, forKey: .wasLoadingRequest) {
       self.wasLoadingRequest = value
     }
-    self.pendingTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .pendingTime)
+    self.pendingTime = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .pendingTime)
     if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .instanceIndex) {
       self.instanceIndex = value
     }
@@ -332,7 +330,7 @@ public struct RequestLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -379,10 +377,10 @@ public struct RequestLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.appengine.logging.v1.RequestLog"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

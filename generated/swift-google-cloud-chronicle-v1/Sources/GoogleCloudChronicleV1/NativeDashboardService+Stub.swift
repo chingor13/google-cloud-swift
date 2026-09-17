@@ -15,74 +15,74 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol NativeDashboardServiceStub: Sendable {
     func createNativeDashboard(
-      request: CreateNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard
 
     func getNativeDashboard(
-      request: GetNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: GetNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard
 
     func listNativeDashboards(
-      request: ListNativeDashboardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListNativeDashboardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ListNativeDashboardsResponse
 
     func updateNativeDashboard(
-      request: UpdateNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard
 
     func duplicateNativeDashboard(
-      request: DuplicateNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: DuplicateNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard
 
     func deleteNativeDashboard(
-      request: DeleteNativeDashboardRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteNativeDashboardRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func addChart(
-      request: AddChartRequest, options: GoogleCloudGax.RequestOptions
+      request: AddChartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.AddChartResponse
 
     func removeChart(
-      request: RemoveChartRequest, options: GoogleCloudGax.RequestOptions
+      request: RemoveChartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.NativeDashboard
 
     func editChart(
-      request: EditChartRequest, options: GoogleCloudGax.RequestOptions
+      request: EditChartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.EditChartResponse
 
     func duplicateChart(
-      request: DuplicateChartRequest, options: GoogleCloudGax.RequestOptions
+      request: DuplicateChartRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.DuplicateChartResponse
 
     func exportNativeDashboards(
-      request: ExportNativeDashboardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportNativeDashboardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ExportNativeDashboardsResponse
 
     func importNativeDashboards(
-      request: ImportNativeDashboardsRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportNativeDashboardsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChronicleV1.ImportNativeDashboardsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

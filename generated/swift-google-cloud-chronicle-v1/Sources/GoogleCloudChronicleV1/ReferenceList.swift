@@ -15,12 +15,12 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A reference list.
 /// Reference lists are user-defined lists of values which users can
 /// use in multiple Rules.
-public struct ReferenceList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ReferenceList: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The resource name of the reference list.
@@ -32,7 +32,7 @@ public struct ReferenceList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var displayName: Swift.String = Swift.String()
 
   /// Output only. The timestamp when the reference list was last updated.
-  public var revisionCreateTime: GoogleCloudWKT.Timestamp? = nil
+  public var revisionCreateTime: GoogleWKT.Timestamp? = nil
 
   /// Required. A user-provided description of the reference list.
   public var description: Swift.String = Swift.String()
@@ -62,7 +62,7 @@ public struct ReferenceList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// update, if scope_info is requested to be updated, this field must be set.
   public var scopeInfo: ScopeInfo? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ReferenceList`.
   public init() {}
@@ -118,7 +118,7 @@ public struct ReferenceList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.displayName = value
     }
     self.revisionCreateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .revisionCreateTime)
+      GoogleWKT.Timestamp.self, forKey: .revisionCreateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .description) {
       self.description = value
     }
@@ -138,7 +138,7 @@ public struct ReferenceList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.scopeInfo = try container.decodeIfPresent(ScopeInfo.self, forKey: .scopeInfo)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -161,10 +161,10 @@ public struct ReferenceList: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.chronicle.v1.ReferenceList"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

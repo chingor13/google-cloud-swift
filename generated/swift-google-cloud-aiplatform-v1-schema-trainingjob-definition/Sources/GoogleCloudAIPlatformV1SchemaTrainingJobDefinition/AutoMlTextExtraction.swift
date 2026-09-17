@@ -15,16 +15,16 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A TrainingJob that trains and uploads an AutoML Text Extraction Model.
-public struct AutoMlTextExtraction: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct AutoMlTextExtraction: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The input parameters of this TrainingJob.
   public var inputs: AutoMlTextExtractionInputs? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `AutoMlTextExtraction`.
   public init() {}
@@ -60,7 +60,7 @@ public struct AutoMlTextExtraction: Codable, Equatable, GoogleCloudWKT._AnyPacka
     self.inputs = try container.decodeIfPresent(AutoMlTextExtractionInputs.self, forKey: .inputs)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -76,10 +76,10 @@ public struct AutoMlTextExtraction: Codable, Equatable, GoogleCloudWKT._AnyPacka
     return
       "type.googleapis.com/google.cloud.aiplatform.v1.schema.trainingjob.definition.AutoMlTextExtraction"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

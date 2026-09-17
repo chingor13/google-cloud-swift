@@ -15,9 +15,9 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
-public struct SearchHashesResponse: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct SearchHashesResponse: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The full hashes that matched the requested prefixes.
@@ -26,9 +26,9 @@ public struct SearchHashesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   /// For requested entities that did not match the threat list, how long to
   /// cache the response until.
-  public var negativeExpireTime: GoogleCloudWKT.Timestamp? = nil
+  public var negativeExpireTime: GoogleWKT.Timestamp? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `SearchHashesResponse`.
   public init() {}
@@ -69,10 +69,10 @@ public struct SearchHashesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
       self.threats = value
     }
     self.negativeExpireTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .negativeExpireTime)
+      GoogleWKT.Timestamp.self, forKey: .negativeExpireTime)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -86,7 +86,7 @@ public struct SearchHashesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Contains threat information on a matching hash.
-  public struct ThreatHash: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ThreatHash: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The ThreatList this threat belongs to.
@@ -99,9 +99,9 @@ public struct SearchHashesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
     /// The cache lifetime for the returned match. Clients must not cache this
     /// response past this timestamp to avoid false positives.
-    public var expireTime: GoogleCloudWKT.Timestamp? = nil
+    public var expireTime: GoogleWKT.Timestamp? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ThreatHash`.
     public init() {}
@@ -144,11 +144,10 @@ public struct SearchHashesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
       if let value = try container.decodeIfPresent(Foundation.Data.self, forKey: .hash) {
         self.hash = value
       }
-      self.expireTime = try container.decodeIfPresent(
-        GoogleCloudWKT.Timestamp.self, forKey: .expireTime)
+      self.expireTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .expireTime)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -165,21 +164,21 @@ public struct SearchHashesResponse: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.webrisk.v1.SearchHashesResponse.ThreatHash"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.webrisk.v1.SearchHashesResponse"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

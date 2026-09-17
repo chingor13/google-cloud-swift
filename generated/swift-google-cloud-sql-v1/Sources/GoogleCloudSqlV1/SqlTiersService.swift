@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service for providing machine types (tiers) for Cloud SQL instances.
   ///
@@ -29,7 +29,7 @@
     let inner: any Clients.SqlTiersServiceStub
 
     /// Creates a new `SqlTiersServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlTiersServiceStub = try Clients.SqlTiersServiceTransport(options)
       inner = Clients.SqlTiersServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -44,7 +44,7 @@
     ///
     /// @Snippet(path: "SqlTiersService_List")
     public func list(
-      request: SqlTiersListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlTiersListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.TiersListResponse {
       try await self.inner.list(request: request, options: options)
     }
@@ -62,7 +62,7 @@
 
       /// See `SqlTiersServiceClient.list`.
       func list(
-        request: SqlTiersListRequest, options: GoogleCloudGax.RequestOptions
+        request: SqlTiersListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudSqlV1.TiersListResponse
     }
   }
@@ -76,9 +76,9 @@
     }
 
     public func list(
-      request: SqlTiersListRequest, options: GoogleCloudGax.RequestOptions
+      request: SqlTiersListRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudSqlV1.TiersListResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

@@ -16,10 +16,10 @@
 
 #if SqlInstancesService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Database instance demote primary instance context.
-  public struct DemoteMasterContext: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DemoteMasterContext: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// This is always `sql#demoteMasterContext`.
@@ -32,7 +32,7 @@
     /// future replication failures. Change the value only if you know the reason
     /// for the GTID divergence and are confident that doing so will not cause any
     /// replication issues.
-    public var verifyGtidConsistency: GoogleCloudWKT.BoolValue? = nil
+    public var verifyGtidConsistency: GoogleWKT.BoolValue? = nil
 
     /// The name of the instance which will act as on-premises primary instance
     /// in the replication setup.
@@ -45,7 +45,7 @@
     /// Flag to skip replication setup on the instance.
     public var skipReplicationSetup: Swift.Bool = Swift.Bool()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DemoteMasterContext`.
     public init() {}
@@ -90,7 +90,7 @@
         self.kind = value
       }
       self.verifyGtidConsistency = try container.decodeIfPresent(
-        GoogleCloudWKT.BoolValue.self, forKey: .verifyGtidConsistency)
+        GoogleWKT.BoolValue.self, forKey: .verifyGtidConsistency)
       if let value = try container.decodeIfPresent(Swift.String.self, forKey: .masterInstanceName) {
         self.masterInstanceName = value
       }
@@ -101,7 +101,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -120,11 +120,11 @@
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.sql.v1.DemoteMasterContext"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

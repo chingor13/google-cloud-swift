@@ -15,19 +15,19 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Requirements that must be true before a table is scanned in discovery for the
 /// first time. There is an AND relationship between the top-level attributes.
 /// Additionally, minimum conditions with an OR relationship that must be met
 /// before Cloud DLP scans a table can be set (like a minimum row count or a
 /// minimum table age).
-public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// BigQuery table must have been created after this date. Used to avoid
   /// backfilling.
-  public var createdAfter: GoogleCloudWKT.Timestamp? = nil
+  public var createdAfter: GoogleWKT.Timestamp? = nil
 
   /// At least one of the conditions must be true for a table to be scanned.
   public var orConditions: DiscoveryBigQueryConditions.OrConditions? = nil
@@ -37,7 +37,7 @@ public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._A
   /// for all unsupported tables.
   public var includedTypes: OneOf_IncludedTypes? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `DiscoveryBigQueryConditions`.
   public init() {}
@@ -77,7 +77,7 @@ public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._A
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.createdAfter = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createdAfter)
+      GoogleWKT.Timestamp.self, forKey: .createdAfter)
     self.orConditions = try container.decodeIfPresent(
       DiscoveryBigQueryConditions.OrConditions.self, forKey: .orConditions)
 
@@ -102,7 +102,7 @@ public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._A
     self.includedTypes = includedTypes
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -126,7 +126,7 @@ public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._A
 
   /// There is an OR relationship between these attributes. They are used to
   /// determine if a table should be scanned or not in Discovery.
-  public struct OrConditions: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct OrConditions: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Minimum number of rows that should be present before Cloud DLP
@@ -135,9 +135,9 @@ public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._A
 
     /// Minimum age a table must have before Cloud DLP can profile it. Value must
     /// be 1 hour or greater.
-    public var minAge: GoogleCloudWKT.Duration? = nil
+    public var minAge: GoogleWKT.Duration? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `OrConditions`.
     public init() {}
@@ -175,10 +175,10 @@ public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._A
       if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .minRowCount) {
         self.minRowCount = value
       }
-      self.minAge = try container.decodeIfPresent(GoogleCloudWKT.Duration.self, forKey: .minAge)
+      self.minAge = try container.decodeIfPresent(GoogleWKT.Duration.self, forKey: .minAge)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -194,11 +194,11 @@ public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._A
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryBigQueryConditions.OrConditions"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -215,10 +215,10 @@ public struct DiscoveryBigQueryConditions: Codable, Equatable, GoogleCloudWKT._A
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.privacy.dlp.v2.DiscoveryBigQueryConditions"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

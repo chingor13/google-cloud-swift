@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// The results of scoring a single conversation against a QaScorecard. Contains
 /// a collection of QaAnswers and aggregate score.
-public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct QaScorecardResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The name of the scorecard result.
@@ -34,7 +34,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   public var conversation: Swift.String = Swift.String()
 
   /// Output only. The timestamp that the revision was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// ID of the agent that handled the conversation.
   public var agentId: Swift.String = Swift.String()
@@ -60,7 +60,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   /// List of all individual score sets.
   public var scoreSources: [QaScorecardResult.ScoreSource] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `QaScorecardResult`.
   public init() {}
@@ -122,8 +122,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .conversation) {
       self.conversation = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .agentId) {
       self.agentId = value
     }
@@ -146,7 +145,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -169,7 +168,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
   }
 
   /// Tags and their corresponding results.
-  public struct QaTagResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct QaTagResult: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The tag the score applies to.
@@ -184,7 +183,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// The normalized score the tag applies to.
     public var normalizedScore: Swift.Double? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `QaTagResult`.
     public init() {}
@@ -233,7 +232,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
         Swift.Double.self, forKey: .normalizedScore)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -252,18 +251,18 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.QaScorecardResult.QaTagResult"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// A scorecard result may have multiple sets of scores from varying sources,
   /// one of which becomes the "main" answer above. A ScoreSource represents
   /// each individual set of scores.
-  public struct ScoreSource: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct ScoreSource: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// What created the score.
@@ -283,7 +282,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
     /// Collection of tags and their scores.
     public var qaTagResults: [QaScorecardResult.QaTagResult] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `ScoreSource`.
     public init() {}
@@ -341,7 +340,7 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -467,21 +466,21 @@ public struct QaScorecardResult: Codable, Equatable, GoogleCloudWKT._AnyPackable
       return
         "type.googleapis.com/google.cloud.contactcenterinsights.v1.QaScorecardResult.ScoreSource"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.contactcenterinsights.v1.QaScorecardResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

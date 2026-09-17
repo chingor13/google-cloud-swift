@@ -16,17 +16,17 @@
 
 #if InterconnectLocations
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol InterconnectLocationsStub: Sendable {
       func `get`(
-        request: InterconnectLocationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocation
 
       func list(
-        request: InterconnectLocationsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: InterconnectLocationsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InterconnectLocationList
     }
   }

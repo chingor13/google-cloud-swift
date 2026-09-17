@@ -19,7 +19,7 @@
   // snippet.show
   import Foundation
   import GoogleCloudSqlV1
-  import GoogleCloudWKT
+  import GoogleWKT
 
   func sample(client: SqlOperationsServiceClient) async throws {
     let items = try client.list(

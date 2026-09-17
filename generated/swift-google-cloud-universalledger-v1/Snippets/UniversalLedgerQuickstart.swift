@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudUniversalLedgerV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleCloudUniversalLedgerV1.UniversalLedgerClient()

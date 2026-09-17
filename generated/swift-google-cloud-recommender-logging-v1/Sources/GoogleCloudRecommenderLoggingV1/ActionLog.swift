@@ -16,10 +16,10 @@
 
 import Foundation
 import GoogleCloudRecommenderV1
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Log content of an action on a recommendation. This includes Mark* actions.
-public struct ActionLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ActionLog: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Required. User that executed this action. Eg, foo@gmail.com
@@ -36,7 +36,7 @@ public struct ActionLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// 'projects/123/locations/global/recommenders/roleReco/recommendations/r1'
   public var recommendationName: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ActionLog`.
   public init() {}
@@ -93,7 +93,7 @@ public struct ActionLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -111,10 +111,10 @@ public struct ActionLog: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.recommender.logging.v1.ActionLog"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

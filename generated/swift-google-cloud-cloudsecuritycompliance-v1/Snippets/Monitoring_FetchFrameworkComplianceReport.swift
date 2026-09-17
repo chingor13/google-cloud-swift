@@ -19,8 +19,8 @@
 import Foundation
 import GoogleCloudSecurityComplianceV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleLongRunning
+import GoogleWKT
 
 func sample(client: MonitoringClient) async throws {
   let response = try await client.fetchFrameworkComplianceReport(

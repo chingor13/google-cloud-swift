@@ -19,8 +19,8 @@
   #if canImport(FoundationNetworking)
     import FoundationNetworking
   #endif
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// Service that exposes Cloud SQL event information. This
   /// service is only used internally.
@@ -30,7 +30,7 @@
     let inner: any Clients.SqlEventsServiceStub
 
     /// Creates a new `SqlEventsServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.SqlEventsServiceStub = try Clients.SqlEventsServiceTransport(options)
       inner = Clients.SqlEventsServiceRetry(inner, options: options)
       if let logger = options.logger {

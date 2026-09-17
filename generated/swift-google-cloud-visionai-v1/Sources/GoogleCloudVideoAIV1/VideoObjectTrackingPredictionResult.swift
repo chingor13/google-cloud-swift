@@ -15,25 +15,25 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Prediction output format for Video Object Tracking.
-public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The beginning, inclusive, of the video's time segment in which the
   /// current identifications happens.
-  public var segmentStartTime: GoogleCloudWKT.Timestamp? = nil
+  public var segmentStartTime: GoogleWKT.Timestamp? = nil
 
   /// The end, inclusive, of the video's time segment in which the current
   /// identifications happen. Particularly, if the end is the same as the start,
   /// it means the identifications happen on a specific video frame.
-  public var segmentEndTime: GoogleCloudWKT.Timestamp? = nil
+  public var segmentEndTime: GoogleWKT.Timestamp? = nil
 
   /// All of the objects detected in the specified time range.
   public var objects: [VideoObjectTrackingPredictionResult.DetectedObject] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `VideoObjectTrackingPredictionResult`.
   public init() {}
@@ -71,9 +71,9 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
     self.segmentStartTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .segmentStartTime)
+      GoogleWKT.Timestamp.self, forKey: .segmentStartTime)
     self.segmentEndTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .segmentEndTime)
+      GoogleWKT.Timestamp.self, forKey: .segmentEndTime)
     if let value = try container.decodeIfPresent(
       [VideoObjectTrackingPredictionResult.DetectedObject].self, forKey: .objects)
     {
@@ -81,7 +81,7 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -98,7 +98,7 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
   /// Boundingbox for detected object. I.e. the rectangle over the video frame
   /// pinpointing the found AnnotationSpec. The coordinates are relative to the
   /// frame size, and the point 0,0 is in the top left of the frame.
-  public struct BoundingBox: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct BoundingBox: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The leftmost coordinate of the bounding box.
@@ -113,7 +113,7 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
     /// The bottommost coordinate of the bounding box.
     public var yMax: Swift.Float = Swift.Float()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `BoundingBox`.
     public init() {}
@@ -166,7 +166,7 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -185,18 +185,18 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
       return
         "type.googleapis.com/google.cloud.visionai.v1.VideoObjectTrackingPredictionResult.BoundingBox"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Each DetectedObject is one particular identification of an object
   /// specified with the AnnotationSpec id and display_name, the bounding box,
   /// the associated confidence score and the corresponding track_id.
-  public struct DetectedObject: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct DetectedObject: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The resource ID of the AnnotationSpec that had been identified.
@@ -218,7 +218,7 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
     /// detected object.
     public var trackId: Swift.Int64 = Swift.Int64()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `DetectedObject`.
     public init() {}
@@ -275,7 +275,7 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -295,21 +295,21 @@ public struct VideoObjectTrackingPredictionResult: Codable, Equatable, GoogleClo
       return
         "type.googleapis.com/google.cloud.visionai.v1.VideoObjectTrackingPredictionResult.DetectedObject"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.visionai.v1.VideoObjectTrackingPredictionResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

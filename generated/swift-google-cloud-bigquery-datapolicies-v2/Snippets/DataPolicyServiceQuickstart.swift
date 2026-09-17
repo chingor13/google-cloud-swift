@@ -18,8 +18,8 @@
 // snippet.show
 import Foundation
 import GoogleBigQueryDataPoliciesV2
-import GoogleCloudWKT
 import GoogleIAMV1
+import GoogleWKT
 
 func sample(projectId: String, locationId: String, ) async throws {
   let client = try GoogleBigQueryDataPoliciesV2.DataPolicyServiceClient()

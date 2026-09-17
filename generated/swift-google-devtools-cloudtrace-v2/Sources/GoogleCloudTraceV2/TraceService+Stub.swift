@@ -15,17 +15,17 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol TraceServiceStub: Sendable {
     func batchWriteSpans(
-      request: BatchWriteSpansRequest, options: GoogleCloudGax.RequestOptions
+      request: BatchWriteSpansRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createSpan(
-      request: Span, options: GoogleCloudGax.RequestOptions
+      request: Span, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudTraceV2.Span
   }
 }

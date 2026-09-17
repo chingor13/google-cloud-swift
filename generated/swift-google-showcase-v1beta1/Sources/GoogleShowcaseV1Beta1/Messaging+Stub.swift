@@ -16,100 +16,100 @@
 
 import Foundation
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol MessagingStub: Sendable {
     func createRoom(
-      request: CreateRoomRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateRoomRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Room
 
     func getRoom(
-      request: GetRoomRequest, options: GoogleCloudGax.RequestOptions
+      request: GetRoomRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Room
 
     func updateRoom(
-      request: UpdateRoomRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateRoomRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Room
 
     func deleteRoom(
-      request: DeleteRoomRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteRoomRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listRooms(
-      request: ListRoomsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListRoomsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.ListRoomsResponse
 
     func createBlurb(
-      request: CreateBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Blurb
 
     func getBlurb(
-      request: GetBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: GetBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Blurb
 
     func updateBlurb(
-      request: UpdateBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.Blurb
 
     func deleteBlurb(
-      request: DeleteBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listBlurbs(
-      request: ListBlurbsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListBlurbsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.ListBlurbsResponse
 
     func searchBlurbs(
-      request: SearchBlurbsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchBlurbsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func streamBlurbs(
-      request: StreamBlurbsRequest, options: GoogleCloudGax.RequestOptions
+      request: StreamBlurbsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.StreamBlurbsResponse
 
     func sendBlurbs(
-      request: CreateBlurbRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateBlurbRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleShowcaseV1Beta1.SendBlurbsResponse
 
     func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
     func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location
 
     func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy
 
     func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

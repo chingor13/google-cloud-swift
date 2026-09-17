@@ -15,34 +15,34 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol SynonymSetServiceStub: Sendable {
     func createSynonymSet(
-      request: CreateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet
 
     func getSynonymSet(
-      request: GetSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet
 
     func updateSynonymSet(
-      request: UpdateSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.SynonymSet
 
     func deleteSynonymSet(
-      request: DeleteSynonymSetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSynonymSetRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func listSynonymSets(
-      request: ListSynonymSetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSynonymSetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudContentWarehouseV1.ListSynonymSetsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
   }
 }

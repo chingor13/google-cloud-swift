@@ -15,15 +15,15 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleRpc
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Explanation for how a condition affects a principal's access
-public struct ConditionExplanation: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ConditionExplanation: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Value of the condition.
-  public var value: GoogleCloudWKT.Value? = nil
+  public var value: GoogleWKT.Value? = nil
 
   /// Any errors that prevented complete evaluation of the condition expression.
   public var errors: [GoogleRpc.Status] = []
@@ -33,7 +33,7 @@ public struct ConditionExplanation: Codable, Equatable, GoogleCloudWKT._AnyPacka
   /// evaluated.
   public var evaluationStates: [ConditionExplanation.EvaluationState] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ConditionExplanation`.
   public init() {}
@@ -70,7 +70,7 @@ public struct ConditionExplanation: Codable, Equatable, GoogleCloudWKT._AnyPacka
 
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: CodingKeys.self)
-    self.value = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .value)
+    self.value = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .value)
     if let value = try container.decodeIfPresent([GoogleRpc.Status].self, forKey: .errors) {
       self.errors = value
     }
@@ -81,7 +81,7 @@ public struct ConditionExplanation: Codable, Equatable, GoogleCloudWKT._AnyPacka
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -96,7 +96,7 @@ public struct ConditionExplanation: Codable, Equatable, GoogleCloudWKT._AnyPacka
   }
 
   /// Evaluated state of a condition expression.
-  public struct EvaluationState: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct EvaluationState: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Start position of an expression in the condition, by character.
@@ -108,13 +108,13 @@ public struct ConditionExplanation: Codable, Equatable, GoogleCloudWKT._AnyPacka
     public var end: Swift.Int32 = Swift.Int32()
 
     /// Value of this expression.
-    public var value: GoogleCloudWKT.Value? = nil
+    public var value: GoogleWKT.Value? = nil
 
     /// Any errors that prevented complete evaluation of the condition
     /// expression.
     public var errors: [GoogleRpc.Status] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `EvaluationState`.
     public init() {}
@@ -159,13 +159,13 @@ public struct ConditionExplanation: Codable, Equatable, GoogleCloudWKT._AnyPacka
       if let value = try container.decodeIfPresent(Swift.Int32.self, forKey: .end) {
         self.end = value
       }
-      self.value = try container.decodeIfPresent(GoogleCloudWKT.Value.self, forKey: .value)
+      self.value = try container.decodeIfPresent(GoogleWKT.Value.self, forKey: .value)
       if let value = try container.decodeIfPresent([GoogleRpc.Status].self, forKey: .errors) {
         self.errors = value
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -184,21 +184,21 @@ public struct ConditionExplanation: Codable, Equatable, GoogleCloudWKT._AnyPacka
       return
         "type.googleapis.com/google.cloud.policytroubleshooter.iam.v3.ConditionExplanation.EvaluationState"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.policytroubleshooter.iam.v3.ConditionExplanation"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

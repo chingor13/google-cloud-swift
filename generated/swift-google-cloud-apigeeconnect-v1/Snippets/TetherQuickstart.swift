@@ -18,7 +18,7 @@
 // snippet.show
 import Foundation
 import GoogleCloudApigeeConnectV1
-import GoogleCloudWKT
+import GoogleWKT
 
 func sample() async throws {
   let client = try GoogleCloudApigeeConnectV1.TetherClient()

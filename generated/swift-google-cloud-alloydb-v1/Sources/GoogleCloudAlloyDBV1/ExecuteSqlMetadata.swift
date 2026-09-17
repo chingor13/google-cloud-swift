@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Any additional metadata information regarding the execution of the SQL
-public struct ExecuteSqlMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ExecuteSqlMetadata: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Message related to SQL execution. Marked as core content since it
@@ -32,12 +32,12 @@ public struct ExecuteSqlMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public var partialResult: Swift.Bool = Swift.Bool()
 
   /// The time duration taken to execute the sql statement.
-  public var sqlStatementExecutionDuration: GoogleCloudWKT.Duration? = nil
+  public var sqlStatementExecutionDuration: GoogleWKT.Duration? = nil
 
   /// Status of SQL execution.
   public var status: ExecuteSqlMetadata.Status = ExecuteSqlMetadata.Status()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ExecuteSqlMetadata`.
   public init() {}
@@ -84,13 +84,13 @@ public struct ExecuteSqlMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackabl
       self.partialResult = value
     }
     self.sqlStatementExecutionDuration = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .sqlStatementExecutionDuration)
+      GoogleWKT.Duration.self, forKey: .sqlStatementExecutionDuration)
     if let value = try container.decodeIfPresent(ExecuteSqlMetadata.Status.self, forKey: .status) {
       self.status = value
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -229,10 +229,10 @@ public struct ExecuteSqlMetadata: Codable, Equatable, GoogleCloudWKT._AnyPackabl
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.alloydb.v1.ExecuteSqlMetadata"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

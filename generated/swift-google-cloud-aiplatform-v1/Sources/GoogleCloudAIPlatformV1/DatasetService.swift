@@ -20,22 +20,22 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleIAMV1
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   /// The service that manages Vertex AI Dataset and its child resources.
   ///
   /// @Snippet(path: "DatasetServiceQuickstart")
   public final class DatasetServiceClient: Clients.DatasetServiceProtocol, Sendable {
     let inner: any Clients.DatasetServiceStub
-    let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-    let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+    let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+    let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
     /// Creates a new `DatasetServiceClient` instance.
-    public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+    public init(_ options: GoogleGax.ClientOptions = .init()) throws {
       var inner: any Clients.DatasetServiceStub = try Clients.DatasetServiceTransport(options)
       inner = Clients.DatasetServiceRetry(inner, options: options)
       if let logger = options.logger {
@@ -50,7 +50,7 @@
     ///
     /// @Snippet(path: "DatasetService_CreateDataset")
     public func createDataset(
-      request: CreateDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createDataset(request: request, options: options)
     }
@@ -59,21 +59,21 @@
     ///
     /// @Snippet(path: "DatasetService_CreateDataset")
     public func createDataset(
-      withPolling: CreateDatasetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Dataset> {
+      withPolling: CreateDatasetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Dataset> {
       let extractStatus = {
-        (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Dataset>.State in
+        (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Dataset>.State
+        in
         return try op._extractStatus(Dataset.self)
       }
       let rawOp = try await self.createDataset(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Dataset>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Dataset>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -85,7 +85,7 @@
     ///
     /// @Snippet(path: "DatasetService_GetDataset")
     public func getDataset(
-      request: GetDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Dataset {
       try await self.inner.getDataset(request: request, options: options)
     }
@@ -94,7 +94,7 @@
     ///
     /// @Snippet(path: "DatasetService_UpdateDataset")
     public func updateDataset(
-      request: UpdateDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Dataset {
       try await self.inner.updateDataset(request: request, options: options)
     }
@@ -103,7 +103,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListDatasets")
     public func listDatasets(
-      request: ListDatasetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatasetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDatasetsResponse {
       try await self.inner.listDatasets(request: request, options: options)
     }
@@ -112,7 +112,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListDatasets")
     public func listDatasets(
-      byItem: ListDatasetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDatasetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Dataset, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListDatasetsResponse in
@@ -120,14 +120,14 @@
         request.pageToken = token
         return try await self.listDatasets(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a Dataset.
     ///
     /// @Snippet(path: "DatasetService_DeleteDataset")
     public func deleteDataset(
-      request: DeleteDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteDataset(request: request, options: options)
     }
@@ -136,21 +136,21 @@
     ///
     /// @Snippet(path: "DatasetService_DeleteDataset")
     public func deleteDataset(
-      withPolling: DeleteDatasetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteDatasetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteDataset(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -162,7 +162,7 @@
     ///
     /// @Snippet(path: "DatasetService_ImportData")
     public func importData(
-      request: ImportDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.importData(request: request, options: options)
     }
@@ -171,22 +171,21 @@
     ///
     /// @Snippet(path: "DatasetService_ImportData")
     public func importData(
-      withPolling: ImportDataRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataResponse> {
+      withPolling: ImportDataRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportDataResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ImportDataResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ImportDataResponse>.State in
         return try op._extractStatus(ImportDataResponse.self)
       }
       let rawOp = try await self.importData(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportDataResponse>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportDataResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -198,7 +197,7 @@
     ///
     /// @Snippet(path: "DatasetService_ExportData")
     public func exportData(
-      request: ExportDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.exportData(request: request, options: options)
     }
@@ -207,22 +206,21 @@
     ///
     /// @Snippet(path: "DatasetService_ExportData")
     public func exportData(
-      withPolling: ExportDataRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportDataResponse> {
+      withPolling: ExportDataRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportDataResponse> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<ExportDataResponse>.State in
+          -> GoogleGax._PollableOperationImpl<ExportDataResponse>.State in
         return try op._extractStatus(ExportDataResponse.self)
       }
       let rawOp = try await self.exportData(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportDataResponse>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportDataResponse>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -234,7 +232,7 @@
     ///
     /// @Snippet(path: "DatasetService_CreateDatasetVersion")
     public func createDatasetVersion(
-      request: CreateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.createDatasetVersion(request: request, options: options)
     }
@@ -243,21 +241,21 @@
     ///
     /// @Snippet(path: "DatasetService_CreateDatasetVersion")
     public func createDatasetVersion(
-      withPolling: CreateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion> {
+      withPolling: CreateDatasetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DatasetVersion> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<DatasetVersion>.State in
+          -> GoogleGax._PollableOperationImpl<DatasetVersion>.State in
         return try op._extractStatus(DatasetVersion.self)
       }
       let rawOp = try await self.createDatasetVersion(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DatasetVersion>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<DatasetVersion>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -269,7 +267,7 @@
     ///
     /// @Snippet(path: "DatasetService_UpdateDatasetVersion")
     public func updateDatasetVersion(
-      request: UpdateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DatasetVersion {
       try await self.inner.updateDatasetVersion(request: request, options: options)
     }
@@ -278,7 +276,7 @@
     ///
     /// @Snippet(path: "DatasetService_DeleteDatasetVersion")
     public func deleteDatasetVersion(
-      request: DeleteDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteDatasetVersion(request: request, options: options)
     }
@@ -287,21 +285,21 @@
     ///
     /// @Snippet(path: "DatasetService_DeleteDatasetVersion")
     public func deleteDatasetVersion(
-      withPolling: DeleteDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteDatasetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteDatasetVersion(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -313,7 +311,7 @@
     ///
     /// @Snippet(path: "DatasetService_GetDatasetVersion")
     public func getDatasetVersion(
-      request: GetDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DatasetVersion {
       try await self.inner.getDatasetVersion(request: request, options: options)
     }
@@ -322,7 +320,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListDatasetVersions")
     public func listDatasetVersions(
-      request: ListDatasetVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatasetVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDatasetVersionsResponse {
       try await self.inner.listDatasetVersions(request: request, options: options)
     }
@@ -331,7 +329,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListDatasetVersions")
     public func listDatasetVersions(
-      byItem: ListDatasetVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDatasetVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DatasetVersion, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListDatasetVersionsResponse in
@@ -339,14 +337,14 @@
         request.pageToken = token
         return try await self.listDatasetVersions(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Restores a dataset version.
     ///
     /// @Snippet(path: "DatasetService_RestoreDatasetVersion")
     public func restoreDatasetVersion(
-      request: RestoreDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.restoreDatasetVersion(request: request, options: options)
     }
@@ -355,21 +353,21 @@
     ///
     /// @Snippet(path: "DatasetService_RestoreDatasetVersion")
     public func restoreDatasetVersion(
-      withPolling: RestoreDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion> {
+      withPolling: RestoreDatasetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DatasetVersion> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<DatasetVersion>.State in
+          -> GoogleGax._PollableOperationImpl<DatasetVersion>.State in
         return try op._extractStatus(DatasetVersion.self)
       }
       let rawOp = try await self.restoreDatasetVersion(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DatasetVersion>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<DatasetVersion>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -381,7 +379,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListDataItems")
     public func listDataItems(
-      request: ListDataItemsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataItemsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDataItemsResponse {
       try await self.inner.listDataItems(request: request, options: options)
     }
@@ -390,7 +388,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListDataItems")
     public func listDataItems(
-      byItem: ListDataItemsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataItemsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataItem, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListDataItemsResponse in
@@ -398,14 +396,14 @@
         request.pageToken = token
         return try await self.listDataItems(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Searches DataItems in a Dataset.
     ///
     /// @Snippet(path: "DatasetService_SearchDataItems")
     public func searchDataItems(
-      request: SearchDataItemsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchDataItemsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SearchDataItemsResponse {
       try await self.inner.searchDataItems(request: request, options: options)
     }
@@ -414,7 +412,7 @@
     ///
     /// @Snippet(path: "DatasetService_SearchDataItems")
     public func searchDataItems(
-      byItem: SearchDataItemsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchDataItemsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataItemView, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.SearchDataItemsResponse in
@@ -422,14 +420,14 @@
         request.pageToken = token
         return try await self.searchDataItems(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Lists SavedQueries in a Dataset.
     ///
     /// @Snippet(path: "DatasetService_ListSavedQueries")
     public func listSavedQueries(
-      request: ListSavedQueriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSavedQueriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListSavedQueriesResponse {
       try await self.inner.listSavedQueries(request: request, options: options)
     }
@@ -438,7 +436,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListSavedQueries")
     public func listSavedQueries(
-      byItem: ListSavedQueriesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSavedQueriesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SavedQuery, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListSavedQueriesResponse in
@@ -446,14 +444,14 @@
         request.pageToken = token
         return try await self.listSavedQueries(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Deletes a SavedQuery.
     ///
     /// @Snippet(path: "DatasetService_DeleteSavedQuery")
     public func deleteSavedQuery(
-      request: DeleteSavedQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSavedQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.deleteSavedQuery(request: request, options: options)
     }
@@ -462,21 +460,21 @@
     ///
     /// @Snippet(path: "DatasetService_DeleteSavedQuery")
     public func deleteSavedQuery(
-      withPolling: DeleteSavedQueryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+      withPolling: DeleteSavedQueryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let extractStatus = {
         (op: GoogleLongRunning.Operation) throws
-          -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+          -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         return try op._extractStatusEmpty()
       }
       let rawOp = try await self.deleteSavedQuery(request: withPolling, options: options)
       let initialState = try extractStatus(rawOp)
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
         let op = try await self.getOperation(
           request: .init().with { $0.name = rawOp.name }, options: options)
         return try extractStatus(op)
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: initialState,
         polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
         backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -488,7 +486,7 @@
     ///
     /// @Snippet(path: "DatasetService_GetAnnotationSpec")
     public func getAnnotationSpec(
-      request: GetAnnotationSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnnotationSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AnnotationSpec {
       try await self.inner.getAnnotationSpec(request: request, options: options)
     }
@@ -497,7 +495,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListAnnotations")
     public func listAnnotations(
-      request: ListAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAnnotationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListAnnotationsResponse {
       try await self.inner.listAnnotations(request: request, options: options)
     }
@@ -506,7 +504,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListAnnotations")
     public func listAnnotations(
-      byItem: ListAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAnnotationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Annotation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListAnnotationsResponse in
@@ -514,14 +512,14 @@
         request.pageToken = token
         return try await self.listAnnotations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Lists information about the supported locations for this service.
     ///
     /// @Snippet(path: "DatasetService_ListLocations")
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self.inner.listLocations(request: request, options: options)
     }
@@ -530,7 +528,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListLocations")
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
@@ -538,14 +536,14 @@
         request.pageToken = token
         return try await self.listLocations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Gets information about a location.
     ///
     /// @Snippet(path: "DatasetService_GetLocation")
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self.inner.getLocation(request: request, options: options)
     }
@@ -558,7 +556,7 @@
     ///
     /// @Snippet(path: "DatasetService_SetIamPolicy")
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.setIamPolicy(request: request, options: options)
     }
@@ -568,7 +566,7 @@
     ///
     /// @Snippet(path: "DatasetService_GetIamPolicy")
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
       try await self.inner.getIamPolicy(request: request, options: options)
     }
@@ -583,7 +581,7 @@
     ///
     /// @Snippet(path: "DatasetService_TestIamPermissions")
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
       try await self.inner.testIamPermissions(request: request, options: options)
     }
@@ -594,7 +592,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListOperations")
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self.inner.listOperations(request: request, options: options)
     }
@@ -605,7 +603,7 @@
     ///
     /// @Snippet(path: "DatasetService_ListOperations")
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -613,7 +611,7 @@
         request.pageToken = token
         return try await self.listOperations(request: request, options: options)
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -622,7 +620,7 @@
     ///
     /// @Snippet(path: "DatasetService_GetOperation")
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.getOperation(request: request, options: options)
     }
@@ -633,7 +631,7 @@
     ///
     /// @Snippet(path: "DatasetService_DeleteOperation")
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.deleteOperation(request: request, options: options)
     }
@@ -644,7 +642,7 @@
     ///
     /// @Snippet(path: "DatasetService_CancelOperation")
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self.inner.cancelOperation(request: request, options: options)
     }
@@ -655,7 +653,7 @@
     ///
     /// @Snippet(path: "DatasetService_WaitOperation")
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self.inner.waitOperation(request: request, options: options)
     }
@@ -672,14 +670,14 @@
       func createDataset(request: CreateDatasetRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.createDataset`.
-      func createDataset(withPolling: CreateDatasetRequest) async throws -> any GoogleCloudGax
+      func createDataset(withPolling: CreateDatasetRequest) async throws -> any GoogleGax
         .PollableOperation<Dataset>
 
       /// See `DatasetServiceClient.createDataset`.
       func createDataset(
         parent: Swift.String,
         dataset: Dataset?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Dataset>
+      ) async throws -> any GoogleGax.PollableOperation<Dataset>
 
       /// See `DatasetServiceClient.getDataset`.
       func getDataset(request: GetDatasetRequest) async throws -> GoogleCloudAIPlatformV1.Dataset
@@ -696,7 +694,7 @@
       /// See `DatasetServiceClient.updateDataset`.
       func updateDataset(
         dataset: Dataset?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudAIPlatformV1.Dataset
 
       /// See `DatasetServiceClient.listDatasets`.
@@ -717,39 +715,39 @@
       func deleteDataset(request: DeleteDatasetRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.deleteDataset`.
-      func deleteDataset(withPolling: DeleteDatasetRequest) async throws -> any GoogleCloudGax
+      func deleteDataset(withPolling: DeleteDatasetRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.deleteDataset`.
       func deleteDataset(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.importData`.
       func importData(request: ImportDataRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.importData`.
-      func importData(withPolling: ImportDataRequest) async throws -> any GoogleCloudGax
+      func importData(withPolling: ImportDataRequest) async throws -> any GoogleGax
         .PollableOperation<ImportDataResponse>
 
       /// See `DatasetServiceClient.importData`.
       func importData(
         name: Swift.String,
         importConfigs: [ImportDataConfig],
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataResponse>
+      ) async throws -> any GoogleGax.PollableOperation<ImportDataResponse>
 
       /// See `DatasetServiceClient.exportData`.
       func exportData(request: ExportDataRequest) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.exportData`.
-      func exportData(withPolling: ExportDataRequest) async throws -> any GoogleCloudGax
+      func exportData(withPolling: ExportDataRequest) async throws -> any GoogleGax
         .PollableOperation<ExportDataResponse>
 
       /// See `DatasetServiceClient.exportData`.
       func exportData(
         name: Swift.String,
         exportConfig: ExportDataConfig?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<ExportDataResponse>
+      ) async throws -> any GoogleGax.PollableOperation<ExportDataResponse>
 
       /// See `DatasetServiceClient.createDatasetVersion`.
       func createDatasetVersion(request: CreateDatasetVersionRequest) async throws
@@ -757,13 +755,13 @@
 
       /// See `DatasetServiceClient.createDatasetVersion`.
       func createDatasetVersion(withPolling: CreateDatasetVersionRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<DatasetVersion>
+        -> any GoogleGax.PollableOperation<DatasetVersion>
 
       /// See `DatasetServiceClient.createDatasetVersion`.
       func createDatasetVersion(
         parent: Swift.String,
         datasetVersion: DatasetVersion?,
-      ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion>
+      ) async throws -> any GoogleGax.PollableOperation<DatasetVersion>
 
       /// See `DatasetServiceClient.updateDatasetVersion`.
       func updateDatasetVersion(request: UpdateDatasetVersionRequest) async throws
@@ -772,7 +770,7 @@
       /// See `DatasetServiceClient.updateDatasetVersion`.
       func updateDatasetVersion(
         datasetVersion: DatasetVersion?,
-        updateMask: GoogleCloudWKT.FieldMask?,
+        updateMask: GoogleWKT.FieldMask?,
       ) async throws -> GoogleCloudAIPlatformV1.DatasetVersion
 
       /// See `DatasetServiceClient.deleteDatasetVersion`.
@@ -781,12 +779,12 @@
 
       /// See `DatasetServiceClient.deleteDatasetVersion`.
       func deleteDatasetVersion(withPolling: DeleteDatasetVersionRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.deleteDatasetVersion`.
       func deleteDatasetVersion(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.getDatasetVersion`.
       func getDatasetVersion(request: GetDatasetVersionRequest) async throws
@@ -817,12 +815,12 @@
 
       /// See `DatasetServiceClient.restoreDatasetVersion`.
       func restoreDatasetVersion(withPolling: RestoreDatasetVersionRequest) async throws
-        -> any GoogleCloudGax.PollableOperation<DatasetVersion>
+        -> any GoogleGax.PollableOperation<DatasetVersion>
 
       /// See `DatasetServiceClient.restoreDatasetVersion`.
       func restoreDatasetVersion(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion>
+      ) async throws -> any GoogleGax.PollableOperation<DatasetVersion>
 
       /// See `DatasetServiceClient.listDataItems`.
       func listDataItems(request: ListDataItemsRequest) async throws
@@ -866,13 +864,13 @@
         -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.deleteSavedQuery`.
-      func deleteSavedQuery(withPolling: DeleteSavedQueryRequest) async throws -> any GoogleCloudGax
+      func deleteSavedQuery(withPolling: DeleteSavedQueryRequest) async throws -> any GoogleGax
         .PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.deleteSavedQuery`.
       func deleteSavedQuery(
         name: Swift.String,
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.getAnnotationSpec`.
       func getAnnotationSpec(request: GetAnnotationSpecRequest) async throws
@@ -957,222 +955,222 @@
 
       /// See `DatasetServiceClient.createDataset`.
       func createDataset(
-        request: CreateDatasetRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDatasetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.createDataset`.
       func createDataset(
-        withPolling: CreateDatasetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Dataset>
+        withPolling: CreateDatasetRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Dataset>
 
       /// See `DatasetServiceClient.getDataset`.
       func getDataset(
-        request: GetDatasetRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDatasetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Dataset
 
       /// See `DatasetServiceClient.updateDataset`.
       func updateDataset(
-        request: UpdateDatasetRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateDatasetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.Dataset
 
       /// See `DatasetServiceClient.listDatasets`.
       func listDatasets(
-        request: ListDatasetsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDatasetsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListDatasetsResponse
 
       /// See `DatasetServiceClient.listDatasets`.
       func listDatasets(
-        byItem: ListDatasetsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListDatasetsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Dataset, Swift.Error>
 
       /// See `DatasetServiceClient.deleteDataset`.
       func deleteDataset(
-        request: DeleteDatasetRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDatasetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.deleteDataset`.
       func deleteDataset(
-        withPolling: DeleteDatasetRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteDatasetRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.importData`.
       func importData(
-        request: ImportDataRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportDataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.importData`.
       func importData(
-        withPolling: ImportDataRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataResponse>
+        withPolling: ImportDataRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ImportDataResponse>
 
       /// See `DatasetServiceClient.exportData`.
       func exportData(
-        request: ExportDataRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportDataRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.exportData`.
       func exportData(
-        withPolling: ExportDataRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<ExportDataResponse>
+        withPolling: ExportDataRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<ExportDataResponse>
 
       /// See `DatasetServiceClient.createDatasetVersion`.
       func createDatasetVersion(
-        request: CreateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreateDatasetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.createDatasetVersion`.
       func createDatasetVersion(
-        withPolling: CreateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion>
+        withPolling: CreateDatasetVersionRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<DatasetVersion>
 
       /// See `DatasetServiceClient.updateDatasetVersion`.
       func updateDatasetVersion(
-        request: UpdateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdateDatasetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DatasetVersion
 
       /// See `DatasetServiceClient.deleteDatasetVersion`.
       func deleteDatasetVersion(
-        request: DeleteDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteDatasetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.deleteDatasetVersion`.
       func deleteDatasetVersion(
-        withPolling: DeleteDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteDatasetVersionRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.getDatasetVersion`.
       func getDatasetVersion(
-        request: GetDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetDatasetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.DatasetVersion
 
       /// See `DatasetServiceClient.listDatasetVersions`.
       func listDatasetVersions(
-        request: ListDatasetVersionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDatasetVersionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListDatasetVersionsResponse
 
       /// See `DatasetServiceClient.listDatasetVersions`.
       func listDatasetVersions(
-        byItem: ListDatasetVersionsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListDatasetVersionsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<DatasetVersion, Swift.Error>
 
       /// See `DatasetServiceClient.restoreDatasetVersion`.
       func restoreDatasetVersion(
-        request: RestoreDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: RestoreDatasetVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.restoreDatasetVersion`.
       func restoreDatasetVersion(
-        withPolling: RestoreDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion>
+        withPolling: RestoreDatasetVersionRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<DatasetVersion>
 
       /// See `DatasetServiceClient.listDataItems`.
       func listDataItems(
-        request: ListDataItemsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListDataItemsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListDataItemsResponse
 
       /// See `DatasetServiceClient.listDataItems`.
       func listDataItems(
-        byItem: ListDataItemsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListDataItemsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<DataItem, Swift.Error>
 
       /// See `DatasetServiceClient.searchDataItems`.
       func searchDataItems(
-        request: SearchDataItemsRequest, options: GoogleCloudGax.RequestOptions
+        request: SearchDataItemsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.SearchDataItemsResponse
 
       /// See `DatasetServiceClient.searchDataItems`.
       func searchDataItems(
-        byItem: SearchDataItemsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: SearchDataItemsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<DataItemView, Swift.Error>
 
       /// See `DatasetServiceClient.listSavedQueries`.
       func listSavedQueries(
-        request: ListSavedQueriesRequest, options: GoogleCloudGax.RequestOptions
+        request: ListSavedQueriesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListSavedQueriesResponse
 
       /// See `DatasetServiceClient.listSavedQueries`.
       func listSavedQueries(
-        byItem: ListSavedQueriesRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListSavedQueriesRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<SavedQuery, Swift.Error>
 
       /// See `DatasetServiceClient.deleteSavedQuery`.
       func deleteSavedQuery(
-        request: DeleteSavedQueryRequest, options: GoogleCloudGax.RequestOptions
+        request: DeleteSavedQueryRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
 
       /// See `DatasetServiceClient.deleteSavedQuery`.
       func deleteSavedQuery(
-        withPolling: DeleteSavedQueryRequest, options: GoogleCloudGax.RequestOptions
-      ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+        withPolling: DeleteSavedQueryRequest, options: GoogleGax.RequestOptions
+      ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
       /// See `DatasetServiceClient.getAnnotationSpec`.
       func getAnnotationSpec(
-        request: GetAnnotationSpecRequest, options: GoogleCloudGax.RequestOptions
+        request: GetAnnotationSpecRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.AnnotationSpec
 
       /// See `DatasetServiceClient.listAnnotations`.
       func listAnnotations(
-        request: ListAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListAnnotationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudAIPlatformV1.ListAnnotationsResponse
 
       /// See `DatasetServiceClient.listAnnotations`.
       func listAnnotations(
-        byItem: ListAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: ListAnnotationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<Annotation, Swift.Error>
 
       /// See `DatasetServiceClient.listLocations`.
       func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse
 
       /// See `DatasetServiceClient.listLocations`.
       func listLocations(
-        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error>
 
       /// See `DatasetServiceClient.getLocation`.
       func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location
 
       /// See `DatasetServiceClient.setIamPolicy`.
       func setIamPolicy(
-        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `DatasetServiceClient.getIamPolicy`.
       func getIamPolicy(
-        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.Policy
 
       /// See `DatasetServiceClient.testIamPermissions`.
       func testIamPermissions(
-        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleIAMV1.TestIamPermissionsResponse
 
       /// See `DatasetServiceClient.listOperations`.
       func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse
 
       /// See `DatasetServiceClient.listOperations`.
       func listOperations(
-        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
       /// See `DatasetServiceClient.deleteOperation`.
       func deleteOperation(
-        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `DatasetServiceClient.cancelOperation`.
       func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws
 
       /// See `DatasetServiceClient.waitOperation`.
       func waitOperation(
-        request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation
     }
   }
@@ -1186,31 +1184,31 @@
     }
 
     public func createDataset(
-      request: CreateDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func createDataset(withPolling: CreateDatasetRequest) async throws -> any GoogleCloudGax
+    public func createDataset(withPolling: CreateDatasetRequest) async throws -> any GoogleGax
       .PollableOperation<Dataset>
     {
       try await self.createDataset(withPolling: withPolling, options: .init())
     }
 
     public func createDataset(
-      withPolling: CreateDatasetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Dataset> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Dataset>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateDatasetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Dataset> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Dataset>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createDataset(
       parent: Swift.String,
       dataset: Dataset?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Dataset> {
+    ) async throws -> any GoogleGax.PollableOperation<Dataset> {
       let request = CreateDatasetRequest().with {
         $0.parent = parent
         $0.dataset = dataset
@@ -1225,9 +1223,9 @@
     }
 
     public func getDataset(
-      request: GetDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Dataset {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getDataset(
@@ -1246,14 +1244,14 @@
     }
 
     public func updateDataset(
-      request: UpdateDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.Dataset {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateDataset(
       dataset: Dataset?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudAIPlatformV1.Dataset {
       let request = UpdateDatasetRequest().with {
         $0.dataset = dataset
@@ -1269,9 +1267,9 @@
     }
 
     public func listDatasets(
-      request: ListDatasetsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatasetsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDatasetsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listDatasets(
@@ -1281,13 +1279,13 @@
     }
 
     public func listDatasets(
-      byItem: ListDatasetsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDatasetsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Dataset, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListDatasetsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listDatasets(
@@ -1306,30 +1304,30 @@
     }
 
     public func deleteDataset(
-      request: DeleteDatasetRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDatasetRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteDataset(withPolling: DeleteDatasetRequest) async throws -> any GoogleCloudGax
+    public func deleteDataset(withPolling: DeleteDatasetRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
     {
       try await self.deleteDataset(withPolling: withPolling, options: .init())
     }
 
     public func deleteDataset(
-      withPolling: DeleteDatasetRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteDatasetRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteDataset(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteDatasetRequest().with {
         $0.name = name
       }
@@ -1341,32 +1339,31 @@
     }
 
     public func importData(
-      request: ImportDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func importData(withPolling: ImportDataRequest) async throws -> any GoogleCloudGax
+    public func importData(withPolling: ImportDataRequest) async throws -> any GoogleGax
       .PollableOperation<ImportDataResponse>
     {
       try await self.importData(withPolling: withPolling, options: .init())
     }
 
     public func importData(
-      withPolling: ImportDataRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataResponse> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ImportDataResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: ImportDataRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ImportDataResponse> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ImportDataResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func importData(
       name: Swift.String,
       importConfigs: [ImportDataConfig],
-    ) async throws -> any GoogleCloudGax.PollableOperation<ImportDataResponse> {
+    ) async throws -> any GoogleGax.PollableOperation<ImportDataResponse> {
       let request = ImportDataRequest().with {
         $0.name = name
         $0.importConfigs = importConfigs
@@ -1379,32 +1376,31 @@
     }
 
     public func exportData(
-      request: ExportDataRequest, options: GoogleCloudGax.RequestOptions
+      request: ExportDataRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func exportData(withPolling: ExportDataRequest) async throws -> any GoogleCloudGax
+    public func exportData(withPolling: ExportDataRequest) async throws -> any GoogleGax
       .PollableOperation<ExportDataResponse>
     {
       try await self.exportData(withPolling: withPolling, options: .init())
     }
 
     public func exportData(
-      withPolling: ExportDataRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportDataResponse> {
-      let poll = {
-        () async throws -> GoogleCloudGax._PollableOperationImpl<ExportDataResponse>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: ExportDataRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<ExportDataResponse> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<ExportDataResponse>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func exportData(
       name: Swift.String,
       exportConfig: ExportDataConfig?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<ExportDataResponse> {
+    ) async throws -> any GoogleGax.PollableOperation<ExportDataResponse> {
       let request = ExportDataRequest().with {
         $0.name = name
         $0.exportConfig = exportConfig
@@ -1419,31 +1415,31 @@
     }
 
     public func createDatasetVersion(
-      request: CreateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func createDatasetVersion(withPolling: CreateDatasetVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DatasetVersion>
+      -> any GoogleGax.PollableOperation<DatasetVersion>
     {
       try await self.createDatasetVersion(withPolling: withPolling, options: .init())
     }
 
     public func createDatasetVersion(
-      withPolling: CreateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DatasetVersion>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: CreateDatasetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DatasetVersion> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<DatasetVersion>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func createDatasetVersion(
       parent: Swift.String,
       datasetVersion: DatasetVersion?,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion> {
+    ) async throws -> any GoogleGax.PollableOperation<DatasetVersion> {
       let request = CreateDatasetVersionRequest().with {
         $0.parent = parent
         $0.datasetVersion = datasetVersion
@@ -1458,14 +1454,14 @@
     }
 
     public func updateDatasetVersion(
-      request: UpdateDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DatasetVersion {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func updateDatasetVersion(
       datasetVersion: DatasetVersion?,
-      updateMask: GoogleCloudWKT.FieldMask?,
+      updateMask: GoogleWKT.FieldMask?,
     ) async throws -> GoogleCloudAIPlatformV1.DatasetVersion {
       let request = UpdateDatasetVersionRequest().with {
         $0.datasetVersion = datasetVersion
@@ -1481,30 +1477,30 @@
     }
 
     public func deleteDatasetVersion(
-      request: DeleteDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteDatasetVersion(withPolling: DeleteDatasetVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
     {
       try await self.deleteDatasetVersion(withPolling: withPolling, options: .init())
     }
 
     public func deleteDatasetVersion(
-      withPolling: DeleteDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteDatasetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteDatasetVersion(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteDatasetVersionRequest().with {
         $0.name = name
       }
@@ -1518,9 +1514,9 @@
     }
 
     public func getDatasetVersion(
-      request: GetDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.DatasetVersion {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getDatasetVersion(
@@ -1539,9 +1535,9 @@
     }
 
     public func listDatasetVersions(
-      request: ListDatasetVersionsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDatasetVersionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDatasetVersionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listDatasetVersions(
@@ -1551,13 +1547,13 @@
     }
 
     public func listDatasetVersions(
-      byItem: ListDatasetVersionsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDatasetVersionsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DatasetVersion, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListDatasetVersionsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listDatasetVersions(
@@ -1576,30 +1572,30 @@
     }
 
     public func restoreDatasetVersion(
-      request: RestoreDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
+      request: RestoreDatasetVersionRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func restoreDatasetVersion(withPolling: RestoreDatasetVersionRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<DatasetVersion>
+      -> any GoogleGax.PollableOperation<DatasetVersion>
     {
       try await self.restoreDatasetVersion(withPolling: withPolling, options: .init())
     }
 
     public func restoreDatasetVersion(
-      withPolling: RestoreDatasetVersionRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<DatasetVersion>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: RestoreDatasetVersionRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<DatasetVersion> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<DatasetVersion>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func restoreDatasetVersion(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<DatasetVersion> {
+    ) async throws -> any GoogleGax.PollableOperation<DatasetVersion> {
       let request = RestoreDatasetVersionRequest().with {
         $0.name = name
       }
@@ -1613,9 +1609,9 @@
     }
 
     public func listDataItems(
-      request: ListDataItemsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataItemsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListDataItemsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listDataItems(
@@ -1625,13 +1621,13 @@
     }
 
     public func listDataItems(
-      byItem: ListDataItemsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListDataItemsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataItem, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListDataItemsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listDataItems(
@@ -1650,9 +1646,9 @@
     }
 
     public func searchDataItems(
-      request: SearchDataItemsRequest, options: GoogleCloudGax.RequestOptions
+      request: SearchDataItemsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.SearchDataItemsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func searchDataItems(
@@ -1662,13 +1658,13 @@
     }
 
     public func searchDataItems(
-      byItem: SearchDataItemsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: SearchDataItemsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<DataItemView, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.SearchDataItemsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listSavedQueries(request: ListSavedQueriesRequest) async throws
@@ -1678,9 +1674,9 @@
     }
 
     public func listSavedQueries(
-      request: ListSavedQueriesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSavedQueriesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListSavedQueriesResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listSavedQueries(
@@ -1690,13 +1686,13 @@
     }
 
     public func listSavedQueries(
-      byItem: ListSavedQueriesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSavedQueriesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SavedQuery, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListSavedQueriesResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listSavedQueries(
@@ -1715,30 +1711,30 @@
     }
 
     public func deleteSavedQuery(
-      request: DeleteSavedQueryRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteSavedQueryRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
-    public func deleteSavedQuery(withPolling: DeleteSavedQueryRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    public func deleteSavedQuery(withPolling: DeleteSavedQueryRequest) async throws -> any GoogleGax
+      .PollableOperation<Swift.Void>
     {
       try await self.deleteSavedQuery(withPolling: withPolling, options: .init())
     }
 
     public func deleteSavedQuery(
-      withPolling: DeleteSavedQueryRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-      let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-        throw GoogleCloudGax.RequestError.unimplemented
+      withPolling: DeleteSavedQueryRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+      let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax._PollableOperationImpl(
+      return GoogleGax._PollableOperationImpl(
         initialState: .init(done: false, result: nil), poll: poll)
     }
 
     public func deleteSavedQuery(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
       let request = DeleteSavedQueryRequest().with {
         $0.name = name
       }
@@ -1752,9 +1748,9 @@
     }
 
     public func getAnnotationSpec(
-      request: GetAnnotationSpecRequest, options: GoogleCloudGax.RequestOptions
+      request: GetAnnotationSpecRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.AnnotationSpec {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getAnnotationSpec(
@@ -1773,9 +1769,9 @@
     }
 
     public func listAnnotations(
-      request: ListAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListAnnotationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudAIPlatformV1.ListAnnotationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listAnnotations(
@@ -1785,13 +1781,13 @@
     }
 
     public func listAnnotations(
-      byItem: ListAnnotationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListAnnotationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Annotation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudAIPlatformV1.ListAnnotationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listAnnotations(
@@ -1810,9 +1806,9 @@
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listLocations(
@@ -1822,13 +1818,13 @@
     }
 
     public func listLocations(
-      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleCloudLocation.Location, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleCloudLocation.ListLocationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func getLocation(request: GoogleCloudLocation.GetLocationRequest) async throws
@@ -1838,9 +1834,9 @@
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func setIamPolicy(request: GoogleIAMV1.SetIamPolicyRequest) async throws
@@ -1850,9 +1846,9 @@
     }
 
     public func setIamPolicy(
-      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.SetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getIamPolicy(request: GoogleIAMV1.GetIamPolicyRequest) async throws
@@ -1862,9 +1858,9 @@
     }
 
     public func getIamPolicy(
-      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.GetIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.Policy {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func testIamPermissions(request: GoogleIAMV1.TestIamPermissionsRequest) async throws
@@ -1874,9 +1870,9 @@
     }
 
     public func testIamPermissions(
-      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleIAMV1.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleIAMV1.TestIamPermissionsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(request: GoogleLongRunning.ListOperationsRequest) async throws
@@ -1886,9 +1882,9 @@
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func listOperations(
@@ -1898,13 +1894,13 @@
     }
 
     public func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
       let listRpc = {
         (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-        throw GoogleCloudGax.RequestError.unimplemented
+        throw GoogleGax.RequestError.unimplemented
       }
-      return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+      return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
     }
 
     public func listOperations(
@@ -1925,9 +1921,9 @@
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func getOperation(
@@ -1944,9 +1940,9 @@
     }
 
     public func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func deleteOperation(
@@ -1963,9 +1959,9 @@
     }
 
     public func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
 
     public func cancelOperation(
@@ -1984,9 +1980,9 @@
     }
 
     public func waitOperation(
-      request: GoogleLongRunning.WaitOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.WaitOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
   }
 #endif

@@ -17,13 +17,13 @@
 import PackageDescription
 
 let package = Package(
-  name: "GoogleCloudWKT",
+  name: "GoogleWKT",
   platforms: [
     .macOS(.v15)
   ],
   products: [
-    .library(name: "GoogleCloudWKT", targets: ["GoogleCloudWKT"]),
-    .library(name: "GoogleCloudWKTConvert", targets: ["GoogleCloudWKTConvert"]),
+    .library(name: "GoogleWKT", targets: ["GoogleWKT"]),
+    .library(name: "GoogleWKTConvert", targets: ["GoogleWKTConvert"]),
   ],
   dependencies: [
     .package(url: "https://github.com/swift-extras/swift-extras-base64", from: "1.0.0"),
@@ -32,24 +32,24 @@ let package = Package(
 
   targets: [
     .target(
-      name: "GoogleCloudWKT",
+      name: "GoogleWKT",
       dependencies: [
         .product(name: "ExtrasBase64", package: "swift-extras-base64")
       ]
     ),
     .target(
-      name: "GoogleCloudWKTConvert",
+      name: "GoogleWKTConvert",
       dependencies: [
-        "GoogleCloudWKT",
+        "GoogleWKT",
         .product(name: "SwiftProtobuf", package: "swift-protobuf"),
       ]
     ),
 
     .testTarget(
-      name: "GoogleCloudWKTTests",
+      name: "GoogleWKTTests",
       dependencies: [
-        "GoogleCloudWKT",
-        "GoogleCloudWKTConvert",
+        "GoogleWKT",
+        "GoogleWKTConvert",
         .product(name: "SwiftProtobuf", package: "swift-protobuf"),
       ],
       path: "Tests"

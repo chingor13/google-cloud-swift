@@ -15,119 +15,119 @@
 // limitations under the License.
 
 import Foundation
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 extension Clients {
   protocol EnvironmentsStub: Sendable {
     func createEnvironment(
-      request: CreateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func getEnvironment(
-      request: GetEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.Environment
 
     func listEnvironments(
-      request: ListEnvironmentsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEnvironmentsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListEnvironmentsResponse
 
     func updateEnvironment(
-      request: UpdateEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteEnvironment(
-      request: DeleteEnvironmentRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteEnvironmentRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func executeAirflowCommand(
-      request: ExecuteAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+      request: ExecuteAirflowCommandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ExecuteAirflowCommandResponse
 
     func stopAirflowCommand(
-      request: StopAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+      request: StopAirflowCommandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.StopAirflowCommandResponse
 
     func pollAirflowCommand(
-      request: PollAirflowCommandRequest, options: GoogleCloudGax.RequestOptions
+      request: PollAirflowCommandRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.PollAirflowCommandResponse
 
     func listWorkloads(
-      request: ListWorkloadsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListWorkloadsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListWorkloadsResponse
 
     func checkUpgrade(
-      request: CheckUpgradeRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckUpgradeRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func createUserWorkloadsSecret(
-      request: CreateUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret
 
     func getUserWorkloadsSecret(
-      request: GetUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret
 
     func listUserWorkloadsSecrets(
-      request: ListUserWorkloadsSecretsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUserWorkloadsSecretsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsSecretsResponse
 
     func updateUserWorkloadsSecret(
-      request: UpdateUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsSecret
 
     func deleteUserWorkloadsSecret(
-      request: DeleteUserWorkloadsSecretRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUserWorkloadsSecretRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func createUserWorkloadsConfigMap(
-      request: CreateUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap
 
     func getUserWorkloadsConfigMap(
-      request: GetUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+      request: GetUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap
 
     func listUserWorkloadsConfigMaps(
-      request: ListUserWorkloadsConfigMapsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListUserWorkloadsConfigMapsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.ListUserWorkloadsConfigMapsResponse
 
     func updateUserWorkloadsConfigMap(
-      request: UpdateUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.UserWorkloadsConfigMap
 
     func deleteUserWorkloadsConfigMap(
-      request: DeleteUserWorkloadsConfigMapRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteUserWorkloadsConfigMapRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     func saveSnapshot(
-      request: SaveSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: SaveSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func loadSnapshot(
-      request: LoadSnapshotRequest, options: GoogleCloudGax.RequestOptions
+      request: LoadSnapshotRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func databaseFailover(
-      request: DatabaseFailoverRequest, options: GoogleCloudGax.RequestOptions
+      request: DatabaseFailoverRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func fetchDatabaseProperties(
-      request: FetchDatabasePropertiesRequest, options: GoogleCloudGax.RequestOptions
+      request: FetchDatabasePropertiesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudOrchestrationAirflowServiceV1.FetchDatabasePropertiesResponse
 
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }

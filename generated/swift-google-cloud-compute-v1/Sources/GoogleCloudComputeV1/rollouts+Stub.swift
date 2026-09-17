@@ -16,41 +16,41 @@
 
 #if Rollouts
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RolloutsStub: Sendable {
       func advance(
-        request: RolloutsClient.AdvanceRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.AdvanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func cancel(
-        request: RolloutsClient.CancelRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.CancelRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func delete(
-        request: RolloutsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RolloutsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Rollout
 
       func list(
-        request: RolloutsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RolloutsListResponse
 
       func pause(
-        request: RolloutsClient.PauseRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.PauseRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func resume(
-        request: RolloutsClient.ResumeRequest, options: GoogleCloudGax.RequestOptions
+        request: RolloutsClient.ResumeRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func getOperation(
-        request: GlobalOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: GlobalOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// CloudChannelService lets Google cloud resellers and distributors manage
 /// their customers, channel partners, entitlements, and reports.
@@ -51,11 +51,11 @@ import GoogleCloudGax
 /// @Snippet(path: "CloudChannelServiceQuickstart")
 public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtocol, Sendable {
   let inner: any Clients.CloudChannelServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `CloudChannelServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.CloudChannelServiceStub = try Clients.CloudChannelServiceTransport(
       options)
     inner = Clients.CloudChannelServiceRetry(inner, options: options)
@@ -83,7 +83,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListCustomers")
   public func listCustomers(
-    request: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCustomersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListCustomersResponse {
     try await self.inner.listCustomers(request: request, options: options)
   }
@@ -104,7 +104,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListCustomers")
   public func listCustomers(
-    byItem: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCustomersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Customer, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListCustomersResponse in
@@ -112,7 +112,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listCustomers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the requested [Customer][google.cloud.channel.v1.Customer]
@@ -133,7 +133,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_GetCustomer")
   public func getCustomer(
-    request: GetCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Customer {
     try await self.inner.getCustomer(request: request, options: options)
   }
@@ -162,7 +162,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CheckCloudIdentityAccountsExist")
   public func checkCloudIdentityAccountsExist(
-    request: CheckCloudIdentityAccountsExistRequest, options: GoogleCloudGax.RequestOptions
+    request: CheckCloudIdentityAccountsExistRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.CheckCloudIdentityAccountsExistResponse {
     try await self.inner.checkCloudIdentityAccountsExist(request: request, options: options)
   }
@@ -188,7 +188,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CreateCustomer")
   public func createCustomer(
-    request: CreateCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Customer {
     try await self.inner.createCustomer(request: request, options: options)
   }
@@ -211,7 +211,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_UpdateCustomer")
   public func updateCustomer(
-    request: UpdateCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Customer {
     try await self.inner.updateCustomer(request: request, options: options)
   }
@@ -231,7 +231,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_DeleteCustomer")
   public func deleteCustomer(
-    request: DeleteCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteCustomer(request: request, options: options)
   }
@@ -261,7 +261,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ImportCustomer")
   public func importCustomer(
-    request: ImportCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Customer {
     try await self.inner.importCustomer(request: request, options: options)
   }
@@ -295,7 +295,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ProvisionCloudIdentity")
   public func provisionCloudIdentity(
-    request: ProvisionCloudIdentityRequest, options: GoogleCloudGax.RequestOptions
+    request: ProvisionCloudIdentityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.provisionCloudIdentity(request: request, options: options)
   }
@@ -329,21 +329,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ProvisionCloudIdentity")
   public func provisionCloudIdentity(
-    withPolling: ProvisionCloudIdentityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Customer> {
+    withPolling: ProvisionCloudIdentityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Customer> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Customer>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Customer>.State
+      in
       return try op._extractStatus(Customer.self)
     }
     let rawOp = try await self.provisionCloudIdentity(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Customer>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Customer>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -367,7 +367,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListEntitlements")
   public func listEntitlements(
-    request: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEntitlementsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListEntitlementsResponse {
     try await self.inner.listEntitlements(request: request, options: options)
   }
@@ -388,7 +388,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListEntitlements")
   public func listEntitlements(
-    byItem: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEntitlementsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Entitlement, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListEntitlementsResponse in
@@ -396,7 +396,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listEntitlements(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// List [TransferableSku][google.cloud.channel.v1.TransferableSku]s of a
@@ -423,7 +423,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListTransferableSkus")
   public func listTransferableSkus(
-    request: ListTransferableSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTransferableSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListTransferableSkusResponse {
     try await self.inner.listTransferableSkus(request: request, options: options)
   }
@@ -452,7 +452,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListTransferableSkus")
   public func listTransferableSkus(
-    byItem: ListTransferableSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTransferableSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TransferableSku, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListTransferableSkusResponse in
@@ -460,7 +460,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listTransferableSkus(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// List [TransferableOffer][google.cloud.channel.v1.TransferableOffer]s of a
@@ -490,7 +490,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListTransferableOffers")
   public func listTransferableOffers(
-    request: ListTransferableOffersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTransferableOffersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListTransferableOffersResponse {
     try await self.inner.listTransferableOffers(request: request, options: options)
   }
@@ -522,7 +522,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListTransferableOffers")
   public func listTransferableOffers(
-    byItem: ListTransferableOffersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTransferableOffersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TransferableOffer, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListTransferableOffersResponse in
@@ -530,7 +530,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listTransferableOffers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the requested [Entitlement][google.cloud.channel.v1.Entitlement]
@@ -549,7 +549,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_GetEntitlement")
   public func getEntitlement(
-    request: GetEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Entitlement {
     try await self.inner.getEntitlement(request: request, options: options)
   }
@@ -598,7 +598,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CreateEntitlement")
   public func createEntitlement(
-    request: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.createEntitlement(request: request, options: options)
   }
@@ -647,21 +647,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CreateEntitlement")
   public func createEntitlement(
-    withPolling: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
+    withPolling: CreateEntitlementRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+        -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       return try op._extractStatus(Entitlement.self)
     }
     let rawOp = try await self.createEntitlement(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -697,7 +697,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ChangeParameters")
   public func changeParameters(
-    request: ChangeParametersRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangeParametersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.changeParameters(request: request, options: options)
   }
@@ -730,21 +730,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ChangeParameters")
   public func changeParameters(
-    withPolling: ChangeParametersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
+    withPolling: ChangeParametersRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+        -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       return try op._extractStatus(Entitlement.self)
     }
     let rawOp = try await self.changeParameters(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -780,7 +780,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ChangeRenewalSettings")
   public func changeRenewalSettings(
-    request: ChangeRenewalSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangeRenewalSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.changeRenewalSettings(request: request, options: options)
   }
@@ -813,21 +813,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ChangeRenewalSettings")
   public func changeRenewalSettings(
-    withPolling: ChangeRenewalSettingsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
+    withPolling: ChangeRenewalSettingsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+        -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       return try op._extractStatus(Entitlement.self)
     }
     let rawOp = try await self.changeRenewalSettings(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -861,7 +861,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ChangeOffer")
   public func changeOffer(
-    request: ChangeOfferRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangeOfferRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.changeOffer(request: request, options: options)
   }
@@ -892,21 +892,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ChangeOffer")
   public func changeOffer(
-    withPolling: ChangeOfferRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
+    withPolling: ChangeOfferRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+        -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       return try op._extractStatus(Entitlement.self)
     }
     let rawOp = try await self.changeOffer(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -943,7 +943,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_StartPaidService")
   public func startPaidService(
-    request: StartPaidServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: StartPaidServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.startPaidService(request: request, options: options)
   }
@@ -977,21 +977,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_StartPaidService")
   public func startPaidService(
-    withPolling: StartPaidServiceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
+    withPolling: StartPaidServiceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+        -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       return try op._extractStatus(Entitlement.self)
     }
     let rawOp = try await self.startPaidService(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1025,7 +1025,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_SuspendEntitlement")
   public func suspendEntitlement(
-    request: SuspendEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: SuspendEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.suspendEntitlement(request: request, options: options)
   }
@@ -1056,21 +1056,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_SuspendEntitlement")
   public func suspendEntitlement(
-    withPolling: SuspendEntitlementRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
+    withPolling: SuspendEntitlementRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+        -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       return try op._extractStatus(Entitlement.self)
     }
     let rawOp = try await self.suspendEntitlement(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1109,7 +1109,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CancelEntitlement")
   public func cancelEntitlement(
-    request: CancelEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.cancelEntitlement(request: request, options: options)
   }
@@ -1145,21 +1145,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CancelEntitlement")
   public func cancelEntitlement(
-    withPolling: CancelEntitlementRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: CancelEntitlementRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.cancelEntitlement(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1199,7 +1199,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ActivateEntitlement")
   public func activateEntitlement(
-    request: ActivateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: ActivateEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.activateEntitlement(request: request, options: options)
   }
@@ -1236,21 +1236,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ActivateEntitlement")
   public func activateEntitlement(
-    withPolling: ActivateEntitlementRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
+    withPolling: ActivateEntitlementRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+        -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       return try op._extractStatus(Entitlement.self)
     }
     let rawOp = try await self.activateEntitlement(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1295,7 +1295,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_TransferEntitlements")
   public func transferEntitlements(
-    request: TransferEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+    request: TransferEntitlementsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.transferEntitlements(request: request, options: options)
   }
@@ -1337,23 +1337,22 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_TransferEntitlements")
   public func transferEntitlements(
-    withPolling: TransferEntitlementsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TransferEntitlementsResponse> {
+    withPolling: TransferEntitlementsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TransferEntitlementsResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<TransferEntitlementsResponse>.State in
+        -> GoogleGax._PollableOperationImpl<TransferEntitlementsResponse>.State in
       return try op._extractStatus(TransferEntitlementsResponse.self)
     }
     let rawOp = try await self.transferEntitlements(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<TransferEntitlementsResponse>.State
-      in
+      () async throws -> GoogleGax._PollableOperationImpl<TransferEntitlementsResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1395,7 +1394,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_TransferEntitlementsToGoogle")
   public func transferEntitlementsToGoogle(
-    request: TransferEntitlementsToGoogleRequest, options: GoogleCloudGax.RequestOptions
+    request: TransferEntitlementsToGoogleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.transferEntitlementsToGoogle(request: request, options: options)
   }
@@ -1434,21 +1433,21 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_TransferEntitlementsToGoogle")
   public func transferEntitlementsToGoogle(
-    withPolling: TransferEntitlementsToGoogleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
+    withPolling: TransferEntitlementsToGoogleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
     let extractStatus = {
-      (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+      (op: GoogleLongRunning.Operation) throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State
+      in
       return try op._extractStatusEmpty()
     }
     let rawOp = try await self.transferEntitlementsToGoogle(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -1473,7 +1472,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListChannelPartnerLinks")
   public func listChannelPartnerLinks(
-    request: ListChannelPartnerLinksRequest, options: GoogleCloudGax.RequestOptions
+    request: ListChannelPartnerLinksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListChannelPartnerLinksResponse {
     try await self.inner.listChannelPartnerLinks(request: request, options: options)
   }
@@ -1495,7 +1494,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListChannelPartnerLinks")
   public func listChannelPartnerLinks(
-    byItem: ListChannelPartnerLinksRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListChannelPartnerLinksRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ChannelPartnerLink, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListChannelPartnerLinksResponse in
@@ -1503,7 +1502,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listChannelPartnerLinks(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the requested
@@ -1526,7 +1525,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_GetChannelPartnerLink")
   public func getChannelPartnerLink(
-    request: GetChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: GetChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
     try await self.inner.getChannelPartnerLink(request: request, options: options)
   }
@@ -1559,7 +1558,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CreateChannelPartnerLink")
   public func createChannelPartnerLink(
-    request: CreateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
     try await self.inner.createChannelPartnerLink(request: request, options: options)
   }
@@ -1591,7 +1590,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_UpdateChannelPartnerLink")
   public func updateChannelPartnerLink(
-    request: UpdateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
     try await self.inner.updateChannelPartnerLink(request: request, options: options)
   }
@@ -1618,7 +1617,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_GetCustomerRepricingConfig")
   public func getCustomerRepricingConfig(
-    request: GetCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
     try await self.inner.getCustomerRepricingConfig(request: request, options: options)
   }
@@ -1656,7 +1655,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListCustomerRepricingConfigs")
   public func listCustomerRepricingConfigs(
-    request: ListCustomerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCustomerRepricingConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListCustomerRepricingConfigsResponse {
     try await self.inner.listCustomerRepricingConfigs(request: request, options: options)
   }
@@ -1694,7 +1693,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListCustomerRepricingConfigs")
   public func listCustomerRepricingConfigs(
-    byItem: ListCustomerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCustomerRepricingConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CustomerRepricingConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1703,7 +1702,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listCustomerRepricingConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a CustomerRepricingConfig. Call this method to set modifications
@@ -1756,7 +1755,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CreateCustomerRepricingConfig")
   public func createCustomerRepricingConfig(
-    request: CreateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
     try await self.inner.createCustomerRepricingConfig(request: request, options: options)
   }
@@ -1800,7 +1799,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_UpdateCustomerRepricingConfig")
   public func updateCustomerRepricingConfig(
-    request: UpdateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
     try await self.inner.updateCustomerRepricingConfig(request: request, options: options)
   }
@@ -1828,7 +1827,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_DeleteCustomerRepricingConfig")
   public func deleteCustomerRepricingConfig(
-    request: DeleteCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteCustomerRepricingConfig(request: request, options: options)
   }
@@ -1855,7 +1854,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_GetChannelPartnerRepricingConfig")
   public func getChannelPartnerRepricingConfig(
-    request: GetChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
     try await self.inner.getChannelPartnerRepricingConfig(request: request, options: options)
   }
@@ -1891,7 +1890,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListChannelPartnerRepricingConfigs")
   public func listChannelPartnerRepricingConfigs(
-    request: ListChannelPartnerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListChannelPartnerRepricingConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListChannelPartnerRepricingConfigsResponse {
     try await self.inner.listChannelPartnerRepricingConfigs(request: request, options: options)
   }
@@ -1927,7 +1926,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListChannelPartnerRepricingConfigs")
   public func listChannelPartnerRepricingConfigs(
-    byItem: ListChannelPartnerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListChannelPartnerRepricingConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ChannelPartnerRepricingConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
@@ -1936,7 +1935,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listChannelPartnerRepricingConfigs(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Creates a ChannelPartnerRepricingConfig. Call this method to set
@@ -1990,7 +1989,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CreateChannelPartnerRepricingConfig")
   public func createChannelPartnerRepricingConfig(
-    request: CreateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
     try await self.inner.createChannelPartnerRepricingConfig(request: request, options: options)
   }
@@ -2034,7 +2033,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_UpdateChannelPartnerRepricingConfig")
   public func updateChannelPartnerRepricingConfig(
-    request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
     try await self.inner.updateChannelPartnerRepricingConfig(request: request, options: options)
   }
@@ -2062,7 +2061,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_DeleteChannelPartnerRepricingConfig")
   public func deleteChannelPartnerRepricingConfig(
-    request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteChannelPartnerRepricingConfig(request: request, options: options)
   }
@@ -2092,7 +2091,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListSkuGroups")
   public func listSkuGroups(
-    request: ListSkuGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSkuGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListSkuGroupsResponse {
     try await self.inner.listSkuGroups(request: request, options: options)
   }
@@ -2122,7 +2121,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListSkuGroups")
   public func listSkuGroups(
-    byItem: ListSkuGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSkuGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SkuGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListSkuGroupsResponse in
@@ -2130,7 +2129,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listSkuGroups(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the Billable SKUs in a given SKU group.
@@ -2159,7 +2158,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListSkuGroupBillableSkus")
   public func listSkuGroupBillableSkus(
-    request: ListSkuGroupBillableSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSkuGroupBillableSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListSkuGroupBillableSkusResponse {
     try await self.inner.listSkuGroupBillableSkus(request: request, options: options)
   }
@@ -2190,7 +2189,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListSkuGroupBillableSkus")
   public func listSkuGroupBillableSkus(
-    byItem: ListSkuGroupBillableSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSkuGroupBillableSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<BillableSku, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListSkuGroupBillableSkusResponse in
@@ -2198,7 +2197,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listSkuGroupBillableSkus(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Returns the requested [Offer][google.cloud.channel.v1.Offer] resource.
@@ -2216,7 +2215,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_LookupOffer")
   public func lookupOffer(
-    request: LookupOfferRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupOfferRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Offer {
     try await self.inner.lookupOffer(request: request, options: options)
   }
@@ -2229,7 +2228,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListProducts")
   public func listProducts(
-    request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListProductsResponse {
     try await self.inner.listProducts(request: request, options: options)
   }
@@ -2242,7 +2241,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListProducts")
   public func listProducts(
-    byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListProductsResponse in
@@ -2250,7 +2249,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listProducts(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the SKUs for a product the reseller is authorized to sell.
@@ -2261,7 +2260,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListSkus")
   public func listSkus(
-    request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListSkusResponse {
     try await self.inner.listSkus(request: request, options: options)
   }
@@ -2274,14 +2273,14 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListSkus")
   public func listSkus(
-    byItem: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Sku, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudChannelV1.ListSkusResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listSkus(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the Offers the reseller can sell.
@@ -2292,7 +2291,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListOffers")
   public func listOffers(
-    request: ListOffersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListOffersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListOffersResponse {
     try await self.inner.listOffers(request: request, options: options)
   }
@@ -2305,14 +2304,14 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListOffers")
   public func listOffers(
-    byItem: ListOffersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListOffersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Offer, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudChannelV1.ListOffersResponse in
       var request = byItem
       request.pageToken = token
       return try await self.listOffers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the following:
@@ -2327,7 +2326,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListPurchasableSkus")
   public func listPurchasableSkus(
-    request: ListPurchasableSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPurchasableSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListPurchasableSkusResponse {
     try await self.inner.listPurchasableSkus(request: request, options: options)
   }
@@ -2344,7 +2343,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListPurchasableSkus")
   public func listPurchasableSkus(
-    byItem: ListPurchasableSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPurchasableSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PurchasableSku, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListPurchasableSkusResponse in
@@ -2352,7 +2351,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listPurchasableSkus(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the following:
@@ -2370,7 +2369,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListPurchasableOffers")
   public func listPurchasableOffers(
-    request: ListPurchasableOffersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPurchasableOffersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListPurchasableOffersResponse {
     try await self.inner.listPurchasableOffers(request: request, options: options)
   }
@@ -2390,7 +2389,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListPurchasableOffers")
   public func listPurchasableOffers(
-    byItem: ListPurchasableOffersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPurchasableOffersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PurchasableOffer, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListPurchasableOffersResponse in
@@ -2398,7 +2397,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listPurchasableOffers(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Lists the billing accounts that are eligible to purchase particular SKUs
@@ -2416,7 +2415,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_QueryEligibleBillingAccounts")
   public func queryEligibleBillingAccounts(
-    request: QueryEligibleBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryEligibleBillingAccountsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.QueryEligibleBillingAccountsResponse {
     try await self.inner.queryEligibleBillingAccounts(request: request, options: options)
   }
@@ -2444,7 +2443,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_RegisterSubscriber")
   public func registerSubscriber(
-    request: RegisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+    request: RegisterSubscriberRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.RegisterSubscriberResponse {
     try await self.inner.registerSubscriber(request: request, options: options)
   }
@@ -2473,7 +2472,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_UnregisterSubscriber")
   public func unregisterSubscriber(
-    request: UnregisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+    request: UnregisterSubscriberRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.UnregisterSubscriberResponse {
     try await self.inner.unregisterSubscriber(request: request, options: options)
   }
@@ -2498,7 +2497,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListSubscribers")
   public func listSubscribers(
-    request: ListSubscribersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSubscribersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListSubscribersResponse {
     try await self.inner.listSubscribers(request: request, options: options)
   }
@@ -2524,7 +2523,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListEntitlementChanges")
   public func listEntitlementChanges(
-    request: ListEntitlementChangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEntitlementChangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListEntitlementChangesResponse {
     try await self.inner.listEntitlementChanges(request: request, options: options)
   }
@@ -2550,7 +2549,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListEntitlementChanges")
   public func listEntitlementChanges(
-    byItem: ListEntitlementChangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEntitlementChangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EntitlementChange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListEntitlementChangesResponse in
@@ -2558,7 +2557,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listEntitlementChanges(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -2567,7 +2566,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListOperations")
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
     try await self.inner.listOperations(request: request, options: options)
   }
@@ -2578,7 +2577,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_ListOperations")
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
@@ -2586,7 +2585,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
       request.pageToken = token
       return try await self.listOperations(request: request, options: options)
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   /// Provides the [Operations][google.longrunning.Operations] service functionality in this service.
@@ -2595,7 +2594,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -2606,7 +2605,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_DeleteOperation")
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.deleteOperation(request: request, options: options)
   }
@@ -2617,7 +2616,7 @@ public final class CloudChannelServiceClient: Clients.CloudChannelServiceProtoco
   ///
   /// @Snippet(path: "CloudChannelService_CancelOperation")
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
     try await self.inner.cancelOperation(request: request, options: options)
   }
@@ -2677,7 +2676,7 @@ extension Clients {
 
     /// See `CloudChannelServiceClient.provisionCloudIdentity`.
     func provisionCloudIdentity(withPolling: ProvisionCloudIdentityRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Customer>
+      -> any GoogleGax.PollableOperation<Customer>
 
     /// See `CloudChannelServiceClient.listEntitlements`.
     func listEntitlements(request: ListEntitlementsRequest) async throws
@@ -2715,7 +2714,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.createEntitlement`.
-    func createEntitlement(withPolling: CreateEntitlementRequest) async throws -> any GoogleCloudGax
+    func createEntitlement(withPolling: CreateEntitlementRequest) async throws -> any GoogleGax
       .PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.changeParameters`.
@@ -2723,7 +2722,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.changeParameters`.
-    func changeParameters(withPolling: ChangeParametersRequest) async throws -> any GoogleCloudGax
+    func changeParameters(withPolling: ChangeParametersRequest) async throws -> any GoogleGax
       .PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.changeRenewalSettings`.
@@ -2732,13 +2731,13 @@ extension Clients {
 
     /// See `CloudChannelServiceClient.changeRenewalSettings`.
     func changeRenewalSettings(withPolling: ChangeRenewalSettingsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Entitlement>
+      -> any GoogleGax.PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.changeOffer`.
     func changeOffer(request: ChangeOfferRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.changeOffer`.
-    func changeOffer(withPolling: ChangeOfferRequest) async throws -> any GoogleCloudGax
+    func changeOffer(withPolling: ChangeOfferRequest) async throws -> any GoogleGax
       .PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.startPaidService`.
@@ -2746,7 +2745,7 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.startPaidService`.
-    func startPaidService(withPolling: StartPaidServiceRequest) async throws -> any GoogleCloudGax
+    func startPaidService(withPolling: StartPaidServiceRequest) async throws -> any GoogleGax
       .PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.suspendEntitlement`.
@@ -2754,15 +2753,15 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.suspendEntitlement`.
-    func suspendEntitlement(withPolling: SuspendEntitlementRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Entitlement>
+    func suspendEntitlement(withPolling: SuspendEntitlementRequest) async throws -> any GoogleGax
+      .PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.cancelEntitlement`.
     func cancelEntitlement(request: CancelEntitlementRequest) async throws
       -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.cancelEntitlement`.
-    func cancelEntitlement(withPolling: CancelEntitlementRequest) async throws -> any GoogleCloudGax
+    func cancelEntitlement(withPolling: CancelEntitlementRequest) async throws -> any GoogleGax
       .PollableOperation<Swift.Void>
 
     /// See `CloudChannelServiceClient.activateEntitlement`.
@@ -2770,8 +2769,8 @@ extension Clients {
       -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.activateEntitlement`.
-    func activateEntitlement(withPolling: ActivateEntitlementRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Entitlement>
+    func activateEntitlement(withPolling: ActivateEntitlementRequest) async throws -> any GoogleGax
+      .PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.transferEntitlements`.
     func transferEntitlements(request: TransferEntitlementsRequest) async throws
@@ -2779,7 +2778,7 @@ extension Clients {
 
     /// See `CloudChannelServiceClient.transferEntitlements`.
     func transferEntitlements(withPolling: TransferEntitlementsRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<TransferEntitlementsResponse>
+      -> any GoogleGax.PollableOperation<TransferEntitlementsResponse>
 
     /// See `CloudChannelServiceClient.transferEntitlementsToGoogle`.
     func transferEntitlementsToGoogle(request: TransferEntitlementsToGoogleRequest) async throws
@@ -2787,7 +2786,7 @@ extension Clients {
 
     /// See `CloudChannelServiceClient.transferEntitlementsToGoogle`.
     func transferEntitlementsToGoogle(withPolling: TransferEntitlementsToGoogleRequest) async throws
-      -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CloudChannelServiceClient.listChannelPartnerLinks`.
     func listChannelPartnerLinks(request: ListChannelPartnerLinksRequest) async throws
@@ -3049,397 +3048,397 @@ extension Clients {
 
     /// See `CloudChannelServiceClient.listCustomers`.
     func listCustomers(
-      request: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListCustomersResponse
 
     /// See `CloudChannelServiceClient.listCustomers`.
     func listCustomers(
-      byItem: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCustomersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Customer, Swift.Error>
 
     /// See `CloudChannelServiceClient.getCustomer`.
     func getCustomer(
-      request: GetCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer
 
     /// See `CloudChannelServiceClient.checkCloudIdentityAccountsExist`.
     func checkCloudIdentityAccountsExist(
-      request: CheckCloudIdentityAccountsExistRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckCloudIdentityAccountsExistRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CheckCloudIdentityAccountsExistResponse
 
     /// See `CloudChannelServiceClient.createCustomer`.
     func createCustomer(
-      request: CreateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer
 
     /// See `CloudChannelServiceClient.updateCustomer`.
     func updateCustomer(
-      request: UpdateCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer
 
     /// See `CloudChannelServiceClient.deleteCustomer`.
     func deleteCustomer(
-      request: DeleteCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CloudChannelServiceClient.importCustomer`.
     func importCustomer(
-      request: ImportCustomerRequest, options: GoogleCloudGax.RequestOptions
+      request: ImportCustomerRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Customer
 
     /// See `CloudChannelServiceClient.provisionCloudIdentity`.
     func provisionCloudIdentity(
-      request: ProvisionCloudIdentityRequest, options: GoogleCloudGax.RequestOptions
+      request: ProvisionCloudIdentityRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.provisionCloudIdentity`.
     func provisionCloudIdentity(
-      withPolling: ProvisionCloudIdentityRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Customer>
+      withPolling: ProvisionCloudIdentityRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Customer>
 
     /// See `CloudChannelServiceClient.listEntitlements`.
     func listEntitlements(
-      request: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListEntitlementsResponse
 
     /// See `CloudChannelServiceClient.listEntitlements`.
     func listEntitlements(
-      byItem: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEntitlementsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Entitlement, Swift.Error>
 
     /// See `CloudChannelServiceClient.listTransferableSkus`.
     func listTransferableSkus(
-      request: ListTransferableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListTransferableSkusResponse
 
     /// See `CloudChannelServiceClient.listTransferableSkus`.
     func listTransferableSkus(
-      byItem: ListTransferableSkusRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTransferableSkusRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TransferableSku, Swift.Error>
 
     /// See `CloudChannelServiceClient.listTransferableOffers`.
     func listTransferableOffers(
-      request: ListTransferableOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferableOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListTransferableOffersResponse
 
     /// See `CloudChannelServiceClient.listTransferableOffers`.
     func listTransferableOffers(
-      byItem: ListTransferableOffersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListTransferableOffersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<TransferableOffer, Swift.Error>
 
     /// See `CloudChannelServiceClient.getEntitlement`.
     func getEntitlement(
-      request: GetEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: GetEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Entitlement
 
     /// See `CloudChannelServiceClient.createEntitlement`.
     func createEntitlement(
-      request: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.createEntitlement`.
     func createEntitlement(
-      withPolling: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement>
+      withPolling: CreateEntitlementRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.changeParameters`.
     func changeParameters(
-      request: ChangeParametersRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeParametersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.changeParameters`.
     func changeParameters(
-      withPolling: ChangeParametersRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement>
+      withPolling: ChangeParametersRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.changeRenewalSettings`.
     func changeRenewalSettings(
-      request: ChangeRenewalSettingsRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeRenewalSettingsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.changeRenewalSettings`.
     func changeRenewalSettings(
-      withPolling: ChangeRenewalSettingsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement>
+      withPolling: ChangeRenewalSettingsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.changeOffer`.
     func changeOffer(
-      request: ChangeOfferRequest, options: GoogleCloudGax.RequestOptions
+      request: ChangeOfferRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.changeOffer`.
     func changeOffer(
-      withPolling: ChangeOfferRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement>
+      withPolling: ChangeOfferRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.startPaidService`.
     func startPaidService(
-      request: StartPaidServiceRequest, options: GoogleCloudGax.RequestOptions
+      request: StartPaidServiceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.startPaidService`.
     func startPaidService(
-      withPolling: StartPaidServiceRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement>
+      withPolling: StartPaidServiceRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.suspendEntitlement`.
     func suspendEntitlement(
-      request: SuspendEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: SuspendEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.suspendEntitlement`.
     func suspendEntitlement(
-      withPolling: SuspendEntitlementRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement>
+      withPolling: SuspendEntitlementRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.cancelEntitlement`.
     func cancelEntitlement(
-      request: CancelEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: CancelEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.cancelEntitlement`.
     func cancelEntitlement(
-      withPolling: CancelEntitlementRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: CancelEntitlementRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CloudChannelServiceClient.activateEntitlement`.
     func activateEntitlement(
-      request: ActivateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+      request: ActivateEntitlementRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.activateEntitlement`.
     func activateEntitlement(
-      withPolling: ActivateEntitlementRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement>
+      withPolling: ActivateEntitlementRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Entitlement>
 
     /// See `CloudChannelServiceClient.transferEntitlements`.
     func transferEntitlements(
-      request: TransferEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+      request: TransferEntitlementsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.transferEntitlements`.
     func transferEntitlements(
-      withPolling: TransferEntitlementsRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<TransferEntitlementsResponse>
+      withPolling: TransferEntitlementsRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<TransferEntitlementsResponse>
 
     /// See `CloudChannelServiceClient.transferEntitlementsToGoogle`.
     func transferEntitlementsToGoogle(
-      request: TransferEntitlementsToGoogleRequest, options: GoogleCloudGax.RequestOptions
+      request: TransferEntitlementsToGoogleRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `CloudChannelServiceClient.transferEntitlementsToGoogle`.
     func transferEntitlementsToGoogle(
-      withPolling: TransferEntitlementsToGoogleRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+      withPolling: TransferEntitlementsToGoogleRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<Swift.Void>
 
     /// See `CloudChannelServiceClient.listChannelPartnerLinks`.
     func listChannelPartnerLinks(
-      request: ListChannelPartnerLinksRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelPartnerLinksRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListChannelPartnerLinksResponse
 
     /// See `CloudChannelServiceClient.listChannelPartnerLinks`.
     func listChannelPartnerLinks(
-      byItem: ListChannelPartnerLinksRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListChannelPartnerLinksRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ChannelPartnerLink, Swift.Error>
 
     /// See `CloudChannelServiceClient.getChannelPartnerLink`.
     func getChannelPartnerLink(
-      request: GetChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink
 
     /// See `CloudChannelServiceClient.createChannelPartnerLink`.
     func createChannelPartnerLink(
-      request: CreateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink
 
     /// See `CloudChannelServiceClient.updateChannelPartnerLink`.
     func updateChannelPartnerLink(
-      request: UpdateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink
 
     /// See `CloudChannelServiceClient.getCustomerRepricingConfig`.
     func getCustomerRepricingConfig(
-      request: GetCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig
 
     /// See `CloudChannelServiceClient.listCustomerRepricingConfigs`.
     func listCustomerRepricingConfigs(
-      request: ListCustomerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListCustomerRepricingConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListCustomerRepricingConfigsResponse
 
     /// See `CloudChannelServiceClient.listCustomerRepricingConfigs`.
     func listCustomerRepricingConfigs(
-      byItem: ListCustomerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListCustomerRepricingConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<CustomerRepricingConfig, Swift.Error>
 
     /// See `CloudChannelServiceClient.createCustomerRepricingConfig`.
     func createCustomerRepricingConfig(
-      request: CreateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig
 
     /// See `CloudChannelServiceClient.updateCustomerRepricingConfig`.
     func updateCustomerRepricingConfig(
-      request: UpdateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig
 
     /// See `CloudChannelServiceClient.deleteCustomerRepricingConfig`.
     func deleteCustomerRepricingConfig(
-      request: DeleteCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CloudChannelServiceClient.getChannelPartnerRepricingConfig`.
     func getChannelPartnerRepricingConfig(
-      request: GetChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
 
     /// See `CloudChannelServiceClient.listChannelPartnerRepricingConfigs`.
     func listChannelPartnerRepricingConfigs(
-      request: ListChannelPartnerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListChannelPartnerRepricingConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListChannelPartnerRepricingConfigsResponse
 
     /// See `CloudChannelServiceClient.listChannelPartnerRepricingConfigs`.
     func listChannelPartnerRepricingConfigs(
-      byItem: ListChannelPartnerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListChannelPartnerRepricingConfigsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<ChannelPartnerRepricingConfig, Swift.Error>
 
     /// See `CloudChannelServiceClient.createChannelPartnerRepricingConfig`.
     func createChannelPartnerRepricingConfig(
-      request: CreateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
 
     /// See `CloudChannelServiceClient.updateChannelPartnerRepricingConfig`.
     func updateChannelPartnerRepricingConfig(
-      request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig
 
     /// See `CloudChannelServiceClient.deleteChannelPartnerRepricingConfig`.
     func deleteChannelPartnerRepricingConfig(
-      request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CloudChannelServiceClient.listSkuGroups`.
     func listSkuGroups(
-      request: ListSkuGroupsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkuGroupsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkuGroupsResponse
 
     /// See `CloudChannelServiceClient.listSkuGroups`.
     func listSkuGroups(
-      byItem: ListSkuGroupsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSkuGroupsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<SkuGroup, Swift.Error>
 
     /// See `CloudChannelServiceClient.listSkuGroupBillableSkus`.
     func listSkuGroupBillableSkus(
-      request: ListSkuGroupBillableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkuGroupBillableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkuGroupBillableSkusResponse
 
     /// See `CloudChannelServiceClient.listSkuGroupBillableSkus`.
     func listSkuGroupBillableSkus(
-      byItem: ListSkuGroupBillableSkusRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSkuGroupBillableSkusRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<BillableSku, Swift.Error>
 
     /// See `CloudChannelServiceClient.lookupOffer`.
     func lookupOffer(
-      request: LookupOfferRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupOfferRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.Offer
 
     /// See `CloudChannelServiceClient.listProducts`.
     func listProducts(
-      request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListProductsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListProductsResponse
 
     /// See `CloudChannelServiceClient.listProducts`.
     func listProducts(
-      byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListProductsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Product, Swift.Error>
 
     /// See `CloudChannelServiceClient.listSkus`.
     func listSkus(
-      request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSkusResponse
 
     /// See `CloudChannelServiceClient.listSkus`.
     func listSkus(
-      byItem: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListSkusRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Sku, Swift.Error>
 
     /// See `CloudChannelServiceClient.listOffers`.
     func listOffers(
-      request: ListOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListOffersResponse
 
     /// See `CloudChannelServiceClient.listOffers`.
     func listOffers(
-      byItem: ListOffersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListOffersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<Offer, Swift.Error>
 
     /// See `CloudChannelServiceClient.listPurchasableSkus`.
     func listPurchasableSkus(
-      request: ListPurchasableSkusRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPurchasableSkusRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListPurchasableSkusResponse
 
     /// See `CloudChannelServiceClient.listPurchasableSkus`.
     func listPurchasableSkus(
-      byItem: ListPurchasableSkusRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPurchasableSkusRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PurchasableSku, Swift.Error>
 
     /// See `CloudChannelServiceClient.listPurchasableOffers`.
     func listPurchasableOffers(
-      request: ListPurchasableOffersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListPurchasableOffersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListPurchasableOffersResponse
 
     /// See `CloudChannelServiceClient.listPurchasableOffers`.
     func listPurchasableOffers(
-      byItem: ListPurchasableOffersRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListPurchasableOffersRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<PurchasableOffer, Swift.Error>
 
     /// See `CloudChannelServiceClient.queryEligibleBillingAccounts`.
     func queryEligibleBillingAccounts(
-      request: QueryEligibleBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+      request: QueryEligibleBillingAccountsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.QueryEligibleBillingAccountsResponse
 
     /// See `CloudChannelServiceClient.registerSubscriber`.
     func registerSubscriber(
-      request: RegisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+      request: RegisterSubscriberRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.RegisterSubscriberResponse
 
     /// See `CloudChannelServiceClient.unregisterSubscriber`.
     func unregisterSubscriber(
-      request: UnregisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+      request: UnregisterSubscriberRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.UnregisterSubscriberResponse
 
     /// See `CloudChannelServiceClient.listSubscribers`.
     func listSubscribers(
-      request: ListSubscribersRequest, options: GoogleCloudGax.RequestOptions
+      request: ListSubscribersRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListSubscribersResponse
 
     /// See `CloudChannelServiceClient.listEntitlementChanges`.
     func listEntitlementChanges(
-      request: ListEntitlementChangesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListEntitlementChangesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudChannelV1.ListEntitlementChangesResponse
 
     /// See `CloudChannelServiceClient.listEntitlementChanges`.
     func listEntitlementChanges(
-      byItem: ListEntitlementChangesRequest, options: GoogleCloudGax.RequestOptions
+      byItem: ListEntitlementChangesRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<EntitlementChange, Swift.Error>
 
     /// See `CloudChannelServiceClient.listOperations`.
     func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse
 
     /// See `CloudChannelServiceClient.listOperations`.
     func listOperations(
-      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error>
 
     /// See `CloudChannelServiceClient.deleteOperation`.
     func deleteOperation(
-      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
 
     /// See `CloudChannelServiceClient.cancelOperation`.
     func cancelOperation(
-      request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
     ) async throws
   }
 }
@@ -3453,9 +3452,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listCustomers(
-    request: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCustomersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListCustomersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCustomers(
@@ -3465,13 +3464,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listCustomers(
-    byItem: ListCustomersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCustomersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Customer, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListCustomersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getCustomer(request: GetCustomerRequest) async throws -> GoogleCloudChannelV1.Customer
@@ -3480,9 +3479,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func getCustomer(
-    request: GetCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Customer {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCustomer(
@@ -3501,9 +3500,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func checkCloudIdentityAccountsExist(
-    request: CheckCloudIdentityAccountsExistRequest, options: GoogleCloudGax.RequestOptions
+    request: CheckCloudIdentityAccountsExistRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.CheckCloudIdentityAccountsExistResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCustomer(request: CreateCustomerRequest) async throws
@@ -3513,9 +3512,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func createCustomer(
-    request: CreateCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Customer {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCustomer(request: UpdateCustomerRequest) async throws
@@ -3525,9 +3524,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func updateCustomer(
-    request: UpdateCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Customer {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCustomer(request: DeleteCustomerRequest) async throws {
@@ -3535,9 +3534,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func deleteCustomer(
-    request: DeleteCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCustomer(
@@ -3556,9 +3555,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func importCustomer(
-    request: ImportCustomerRequest, options: GoogleCloudGax.RequestOptions
+    request: ImportCustomerRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Customer {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func provisionCloudIdentity(request: ProvisionCloudIdentityRequest) async throws
@@ -3568,24 +3567,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func provisionCloudIdentity(
-    request: ProvisionCloudIdentityRequest, options: GoogleCloudGax.RequestOptions
+    request: ProvisionCloudIdentityRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func provisionCloudIdentity(withPolling: ProvisionCloudIdentityRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Customer>
+    -> any GoogleGax.PollableOperation<Customer>
   {
     try await self.provisionCloudIdentity(withPolling: withPolling, options: .init())
   }
 
   public func provisionCloudIdentity(
-    withPolling: ProvisionCloudIdentityRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Customer> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Customer>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ProvisionCloudIdentityRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Customer> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Customer>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3596,9 +3595,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listEntitlements(
-    request: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEntitlementsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListEntitlementsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEntitlements(
@@ -3608,13 +3607,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listEntitlements(
-    byItem: ListEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEntitlementsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Entitlement, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListEntitlementsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTransferableSkus(request: ListTransferableSkusRequest) async throws
@@ -3624,9 +3623,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listTransferableSkus(
-    request: ListTransferableSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTransferableSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListTransferableSkusResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTransferableSkus(
@@ -3636,13 +3635,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listTransferableSkus(
-    byItem: ListTransferableSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTransferableSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TransferableSku, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListTransferableSkusResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listTransferableOffers(request: ListTransferableOffersRequest) async throws
@@ -3652,9 +3651,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listTransferableOffers(
-    request: ListTransferableOffersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListTransferableOffersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListTransferableOffersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listTransferableOffers(
@@ -3664,13 +3663,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listTransferableOffers(
-    byItem: ListTransferableOffersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListTransferableOffersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<TransferableOffer, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListTransferableOffersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getEntitlement(request: GetEntitlementRequest) async throws
@@ -3680,9 +3679,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func getEntitlement(
-    request: GetEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: GetEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Entitlement {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createEntitlement(request: CreateEntitlementRequest) async throws
@@ -3692,24 +3691,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func createEntitlement(
-    request: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func createEntitlement(withPolling: CreateEntitlementRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Entitlement>
+  public func createEntitlement(withPolling: CreateEntitlementRequest) async throws -> any GoogleGax
+    .PollableOperation<Entitlement>
   {
     try await self.createEntitlement(withPolling: withPolling, options: .init())
   }
 
   public func createEntitlement(
-    withPolling: CreateEntitlementRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CreateEntitlementRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3720,24 +3719,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func changeParameters(
-    request: ChangeParametersRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangeParametersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func changeParameters(withPolling: ChangeParametersRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Entitlement>
+  public func changeParameters(withPolling: ChangeParametersRequest) async throws -> any GoogleGax
+    .PollableOperation<Entitlement>
   {
     try await self.changeParameters(withPolling: withPolling, options: .init())
   }
 
   public func changeParameters(
-    withPolling: ChangeParametersRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ChangeParametersRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3748,24 +3747,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func changeRenewalSettings(
-    request: ChangeRenewalSettingsRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangeRenewalSettingsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func changeRenewalSettings(withPolling: ChangeRenewalSettingsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Entitlement>
+    -> any GoogleGax.PollableOperation<Entitlement>
   {
     try await self.changeRenewalSettings(withPolling: withPolling, options: .init())
   }
 
   public func changeRenewalSettings(
-    withPolling: ChangeRenewalSettingsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ChangeRenewalSettingsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3774,24 +3773,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func changeOffer(
-    request: ChangeOfferRequest, options: GoogleCloudGax.RequestOptions
+    request: ChangeOfferRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func changeOffer(withPolling: ChangeOfferRequest) async throws -> any GoogleCloudGax
+  public func changeOffer(withPolling: ChangeOfferRequest) async throws -> any GoogleGax
     .PollableOperation<Entitlement>
   {
     try await self.changeOffer(withPolling: withPolling, options: .init())
   }
 
   public func changeOffer(
-    withPolling: ChangeOfferRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ChangeOfferRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3802,24 +3801,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func startPaidService(
-    request: StartPaidServiceRequest, options: GoogleCloudGax.RequestOptions
+    request: StartPaidServiceRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func startPaidService(withPolling: StartPaidServiceRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Entitlement>
+  public func startPaidService(withPolling: StartPaidServiceRequest) async throws -> any GoogleGax
+    .PollableOperation<Entitlement>
   {
     try await self.startPaidService(withPolling: withPolling, options: .init())
   }
 
   public func startPaidService(
-    withPolling: StartPaidServiceRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: StartPaidServiceRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3830,24 +3829,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func suspendEntitlement(
-    request: SuspendEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: SuspendEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func suspendEntitlement(withPolling: SuspendEntitlementRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Entitlement>
+    -> any GoogleGax.PollableOperation<Entitlement>
   {
     try await self.suspendEntitlement(withPolling: withPolling, options: .init())
   }
 
   public func suspendEntitlement(
-    withPolling: SuspendEntitlementRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: SuspendEntitlementRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3858,24 +3857,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func cancelEntitlement(
-    request: CancelEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: CancelEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func cancelEntitlement(withPolling: CancelEntitlementRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Swift.Void>
+  public func cancelEntitlement(withPolling: CancelEntitlementRequest) async throws -> any GoogleGax
+    .PollableOperation<Swift.Void>
   {
     try await self.cancelEntitlement(withPolling: withPolling, options: .init())
   }
 
   public func cancelEntitlement(
-    withPolling: CancelEntitlementRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: CancelEntitlementRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3886,24 +3885,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func activateEntitlement(
-    request: ActivateEntitlementRequest, options: GoogleCloudGax.RequestOptions
+    request: ActivateEntitlementRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func activateEntitlement(withPolling: ActivateEntitlementRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<Entitlement>
+    -> any GoogleGax.PollableOperation<Entitlement>
   {
     try await self.activateEntitlement(withPolling: withPolling, options: .init())
   }
 
   public func activateEntitlement(
-    withPolling: ActivateEntitlementRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Entitlement> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Entitlement>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: ActivateEntitlementRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Entitlement> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Entitlement>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3914,26 +3913,25 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func transferEntitlements(
-    request: TransferEntitlementsRequest, options: GoogleCloudGax.RequestOptions
+    request: TransferEntitlementsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func transferEntitlements(withPolling: TransferEntitlementsRequest) async throws
-    -> any GoogleCloudGax.PollableOperation<TransferEntitlementsResponse>
+    -> any GoogleGax.PollableOperation<TransferEntitlementsResponse>
   {
     try await self.transferEntitlements(withPolling: withPolling, options: .init())
   }
 
   public func transferEntitlements(
-    withPolling: TransferEntitlementsRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<TransferEntitlementsResponse> {
+    withPolling: TransferEntitlementsRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<TransferEntitlementsResponse> {
     let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<TransferEntitlementsResponse>.State
-      in
-      throw GoogleCloudGax.RequestError.unimplemented
+      () async throws -> GoogleGax._PollableOperationImpl<TransferEntitlementsResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3944,24 +3942,24 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func transferEntitlementsToGoogle(
-    request: TransferEntitlementsToGoogleRequest, options: GoogleCloudGax.RequestOptions
+    request: TransferEntitlementsToGoogleRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func transferEntitlementsToGoogle(withPolling: TransferEntitlementsToGoogleRequest)
-    async throws -> any GoogleCloudGax.PollableOperation<Swift.Void>
+    async throws -> any GoogleGax.PollableOperation<Swift.Void>
   {
     try await self.transferEntitlementsToGoogle(withPolling: withPolling, options: .init())
   }
 
   public func transferEntitlementsToGoogle(
-    withPolling: TransferEntitlementsToGoogleRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<Swift.Void> {
-    let poll = { () async throws -> GoogleCloudGax._PollableOperationImpl<Swift.Void>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: TransferEntitlementsToGoogleRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<Swift.Void> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<Swift.Void>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
@@ -3972,9 +3970,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listChannelPartnerLinks(
-    request: ListChannelPartnerLinksRequest, options: GoogleCloudGax.RequestOptions
+    request: ListChannelPartnerLinksRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListChannelPartnerLinksResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listChannelPartnerLinks(
@@ -3984,13 +3982,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listChannelPartnerLinks(
-    byItem: ListChannelPartnerLinksRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListChannelPartnerLinksRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ChannelPartnerLink, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListChannelPartnerLinksResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func getChannelPartnerLink(request: GetChannelPartnerLinkRequest) async throws
@@ -4000,9 +3998,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func getChannelPartnerLink(
-    request: GetChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: GetChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createChannelPartnerLink(request: CreateChannelPartnerLinkRequest) async throws
@@ -4012,9 +4010,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func createChannelPartnerLink(
-    request: CreateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateChannelPartnerLink(request: UpdateChannelPartnerLinkRequest) async throws
@@ -4024,9 +4022,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func updateChannelPartnerLink(
-    request: UpdateChannelPartnerLinkRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateChannelPartnerLinkRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerLink {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCustomerRepricingConfig(request: GetCustomerRepricingConfigRequest) async throws
@@ -4036,9 +4034,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func getCustomerRepricingConfig(
-    request: GetCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getCustomerRepricingConfig(
@@ -4057,9 +4055,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listCustomerRepricingConfigs(
-    request: ListCustomerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListCustomerRepricingConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListCustomerRepricingConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listCustomerRepricingConfigs(
@@ -4069,14 +4067,14 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listCustomerRepricingConfigs(
-    byItem: ListCustomerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListCustomerRepricingConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<CustomerRepricingConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudChannelV1.ListCustomerRepricingConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listCustomerRepricingConfigs(
@@ -4095,9 +4093,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func createCustomerRepricingConfig(
-    request: CreateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createCustomerRepricingConfig(
@@ -4118,9 +4116,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func updateCustomerRepricingConfig(
-    request: UpdateCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.CustomerRepricingConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateCustomerRepricingConfig(
@@ -4139,9 +4137,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func deleteCustomerRepricingConfig(
-    request: DeleteCustomerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteCustomerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteCustomerRepricingConfig(
@@ -4160,9 +4158,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func getChannelPartnerRepricingConfig(
-    request: GetChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: GetChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getChannelPartnerRepricingConfig(
@@ -4181,9 +4179,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listChannelPartnerRepricingConfigs(
-    request: ListChannelPartnerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListChannelPartnerRepricingConfigsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListChannelPartnerRepricingConfigsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listChannelPartnerRepricingConfigs(
@@ -4193,14 +4191,14 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listChannelPartnerRepricingConfigs(
-    byItem: ListChannelPartnerRepricingConfigsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListChannelPartnerRepricingConfigsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<ChannelPartnerRepricingConfig, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws
         -> GoogleCloudChannelV1.ListChannelPartnerRepricingConfigsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listChannelPartnerRepricingConfigs(
@@ -4219,9 +4217,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func createChannelPartnerRepricingConfig(
-    request: CreateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: CreateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func createChannelPartnerRepricingConfig(
@@ -4242,9 +4240,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func updateChannelPartnerRepricingConfig(
-    request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: UpdateChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ChannelPartnerRepricingConfig {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func updateChannelPartnerRepricingConfig(
@@ -4263,9 +4261,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func deleteChannelPartnerRepricingConfig(
-    request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleCloudGax.RequestOptions
+    request: DeleteChannelPartnerRepricingConfigRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteChannelPartnerRepricingConfig(
@@ -4284,9 +4282,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listSkuGroups(
-    request: ListSkuGroupsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSkuGroupsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListSkuGroupsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSkuGroups(
@@ -4296,13 +4294,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listSkuGroups(
-    byItem: ListSkuGroupsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSkuGroupsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<SkuGroup, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListSkuGroupsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSkuGroups(
@@ -4321,9 +4319,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listSkuGroupBillableSkus(
-    request: ListSkuGroupBillableSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSkuGroupBillableSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListSkuGroupBillableSkusResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSkuGroupBillableSkus(
@@ -4333,13 +4331,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listSkuGroupBillableSkus(
-    byItem: ListSkuGroupBillableSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSkuGroupBillableSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<BillableSku, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListSkuGroupBillableSkusResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSkuGroupBillableSkus(
@@ -4356,9 +4354,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func lookupOffer(
-    request: LookupOfferRequest, options: GoogleCloudGax.RequestOptions
+    request: LookupOfferRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.Offer {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProducts(request: ListProductsRequest) async throws
@@ -4368,9 +4366,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listProducts(
-    request: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    request: ListProductsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListProductsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listProducts(
@@ -4380,13 +4378,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listProducts(
-    byItem: ListProductsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListProductsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Product, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListProductsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listSkus(request: ListSkusRequest) async throws
@@ -4396,9 +4394,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listSkus(
-    request: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListSkusResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSkus(
@@ -4408,12 +4406,12 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listSkus(
-    byItem: ListSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Sku, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudChannelV1.ListSkusResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOffers(request: ListOffersRequest) async throws
@@ -4423,9 +4421,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listOffers(
-    request: ListOffersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListOffersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListOffersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOffers(
@@ -4435,12 +4433,12 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listOffers(
-    byItem: ListOffersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListOffersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<Offer, Swift.Error> {
     let listRpc = { (token: Swift.String) async throws -> GoogleCloudChannelV1.ListOffersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPurchasableSkus(request: ListPurchasableSkusRequest) async throws
@@ -4450,9 +4448,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listPurchasableSkus(
-    request: ListPurchasableSkusRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPurchasableSkusRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListPurchasableSkusResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPurchasableSkus(
@@ -4462,13 +4460,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listPurchasableSkus(
-    byItem: ListPurchasableSkusRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPurchasableSkusRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PurchasableSku, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListPurchasableSkusResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listPurchasableOffers(request: ListPurchasableOffersRequest) async throws
@@ -4478,9 +4476,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listPurchasableOffers(
-    request: ListPurchasableOffersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListPurchasableOffersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListPurchasableOffersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listPurchasableOffers(
@@ -4490,13 +4488,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listPurchasableOffers(
-    byItem: ListPurchasableOffersRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListPurchasableOffersRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<PurchasableOffer, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListPurchasableOffersResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func queryEligibleBillingAccounts(request: QueryEligibleBillingAccountsRequest)
@@ -4506,9 +4504,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func queryEligibleBillingAccounts(
-    request: QueryEligibleBillingAccountsRequest, options: GoogleCloudGax.RequestOptions
+    request: QueryEligibleBillingAccountsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.QueryEligibleBillingAccountsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func registerSubscriber(request: RegisterSubscriberRequest) async throws
@@ -4518,9 +4516,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func registerSubscriber(
-    request: RegisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+    request: RegisterSubscriberRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.RegisterSubscriberResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func unregisterSubscriber(request: UnregisterSubscriberRequest) async throws
@@ -4530,9 +4528,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func unregisterSubscriber(
-    request: UnregisterSubscriberRequest, options: GoogleCloudGax.RequestOptions
+    request: UnregisterSubscriberRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.UnregisterSubscriberResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listSubscribers(request: ListSubscribersRequest) async throws
@@ -4542,9 +4540,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listSubscribers(
-    request: ListSubscribersRequest, options: GoogleCloudGax.RequestOptions
+    request: ListSubscribersRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListSubscribersResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEntitlementChanges(request: ListEntitlementChangesRequest) async throws
@@ -4554,9 +4552,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listEntitlementChanges(
-    request: ListEntitlementChangesRequest, options: GoogleCloudGax.RequestOptions
+    request: ListEntitlementChangesRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudChannelV1.ListEntitlementChangesResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listEntitlementChanges(
@@ -4566,13 +4564,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listEntitlementChanges(
-    byItem: ListEntitlementChangesRequest, options: GoogleCloudGax.RequestOptions
+    byItem: ListEntitlementChangesRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<EntitlementChange, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleCloudChannelV1.ListEntitlementChangesResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listEntitlementChanges(
@@ -4591,9 +4589,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listOperations(
-    request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.ListOperationsResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func listOperations(
@@ -4603,13 +4601,13 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func listOperations(
-    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+    byItem: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
   ) throws -> any AsyncSequence<GoogleLongRunning.Operation, Swift.Error> {
     let listRpc = {
       (token: Swift.String) async throws -> GoogleLongRunning.ListOperationsResponse in
-      throw GoogleCloudGax.RequestError.unimplemented
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax.PaginatedResponseSequence(listRpc: listRpc)
+    return GoogleGax.PaginatedResponseSequence(listRpc: listRpc)
   }
 
   public func listOperations(
@@ -4630,9 +4628,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(
@@ -4649,9 +4647,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func deleteOperation(
-    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.DeleteOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func deleteOperation(
@@ -4668,9 +4666,9 @@ extension Clients.CloudChannelServiceProtocol {
   }
 
   public func cancelOperation(
-    request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
   ) async throws {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func cancelOperation(

@@ -16,65 +16,65 @@
 
 #if TargetPools
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol TargetPoolsStub: Sendable {
       func addHealthCheck(
-        request: TargetPoolsClient.AddHealthCheckRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AddHealthCheckRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func addInstance(
-        request: TargetPoolsClient.AddInstanceRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AddInstanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func aggregatedList(
-        request: TargetPoolsClient.AggregatedListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.AggregatedListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolAggregatedList
 
       func delete(
-        request: TargetPoolsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: TargetPoolsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPool
 
       func getHealth(
-        request: TargetPoolsClient.GetHealthRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.GetHealthRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolInstanceHealth
 
       func insert(
-        request: TargetPoolsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: TargetPoolsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TargetPoolList
 
       func removeHealthCheck(
-        request: TargetPoolsClient.RemoveHealthCheckRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.RemoveHealthCheckRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func removeInstance(
-        request: TargetPoolsClient.RemoveInstanceRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.RemoveInstanceRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setBackup(
-        request: TargetPoolsClient.SetBackupRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.SetBackupRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func setSecurityPolicy(
-        request: TargetPoolsClient.SetSecurityPolicyRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.SetSecurityPolicyRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
-        request: TargetPoolsClient.TestIamPermissionsRequest, options: GoogleCloudGax.RequestOptions
+        request: TargetPoolsClient.TestIamPermissionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

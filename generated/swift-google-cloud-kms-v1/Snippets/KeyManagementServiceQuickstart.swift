@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudKMSV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(parent: String, ) async throws {
   let client = try GoogleCloudKMSV1.KeyManagementServiceClient()

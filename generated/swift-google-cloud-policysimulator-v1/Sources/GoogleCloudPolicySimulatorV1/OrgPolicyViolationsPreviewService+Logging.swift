@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func listOrgPolicyViolationsPreviews(
-      request: ListOrgPolicyViolationsPreviewsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrgPolicyViolationsPreviewsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicySimulatorV1.ListOrgPolicyViolationsPreviewsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOrgPolicyViolationsPreviews",
         action: {
-          (r: ListOrgPolicyViolationsPreviewsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListOrgPolicyViolationsPreviewsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudPolicySimulatorV1.ListOrgPolicyViolationsPreviewsResponse
           in
           return try await self.inner.listOrgPolicyViolationsPreviews(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func getOrgPolicyViolationsPreview(
-      request: GetOrgPolicyViolationsPreviewRequest, options: GoogleCloudGax.RequestOptions
+      request: GetOrgPolicyViolationsPreviewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicySimulatorV1.OrgPolicyViolationsPreview {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOrgPolicyViolationsPreview",
         action: {
-          (r: GetOrgPolicyViolationsPreviewRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetOrgPolicyViolationsPreviewRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudPolicySimulatorV1.OrgPolicyViolationsPreview
           in
           return try await self.inner.getOrgPolicyViolationsPreview(request: r, options: o)
@@ -89,29 +89,29 @@ extension Clients {
     }
 
     public func createOrgPolicyViolationsPreview(
-      request: CreateOrgPolicyViolationsPreviewRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateOrgPolicyViolationsPreviewRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createOrgPolicyViolationsPreview",
         action: {
-          (r: CreateOrgPolicyViolationsPreviewRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.Operation
+          (r: CreateOrgPolicyViolationsPreviewRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.Operation
           in
           return try await self.inner.createOrgPolicyViolationsPreview(request: r, options: o)
         })
     }
 
     public func listOrgPolicyViolations(
-      request: ListOrgPolicyViolationsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListOrgPolicyViolationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicySimulatorV1.ListOrgPolicyViolationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOrgPolicyViolations",
         action: {
-          (r: ListOrgPolicyViolationsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListOrgPolicyViolationsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudPolicySimulatorV1.ListOrgPolicyViolationsResponse
           in
           return try await self.inner.listOrgPolicyViolations(request: r, options: o)
@@ -119,29 +119,29 @@ extension Clients {
     }
 
     public func listOperations(
-      request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.ListOperationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listOperations",
         action: {
-          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleLongRunning.ListOperationsResponse
+          (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleLongRunning.ListOperationsResponse
           in
           return try await self.inner.listOperations(request: r, options: o)
         })
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

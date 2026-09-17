@@ -18,9 +18,9 @@
 // snippet.show
 import Foundation
 import GoogleCloudCommerceConsumerProcurementV1
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(client: ConsumerProcurementServiceClient, parent: String) async throws {
   let items = try client.listOrders(

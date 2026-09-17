@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// ApprovalResult describes the decision and associated metadata of a manual
 /// approval of a build.
-public struct ApprovalResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct ApprovalResult: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Output only. Email of the user that called the ApproveBuild API to
@@ -27,7 +27,7 @@ public struct ApprovalResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var approverAccount: Swift.String = Swift.String()
 
   /// Output only. The time when the approval decision was made.
-  public var approvalTime: GoogleCloudWKT.Timestamp? = nil
+  public var approvalTime: GoogleWKT.Timestamp? = nil
 
   /// Required. The decision of this manual approval.
   public var decision: ApprovalResult.Decision = ApprovalResult.Decision()
@@ -41,7 +41,7 @@ public struct ApprovalResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// approved this Build.
   public var url: Swift.String = Swift.String()
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `ApprovalResult`.
   public init() {}
@@ -86,7 +86,7 @@ public struct ApprovalResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.approverAccount = value
     }
     self.approvalTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .approvalTime)
+      GoogleWKT.Timestamp.self, forKey: .approvalTime)
     if let value = try container.decodeIfPresent(ApprovalResult.Decision.self, forKey: .decision) {
       self.decision = value
     }
@@ -98,7 +98,7 @@ public struct ApprovalResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -223,10 +223,10 @@ public struct ApprovalResult: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.devtools.cloudbuild.v1.ApprovalResult"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

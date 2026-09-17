@@ -19,10 +19,10 @@
 import Foundation
 import GoogleCloudDataplexV1
 import GoogleCloudLocation
-import GoogleCloudWKT
 import GoogleIAMV1
 import GoogleLongRunning
 import GoogleRpc
+import GoogleWKT
 
 func sample(
   client: DataplexServiceClient, projectId: String, locationId: String, lakeId: String,
@@ -35,7 +35,7 @@ func sample(
           $0.name =
             "projects/\(projectId)/locations/\(locationId)/lakes/\(lakeId)/zones/\(zoneId)/assets/\(assetId)"
         }
-        $0.updateMask = GoogleCloudWKT.FieldMask(paths: ["field.path1", "field.path2"])
+        $0.updateMask = GoogleWKT.FieldMask(paths: ["field.path1", "field.path2"])
       }
   )
   let response = try await poller.wait()

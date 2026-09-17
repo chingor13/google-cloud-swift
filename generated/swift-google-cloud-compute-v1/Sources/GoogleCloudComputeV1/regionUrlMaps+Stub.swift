@@ -16,41 +16,41 @@
 
 #if RegionUrlMaps
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionUrlMapsStub: Sendable {
       func delete(
-        request: RegionUrlMapsClient.DeleteRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.DeleteRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func `get`(
-        request: RegionUrlMapsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMap
 
       func insert(
-        request: RegionUrlMapsClient.InsertRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.InsertRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func list(
-        request: RegionUrlMapsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapList
 
       func patch(
-        request: RegionUrlMapsClient.PatchRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.PatchRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func update(
-        request: RegionUrlMapsClient.UpdateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.UpdateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func validate(
-        request: RegionUrlMapsClient.ValidateRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionUrlMapsClient.ValidateRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.UrlMapsValidateResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

@@ -16,36 +16,34 @@
 
 #if RegionInstanceGroups
   import Foundation
-  import GoogleCloudWKT
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
 
   extension Clients {
     protocol RegionInstanceGroupsStub: Sendable {
       func `get`(
-        request: RegionInstanceGroupsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.InstanceGroup
 
       func list(
-        request: RegionInstanceGroupsClient.ListRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.ListRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupList
 
       func listInstances(
-        request: RegionInstanceGroupsClient.ListInstancesRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.ListInstancesRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.RegionInstanceGroupsListInstances
 
       func setNamedPorts(
-        request: RegionInstanceGroupsClient.SetNamedPortsRequest,
-        options: GoogleCloudGax.RequestOptions
+        request: RegionInstanceGroupsClient.SetNamedPortsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
 
       func testIamPermissions(
         request: RegionInstanceGroupsClient.TestIamPermissionsRequest,
-        options: GoogleCloudGax.RequestOptions
+        options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.TestPermissionsResponse
 
       func getOperation(
-        request: RegionOperationsClient.GetRequest, options: GoogleCloudGax.RequestOptions
+        request: RegionOperationsClient.GetRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudComputeV1.Operation
     }
   }

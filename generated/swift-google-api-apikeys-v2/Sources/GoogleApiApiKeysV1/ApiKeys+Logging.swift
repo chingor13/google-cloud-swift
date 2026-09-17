@@ -18,10 +18,10 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 import struct Logging.Logger
 
 extension Clients {
@@ -40,9 +40,9 @@ extension Clients {
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       name: Swift.String,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
       var logger = logger
       logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -59,14 +59,14 @@ extension Clients {
     }
 
     public func createKey(
-      request: CreateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "createKey",
         action: {
-          (r: CreateKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.createKey(request: r, options: o)
@@ -74,14 +74,14 @@ extension Clients {
     }
 
     public func listKeys(
-      request: ListKeysRequest, options: GoogleCloudGax.RequestOptions
+      request: ListKeysRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiApiKeysV1.ListKeysResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "listKeys",
         action: {
-          (r: ListKeysRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListKeysRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiApiKeysV1.ListKeysResponse
           in
           return try await self.inner.listKeys(request: r, options: o)
@@ -89,29 +89,28 @@ extension Clients {
     }
 
     public func getKey(
-      request: GetKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiApiKeysV1.Key {
       try await self._intercept(
         request: request,
         options: options,
         name: "getKey",
         action: {
-          (r: GetKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
-            -> GoogleApiApiKeysV1.Key
+          (r: GetKeyRequest, o: GoogleGax.RequestOptions) async throws -> GoogleApiApiKeysV1.Key
           in
           return try await self.inner.getKey(request: r, options: o)
         })
     }
 
     public func getKeyString(
-      request: GetKeyStringRequest, options: GoogleCloudGax.RequestOptions
+      request: GetKeyStringRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiApiKeysV1.GetKeyStringResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "getKeyString",
         action: {
-          (r: GetKeyStringRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetKeyStringRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiApiKeysV1.GetKeyStringResponse
           in
           return try await self.inner.getKeyString(request: r, options: o)
@@ -119,14 +118,14 @@ extension Clients {
     }
 
     public func updateKey(
-      request: UpdateKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "updateKey",
         action: {
-          (r: UpdateKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.updateKey(request: r, options: o)
@@ -134,14 +133,14 @@ extension Clients {
     }
 
     public func deleteKey(
-      request: DeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "deleteKey",
         action: {
-          (r: DeleteKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: DeleteKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.deleteKey(request: r, options: o)
@@ -149,14 +148,14 @@ extension Clients {
     }
 
     public func undeleteKey(
-      request: UndeleteKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: UndeleteKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "undeleteKey",
         action: {
-          (r: UndeleteKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UndeleteKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.undeleteKey(request: r, options: o)
@@ -164,14 +163,14 @@ extension Clients {
     }
 
     public func lookupKey(
-      request: LookupKeyRequest, options: GoogleCloudGax.RequestOptions
+      request: LookupKeyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleApiApiKeysV1.LookupKeyResponse {
       try await self._intercept(
         request: request,
         options: options,
         name: "lookupKey",
         action: {
-          (r: LookupKeyRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: LookupKeyRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleApiApiKeysV1.LookupKeyResponse
           in
           return try await self.inner.lookupKey(request: r, options: o)
@@ -179,14 +178,14 @@ extension Clients {
     }
 
     public func getOperation(
-      request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation {
       try await self._intercept(
         request: request,
         options: options,
         name: "getOperation",
         action: {
-          (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleLongRunning.Operation
           in
           return try await self.inner.getOperation(request: r, options: o)

@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Edit atom.
-public struct EditAtom: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct EditAtom: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// A unique key for this atom. Must be specified when using advanced
@@ -35,13 +35,13 @@ public struct EditAtom: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// End time in seconds for the atom, relative to the input file timeline.
   /// When `end_time_offset` is not specified, the `inputs` are used until
   /// the end of the atom.
-  public var endTimeOffset: GoogleCloudWKT.Duration? = nil
+  public var endTimeOffset: GoogleWKT.Duration? = nil
 
   /// Start time in seconds for the atom, relative to the input file timeline.
   /// The default is `0s`.
-  public var startTimeOffset: GoogleCloudWKT.Duration? = nil
+  public var startTimeOffset: GoogleWKT.Duration? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `EditAtom`.
   public init() {}
@@ -87,12 +87,12 @@ public struct EditAtom: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.inputs = value
     }
     self.endTimeOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .endTimeOffset)
+      GoogleWKT.Duration.self, forKey: .endTimeOffset)
     self.startTimeOffset = try container.decodeIfPresent(
-      GoogleCloudWKT.Duration.self, forKey: .startTimeOffset)
+      GoogleWKT.Duration.self, forKey: .startTimeOffset)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -110,10 +110,10 @@ public struct EditAtom: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.video.transcoder.v1.EditAtom"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

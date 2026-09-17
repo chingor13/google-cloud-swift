@@ -18,21 +18,21 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
 import GoogleLongRunning
 import GoogleRpc
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// This service lets you manage pipelines.
 ///
 /// @Snippet(path: "PipelineServiceQuickstart")
 public final class PipelineServiceClient: Clients.PipelineServiceProtocol, Sendable {
   let inner: any Clients.PipelineServiceStub
-  let pollingErrorPolicy: GoogleCloudGax.PollingErrorPolicy
-  let pollingBackoffPolicy: GoogleCloudGax.BackoffPolicy
+  let pollingErrorPolicy: GoogleGax.PollingErrorPolicy
+  let pollingBackoffPolicy: GoogleGax.BackoffPolicy
 
   /// Creates a new `PipelineServiceClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.PipelineServiceStub = try Clients.PipelineServiceTransport(options)
     inner = Clients.PipelineServiceRetry(inner, options: options)
     if let logger = options.logger {
@@ -47,7 +47,7 @@ public final class PipelineServiceClient: Clients.PipelineServiceProtocol, Senda
   ///
   /// @Snippet(path: "PipelineService_RunPipeline")
   public func runPipeline(
-    request: RunPipelineRequest, options: GoogleCloudGax.RequestOptions
+    request: RunPipelineRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.runPipeline(request: request, options: options)
   }
@@ -56,22 +56,21 @@ public final class PipelineServiceClient: Clients.PipelineServiceProtocol, Senda
   ///
   /// @Snippet(path: "PipelineService_RunPipeline")
   public func runPipeline(
-    withPolling: RunPipelineRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RunPipelineResponse> {
+    withPolling: RunPipelineRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RunPipelineResponse> {
     let extractStatus = {
       (op: GoogleLongRunning.Operation) throws
-        -> GoogleCloudGax._PollableOperationImpl<RunPipelineResponse>.State in
+        -> GoogleGax._PollableOperationImpl<RunPipelineResponse>.State in
       return try op._extractStatus(RunPipelineResponse.self)
     }
     let rawOp = try await self.runPipeline(request: withPolling, options: options)
     let initialState = try extractStatus(rawOp)
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RunPipelineResponse>.State in
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<RunPipelineResponse>.State in
       let op = try await self.getOperation(
         request: .init().with { $0.name = rawOp.name }, options: options)
       return try extractStatus(op)
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: initialState,
       polling: options.pollingErrorPolicy ?? self.pollingErrorPolicy,
       backoff: options.pollingBackoffPolicy ?? self.pollingBackoffPolicy,
@@ -85,7 +84,7 @@ public final class PipelineServiceClient: Clients.PipelineServiceProtocol, Senda
   ///
   /// @Snippet(path: "PipelineService_GetOperation")
   func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
     try await self.inner.getOperation(request: request, options: options)
   }
@@ -102,23 +101,23 @@ extension Clients {
     func runPipeline(request: RunPipelineRequest) async throws -> GoogleLongRunning.Operation
 
     /// See `PipelineServiceClient.runPipeline`.
-    func runPipeline(withPolling: RunPipelineRequest) async throws -> any GoogleCloudGax
+    func runPipeline(withPolling: RunPipelineRequest) async throws -> any GoogleGax
       .PollableOperation<RunPipelineResponse>
 
     /// See `PipelineServiceClient.runPipeline`.
     func runPipeline(
       name: Swift.String,
-    ) async throws -> any GoogleCloudGax.PollableOperation<RunPipelineResponse>
+    ) async throws -> any GoogleGax.PollableOperation<RunPipelineResponse>
 
     /// See `PipelineServiceClient.runPipeline`.
     func runPipeline(
-      request: RunPipelineRequest, options: GoogleCloudGax.RequestOptions
+      request: RunPipelineRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleLongRunning.Operation
 
     /// See `PipelineServiceClient.runPipeline`.
     func runPipeline(
-      withPolling: RunPipelineRequest, options: GoogleCloudGax.RequestOptions
-    ) async throws -> any GoogleCloudGax.PollableOperation<RunPipelineResponse>
+      withPolling: RunPipelineRequest, options: GoogleGax.RequestOptions
+    ) async throws -> any GoogleGax.PollableOperation<RunPipelineResponse>
   }
 }
 
@@ -129,31 +128,30 @@ extension Clients.PipelineServiceProtocol {
   }
 
   public func runPipeline(
-    request: RunPipelineRequest, options: GoogleCloudGax.RequestOptions
+    request: RunPipelineRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
-  public func runPipeline(withPolling: RunPipelineRequest) async throws -> any GoogleCloudGax
+  public func runPipeline(withPolling: RunPipelineRequest) async throws -> any GoogleGax
     .PollableOperation<RunPipelineResponse>
   {
     try await self.runPipeline(withPolling: withPolling, options: .init())
   }
 
   public func runPipeline(
-    withPolling: RunPipelineRequest, options: GoogleCloudGax.RequestOptions
-  ) async throws -> any GoogleCloudGax.PollableOperation<RunPipelineResponse> {
-    let poll = {
-      () async throws -> GoogleCloudGax._PollableOperationImpl<RunPipelineResponse>.State in
-      throw GoogleCloudGax.RequestError.unimplemented
+    withPolling: RunPipelineRequest, options: GoogleGax.RequestOptions
+  ) async throws -> any GoogleGax.PollableOperation<RunPipelineResponse> {
+    let poll = { () async throws -> GoogleGax._PollableOperationImpl<RunPipelineResponse>.State in
+      throw GoogleGax.RequestError.unimplemented
     }
-    return GoogleCloudGax._PollableOperationImpl(
+    return GoogleGax._PollableOperationImpl(
       initialState: .init(done: false, result: nil), poll: poll)
   }
 
   public func runPipeline(
     name: Swift.String,
-  ) async throws -> any GoogleCloudGax.PollableOperation<RunPipelineResponse> {
+  ) async throws -> any GoogleGax.PollableOperation<RunPipelineResponse> {
     let request = RunPipelineRequest().with {
       $0.name = name
     }
@@ -167,9 +165,9 @@ extension Clients.PipelineServiceProtocol {
   }
 
   public func getOperation(
-    request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+    request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleLongRunning.Operation {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 
   public func getOperation(

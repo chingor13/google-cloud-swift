@@ -16,13 +16,13 @@
 
 #if FeatureOnlineStoreService
   import Foundation
-  @_spi(GoogleCloudInternal) import GoogleCloudWKT
+  @_spi(GoogleCloudInternal) import GoogleWKT
 
   /// Request message for
   /// [FeatureOnlineStoreService.FeatureViewDirectWrite][google.cloud.aiplatform.v1.FeatureOnlineStoreService.FeatureViewDirectWrite].
   ///
   /// [google.cloud.aiplatform.v1.FeatureOnlineStoreService.FeatureViewDirectWrite]: <doc:FeatureOnlineStoreServiceClient/featureViewDirectWrite(request:options:)>
-  public struct FeatureViewDirectWriteRequest: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct FeatureViewDirectWriteRequest: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// FeatureView resource format
@@ -32,7 +32,7 @@
     /// Required. The data keys and associated feature values.
     public var dataKeyAndFeatureValues: [FeatureViewDirectWriteRequest.DataKeyAndFeatureValues] = []
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `FeatureViewDirectWriteRequest`.
     public init() {}
@@ -78,7 +78,7 @@
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -92,7 +92,7 @@
     }
 
     /// A data key and associated feature values to write to the feature view.
-    public struct DataKeyAndFeatureValues: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+    public struct DataKeyAndFeatureValues: Codable, Equatable, GoogleWKT._AnyPackable,
       Sendable
     {
       /// The data key.
@@ -101,7 +101,7 @@
       /// List of features to write.
       public var features: [FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature] = []
 
-      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+      @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
       /// Initialize a new instance of `DataKeyAndFeatureValues`.
       public init() {}
@@ -144,7 +144,7 @@
         }
         for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
           self._unknownFields.json[key.stringValue] = try container.decode(
-            GoogleCloudWKT.Value.self, forKey: key)
+            GoogleWKT.Value.self, forKey: key)
         }
       }
 
@@ -158,7 +158,7 @@
       }
 
       /// Feature name & value pair.
-      public struct Feature: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+      public struct Feature: Codable, Equatable, GoogleWKT._AnyPackable,
         Sendable
       {
         /// Feature short name.
@@ -167,8 +167,7 @@
         /// Feature value data to write.
         public var dataOneof: OneOf_DataOneof? = nil
 
-        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields =
-          .init()
+        @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
         /// Initialize a new instance of `Feature`.
         public init() {}
@@ -223,7 +222,7 @@
           self.dataOneof = dataOneof
           for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
             self._unknownFields.json[key.stringValue] = try container.decode(
-              GoogleCloudWKT.Value.self, forKey: key)
+              GoogleWKT.Value.self, forKey: key)
           }
         }
 
@@ -253,11 +252,11 @@
           return
             "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues.Feature"
         }
-        public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-          self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+        public init(fromAny any: GoogleWKT.`Any`) throws {
+          self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
         }
-        public func _pack() throws -> GoogleCloudWKT.Struct {
-          return try GoogleCloudWKT._slowAnySerialize(message: self)
+        public func _pack() throws -> GoogleWKT.Struct {
+          return try GoogleWKT._slowAnySerialize(message: self)
         }
       }
 
@@ -265,22 +264,22 @@
         return
           "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest.DataKeyAndFeatureValues"
       }
-      public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-        self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+      public init(fromAny any: GoogleWKT.`Any`) throws {
+        self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
       }
-      public func _pack() throws -> GoogleCloudWKT.Struct {
-        return try GoogleCloudWKT._slowAnySerialize(message: self)
+      public func _pack() throws -> GoogleWKT.Struct {
+        return try GoogleWKT._slowAnySerialize(message: self)
       }
     }
 
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.aiplatform.v1.FeatureViewDirectWriteRequest"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 #endif

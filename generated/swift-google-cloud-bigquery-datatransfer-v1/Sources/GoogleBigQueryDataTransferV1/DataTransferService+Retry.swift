@@ -19,26 +19,26 @@ import Foundation
   import FoundationNetworking
 #endif
 import GoogleCloudLocation
-import GoogleCloudWKT
-@_spi(GoogleCloudInternal) import GoogleCloudGax
+import GoogleWKT
+@_spi(GoogleCloudInternal) import GoogleGax
 
 extension Clients {
   final class DataTransferServiceRetry: DataTransferServiceStub {
     let inner: any DataTransferServiceStub
-    let options: GoogleCloudGax.ClientOptions
+    let options: GoogleGax.ClientOptions
 
-    public init(_ inner: any DataTransferServiceStub, options: GoogleCloudGax.ClientOptions) {
+    public init(_ inner: any DataTransferServiceStub, options: GoogleGax.ClientOptions) {
       self.inner = inner
       self.options = options
     }
 
     func _intercept<Input, Output>(
       request: Input,
-      options: GoogleCloudGax.RequestOptions,
+      options: GoogleGax.RequestOptions,
       idempotent: Swift.Bool,
-      action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+      action: (Input, GoogleGax.RequestOptions) async throws -> Output,
     ) async throws -> Output {
-      let loop = GoogleCloudGax._RetryLoop(
+      let loop = GoogleGax._RetryLoop(
         options: options, withDefault: self.options, idempotent: idempotent,
       )
       let attempt = { (attemptTimeout: Swift.Duration?) async throws -> Output in
@@ -50,14 +50,14 @@ extension Clients {
     }
 
     public func getDataSource(
-      request: GetDataSourceRequest, options: GoogleCloudGax.RequestOptions
+      request: GetDataSourceRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.DataSource {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetDataSourceRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetDataSourceRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.DataSource
           in
           return try await self.inner.getDataSource(request: r, options: o)
@@ -65,14 +65,14 @@ extension Clients {
     }
 
     public func listDataSources(
-      request: ListDataSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: ListDataSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ListDataSourcesResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListDataSourcesRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListDataSourcesRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.ListDataSourcesResponse
           in
           return try await self.inner.listDataSources(request: r, options: o)
@@ -80,14 +80,14 @@ extension Clients {
     }
 
     public func createTransferConfig(
-      request: CreateTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: CreateTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.TransferConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CreateTransferConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CreateTransferConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.TransferConfig
           in
           return try await self.inner.createTransferConfig(request: r, options: o)
@@ -95,14 +95,14 @@ extension Clients {
     }
 
     public func updateTransferConfig(
-      request: UpdateTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: UpdateTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.TransferConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UpdateTransferConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: UpdateTransferConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.TransferConfig
           in
           return try await self.inner.updateTransferConfig(request: r, options: o)
@@ -110,27 +110,27 @@ extension Clients {
     }
 
     public func deleteTransferConfig(
-      request: DeleteTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: DeleteTransferConfigRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: DeleteTransferConfigRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteTransferConfig(request: r, options: o)
         })
     }
 
     public func getTransferConfig(
-      request: GetTransferConfigRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTransferConfigRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.TransferConfig {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetTransferConfigRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetTransferConfigRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.TransferConfig
           in
           return try await self.inner.getTransferConfig(request: r, options: o)
@@ -138,14 +138,14 @@ extension Clients {
     }
 
     public func listTransferConfigs(
-      request: ListTransferConfigsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferConfigsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ListTransferConfigsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListTransferConfigsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTransferConfigsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.ListTransferConfigsResponse
           in
           return try await self.inner.listTransferConfigs(request: r, options: o)
@@ -153,14 +153,14 @@ extension Clients {
     }
 
     public func scheduleTransferRuns(
-      request: ScheduleTransferRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ScheduleTransferRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ScheduleTransferRunsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: ScheduleTransferRunsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ScheduleTransferRunsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.ScheduleTransferRunsResponse
           in
           return try await self.inner.scheduleTransferRuns(request: r, options: o)
@@ -168,14 +168,14 @@ extension Clients {
     }
 
     public func startManualTransferRuns(
-      request: StartManualTransferRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: StartManualTransferRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.StartManualTransferRunsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: StartManualTransferRunsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: StartManualTransferRunsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.StartManualTransferRunsResponse
           in
           return try await self.inner.startManualTransferRuns(request: r, options: o)
@@ -183,14 +183,14 @@ extension Clients {
     }
 
     public func getTransferRun(
-      request: GetTransferRunRequest, options: GoogleCloudGax.RequestOptions
+      request: GetTransferRunRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.TransferRun {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GetTransferRunRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GetTransferRunRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.TransferRun
           in
           return try await self.inner.getTransferRun(request: r, options: o)
@@ -198,27 +198,26 @@ extension Clients {
     }
 
     public func deleteTransferRun(
-      request: DeleteTransferRunRequest, options: GoogleCloudGax.RequestOptions
+      request: DeleteTransferRunRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: DeleteTransferRunRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: DeleteTransferRunRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.deleteTransferRun(request: r, options: o)
         })
     }
 
     public func listTransferRuns(
-      request: ListTransferRunsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferRunsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ListTransferRunsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListTransferRunsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTransferRunsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.ListTransferRunsResponse
           in
           return try await self.inner.listTransferRuns(request: r, options: o)
@@ -226,14 +225,14 @@ extension Clients {
     }
 
     public func listTransferLogs(
-      request: ListTransferLogsRequest, options: GoogleCloudGax.RequestOptions
+      request: ListTransferLogsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.ListTransferLogsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: ListTransferLogsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: ListTransferLogsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.ListTransferLogsResponse
           in
           return try await self.inner.listTransferLogs(request: r, options: o)
@@ -241,14 +240,14 @@ extension Clients {
     }
 
     public func checkValidCreds(
-      request: CheckValidCredsRequest, options: GoogleCloudGax.RequestOptions
+      request: CheckValidCredsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleBigQueryDataTransferV1.CheckValidCredsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: CheckValidCredsRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: CheckValidCredsRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleBigQueryDataTransferV1.CheckValidCredsResponse
           in
           return try await self.inner.checkValidCreds(request: r, options: o)
@@ -256,55 +255,54 @@ extension Clients {
     }
 
     public func enrollDataSources(
-      request: EnrollDataSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: EnrollDataSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
-        action: {
-          (r: EnrollDataSourcesRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+        action: { (r: EnrollDataSourcesRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.enrollDataSources(request: r, options: o)
         })
     }
 
     public func unenrollDataSources(
-      request: UnenrollDataSourcesRequest, options: GoogleCloudGax.RequestOptions
+      request: UnenrollDataSourcesRequest, options: GoogleGax.RequestOptions
     ) async throws {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: false,
         action: {
-          (r: UnenrollDataSourcesRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          (r: UnenrollDataSourcesRequest, o: GoogleGax.RequestOptions) async throws -> Void in
           return try await self.inner.unenrollDataSources(request: r, options: o)
         })
     }
 
     public func listLocations(
-      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.ListLocationsResponse {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-            async throws -> GoogleCloudLocation.ListLocationsResponse
+          (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+            -> GoogleCloudLocation.ListLocationsResponse
           in
           return try await self.inner.listLocations(request: r, options: o)
         })
     }
 
     public func getLocation(
-      request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+      request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudLocation.Location {
       try await self._intercept(
         request: request,
         options: options,
         idempotent: true,
         action: {
-          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions) async throws
+          (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
             -> GoogleCloudLocation.Location
           in
           return try await self.inner.getLocation(request: r, options: o)

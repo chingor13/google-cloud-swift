@@ -20,10 +20,10 @@
     import FoundationNetworking
   #endif
   import GoogleCloudLocation
-  import GoogleCloudWKT
   import GoogleLongRunning
   import GoogleRpc
-  import GoogleCloudGax
+  import GoogleWKT
+  import GoogleGax
   import struct Logging.Logger
 
   extension Clients {
@@ -42,9 +42,9 @@
 
       func _intercept<Input, Output>(
         request: Input,
-        options: GoogleCloudGax.RequestOptions,
+        options: GoogleGax.RequestOptions,
         name: Swift.String,
-        action: (Input, GoogleCloudGax.RequestOptions) async throws -> Output,
+        action: (Input, GoogleGax.RequestOptions) async throws -> Output,
       ) async throws -> Output {
         var logger = logger
         logger[metadataKey: "gcp.experimental.swift.request.id"] = "\(UUID())"
@@ -61,14 +61,14 @@
       }
 
       public func createPlaybook(
-        request: CreatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: CreatePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
         try await self._intercept(
           request: request,
           options: options,
           name: "createPlaybook",
           action: {
-            (r: CreatePlaybookRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreatePlaybookRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Playbook
             in
             return try await self.inner.createPlaybook(request: r, options: o)
@@ -76,27 +76,26 @@
       }
 
       public func deletePlaybook(
-        request: DeletePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: DeletePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "deletePlaybook",
-          action: {
-            (r: DeletePlaybookRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void in
+          action: { (r: DeletePlaybookRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.deletePlaybook(request: r, options: o)
           })
       }
 
       public func listPlaybooks(
-        request: ListPlaybooksRequest, options: GoogleCloudGax.RequestOptions
+        request: ListPlaybooksRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybooksResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listPlaybooks",
           action: {
-            (r: ListPlaybooksRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListPlaybooksRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.ListPlaybooksResponse
             in
             return try await self.inner.listPlaybooks(request: r, options: o)
@@ -104,14 +103,14 @@
       }
 
       public func getPlaybook(
-        request: GetPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: GetPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
         try await self._intercept(
           request: request,
           options: options,
           name: "getPlaybook",
           action: {
-            (r: GetPlaybookRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetPlaybookRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Playbook
             in
             return try await self.inner.getPlaybook(request: r, options: o)
@@ -119,14 +118,14 @@
       }
 
       public func exportPlaybook(
-        request: ExportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: ExportPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "exportPlaybook",
           action: {
-            (r: ExportPlaybookRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ExportPlaybookRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.exportPlaybook(request: r, options: o)
@@ -134,14 +133,14 @@
       }
 
       public func importPlaybook(
-        request: ImportPlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: ImportPlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "importPlaybook",
           action: {
-            (r: ImportPlaybookRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ImportPlaybookRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleLongRunning.Operation
             in
             return try await self.inner.importPlaybook(request: r, options: o)
@@ -149,14 +148,14 @@
       }
 
       public func updatePlaybook(
-        request: UpdatePlaybookRequest, options: GoogleCloudGax.RequestOptions
+        request: UpdatePlaybookRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.Playbook {
         try await self._intercept(
           request: request,
           options: options,
           name: "updatePlaybook",
           action: {
-            (r: UpdatePlaybookRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: UpdatePlaybookRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.Playbook
             in
             return try await self.inner.updatePlaybook(request: r, options: o)
@@ -164,14 +163,14 @@
       }
 
       public func createPlaybookVersion(
-        request: CreatePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: CreatePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion {
         try await self._intercept(
           request: request,
           options: options,
           name: "createPlaybookVersion",
           action: {
-            (r: CreatePlaybookVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: CreatePlaybookVersionRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.PlaybookVersion
             in
             return try await self.inner.createPlaybookVersion(request: r, options: o)
@@ -179,14 +178,14 @@
       }
 
       public func getPlaybookVersion(
-        request: GetPlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: GetPlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.PlaybookVersion {
         try await self._intercept(
           request: request,
           options: options,
           name: "getPlaybookVersion",
           action: {
-            (r: GetPlaybookVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: GetPlaybookVersionRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.PlaybookVersion
             in
             return try await self.inner.getPlaybookVersion(request: r, options: o)
@@ -194,14 +193,14 @@
       }
 
       public func restorePlaybookVersion(
-        request: RestorePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: RestorePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.RestorePlaybookVersionResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "restorePlaybookVersion",
           action: {
-            (r: RestorePlaybookVersionRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: RestorePlaybookVersionRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.RestorePlaybookVersionResponse
             in
             return try await self.inner.restorePlaybookVersion(request: r, options: o)
@@ -209,14 +208,14 @@
       }
 
       public func listPlaybookVersions(
-        request: ListPlaybookVersionsRequest, options: GoogleCloudGax.RequestOptions
+        request: ListPlaybookVersionsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudDialogflowCXV3.ListPlaybookVersionsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listPlaybookVersions",
           action: {
-            (r: ListPlaybookVersionsRequest, o: GoogleCloudGax.RequestOptions) async throws
+            (r: ListPlaybookVersionsRequest, o: GoogleGax.RequestOptions) async throws
               -> GoogleCloudDialogflowCXV3.ListPlaybookVersionsResponse
             in
             return try await self.inner.listPlaybookVersions(request: r, options: o)
@@ -224,89 +223,88 @@
       }
 
       public func deletePlaybookVersion(
-        request: DeletePlaybookVersionRequest, options: GoogleCloudGax.RequestOptions
+        request: DeletePlaybookVersionRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "deletePlaybookVersion",
           action: {
-            (r: DeletePlaybookVersionRequest, o: GoogleCloudGax.RequestOptions) async throws -> Void
-            in
+            (r: DeletePlaybookVersionRequest, o: GoogleGax.RequestOptions) async throws -> Void in
             return try await self.inner.deletePlaybookVersion(request: r, options: o)
           })
       }
 
       public func listLocations(
-        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.ListLocationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.ListLocationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listLocations",
           action: {
-            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.ListLocationsResponse
+            (r: GoogleCloudLocation.ListLocationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.ListLocationsResponse
             in
             return try await self.inner.listLocations(request: r, options: o)
           })
       }
 
       public func getLocation(
-        request: GoogleCloudLocation.GetLocationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleCloudLocation.GetLocationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleCloudLocation.Location {
         try await self._intercept(
           request: request,
           options: options,
           name: "getLocation",
           action: {
-            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleCloudLocation.Location
+            (r: GoogleCloudLocation.GetLocationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleCloudLocation.Location
             in
             return try await self.inner.getLocation(request: r, options: o)
           })
       }
 
       public func listOperations(
-        request: GoogleLongRunning.ListOperationsRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.ListOperationsRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.ListOperationsResponse {
         try await self._intercept(
           request: request,
           options: options,
           name: "listOperations",
           action: {
-            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.ListOperationsResponse
+            (r: GoogleLongRunning.ListOperationsRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.ListOperationsResponse
             in
             return try await self.inner.listOperations(request: r, options: o)
           })
       }
 
       public func getOperation(
-        request: GoogleLongRunning.GetOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.GetOperationRequest, options: GoogleGax.RequestOptions
       ) async throws -> GoogleLongRunning.Operation {
         try await self._intercept(
           request: request,
           options: options,
           name: "getOperation",
           action: {
-            (r: GoogleLongRunning.GetOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> GoogleLongRunning.Operation
+            (r: GoogleLongRunning.GetOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> GoogleLongRunning.Operation
             in
             return try await self.inner.getOperation(request: r, options: o)
           })
       }
 
       public func cancelOperation(
-        request: GoogleLongRunning.CancelOperationRequest, options: GoogleCloudGax.RequestOptions
+        request: GoogleLongRunning.CancelOperationRequest, options: GoogleGax.RequestOptions
       ) async throws {
         try await self._intercept(
           request: request,
           options: options,
           name: "cancelOperation",
           action: {
-            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleCloudGax.RequestOptions)
-              async throws -> Void in
+            (r: GoogleLongRunning.CancelOperationRequest, o: GoogleGax.RequestOptions) async throws
+              -> Void in
             return try await self.inner.cancelOperation(request: r, options: o)
           })
       }

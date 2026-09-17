@@ -15,10 +15,10 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// A widget that displays textual content.
-public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct Text: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// The text content to be displayed.
@@ -30,7 +30,7 @@ public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// How the text is styled
   public var style: Text.TextStyle? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `Text`.
   public init() {}
@@ -76,7 +76,7 @@ public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     self.style = try container.decodeIfPresent(Text.TextStyle.self, forKey: .style)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -91,7 +91,7 @@ public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Properties that determine how the title and content are styled
-  public struct TextStyle: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct TextStyle: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The background color as a hex string. "#RRGGBB" or "#RGB"
@@ -118,7 +118,7 @@ public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// The pointer location for this widget (also sometimes called a "tail")
     public var pointerLocation: Text.TextStyle.PointerLocation = Text.TextStyle.PointerLocation()
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `TextStyle`.
     public init() {}
@@ -195,7 +195,7 @@ public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       }
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -868,11 +868,11 @@ public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.monitoring.dashboard.v1.Text.TextStyle"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -984,10 +984,10 @@ public struct Text: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.monitoring.dashboard.v1.Text"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

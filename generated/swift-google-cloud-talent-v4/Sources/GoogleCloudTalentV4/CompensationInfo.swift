@@ -15,11 +15,11 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
 import GoogleType
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// Job compensation details.
-public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct CompensationInfo: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Job compensation information.
@@ -61,7 +61,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.talent.v4.CompensationInfo.CompensationEntry.expected_units_per_year]: <doc:CompensationInfo/CompensationEntry/expectedUnitsPerYear>
   public var annualizedTotalCompensationRange: CompensationInfo.CompensationRange? = nil
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `CompensationInfo`.
   public init() {}
@@ -111,7 +111,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       CompensationInfo.CompensationRange.self, forKey: .annualizedTotalCompensationRange)
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -147,7 +147,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// [google.cloud.talent.v4.CompensationInfo.CompensationEntry.amount]: <doc:CompensationInfo/CompensationEntry/OneOf_CompensationAmount/amount(_:)>
   /// [google.cloud.talent.v4.CompensationInfo.CompensationEntry.expected_units_per_year]: <doc:CompensationInfo/CompensationEntry/expectedUnitsPerYear>
   /// [google.cloud.talent.v4.CompensationInfo.CompensationEntry.range]: <doc:CompensationInfo/CompensationEntry/OneOf_CompensationAmount/range(_:)>
-  public struct CompensationEntry: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CompensationEntry: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Compensation type.
@@ -184,12 +184,12 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     ///
     /// [google.cloud.talent.v4.CompensationInfo.CompensationEntry.unit]: <doc:CompensationInfo/CompensationEntry/unit>
     /// [google.cloud.talent.v4.Job.employment_types]: <doc:Job/employmentTypes>
-    public var expectedUnitsPerYear: GoogleCloudWKT.DoubleValue? = nil
+    public var expectedUnitsPerYear: GoogleWKT.DoubleValue? = nil
 
     /// Compensation amount. It could be a fixed amount or a floating range.
     public var compensationAmount: OneOf_CompensationAmount? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CompensationEntry`.
     public init() {}
@@ -246,7 +246,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         self.description = value
       }
       self.expectedUnitsPerYear = try container.decodeIfPresent(
-        GoogleCloudWKT.DoubleValue.self, forKey: .expectedUnitsPerYear)
+        GoogleWKT.DoubleValue.self, forKey: .expectedUnitsPerYear)
 
       var compensationAmount: OneOf_CompensationAmount? = nil
       let compensationAmountCheckAndSet = {
@@ -269,7 +269,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.compensationAmount = compensationAmount
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -304,16 +304,16 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.CompensationInfo.CompensationEntry"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
   /// Compensation range.
-  public struct CompensationRange: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct CompensationRange: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// The maximum amount of compensation. If left empty, the value is set
@@ -331,7 +331,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// [google.type.Money.currency_code]: https://www.google.com/search?q=Swift+google.type+GoogleType.Money/currencyCode
     public var minCompensation: GoogleType.Money? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `CompensationRange`.
     public init() {}
@@ -372,7 +372,7 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
         GoogleType.Money.self, forKey: .minCompensation)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -388,11 +388,11 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.talent.v4.CompensationInfo.CompensationRange"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -720,10 +720,10 @@ public struct CompensationInfo: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.talent.v4.CompensationInfo"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }

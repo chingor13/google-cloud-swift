@@ -18,8 +18,8 @@ import Foundation
 #if canImport(FoundationNetworking)
   import FoundationNetworking
 #endif
-import GoogleCloudWKT
-import GoogleCloudGax
+import GoogleWKT
+import GoogleGax
 
 /// IAM Policy Troubleshooter service.
 ///
@@ -30,7 +30,7 @@ public final class IamCheckerClient: Clients.IamCheckerProtocol, Sendable {
   let inner: any Clients.IamCheckerStub
 
   /// Creates a new `IamCheckerClient` instance.
-  public init(_ options: GoogleCloudGax.ClientOptions = .init()) throws {
+  public init(_ options: GoogleGax.ClientOptions = .init()) throws {
     var inner: any Clients.IamCheckerStub = try Clients.IamCheckerTransport(options)
     inner = Clients.IamCheckerRetry(inner, options: options)
     if let logger = options.logger {
@@ -45,7 +45,7 @@ public final class IamCheckerClient: Clients.IamCheckerProtocol, Sendable {
   ///
   /// @Snippet(path: "IamChecker_TroubleshootIamPolicy")
   public func troubleshootIamPolicy(
-    request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudPolicyTroubleshooterV1.TroubleshootIamPolicyResponse {
     try await self.inner.troubleshootIamPolicy(request: request, options: options)
   }
@@ -64,7 +64,7 @@ extension Clients {
 
     /// See `IamCheckerClient.troubleshootIamPolicy`.
     func troubleshootIamPolicy(
-      request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+      request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
     ) async throws -> GoogleCloudPolicyTroubleshooterV1.TroubleshootIamPolicyResponse
   }
 }
@@ -78,8 +78,8 @@ extension Clients.IamCheckerProtocol {
   }
 
   public func troubleshootIamPolicy(
-    request: TroubleshootIamPolicyRequest, options: GoogleCloudGax.RequestOptions
+    request: TroubleshootIamPolicyRequest, options: GoogleGax.RequestOptions
   ) async throws -> GoogleCloudPolicyTroubleshooterV1.TroubleshootIamPolicyResponse {
-    throw GoogleCloudGax.RequestError.unimplemented
+    throw GoogleGax.RequestError.unimplemented
   }
 }

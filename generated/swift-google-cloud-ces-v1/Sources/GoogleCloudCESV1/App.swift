@@ -15,13 +15,13 @@
 // limitations under the License.
 
 import Foundation
-@_spi(GoogleCloudInternal) import GoogleCloudWKT
+@_spi(GoogleCloudInternal) import GoogleWKT
 
 /// An app serves as a top-level container for a group of agents, including the
 /// root agent and its sub-agents, along with their associated configurations.
 /// These agents work together to achieve specific goals within the app's
 /// context.
-public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+public struct App: Codable, Equatable, GoogleWKT._AnyPackable,
   Sendable
 {
   /// Identifier. The unique identifier of the app.
@@ -95,10 +95,10 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public var metadata: [Swift.String: Swift.String] = [:]
 
   /// Output only. Timestamp when the app was created.
-  public var createTime: GoogleCloudWKT.Timestamp? = nil
+  public var createTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Timestamp when the app was last updated.
-  public var updateTime: GoogleCloudWKT.Timestamp? = nil
+  public var updateTime: GoogleWKT.Timestamp? = nil
 
   /// Output only. Etag used to ensure the object hasn't changed during a
   /// read-modify-write operation. If the etag is empty, the update will
@@ -121,7 +121,7 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   /// Output only. Misconfigurations or warnings in the app.
   public var validationErrors: [Swift.String] = []
 
-  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+  @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
   /// Initialize a new instance of `App`.
   public init() {}
@@ -267,10 +267,8 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     {
       self.metadata = value
     }
-    self.createTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .createTime)
-    self.updateTime = try container.decodeIfPresent(
-      GoogleCloudWKT.Timestamp.self, forKey: .updateTime)
+    self.createTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .createTime)
+    self.updateTime = try container.decodeIfPresent(GoogleWKT.Timestamp.self, forKey: .updateTime)
     if let value = try container.decodeIfPresent(Swift.String.self, forKey: .etag) {
       self.etag = value
     }
@@ -288,7 +286,7 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     }
     for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
       self._unknownFields.json[key.stringValue] = try container.decode(
-        GoogleCloudWKT.Value.self, forKey: key)
+        GoogleWKT.Value.self, forKey: key)
     }
   }
 
@@ -331,7 +329,7 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   }
 
   /// Defines the structure and metadata for a variable.
-  public struct VariableDeclaration: Codable, Equatable, GoogleCloudWKT._AnyPackable,
+  public struct VariableDeclaration: Codable, Equatable, GoogleWKT._AnyPackable,
     Sendable
   {
     /// Required. The name of the variable. The name must start with a letter or
@@ -344,7 +342,7 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     /// Required. The schema of the variable.
     public var schema: Schema? = nil
 
-    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleCloudWKT._UnknownFields = .init()
+    @_spi(GoogleCloudInternal) public var _unknownFields: GoogleWKT._UnknownFields = .init()
 
     /// Initialize a new instance of `VariableDeclaration`.
     public init() {}
@@ -390,7 +388,7 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
       self.schema = try container.decodeIfPresent(Schema.self, forKey: .schema)
       for key in container.allKeys where !CodingKeys._knownKeys.contains(key.stringValue) {
         self._unknownFields.json[key.stringValue] = try container.decode(
-          GoogleCloudWKT.Value.self, forKey: key)
+          GoogleWKT.Value.self, forKey: key)
       }
     }
 
@@ -407,11 +405,11 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
     public static var _anyTypeUrl: Swift.String {
       return "type.googleapis.com/google.cloud.ces.v1.App.VariableDeclaration"
     }
-    public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-      self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+    public init(fromAny any: GoogleWKT.`Any`) throws {
+      self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
     }
-    public func _pack() throws -> GoogleCloudWKT.Struct {
-      return try GoogleCloudWKT._slowAnySerialize(message: self)
+    public func _pack() throws -> GoogleWKT.Struct {
+      return try GoogleWKT._slowAnySerialize(message: self)
     }
   }
 
@@ -530,10 +528,10 @@ public struct App: Codable, Equatable, GoogleCloudWKT._AnyPackable,
   public static var _anyTypeUrl: Swift.String {
     return "type.googleapis.com/google.cloud.ces.v1.App"
   }
-  public init(fromAny any: GoogleCloudWKT.`Any`) throws {
-    self = try GoogleCloudWKT._slowAnyDeserialize(Self.self, from: any)
+  public init(fromAny any: GoogleWKT.`Any`) throws {
+    self = try GoogleWKT._slowAnyDeserialize(Self.self, from: any)
   }
-  public func _pack() throws -> GoogleCloudWKT.Struct {
-    return try GoogleCloudWKT._slowAnySerialize(message: self)
+  public func _pack() throws -> GoogleWKT.Struct {
+    return try GoogleWKT._slowAnySerialize(message: self)
   }
 }
