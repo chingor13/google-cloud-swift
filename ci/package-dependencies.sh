@@ -19,51 +19,33 @@ REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
 
 _EDITED_PACKAGES=()
 _REMOVED_DISABLE_RESOLUTION=()
-
-# The packages in this repository that other packages depend on via their
-# published GitHub URL. Dependent packages build against the last published
-# version unless SwiftPM is told to use the local copy.
-#
-# The list is derived from the manifests, so it does not go stale as packages
-# are added or start (or stop) depending on each other.
-_LOCAL_DEPENDENCIES=()
-_find_local_dependencies() {
-    local name dir
-    for name in $(find "${REPO_ROOT}" \
-        \( -name .build -o -name .build-cache -o -name .git -o -name Sources -o -name Tests \) -prune \
-        -o -type f -name Package.swift -print |
-        xargs grep -ho 'github\.com/googleapis/[a-z0-9-]*' | sed -e 's;.*/;;' | sort -u); do
-        for dir in pkgs generated; do
-            if [[ -f "${REPO_ROOT}/${dir}/${name}/Package.swift" ]]; then
-                _LOCAL_DEPENDENCIES+=("${dir}/${name}:${name}")
-            fi
-        done
-    done
-}
-_find_local_dependencies
+_MODIFIED_RESOLVED=()
+_CREATED_RESOLVED=()
 
 edit_package_dependencies() {
     local dir="$1"
     local clean_dir="${dir#./}"
     [[ -z "${clean_dir}" ]] && clean_dir="."
     _EDITED_PACKAGES+=("${dir}")
-    local scratch_args=()
-    if [[ -n "${flags+x}" ]]; then
-        for ((i=0; i<${#flags[@]}; i++)); do
-            if [[ "${flags[i]}" == "--scratch-path" && $((i+1)) -lt ${#flags[@]} ]]; then
-                scratch_args=("--scratch-path" "${flags[i+1]}")
-                break
-            fi
-        done
-    fi
-    for item in "${_LOCAL_DEPENDENCIES[@]}"; do
-        local dep_rel="${item%%:*}"
-        local dep_name="${item##*:}"
-        if [[ "${clean_dir}" != "${dep_rel}" && "${clean_dir}" != "${REPO_ROOT}/${dep_rel}" ]]; then
-            swift package "${scratch_args[@]}" --package-path "${dir}" edit --path "${REPO_ROOT}/${dep_rel}" "${dep_name}" >/dev/null 2>&1 || true
+
+    export GOOGLE_CLOUD_SWIFT_LOCAL_DEPS="${REPO_ROOT}"
+
+    for ws in "${dir}/.build/workspace-state.json" "${REPO_ROOT}/.build-cache/workspace-state.json" "${REPO_ROOT}/.build/workspace-state.json"; do
+        if [[ -f "${ws}" ]] && grep -q '"edited"' "${ws}"; then
+            rm -f "${ws}"
         fi
     done
-    # SwiftPM requires automatic resolution when dependencies are in editable mode.
+
+    if [[ -f "${dir}/Package.resolved" ]]; then
+        if [[ ! -f "${dir}/Package.resolved.ci-bak" ]]; then
+            cp "${dir}/Package.resolved" "${dir}/Package.resolved.ci-bak"
+            _MODIFIED_RESOLVED+=("${dir}/Package.resolved")
+        fi
+    else
+        _CREATED_RESOLVED+=("${dir}/Package.resolved")
+    fi
+
+    # SwiftPM requires automatic resolution when dependencies are overridden.
     if [[ -n "${flags+x}" ]]; then
         local filtered_flags=()
         local had_flag=false
@@ -85,25 +67,18 @@ restore_package_dependencies() {
     local dir="$1"
     local clean_dir="${dir#./}"
     [[ -z "${clean_dir}" ]] && clean_dir="."
-    local scratch_args=()
-    if [[ -n "${flags+x}" ]]; then
-        for ((i=0; i<${#flags[@]}; i++)); do
-            if [[ "${flags[i]}" == "--scratch-path" && $((i+1)) -lt ${#flags[@]} ]]; then
-                scratch_args=("--scratch-path" "${flags[i+1]}")
+
+    if [[ -f "${dir}/Package.resolved.ci-bak" ]]; then
+        mv "${dir}/Package.resolved.ci-bak" "${dir}/Package.resolved"
+    else
+        for res in "${_CREATED_RESOLVED[@]}"; do
+            if [[ "${res}" == "${dir}/Package.resolved" ]]; then
+                rm -f "${dir}/Package.resolved"
                 break
             fi
         done
     fi
-    for item in "${_LOCAL_DEPENDENCIES[@]}"; do
-        local dep_rel="${item%%:*}"
-        local dep_name="${item##*:}"
-        if [[ "${clean_dir}" != "${dep_rel}" && "${clean_dir}" != "${REPO_ROOT}/${dep_rel}" ]]; then
-            swift package "${scratch_args[@]}" --package-path "${dir}" unedit --force "${dep_name}" >/dev/null 2>&1 || true
-        fi
-    done
-    if [[ "${clean_dir}" == "." || "${clean_dir}" == "${REPO_ROOT}" ]]; then
-        git -C "${REPO_ROOT}" restore Package.resolved || true
-    fi
+
     if [[ -n "${flags+x}" ]]; then
         for p in "${_REMOVED_DISABLE_RESOLUTION[@]}"; do
             if [[ "${p}" == "${dir}" ]]; then
@@ -129,6 +104,20 @@ restore_all_package_dependencies() {
     for p in "${_EDITED_PACKAGES[@]}"; do
         restore_package_dependencies "${p}"
     done
+
+    unset GOOGLE_CLOUD_SWIFT_LOCAL_DEPS
+
+    for res in "${_MODIFIED_RESOLVED[@]}"; do
+        if [[ -f "${res}.ci-bak" ]]; then
+            mv "${res}.ci-bak" "${res}"
+        fi
+    done
+    _MODIFIED_RESOLVED=()
+
+    for res in "${_CREATED_RESOLVED[@]}"; do
+        rm -f "${res}"
+    done
+    _CREATED_RESOLVED=()
 }
 
 trap restore_all_package_dependencies EXIT INT TERM
