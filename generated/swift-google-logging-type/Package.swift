@@ -24,7 +24,7 @@ let package = Package(
     .library(name: "GoogleCloudLoggingType", targets: ["GoogleCloudLoggingType"])
   ],
   dependencies: [
-    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview")
+    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.2.0")
   ],
   targets: [
     .target(

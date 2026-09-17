@@ -24,29 +24,22 @@ let package = Package(
     .library(name: "GoogleCloudGSuiteAddOnsV1", targets: ["GoogleCloudGSuiteAddOnsV1"])
   ],
   dependencies: [
+    .package(url: "https://github.com/googleapis/swift-google-apps-script-type", from: "0.2.0"),
     .package(
-      url: "https://github.com/googleapis/swift-google-apps-script-type", from: "0.0.0-preview"),
+      url: "https://github.com/googleapis/swift-google-apps-script-type-calendar", from: "0.2.0"),
     .package(
-      url: "https://github.com/googleapis/swift-google-apps-script-type-calendar",
-      from: "0.0.0-preview"),
+      url: "https://github.com/googleapis/swift-google-apps-script-type-docs", from: "0.2.0"),
     .package(
-      url: "https://github.com/googleapis/swift-google-apps-script-type-docs", from: "0.0.0-preview"
-    ),
+      url: "https://github.com/googleapis/swift-google-apps-script-type-drive", from: "0.2.0"),
     .package(
-      url: "https://github.com/googleapis/swift-google-apps-script-type-drive",
-      from: "0.0.0-preview"),
+      url: "https://github.com/googleapis/swift-google-apps-script-type-gmail", from: "0.2.0"),
     .package(
-      url: "https://github.com/googleapis/swift-google-apps-script-type-gmail",
-      from: "0.0.0-preview"),
+      url: "https://github.com/googleapis/swift-google-apps-script-type-sheets", from: "0.2.0"),
     .package(
-      url: "https://github.com/googleapis/swift-google-apps-script-type-sheets",
-      from: "0.0.0-preview"),
-    .package(
-      url: "https://github.com/googleapis/swift-google-apps-script-type-slides",
-      from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
+      url: "https://github.com/googleapis/swift-google-apps-script-type-slides", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.2.0"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [

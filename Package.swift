@@ -53,9 +53,9 @@ let baseModules: [Target.Dependency] =
 // Declaring both a remote URL and a path dependency for the same package makes
 // SwiftPM dependency resolution fail, so this list must not reference them.
 let baseDependencies: [Package.Dependency] = [
-  .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.0.0-preview"),
-  .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.0.0-preview"),
-  .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
+  .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.2.0"),
+  .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.2.0"),
+  .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.2.0"),
   // Reference local packages via paths
   .package(path: "./pkgs/swift-google-cloud-storage"),
   .package(path: "./guide"),

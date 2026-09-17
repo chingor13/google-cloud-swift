@@ -24,13 +24,13 @@ let package = Package(
     .library(name: "GoogleApiServiceManagementV1", targets: ["GoogleApiServiceManagementV1"])
   ],
   dependencies: [
-    .package(url: "https://github.com/googleapis/swift-google-api", from: "0.1.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-iam-v1", from: "0.1.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-longrunning", from: "0.1.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-rpc", from: "0.1.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
+    .package(url: "https://github.com/googleapis/swift-google-api", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-iam-v1", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-longrunning", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-rpc", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.2.0"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [

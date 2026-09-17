@@ -24,9 +24,9 @@ let package = Package(
     .library(name: "GoogleBigQueryLoggingV1", targets: ["GoogleBigQueryLoggingV1"])
   ],
   dependencies: [
-    .package(url: "https://github.com/googleapis/swift-google-iam-v1", from: "0.1.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-rpc", from: "0.1.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
+    .package(url: "https://github.com/googleapis/swift-google-iam-v1", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-rpc", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.2.0"),
   ],
   targets: [
     .target(

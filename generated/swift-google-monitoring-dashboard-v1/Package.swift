@@ -25,11 +25,11 @@ let package = Package(
       name: "GoogleCloudMonitoringDashboardV1", targets: ["GoogleCloudMonitoringDashboardV1"])
   ],
   dependencies: [
-    .package(url: "https://github.com/googleapis/swift-google-api", from: "0.1.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.0.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-type", from: "0.1.0-preview"),
-    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.1.0-preview"),
+    .package(url: "https://github.com/googleapis/swift-google-api", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-auth", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-gax", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-type", from: "0.2.0"),
+    .package(url: "https://github.com/googleapis/swift-google-wkt", from: "0.2.0"),
     .package(url: "https://github.com/apple/swift-log", from: "1.12.0"),
   ],
   targets: [
