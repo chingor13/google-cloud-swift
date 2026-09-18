@@ -14,8 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+if [[ -n "${_PACKAGE_DEPENDENCIES_LOADED:-}" ]]; then
+    return 0
+fi
+_PACKAGE_DEPENDENCIES_LOADED=1
+
+_PKG_DEPS_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+REPO_ROOT="$(cd "${_PKG_DEPS_SCRIPT_DIR}/.." && pwd)"
+
+export GOOGLE_CLOUD_SWIFT_LOCAL_DEPS="${REPO_ROOT}"
 
 _EDITED_PACKAGES=()
 _REMOVED_DISABLE_RESOLUTION=()
@@ -49,7 +56,7 @@ edit_package_dependencies() {
     if [[ -n "${flags+x}" ]]; then
         local filtered_flags=()
         local had_flag=false
-        for f in "${flags[@]}"; do
+        for f in ${flags[@]+"${flags[@]}"}; do
             if [[ "${f}" == "--disable-automatic-resolution" ]]; then
                 had_flag=true
             else
@@ -58,7 +65,7 @@ edit_package_dependencies() {
         done
         if [[ "${had_flag}" == true ]]; then
             _REMOVED_DISABLE_RESOLUTION+=("${dir}")
-            flags=("${filtered_flags[@]}")
+            flags=(${filtered_flags[@]+"${filtered_flags[@]}"})
         fi
     fi
 }
@@ -71,7 +78,7 @@ restore_package_dependencies() {
     if [[ -f "${dir}/Package.resolved.ci-bak" ]]; then
         mv "${dir}/Package.resolved.ci-bak" "${dir}/Package.resolved"
     else
-        for res in "${_CREATED_RESOLVED[@]}"; do
+        for res in ${_CREATED_RESOLVED[@]+"${_CREATED_RESOLVED[@]}"}; do
             if [[ "${res}" == "${dir}/Package.resolved" ]]; then
                 rm -f "${dir}/Package.resolved"
                 break
@@ -80,7 +87,7 @@ restore_package_dependencies() {
     fi
 
     if [[ -n "${flags+x}" ]]; then
-        for p in "${_REMOVED_DISABLE_RESOLUTION[@]}"; do
+        for p in ${_REMOVED_DISABLE_RESOLUTION[@]+"${_REMOVED_DISABLE_RESOLUTION[@]}"}; do
             if [[ "${p}" == "${dir}" ]]; then
                 flags+=("--disable-automatic-resolution")
                 break
@@ -88,33 +95,33 @@ restore_package_dependencies() {
         done
     fi
     local new_removed=()
-    for p in "${_REMOVED_DISABLE_RESOLUTION[@]}"; do
+    for p in ${_REMOVED_DISABLE_RESOLUTION[@]+"${_REMOVED_DISABLE_RESOLUTION[@]}"}; do
         [[ "${p}" != "${dir}" ]] && new_removed+=("${p}")
     done
-    _REMOVED_DISABLE_RESOLUTION=("${new_removed[@]}")
+    _REMOVED_DISABLE_RESOLUTION=(${new_removed[@]+"${new_removed[@]}"})
 
     local new_list=()
-    for p in "${_EDITED_PACKAGES[@]}"; do
+    for p in ${_EDITED_PACKAGES[@]+"${_EDITED_PACKAGES[@]}"}; do
         [[ "${p}" != "${dir}" ]] && new_list+=("${p}")
     done
-    _EDITED_PACKAGES=("${new_list[@]}")
+    _EDITED_PACKAGES=(${new_list[@]+"${new_list[@]}"})
 }
 
 restore_all_package_dependencies() {
-    for p in "${_EDITED_PACKAGES[@]}"; do
+    for p in ${_EDITED_PACKAGES[@]+"${_EDITED_PACKAGES[@]}"}; do
         restore_package_dependencies "${p}"
     done
 
     unset GOOGLE_CLOUD_SWIFT_LOCAL_DEPS
 
-    for res in "${_MODIFIED_RESOLVED[@]}"; do
+    for res in ${_MODIFIED_RESOLVED[@]+"${_MODIFIED_RESOLVED[@]}"}; do
         if [[ -f "${res}.ci-bak" ]]; then
             mv "${res}.ci-bak" "${res}"
         fi
     done
     _MODIFIED_RESOLVED=()
 
-    for res in "${_CREATED_RESOLVED[@]}"; do
+    for res in ${_CREATED_RESOLVED[@]+"${_CREATED_RESOLVED[@]}"}; do
         rm -f "${res}"
     done
     _CREATED_RESOLVED=()
