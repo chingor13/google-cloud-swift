@@ -43,6 +43,19 @@ To prevent future SDK updates from breaking your application, please observe the
 - Keep extensions on SDK types `internal` or `private` within your module.
 - Avoid adding `public` extensions to SDK types unless the member signature includes custom types from your own module or is uniquely prefixed, to avoid collisions if the SDK introduces a method or property with the same name.
 
+### Using Multiple Client Packages
+
+- **Module-Qualify Shared Namespaces (`Clients`)**: Each generated client module exports a top-level `public enum Clients` namespace containing its service protocols (e.g., `Clients.SecretManagerServiceProtocol`, `Clients.WorkflowsProtocol`). When importing more than one Google Cloud module in the same Swift file, qualify `Clients` (or colliding message names) with the module name—or declare a `typealias`—to avoid ambiguity errors (`'Clients' is ambiguous for type lookup in this context`):
+  ```swift
+  import GoogleCloudSecretManagerV1
+  import GoogleCloudWorkflowsV1
+
+  typealias SecretManagerServiceProtocol =
+    GoogleCloudSecretManagerV1.Clients.SecretManagerServiceProtocol
+  typealias WorkflowsProtocol =
+    GoogleCloudWorkflowsV1.Clients.WorkflowsProtocol
+  ```
+
 ### Dependencies and Toolchain
 
 - **Swift Tools Version**: We do not consider changes to `swift-tools-version` to be breaking changes.
