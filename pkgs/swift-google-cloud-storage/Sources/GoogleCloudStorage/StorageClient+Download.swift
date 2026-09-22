@@ -23,12 +23,12 @@ extension StorageClient {
   ///   - bucket: The GCS bucket name.
   ///   - object: The GCS object name.
   ///   - options: Configuration options for the read operation.
-  /// - Returns: A `ReadObjectTask` containing initial object metadata and streaming body sequence.
+  /// - Returns: An `ObjectDownload` containing initial object metadata and streaming body sequence.
   public func readObject(
     from bucket: String,
     object: String,
     options: ReadObjectOptions = .init()
-  ) -> ReadObjectTask {
+  ) -> ObjectDownload {
     let effectiveOptions = options.withDefaults(self.options.download)
     let resumeLoop = _ResumeLoop(
       resumePolicy: effectiveOptions.resumePolicy
@@ -43,7 +43,7 @@ extension StorageClient {
       httpClient: inner,
       resumeLoop: resumeLoop
     )
-    return ReadObjectTask(coordinator: coordinator)
+    return ObjectDownload(coordinator: coordinator)
   }
 
   internal static func parseReadObjectMetadata(

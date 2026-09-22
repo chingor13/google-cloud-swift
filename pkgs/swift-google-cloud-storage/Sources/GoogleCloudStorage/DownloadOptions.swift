@@ -773,7 +773,7 @@ package final class ReadObjectCoordinator: @unchecked Sendable {
 }
 
 /// Container object returned by `readObject` containing metadata and the streaming body sequence.
-public struct ReadObjectTask: Sendable {
+public struct ObjectDownload: Sendable {
   private let coordinator: ReadObjectCoordinator
 
   package init(coordinator: ReadObjectCoordinator) {

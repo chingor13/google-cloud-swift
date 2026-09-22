@@ -52,5 +52,5 @@ public protocol StorageProtocol {
     from bucket: String,
     object: String,
     options: ReadObjectOptions
-  ) -> ReadObjectTask
+  ) -> ObjectDownload
 }
