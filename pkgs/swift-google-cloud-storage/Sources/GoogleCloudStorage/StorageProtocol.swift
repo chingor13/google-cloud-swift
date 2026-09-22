@@ -47,10 +47,27 @@ public protocol StorageProtocol {
     options: UploadOptions
   ) async throws -> Object
 
-  /// Reads (downloads) an object from Cloud Storage as an async sequence of ByteBuffer chunks.
+  /// Starts an object download from Cloud Storage.
+  ///
+  /// Iterate over ``ObjectDownload/body`` on the returned ``ObjectDownload`` to stream the
+  /// object's content as an asynchronous sequence of ``ByteBuffer`` chunks, or `await`
+  /// ``ObjectDownload/metadata`` to inspect the object's metadata.
+  ///
+  /// ```swift
+  /// let download = client.readObject(from: "my-bucket", object: "my-object", options: .init())
+  /// for try await chunk in download.body {
+  ///   // Process ByteBuffer chunk
+  /// }
+  /// ```
+  ///
+  /// - Parameters:
+  ///   - bucket: The GCS bucket name.
+  ///   - object: The GCS object name.
+  ///   - options: Configuration options for the read operation.
+  /// - Returns: An ``ObjectDownload`` providing access to the object's ``ObjectDownload/metadata`` and streaming ``ObjectDownload/body``.
   func readObject(
     from bucket: String,
     object: String,
     options: ReadObjectOptions
-  ) -> ReadObjectTask
+  ) -> ObjectDownload
 }

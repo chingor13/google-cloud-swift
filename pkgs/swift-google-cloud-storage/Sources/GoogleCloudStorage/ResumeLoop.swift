@@ -55,8 +55,14 @@ package struct _ResumeLoop<Details: Sendable>: Sendable {
     error: any Error,
     sleep: (Duration) async throws -> Void = { (d: Duration) in try await Task.sleep(for: d) }
   ) async throws {
+    if error is CancellationError || Task.isCancelled {
+      throw CancellationError()
+    }
     guard let requestError = error as? RequestError else {
       throw error
+    }
+    if case .io(let underlying) = requestError, underlying is CancellationError {
+      throw CancellationError()
     }
     state.consecutiveErrorCount += 1
     state.totalResumeCount += 1
