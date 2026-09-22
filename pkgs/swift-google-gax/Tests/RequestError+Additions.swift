@@ -41,12 +41,6 @@ extension HTTPDetails: Equatable {
   }
 }
 
-extension ServiceError: Equatable {
-  public static func == (lhs: ServiceError, rhs: ServiceError) -> Bool {
-    return lhs.code == rhs.code && lhs.message == rhs.message
-  }
-}
-
 extension LimitedElapsedTimeError: Equatable {
   public static func == (lhs: LimitedElapsedTimeError, rhs: LimitedElapsedTimeError) -> Bool {
     return lhs.maximumDuration == rhs.maximumDuration && lhs.source == rhs.source
