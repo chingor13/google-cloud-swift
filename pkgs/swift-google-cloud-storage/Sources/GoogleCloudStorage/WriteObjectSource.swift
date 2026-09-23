@@ -21,7 +21,7 @@ import Foundation
 ///   clause in `switch` statements.
 public enum WriteObjectSourceError: Error, Sendable {
   /// The requested seek offset exceeds the size of the source.
-  case offsetOutOfBounds(offset: UInt64, size: UInt64)
+  case offsetOutOfBounds(offset: Int64, size: Int64)
 
   /// Reading from the underlying data source failed.
   case readFailed(underlyingError: any Error)
@@ -34,12 +34,12 @@ public protocol WriteObjectSource: Sendable {
   mutating func read(maxBytes: Int) async throws -> ByteChunk?
 
   /// The total size of the source, if known.
-  var totalSize: UInt64? { get }
+  var totalSize: Int64? { get }
 }
 
 /// Represents a write object source that supports seeking (rewinding/skipping).
 /// Conformance to this protocol enables persistent resumption.
 public protocol SeekableWriteObjectSource: WriteObjectSource {
   /// Seeks to a specific byte offset.
-  mutating func seek(to offset: UInt64) async throws
+  mutating func seek(to offset: Int64) async throws
 }

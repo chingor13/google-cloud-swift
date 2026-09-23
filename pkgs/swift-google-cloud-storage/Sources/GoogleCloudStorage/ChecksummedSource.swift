@@ -31,8 +31,8 @@ struct ChecksummedSource<S: WriteObjectSource> {
   /// All bytes in `0 ..< bytesHashed` have already been fed into the checksum calculators.
   /// When seeking backward (`offset < bytesHashed`), `bytesHashed` is not decremented,
   /// ensuring that re-reading previously hashed bytes will not cause duplicate hashing.
-  private var bytesHashed: UInt64 = 0
-  private var nextChunkOffset: UInt64 = 0
+  private var bytesHashed: Int64 = 0
+  private var nextChunkOffset: Int64 = 0
 
   init(source: S, options: ChecksumOptions) {
     self.source = source
@@ -58,7 +58,7 @@ struct ChecksummedSource<S: WriteObjectSource> {
   /// Because the other hash algorithm used by Cloud Storage (MD5) does not support
   /// intermediate running seeds from GCS, any dynamic non-seedable calculators are discarded
   /// to prevent corruption when `bytesHashed` is rewound.
-  mutating func seedCRC32C(seed: UInt32, bytesHashed: UInt64) {
+  mutating func seedCRC32C(seed: UInt32, bytesHashed: Int64) {
     self.bytesHashed = bytesHashed
     self.calculators = self.calculators.compactMap { calc in
       if calc is CRC32CCalculator {
@@ -78,10 +78,10 @@ struct ChecksummedSource<S: WriteObjectSource> {
   /// To support seeking backward and retrying chunk uploads without corrupting checksums,
   /// this method skips any prefix of `data` that falls below `bytesHashed` (the high-water mark
   /// of bytes already fed into `calculators`). Only bytes beyond `bytesHashed` are accumulated.
-  private mutating func updateChecksums(data: ByteChunk, startOffset: UInt64) {
+  private mutating func updateChecksums(data: ByteChunk, startOffset: Int64) {
     guard !calculators.isEmpty else { return }
 
-    let endOffset = startOffset + UInt64(data.count)
+    let endOffset = startOffset + Int64(data.count)
     guard endOffset > bytesHashed else { return }
 
     let unhashedData: ByteChunk
@@ -114,7 +114,7 @@ struct ChecksummedSource<S: WriteObjectSource> {
     }
 
     let currentChunkOffset = nextChunkOffset
-    nextChunkOffset += UInt64(currentChunk.count)
+    nextChunkOffset += Int64(currentChunk.count)
 
     do {
       nextChunk = try await source.read(maxBytes: maxBytes)
@@ -150,7 +150,7 @@ extension ChecksummedSource where S: SeekableWriteObjectSource {
   ///   leaves `bytesHashed` unchanged. When the stream is subsequently re-read,
   ///   `updateChecksums` will skip the already-hashed bytes `offset ..< bytesHashed`, preventing
   ///   duplicate accumulation into the hash calculators.
-  mutating func seek(to offset: UInt64) async throws {
+  mutating func seek(to offset: Int64) async throws {
     nextChunk = nil
     isInitialized = false
     isFinished = false
@@ -173,7 +173,7 @@ extension ChecksummedSource where S: SeekableWriteObjectSource {
     }
     var currentSeekOffset = bytesHashed
     var bytesRemaining = offset - bytesHashed
-    let bufferSize: UInt64 = 8 * 1024 * 1024
+    let bufferSize: Int64 = 8 * 1024 * 1024
     while bytesRemaining > 0 {
       let toRead = Int(min(bytesRemaining, bufferSize))
       let chunk: ByteChunk?
@@ -187,8 +187,8 @@ extension ChecksummedSource where S: SeekableWriteObjectSource {
           WriteObjectSourceError.offsetOutOfBounds(offset: offset, size: currentSeekOffset))
       }
       updateChecksums(data: chunk, startOffset: currentSeekOffset)
-      currentSeekOffset += UInt64(chunk.count)
-      bytesRemaining -= UInt64(chunk.count)
+      currentSeekOffset += Int64(chunk.count)
+      bytesRemaining -= Int64(chunk.count)
     }
   }
 }

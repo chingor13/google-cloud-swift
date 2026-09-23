@@ -102,6 +102,61 @@ import Testing
     #expect(metadata.updated == now)
   }
 
+  @Test func int64TypeConsistencyAcrossStorageTypes() {
+    var uploadedObject = Object()
+    uploadedObject.generation = 987_654_321
+    uploadedObject.metageneration = 4
+    uploadedObject.size = 1_048_576
+
+    let readOptions = ReadObjectOptions().with {
+      $0.generation = uploadedObject.generation
+      $0.preconditions = StoragePreconditions().with {
+        $0.ifGenerationMatch = uploadedObject.generation
+        $0.ifMetagenerationMatch = uploadedObject.metageneration
+      }
+    }
+    #expect(readOptions.generation == uploadedObject.generation)
+    #expect(readOptions.preconditions?.ifGenerationMatch == uploadedObject.generation)
+    #expect(readOptions.preconditions?.ifMetagenerationMatch == uploadedObject.metageneration)
+
+    let readMetadata = ReadObjectMetadata().with {
+      $0.generation = uploadedObject.generation
+      $0.metageneration = uploadedObject.metageneration
+      $0.size = uploadedObject.size
+      $0.storedContentLength = uploadedObject.size
+    }
+    let preconditionsFromMetadata = StoragePreconditions().with {
+      $0.ifGenerationMatch = readMetadata.generation
+      $0.ifMetagenerationMatch = readMetadata.metageneration
+    }
+    #expect(preconditionsFromMetadata.ifGenerationMatch == readMetadata.generation)
+    #expect(preconditionsFromMetadata.ifMetagenerationMatch == readMetadata.metageneration)
+
+    let readDetails = ReadObjectDetails(
+      bytesRead: readMetadata.size,
+      totalBytes: readMetadata.size
+    )
+    let writeDetails = WriteObjectDetails(
+      bytesWritten: uploadedObject.size,
+      totalBytes: uploadedObject.size
+    )
+    #expect(readDetails.bytesRead == writeDetails.bytesWritten)
+    #expect(readDetails.totalBytes == writeDetails.totalBytes)
+
+    let rangeFromSize = ReadObjectRange.bounded(0...(uploadedObject.size - 1))
+    let rangeFromOffset = ReadObjectRange.fromOffset(readDetails.bytesRead)
+    let rangePrefix = ReadObjectRange.prefix(uploadedObject.size)
+    let rangeSuffix = ReadObjectRange.suffix(uploadedObject.size)
+    #expect(rangeFromSize.headerValue == "bytes=0-1048575")
+    #expect(rangeFromOffset.headerValue == "bytes=1048576-")
+    #expect(rangePrefix.headerValue == "bytes=0-1048575")
+    #expect(rangeSuffix.headerValue == "bytes=-1048576")
+
+    let source = BytesSource(data: Data(count: 16))
+    let totalSize: Int64? = source.totalSize
+    #expect(totalSize == 16)
+  }
+
   @Test func calculateResumeRangeScenarios() {
     // Entire
     #expect(

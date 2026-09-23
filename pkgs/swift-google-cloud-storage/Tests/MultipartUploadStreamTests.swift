@@ -30,7 +30,7 @@ import Testing
       boundary: boundary,
       metadataJson: metadataJson,
       contentType: "text/plain",
-      totalSize: UInt64(payload.count),
+      totalSize: Int64(payload.count),
       chunkSize: 4
     )
 
@@ -45,7 +45,7 @@ import Testing
     let expectedEpilogue = "\r\n--TestBoundary123--\r\n"
     let expectedFullString = expectedPreamble + "Hello, World!" + expectedEpilogue
 
-    #expect(UInt64(collected.readableBytes) == stream.bodyLength)
+    #expect(Int64(collected.readableBytes) == stream.bodyLength)
     #expect(collected.readableBytes == expectedFullString.utf8.count)
 
     let actualString = collected.withUnsafeReadableBytes { String(decoding: $0, as: UTF8.self) }
@@ -64,7 +64,7 @@ import Testing
       boundary: boundary,
       metadataJson: metadataJson,
       contentType: "application/octet-stream",
-      totalSize: UInt64(payload.count),
+      totalSize: Int64(payload.count),
       options: .default,
       chunkSize: 4
     )
@@ -79,7 +79,7 @@ import Testing
       var copy = chunk
       collected.writeBuffer(&copy)
     }
-    #expect(UInt64(collected.readableBytes) == stream.bodyLength)
+    #expect(Int64(collected.readableBytes) == stream.bodyLength)
   }
 
   /// Tests MultipartUploadStream.prepare with a non-seekable UploadSource and automatic checksums.
@@ -91,14 +91,14 @@ import Testing
       continuation.yield(payload)
       continuation.finish()
     }
-    let source = StreamSource(sequence: asyncStream, totalSize: UInt64(payload.count))
+    let source = StreamSource(sequence: asyncStream, totalSize: Int64(payload.count))
 
     let prepared = try await MultipartUploadStream.prepare(
       source: source,
       boundary: boundary,
       metadataJson: metadataJson,
       contentType: "text/plain",
-      totalSize: UInt64(payload.count),
+      totalSize: Int64(payload.count),
       options: .default,
       chunkSize: 8
     )
@@ -113,7 +113,7 @@ import Testing
       var copy = chunk
       collected.writeBuffer(&copy)
     }
-    #expect(UInt64(collected.readableBytes) == stream.bodyLength)
+    #expect(Int64(collected.readableBytes) == stream.bodyLength)
   }
 
   /// Tests MultipartUploadStream.prepare when checksum calculation is disabled.
@@ -128,7 +128,7 @@ import Testing
       boundary: boundary,
       metadataJson: metadataJson,
       contentType: "text/plain",
-      totalSize: UInt64(payload.count),
+      totalSize: Int64(payload.count),
       options: .none,
       chunkSize: 4
     )
@@ -142,7 +142,7 @@ import Testing
       var copy = chunk
       collected.writeBuffer(&copy)
     }
-    #expect(UInt64(collected.readableBytes) == stream.bodyLength)
+    #expect(Int64(collected.readableBytes) == stream.bodyLength)
   }
 
   /// Tests that MultipartUploadStream throws when the source returns fewer bytes than totalSize.
@@ -183,7 +183,7 @@ import Testing
       boundary: boundary,
       metadataJson: metadataJson,
       contentType: "text/plain",
-      totalSize: UInt64(payload.count),
+      totalSize: Int64(payload.count),
       chunkSize: 4
     )
 
@@ -212,7 +212,7 @@ import Testing
       boundary: "Boundary123",
       metadataJson: Data("{}".utf8),
       contentType: "application/octet-stream",
-      totalSize: UInt64(payload.count),
+      totalSize: Int64(payload.count),
       chunkSize: 4
     )
 
@@ -231,7 +231,7 @@ import Testing
       var copy = chunk
       collected.writeBuffer(&copy)
     }
-    #expect(UInt64(collected.readableBytes) == stream.bodyLength)
+    #expect(Int64(collected.readableBytes) == stream.bodyLength)
   }
 
   /// Tests that MultipartUploadStream.prepare rewinds a seekable source back to offset 0 even if it had been partially read.
@@ -246,7 +246,7 @@ import Testing
       boundary: "BoundaryRewind",
       metadataJson: Data("{}".utf8),
       contentType: "application/octet-stream",
-      totalSize: UInt64(payload.count),
+      totalSize: Int64(payload.count),
       options: .none,
       chunkSize: 4
     )
@@ -256,7 +256,7 @@ import Testing
       var copy = chunk
       collected.writeBuffer(&copy)
     }
-    #expect(UInt64(collected.readableBytes) == prepared.stream.bodyLength)
+    #expect(Int64(collected.readableBytes) == prepared.stream.bodyLength)
   }
 
   /// Tests that MultipartUploadStream.rewind rewinds a seekable source back to offset 0.
@@ -271,7 +271,7 @@ import Testing
       boundary: "BoundaryRewind",
       metadataJson: Data("{}".utf8),
       contentType: "application/octet-stream",
-      totalSize: UInt64(payload.count),
+      totalSize: Int64(payload.count),
       chunkSize: 4
     )
 
@@ -282,6 +282,6 @@ import Testing
       var copy = chunk
       collected.writeBuffer(&copy)
     }
-    #expect(UInt64(collected.readableBytes) == stream.bodyLength)
+    #expect(Int64(collected.readableBytes) == stream.bodyLength)
   }
 }

@@ -65,8 +65,8 @@ struct StorageClientIntegrationTests {
     let metadata = try await result.metadata
     #expect(metadata.bucket == bucketResource)
     #expect(metadata.object == objectName)
-    #expect(metadata.size == UInt64(data.count))
-    #expect(metadata.generation == UInt64(uploadedObject.generation))
+    #expect(metadata.size == uploadedObject.size)
+    #expect(metadata.generation == uploadedObject.generation)
 
     var downloadedData = Data()
     for try await chunk in result.body {
@@ -139,8 +139,8 @@ struct StorageClientIntegrationTests {
     let metadata = try await result.metadata
     #expect(metadata.bucket == bucketResource)
     #expect(metadata.object == objectName)
-    #expect(metadata.size == UInt64(data.count))
-    #expect(metadata.generation == UInt64(uploadedObject.generation))
+    #expect(metadata.size == uploadedObject.size)
+    #expect(metadata.generation == uploadedObject.generation)
 
     var downloadedData = Data()
     for try await chunk in result.body {
@@ -325,8 +325,8 @@ struct StorageClientIntegrationTests {
     let metadata = try await result.metadata
     #expect(metadata.bucket == bucketResource)
     #expect(metadata.object == objectName)
-    #expect(metadata.size == UInt64(data.count))
-    #expect(metadata.generation == UInt64(uploadedObject.generation))
+    #expect(metadata.size == uploadedObject.size)
+    #expect(metadata.generation == uploadedObject.generation)
 
     var downloadedData = Data()
     for try await chunk in result.body {
@@ -400,7 +400,7 @@ struct StorageClientIntegrationTests {
     let result = storage.readObject(
       from: bucketName, object: objectName, options: downloadOptions)
     let metadata = try await result.metadata
-    #expect(metadata.size == UInt64(fileSize))
+    #expect(metadata.size == Int64(fileSize))
 
     var downloadedData = Data()
     for try await chunk in result.body {
@@ -632,7 +632,7 @@ struct StorageClientGzipDownloadIntegrationTests {
     }
     // Downloader receives the original gzip-compressed file
     #expect(downloadedData == Self.compressedGzipData)
-    #expect(metadata.size == UInt64(Self.compressedGzipData.count))
+    #expect(metadata.size == Int64(Self.compressedGzipData.count))
 
     print(
       "Gzip prevent transcoding via request header integration test successful: \(metadata)"
@@ -672,7 +672,7 @@ struct StorageClientGzipDownloadIntegrationTests {
     }
     // Downloader receives the original gzip-compressed file because of Cache-Control: no-transform
     #expect(downloadedData == Self.compressedGzipData)
-    #expect(metadata.size == UInt64(Self.compressedGzipData.count))
+    #expect(metadata.size == Int64(Self.compressedGzipData.count))
 
     print(
       "Gzip prevent transcoding via Cache-Control no-transform integration test successful: \(metadata)"
@@ -685,7 +685,7 @@ struct StorageClientRangedDownloadIntegrationTests {
   struct FixtureState: Sendable {
     let bucketName: String
     let objectName: String
-    let totalSize: UInt64
+    let totalSize: Int64
     let uploadedObject: Object
   }
 
@@ -706,7 +706,7 @@ struct StorageClientRangedDownloadIntegrationTests {
     return FixtureState(
       bucketName: bucket,
       objectName: objName,
-      totalSize: UInt64(data.count),
+      totalSize: Int64(data.count),
       uploadedObject: obj
     )
   }
@@ -730,7 +730,7 @@ struct StorageClientRangedDownloadIntegrationTests {
     let metadata = try await result.metadata
 
     #expect(metadata.size == fixture.totalSize)
-    #expect(metadata.generation == UInt64(fixture.uploadedObject.generation))
+    #expect(metadata.generation == fixture.uploadedObject.generation)
 
     var downloadedData = Data()
     for try await chunk in result.body {
@@ -751,7 +751,7 @@ struct StorageClientRangedDownloadIntegrationTests {
     let metadata = try await result.metadata
 
     #expect(metadata.size == fixture.totalSize)
-    #expect(metadata.generation == UInt64(fixture.uploadedObject.generation))
+    #expect(metadata.generation == fixture.uploadedObject.generation)
 
     var downloadedData = Data()
     for try await chunk in result.body {
@@ -794,10 +794,10 @@ struct StorageClientRangedDownloadIntegrationTests {
 private struct IntegrationDynamicSource: WriteObjectSource {
   let chunkSize: Int
   let totalChunks: Int
-  let totalSize: UInt64?
+  let totalSize: Int64?
   private var currentChunk: Int = 0
 
-  init(chunkSize: Int, totalChunks: Int, totalSize: UInt64? = nil) {
+  init(chunkSize: Int, totalChunks: Int, totalSize: Int64? = nil) {
     self.chunkSize = chunkSize
     self.totalChunks = totalChunks
     self.totalSize = totalSize

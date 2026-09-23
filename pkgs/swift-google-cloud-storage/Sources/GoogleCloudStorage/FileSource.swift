@@ -41,13 +41,10 @@ private final class FileHandleBox: @unchecked Sendable {
     }
   }
 
-  func read(maxBytes: Int, offset: UInt64) async throws -> NIOCore.ByteBuffer? {
-    guard let off = Int64(exactly: offset) else {
-      throw WriteObjectSourceError.offsetOutOfBounds(offset: offset, size: UInt64(Int64.max))
-    }
+  func read(maxBytes: Int, offset: Int64) async throws -> NIOCore.ByteBuffer? {
     do {
       let buffer = try await handle.readChunk(
-        fromAbsoluteOffset: off,
+        fromAbsoluteOffset: offset,
         length: .bytes(Int64(maxBytes))
       )
       guard buffer.readableBytes > 0 else { return nil }
@@ -65,13 +62,13 @@ private final class FileHandleBox: @unchecked Sendable {
 /// A write object source that reads from a local file.
 public struct FileSource: SeekableWriteObjectSource {
   public let fileURL: URL
-  private var offset: UInt64 = 0
+  private var offset: Int64 = 0
   private var handleBox: FileHandleBox?
 
-  public var totalSize: UInt64? {
+  public var totalSize: Int64? {
     do {
       let values = try fileURL.resourceValues(forKeys: [.fileSizeKey])
-      return values.fileSize.flatMap { $0 >= 0 ? UInt64($0) : nil }
+      return values.fileSize.flatMap { $0 >= 0 ? Int64($0) : nil }
     } catch {
       return nil
     }
@@ -106,11 +103,14 @@ public struct FileSource: SeekableWriteObjectSource {
       return nil
     }
 
-    offset += UInt64(nioBuffer.readableBytes)
+    offset += Int64(nioBuffer.readableBytes)
     return ByteChunk(nioBuffer)
   }
 
-  public mutating func seek(to offset: UInt64) async throws {
+  public mutating func seek(to offset: Int64) async throws {
+    if offset < 0 {
+      throw WriteObjectSourceError.offsetOutOfBounds(offset: offset, size: totalSize ?? 0)
+    }
     if let size = totalSize, offset > size {
       throw WriteObjectSourceError.offsetOutOfBounds(offset: offset, size: size)
     }

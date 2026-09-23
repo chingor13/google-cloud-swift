@@ -40,10 +40,10 @@ import Testing
   }
 
   @Test(arguments: [
-    ("bytes=0-1999", UInt64(2000)),
-    ("bytes=-2000", UInt64(2001)),
+    ("bytes=0-1999", Int64(2000)),
+    ("bytes=-2000", Int64(2001)),
   ])
-  func parseNextRangeStart(header: String, expectedNextStart: UInt64) throws {
+  func parseNextRangeStart(header: String, expectedNextStart: Int64) throws {
     let nextStart = try HttpRange.parseNextRangeStart(header)
     #expect(nextStart == expectedNextStart)
   }

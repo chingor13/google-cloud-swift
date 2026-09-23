@@ -66,7 +66,7 @@ import Testing
 
   @Test func genericDetails() {
     struct CustomDetails: Sendable, Equatable {
-      var bytes: UInt64
+      var bytes: Int64
     }
 
     var state = ResumeState(details: CustomDetails(bytes: 1024))

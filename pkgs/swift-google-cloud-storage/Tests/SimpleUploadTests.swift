@@ -354,8 +354,8 @@ import Testing
         self.data = data
       }
 
-      var totalSize: UInt64? {
-        UInt64(data.count)
+      var totalSize: Int64? {
+        Int64(data.count)
       }
 
       func read(maxBytes: Int) async throws -> ByteChunk? {
@@ -366,7 +366,7 @@ import Testing
         return ByteChunk(chunk)
       }
 
-      func seek(to offset: UInt64) async throws {
+      func seek(to offset: Int64) async throws {
         self.offset = Int(offset)
       }
     }

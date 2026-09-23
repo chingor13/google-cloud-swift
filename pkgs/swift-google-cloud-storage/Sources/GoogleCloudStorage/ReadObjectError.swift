@@ -27,7 +27,7 @@ public enum ReadObjectError: Error, Sendable {
   case invalidRangeHeader(String)
 
   /// Transparent download auto-resumption failed after a network interruption.
-  case resumeFailed(bytesReceived: UInt64, message: String)
+  case resumeFailed(bytesReceived: Int64, message: String)
 
   /// Cloud Storage returned an unexpected HTTP status code or error response during download.
   case unexpectedServerResponse(statusCode: Int, message: String)

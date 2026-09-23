@@ -25,14 +25,14 @@ public struct StreamSource: WriteObjectSource {
     }
   }
 
-  public var totalSize: UInt64? { return totalSizeValue }
-  private let totalSizeValue: UInt64?
+  public var totalSize: Int64? { return totalSizeValue }
+  private let totalSizeValue: Int64?
   private let stateBox: StateBox
   private var buffer = NIOCore.ByteBuffer()
 
   public init<S: AsyncSequence & Sendable>(
     sequence: S,
-    totalSize: UInt64? = nil
+    totalSize: Int64? = nil
   ) where S.Element == ByteChunk {
     self.totalSizeValue = totalSize
     var iterator = sequence.makeAsyncIterator()
@@ -44,7 +44,7 @@ public struct StreamSource: WriteObjectSource {
 
   public init<S: AsyncSequence & Sendable>(
     sequence: S,
-    totalSize: UInt64? = nil
+    totalSize: Int64? = nil
   ) where S.Element == Data {
     self.totalSizeValue = totalSize
     var iterator = sequence.makeAsyncIterator()
@@ -56,7 +56,7 @@ public struct StreamSource: WriteObjectSource {
 
   internal init<S: AsyncSequence & Sendable>(
     sequence: S,
-    totalSize: UInt64? = nil
+    totalSize: Int64? = nil
   ) where S.Element == NIOCore.ByteBuffer {
     self.totalSizeValue = totalSize
     var iterator = sequence.makeAsyncIterator()

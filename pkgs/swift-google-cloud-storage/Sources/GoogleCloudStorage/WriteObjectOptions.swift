@@ -632,16 +632,16 @@ extension CustomerEncryption {
 
 /// Represents a parsed HTTP `Range` header (e.g. `bytes=0-1999`).
 struct HttpRange: Sendable, Hashable, Equatable {
-  let start: UInt64?
-  let end: UInt64?
+  let start: Int64?
+  let end: Int64?
 
-  init(start: UInt64? = nil, end: UInt64? = nil) {
+  init(start: Int64? = nil, end: Int64? = nil) {
     self.start = start
     self.end = end
   }
 
   /// Parses an HTTP `Range` header and returns the next byte offset (`end + 1`).
-  static func parseNextRangeStart(_ header: String) throws -> UInt64 {
+  static func parseNextRangeStart(_ header: String) throws -> Int64 {
     let range = try parse(header)
     guard let end = range.end else {
       throw WriteObjectError.invalidRangeHeader(header)
@@ -664,8 +664,8 @@ struct HttpRange: Sendable, Hashable, Equatable {
     let startStr = parts[0]
     let endStr = parts[1]
 
-    let start = startStr.isEmpty ? nil : UInt64(startStr)
-    let end = endStr.isEmpty ? nil : UInt64(endStr)
+    let start = startStr.isEmpty ? nil : Int64(startStr)
+    let end = endStr.isEmpty ? nil : Int64(endStr)
 
     if startStr.isEmpty && endStr.isEmpty {
       throw WriteObjectError.invalidRangeHeader(header)
@@ -677,6 +677,12 @@ struct HttpRange: Sendable, Hashable, Equatable {
       throw WriteObjectError.invalidRangeHeader(header)
     }
     if start == nil && end == nil {
+      throw WriteObjectError.invalidRangeHeader(header)
+    }
+    if let s = start, s < 0 {
+      throw WriteObjectError.invalidRangeHeader(header)
+    }
+    if let e = end, e < 0 {
       throw WriteObjectError.invalidRangeHeader(header)
     }
     if let s = start, let e = end, s > e {

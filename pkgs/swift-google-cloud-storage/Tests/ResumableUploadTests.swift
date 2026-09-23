@@ -778,7 +778,7 @@ import Testing
     let objectName = "dynamic-computation-known"
     let chunkSize = 4 * 1024 * 1024
     let totalChunks = 3
-    let totalSize = UInt64(chunkSize * totalChunks)  // 12MB
+    let totalSize = Int64(chunkSize * totalChunks)  // 12MB
 
     let source = DynamicComputationSource(
       chunkSize: chunkSize, totalChunks: totalChunks, totalSize: totalSize)
@@ -870,7 +870,7 @@ import Testing
     let objectName = "dynamic-computation-seekable-resumed"
     let chunkSize = 4 * 1024 * 1024
     let totalChunks = 3
-    let totalSize = UInt64(chunkSize * totalChunks)  // 12MB
+    let totalSize = Int64(chunkSize * totalChunks)  // 12MB
 
     let source = SeekableComputationSource(chunkSize: chunkSize, totalChunks: totalChunks)
 
@@ -943,7 +943,7 @@ import Testing
     let objectName = "async-download-stream-known"
     let chunk1 = Data(repeating: 0x33, count: 5 * 1024 * 1024)
     let chunk2 = Data(repeating: 0x44, count: 5 * 1024 * 1024)
-    let totalSize = UInt64(chunk1.count + chunk2.count)  // 10MiB
+    let totalSize = Int64(chunk1.count + chunk2.count)  // 10MiB
 
     let asyncStream = makeAsyncStream(chunks: [chunk1, chunk2])
     let source = StreamSource(sequence: asyncStream, totalSize: totalSize)
@@ -2309,7 +2309,7 @@ import Testing
     let objectName = "non-seekable-uncommitted-recovery"
     let chunkSize = 4 * 1024 * 1024
     let totalChunks = 2
-    let totalSize = UInt64(chunkSize * totalChunks)
+    let totalSize = Int64(chunkSize * totalChunks)
 
     let source = DynamicComputationSource(
       chunkSize: chunkSize, totalChunks: totalChunks, totalSize: totalSize)
@@ -2379,7 +2379,7 @@ import Testing
     let objectName = "non-seekable-committed-advance"
     let chunkSize = 4 * 1024 * 1024
     let totalChunks = 2
-    let totalSize = UInt64(chunkSize * totalChunks)
+    let totalSize = Int64(chunkSize * totalChunks)
 
     let source = DynamicComputationSource(
       chunkSize: chunkSize, totalChunks: totalChunks, totalSize: totalSize)
@@ -2441,7 +2441,7 @@ import Testing
     let objectName = "non-seekable-partial-commit"
     let chunkSize = 1024 * 1024  // 1MiB
     let totalChunks = 2
-    let totalSize = UInt64(chunkSize * totalChunks)  // 2MiB
+    let totalSize = Int64(chunkSize * totalChunks)  // 2MiB
     let committedFirstChunk = 3 * 256 * 1024  // 768KiB
 
     let source = DynamicComputationSource(
@@ -2763,10 +2763,10 @@ import Testing
 private struct DynamicComputationSource: WriteObjectSource {
   let chunkSize: Int
   let totalChunks: Int
-  let totalSize: UInt64?
+  let totalSize: Int64?
   private var currentChunk: Int = 0
 
-  init(chunkSize: Int, totalChunks: Int, totalSize: UInt64?) {
+  init(chunkSize: Int, totalChunks: Int, totalSize: Int64?) {
     self.chunkSize = chunkSize
     self.totalChunks = totalChunks
     self.totalSize = totalSize
@@ -2785,27 +2785,27 @@ private struct DynamicComputationSource: WriteObjectSource {
 private struct SeekableComputationSource: SeekableWriteObjectSource {
   let chunkSize: Int
   let totalChunks: Int
-  let totalSize: UInt64?
-  private var currentOffset: UInt64 = 0
+  let totalSize: Int64?
+  private var currentOffset: Int64 = 0
 
   init(chunkSize: Int, totalChunks: Int) {
     self.chunkSize = chunkSize
     self.totalChunks = totalChunks
-    self.totalSize = UInt64(chunkSize * totalChunks)
+    self.totalSize = Int64(chunkSize * totalChunks)
   }
 
   mutating func read(maxBytes: Int) async throws -> ByteChunk? {
     guard let totalSize = totalSize, currentOffset < totalSize else { return nil }
-    let bytesToRead = min(UInt64(maxBytes), totalSize - currentOffset)
+    let bytesToRead = min(Int64(maxBytes), totalSize - currentOffset)
     guard bytesToRead > 0 else { return nil }
-    let chunkIndex = Int(currentOffset / UInt64(chunkSize))
+    let chunkIndex = Int(currentOffset / Int64(chunkSize))
     let byteVal = UInt8((chunkIndex + 1) % 256)
     currentOffset += bytesToRead
     return ByteChunk(Data(repeating: byteVal, count: Int(bytesToRead)))
   }
 
-  mutating func seek(to offset: UInt64) async throws {
-    guard let total = totalSize, offset <= total else {
+  mutating func seek(to offset: Int64) async throws {
+    guard let total = totalSize, offset >= 0, offset <= total else {
       throw WriteObjectSourceError.offsetOutOfBounds(offset: offset, size: totalSize ?? 0)
     }
     self.currentOffset = offset

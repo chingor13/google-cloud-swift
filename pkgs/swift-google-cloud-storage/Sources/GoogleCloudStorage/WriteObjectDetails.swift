@@ -17,10 +17,10 @@ import Foundation
 /// Progress and size details for an ongoing write object operation.
 public struct WriteObjectDetails: Sendable, Equatable {
   /// The total number of bytes successfully written or committed so far.
-  public var bytesWritten: UInt64
+  public var bytesWritten: Int64
 
   /// The total size of the object to write in bytes, if known.
-  public var totalBytes: UInt64?
+  public var totalBytes: Int64?
 
   /// Creates a new `WriteObjectDetails` instance.
   ///
@@ -28,8 +28,8 @@ public struct WriteObjectDetails: Sendable, Equatable {
   ///   - bytesWritten: Initial bytes written. Defaults to 0.
   ///   - totalBytes: Total object size in bytes if known. Defaults to `nil`.
   public init(
-    bytesWritten: UInt64 = 0,
-    totalBytes: UInt64? = nil
+    bytesWritten: Int64 = 0,
+    totalBytes: Int64? = nil
   ) {
     self.bytesWritten = bytesWritten
     self.totalBytes = totalBytes

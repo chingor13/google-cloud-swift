@@ -26,7 +26,7 @@ import NIOHTTP1
 
 package enum ResumableUploadStatus: Sendable {
   case unknown
-  case inprogress(UInt64)
+  case inprogress(Int64)
   case done(Object)
 }
 
@@ -61,7 +61,7 @@ extension StorageClient {
     do {
       // Determine if simple or resumable
       if let totalSize = source.totalSize, effectiveThreshold > 0,
-        totalSize < UInt64(effectiveThreshold)
+        totalSize < Int64(effectiveThreshold)
       {
         return try await Self.performSimpleUpload(
           httpClient: httpClient,
@@ -127,7 +127,7 @@ extension StorageClient {
     do {
       // Determine if simple or resumable
       if let totalSize = source.totalSize, effectiveThreshold > 0,
-        totalSize < UInt64(effectiveThreshold)
+        totalSize < Int64(effectiveThreshold)
       {
         return try await Self.performSimpleUpload(
           httpClient: httpClient,
@@ -170,7 +170,7 @@ extension StorageClient {
     objectName: String,
     metadata: WriteObjectMetadata?,
     options: WriteObjectOptions,
-    totalSize: UInt64,
+    totalSize: Int64,
     resumeLoop: _ResumeLoop<WriteObjectDetails>
   ) async throws -> Object {
     var queryItems = [URLQueryItem(name: "uploadType", value: "multipart")]
@@ -223,7 +223,7 @@ extension StorageClient {
       request.applyCustomerSuppliedEncryptionHeaders(options.customerEncryptionKey)
       request.setHeader(name: "Content-Type", value: "multipart/related; boundary=\(boundary)")
 
-      request.setBody(stream: stream, length: Int64(stream.bodyLength))
+      request.setBody(stream: stream, length: stream.bodyLength)
 
       let response: _HTTPClientResponse
       do {
@@ -322,8 +322,8 @@ extension StorageClient {
     httpClient: GoogleGax._HTTPClient,
     uploadId: String,
     data: ByteChunk,
-    offset: UInt64,
-    totalSize: UInt64?,
+    offset: Int64,
+    totalSize: Int64?,
     options: WriteObjectOptions,
     checksum: String?
   ) async throws -> (status: ResumableUploadStatus, crc32cSeed: UInt32?) {
@@ -352,8 +352,8 @@ extension StorageClient {
       let object = try await handleObjectResponse(response: uploadResponse)
       return (.done(object), nil)
     } else if statusCode == 308 {
-      let chunkEnd = offset + UInt64(data.count)
-      let nextOffset: UInt64
+      let chunkEnd = offset + Int64(data.count)
+      let nextOffset: Int64
       if let rangeHeader = uploadResponse.headers.first(name: "Range") {
         nextOffset = try HttpRange.parseNextRangeStart(rangeHeader)
       } else {
@@ -390,15 +390,15 @@ extension StorageClient {
     httpClient: GoogleGax._HTTPClient,
     checksummedSource: inout ChecksummedSource<S>,
     uploadId: String,
-    committedBytes: UInt64,
+    committedBytes: Int64,
     chunkSize: Int,
-    totalSize: UInt64?,
+    totalSize: Int64?,
     options: WriteObjectOptions,
-    maxBytesSent: inout UInt64
+    maxBytesSent: inout Int64
   ) async throws -> (status: ResumableUploadStatus, crc32cSeed: UInt32?) {
     let chunkInfo = try await checksummedSource.readChunk(maxBytes: chunkSize)
     let chunk: ByteChunk
-    let effectiveTotalSize: UInt64?
+    let effectiveTotalSize: Int64?
     let checksum: String?
 
     if let chunkInfo = chunkInfo, !chunkInfo.data.isEmpty {
@@ -406,13 +406,13 @@ extension StorageClient {
       let isLast = chunkInfo.isLast
       checksum = isLast ? chunkInfo.checksum : nil
       effectiveTotalSize =
-        (isLast && totalSize == nil) ? (committedBytes + UInt64(chunk.count)) : totalSize
+        (isLast && totalSize == nil) ? (committedBytes + Int64(chunk.count)) : totalSize
     } else {
       chunk = ByteChunk()
       effectiveTotalSize = totalSize ?? committedBytes
       checksum = checksummedSource.finalizeChecksum()
     }
-    let chunkEnd = committedBytes + UInt64(chunk.count)
+    let chunkEnd = committedBytes + Int64(chunk.count)
     maxBytesSent = max(maxBytesSent, chunkEnd)
 
     return try await sendChunk(
@@ -430,8 +430,8 @@ extension StorageClient {
     var data: ByteChunk
     let isLast: Bool
     let checksum: String?
-    var chunkStartOffset: UInt64
-    let effectiveTotalSize: UInt64?
+    var chunkStartOffset: Int64
+    let effectiveTotalSize: Int64?
   }
 
   fileprivate static func continueStreamingUpload<S: WriteObjectSource>(
@@ -443,7 +443,7 @@ extension StorageClient {
     uploadId: String?,
     initialStatus: ResumableUploadStatus,
     chunkSize: Int,
-    totalSize: UInt64?,
+    totalSize: Int64?,
     options: WriteObjectOptions,
     resumeLoop: _ResumeLoop<WriteObjectDetails>
   ) async throws -> Object {
@@ -452,8 +452,8 @@ extension StorageClient {
     var currentUploadId = uploadId
     var checksummedSource: ChecksummedSource<S>? = nil
     var pendingChunk: PendingChunk? = nil
-    var sourceBytesRead: UInt64 = 0
-    let initialBytes: UInt64
+    var sourceBytesRead: Int64 = 0
+    let initialBytes: Int64
     var isResumedSession = false
     if case .inprogress(let b) = initialStatus {
       initialBytes = b
@@ -541,7 +541,7 @@ extension StorageClient {
 
         if var pending = pendingChunk {
           let chunkStart = pending.chunkStartOffset
-          let chunkEnd = chunkStart + UInt64(pending.data.count)
+          let chunkEnd = chunkStart + Int64(pending.data.count)
 
           if committedBytes < chunkStart {
             throw WriteObjectError.internalError(
@@ -579,14 +579,14 @@ extension StorageClient {
           let chunk: ByteChunk
           let isLast: Bool
           let checksum: String?
-          let effectiveTotalSize: UInt64?
+          let effectiveTotalSize: Int64?
 
           if let chunkInfo = chunkInfo, !chunkInfo.data.isEmpty {
             chunk = chunkInfo.data
             isLast = chunkInfo.isLast
             checksum = isLast ? chunkInfo.checksum : nil
             effectiveTotalSize =
-              (isLast && totalSize == nil) ? (sourceBytesRead + UInt64(chunk.count)) : totalSize
+              (isLast && totalSize == nil) ? (sourceBytesRead + Int64(chunk.count)) : totalSize
           } else {
             chunk = ByteChunk()
             isLast = true
@@ -601,14 +601,14 @@ extension StorageClient {
             chunkStartOffset: sourceBytesRead,
             effectiveTotalSize: effectiveTotalSize
           )
-          sourceBytesRead += UInt64(chunk.count)
+          sourceBytesRead += Int64(chunk.count)
         }
 
         guard let chunkToSend = pendingChunk else {
           fatalError("pendingChunk must not be nil")
         }
 
-        let chunkEnd = chunkToSend.chunkStartOffset + UInt64(chunkToSend.data.count)
+        let chunkEnd = chunkToSend.chunkStartOffset + Int64(chunkToSend.data.count)
         maxBytesSent = max(maxBytesSent, chunkEnd)
 
         uploadStatus = .unknown
@@ -634,7 +634,7 @@ extension StorageClient {
         uploadStatus = chunkResult.status
         if case .inprogress(let nextBytes) = chunkResult.status {
           let chunkStart = chunkToSend.chunkStartOffset
-          let chunkEnd = chunkStart + UInt64(chunkToSend.data.count)
+          let chunkEnd = chunkStart + Int64(chunkToSend.data.count)
 
           if chunkToSend.data.isEmpty {
             // Empty finalization chunk that didn't complete (308 response).
@@ -667,7 +667,7 @@ extension StorageClient {
     initialStatus: ResumableUploadStatus,
     initialCrc32cSeed: UInt32? = nil,
     chunkSize: Int,
-    totalSize: UInt64?,
+    totalSize: Int64?,
     options: WriteObjectOptions,
     resumeLoop: _ResumeLoop<WriteObjectDetails>
   ) async throws -> Object {
@@ -676,7 +676,7 @@ extension StorageClient {
     var currentUploadId = uploadId
     var crc32cSeed = initialCrc32cSeed
     var checksummedSource: ChecksummedSource<S>? = nil
-    let initialBytes: UInt64
+    let initialBytes: Int64
     var isResumedSession = false
     if case .inprogress(let b) = initialStatus {
       initialBytes = b
@@ -872,7 +872,7 @@ extension StorageClient {
 
 /// Status returned by GCS when querying an in-progress resumable upload.
 struct ResumableUploadQueryStatus: Sendable {
-  let nextOffset: UInt64
+  let nextOffset: Int64
   let crc32cSeed: UInt32?
 }
 
@@ -934,8 +934,8 @@ extension StorageClient {
     httpClient: GoogleGax._HTTPClient,
     uploadId: String,
     data: ByteChunk,
-    offset: UInt64,
-    totalSize: UInt64?,
+    offset: Int64,
+    totalSize: Int64?,
     options: WriteObjectOptions,
     checksum: String? = nil
   ) async throws -> GoogleGax._HTTPClientRequest {
@@ -953,7 +953,7 @@ extension StorageClient {
     if data.isEmpty {
       request.setHeader(name: "Content-Range", value: "bytes */\(totalStr)")
     } else {
-      let end = offset + UInt64(data.count) - 1
+      let end = offset + Int64(data.count) - 1
       request.setHeader(name: "Content-Range", value: "bytes \(offset)-\(end)/\(totalStr)")
     }
     request.setBody(buffer: data.byteBuffer)
@@ -963,7 +963,7 @@ extension StorageClient {
   internal static func parseResumableUploadQueryStatus(from headers: NIOHTTP1.HTTPHeaders) throws
     -> ResumableUploadQueryStatus
   {
-    var nextOffset: UInt64 = 0
+    var nextOffset: Int64 = 0
     if let rangeHeader = headers.first(name: "Range") {
       nextOffset = try HttpRange.parseNextRangeStart(rangeHeader)
     }

@@ -17,7 +17,7 @@ import Foundation
 /// Progress and size details for an ongoing read object operation.
 public struct ReadObjectDetails: Sendable, Equatable {
   /// The total number of bytes successfully read so far.
-  public var bytesRead: UInt64
+  public var bytesRead: Int64
 
   /// The total size of the object to read in bytes, if known.
   public var totalBytes: Int64?
@@ -28,7 +28,7 @@ public struct ReadObjectDetails: Sendable, Equatable {
   ///   - bytesRead: Initial bytes read. Defaults to 0.
   ///   - totalBytes: Total object size in bytes if known. Defaults to `nil`.
   public init(
-    bytesRead: UInt64 = 0,
+    bytesRead: Int64 = 0,
     totalBytes: Int64? = nil
   ) {
     self.bytesRead = bytesRead
