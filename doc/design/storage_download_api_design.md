@@ -20,16 +20,16 @@ func readObject(
   from bucket: String,
   object: String,
   options: ReadObjectOptions = .init()
-) -> ReadObjectTask
+) -> ReadObjectHandle
 ```
 
-- **Return Task Struct (`ReadObjectTask`):** `readObject` returns immediately with a `ReadObjectTask` struct holding both the object metadata and the streaming body:
+- **Return Struct (`ReadObjectHandle`):** `readObject` returns immediately with a `ReadObjectHandle` struct holding both the object metadata and the streaming body:
   ```swift
-  public struct ReadObjectTask: Sendable {
+  public struct ReadObjectHandle: Sendable {
     /// Object metadata populated from response headers upon request initiation.
     public var metadata: ReadObjectMetadata { get async throws }
 
-    /// An asynchronous sequence of `ByteBuffer` chunks for the object payload.
+    /// An asynchronous sequence of `ByteChunk` chunks for the object payload.
     public var body: ReadObjectSequence { get }
 
     /// Cancels the ongoing download.
@@ -300,7 +300,7 @@ public struct ReadObjectSequence: AsyncSequence, Sendable {
 }
 
 /// Container object returned by `readObject` containing metadata and the streaming body sequence.
-public struct ReadObjectTask: Sendable {
+public struct ReadObjectHandle: Sendable {
   /// Object metadata extracted from initial HTTP response headers.
   public var metadata: ReadObjectMetadata { get async throws }
 
@@ -320,14 +320,14 @@ public protocol StorageProtocol {
     from bucket: String,
     object: String,
     options: ReadObjectOptions
-  ) -> ReadObjectTask
+  ) -> ReadObjectHandle
 }
 
 extension StorageProtocol {
   public func readObject(
     from bucket: String,
     object: String
-  ) -> ReadObjectTask {
+  ) -> ReadObjectHandle {
     readObject(from: bucket, object: object, options: .init())
   }
 }
@@ -337,8 +337,8 @@ extension StorageClient {
     from bucket: String,
     object: String,
     options: ReadObjectOptions = .init()
-  ) -> ReadObjectTask {
-    // Return ReadObjectTask backed by coordinator
+  ) -> ReadObjectHandle {
+    // Return ReadObjectHandle backed by coordinator
   }
 }
 ```
