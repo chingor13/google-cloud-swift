@@ -19,7 +19,7 @@ public import Foundation
 /// This type is an implementation detail of the Google Cloud client libraries for Swift.
 /// Do not use it directly.
 @_spi(GoogleCloudInternal)
-public struct _UnknownFields: Equatable, Sendable {
+public struct _UnknownFields: Equatable, Hashable, Sendable {
   /// Unknown fields encountered during JSON decoding, keyed by JSON field name.
   public var json: [String: WKTValue]
 

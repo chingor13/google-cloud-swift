@@ -19,7 +19,7 @@ import Foundation
 /// - Note: As Google Cloud APIs and client libraries evolve, new error cases may be added to this
 ///   enumeration in minor or patch releases. Always handle unexpected cases using an `@unknown default:`
 ///   clause in `switch` statements.
-public enum WKTAnyError: Error {
+public enum WKTAnyError: Error, Equatable, Hashable, Sendable {
   /// The typeUrl of the message does not match the contents in the `WKTAny`.
   ///
   /// Each `WKTAny` carries a field indicating the type URL of its contents. This error indicates that

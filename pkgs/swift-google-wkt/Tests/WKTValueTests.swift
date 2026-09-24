@@ -442,4 +442,30 @@ import Testing
       _ = try encoder.encode(arrayValue)
     }
   }
+
+  @Test("Value and WKT types conform to Hashable")
+  func valueAndWKTTypesHashable() throws {
+    let v1 = WKTValue.object(["a": .string("hello"), "b": .array([.number(1), .bool(true)])])
+    let v2 = WKTValue.object(["b": .array([.number(1), .bool(true)]), "a": .string("hello")])
+    let v3 = WKTValue.null(WKTNullValue())
+    #expect(v1 == v2)
+    #expect(v1.hashValue == v2.hashValue)
+
+    let valueSet: Set<WKTValue> = [v1, v2, v3, .number(0.0), .number(-0.0)]
+    #expect(valueSet.count == 3)
+
+    let timestamp = try WKTTimestamp(seconds: 1_700_000_000, nanos: 500)
+    let duration = try WKTDuration(seconds: 60, nanos: 0)
+    let fieldMask = WKTFieldMask(paths: ["a.b", "c"])
+    let empty = WKTEmpty()
+    let any = try WKTAny(fromMessage: v1)
+    let recursive = WKTRecursive(value: v1)
+
+    #expect(Set([timestamp, timestamp]).count == 1)
+    #expect(Set([duration, duration]).count == 1)
+    #expect(Set([fieldMask, fieldMask]).count == 1)
+    #expect(Set([empty, empty]).count == 1)
+    #expect(Set([any, any]).count == 1)
+    #expect(Set([recursive, WKTRecursive(value: v2)]).count == 1)
+  }
 }

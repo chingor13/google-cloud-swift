@@ -32,7 +32,7 @@ import Foundation
 /// encoded in JSON format as "3s", while 3 seconds and 1 nanosecond should
 /// be expressed in JSON format as "3.000000001s", and 3 seconds and 1
 /// microsecond should be expressed in JSON format as "3.000001s".
-public struct WKTDuration: Codable, Equatable, Sendable {
+public struct WKTDuration: Codable, Equatable, Hashable, Sendable {
   /// The maximum value for the `seconds` component, approximately 10,000 years.
   public static let maxSeconds: Int64 = 315_576_000_000
 
@@ -175,7 +175,7 @@ extension WKTDuration: _AnyPackable {
 /// - Note: As Google Cloud APIs and client libraries evolve, new error cases may be added to this
 ///   enumeration in minor or patch releases. Always handle unexpected cases using an `@unknown default:`
 ///   clause in `switch` statements.
-public enum WKTDurationError: Error {
+public enum WKTDurationError: Error, Equatable, Hashable, Sendable {
   /// The seconds and nanosecond signs did no match.
   case mismatchedSigns
   /// The seconds or nanosecond components are out of range.

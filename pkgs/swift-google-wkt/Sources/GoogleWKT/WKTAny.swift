@@ -21,7 +21,7 @@ import Foundation
 /// the wire and their type may not be known in the receiving application.
 ///
 /// Only known types may be extracted from a `WKTAny`.
-public struct WKTAny: Codable, Equatable, Sendable {
+public struct WKTAny: Codable, Equatable, Hashable, Sendable {
   let _type: String
   let fields: WKTStruct
 

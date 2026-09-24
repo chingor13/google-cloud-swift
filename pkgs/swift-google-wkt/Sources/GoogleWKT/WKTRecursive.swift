@@ -109,3 +109,9 @@ extension WKTRecursive: Equatable where T: Equatable {
     return lhs.value == rhs.value
   }
 }
+
+extension WKTRecursive: Hashable where T: Hashable {
+  public func hash(into hasher: inout Hasher) {
+    hasher.combine(value)
+  }
+}

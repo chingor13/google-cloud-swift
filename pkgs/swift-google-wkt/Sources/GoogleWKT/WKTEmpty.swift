@@ -23,7 +23,7 @@ import Foundation
 ///     }
 ///
 /// The JSON representation for `WKTEmpty` is empty JSON object `{}`.
-public struct WKTEmpty: Codable, Equatable, Sendable {
+public struct WKTEmpty: Codable, Equatable, Hashable, Sendable {
   public init() {}
 }
 

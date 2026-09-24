@@ -58,7 +58,7 @@ let rfc3339DateTimeLength = 19
 /// able to accept both UTC and other timezones (as indicated by an offset).
 ///
 /// For example, "2017-01-15T01:30:15.01Z" encodes 15.01 seconds past 01:30 UTC on January 15, 2017.
-public struct WKTTimestamp: Codable, Equatable, Sendable {
+public struct WKTTimestamp: Codable, Equatable, Hashable, Sendable {
   /// The minimum value for the `seconds` component.
   ///
   /// Corresponds to 0001-01-01T00:00:00Z
@@ -354,7 +354,7 @@ extension WKTTimestamp: _AnyPackable {
 /// - Note: As Google Cloud APIs and client libraries evolve, new error cases may be added to this
 ///   enumeration in minor or patch releases. Always handle unexpected cases using an `@unknown default:`
 ///   clause in `switch` statements.
-public enum WKTTimestampError: Error {
+public enum WKTTimestampError: Error, Equatable, Hashable, Sendable {
   /// The seconds or nanosecond components are out of range.
   case outOfRange
   /// Invalid format when parsing a timestamp from a string.
