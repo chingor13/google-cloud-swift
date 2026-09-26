@@ -551,13 +551,14 @@ public struct WriteObjectOptions: Sendable {
 extension WriteObjectOptions {
   internal func withDefaults(_ defaults: Self) -> Self {
     var copy = self
-    copy.chunkSize = self.chunkSize ?? defaults.chunkSize
+    copy.chunkSize = self.chunkSize ?? defaults.chunkSize ?? Self.defaultChunkSize
     copy.resumableUploadThreshold =
       self.resumableUploadThreshold ?? defaults.resumableUploadThreshold
+      ?? Self.defaultResumableUploadThreshold
     copy.preconditions = self.preconditions ?? defaults.preconditions
     copy.kmsKeyName = self.kmsKeyName ?? defaults.kmsKeyName
     copy.customerEncryptionKey = self.customerEncryptionKey ?? defaults.customerEncryptionKey
-    copy.checksums = self.checksums ?? defaults.checksums
+    copy.checksums = self.checksums ?? defaults.checksums ?? .default
     copy.metadata = self.metadata ?? defaults.metadata
     copy.predefinedAcl = self.predefinedAcl ?? defaults.predefinedAcl
     copy.resumePolicy = self.resumePolicy ?? defaults.resumePolicy
@@ -565,18 +566,6 @@ extension WriteObjectOptions {
     copy.quotaProject = self.quotaProject ?? defaults.quotaProject
     copy.idempotency = self.idempotency ?? defaults.idempotency
     return copy
-  }
-
-  internal var effectiveChunkSize: Int {
-    chunkSize ?? Self.defaultChunkSize
-  }
-
-  internal var effectiveResumableUploadThreshold: Int {
-    resumableUploadThreshold ?? Self.defaultResumableUploadThreshold
-  }
-
-  internal var effectiveChecksums: ChecksumOptions {
-    checksums ?? .default
   }
 
   internal var requestOptions: RequestOptions {

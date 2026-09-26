@@ -35,12 +35,14 @@ import Testing
     #expect(options.backoffPolicy == nil)
     #expect(options.quotaProject == nil)
     #expect(options.idempotency == nil)
+
+    let effectiveOptions = options.withDefaults(.default)
     #expect(
-      options.effectiveResumableUploadThreshold
+      effectiveOptions.resumableUploadThreshold
         == WriteObjectOptions.defaultResumableUploadThreshold
     )
-    #expect(options.effectiveChunkSize == WriteObjectOptions.defaultChunkSize)
-    #expect(options.effectiveChecksums == .default)
+    #expect(effectiveOptions.chunkSize == WriteObjectOptions.defaultChunkSize)
+    #expect(effectiveOptions.checksums == .default)
   }
 
   @Test func writeObjectOptionsWithBuilder() throws {
@@ -96,14 +98,11 @@ import Testing
 
     let resolved = WriteObjectOptions().withDefaults(defaults)
     #expect(resolved.chunkSize == 4 * 1024 * 1024)
-    #expect(resolved.effectiveChunkSize == 4 * 1024 * 1024)
     #expect(resolved.resumableUploadThreshold == 16 * 1024 * 1024)
-    #expect(resolved.effectiveResumableUploadThreshold == 16 * 1024 * 1024)
     #expect(resolved.preconditions?.ifGenerationMatch == 1)
     #expect(resolved.kmsKeyName == "default-kms-key")
     #expect(resolved.customerEncryptionKey == defaultCsek)
     #expect(resolved.checksums == .off)
-    #expect(resolved.effectiveChecksums == .off)
     #expect(resolved.metadata?.contentType == "text/plain")
     #expect(resolved.predefinedAcl == .private)
     #expect(resolved.resumePolicy is NeverResume<WriteObjectDetails>)
@@ -147,14 +146,11 @@ import Testing
 
     let resolved = options.withDefaults(defaults)
     #expect(resolved.chunkSize == 8 * 1024 * 1024)
-    #expect(resolved.effectiveChunkSize == 8 * 1024 * 1024)
     #expect(resolved.resumableUploadThreshold == 32 * 1024 * 1024)
-    #expect(resolved.effectiveResumableUploadThreshold == 32 * 1024 * 1024)
     #expect(resolved.preconditions?.ifGenerationMatch == 2)
     #expect(resolved.kmsKeyName == "override-kms-key")
     #expect(resolved.customerEncryptionKey == overrideCsek)
     #expect(resolved.checksums == .default)
-    #expect(resolved.effectiveChecksums == .default)
     #expect(resolved.metadata?.contentType == "application/octet-stream")
     #expect(resolved.predefinedAcl == .publicRead)
     #expect(resolved.resumePolicy is AlwaysResume<WriteObjectDetails>)

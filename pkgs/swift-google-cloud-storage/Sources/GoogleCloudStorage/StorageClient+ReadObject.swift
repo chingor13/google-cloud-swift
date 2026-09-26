@@ -185,11 +185,11 @@ extension GoogleGax._HTTPClient {
       options: options.requestOptions)
     request.setMethod(.GET)
 
-    if let rangeHeader = options.effectiveRange.headerValue {
+    if let rangeHeader = options.range?.headerValue {
       request.setHeader(name: "Range", value: rangeHeader)
     }
 
-    if !options.effectiveEnableDecompressiveTranscoding {
+    if !(options.enableDecompressiveTranscoding ?? true) {
       request.setHeader(name: "Accept-Encoding", value: "gzip")
     }
 

@@ -204,7 +204,7 @@ public struct ReadObjectRange: Sendable, Hashable, Equatable {
 
 /// Configuration options for object download (`readObject`) requests.
 public struct ReadObjectOptions: Sendable {
-  public var generation: Int64?
+  public var generation: UInt64?
   public var preconditions: StoragePreconditions?
   public var customerEncryptionKey: CustomerEncryptionKeyOptions?
   public var range: ReadObjectRange?

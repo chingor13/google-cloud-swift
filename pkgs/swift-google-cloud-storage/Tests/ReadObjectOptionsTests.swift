@@ -53,9 +53,11 @@ import Testing
     #expect(defaultOptions.resumePolicy == nil)
     #expect(defaultOptions.backoffPolicy == nil)
     #expect(defaultOptions.quotaProject == nil)
-    #expect(defaultOptions.effectiveRange == .entire)
-    #expect(defaultOptions.effectiveEnableDecompressiveTranscoding == true)
-    #expect(defaultOptions.effectiveChecksums == .default)
+
+    let effectiveOptions = defaultOptions.withDefaults(.default)
+    #expect(effectiveOptions.range == .entire)
+    #expect(effectiveOptions.enableDecompressiveTranscoding == true)
+    #expect(effectiveOptions.checksums == .default)
   }
 
   @Test func readObjectOptionsWithBuilder() throws {
@@ -252,11 +254,8 @@ import Testing
     #expect(resolved.preconditions?.ifGenerationMatch == 100)
     #expect(resolved.customerEncryptionKey == defaultCsek)
     #expect(resolved.range == ReadObjectRange(prefix: 512))
-    #expect(resolved.effectiveRange == ReadObjectRange(prefix: 512))
     #expect(resolved.enableDecompressiveTranscoding == false)
-    #expect(resolved.effectiveEnableDecompressiveTranscoding == false)
     #expect(resolved.checksums == .off)
-    #expect(resolved.effectiveChecksums == .off)
     #expect(resolved.resumePolicy is NeverResume<ReadObjectDetails>)
     #expect(resolved.backoffPolicy is ExponentialBackoff)
     #expect(resolved.quotaProject == "default-download-quota")
@@ -294,11 +293,8 @@ import Testing
     #expect(resolved.preconditions?.ifGenerationMatch == 200)
     #expect(resolved.customerEncryptionKey == overrideCsek)
     #expect(resolved.range == .entire)
-    #expect(resolved.effectiveRange == .entire)
     #expect(resolved.enableDecompressiveTranscoding == true)
-    #expect(resolved.effectiveEnableDecompressiveTranscoding == true)
     #expect(resolved.checksums == .default)
-    #expect(resolved.effectiveChecksums == .default)
     #expect(resolved.resumePolicy is AlwaysResume<ReadObjectDetails>)
     #expect(resolved.backoffPolicy is ExponentialBackoff)
     #expect(resolved.quotaProject == "override-download-quota")

@@ -51,7 +51,9 @@ extension StorageClient {
         ?? StorageResumePolicy<WriteObjectDetails>.defaultPolicy,
       backoffPolicy: effectiveOptions.backoffPolicy ?? self.options.client.backoffPolicy
     )
-    let effectiveThreshold = effectiveOptions.effectiveResumableUploadThreshold
+    let effectiveThreshold =
+      effectiveOptions.resumableUploadThreshold
+      ?? WriteObjectOptions.defaultResumableUploadThreshold
     let httpClient = self.inner
 
     var source = source
@@ -80,7 +82,7 @@ extension StorageClient {
           metadata: effectiveOptions.metadata,
           uploadId: nil,
           initialStatus: .inprogress(0),
-          chunkSize: effectiveOptions.effectiveChunkSize,
+          chunkSize: effectiveOptions.chunkSize ?? WriteObjectOptions.defaultChunkSize,
           totalSize: source.totalSize,
           options: effectiveOptions,
           resumeLoop: resumeLoop
@@ -120,7 +122,9 @@ extension StorageClient {
         ?? StorageResumePolicy<WriteObjectDetails>.defaultPolicy,
       backoffPolicy: effectiveOptions.backoffPolicy ?? self.options.client.backoffPolicy
     )
-    let effectiveThreshold = effectiveOptions.effectiveResumableUploadThreshold
+    let effectiveThreshold =
+      effectiveOptions.resumableUploadThreshold
+      ?? WriteObjectOptions.defaultResumableUploadThreshold
     let httpClient = self.inner
 
     var source = source
@@ -149,7 +153,7 @@ extension StorageClient {
           metadata: effectiveOptions.metadata,
           uploadId: nil,
           initialStatus: .inprogress(0),
-          chunkSize: effectiveOptions.effectiveChunkSize,
+          chunkSize: effectiveOptions.chunkSize ?? WriteObjectOptions.defaultChunkSize,
           totalSize: source.totalSize,
           options: effectiveOptions,
           resumeLoop: resumeLoop
@@ -203,7 +207,7 @@ extension StorageClient {
         metadataJson: metadataJson,
         contentType: dataPartContentType,
         totalSize: totalSize,
-        options: options.effectiveChecksums
+        options: options.checksums ?? .default
       )
     var stream = prepared.stream
     let checksum = prepared.checksum
@@ -532,10 +536,8 @@ extension StorageClient {
           throw WriteObjectError.sourceError(
             WriteObjectSourceError.offsetOutOfBounds(offset: committedBytes, size: total))
         }
-        var checksums = options.effectiveChecksums
-        if committedBytes > 0 && checksums.md5 == .auto {
-          checksums.md5 = nil
-          options.checksums = checksums
+        if committedBytes > 0 && options.checksums?.md5 == .auto {
+          options.checksums?.md5 = nil
         }
 
         if checksummedSource == nil {
@@ -544,7 +546,8 @@ extension StorageClient {
               "Cannot resume non-seekable source at offset \(committedBytes)"
             )
           }
-          checksummedSource = ChecksummedSource(source: source, options: checksums)
+          checksummedSource = ChecksummedSource(
+            source: source, options: options.checksums ?? .default)
         }
 
         if var pending = pendingChunk {
@@ -774,14 +777,12 @@ extension StorageClient {
           throw WriteObjectError.sourceError(
             WriteObjectSourceError.offsetOutOfBounds(offset: committedBytes, size: total))
         }
-        var checksums = options.effectiveChecksums
-        if committedBytes > 0 && checksums.md5 == .auto {
-          checksums.md5 = nil
-          options.checksums = checksums
+        if committedBytes > 0 && options.checksums?.md5 == .auto {
+          options.checksums?.md5 = nil
         }
 
         if checksummedSource == nil {
-          var cs = ChecksummedSource(source: source, options: checksums)
+          var cs = ChecksummedSource(source: source, options: options.checksums ?? .default)
           if let seed = crc32cSeed {
             cs.seedCRC32C(seed: seed, bytesHashed: committedBytes)
           }
@@ -864,7 +865,7 @@ extension StorageClient {
         metadata: nil,
         uploadId: uploadId,
         initialStatus: .unknown,
-        chunkSize: effectiveOptions.effectiveChunkSize,
+        chunkSize: effectiveOptions.chunkSize ?? WriteObjectOptions.defaultChunkSize,
         totalSize: totalSize,
         options: effectiveOptions,
         resumeLoop: resumeLoop

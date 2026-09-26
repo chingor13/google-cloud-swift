@@ -352,26 +352,14 @@ extension ReadObjectOptions {
     copy.generation = self.generation ?? defaults.generation
     copy.preconditions = self.preconditions ?? defaults.preconditions
     copy.customerEncryptionKey = self.customerEncryptionKey ?? defaults.customerEncryptionKey
-    copy.range = self.range ?? defaults.range
+    copy.range = self.range ?? defaults.range ?? .entire
     copy.enableDecompressiveTranscoding =
-      self.enableDecompressiveTranscoding ?? defaults.enableDecompressiveTranscoding
-    copy.checksums = self.checksums ?? defaults.checksums
+      self.enableDecompressiveTranscoding ?? defaults.enableDecompressiveTranscoding ?? true
+    copy.checksums = self.checksums ?? defaults.checksums ?? .default
     copy.resumePolicy = self.resumePolicy ?? defaults.resumePolicy
     copy.backoffPolicy = self.backoffPolicy ?? defaults.backoffPolicy
     copy.quotaProject = self.quotaProject ?? defaults.quotaProject
     return copy
-  }
-
-  internal var effectiveRange: ReadObjectRange {
-    range ?? .entire
-  }
-
-  internal var effectiveEnableDecompressiveTranscoding: Bool {
-    enableDecompressiveTranscoding ?? true
-  }
-
-  internal var effectiveChecksums: ChecksumOptions {
-    checksums ?? .default
   }
 
   internal var requestOptions: RequestOptions {
