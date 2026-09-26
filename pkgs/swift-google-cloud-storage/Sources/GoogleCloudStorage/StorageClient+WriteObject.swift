@@ -51,9 +51,7 @@ extension StorageClient {
         ?? StorageResumePolicy<WriteObjectDetails>.defaultPolicy,
       backoffPolicy: effectiveOptions.backoffPolicy ?? self.options.client.backoffPolicy
     )
-    let effectiveThreshold =
-      effectiveOptions.resumableUploadThreshold
-      ?? WriteObjectOptions.defaultResumableUploadThreshold
+    let effectiveThreshold = effectiveOptions.effectiveResumableUploadThreshold
     let httpClient = self.inner
 
     var source = source
@@ -82,7 +80,7 @@ extension StorageClient {
           metadata: effectiveOptions.metadata,
           uploadId: nil,
           initialStatus: .inprogress(0),
-          chunkSize: effectiveOptions.chunkSize,
+          chunkSize: effectiveOptions.effectiveChunkSize,
           totalSize: source.totalSize,
           options: effectiveOptions,
           resumeLoop: resumeLoop
@@ -122,9 +120,7 @@ extension StorageClient {
         ?? StorageResumePolicy<WriteObjectDetails>.defaultPolicy,
       backoffPolicy: effectiveOptions.backoffPolicy ?? self.options.client.backoffPolicy
     )
-    let effectiveThreshold =
-      effectiveOptions.resumableUploadThreshold
-      ?? WriteObjectOptions.defaultResumableUploadThreshold
+    let effectiveThreshold = effectiveOptions.effectiveResumableUploadThreshold
     let httpClient = self.inner
 
     var source = source
@@ -153,7 +149,7 @@ extension StorageClient {
           metadata: effectiveOptions.metadata,
           uploadId: nil,
           initialStatus: .inprogress(0),
-          chunkSize: effectiveOptions.chunkSize,
+          chunkSize: effectiveOptions.effectiveChunkSize,
           totalSize: source.totalSize,
           options: effectiveOptions,
           resumeLoop: resumeLoop
@@ -207,7 +203,7 @@ extension StorageClient {
         metadataJson: metadataJson,
         contentType: dataPartContentType,
         totalSize: totalSize,
-        options: options.checksums
+        options: options.effectiveChecksums
       )
     var stream = prepared.stream
     let checksum = prepared.checksum
@@ -536,8 +532,10 @@ extension StorageClient {
           throw WriteObjectError.sourceError(
             WriteObjectSourceError.offsetOutOfBounds(offset: committedBytes, size: total))
         }
-        if committedBytes > 0 && options.checksums.md5 == .auto {
-          options.checksums.md5 = nil
+        var checksums = options.effectiveChecksums
+        if committedBytes > 0 && checksums.md5 == .auto {
+          checksums.md5 = nil
+          options.checksums = checksums
         }
 
         if checksummedSource == nil {
@@ -546,7 +544,7 @@ extension StorageClient {
               "Cannot resume non-seekable source at offset \(committedBytes)"
             )
           }
-          checksummedSource = ChecksummedSource(source: source, options: options.checksums)
+          checksummedSource = ChecksummedSource(source: source, options: checksums)
         }
 
         if var pending = pendingChunk {
@@ -776,12 +774,14 @@ extension StorageClient {
           throw WriteObjectError.sourceError(
             WriteObjectSourceError.offsetOutOfBounds(offset: committedBytes, size: total))
         }
-        if committedBytes > 0 && options.checksums.md5 == .auto {
-          options.checksums.md5 = nil
+        var checksums = options.effectiveChecksums
+        if committedBytes > 0 && checksums.md5 == .auto {
+          checksums.md5 = nil
+          options.checksums = checksums
         }
 
         if checksummedSource == nil {
-          var cs = ChecksummedSource(source: source, options: options.checksums)
+          var cs = ChecksummedSource(source: source, options: checksums)
           if let seed = crc32cSeed {
             cs.seedCRC32C(seed: seed, bytesHashed: committedBytes)
           }
@@ -864,7 +864,7 @@ extension StorageClient {
         metadata: nil,
         uploadId: uploadId,
         initialStatus: .unknown,
-        chunkSize: effectiveOptions.chunkSize,
+        chunkSize: effectiveOptions.effectiveChunkSize,
         totalSize: totalSize,
         options: effectiveOptions,
         resumeLoop: resumeLoop
