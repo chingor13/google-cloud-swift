@@ -6,11 +6,14 @@ your Sovereign Controls by Partners offering.
 
 ## Overview
 
-Most applications use the `*Client` types in this library. A default initialized
-client will let you interact with the API. The methods in the client type
-corresponds to RPCs in the API. Many APIs have more than one client, exposing
-different aspects of the API, consult the reference documentation for details.
+The following types provide methods to make RPCs. They are a good starting point
+to learn about this library.
 
-- ``CloudControlsPartnerCoreClient``
-- ``CloudControlsPartnerMonitoringClient``
+- ``CloudControlsPartnerCoreClient``: Service describing handlers for resources.
+- ``CloudControlsPartnerMonitoringClient``: Service describing handlers for resources.
 
+## Quickstart
+
+The following example demonstrates using ``CloudControlsPartnerCoreClient``:
+
+@Snippet(path: "CloudControlsPartnerCoreQuickstart")

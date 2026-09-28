@@ -7,10 +7,13 @@ annotations, to developers.
 
 ## Overview
 
-Most applications use the `*Client` types in this library. A default initialized
-client will let you interact with the API. The methods in the client type
-corresponds to RPCs in the API. Many APIs have more than one client, exposing
-different aspects of the API, consult the reference documentation for details.
+The following types provide methods to make RPCs. They are a good starting point
+to learn about this library.
 
-- ``LanguageServiceClient``
+- ``LanguageServiceClient``: Provides text analysis operations such as sentiment analysis and entity recognition.
 
+## Quickstart
+
+The following example demonstrates using ``LanguageServiceClient``:
+
+@Snippet(path: "LanguageServiceQuickstart")

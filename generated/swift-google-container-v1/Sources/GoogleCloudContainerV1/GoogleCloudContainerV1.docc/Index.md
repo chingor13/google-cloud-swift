@@ -6,10 +6,13 @@ Kubernetes technology.
 
 ## Overview
 
-Most applications use the `*Client` types in this library. A default initialized
-client will let you interact with the API. The methods in the client type
-corresponds to RPCs in the API. Many APIs have more than one client, exposing
-different aspects of the API, consult the reference documentation for details.
+The following types provide methods to make RPCs. They are a good starting point
+to learn about this library.
 
-- ``ClusterManagerClient``
+- ``ClusterManagerClient``: Google Kubernetes Engine Cluster Manager v1.
 
+## Quickstart
+
+The following example demonstrates using ``ClusterManagerClient``:
+
+@Snippet(path: "ClusterManagerQuickstart")

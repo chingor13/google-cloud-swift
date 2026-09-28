@@ -8,12 +8,15 @@ Cloud Run.
 
 ## Overview
 
-Most applications use the `*Client` types in this library. A default initialized
-client will let you interact with the API. The methods in the client type
-corresponds to RPCs in the API. Many APIs have more than one client, exposing
-different aspects of the API, consult the reference documentation for details.
+The following types provide methods to make RPCs. They are a good starting point
+to learn about this library.
 
-- ``BinauthzManagementServiceV1Client``
-- ``SystemPolicyV1Client``
-- ``ValidationHelperV1Client``
+- ``BinauthzManagementServiceV1Client``: Google Cloud Management Service for Binary Authorization admission policies and attestation authorities.
+- ``SystemPolicyV1Client``: API for working with the system policy.
+- ``ValidationHelperV1Client``: BinAuthz Attestor verification.
 
+## Quickstart
+
+The following example demonstrates using ``BinauthzManagementServiceV1Client``:
+
+@Snippet(path: "BinauthzManagementServiceV1Quickstart")
