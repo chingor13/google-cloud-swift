@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 language: swift
-version: v0.45.1-0.20260928170354-d16aff394bfc
+version: v0.45.1-0.20260928190206-91a307d7ed0d
 repo: googleapis/google-cloud-swift
 sources:
   conformance:
@@ -1065,6 +1065,7 @@ libraries:
             - .google.storage.v2.Storage.RewriteObject
             - .google.storage.v2.Storage.MoveObject
           module_path: StorageProtos
+          idempotency_hook: resolveIdempotency
         - output: pkgs/swift-google-cloud-storage/Sources/GoogleCloudStorage/generated/Storage/Convert/Storage
           api_path: google/storage/v2
           module_type: convert-swift
