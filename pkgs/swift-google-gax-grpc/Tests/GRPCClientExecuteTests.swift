@@ -366,4 +366,127 @@ import Testing
       #expect(await collector.userProjects == [expected])
     }
   }
+
+  @Test func executeRequestOptionsHeaders() async throws {
+    actor MetadataCollector {
+      var idempotencyTokens: [String] = []
+      var customHeaders: [String] = []
+      var authorizations: [String] = []
+      var apiKeys: [String] = []
+      var userProjects: [String] = []
+      var apiClients: [String] = []
+      var requestParams: [String] = []
+
+      func record(
+        token: [String], custom: [String], auth: [String], key: [String],
+        userProject: [String], apiClient: [String], params: [String]
+      ) {
+        idempotencyTokens = token
+        customHeaders = custom
+        authorizations = auth
+        apiKeys = key
+        userProjects = userProject
+        apiClients = apiClient
+        requestParams = params
+      }
+    }
+    let collector = MetadataCollector()
+
+    struct InspectingEchoService: RegistrableRPCService {
+      let collector: MetadataCollector
+      func registerMethods<Transport: ServerTransport>(with router: inout RPCRouter<Transport>) {
+        router.registerHandler(
+          forMethod: MethodDescriptor(
+            service: ServiceDescriptor(package: "test", service: "Echo"),
+            method: "Echo"
+          ),
+          deserializer: ProtobufDeserializer<Google_Protobuf_Empty>(),
+          serializer: ProtobufSerializer<Google_Protobuf_Empty>()
+        ) { request, _ in
+          let tokenValues = request.metadata[stringValues: "x-goog-gcs-idempotency-token"].map {
+            String($0)
+          }
+          let customValues = request.metadata[stringValues: "x-custom-header"].map { String($0) }
+          let authValues = request.metadata[stringValues: "authorization"].map { String($0) }
+          let keyValues = request.metadata[stringValues: "x-goog-api-key"].map { String($0) }
+          let projectValues = request.metadata[stringValues: "x-goog-user-project"].map {
+            String($0)
+          }
+          let clientValues = request.metadata[stringValues: "x-goog-api-client"].map { String($0) }
+          let paramValues = request.metadata[stringValues: "x-goog-request-params"].map {
+            String($0)
+          }
+          await collector.record(
+            token: tokenValues,
+            custom: customValues,
+            auth: authValues,
+            key: keyValues,
+            userProject: projectValues,
+            apiClient: clientValues,
+            params: paramValues
+          )
+          return StreamingServerResponse(metadata: [:]) { writer in
+            try await writer.write(Google_Protobuf_Empty())
+            return [:]
+          }
+        }
+      }
+    }
+
+    let server = GRPCServer(
+      transport: .http2NIOPosix(
+        address: .ipv4(host: "127.0.0.1", port: 0),
+        transportSecurity: .plaintext
+      ),
+      services: [InspectingEchoService(collector: collector)]
+    )
+
+    try await withThrowingDiscardingTaskGroup { group in
+      group.addTask {
+        try await server.serve()
+      }
+
+      let listeningAddress = try await server.listeningAddress?.ipv4
+      guard let port = listeningAddress?.port else {
+        Issue.record("Failed to get listening port")
+        server.beginGracefulShutdown()
+        return
+      }
+
+      let endpoint = "http://127.0.0.1:\(port)"
+      var clientOptions = ClientOptions()
+      clientOptions.endpoint = endpoint
+      clientOptions.credentials = try Credentials(configuration: .anonymous)
+
+      let client = try _GRPCClient(from: clientOptions, withDefaultEndpoint: endpoint)
+      defer {
+        client.close()
+        server.beginGracefulShutdown()
+      }
+
+      let requestOptions = RequestOptions().with {
+        $0.headers["x-goog-gcs-idempotency-token"] = "token-12345"
+        $0.headers["x-custom-header"] = "custom-val"
+        $0.headers["authorization"] = "Bearer bad-token"
+        $0.headers["x-goog-api-key"] = "bad-key"
+        $0.headers["x-goog-user-project"] = "bad-project"
+        $0.headers["x-goog-api-client"] = "bad-client"
+        $0.headers["x-goog-request-params"] = "bad-params"
+      }
+      let _: Google_Protobuf_Empty = try await client.execute(
+        path: "/test.Echo/Echo",
+        request: Google_Protobuf_Empty(),
+        options: requestOptions,
+        clientHeader: "test-client-header",
+        routingParams: ["foo=bar"]
+      )
+      #expect(await collector.idempotencyTokens == ["token-12345"])
+      #expect(await collector.customHeaders == ["custom-val"])
+      #expect(await collector.authorizations.isEmpty)
+      #expect(await collector.apiKeys.isEmpty)
+      #expect(await collector.userProjects.isEmpty)
+      #expect(await collector.apiClients == ["test-client-header"])
+      #expect(await collector.requestParams == ["foo=bar"])
+    }
+  }
 }
