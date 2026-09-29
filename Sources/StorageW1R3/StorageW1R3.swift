@@ -17,9 +17,8 @@ import Foundation
 import GoogleAuth
 import GoogleCloudStorage
 
-@main
-struct StorageW1R3: AsyncParsableCommand, Sendable {
-  static let configuration = CommandConfiguration(
+public struct StorageW1R3: AsyncParsableCommand, Sendable {
+  public static let configuration = CommandConfiguration(
     commandName: "StorageW1R3",
     abstract: "W1R3 Benchmark for Google Cloud Storage Swift client library.",
     discussion: """
@@ -47,7 +46,14 @@ struct StorageW1R3: AsyncParsableCommand, Sendable {
       """
   )
 
-  func run() async throws {
+  public init() {}
+
+  public func run() async throws {
+    _ = try await self.runBenchmark()
+  }
+
+  @discardableResult
+  public func runBenchmark() async throws -> BenchmarkCounters {
     logToStderr(
       "# Starting W1R3 benchmark with bucket: \(bucketName), tasks: \(taskCount), iterations: \(iterations)"
     )
@@ -96,6 +102,7 @@ struct StorageW1R3: AsyncParsableCommand, Sendable {
 
     let finalSummary = await counters.formattedDescription()
     logToStderr("DONE. Final \(finalSummary)")
+    return counters
   }
 
   @Option(
@@ -196,7 +203,7 @@ struct StorageW1R3: AsyncParsableCommand, Sendable {
     }
   }
 
-  func validate() throws {
+  public func validate() throws {
     guard minObjectSize <= maxObjectSize else {
       throw ValidationError(
         "Invalid object size range: min (\(minObjectSize)) > max (\(maxObjectSize))")
@@ -223,12 +230,12 @@ struct StorageW1R3: AsyncParsableCommand, Sendable {
   }
 }
 
-enum Crc32cOption: String, ExpressibleByArgument, CaseIterable, Sendable {
+public enum Crc32cOption: String, ExpressibleByArgument, CaseIterable, Sendable {
   case always
   case random
   case never
 
-  init?(argument: String) {
+  public init?(argument: String) {
     switch argument.lowercased() {
     case "always", "enabled", "true":
       self = .always
