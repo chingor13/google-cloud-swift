@@ -204,4 +204,63 @@ import Testing
     let expected = try encoder.encode(Self.omitModel)
     #expect(data == expected)
   }
+
+  struct CollectionModel: Codable, Equatable {
+    var name: String = "test"
+    var emptyList: [String] = []
+    var populatedList: [String] = ["a", "b"]
+    var emptyMap: [String: String] = [:]
+    var populatedMap: [String: String] = ["k": "v"]
+    var matrix: [[Int]] = [[], [1, 2]]
+  }
+
+  @Test func encodeOmitEmptyCollectionsByDefault() throws {
+    let encoder = _ProtoJSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+
+    let model = CollectionModel()
+    let data = try encoder.encode(model)
+    let jsonString = try #require(String(data: data, encoding: .utf8))
+
+    #expect(
+      jsonString
+        == #"{"matrix":[[],[1,2]],"name":"test","populatedList":["a","b"],"populatedMap":{"k":"v"}}"#
+    )
+  }
+
+  @Test func encodePreserveEmptyCollectionsWhenDisabled() throws {
+    let encoder = _ProtoJSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+    encoder.omitEmptyCollections = false
+
+    let model = CollectionModel()
+    let data = try encoder.encode(model)
+    let jsonString = try #require(String(data: data, encoding: .utf8))
+
+    #expect(
+      jsonString
+        == #"{"emptyList":[],"emptyMap":{},"matrix":[[],[1,2]],"name":"test","populatedList":["a","b"],"populatedMap":{"k":"v"}}"#
+    )
+  }
+
+  struct WKTMessageModel: Codable, Equatable {
+    var structField: WKTStruct?
+    var listField: WKTListValue?
+  }
+
+  @Test func encodeWKTStructAndListValuePreservedWhenPresent() throws {
+    let encoder = _ProtoJSONEncoder()
+    encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
+
+    let emptyModel = WKTMessageModel(structField: nil, listField: nil)
+    let emptyData = try encoder.encode(emptyModel)
+    #expect(String(data: emptyData, encoding: .utf8) == "{}")
+
+    let presentModel = WKTMessageModel(structField: [:], listField: [])
+    let presentData = try encoder.encode(presentModel)
+    #expect(
+      String(data: presentData, encoding: .utf8)
+        == #"{"listField":[],"structField":{}}"#
+    )
+  }
 }
