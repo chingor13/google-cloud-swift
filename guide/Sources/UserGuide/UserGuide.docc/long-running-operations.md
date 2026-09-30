@@ -52,4 +52,5 @@ polls until the operation completes, returning the created `Workflow` object.
   the default endpoint used by the Swift client libraries.
 * [Override the default retry policies](<doc:override-retry-policy>) describes how
   to change how the Swift client libraries retry failed requests.
-<!-- TODO(https://github.com/googleapis/google-cloud-swift/issues/145) - link the polling policy override guide -->
+* [Override the default polling policies](<doc:override-polling-policy>) describes
+  how to change how the Swift client libraries poll long-running operations.

@@ -93,4 +93,5 @@ request is safe to retry:
   change the default credentials used by the Swift client libraries.
 * [Long-running operations](<doc:long-running-operations>) describes how to make
   API requests that use long-running operations.
-<!-- TODO(https://github.com/googleapis/google-cloud-swift/issues/145) - link the polling policy override guide -->
+* [Override the default polling policies](<doc:override-polling-policy>) describes
+  how to change how the Swift client libraries poll long-running operations.
