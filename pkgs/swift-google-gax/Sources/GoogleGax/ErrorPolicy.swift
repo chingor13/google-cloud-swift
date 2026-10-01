@@ -14,16 +14,10 @@
 
 import Foundation
 
-/// A retry policy decorator that continues on I/O errors.
+/// A marker protocol representing a policy for handling errors in retry or polling loops.
 ///
-/// This policy returns [.retry](``RetryResult.retry(_:)``) on [.io](``RequestError/io(_:)``)
-/// errors. Otherwise it returns the result from the inner retry policy.
-public struct ContinueOnIO<P: ErrorPolicy>: ErrorPolicy, Sendable {
-  let inner: P
-
-  public init(inner: P) {
-    self.inner = inner
-  }
-}
-
-extension ContinueOnIO: Equatable where P: Equatable {}
+/// Both ``RetryPolicy`` and ``PollingErrorPolicy`` inherit from ``ErrorPolicy``.
+/// Common error policy decorators—such as ``ContinueOnIO``, ``TooManyRequests``,
+/// ``LimitedAttemptCount``, and ``LimitedElapsedTime``—constrain their wrapped inner
+/// policy to ``ErrorPolicy``.
+public protocol ErrorPolicy: Sendable {}

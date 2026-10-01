@@ -26,7 +26,7 @@ import GoogleRpc
 ///
 /// Note that polling errors are distinct from errors in the operation itself. If the operation
 /// fails, polling succeeds, and the response indicates the details of the failure.
-public protocol PollingErrorPolicy: Sendable {
+public protocol PollingErrorPolicy: ErrorPolicy {
   /// Query the polling policy after an error.
   ///
   /// - Parameters:

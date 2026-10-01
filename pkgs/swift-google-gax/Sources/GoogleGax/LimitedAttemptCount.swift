@@ -25,7 +25,7 @@ import Foundation
 ///
 /// Once the maximum number of attempts is reached, the policy replaces any
 /// [.retry](``RetryResult/retry(_:)``) result with [.exhausted](``RetryResult/exhausted(_:)``).
-public struct LimitedAttemptCount<P: Sendable>: Sendable {
+public struct LimitedAttemptCount<P: ErrorPolicy>: ErrorPolicy, Sendable {
   let inner: P
   let maximumAttempts: Int
 

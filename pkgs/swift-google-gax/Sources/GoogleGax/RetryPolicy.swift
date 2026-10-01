@@ -30,7 +30,7 @@ import Foundation
 /// Application developers may define their own policies if needed.
 ///
 /// [idempotent]: https://en.wikipedia.org/wiki/Idempotence
-public protocol RetryPolicy: Sendable {
+public protocol RetryPolicy: ErrorPolicy {
   /// Query the retry policy after an error.
   ///
   /// - Parameters:

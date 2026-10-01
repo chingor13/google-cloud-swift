@@ -20,7 +20,7 @@ import GoogleRpc
 /// This policy returns [retry][RetryResult.retry] when the error is a `ResourceExhausted` (or
 /// `TOO_MANY_REQUESTS` if received from the HTTP layer). Otherwise it returns the result from the
 /// inner retry policy.
-public struct TooManyRequests<P: Sendable>: Sendable {
+public struct TooManyRequests<P: ErrorPolicy>: ErrorPolicy, Sendable {
   let inner: P
 
   public init(inner: P) {

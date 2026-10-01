@@ -22,7 +22,7 @@ import Foundation
 ///
 /// The `remainingTime()` method returns the remaining time. This is always zero after the
 /// policy's deadline is reached.
-public struct LimitedElapsedTime<P: Sendable>: Sendable {
+public struct LimitedElapsedTime<P: ErrorPolicy>: ErrorPolicy, Sendable {
   let inner: P
   let maximumDuration: Duration
 
