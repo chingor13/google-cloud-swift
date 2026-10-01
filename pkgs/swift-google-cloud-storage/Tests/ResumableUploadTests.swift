@@ -3178,6 +3178,49 @@ import Testing
       try await client.writeObject(source, to: bucket, as: objectName)
     }
   }
+
+  /// Verifies that both `Data`-backed and `NIOCore.ByteBuffer`-backed `ByteChunk` sources
+  /// forward their exact payload bytes through `_HTTPClientRequest.setBody(byteChunk:)`.
+  @Test func resumableUploadByteChunkBackingStorageForwarding() async throws {
+    let registry = MockRegistry.create()
+    let bucket = "test-bucket"
+    let objectName = "test-object"
+
+    let baseData = Data((0..<1024).map { UInt8($0 & 0xFF) })
+    let slicedData = baseData[128..<896]
+    let byteBufferChunk = ByteChunk(Array(slicedData))
+
+    for (index, source) in [
+      BytesSource(data: slicedData),
+      BytesSource(buffer: byteBufferChunk),
+    ].enumerated() {
+      let startUrl = registry.url(
+        "/upload/storage/v1/b/\(bucket)/o?uploadType=resumable&name=\(objectName)-\(index)")
+      let chunkUrl = registry.url(
+        "/upload/storage/v1/b/\(bucket)/o?upload_id=chunk-backing-\(index)")
+
+      registry.register(
+        response: .success(
+          statusCode: 200, data: Data(),
+          headers: ["Location": chunkUrl.absoluteString]),
+        for: startUrl)
+      registry.register(
+        response: .success(
+          statusCode: 200,
+          data: makeObjectJSON(
+            name: "\(objectName)-\(index)", bucket: bucket, size: slicedData.count),
+          headers: ["Content-Type": "application/json"]),
+        for: chunkUrl)
+
+      let client = try makeClient(registry: registry, uploadThreshold: 1)
+      let object = try await client.writeObject(
+        source, to: bucket, as: "\(objectName)-\(index)")
+      #expect(object.name == "\(objectName)-\(index)")
+
+      let chunkRequest = try #require(registry.lastRequest(for: chunkUrl))
+      #expect(chunkRequest.httpBody == Data(slicedData))
+    }
+  }
 }
 
 // MARK: - Test Helper Sources
