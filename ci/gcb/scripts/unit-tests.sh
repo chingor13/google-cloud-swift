@@ -26,7 +26,6 @@ errors=0
 count=0
 
 flags=("${build_flags[@]}")
-source "${REPO_ROOT}/ci/package-dependencies.sh"
 
 mapfile -t packages < <(find . \( -name Sources -o -name .build -o -name .build-cache -o -name generated -o -name guide \) -prune -o -type f -name Package.swift -exec dirname {} \; | sort -u)
 for dir in "${packages[@]}"; do
@@ -37,22 +36,24 @@ for dir in "${packages[@]}"; do
         name="top-level package"
     fi
 
-    edit_package_dependencies "${dir}"
+    pkg_flags=("${flags[@]}")
+    if [[ "${dir}" == "." ]]; then
+        pkg_flags+=(--disable-automatic-resolution)
+    fi
 
     echo; echo; echo "--- Building ${name} ---"
-    if swift build --build-tests "${flags[@]}" --package-path "${dir}" >${dir}/.build.log 2>&1; then
+    if swift build --build-tests "${pkg_flags[@]}" --package-path "${dir}" >${dir}/.build.log 2>&1; then
         echo "✓ ${name} built successfully"
     else
         cat ${dir}/.build.log
         echo "✗ ${name} failed to build"
         errors=$((errors + 1))
-        restore_package_dependencies "${dir}"
         continue
     fi
 
     if [[ -d "${dir}/Tests" ]]; then
         echo "--- Testing ${name} ---"
-        if swift test "${flags[@]}" --quiet --package-path "${dir}" >${dir}/.test.log 2>&1; then
+        if swift test "${pkg_flags[@]}" --quiet --package-path "${dir}" >${dir}/.test.log 2>&1; then
             echo "✓ ${name} passed"
         else
             cat ${dir}/.test.log
@@ -60,8 +61,6 @@ for dir in "${packages[@]}"; do
             errors=$((errors + 1))
         fi
     fi
-
-    restore_package_dependencies "${dir}"
 done
 
 echo; echo; echo "${count} local package(s) tested, ${errors} failure(s)."
