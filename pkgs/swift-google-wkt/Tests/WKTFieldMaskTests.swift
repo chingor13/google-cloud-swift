@@ -122,20 +122,6 @@ import Testing
   }
 
   @Test(
-    "FieldMask stringValue",
-    arguments: [
-      ([], ""),
-      (["user_id"], "userId"),
-      (["user_id", "foo_bar"], "userId,fooBar"),
-      (["author.profile.avatar"], "author.profile.avatar"),
-      (["author_profile.avatar_url"], "authorProfile.avatarUrl"),
-    ])
-  func testStringValue(_ paths: [String], _ expected: String) {
-    let fieldMask = WKTFieldMask(paths: paths)
-    #expect(fieldMask.stringValue == expected)
-  }
-
-  @Test(
     "FieldMask CustomStringConvertible description",
     arguments: [
       ([], ""),

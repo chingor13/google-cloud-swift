@@ -43,11 +43,7 @@ public struct WKTFieldMask: Codable, Equatable, Sendable {
     self.paths = try Self.pathsFromString(string: string)
   }
 
-  /// The ProtoJSON string representation of the field mask.
-  ///
-  /// Field paths are converted to camelCase and joined by commas, matching
-  /// the canonical Protocol Buffers JSON mapping.
-  public var stringValue: String {
+  var stringValue: String {
     let camelCasePaths = paths.map { convertPathToCamelCase($0) }
     return camelCasePaths.joined(separator: ",")
   }
@@ -70,7 +66,8 @@ extension WKTFieldMask: ExpressibleByArrayLiteral {
 
 // Makes `WKTFieldMask` conform to `CustomStringConvertible`, providing string interpolation and textual representation.
 extension WKTFieldMask: CustomStringConvertible {
-  /// A textual representation of this field mask, matching `stringValue`.
+  /// A textual representation of this field mask, formatted as comma-separated
+  /// camelCase field paths per the Protocol Buffers JSON mapping.
   public var description: String {
     stringValue
   }
