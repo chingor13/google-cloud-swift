@@ -246,8 +246,18 @@ if [[ "${RESULTS_BUCKET}" != "${BUCKET_NAME}" ]]; then
     --role="roles/storage.objectAdmin" >/dev/null 2>&1 || true
 fi
 
-# Ensure BigQuery dataset exists
+# Ensure BigQuery permissions for the VM service account and ensure dataset exists
 if [[ -n "${BQ_DATASET}" ]]; then
+  echo "Ensuring BigQuery permissions for VM service account..."
+  gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+    --member="serviceAccount:${SERVICE_ACCOUNT}" \
+    --role="roles/bigquery.jobUser" \
+    --condition=None >/dev/null 2>&1 || true
+  gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+    --member="serviceAccount:${SERVICE_ACCOUNT}" \
+    --role="roles/bigquery.dataEditor" \
+    --condition=None >/dev/null 2>&1 || true
+
   echo "Ensuring BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' exists..."
   bq show "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || \
     bq mk --project_id="${PROJECT_ID}" --location="${REGION}" --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
@@ -364,7 +374,31 @@ if [[ "${AUTO_TEARDOWN}" == "true" ]]; then
   fi
 fi
 
-# 8. Summary and Query Instructions
+# 8. Ensure results are published to BigQuery
+if [[ -n "${BQ_DATASET}" ]]; then
+  RESULTS_CSV_GCS="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/results.csv"
+  echo "Ensuring results are loaded into BigQuery: ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
+  if ! bq show "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" >/dev/null 2>&1; then
+    if gcloud storage objects describe "${RESULTS_CSV_GCS}" >/dev/null 2>&1; then
+      echo "Publishing ${RESULTS_CSV_GCS} to ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
+      bq load \
+        --project_id="${PROJECT_ID}" \
+        --location="${REGION}" \
+        --source_format=CSV \
+        --skip_leading_rows=1 \
+        --replace \
+        "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" \
+        "${RESULTS_CSV_GCS}" \
+        Task:INT64,Iteration:INT64,IterationStart:INT64,Operation:STRING,Size:INT64,TransferSize:INT64,ElapsedMicroseconds:INT64,Object:STRING,Crc32cEnabled:BOOL,Result:STRING,Details:STRING || {
+          echo "WARNING: Failed to load results into BigQuery."
+        }
+    fi
+  else
+    echo "✓ BigQuery table ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE} is ready."
+  fi
+fi
+
+# 9. Summary and Query Instructions
 echo ""
 echo "=========================================================="
 echo "Benchmark Summary"

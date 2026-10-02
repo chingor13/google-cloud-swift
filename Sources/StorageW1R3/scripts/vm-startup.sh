@@ -68,6 +68,7 @@ INSTANCE_NAME=$(get_instance_metadata "name")
 [[ -z "${INSTANCE_NAME}" ]] && INSTANCE_NAME=$(hostname)
 RAW_ZONE=$(get_instance_metadata "zone")
 ZONE="${RAW_ZONE##*/}"
+REGION="${ZONE%-*}"
 PROJECT_ID=$(get_project_metadata "project-id")
 RAW_MACHINE_TYPE=$(get_instance_metadata "machine-type")
 MACHINE_TYPE="${RAW_MACHINE_TYPE##*/}"
@@ -156,7 +157,13 @@ echo "--- Installing build dependencies ---"
 apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
   git curl binutils build-essential pkg-config \
-  libicu-dev libcurl4-openssl-dev libssl-dev libxml2-dev zlib1g-dev jq
+  libicu-dev libcurl4-openssl-dev libssl-dev libxml2-dev zlib1g-dev jq \
+  google-cloud-cli-bigquery || true
+
+# Ensure bq CLI is available in PATH
+if ! command -v bq &>/dev/null && [[ -x "/snap/bin/bq" ]]; then
+  export PATH="/snap/bin:${PATH}"
+fi
 
 echo "--- Installing Swift toolchain ---"
 if ! command -v swift &>/dev/null; then
@@ -236,16 +243,23 @@ echo "Benchmark finished successfully."
 if [[ -n "${BQ_DATASET}" && -s "/root/results.csv" ]]; then
   RUN_STATUS="UPLOADING_BIGQUERY"
   echo "--- Loading results into BigQuery: ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE} ---"
-  bq show "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || bq mk --dataset "${PROJECT_ID}:${BQ_DATASET}"
-  bq load \
-    --source_format=CSV \
-    --skip_leading_rows=1 \
-    --replace \
-    "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" \
-    /root/results.csv \
-    Task:int64,Iteration:int64,IterationStart:int64,Operation,Size:int64,TransferSize:int64,ElapsedMicroseconds:int64,Object,Crc32cEnabled:bool,Result,Details || {
-      echo "WARNING: Failed to load results into BigQuery. Results CSV is still preserved in GCS."
-    }
+  if command -v bq &>/dev/null; then
+    bq show --project_id="${PROJECT_ID}" "${BQ_DATASET}" >/dev/null 2>&1 || \
+      bq mk --project_id="${PROJECT_ID}" --location="${REGION}" --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
+    bq load \
+      --project_id="${PROJECT_ID}" \
+      --location="${REGION}" \
+      --source_format=CSV \
+      --skip_leading_rows=1 \
+      --replace \
+      "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" \
+      /root/results.csv \
+      Task:INT64,Iteration:INT64,IterationStart:INT64,Operation:STRING,Size:INT64,TransferSize:INT64,ElapsedMicroseconds:INT64,Object:STRING,Crc32cEnabled:BOOL,Result:STRING,Details:STRING || {
+        echo "WARNING: Failed to load results into BigQuery from VM. Results CSV is preserved in GCS."
+      }
+  else
+    echo "WARNING: 'bq' CLI not available on VM. Results will be loaded into BigQuery from the host deployment script."
+  fi
 fi
 
 RUN_STATUS="SUCCESS"
