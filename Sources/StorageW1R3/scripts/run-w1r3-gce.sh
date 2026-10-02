@@ -257,7 +257,7 @@ fi
 SOURCE_TAR_GCS=""
 if [[ "${STAGE_LOCAL}" == "true" ]]; then
   echo "Creating archive of local repository..."
-  TEMP_ARCHIVE=$(mktemp /tmp/w1r3-src-XXXXXX.tar.gz)
+  TEMP_ARCHIVE=$(mktemp /tmp/w1r3-src-XXXXXX)
   # Archive tracked git files plus submodules
   git archive --format=tar.gz -o "${TEMP_ARCHIVE}" HEAD
   SOURCE_TAR_GCS="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/source.tar.gz"
@@ -287,8 +287,8 @@ if [[ -n "${SOURCE_TAR_GCS}" ]]; then
   METADATA_ENTRIES+=("source-tar-gcs=${SOURCE_TAR_GCS}")
 fi
 
-# Join metadata entries with comma
-IFS=',' METADATA_STR="${METADATA_ENTRIES[*]}"
+# Join metadata entries with comma safely in a subshell
+METADATA_STR=$(IFS=,; echo "${METADATA_ENTRIES[*]}")
 
 # 5. Launch GCE Instance
 STARTUP_SCRIPT="${SCRIPT_DIR}/vm-startup.sh"
