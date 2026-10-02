@@ -19,13 +19,15 @@ import GoogleAuth
 @Suite struct CredentialsErrorTest {
   @Test func notSupported() {
     let got = CredentialsError.notSupported("-- details here --")
+    #expect(got.description == "Operation not supported: -- details here --")
     #expect(
       got.debugDescription.contains("-- details here --"),
       "\(got):\n\(got.debugDescription)")
   }
 
-  @Test func parseErrorLocalized() {
+  @Test func parseError() {
     let got = CredentialsError.parseError("-- details here --")
+    #expect(got.description == "Configuration parse error: -- details here --")
     #expect(
       got.debugDescription.contains("-- details here --"),
       "\(got):\n\(got.debugDescription)")
@@ -34,6 +36,7 @@ import GoogleAuth
   @Test func cannotFetchTokenDetails() {
     let source = CredentialsError.notSupported("--inner--")
     let got = CredentialsError.cannotFetchToken(message: "--message here--", source: source)
+    #expect(got.description == "--message here--: Operation not supported: --inner--")
     #expect(
       got.debugDescription.contains("--message here--"),
       "\(got):\n\(got.debugDescription)")

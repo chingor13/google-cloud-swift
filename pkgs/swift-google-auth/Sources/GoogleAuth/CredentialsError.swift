@@ -72,3 +72,16 @@ extension CredentialsError: CustomDebugStringConvertible {
     }
   }
 }
+
+extension CredentialsError: CustomStringConvertible {
+  public var description: String {
+    switch self {
+    case .notSupported(let detail):
+      return "Operation not supported: \(detail)"
+    case .parseError(let detail):
+      return "Configuration parse error: \(detail)"
+    case .cannotFetchToken(let message, let source):
+      return "\(message): \(source)"
+    }
+  }
+}
