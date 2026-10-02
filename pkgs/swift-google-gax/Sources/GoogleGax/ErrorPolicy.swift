@@ -17,7 +17,7 @@ import Foundation
 /// A marker protocol representing a policy for handling errors in retry or polling loops.
 ///
 /// Both ``RetryPolicy`` and ``PollingErrorPolicy`` inherit from ``ErrorPolicy``.
-/// Common error policy decorators—such as ``ContinueOnIO``, ``TooManyRequests``,
-/// ``LimitedAttemptCount``, and ``LimitedElapsedTime``—constrain their wrapped inner
+/// Common error policy decorators (such as ``ContinueOnIO``, ``TooManyRequests``,
+/// ``LimitedAttemptCount``, and ``LimitedElapsedTime``) constrain their wrapped inner
 /// policy to ``ErrorPolicy``.
 public protocol ErrorPolicy: Sendable {}
