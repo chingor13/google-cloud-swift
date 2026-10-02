@@ -227,7 +227,7 @@ set +e
 "${BENCHMARK_BIN}" \
   --bucket-name "${BUCKET_NAME}" \
   ${BENCHMARK_ARGS} \
-  > /root/results.csv 2> >(tee -a /root/benchmark.log /dev/console)
+  > /root/results.csv 2> >(tee -a /root/benchmark.log >/dev/console)
 BENCHMARK_EXIT_CODE=$?
 set -e
 
