@@ -17,17 +17,11 @@ import GoogleGax
 import Testing
 
 @Suite struct ErrorPolicyTests {
-  private func assertIsRetryPolicy<T: RetryPolicy>(_ policy: T) {
-    let anyValue: Any = policy
-    #expect(anyValue is RetryPolicy)
-    #expect(anyValue is ErrorPolicy)
-  }
+  private func assertIsRetryPolicy<T: RetryPolicy>(_: T) {}
 
-  private func assertIsPollingErrorPolicy<T: PollingErrorPolicy>(_ policy: T) {
-    let anyValue: Any = policy
-    #expect(anyValue is PollingErrorPolicy)
-    #expect(anyValue is ErrorPolicy)
-  }
+  private func assertIsPollingErrorPolicy<T: PollingErrorPolicy>(_: T) {}
+
+  private func assertIsErrorPolicy<T: ErrorPolicy>(_: T) {}
 
   @Test func leafRetryPoliciesConformToErrorPolicy() {
     assertIsRetryPolicy(AIP194.unbounded())
@@ -88,5 +82,6 @@ import Testing
       maximumAttempts: 5
     )
     assertIsRetryPolicy(manualNested)
+    assertIsErrorPolicy(manualNested)
   }
 }
