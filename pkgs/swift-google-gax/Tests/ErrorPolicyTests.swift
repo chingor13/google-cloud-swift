@@ -17,10 +17,10 @@ import GoogleGax
 import Testing
 
 @Suite struct ErrorPolicyTests {
+  // These assertions are compile-time checks that the type conforms to
+  // the expected protocol.
   private func assertIsRetryPolicy<T: RetryPolicy>(_: T) {}
-
   private func assertIsPollingErrorPolicy<T: PollingErrorPolicy>(_: T) {}
-
   private func assertIsErrorPolicy<T: ErrorPolicy>(_: T) {}
 
   @Test func leafRetryPoliciesConformToErrorPolicy() {
