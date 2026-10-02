@@ -247,6 +247,7 @@ if [[ "${RESULTS_BUCKET}" != "${BUCKET_NAME}" ]]; then
 fi
 
 # Ensure BigQuery permissions for the VM service account and ensure dataset exists
+BQ_LOCATION=""
 if [[ -n "${BQ_DATASET}" ]]; then
   echo "Ensuring BigQuery permissions for VM service account..."
   gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
@@ -258,9 +259,17 @@ if [[ -n "${BQ_DATASET}" ]]; then
     --role="roles/bigquery.dataEditor" \
     --condition=None >/dev/null 2>&1 || true
 
-  echo "Ensuring BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' exists..."
-  bq show "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || \
-    bq mk --project_id="${PROJECT_ID}" --location="${REGION}" --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
+  echo "Checking BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}'..."
+  if bq show --project_id="${PROJECT_ID}" "${BQ_DATASET}" >/dev/null 2>&1; then
+    BQ_LOCATION=$(bq show --project_id="${PROJECT_ID}" --format=prettyjson "${BQ_DATASET}" 2>/dev/null | jq -r '.location // empty')
+  fi
+  if [[ -z "${BQ_LOCATION}" || "${BQ_LOCATION}" == "null" ]]; then
+    BQ_LOCATION="${REGION}"
+    echo "Creating BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' in location '${BQ_LOCATION}'..."
+    bq mk --project_id="${PROJECT_ID}" --location="${BQ_LOCATION}" --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
+  else
+    echo "BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' found in location '${BQ_LOCATION}'."
+  fi
 fi
 
 # 3. Handle Local Staging if requested
@@ -288,6 +297,7 @@ METADATA_ENTRIES=(
   "run-id=${RUN_ID}"
   "bq-dataset=${BQ_DATASET}"
   "bq-table=${BQ_TABLE}"
+  "bq-location=${BQ_LOCATION}"
   "git-repo=${GIT_REPO}"
   "git-ref=${GIT_REF}"
   "benchmark-args=${BENCHMARK_ARGS}"
@@ -358,6 +368,10 @@ if gcloud storage objects describe "${STATUS_FILE}" >/dev/null 2>&1; then
 fi
 
 echo "Run Status: ${RUN_STATUS}"
+if [[ "${RUN_STATUS}" != "SUCCESS" ]]; then
+  echo "WARNING: Benchmark run did not finish with SUCCESS (status: ${RUN_STATUS})." >&2
+  echo "Check startup log: gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/startup.log" >&2
+fi
 
 # 7. Post-run Teardown check
 if [[ "${AUTO_TEARDOWN}" == "true" ]]; then
@@ -378,20 +392,25 @@ fi
 if [[ -n "${BQ_DATASET}" ]]; then
   RESULTS_CSV_GCS="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/results.csv"
   echo "Ensuring results are loaded into BigQuery: ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
-  if ! bq show "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" >/dev/null 2>&1; then
+  if ! bq show --project_id="${PROJECT_ID}" "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" >/dev/null 2>&1; then
     if gcloud storage objects describe "${RESULTS_CSV_GCS}" >/dev/null 2>&1; then
       echo "Publishing ${RESULTS_CSV_GCS} to ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
+      TEMP_CSV=$(mktemp /tmp/w1r3-results-XXXXXX.csv)
+      gcloud storage cp "${RESULTS_CSV_GCS}" "${TEMP_CSV}"
       bq load \
         --project_id="${PROJECT_ID}" \
-        --location="${REGION}" \
+        --location="${BQ_LOCATION:-${REGION}}" \
         --source_format=CSV \
         --skip_leading_rows=1 \
         --replace \
         "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" \
-        "${RESULTS_CSV_GCS}" \
+        "${TEMP_CSV}" \
         Task:INT64,Iteration:INT64,IterationStart:INT64,Operation:STRING,Size:INT64,TransferSize:INT64,ElapsedMicroseconds:INT64,Object:STRING,Crc32cEnabled:BOOL,Result:STRING,Details:STRING || {
           echo "WARNING: Failed to load results into BigQuery."
         }
+      rm -f "${TEMP_CSV}"
+    else
+      echo "WARNING: Results CSV not found at ${RESULTS_CSV_GCS}. Skipping BigQuery load."
     fi
   else
     echo "✓ BigQuery table ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE} is ready."

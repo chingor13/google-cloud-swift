@@ -57,6 +57,7 @@ RESULTS_BUCKET=$(get_attribute "results-bucket" "${BUCKET_NAME}")
 RUN_ID=$(get_attribute "run-id" "$(date +%Y%m%d-%H%M%S)")
 BQ_DATASET=$(get_attribute "bq-dataset" "w1r3")
 BQ_TABLE=$(get_attribute "bq-table" "swift_${RUN_ID//-/_}")
+BQ_LOCATION=$(get_attribute "bq-location" "")
 GIT_REPO=$(get_attribute "git-repo" "https://github.com/googleapis/google-cloud-swift.git")
 GIT_REF=$(get_attribute "git-ref" "main")
 SOURCE_TAR_GCS=$(get_attribute "source-tar-gcs" "")
@@ -69,6 +70,7 @@ INSTANCE_NAME=$(get_instance_metadata "name")
 RAW_ZONE=$(get_instance_metadata "zone")
 ZONE="${RAW_ZONE##*/}"
 REGION="${ZONE%-*}"
+[[ -z "${BQ_LOCATION}" ]] && BQ_LOCATION="${REGION}"
 PROJECT_ID=$(get_project_metadata "project-id")
 RAW_MACHINE_TYPE=$(get_instance_metadata "machine-type")
 MACHINE_TYPE="${RAW_MACHINE_TYPE##*/}"
@@ -158,7 +160,7 @@ apt-get update -y
 DEBIAN_FRONTEND=noninteractive apt-get install -y \
   git curl binutils build-essential pkg-config \
   libicu-dev libcurl4-openssl-dev libssl-dev libxml2-dev zlib1g-dev jq \
-  google-cloud-cli-bigquery || true
+  unzip zip gnupg2 libc6-dev libpython3-dev libncurses-dev libz3-dev
 
 # Ensure bq CLI is available in PATH
 if ! command -v bq &>/dev/null && [[ -x "/snap/bin/bq" ]]; then
@@ -245,10 +247,10 @@ if [[ -n "${BQ_DATASET}" && -s "/root/results.csv" ]]; then
   echo "--- Loading results into BigQuery: ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE} ---"
   if command -v bq &>/dev/null; then
     bq show --project_id="${PROJECT_ID}" "${BQ_DATASET}" >/dev/null 2>&1 || \
-      bq mk --project_id="${PROJECT_ID}" --location="${REGION}" --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
+      bq mk --project_id="${PROJECT_ID}" --location="${BQ_LOCATION}" --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
     bq load \
       --project_id="${PROJECT_ID}" \
-      --location="${REGION}" \
+      --location="${BQ_LOCATION}" \
       --source_format=CSV \
       --skip_leading_rows=1 \
       --replace \
