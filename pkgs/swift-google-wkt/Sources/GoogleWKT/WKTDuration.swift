@@ -182,13 +182,37 @@ extension WKTDuration: _AnyPackable {
 /// - Note: As Google Cloud APIs and client libraries evolve, new error cases may be added to this
 ///   enumeration in minor or patch releases. Always handle unexpected cases using an `@unknown default:`
 ///   clause in `switch` statements.
-public enum WKTDurationError: Error {
+public enum WKTDurationError: Error, Sendable, Equatable, CustomStringConvertible,
+  CustomDebugStringConvertible
+{
   /// The seconds and nanosecond signs did no match.
   case mismatchedSigns
   /// The seconds or nanosecond components are out of range.
   case outOfRange
   /// Invalid format when parsing a duration from a string.
   case invalidFormat
+
+  public var description: String {
+    switch self {
+    case .mismatchedSigns:
+      return "The seconds and nanosecond signs did not match."
+    case .outOfRange:
+      return "The seconds or nanosecond components are out of range."
+    case .invalidFormat:
+      return "Invalid format when parsing a duration from a string."
+    }
+  }
+
+  public var debugDescription: String {
+    switch self {
+    case .mismatchedSigns:
+      return "WKTDurationError.mismatchedSigns"
+    case .outOfRange:
+      return "WKTDurationError.outOfRange"
+    case .invalidFormat:
+      return "WKTDurationError.invalidFormat"
+    }
+  }
 }
 
 /// The number of nanoseconds in a second.

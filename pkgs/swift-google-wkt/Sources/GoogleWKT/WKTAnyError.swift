@@ -19,7 +19,9 @@ import Foundation
 /// - Note: As Google Cloud APIs and client libraries evolve, new error cases may be added to this
 ///   enumeration in minor or patch releases. Always handle unexpected cases using an `@unknown default:`
 ///   clause in `switch` statements.
-public enum WKTAnyError: Error {
+public enum WKTAnyError: Error, Sendable, Equatable, CustomStringConvertible,
+  CustomDebugStringConvertible
+{
   /// The type URL of the message does not match the contents in the `WKTAny`.
   ///
   /// Each `WKTAny` carries a field indicating the type URL of its contents. This error indicates that
@@ -45,8 +47,8 @@ public enum WKTAnyError: Error {
   ///     {"@type": "type.googleapis.com/google.protobuf.Duration", "value": "123.45s"}
   ///
   /// This error indicates that the `value` field is missing.
-
   case missingValueField
+
   /// The message is encoded as a JSON string but the `value` field is not a string.
   ///
   /// Some messages, notably many well-known types, are JSON encoded to strings. When stored in a
@@ -60,4 +62,30 @@ public enum WKTAnyError: Error {
   ///
   /// This error indicates that the `value` field is present, but it is not of string type.
   case invalidValueField
+
+  public var description: String {
+    switch self {
+    case .mismatchedTypeURL:
+      return "The type URL of the message does not match the contents in the WKTAny."
+    case .invalidNestedAnyType:
+      return "The @type field in a nested WKTAny is missing or invalid."
+    case .missingValueField:
+      return "The message is encoded as a JSON string but the 'value' field is missing."
+    case .invalidValueField:
+      return "The message is encoded as a JSON string but the 'value' field is not a string."
+    }
+  }
+
+  public var debugDescription: String {
+    switch self {
+    case .mismatchedTypeURL:
+      return "WKTAnyError.mismatchedTypeURL"
+    case .invalidNestedAnyType:
+      return "WKTAnyError.invalidNestedAnyType"
+    case .missingValueField:
+      return "WKTAnyError.missingValueField"
+    case .invalidValueField:
+      return "WKTAnyError.invalidValueField"
+    }
+  }
 }
