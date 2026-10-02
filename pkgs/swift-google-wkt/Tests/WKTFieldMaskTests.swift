@@ -122,7 +122,7 @@ import Testing
   }
 
   @Test(
-    "FieldMask toString",
+    "FieldMask stringValue",
     arguments: [
       ([], ""),
       (["user_id"], "userId"),
@@ -130,9 +130,9 @@ import Testing
       (["author.profile.avatar"], "author.profile.avatar"),
       (["author_profile.avatar_url"], "authorProfile.avatarUrl"),
     ])
-  func testToString(_ paths: [String], _ expected: String) {
+  func testStringValue(_ paths: [String], _ expected: String) {
     let fieldMask = WKTFieldMask(paths: paths)
-    #expect(fieldMask.toString() == expected)
+    #expect(fieldMask.stringValue == expected)
   }
 
   @Test(

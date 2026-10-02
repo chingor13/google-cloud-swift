@@ -33,7 +33,7 @@ public struct WKTFieldMask: Codable, Equatable, Sendable {
   }
 
   public func encode(to encoder: any Encoder) throws {
-    let joined = self.toString()
+    let joined = self.stringValue
     try joined.encode(to: encoder)
   }
 
@@ -43,11 +43,11 @@ public struct WKTFieldMask: Codable, Equatable, Sendable {
     self.paths = try Self.pathsFromString(string: string)
   }
 
-  /// Returns the ProtoJSON string representation of the field mask.
+  /// The ProtoJSON string representation of the field mask.
   ///
   /// Field paths are converted to camelCase and joined by commas, matching
   /// the canonical Protocol Buffers JSON mapping.
-  public func toString() -> String {
+  public var stringValue: String {
     let camelCasePaths = paths.map { convertPathToCamelCase($0) }
     return camelCasePaths.joined(separator: ",")
   }
@@ -68,11 +68,11 @@ extension WKTFieldMask: ExpressibleByArrayLiteral {
   }
 }
 
-// Makes `WKTFieldMask` conform to `CustomStringConvertible`, providing string interpolation and debug printing.
+// Makes `WKTFieldMask` conform to `CustomStringConvertible`, providing string interpolation and textual representation.
 extension WKTFieldMask: CustomStringConvertible {
-  /// A textual representation of this field mask, matching `toString()`.
+  /// A textual representation of this field mask, matching `stringValue`.
   public var description: String {
-    toString()
+    stringValue
   }
 }
 
@@ -93,7 +93,7 @@ extension WKTFieldMask: _AnyPackable {
   }
 
   public func _pack() throws -> WKTStruct {
-    return [WKTAny.valueField: .string(toString())]
+    return [WKTAny.valueField: .string(stringValue)]
   }
 }
 
