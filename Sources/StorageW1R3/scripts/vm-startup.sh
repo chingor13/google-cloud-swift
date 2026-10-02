@@ -208,7 +208,7 @@ if [[ -f "ci/swift-version.sh" ]]; then
   fi
 fi
 
-swift build "${BUILD_FLAGS[@]}"
+GOOGLE_CLOUD_SWIFT_LOCAL_DEPS=1 swift build "${BUILD_FLAGS[@]}"
 
 BENCHMARK_BIN="/root/workspace/.build/release/StorageW1R3Benchmark"
 if [[ ! -x "${BENCHMARK_BIN}" ]]; then
