@@ -157,7 +157,7 @@ if [[ -z "${BUCKET_NAME}" ]]; then
 fi
 
 if [[ -z "${RESULTS_BUCKET}" ]]; then
-  RESULTS_BUCKET="${BUCKET_NAME}"
+  RESULTS_BUCKET="w1r3-results-${PROJECT_ID}-${REGION}"
 fi
 
 if [[ -z "${BQ_TABLE}" ]]; then
@@ -187,6 +187,9 @@ echo "Machine Type:    ${MACHINE_TYPE}"
 echo "Instance:        ${INSTANCE_NAME}"
 echo "Test Bucket:     gs://${BUCKET_NAME}"
 echo "Results Bucket:  gs://${RESULTS_BUCKET}"
+if [[ "${RESULTS_BUCKET}" == "${BUCKET_NAME}" ]]; then
+  echo "WARNING: Results bucket is identical to test bucket. Output artifacts may be purged after 24h by bucket lifecycle rules." >&2
+fi
 echo "BigQuery Target: ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}"
 echo "Git Source:      ${GIT_REPO} @ ${GIT_REF}"
 if [[ "${STAGE_LOCAL}" == "true" ]]; then
