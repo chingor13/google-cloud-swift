@@ -16,9 +16,9 @@
 
 set -euo pipefail
 
-# Redirect stdout and stderr to both startup log and serial console
+# Redirect stdout and stderr to startup log (automatically forwarded to serial port by GCE)
 mkdir -p /var/log
-exec > >(tee -a /var/log/w1r3-startup.log /dev/console) 2>&1
+exec > >(tee -a /var/log/w1r3-startup.log) 2>&1
 
 echo "=========================================================="
 echo "Starting Storage W1R3 Benchmark Runner on GCE"
@@ -251,7 +251,7 @@ set +e
 "${BENCHMARK_BIN}" \
   --bucket-name "${BUCKET_NAME}" \
   ${BENCHMARK_ARGS} \
-  > /root/results.csv 2> >(tee -a /root/benchmark.log >/dev/console)
+  > /root/results.csv 2> >(tee -a /root/benchmark.log)
 BENCHMARK_EXIT_CODE=$?
 set -e
 
