@@ -108,8 +108,45 @@ cleanup_and_teardown() {
       gcloud storage cp /var/log/w1r3-startup.log "${GCS_OUTPUT_DIR}/startup.log" || true
     fi
 
-    # Write metadata JSON
-    cat <<EOF > /root/metadata.json
+    # Write metadata JSON safely with jq escaping if available
+    if command -v jq &>/dev/null; then
+      jq -n \
+        --arg run_id "${RUN_ID}" \
+        --arg project_id "${PROJECT_ID}" \
+        --arg zone "${ZONE}" \
+        --arg instance_name "${INSTANCE_NAME}" \
+        --arg machine_type "${MACHINE_TYPE}" \
+        --arg bucket_name "${BUCKET_NAME}" \
+        --arg results_bucket "${RESULTS_BUCKET}" \
+        --arg bq_dataset "${BQ_DATASET}" \
+        --arg bq_table "${BQ_TABLE}" \
+        --arg git_repo "${GIT_REPO}" \
+        --arg git_ref "${GIT_REF}" \
+        --arg benchmark_args "${BENCHMARK_ARGS}" \
+        --arg start_time "${RUN_START_TIME}" \
+        --arg end_time "${end_time}" \
+        --arg status "${RUN_STATUS}" \
+        --argjson exit_code "${exit_code}" \
+        '{
+          run_id: $run_id,
+          project_id: $project_id,
+          zone: $zone,
+          instance_name: $instance_name,
+          machine_type: $machine_type,
+          bucket_name: $bucket_name,
+          results_bucket: $results_bucket,
+          bq_dataset: $bq_dataset,
+          bq_table: $bq_table,
+          git_repo: $git_repo,
+          git_ref: $git_ref,
+          benchmark_args: $benchmark_args,
+          start_time: $start_time,
+          end_time: $end_time,
+          status: $status,
+          exit_code: $exit_code
+        }' > /root/metadata.json
+    else
+      cat <<EOF > /root/metadata.json
 {
   "run_id": "${RUN_ID}",
   "project_id": "${PROJECT_ID}",
@@ -129,6 +166,7 @@ cleanup_and_teardown() {
   "exit_code": ${exit_code}
 }
 EOF
+    fi
     gcloud storage cp /root/metadata.json "${GCS_OUTPUT_DIR}/metadata.json" || true
     echo "${RUN_STATUS}" | gcloud storage cp - "${GCS_OUTPUT_DIR}/STATUS" || true
   fi
@@ -140,7 +178,7 @@ EOF
       echo "Instance deletion requested successfully."
     else
       echo "Instance deletion failed or lacks permission; shutting down instance to halt compute billing..."
-      sudo poweroff || true
+      poweroff || true
     fi
   else
     echo "Auto-teardown is disabled. Leaving instance running for inspection."
@@ -242,7 +280,8 @@ fi
 
 GOOGLE_CLOUD_SWIFT_LOCAL_DEPS=1 swift build "${BUILD_FLAGS[@]}"
 
-BENCHMARK_BIN="/root/workspace/.build/release/StorageW1R3Benchmark"
+BIN_DIR=$(swift build "${BUILD_FLAGS[@]}" --show-bin-path 2>/dev/null || echo "/root/workspace/.build/release")
+BENCHMARK_BIN="${BIN_DIR}/StorageW1R3Benchmark"
 if [[ ! -x "${BENCHMARK_BIN}" ]]; then
   echo "ERROR: Benchmark binary not found at ${BENCHMARK_BIN}"
   RUN_STATUS="BUILD_FAILED"
