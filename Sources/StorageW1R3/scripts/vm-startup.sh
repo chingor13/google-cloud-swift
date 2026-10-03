@@ -132,7 +132,7 @@ EOF
   if [[ "${AUTO_TEARDOWN}" == "true" ]]; then
     echo "Auto-teardown enabled. Initiating instance deletion..."
     # Attempt self-deletion via gcloud
-    if gcloud compute instances delete "${INSTANCE_NAME}" --zone="${ZONE}" --quiet 2>/dev/null; then
+    if gcloud compute instances delete "${INSTANCE_NAME}" --zone="${ZONE}" --project="${PROJECT_ID}" --quiet 2>/dev/null; then
       echo "Instance deletion requested successfully."
     else
       echo "Instance deletion failed or lacks permission; shutting down instance to halt compute billing..."

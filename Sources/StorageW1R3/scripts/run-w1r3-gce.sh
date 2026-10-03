@@ -344,6 +344,10 @@ if [[ "${WAIT_FOR_COMPLETION}" != "true" ]]; then
   echo "Results will be available at:"
   echo "  Cloud Storage: gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/"
   echo "  BigQuery:      ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}"
+  if [[ "${AUTO_TEARDOWN}" == "true" ]]; then
+    echo ""
+    echo "Note: The VM will attempt to self-delete on completion (or power off if service account lacks compute.instances.delete)."
+  fi
   exit 0
 fi
 
