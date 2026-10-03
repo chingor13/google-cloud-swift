@@ -290,10 +290,11 @@ if [[ -n "${BQ_DATASET}" ]]; then
   fi
 
   echo "Granting dataset dataEditor permission on '${PROJECT_ID}:${BQ_DATASET}'..."
-  if ! bq add-iam-policy-binding \
-    --member="serviceAccount:${SERVICE_ACCOUNT}" \
-    --role="roles/bigquery.dataEditor" \
-    --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1; then
+  if ! bq query \
+    --project_id="${PROJECT_ID}" \
+    --location="${BQ_LOCATION}" \
+    --use_legacy_sql=false \
+    "GRANT \`roles/bigquery.dataEditor\` ON SCHEMA \`${PROJECT_ID}.${BQ_DATASET}\` TO 'serviceAccount:${SERVICE_ACCOUNT}'" >/dev/null 2>&1; then
     echo "WARNING: Could not grant dataEditor on dataset ${PROJECT_ID}:${BQ_DATASET}. Ensure ${SERVICE_ACCOUNT} can write to this dataset." >&2
   fi
 fi
