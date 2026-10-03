@@ -346,20 +346,29 @@ if [[ ! -f "${STARTUP_SCRIPT}" ]]; then
 fi
 
 echo "Creating GCE VM instance '${INSTANCE_NAME}' in ${ZONE}..."
-gcloud compute instances create "${INSTANCE_NAME}" \
-  --project="${PROJECT_ID}" \
-  --zone="${ZONE}" \
-  --machine-type="${MACHINE_TYPE}" \
-  --network-tier=PREMIUM \
-  --scopes=cloud-platform \
-  --service-account="${SERVICE_ACCOUNT}" \
-  --image-family=ubuntu-2404-lts-amd64 \
-  --image-project=ubuntu-os-cloud \
-  --boot-disk-size=50GB \
-  --boot-disk-type=pd-ssd \
-  --metadata="${METADATA_STR}" \
-  --metadata-from-file="startup-script=${STARTUP_SCRIPT}" \
+CREATE_FLAGS=(
+  --project="${PROJECT_ID}"
+  --zone="${ZONE}"
+  --machine-type="${MACHINE_TYPE}"
+  --network-tier=PREMIUM
+  --scopes=cloud-platform
+  --service-account="${SERVICE_ACCOUNT}"
+  --image-family=ubuntu-2404-lts-amd64
+  --image-project=ubuntu-os-cloud
+  --boot-disk-size=50GB
+  --boot-disk-type=pd-ssd
+  --metadata="${METADATA_STR}"
+  --metadata-from-file="startup-script=${STARTUP_SCRIPT}"
   --quiet
+)
+if [[ "${AUTO_TEARDOWN}" == "true" ]]; then
+  CREATE_FLAGS+=(
+    --max-run-duration=2h
+    --instance-termination-action=DELETE
+  )
+fi
+
+gcloud compute instances create "${INSTANCE_NAME}" "${CREATE_FLAGS[@]}"
 
 echo "✓ VM '${INSTANCE_NAME}' created successfully."
 
