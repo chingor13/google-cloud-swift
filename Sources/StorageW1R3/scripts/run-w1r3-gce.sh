@@ -249,14 +249,10 @@ fi
 # Ensure BigQuery permissions for the VM service account and ensure dataset exists
 BQ_LOCATION=""
 if [[ -n "${BQ_DATASET}" ]]; then
-  echo "Ensuring BigQuery permissions for VM service account..."
+  echo "Ensuring BigQuery jobUser permission for VM service account..."
   gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
     --member="serviceAccount:${SERVICE_ACCOUNT}" \
     --role="roles/bigquery.jobUser" \
-    --condition=None >/dev/null 2>&1 || true
-  gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
-    --member="serviceAccount:${SERVICE_ACCOUNT}" \
-    --role="roles/bigquery.dataEditor" \
     --condition=None >/dev/null 2>&1 || true
 
   echo "Checking BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}'..."
@@ -270,6 +266,12 @@ if [[ -n "${BQ_DATASET}" ]]; then
   else
     echo "BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' found in location '${BQ_LOCATION}'."
   fi
+
+  echo "Granting dataset dataEditor permission on '${PROJECT_ID}:${BQ_DATASET}'..."
+  bq add-iam-policy-binding \
+    --member="serviceAccount:${SERVICE_ACCOUNT}" \
+    --role="roles/bigquery.dataEditor" \
+    --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
 fi
 
 # 3. Handle Local Staging if requested
