@@ -280,29 +280,34 @@ if [[ -n "${BQ_DATASET}" ]]; then
     echo "WARNING: Could not grant roles/bigquery.jobUser on project ${PROJECT_ID}. Ensure ${SERVICE_ACCOUNT} can run BigQuery jobs." >&2
   fi
 
-  echo "Checking BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}'..."
-  if bq show --project_id="${PROJECT_ID}" "${BQ_DATASET}" >/dev/null 2>&1; then
-    if command -v jq &>/dev/null; then
-      BQ_LOCATION=$(bq show --project_id="${PROJECT_ID}" --format=prettyjson "${BQ_DATASET}" 2>/dev/null | jq -r '.location // empty')
-    else
-      BQ_LOCATION=$(bq show --project_id="${PROJECT_ID}" --format=prettyjson "${BQ_DATASET}" 2>/dev/null | sed -n 's/.*"location": "\([^"]*\)".*/\1/p' | head -n 1)
+  if command -v bq &>/dev/null; then
+    echo "Checking BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}'..."
+    if bq show --project_id="${PROJECT_ID}" "${BQ_DATASET}" >/dev/null 2>&1; then
+      if command -v jq &>/dev/null; then
+        BQ_LOCATION=$(bq show --project_id="${PROJECT_ID}" --format=prettyjson "${BQ_DATASET}" 2>/dev/null | jq -r '.location // empty')
+      else
+        BQ_LOCATION=$(bq show --project_id="${PROJECT_ID}" --format=prettyjson "${BQ_DATASET}" 2>/dev/null | sed -n 's/.*"location": "\([^"]*\)".*/\1/p' | head -n 1)
+      fi
     fi
-  fi
-  if [[ -z "${BQ_LOCATION}" || "${BQ_LOCATION}" == "null" ]]; then
-    BQ_LOCATION="${REGION}"
-    echo "Creating BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' in location '${BQ_LOCATION}'..."
-    bq mk --project_id="${PROJECT_ID}" --location="${BQ_LOCATION}" --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
-  else
-    echo "BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' found in location '${BQ_LOCATION}'."
-  fi
+    if [[ -z "${BQ_LOCATION}" || "${BQ_LOCATION}" == "null" ]]; then
+      BQ_LOCATION="${REGION}"
+      echo "Creating BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' in location '${BQ_LOCATION}'..."
+      bq mk --project_id="${PROJECT_ID}" --location="${BQ_LOCATION}" --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
+    else
+      echo "BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}' found in location '${BQ_LOCATION}'."
+    fi
 
-  echo "Granting dataset dataEditor permission on '${PROJECT_ID}:${BQ_DATASET}'..."
-  if ! bq query \
-    --project_id="${PROJECT_ID}" \
-    --location="${BQ_LOCATION}" \
-    --use_legacy_sql=false \
-    "GRANT \`roles/bigquery.dataEditor\` ON SCHEMA \`${PROJECT_ID}.${BQ_DATASET}\` TO 'serviceAccount:${SERVICE_ACCOUNT}'" >/dev/null 2>&1; then
-    echo "WARNING: Could not grant dataEditor on dataset ${PROJECT_ID}:${BQ_DATASET}. Ensure ${SERVICE_ACCOUNT} can write to this dataset." >&2
+    echo "Granting dataset dataEditor permission on '${PROJECT_ID}:${BQ_DATASET}'..."
+    if ! bq query \
+      --project_id="${PROJECT_ID}" \
+      --location="${BQ_LOCATION}" \
+      --use_legacy_sql=false \
+      "GRANT \`roles/bigquery.dataEditor\` ON SCHEMA \`${PROJECT_ID}.${BQ_DATASET}\` TO 'serviceAccount:${SERVICE_ACCOUNT}'" >/dev/null 2>&1; then
+      echo "WARNING: Could not grant dataEditor on dataset ${PROJECT_ID}:${BQ_DATASET}. Ensure ${SERVICE_ACCOUNT} can write to this dataset." >&2
+    fi
+  else
+    BQ_LOCATION="${REGION}"
+    echo "Notice: 'bq' CLI not found on host. Dataset verification and creation will be handled on the VM."
   fi
 fi
 
@@ -451,31 +456,35 @@ fi
 
 # 8. Ensure results are published to BigQuery
 if [[ -n "${BQ_DATASET}" ]]; then
-  RESULTS_CSV_GCS="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/results.csv"
-  echo "Ensuring results are loaded into BigQuery: ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
-  if ! bq show --project_id="${PROJECT_ID}" "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" >/dev/null 2>&1; then
-    if gcloud storage objects describe "${RESULTS_CSV_GCS}" >/dev/null 2>&1; then
-      echo "Publishing ${RESULTS_CSV_GCS} to ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
-      TEMP_CSV=$(mktemp "${TMPDIR:-/tmp}/w1r3-results-XXXXXX")
-      CLEANUP_FILES+=("${TEMP_CSV}")
-      gcloud storage cp "${RESULTS_CSV_GCS}" "${TEMP_CSV}"
-      bq load \
-        --project_id="${PROJECT_ID}" \
-        --location="${BQ_LOCATION:-${REGION}}" \
-        --source_format=CSV \
-        --skip_leading_rows=1 \
-        --replace \
-        "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" \
-        "${TEMP_CSV}" \
-        Task:INT64,Iteration:INT64,IterationStart:INT64,Operation:STRING,Size:INT64,TransferSize:INT64,ElapsedMicroseconds:INT64,Object:STRING,Crc32cEnabled:BOOL,Result:STRING,Details:STRING || {
-          echo "WARNING: Failed to load results into BigQuery."
-        }
-      rm -f "${TEMP_CSV}"
-    else
-      echo "WARNING: Results CSV not found at ${RESULTS_CSV_GCS}. Skipping BigQuery load."
-    fi
+  if ! command -v bq &>/dev/null; then
+    echo "Notice: 'bq' CLI not installed on host. Results were uploaded to GCS (and loaded into BigQuery if bq was available on the VM)."
   else
-    echo "✓ BigQuery table ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE} is ready."
+    RESULTS_CSV_GCS="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/results.csv"
+    echo "Ensuring results are loaded into BigQuery: ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
+    if ! bq show --project_id="${PROJECT_ID}" "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" >/dev/null 2>&1; then
+      if gcloud storage objects describe "${RESULTS_CSV_GCS}" >/dev/null 2>&1; then
+        echo "Publishing ${RESULTS_CSV_GCS} to ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
+        TEMP_CSV=$(mktemp "${TMPDIR:-/tmp}/w1r3-results-XXXXXX")
+        CLEANUP_FILES+=("${TEMP_CSV}")
+        gcloud storage cp "${RESULTS_CSV_GCS}" "${TEMP_CSV}"
+        bq load \
+          --project_id="${PROJECT_ID}" \
+          --location="${BQ_LOCATION:-${REGION}}" \
+          --source_format=CSV \
+          --skip_leading_rows=1 \
+          --replace \
+          "${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}" \
+          "${TEMP_CSV}" \
+          Task:INT64,Iteration:INT64,IterationStart:INT64,Operation:STRING,Size:INT64,TransferSize:INT64,ElapsedMicroseconds:INT64,Object:STRING,Crc32cEnabled:BOOL,Result:STRING,Details:STRING || {
+            echo "WARNING: Failed to load results into BigQuery."
+          }
+        rm -f "${TEMP_CSV}"
+      else
+        echo "WARNING: Results CSV not found at ${RESULTS_CSV_GCS}. Skipping BigQuery load."
+      fi
+    else
+      echo "✓ BigQuery table ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE} is ready."
+    fi
   fi
 fi
 
