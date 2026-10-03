@@ -18,6 +18,14 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
+CLEANUP_FILES=()
+cleanup_host() {
+  for f in "${CLEANUP_FILES[@]}"; do
+    rm -f "${f}"
+  done
+}
+trap cleanup_host EXIT INT TERM
+
 usage() {
   cat <<'EOF'
 Usage: run-w1r3-gce.sh [OPTIONS]
@@ -283,6 +291,7 @@ if [[ "${STAGE_LOCAL}" == "true" ]]; then
   REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
   echo "Creating archive of local repository from ${REPO_ROOT}..."
   TEMP_ARCHIVE=$(mktemp /tmp/w1r3-src-XXXXXX.tar.gz)
+  CLEANUP_FILES+=("${TEMP_ARCHIVE}")
   tar --exclude='.git' --exclude='.build' -czf "${TEMP_ARCHIVE}" -C "${REPO_ROOT}" .
   SOURCE_TAR_GCS="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/source.tar.gz"
   echo "Uploading local source archive to ${SOURCE_TAR_GCS}..."
@@ -405,6 +414,7 @@ if [[ -n "${BQ_DATASET}" ]]; then
     if gcloud storage objects describe "${RESULTS_CSV_GCS}" >/dev/null 2>&1; then
       echo "Publishing ${RESULTS_CSV_GCS} to ${PROJECT_ID}:${BQ_DATASET}.${BQ_TABLE}..."
       TEMP_CSV=$(mktemp /tmp/w1r3-results-XXXXXX.csv)
+      CLEANUP_FILES+=("${TEMP_CSV}")
       gcloud storage cp "${RESULTS_CSV_GCS}" "${TEMP_CSV}"
       bq load \
         --project_id="${PROJECT_ID}" \
