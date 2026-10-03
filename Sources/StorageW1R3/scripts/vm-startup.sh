@@ -29,7 +29,7 @@ get_attribute() {
   local key="$1"
   local default_val="${2:-}"
   local val
-  val=$(curl -s -f -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/attributes/${key}" 2>/dev/null || true)
+  val=$(curl -s -f --retry 3 --retry-connrefused --connect-timeout 2 -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/attributes/${key}" 2>/dev/null || true)
   if [[ -n "${val}" ]]; then
     echo "${val}"
   else
@@ -40,14 +40,14 @@ get_attribute() {
 get_instance_metadata() {
   local path="$1"
   local val
-  val=$(curl -s -f -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/${path}" 2>/dev/null || true)
+  val=$(curl -s -f --retry 3 --retry-connrefused --connect-timeout 2 -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/instance/${path}" 2>/dev/null || true)
   echo "${val}"
 }
 
 get_project_metadata() {
   local path="$1"
   local val
-  val=$(curl -s -f -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/project/${path}" 2>/dev/null || true)
+  val=$(curl -s -f --retry 3 --retry-connrefused --connect-timeout 2 -H "Metadata-Flavor: Google" "http://metadata.google.internal/computeMetadata/v1/project/${path}" 2>/dev/null || true)
   echo "${val}"
 }
 
@@ -93,6 +93,10 @@ cleanup_and_teardown() {
 
   # Upload logs and status to GCS if results bucket is configured
   if [[ -n "${RESULTS_BUCKET}" ]]; then
+    # Flush asynchronously written log streams to disk
+    sync
+    sleep 1
+
     echo "Uploading final logs and status to ${GCS_OUTPUT_DIR}..."
     if [[ -f "/root/results.csv" ]]; then
       gcloud storage cp /root/results.csv "${GCS_OUTPUT_DIR}/results.csv" || true
@@ -182,10 +186,15 @@ fi
 
 echo "--- Installing Swift toolchain ---"
 if ! command -v swift &>/dev/null; then
-  ARCH=$(uname -m)
-  curl -s -O "https://download.swift.org/swiftly/linux/swiftly-${ARCH}.tar.gz"
-  tar zxf "swiftly-${ARCH}.tar.gz"
-  ./swiftly init --quiet-shell-followup
+  SWIFTLY_TMP=$(mktemp -d /tmp/swiftly-install-XXXXXX)
+  (
+    cd "${SWIFTLY_TMP}"
+    ARCH=$(uname -m)
+    curl -fsSL -O "https://download.swift.org/swiftly/linux/swiftly-${ARCH}.tar.gz"
+    tar zxf "swiftly-${ARCH}.tar.gz"
+    ./swiftly init --quiet-shell-followup
+  )
+  rm -rf "${SWIFTLY_TMP}"
   export SWIFTLY_HOME_DIR="/root/.local/share/swiftly"
   # shellcheck source=/dev/null
   source "${SWIFTLY_HOME_DIR}/env.sh"
