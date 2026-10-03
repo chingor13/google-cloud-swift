@@ -39,8 +39,8 @@ Options:
   --zone ZONE                  GCE zone (default: us-central1-a)
   --region REGION              GCP region (default: derived from zone)
   --machine-type TYPE          GCE machine type (default: c2d-standard-8)
-  --bucket BUCKET_NAME         GCS test bucket name (default: w1r3-<PROJECT>-<REGION>)
-  --results-bucket BUCKET_NAME GCS bucket for results and logs (default: same as test bucket)
+  --bucket BUCKET_NAME         GCS test bucket name (has 1-day auto-delete lifecycle; default: w1r3-<PROJECT>-<REGION>)
+  --results-bucket BUCKET_NAME GCS bucket for persistent results and logs (default: w1r3-results-<PROJECT>-<REGION>)
   --bq-dataset DATASET         BigQuery dataset for benchmark results (default: w1r3)
   --bq-table TABLE             BigQuery table name (default: swift_<RUN_ID>)
   --git-repo URL               Git repository URL to clone on the VM
