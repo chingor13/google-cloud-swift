@@ -143,6 +143,11 @@ if ! command -v bq &>/dev/null; then
   echo "WARNING: 'bq' CLI not found. BigQuery loading might be skipped if not available on VM." >&2
 fi
 
+if ! command -v jq &>/dev/null; then
+  echo "ERROR: 'jq' CLI is required for BigQuery dataset inspection but not found in PATH." >&2
+  exit 1
+fi
+
 # Detect project
 if [[ -z "${PROJECT_ID}" ]]; then
   PROJECT_ID=$(gcloud config get-value project 2>/dev/null || true)
