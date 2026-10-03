@@ -252,24 +252,30 @@ echo "Using VM Service Account: ${SERVICE_ACCOUNT}"
 
 # Grant storage objectAdmin on the test and results bucket
 echo "Ensuring IAM permissions on buckets..."
-gcloud storage buckets add-iam-policy-binding "gs://${BUCKET_NAME}" \
+if ! gcloud storage buckets add-iam-policy-binding "gs://${BUCKET_NAME}" \
   --member="serviceAccount:${SERVICE_ACCOUNT}" \
-  --role="roles/storage.objectAdmin" >/dev/null 2>&1 || true
+  --role="roles/storage.objectAdmin" >/dev/null 2>&1; then
+  echo "WARNING: Could not grant storage.objectAdmin on gs://${BUCKET_NAME}. Ensure ${SERVICE_ACCOUNT} has write access." >&2
+fi
 
 if [[ "${RESULTS_BUCKET}" != "${BUCKET_NAME}" ]]; then
-  gcloud storage buckets add-iam-policy-binding "gs://${RESULTS_BUCKET}" \
+  if ! gcloud storage buckets add-iam-policy-binding "gs://${RESULTS_BUCKET}" \
     --member="serviceAccount:${SERVICE_ACCOUNT}" \
-    --role="roles/storage.objectAdmin" >/dev/null 2>&1 || true
+    --role="roles/storage.objectAdmin" >/dev/null 2>&1; then
+    echo "WARNING: Could not grant storage.objectAdmin on gs://${RESULTS_BUCKET}. Ensure ${SERVICE_ACCOUNT} has write access." >&2
+  fi
 fi
 
 # Ensure BigQuery permissions for the VM service account and ensure dataset exists
 BQ_LOCATION=""
 if [[ -n "${BQ_DATASET}" ]]; then
   echo "Ensuring BigQuery jobUser permission for VM service account..."
-  gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
+  if ! gcloud projects add-iam-policy-binding "${PROJECT_ID}" \
     --member="serviceAccount:${SERVICE_ACCOUNT}" \
     --role="roles/bigquery.jobUser" \
-    --condition=None >/dev/null 2>&1 || true
+    --condition=None >/dev/null 2>&1; then
+    echo "WARNING: Could not grant roles/bigquery.jobUser on project ${PROJECT_ID}. Ensure ${SERVICE_ACCOUNT} can run BigQuery jobs." >&2
+  fi
 
   echo "Checking BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}'..."
   if bq show --project_id="${PROJECT_ID}" "${BQ_DATASET}" >/dev/null 2>&1; then
@@ -284,10 +290,12 @@ if [[ -n "${BQ_DATASET}" ]]; then
   fi
 
   echo "Granting dataset dataEditor permission on '${PROJECT_ID}:${BQ_DATASET}'..."
-  bq add-iam-policy-binding \
+  if ! bq add-iam-policy-binding \
     --member="serviceAccount:${SERVICE_ACCOUNT}" \
     --role="roles/bigquery.dataEditor" \
-    --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1 || true
+    --dataset "${PROJECT_ID}:${BQ_DATASET}" >/dev/null 2>&1; then
+    echo "WARNING: Could not grant dataEditor on dataset ${PROJECT_ID}:${BQ_DATASET}. Ensure ${SERVICE_ACCOUNT} can write to this dataset." >&2
+  fi
 fi
 
 # 3. Handle Local Staging if requested
