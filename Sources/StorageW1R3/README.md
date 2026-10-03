@@ -9,7 +9,7 @@ The easiest way to deploy and run the benchmark is using the turnkey deployment 
 
 This script automates:
 1. **Infrastructure setup**: Creating a regional GCS bucket with optimal configuration (hierarchical namespace, uniform bucket-level access, auto-deletion lifecycle rule).
-2. **VM provisioning**: Launching a Compute-Optimized GCE VM (e.g. `c2d-standard-8`) with high network allocation.
+2. **VM provisioning**: Launching a [Compute-Optimized][compute-optimized] GCE VM (e.g. `c2d-standard-8`) with high [network bandwidth][network bandwidth].
 3. **Environment & compilation**: Automatically installing dependencies and building `StorageW1R3Benchmark` in release mode.
 4. **Execution & metrics collection**: Running the benchmark, streaming live logs to your console, and uploading CSV results and logs to Cloud Storage.
 5. **BigQuery ingestion**: Automatically loading results into a BigQuery dataset for immediate query and analysis.
