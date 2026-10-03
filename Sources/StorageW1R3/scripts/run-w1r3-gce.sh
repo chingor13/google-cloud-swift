@@ -20,9 +20,11 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 CLEANUP_FILES=()
 cleanup_host() {
-  for f in "${CLEANUP_FILES[@]}"; do
-    rm -f "${f}"
-  done
+  if [[ ${#CLEANUP_FILES[@]} -gt 0 ]]; then
+    for f in "${CLEANUP_FILES[@]}"; do
+      [[ -e "${f}" ]] && rm -f "${f}"
+    done
+  fi
 }
 trap cleanup_host EXIT INT TERM
 
