@@ -395,10 +395,23 @@ echo ""
 echo "Streaming VM console output (Ctrl+C will disconnect monitoring; the VM will continue running in GCE)..."
 echo "----------------------------------------------------------"
 
+handle_stream_interrupt() {
+  echo ""
+  echo "Disconnected from VM console streaming."
+  echo "The benchmark is continuing to run on VM '${INSTANCE_NAME}' in GCE."
+  echo "To view execution logs again, run:"
+  echo "  gcloud compute instances tail-serial-port-output ${INSTANCE_NAME} --zone=${ZONE} --project=${PROJECT_ID}"
+  exit 0
+}
+trap handle_stream_interrupt INT
+
 # Tail serial port output until instance terminates/shuts down
 gcloud compute instances tail-serial-port-output "${INSTANCE_NAME}" \
   --zone="${ZONE}" \
   --project="${PROJECT_ID}" || true
+
+# Restore default host cleanup trap on INT
+trap cleanup_host INT
 
 echo "----------------------------------------------------------"
 echo "VM execution completed (serial console closed)."
