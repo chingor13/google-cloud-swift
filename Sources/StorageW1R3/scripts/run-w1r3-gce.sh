@@ -275,10 +275,10 @@ fi
 # 3. Handle Local Staging if requested
 SOURCE_TAR_GCS=""
 if [[ "${STAGE_LOCAL}" == "true" ]]; then
-  echo "Creating archive of local repository..."
-  TEMP_ARCHIVE=$(mktemp /tmp/w1r3-src-XXXXXX)
-  # Archive tracked git files plus submodules
-  git archive --format=tar.gz -o "${TEMP_ARCHIVE}" HEAD
+  REPO_ROOT="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
+  echo "Creating archive of local repository from ${REPO_ROOT}..."
+  TEMP_ARCHIVE=$(mktemp /tmp/w1r3-src-XXXXXX.tar.gz)
+  tar --exclude='.git' --exclude='.build' -czf "${TEMP_ARCHIVE}" -C "${REPO_ROOT}" .
   SOURCE_TAR_GCS="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/source.tar.gz"
   echo "Uploading local source archive to ${SOURCE_TAR_GCS}..."
   gcloud storage cp "${TEMP_ARCHIVE}" "${SOURCE_TAR_GCS}"
