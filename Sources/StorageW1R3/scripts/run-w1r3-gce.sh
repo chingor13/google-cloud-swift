@@ -146,8 +146,7 @@ if ! command -v bq &>/dev/null; then
 fi
 
 if [[ -n "${BQ_DATASET}" ]] && ! command -v jq &>/dev/null; then
-  echo "ERROR: 'jq' CLI is required for BigQuery dataset inspection but not found in PATH." >&2
-  exit 1
+  echo "Notice: 'jq' CLI not found. Falling back to pattern extraction for BigQuery dataset location." >&2
 fi
 
 # Detect project
@@ -283,7 +282,11 @@ if [[ -n "${BQ_DATASET}" ]]; then
 
   echo "Checking BigQuery dataset '${PROJECT_ID}:${BQ_DATASET}'..."
   if bq show --project_id="${PROJECT_ID}" "${BQ_DATASET}" >/dev/null 2>&1; then
-    BQ_LOCATION=$(bq show --project_id="${PROJECT_ID}" --format=prettyjson "${BQ_DATASET}" 2>/dev/null | jq -r '.location // empty')
+    if command -v jq &>/dev/null; then
+      BQ_LOCATION=$(bq show --project_id="${PROJECT_ID}" --format=prettyjson "${BQ_DATASET}" 2>/dev/null | jq -r '.location // empty')
+    else
+      BQ_LOCATION=$(bq show --project_id="${PROJECT_ID}" --format=prettyjson "${BQ_DATASET}" 2>/dev/null | sed -n 's/.*"location": "\([^"]*\)".*/\1/p' | head -n 1)
+    fi
   fi
   if [[ -z "${BQ_LOCATION}" || "${BQ_LOCATION}" == "null" ]]; then
     BQ_LOCATION="${REGION}"

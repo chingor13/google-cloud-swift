@@ -17,7 +17,7 @@ This script automates:
 
 ### Prerequisites
 
-Ensure you have the Google Cloud CLI installed and authenticated:
+Ensure you have the Google Cloud CLI (`gcloud`, `bq`) installed and authenticated. The `jq` utility is recommended for inspecting BigQuery datasets.
 
 ```shell
 gcloud auth login
