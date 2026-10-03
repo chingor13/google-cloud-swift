@@ -318,7 +318,7 @@ if [[ "${STAGE_LOCAL}" == "true" ]]; then
   echo "Creating archive of local repository from ${REPO_ROOT}..."
   TEMP_ARCHIVE=$(mktemp "${TMPDIR:-/tmp}/w1r3-src-XXXXXX")
   CLEANUP_FILES+=("${TEMP_ARCHIVE}")
-  tar --exclude='.git' --exclude='.build' -czf "${TEMP_ARCHIVE}" -C "${REPO_ROOT}" .
+  COPYFILE_DISABLE=1 tar --exclude='.git' --exclude='.build' -czf "${TEMP_ARCHIVE}" -C "${REPO_ROOT}" .
   SOURCE_TAR_GCS="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/source.tar.gz"
   echo "Uploading local source archive to ${SOURCE_TAR_GCS}..."
   gcloud storage cp "${TEMP_ARCHIVE}" "${SOURCE_TAR_GCS}"
