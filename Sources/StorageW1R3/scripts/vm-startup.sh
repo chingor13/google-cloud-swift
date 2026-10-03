@@ -162,9 +162,22 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
   libicu-dev libcurl4-openssl-dev libssl-dev libxml2-dev zlib1g-dev jq \
   unzip zip gnupg2 libc6-dev libpython3-dev libncurses-dev libz3-dev
 
-# Ensure bq CLI is available in PATH
-if ! command -v bq &>/dev/null && [[ -x "/snap/bin/bq" ]]; then
-  export PATH="/snap/bin:${PATH}"
+# Ensure CLI search paths include snap and system binaries
+export PATH="/snap/bin:/usr/local/bin:/usr/bin:/bin:${PATH}"
+
+# Ensure Google Cloud CLI and bq are installed
+if ! command -v gcloud &>/dev/null || ! command -v bq &>/dev/null; then
+  echo "--- Installing Google Cloud CLI ---"
+  if command -v snap &>/dev/null; then
+    snap install google-cloud-cli --classic || true
+  fi
+  if ! command -v gcloud &>/dev/null; then
+    mkdir -p /etc/apt/keyrings
+    curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor --yes -o /etc/apt/keyrings/cloud.google.gpg
+    echo "deb [signed-by=/etc/apt/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
+    apt-get update -y
+    DEBIAN_FRONTEND=noninteractive apt-get install -y google-cloud-cli
+  fi
 fi
 
 echo "--- Installing Swift toolchain ---"
