@@ -170,7 +170,7 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \
 export PATH="/snap/bin:/usr/local/bin:/usr/bin:/bin:${PATH}"
 
 # Ensure Google Cloud CLI and bq are installed
-if ! command -v gcloud &>/dev/null || ! command -v bq &>/dev/null; then
+if ! command -v gcloud &>/dev/null; then
   echo "--- Installing Google Cloud CLI ---"
   if command -v snap &>/dev/null; then
     snap install google-cloud-cli --classic || true
@@ -181,6 +181,16 @@ if ! command -v gcloud &>/dev/null || ! command -v bq &>/dev/null; then
     echo "deb [signed-by=/etc/apt/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee /etc/apt/sources.list.d/google-cloud-sdk.list
     apt-get update -y
     DEBIAN_FRONTEND=noninteractive apt-get install -y google-cloud-cli
+  fi
+fi
+
+if ! command -v bq &>/dev/null; then
+  echo "--- Ensuring BigQuery CLI (bq) is installed ---"
+  if command -v gcloud &>/dev/null; then
+    gcloud components install bq --quiet 2>/dev/null || true
+  fi
+  if ! command -v bq &>/dev/null && [[ -f "/etc/apt/sources.list.d/google-cloud-sdk.list" ]]; then
+    apt-get update -y && DEBIAN_FRONTEND=noninteractive apt-get install -y google-cloud-cli-bq || true
   fi
 fi
 
