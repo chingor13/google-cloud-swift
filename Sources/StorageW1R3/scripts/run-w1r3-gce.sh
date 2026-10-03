@@ -143,7 +143,7 @@ if ! command -v bq &>/dev/null; then
   echo "WARNING: 'bq' CLI not found. BigQuery loading might be skipped if not available on VM." >&2
 fi
 
-if ! command -v jq &>/dev/null; then
+if [[ -n "${BQ_DATASET}" ]] && ! command -v jq &>/dev/null; then
   echo "ERROR: 'jq' CLI is required for BigQuery dataset inspection but not found in PATH." >&2
   exit 1
 fi
@@ -174,8 +174,10 @@ if [[ -z "${RESULTS_BUCKET}" ]]; then
 fi
 
 if [[ -z "${BQ_TABLE}" ]]; then
-  # BigQuery table names cannot contain hyphens
   BQ_TABLE="swift_${RUN_ID//-/_}"
+else
+  # BigQuery table names cannot contain hyphens
+  BQ_TABLE="${BQ_TABLE//-/_}"
 fi
 
 # Detect Git repo and ref if not specified
@@ -390,7 +392,7 @@ fi
 
 # 6. Stream logs and wait for completion
 echo ""
-echo "Streaming VM console output (Ctrl+C will detach without canceling the benchmark)..."
+echo "Streaming VM console output (Ctrl+C will disconnect monitoring; the VM will continue running in GCE)..."
 echo "----------------------------------------------------------"
 
 # Tail serial port output until instance terminates/shuts down
@@ -399,7 +401,7 @@ gcloud compute instances tail-serial-port-output "${INSTANCE_NAME}" \
   --project="${PROJECT_ID}" || true
 
 echo "----------------------------------------------------------"
-echo "VM execution completed or detached."
+echo "VM execution completed (serial console closed)."
 
 # Check status in GCS
 STATUS_FILE="gs://${RESULTS_BUCKET}/w1r3/${RUN_ID}/STATUS"
