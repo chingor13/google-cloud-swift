@@ -296,12 +296,15 @@ echo "Command: ${BENCHMARK_BIN} --bucket-name ${BUCKET_NAME} ${BENCHMARK_ARGS}"
 echo "=========================================================="
 
 set +e
-# Run benchmark, redirect stdout to results.csv and stderr to benchmark.log and console
+# Run benchmark, redirect stdout to results.csv and stderr to benchmark.log and console.
+# In Bash, redirections are evaluated left to right; placing 2> before > ensures tee inherits
+# the console/startup log stdout rather than results.csv.
 # shellcheck disable=SC2086
 "${BENCHMARK_BIN}" \
   --bucket-name "${BUCKET_NAME}" \
   ${BENCHMARK_ARGS} \
-  > /root/results.csv 2> >(tee -a /root/benchmark.log)
+  2> >(tee -a /root/benchmark.log) \
+  > /root/results.csv
 BENCHMARK_EXIT_CODE=$?
 set -e
 
