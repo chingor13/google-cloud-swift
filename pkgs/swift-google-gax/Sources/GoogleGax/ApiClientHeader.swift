@@ -14,19 +14,124 @@
 
 import Foundation
 
-func _apiClientHeader(packageVersion: String, libraryType: String) -> String {
-  "gl-swift/apple-\(compilerVersion())-lang-\(swiftCompatVersion()) gax/\(gaxVersion()) rest/\(gaxVersion()) \(libraryType)/\(packageVersion)"
+/// A builder and container for Google Cloud `x-goog-api-client` telemetry headers.
+///
+/// Google Cloud APIs use the `x-goog-api-client` header to collect client library
+/// usage and adoption metrics. The header consists of a space-separated list of
+/// `NAME "/" VERSION` tokens (e.g., `gl-swift/apple-6.x-lang-6.x gax/0.5.0 rest/0.5.0 gapic/0.5.0`).
+///
+/// Standard token names include:
+/// - `gl-swift`: Language runtime and compiler version.
+/// - `gax`: Google API Extensions (GAX) version.
+/// - `rest`: REST/HTTP transport version.
+/// - `grpc`: gRPC transport version.
+/// - `gapic`: Generated GAPIC client library version.
+/// - `gccl`: Google Cloud Client Library (veneer) version.
+/// - `pb`: Swift Protobuf runtime version.
+///
+/// See [System Parameters](https://docs.cloud.google.com/apis/docs/system-parameters)
+/// and [go/cloud-api-headers](https://docs.google.com/document/d/1Afm2EGsYRlrk4-YBoEOHIIB-0X-CSkfqUT5xEXNozls).
+struct _ApiClientHeader: Sendable, Equatable, CustomStringConvertible {
+  enum Token: Hashable, Sendable {
+    case swiftLanguage
+    case gccl
+    case gapic
+    case gax
+    case grpc
+    case rest
+    case custom(String)
+
+    var name: String {
+      switch self {
+      case .swiftLanguage: return "gl-swift"
+      case .gccl: return "gccl"
+      case .gapic: return "gapic"
+      case .gax: return "gax"
+      case .grpc: return "grpc"
+      case .rest: return "rest"
+      case .custom(let name): return name
+      }
+    }
+
+    fileprivate var sortRank: Int {
+      switch self {
+      case .swiftLanguage: return 0
+      case .gccl: return 1
+      case .gapic: return 2
+      case .gax: return 3
+      case .grpc: return 4
+      case .rest: return 5
+      case .custom: return 10
+      }
+    }
+  }
+
+  private var tokens: [Token: String]
+
+  /// The standard HTTP header name (`x-goog-api-client`).
+  static let headerName = _HeaderNames.apiClient
+
+  /// Creates a header populated with default environment tokens (`gl-swift` and `gax`).
+  init() {
+    self.tokens = [
+      .swiftLanguage: defaultLanguageTokenVersion(),
+      .gax: gaxVersion(),
+    ]
+  }
+
+  /// Sets or updates a token.
+  mutating func setToken(_ token: Token, version: String) {
+    switch token {
+    case .custom(let name):
+      switch name {
+      case "gl-swift": self.tokens[.swiftLanguage] = version
+      case "gccl": self.tokens[.gccl] = version
+      case "gapic": self.tokens[.gapic] = version
+      case "gax": self.tokens[.gax] = version
+      case "grpc": self.tokens[.grpc] = version
+      case "rest": self.tokens[.rest] = version
+      default: self.tokens[token] = version
+      }
+    default:
+      self.tokens[token] = version
+    }
+  }
+
+  /// Formats the header into its canonical space-separated string representation.
+  func build() -> String {
+    self.tokens
+      .sorted { lhs, rhs in
+        if lhs.key.sortRank != rhs.key.sortRank {
+          return lhs.key.sortRank < rhs.key.sortRank
+        }
+        return lhs.key.name < rhs.key.name
+      }
+      .map { "\($0.key.name)/\($0.value)" }
+      .joined(separator: " ")
+  }
+
+  var description: String { self.build() }
+}
+
+func defaultLanguageTokenVersion() -> String {
+  "apple-\(compilerVersion())-lang-\(swiftCompatVersion())"
 }
 
 @_spi(GoogleCloudInternal)
 public func _gapicApiClientHeader(packageVersion: String) -> String {
-  _apiClientHeader(packageVersion: packageVersion, libraryType: "gapic")
+  var header = _ApiClientHeader()
+  header.setToken(.rest, version: gaxVersion())
+  header.setToken(.gapic, version: packageVersion)
+  return header.build()
 }
 
 @_spi(GoogleCloudInternal)
 public func _veneerApiClientHeader(packageVersion: String) -> String {
   // gccl == Google Cloud Client Library
-  _apiClientHeader(packageVersion: packageVersion, libraryType: "gccl")
+  var header = _ApiClientHeader()
+  header.setToken(.rest, version: gaxVersion())
+  header.setToken(.gccl, version: packageVersion)
+  return header.build()
 }
 
 func compilerVersion() -> String {
