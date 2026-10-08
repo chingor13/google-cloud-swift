@@ -284,4 +284,115 @@ import Testing
     }
     #expect(UInt64(collected.readableBytes) == stream.bodyLength)
   }
+
+  /// Tests that MultipartUploadStream defaults to a 2 MiB chunk size.
+  @Test func multipartUploadStreamDefaultChunkSize() async throws {
+    #expect(MultipartUploadStream.defaultChunkSize == 2 * 1024 * 1024)
+
+    let payload = Data("Hello, World!".utf8)
+    let source = BytesSource(data: payload)
+
+    let stream = MultipartUploadStream(
+      source: source,
+      boundary: "BoundaryDefault",
+      metadataJson: Data("{}".utf8),
+      contentType: "text/plain",
+      totalSize: UInt64(payload.count)
+    )
+    #expect(stream.chunkSize == 2 * 1024 * 1024)
+
+    let prepared = try await MultipartUploadStream.prepare(
+      source: source,
+      boundary: "BoundaryDefault",
+      metadataJson: Data("{}".utf8),
+      contentType: "text/plain",
+      totalSize: UInt64(payload.count),
+      options: .default
+    )
+    #expect(prepared.stream.chunkSize == 2 * 1024 * 1024)
+    #expect(prepared.checksum == "crc32c=TVUQaA==")
+  }
+
+  /// Tests that MultipartUploadStream.prepare computes CRC32C and MD5 over the full BytesSource buffer even if partially read beforehand.
+  @Test func multipartUploadStreamPrepareBytesSourceComputesFullChecksumWhenPartiallyRead()
+    async throws
+  {
+    let payload = Data("Hello, World!".utf8)
+    var source = BytesSource(data: payload)
+    // Advance offset before prepare
+    _ = try await source.read(maxBytes: 7)
+
+    let prepared = try await MultipartUploadStream.prepare(
+      source: source,
+      boundary: "BoundaryBytesFastPath",
+      metadataJson: Data("{}".utf8),
+      contentType: "text/plain",
+      totalSize: UInt64(payload.count),
+      options: ChecksumOptions(crc32c: .auto, md5: .auto),
+      chunkSize: 4
+    )
+
+    #expect(prepared.checksum == "crc32c=TVUQaA==, md5=ZajifYh5KDgxtmS9i38K1A==")
+
+    var collected = NIOCore.ByteBuffer()
+    for try await chunk in prepared.stream {
+      var copy = chunk
+      collected.writeBuffer(&copy)
+    }
+    #expect(UInt64(collected.readableBytes) == prepared.stream.bodyLength)
+  }
+
+  /// Tests that MultipartUploadStream.prepare rewinds a custom SeekableWriteObjectSource before hashing and streams with defaultChunkSize.
+  @Test func multipartUploadStreamPrepareCustomSeekableSource() async throws {
+    final class TrackingSeekableSource: SeekableWriteObjectSource, @unchecked Sendable {
+      let data: Data
+      private var offset: Int = 0
+      var readMaxBytesHistory: [Int] = []
+
+      init(data: Data) {
+        self.data = data
+      }
+
+      var totalSize: UInt64? { UInt64(data.count) }
+
+      func read(maxBytes: Int) async throws -> ByteChunk? {
+        readMaxBytesHistory.append(maxBytes)
+        guard offset < data.count else { return nil }
+        let end = min(offset + maxBytes, data.count)
+        let chunk = data.subdata(in: offset..<end)
+        offset = end
+        return ByteChunk(chunk)
+      }
+
+      func seek(to offset: UInt64) async throws {
+        self.offset = Int(offset)
+      }
+    }
+
+    let payload = Data("Hello, World!".utf8)
+    let source = TrackingSeekableSource(data: payload)
+    // Partially read before prepare
+    _ = try await source.read(maxBytes: 5)
+    source.readMaxBytesHistory.removeAll()
+
+    let prepared = try await MultipartUploadStream.prepare(
+      source: source,
+      boundary: "BoundaryCustomSeekable",
+      metadataJson: Data("{}".utf8),
+      contentType: "text/plain",
+      totalSize: UInt64(payload.count),
+      options: ChecksumOptions(crc32c: .auto, md5: .auto)
+    )
+
+    // Full payload checksum must be computed despite prior partial read, using 2 MiB defaultChunkSize
+    #expect(prepared.checksum == "crc32c=TVUQaA==, md5=ZajifYh5KDgxtmS9i38K1A==")
+    #expect(source.readMaxBytesHistory.allSatisfy { $0 == 2 * 1024 * 1024 })
+
+    var collected = NIOCore.ByteBuffer()
+    for try await chunk in prepared.stream {
+      var copy = chunk
+      collected.writeBuffer(&copy)
+    }
+    #expect(UInt64(collected.readableBytes) == prepared.stream.bodyLength)
+  }
 }

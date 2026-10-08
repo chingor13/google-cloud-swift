@@ -26,6 +26,8 @@ struct PreparedMultipartUpload: Sendable {
 struct MultipartUploadStream: AsyncSequence, Sendable {
   typealias Element = NIOCore.ByteBuffer
 
+  static let defaultChunkSize = 2 * 1024 * 1024
+
   var source: any WriteObjectSource
   let boundary: String
   let metadataJson: Data
@@ -39,7 +41,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     metadataJson: Data,
     contentType: String,
     totalSize: UInt64,
-    chunkSize: Int = 64 * 1024
+    chunkSize: Int = Self.defaultChunkSize
   ) {
     self.source = source
     self.boundary = boundary
@@ -85,7 +87,7 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     contentType: String,
     totalSize: UInt64,
     options: ChecksumOptions,
-    chunkSize: Int = 64 * 1024
+    chunkSize: Int = Self.defaultChunkSize
   ) async throws -> PreparedMultipartUpload {
     var calculators = options.makeUploadCalculators()
     var preparedSource: any WriteObjectSource = source
@@ -93,8 +95,17 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     // Only inspect/read the source if automatic checksum computation is needed.
     let autoCalculators = calculators.filter { !($0 is ProvidedChecksumCalculator) }
     do {
-      if var seekable = source as? (any SeekableWriteObjectSource) {
+      if var bytesSource = source as? BytesSource {
         if !autoCalculators.isEmpty {
+          for i in calculators.indices {
+            calculators[i].update(bytesSource.buffer)
+          }
+        }
+        try await bytesSource.seek(to: 0)
+        preparedSource = bytesSource
+      } else if var seekable = source as? (any SeekableWriteObjectSource) {
+        if !autoCalculators.isEmpty {
+          try await seekable.seek(to: 0)
           while let chunk = try await seekable.read(maxBytes: chunkSize) {
             for i in calculators.indices {
               calculators[i].update(chunk)
