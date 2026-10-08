@@ -26,6 +26,7 @@ import GoogleAuth
 /// [Cloud Storage]: https://docs.cloud.google.com/storage
 public final class StorageClient: StorageProtocol, Sendable {
   public static let defaultEndpoint = "https://storage.googleapis.com"
+  public static let version = "0.5.0"
 
   let inner: GoogleGax._HTTPClient
   let options: StorageClientOptions
@@ -39,7 +40,10 @@ public final class StorageClient: StorageProtocol, Sendable {
   public init(_ options: StorageClientOptions = .init()) throws {
     self.options = options
     self.inner = try GoogleGax._HTTPClient(
-      from: options.client, withDefaultEndpoint: Self.defaultEndpoint)
+      from: options.client,
+      withDefaultEndpoint: Self.defaultEndpoint,
+      clientHeader: GoogleGax._veneerApiClientHeader(packageVersion: Self.version)
+    )
   }
 
   @_spi(GoogleCloudInternal) public init(
@@ -49,8 +53,13 @@ public final class StorageClient: StorageProtocol, Sendable {
     let endpoint = options.client.endpoint ?? Self.defaultEndpoint
     self.options = options
     self.inner = try GoogleGax._HTTPClient(
-      mock, endpoint: endpoint, credentials: options.client.credentials,
-      quotaProject: options.client.quotaProject, defaultEndpoint: Self.defaultEndpoint)
+      mock,
+      endpoint: endpoint,
+      credentials: options.client.credentials,
+      quotaProject: options.client.quotaProject,
+      defaultEndpoint: Self.defaultEndpoint,
+      clientHeader: GoogleGax._veneerApiClientHeader(packageVersion: Self.version)
+    )
   }
 
   @_spi(GoogleCloudInternal) public init(

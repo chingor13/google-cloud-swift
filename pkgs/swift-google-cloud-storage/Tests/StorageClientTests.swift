@@ -31,6 +31,31 @@ import Testing
     #expect(client.options.client.endpoint == "https://override.googleapis.com")
   }
 
+  @Test func clientInitializesVeneerClientHeader() async throws {
+    let mock = MockRegistry.create()
+    let options = StorageClientOptions().with {
+      $0.client = .init().with {
+        $0.endpoint = mock.endpoint
+        $0.credentials = try! Credentials(configuration: .anonymous)
+      }
+    }
+    let client = try StorageClient(options, mock: mock)
+    #expect(StorageClient.version == "0.5.0")
+    let expectedHeader = GoogleGax._veneerApiClientHeader(packageVersion: StorageClient.version)
+    #expect(expectedHeader.contains("gccl/0.5.0"))
+
+    mock.register(
+      response: .success(statusCode: 200, data: Data("{}".utf8)),
+      for: mock.url("/storage/v1/b/my-bucket/o/my-object?alt=media")
+    )
+    _ = try await client.readObject(from: "my-bucket", object: "my-object").metadata
+    let requests = mock.recordedRequests()
+    #expect(!requests.isEmpty)
+    #expect(
+      requests.first?.value(forHTTPHeaderField: GoogleGax._HeaderNames.apiClient) == expectedHeader
+    )
+  }
+
   static func assertSendable<T: Sendable>(_ type: T.Type) {}
 
   @Test func clientIsSendable() {

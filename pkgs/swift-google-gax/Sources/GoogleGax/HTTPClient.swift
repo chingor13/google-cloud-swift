@@ -27,9 +27,14 @@ import struct AsyncHTTPClient.HTTPClientResponse
   let quotaProject: String?
   let inner: any _HTTPClientProtocol
   let hostHeader: String
+  let clientHeader: String?
 
   // Creates a new client.
-  public init(from: ClientOptions, withDefaultEndpoint: String) throws {
+  public init(
+    from: ClientOptions,
+    withDefaultEndpoint: String,
+    clientHeader: String? = nil
+  ) throws {
     self.credentials = try from.credentials ?? GoogleAuth.Credentials()
     self.logger = from.logger
     self.quotaProject = from.quotaProject
@@ -40,6 +45,7 @@ import struct AsyncHTTPClient.HTTPClientResponse
       defaultEndpoint: withDefaultEndpoint
     )
     self.inner = HTTPClientHolder()
+    self.clientHeader = clientHeader
   }
 
   // Creates a new testing client.
@@ -48,7 +54,8 @@ import struct AsyncHTTPClient.HTTPClientResponse
     credentials: (any _CredentialsProtocol)? = nil,
     logger: Logging.Logger? = nil,
     quotaProject: String? = nil,
-    defaultEndpoint: String? = nil
+    defaultEndpoint: String? = nil,
+    clientHeader: String? = nil
   ) throws {
     self.baseURL = try Self.validateEndpoint(endpoint)
     self.credentials = try credentials ?? GoogleAuth.Credentials(configuration: .anonymous)
@@ -58,6 +65,40 @@ import struct AsyncHTTPClient.HTTPClientResponse
     self.hostHeader = try _Host.header(
       endpoint: endpoint,
       defaultEndpoint: defaultEndpoint ?? endpoint
+    )
+    self.clientHeader = clientHeader
+  }
+
+  // Creates a new client with an _ApiClientHeader.
+  init(
+    from: ClientOptions,
+    withDefaultEndpoint: String,
+    clientHeader: _ApiClientHeader
+  ) throws {
+    try self.init(
+      from: from,
+      withDefaultEndpoint: withDefaultEndpoint,
+      clientHeader: clientHeader.build()
+    )
+  }
+
+  // Creates a new testing client with an _ApiClientHeader.
+  init(
+    _ inner: any _HTTPClientProtocol, endpoint: String,
+    credentials: (any _CredentialsProtocol)? = nil,
+    logger: Logging.Logger? = nil,
+    quotaProject: String? = nil,
+    defaultEndpoint: String? = nil,
+    clientHeader: _ApiClientHeader
+  ) throws {
+    try self.init(
+      inner,
+      endpoint: endpoint,
+      credentials: credentials,
+      logger: logger,
+      quotaProject: quotaProject,
+      defaultEndpoint: defaultEndpoint,
+      clientHeader: clientHeader.build()
     )
   }
 
@@ -94,6 +135,9 @@ import struct AsyncHTTPClient.HTTPClientResponse
       request.setHeader(name: _HeaderNames.userProject, value: effectiveQuotaProject)
     }
     request.setHeader(name: _HeaderNames.host, value: self.hostHeader)
+    if let clientHeader = self.clientHeader {
+      request.setHeader(name: _HeaderNames.apiClient, value: clientHeader)
+    }
   }
 
   public func newRequest(

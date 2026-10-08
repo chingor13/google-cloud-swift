@@ -163,6 +163,76 @@ import NIOHTTP1
     #expect(request.headers["x-goog-gcs-idempotency-token"] == ["valid-token"])
   }
 
+  @Test func clientHeaderConfigured() async throws {
+    let endpoint = "http://localhost:1234"
+    let credentials = try Credentials(configuration: .anonymous)
+    let options = ClientOptions().with { $0.credentials = credentials }
+    let client = try _HTTPClient(
+      from: options,
+      withDefaultEndpoint: endpoint,
+      clientHeader: "gl-swift/test-header"
+    )
+    let request = try await client.newRequest(path: "/test", query: [])
+    #expect(request.headers[_HeaderNames.apiClient] == ["gl-swift/test-header"])
+
+    let percentEncodedRequest = try await client.newRequest(
+      percentEncodedPath: "/test", query: []
+    )
+    #expect(percentEncodedRequest.headers[_HeaderNames.apiClient] == ["gl-swift/test-header"])
+
+    let uriRequest = try await client.newRequest(uri: "http://localhost:1234/test")
+    #expect(uriRequest.headers[_HeaderNames.apiClient] == ["gl-swift/test-header"])
+  }
+
+  @Test func clientHeaderDefaultIsNil() async throws {
+    let endpoint = "http://localhost:1234"
+    let credentials = try Credentials(configuration: .anonymous)
+    let options = ClientOptions().with { $0.credentials = credentials }
+    let client = try _HTTPClient(from: options, withDefaultEndpoint: endpoint)
+    let request = try await client.newRequest(path: "/test", query: [])
+    #expect(request.headers[_HeaderNames.apiClient].isEmpty)
+  }
+
+  @Test func clientHeaderTestingInit() async throws {
+    let mock = MockHTTPClient { _, _ in
+      HTTPClientResponse(version: .http1_1, status: .ok)
+    }
+    let client = try _HTTPClient(
+      mock,
+      endpoint: "http://localhost:1234",
+      clientHeader: "gl-swift/mock-header"
+    )
+    let request = try await client.newRequest(path: "/test", query: [])
+    #expect(request.headers[_HeaderNames.apiClient] == ["gl-swift/mock-header"])
+  }
+
+  @Test func clientHeaderWithApiClientHeader() async throws {
+    let endpoint = "http://localhost:1234"
+    let credentials = try Credentials(configuration: .anonymous)
+    let options = ClientOptions().with { $0.credentials = credentials }
+    var header = _ApiClientHeader()
+    header.setToken(.rest, version: "1.0.0")
+    header.setToken(.gapic, version: "2.0.0")
+    let client = try _HTTPClient(
+      from: options,
+      withDefaultEndpoint: endpoint,
+      clientHeader: header
+    )
+    let request = try await client.newRequest(path: "/test", query: [])
+    #expect(request.headers[_HeaderNames.apiClient] == [header.build()])
+
+    let mock = MockHTTPClient { _, _ in
+      HTTPClientResponse(version: .http1_1, status: .ok)
+    }
+    let mockClient = try _HTTPClient(
+      mock,
+      endpoint: endpoint,
+      clientHeader: header
+    )
+    let mockRequest = try await mockClient.newRequest(path: "/test", query: [])
+    #expect(mockRequest.headers[_HeaderNames.apiClient] == [header.build()])
+  }
+
   @Test func requestOptionsHeadersAuthPrecedence() async throws {
     struct MockAuthCredentials: _CredentialsProtocol {
       let authHeaders: AuthHeaders
