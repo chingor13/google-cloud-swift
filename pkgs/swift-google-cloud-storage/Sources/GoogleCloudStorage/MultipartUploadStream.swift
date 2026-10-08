@@ -93,8 +93,17 @@ struct MultipartUploadStream: AsyncSequence, Sendable {
     // Only inspect/read the source if automatic checksum computation is needed.
     let autoCalculators = calculators.filter { !($0 is ProvidedChecksumCalculator) }
     do {
-      if var seekable = source as? (any SeekableWriteObjectSource) {
+      if var bytesSource = source as? BytesSource {
         if !autoCalculators.isEmpty {
+          for i in calculators.indices {
+            calculators[i].update(bytesSource.buffer)
+          }
+        }
+        try await bytesSource.seek(to: 0)
+        preparedSource = bytesSource
+      } else if var seekable = source as? (any SeekableWriteObjectSource) {
+        if !autoCalculators.isEmpty {
+          try await seekable.seek(to: 0)
           while let chunk = try await seekable.read(maxBytes: chunkSize) {
             for i in calculators.indices {
               calculators[i].update(chunk)
