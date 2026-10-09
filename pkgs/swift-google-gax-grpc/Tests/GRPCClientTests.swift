@@ -98,6 +98,23 @@ import GoogleAuth
     let customDomainClient = try _GRPCClient(
       from: customDomainOptions, withDefaultEndpoint: "https://storage.googleapis.com")
     customDomainClient.close()
+
+    // Case-insensitive scheme (HTTPS / HTTP)
+    let upperSecureOptions = ClientOptions().with {
+      $0.credentials = credentials
+      $0.endpoint = "HTTPS://custom.endpoint.com:443"
+    }
+    let upperSecureClient = try _GRPCClient(
+      from: upperSecureOptions, withDefaultEndpoint: "https://storage.googleapis.com")
+    upperSecureClient.close()
+
+    let upperInsecureOptions = ClientOptions().with {
+      $0.credentials = credentials
+      $0.endpoint = "HTTP://127.0.0.1:8080"
+    }
+    let upperInsecureClient = try _GRPCClient(
+      from: upperInsecureOptions, withDefaultEndpoint: "https://storage.googleapis.com")
+    upperInsecureClient.close()
   }
 
   @Test(arguments: [
