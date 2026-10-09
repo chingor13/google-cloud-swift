@@ -30,8 +30,15 @@ extension LimitedAttemptCount: RetryPolicy where P: RetryPolicy & Sendable {
   }
 
   public func onThrottle(state: RetryState, error: RequestError) -> ThrottleResult {
-    // The retry loop only calls `onThrottle()` if the policy has not been exhausted.
-    inner.onThrottle(state: state, error: error)
+    switch inner.onThrottle(state: state, error: error) {
+    case .exhausted(let e):
+      return .exhausted(e)
+    case .retry(let e):
+      if state.attemptCount >= maximumAttempts {
+        return .exhausted(e)
+      }
+      return .retry(e)
+    }
   }
 
   public func remainingTime(state: RetryState) -> Duration? {
