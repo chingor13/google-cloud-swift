@@ -281,24 +281,22 @@ import NIOHTTP1
     #expect(data == .init("{}".utf8))
   }
 
-  @Test(arguments: [
-    (_HTTPClientRequest.Method.GET, NIOHTTP1.HTTPMethod.GET),
-    (_HTTPClientRequest.Method.PUT, NIOHTTP1.HTTPMethod.PUT),
-    (_HTTPClientRequest.Method.POST, NIOHTTP1.HTTPMethod.POST),
-    (_HTTPClientRequest.Method.DELETE, NIOHTTP1.HTTPMethod.DELETE),
-    (_HTTPClientRequest.Method.PATCH, NIOHTTP1.HTTPMethod.PATCH),
-    (_HTTPClientRequest.Method.HEAD, NIOHTTP1.HTTPMethod.HEAD),
-    (_HTTPClientRequest.Method.OPTIONS, NIOHTTP1.HTTPMethod.OPTIONS),
-  ]) func setMethodMappings(
-    method: _HTTPClientRequest.Method,
-    want: NIOHTTP1.HTTPMethod
-  ) async throws {
-    let credentials = try Credentials(configuration: .anonymous)
-    let options = ClientOptions().with { $0.credentials = credentials }
-    let client = try _HTTPClient(from: options, withDefaultEndpoint: "http://localhost:8080")
-    var request = try await client.newRequest(path: "/v1/test", query: [])
-    request.setMethod(method)
-    #expect(request.method == want)
+  @Test(
+    arguments: [
+      (.GET, .GET),
+      (.PUT, .PUT),
+      (.POST, .POST),
+      (.DELETE, .DELETE),
+      (.PATCH, .PATCH),
+      (.HEAD, .HEAD),
+      (.OPTIONS, .OPTIONS),
+    ] as [(_HTTPClientRequest.Method, NIOHTTP1.HTTPMethod)]
+  )
+  func setMethodMappings(
+    _ method: _HTTPClientRequest.Method,
+    _ want: NIOHTTP1.HTTPMethod
+  ) {
+    #expect(method.nioMethod == want)
   }
 
   @Test func postRequestBodyJSON() async throws {
