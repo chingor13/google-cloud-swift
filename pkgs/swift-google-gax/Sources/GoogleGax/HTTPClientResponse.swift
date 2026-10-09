@@ -109,7 +109,7 @@ import NIOFoundationCompat
       let payload = try decoder.decode(type, from: data)
       return .success(payload)
     } catch {
-      return .failure(.malformedResponse("\(error)"))
+      return .failure(.malformedResponse("Failed to decode \(type): \(error)"))
     }
   }
 }

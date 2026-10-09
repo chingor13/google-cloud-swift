@@ -438,7 +438,7 @@ import NIOHTTP1
       Issue.record("expected .failure(.malformedResponse), got=\(result)")
       return
     }
-    #expect(!message.isEmpty)
+    #expect(message.contains("ResponseType"))
   }
 
   @Test func getErrorDetails() async throws {
