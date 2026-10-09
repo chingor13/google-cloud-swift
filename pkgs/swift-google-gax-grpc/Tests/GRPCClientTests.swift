@@ -104,16 +104,59 @@ import GoogleAuth
     "",
     "http:///",
     "https:///",
+    "htps://storage.googleapis.com",
+    "htt://localhost:1",
+    "grpc://storage.googleapis.com",
+    "dns:///storage.googleapis.com",
+    "dns://8.8.8.8/storage.googleapis.com",
+    "file:///etc/passwd",
+    "ftp://storage.googleapis.com",
+    "://storage.googleapis.com",
   ]) func badEndpoint(input: String) throws {
     let credentials = try Credentials(configuration: .anonymous)
     let options = ClientOptions().with {
       $0.credentials = credentials
       $0.endpoint = input
     }
-    #expect(throws: ClientError.self) {
+    let error = #expect(throws: ClientError.self) {
       let client = try _GRPCClient(
         from: options, withDefaultEndpoint: "https://storage.googleapis.com")
       client.close()
     }
+    guard case let .invalidEndpoint(msg) = error else {
+      Issue.record(
+        "Mismatched error type, want .invalidEndpoint, got=\(String(describing: error)).")
+      return
+    }
+    #expect(msg == input, "error=\(String(describing: error))")
+  }
+
+  @Test(arguments: [
+    "",
+    "http:///",
+    "https:///",
+    "htps://storage.googleapis.com",
+    "htt://localhost:1",
+    "grpc://storage.googleapis.com",
+    "dns:///storage.googleapis.com",
+    "dns://8.8.8.8/storage.googleapis.com",
+    "file:///etc/passwd",
+    "ftp://storage.googleapis.com",
+    "://storage.googleapis.com",
+  ]) func badDefaultEndpoint(input: String) throws {
+    let credentials = try Credentials(configuration: .anonymous)
+    let options = ClientOptions().with {
+      $0.credentials = credentials
+    }
+    let error = #expect(throws: ClientError.self) {
+      let client = try _GRPCClient(from: options, withDefaultEndpoint: input)
+      client.close()
+    }
+    guard case let .invalidEndpoint(msg) = error else {
+      Issue.record(
+        "Mismatched error type, want .invalidEndpoint, got=\(String(describing: error)).")
+      return
+    }
+    #expect(msg == input, "error=\(String(describing: error))")
   }
 }

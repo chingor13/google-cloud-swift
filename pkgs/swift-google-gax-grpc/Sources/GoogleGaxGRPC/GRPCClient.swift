@@ -50,6 +50,7 @@ public final class _GRPCClient: Sendable {
     let rawEndpoint = options.endpoint ?? defaultEndpoint
     let endpointWithScheme = rawEndpoint.contains("://") ? rawEndpoint : "https://\(rawEndpoint)"
     guard let components = URLComponents(string: endpointWithScheme),
+      let scheme = components.scheme, scheme == "http" || scheme == "https",
       let host = components.host, !host.isEmpty
     else {
       throw ClientError.invalidEndpoint(rawEndpoint)
