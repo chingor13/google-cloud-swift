@@ -113,4 +113,13 @@ import Testing
         "pb",
       ])
   }
+
+  @Test func swiftVersionTracking() {
+    let compiler = compilerVersion()
+    let compat = swiftCompatVersion()
+    #expect(!compiler.isEmpty)
+    #expect(!compat.isEmpty)
+    let lang = defaultLanguageTokenVersion()
+    #expect(lang == "apple-\(compiler)-lang-\(compat)")
+  }
 }

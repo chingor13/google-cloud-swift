@@ -18,7 +18,7 @@ import Foundation
 ///
 /// Google Cloud APIs use the `x-goog-api-client` header to collect client library
 /// usage and adoption metrics. The header consists of a space-separated list of
-/// `NAME "/" VERSION` tokens (e.g., `gl-swift/apple-6.x-lang-6.x gax/0.5.0 rest/0.5.0 gapic/0.5.0`).
+/// `NAME "/" VERSION` tokens (e.g., `gl-swift/apple-6.3-lang-6.3 gax/0.5.0 rest/0.5.0 gapic/0.5.0`).
 ///
 /// Standard token names include:
 /// - `gl-swift`: Language runtime and compiler version.
@@ -136,19 +136,28 @@ public func _veneerApiClientHeader(packageVersion: String) -> String {
 
 func compilerVersion() -> String {
   // Apparently Swift does not have a macro or function to detect the compiler version.
-  // This code is mildly annoying, but only requires updates every 5 years or so.
-  #if compiler(>=11.0)
-    return "11.x"
-  #elseif compiler(>=10.0)
-    return "10.x"
-  #elseif compiler(>=9.0)
-    return "9.x"
-  #elseif compiler(>=8.0)
-    return "8.x"
+  #if compiler(>=8.0)
+    return "8.0"
+  #elseif compiler(>=7.4)
+    return "7.4"
+  #elseif compiler(>=7.3)
+    return "7.3"
+  #elseif compiler(>=7.2)
+    return "7.2"
+  #elseif compiler(>=7.1)
+    return "7.1"
   #elseif compiler(>=7.0)
-    return "7.x"
-  #elseif compiler(>=6.0)
-    return "6.x"
+    return "7.0"
+  #elseif compiler(>=6.6)
+    return "6.6"
+  #elseif compiler(>=6.5)
+    return "6.5"
+  #elseif compiler(>=6.4)
+    return "6.4"
+  #elseif compiler(>=6.3)
+    return "6.3"
+  #elseif compiler(>=6.2)
+    return "6.2"
   #else
     // Stop compilation. Should not be that hard to keep this function up to date, we will need to
     // update our code to compile with each major release anyway.
@@ -157,20 +166,29 @@ func compilerVersion() -> String {
 }
 
 func swiftCompatVersion() -> String {
-  // Apparently Swift does not have a macro or function to detect the compiler version.
-  // This code is mildly annoying, but only requires updates every 5 years or so.
-  #if swift(>=11.0)
-    return "11.x"
-  #elseif swift(>=10.0)
-    return "10.x"
-  #elseif swift(>=9.0)
-    return "9.x"
-  #elseif swift(>=8.0)
-    return "8.x"
+  // Apparently Swift does not have a macro or function to detect the language version.
+  #if swift(>=8.0)
+    return "8.0"
+  #elseif swift(>=7.4)
+    return "7.4"
+  #elseif swift(>=7.3)
+    return "7.3"
+  #elseif swift(>=7.2)
+    return "7.2"
+  #elseif swift(>=7.1)
+    return "7.1"
   #elseif swift(>=7.0)
-    return "7.x"
-  #elseif swift(>=6.0)
-    return "6.x"
+    return "7.0"
+  #elseif swift(>=6.6)
+    return "6.6"
+  #elseif swift(>=6.5)
+    return "6.5"
+  #elseif swift(>=6.4)
+    return "6.4"
+  #elseif swift(>=6.3)
+    return "6.3"
+  #elseif swift(>=6.2)
+    return "6.2"
   #else
     // Stop compilation. Should not be that hard to keep this function up to date, we will need to
     // update our code to compile with each major release anyway.
