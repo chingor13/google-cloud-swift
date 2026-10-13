@@ -134,8 +134,7 @@ struct WKTStructEncoder {
     } else if value == -.infinity {
       return .string("-Infinity")
     } else {
-      let rounded = Double(String(value)) ?? Double(value)
-      return .number(rounded)
+      return .number(Double(value))
     }
   }
 

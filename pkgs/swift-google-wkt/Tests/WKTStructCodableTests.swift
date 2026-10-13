@@ -111,7 +111,7 @@ import Testing
     #expect(packed["uint16Val"] == .number(16))
     #expect(packed["uint32Val"] == .number(32))
     #expect(packed["uint64Val"] == .string(String(UInt64.max)))
-    #expect(packed["floatVal"] == .number(3.14))
+    #expect(packed["floatVal"] == .number(Double(original.floatVal)))
     #expect(packed["doubleVal"] == .number(2.718281828))
     #expect(packed["stringVal"] == .string("hello world"))
     #expect(packed["dataVal"] == .string(Data([0x01, 0x02, 0x03, 0xFF]).base64EncodedString()))
