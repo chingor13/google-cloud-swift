@@ -33,6 +33,9 @@ extension WKTAnyTests {
 
     let inner = try BasicMessage(fromAny: any)
     #expect(inner == BasicMessage(field0: "0", field1: "1"))
+
+    let fastInner = try _anyDeserialize(BasicMessage.self, from: any)
+    #expect(fastInner == inner)
   }
 
   @Test func decodeBasicMessageMismatchedUrl() throws {
@@ -46,6 +49,11 @@ extension WKTAnyTests {
       let _ = try BasicMessage(fromAny: any)
     }
     #expect(error == .mismatchedTypeURL)
+
+    let fastError = #expect(throws: WKTAnyError.self) {
+      let _ = try _anyDeserialize(BasicMessage.self, from: any)
+    }
+    #expect(fastError == .mismatchedTypeURL)
   }
 
   @Test func decodeBasicMessageMissing() throws {
@@ -59,6 +67,17 @@ extension WKTAnyTests {
 
     let inner = try BasicMessage(fromAny: any)
     #expect(inner == BasicMessage(field0: "0", field1: ""))
+
+    let fastInner = try _anyDeserialize(BasicMessage.self, from: any)
+    #expect(fastInner == inner)
+  }
+
+  @Test func encodeBasicMessage() throws {
+    let message = BasicMessage(field0: "0", field1: "1")
+    let slowPacked = try _slowAnySerialize(message: message)
+    let fastPacked = try _anySerialize(message: message)
+    #expect(fastPacked == slowPacked)
+    #expect(fastPacked == ["field0": .string("0"), "field1": .string("1")])
   }
 }
 

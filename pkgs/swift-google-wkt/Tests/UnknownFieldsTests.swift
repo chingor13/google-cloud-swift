@@ -18,7 +18,9 @@ import Testing
 
 @Suite struct UnknownFieldsTests {
   /// A sample message struct mirroring generated message structure with `_UnknownFields`.
-  struct SampleMessage: Codable, Equatable, Sendable {
+  struct SampleMessage: Codable, Equatable, _AnyPackable, Sendable {
+    static var _anyTypeUrl: String { "type.googleapis.com/test.SampleMessage" }
+
     var name: String = ""
     var displayName: String = ""
     var _unknownFields = _UnknownFields()
@@ -65,10 +67,20 @@ import Testing
         }
       }
     }
+
+    init(fromAny any: WKTAny) throws {
+      self = try _anyDeserialize(Self.self, from: any)
+    }
+
+    func _pack() throws -> WKTStruct {
+      return try _anySerialize(message: self)
+    }
   }
 
   /// A wrapper struct to test missing nested messages with `DecodeToDefault`.
-  struct WrapperMessage: Codable, Equatable, Sendable {
+  struct WrapperMessage: Codable, Equatable, _AnyPackable, Sendable {
+    static var _anyTypeUrl: String { "type.googleapis.com/test.WrapperMessage" }
+
     var nested: SampleMessage = SampleMessage()
 
     private enum CodingKeys: String, CodingKey {
@@ -80,6 +92,14 @@ import Testing
     init(from decoder: any Swift.Decoder) throws {
       let container = try decoder.container(keyedBy: CodingKeys.self)
       self.nested = try container.decode(SampleMessage.self, forKey: .nested)
+    }
+
+    init(fromAny any: WKTAny) throws {
+      self = try _anyDeserialize(Self.self, from: any)
+    }
+
+    func _pack() throws -> WKTStruct {
+      return try _anySerialize(message: self)
     }
   }
 
@@ -156,6 +176,16 @@ import Testing
     #expect(roundTripped == message)
     #expect(roundTripped.displayName == "Updated")
     #expect(roundTripped._unknownFields == message._unknownFields)
+
+    // Verify _anySerialize and _anyDeserialize parity with _slowAnySerialize and _slowAnyDeserialize
+    let fastPacked = try _anySerialize(message: message)
+    let slowPacked = try _slowAnySerialize(message: message)
+    #expect(fastPacked == slowPacked)
+    let any = try WKTAny(fromMessage: message)
+    let fastUnpacked = try _anyDeserialize(SampleMessage.self, from: any)
+    let slowUnpacked = try _slowAnyDeserialize(SampleMessage.self, from: any)
+    #expect(fastUnpacked == message)
+    #expect(fastUnpacked == slowUnpacked)
   }
 
   @Test("JSON decoding and encoding preserves unknown non-finite float fields")
@@ -190,6 +220,15 @@ import Testing
     let roundTripped = try decoder.decode(SampleMessage.self, from: encodedData)
     #expect(roundTripped == message)
     #expect(roundTripped._unknownFields == message._unknownFields)
+
+    let fastPacked = try _anySerialize(message: message)
+    let slowPacked = try _slowAnySerialize(message: message)
+    #expect(fastPacked == slowPacked)
+    let any = try WKTAny(fromMessage: message)
+    let fastUnpacked = try _anyDeserialize(SampleMessage.self, from: any)
+    let slowUnpacked = try _slowAnyDeserialize(SampleMessage.self, from: any)
+    #expect(fastUnpacked == message)
+    #expect(fastUnpacked == slowUnpacked)
   }
 
   @Test("Missing nested message decodes to default with empty unknown fields")
@@ -199,5 +238,13 @@ import Testing
     #expect(wrapper.nested == SampleMessage())
     #expect(wrapper.nested._unknownFields.json.isEmpty)
     #expect(wrapper.nested._unknownFields.proto.isEmpty)
+
+    let emptyAny = try WKTAny(fromMessage: WrapperMessage())
+    let fastWrapper = try _anyDeserialize(WrapperMessage.self, from: emptyAny)
+    let slowWrapper = try _slowAnyDeserialize(WrapperMessage.self, from: emptyAny)
+    #expect(fastWrapper == WrapperMessage())
+    #expect(fastWrapper == slowWrapper)
+    #expect(fastWrapper.nested._unknownFields.json.isEmpty)
+    #expect(fastWrapper.nested._unknownFields.proto.isEmpty)
   }
 }
