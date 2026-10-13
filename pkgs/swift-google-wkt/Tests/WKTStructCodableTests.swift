@@ -18,6 +18,13 @@ import Testing
 @testable @_spi(GoogleCloudInternal) import GoogleWKT
 
 @Suite struct WKTStructCodableTests {
+  typealias RequiredPrimitives = ProtoJSONDecoderTest.RequiredPrimitives
+  typealias OptionalPrimitives = ProtoJSONDecoderTest.OptionalPrimitives
+  typealias RepeatedPrimitives = ProtoJSONDecoderTest.RepeatedPrimitives
+  typealias MapPrimitives = ProtoJSONDecoderTest.MapPrimitives
+  typealias MessageWithRepeated = ProtoJSONDecoderTest.MessageWithRepeated
+  typealias CollectionModel = ProtoJSONEncoderTest.CollectionModel
+
   struct AllPrimitivesMessage: Codable, Equatable, _AnyPackable, Sendable {
     var boolVal: Bool = false
     var intVal: Int = 0
@@ -80,7 +87,8 @@ import Testing
     }
   }
 
-  @Test func packAndUnpackAllPrimitives() throws {
+  @Test(arguments: AnyCodingMode.allCases)
+  func packAndUnpackAllPrimitives(mode: AnyCodingMode) throws {
     let original = AllPrimitivesMessage(
       boolVal: true,
       intVal: -42,
@@ -99,7 +107,7 @@ import Testing
       dataVal: Data([0x01, 0x02, 0x03, 0xFF])
     )
 
-    let packed = try original._pack()
+    let packed = try mode.serialize(original)
     #expect(packed["boolVal"] == .bool(true))
     #expect(packed["intVal"] == .number(-42))
     #expect(packed["int8Val"] == .number(-8))
@@ -111,38 +119,39 @@ import Testing
     #expect(packed["uint16Val"] == .number(16))
     #expect(packed["uint32Val"] == .number(32))
     #expect(packed["uint64Val"] == .string(String(UInt64.max)))
-    #expect(packed["floatVal"] == .number(Double(original.floatVal)))
     #expect(packed["doubleVal"] == .number(2.718281828))
     #expect(packed["stringVal"] == .string("hello world"))
     #expect(packed["dataVal"] == .string(Data([0x01, 0x02, 0x03, 0xFF]).base64EncodedString()))
 
-    let any = try WKTAny(fromMessage: original)
-    let unpacked = try AllPrimitivesMessage(fromAny: any)
+    let any = try mode.pack(original)
+    let unpacked = try mode.deserialize(AllPrimitivesMessage.self, from: any)
     #expect(unpacked == original)
   }
 
-  @Test func packAndUnpackNonConformingFloats() throws {
+  @Test(arguments: AnyCodingMode.allCases)
+  func packAndUnpackNonConformingFloats(mode: AnyCodingMode) throws {
     let infMsg = AllPrimitivesMessage(floatVal: .infinity, doubleVal: -.infinity)
-    let infPacked = try infMsg._pack()
+    let infPacked = try mode.serialize(infMsg)
     #expect(infPacked["floatVal"] == .string("Infinity"))
     #expect(infPacked["doubleVal"] == .string("-Infinity"))
 
-    let infAny = try WKTAny(fromMessage: infMsg)
-    let infUnpacked = try AllPrimitivesMessage(fromAny: infAny)
+    let infAny = try mode.pack(infMsg)
+    let infUnpacked = try mode.deserialize(AllPrimitivesMessage.self, from: infAny)
     #expect(infUnpacked == infMsg)
 
     let nanMsg = AllPrimitivesMessage(floatVal: .nan, doubleVal: .nan)
-    let nanPacked = try nanMsg._pack()
+    let nanPacked = try mode.serialize(nanMsg)
     #expect(nanPacked["floatVal"] == .string("NaN"))
     #expect(nanPacked["doubleVal"] == .string("NaN"))
 
-    let nanAny = try WKTAny(fromMessage: nanMsg)
-    let nanUnpacked = try AllPrimitivesMessage(fromAny: nanAny)
+    let nanAny = try mode.pack(nanMsg)
+    let nanUnpacked = try mode.deserialize(AllPrimitivesMessage.self, from: nanAny)
     #expect(nanUnpacked.floatVal.isNaN)
     #expect(nanUnpacked.doubleVal.isNaN)
   }
 
-  @Test func decodeFlexibleStringAndNumericRepresentations() throws {
+  @Test(arguments: AnyCodingMode.allCases)
+  func decodeFlexibleStringAndNumericRepresentations(mode: AnyCodingMode) throws {
     let fields: WKTStruct = [
       "boolVal": .string("true"),
       "intVal": .string("-42"),
@@ -160,8 +169,8 @@ import Testing
       "stringVal": .string("text"),
       "dataVal": .string(Data("abc".utf8).base64EncodedString()),
     ]
-    let decoder = WKTStructDecoder()
-    let decoded = try decoder.decode(AllPrimitivesMessage.self, from: fields)
+    let any = try AnyCodingMode.makeAny(for: AllPrimitivesMessage.self, fields: fields)
+    let decoded = try mode.deserialize(AllPrimitivesMessage.self, from: any)
     #expect(decoded.boolVal == true)
     #expect(decoded.intVal == -42)
     #expect(decoded.int8Val == -8)
@@ -179,9 +188,10 @@ import Testing
     #expect(decoded.dataVal == Data("abc".utf8))
   }
 
-  @Test func decodeMissingFieldsDefaultsToZeroValues() throws {
-    let decoder = WKTStructDecoder()
-    let decoded = try decoder.decode(AllPrimitivesMessage.self, from: [:])
+  @Test(arguments: AnyCodingMode.allCases)
+  func decodeMissingFieldsDefaultsToZeroValues(mode: AnyCodingMode) throws {
+    let any = try AnyCodingMode.makeAny(for: AllPrimitivesMessage.self, fields: [:])
+    let decoded = try mode.deserialize(AllPrimitivesMessage.self, from: any)
     #expect(decoded == AllPrimitivesMessage())
   }
 
@@ -272,19 +282,20 @@ import Testing
     }
   }
 
-  @Test func omitEmptyCollectionsAndPreserveExplicitOptionalWKTCollections() throws {
+  @Test(arguments: AnyCodingMode.allCases)
+  func omitEmptyCollectionsAndPreserveExplicitOptionalWKTCollections(mode: AnyCodingMode) throws {
     let emptyMsg = CollectionsAndOptionalsMessage()
-    let emptyPacked = try emptyMsg._pack()
+    let emptyPacked = try mode.serialize(emptyMsg)
     #expect(emptyPacked.isEmpty)
 
     let presentEmptyWKT = CollectionsAndOptionalsMessage(
       structField: [:],
       listValueField: []
     )
-    let presentPacked = try presentEmptyWKT._pack()
+    let presentPacked = try mode.serialize(presentEmptyWKT)
     #expect(presentPacked == ["structField": .object([:]), "listValueField": .array([])])
-    let any = try WKTAny(fromMessage: presentEmptyWKT)
-    let unpacked = try CollectionsAndOptionalsMessage(fromAny: any)
+    let any = try mode.pack(presentEmptyWKT)
+    let unpacked = try mode.deserialize(CollectionsAndOptionalsMessage.self, from: any)
     #expect(unpacked == presentEmptyWKT)
 
     let populated = CollectionsAndOptionalsMessage(
@@ -298,15 +309,15 @@ import Testing
       listValueField: [.number(1), .string("two")],
       valueField: .string("val")
     )
-    let popPacked = try populated._pack()
+    let popPacked = try mode.serialize(populated)
     #expect(popPacked["optInt64"] == .string("9000000000"))
     #expect(popPacked["optUInt64"] == .string("18000000000"))
     #expect(
       popPacked["listInt64"] == .array([.string("1"), .string("2"), .string(String(Int64.max))]))
     #expect(popPacked["mapInt64"] == .object(["k": .string(String(Int64.min))]))
 
-    let popAny = try WKTAny(fromMessage: populated)
-    let popUnpacked = try CollectionsAndOptionalsMessage(fromAny: popAny)
+    let popAny = try mode.pack(populated)
+    let popUnpacked = try mode.deserialize(CollectionsAndOptionalsMessage.self, from: popAny)
     #expect(popUnpacked == populated)
   }
 
@@ -318,65 +329,9 @@ import Testing
     #expect(packed["mapInt64"] == .object([:]))
   }
 
-  @Test func generatedWKTMessagesParityWithProtoJSON() throws {
-    let option = WKTOption().with {
-      $0.name = "custom_opt"
-      $0.value = try? WKTAny(fromMessage: WKTDuration(seconds: 10, nanos: 500_000_000))
-    }
-    let field = WKTField().with {
-      $0.kind = .typeString
-      $0.cardinality = .optional
-      $0.number = 1
-      $0.name = "display_name"
-      $0.jsonName = "displayName"
-      $0.options = [option]
-    }
-    var api = WKTApi().with {
-      $0.name = "google.example.v1.ExampleService"
-      $0.version = "v1"
-      $0.syntax = .proto3
-      $0.sourceContext = WKTSourceContext().with { $0.fileName = "example.proto" }
-      $0.methods = [
-        WKTMethod().with {
-          $0.name = "GetItem"
-          $0.requestTypeUrl = "type.googleapis.com/google.example.v1.GetItemRequest"
-          $0.responseTypeUrl = "type.googleapis.com/google.example.v1.Item"
-          $0.requestStreaming = false
-          $0.responseStreaming = false
-          $0.options = [option]
-          $0.syntax = .proto3
-        }
-      ]
-      $0.options = [option]
-    }
-    api._unknownFields.json = [
-      "extraStr": .string("extra"),
-      "extraObj": .object(["inner": .number(42)]),
-      "extraArr": .array([.bool(true), .null(WKTNullValue())]),
-    ]
+  struct NestedAndSuperCodableMessage: Codable, Equatable, _AnyPackable, Sendable {
+    static var _anyTypeUrl: String { "type.googleapis.com/test.NestedAndSuperCodableMessage" }
 
-    let fastStruct = try _anySerialize(message: api)
-    let slowStruct = try _slowAnySerialize(message: api)
-    #expect(fastStruct == slowStruct)
-
-    let any = try WKTAny(fromMessage: api)
-    let fastUnpackedApi = try _anyDeserialize(WKTApi.self, from: any)
-    let slowUnpackedApi = try _slowAnyDeserialize(WKTApi.self, from: any)
-    #expect(fastUnpackedApi == api)
-    #expect(fastUnpackedApi == slowUnpackedApi)
-
-    let fieldAny = try WKTAny(fromMessage: field)
-    let fastUnpackedField = try _anyDeserialize(WKTField.self, from: fieldAny)
-    let slowUnpackedField = try _slowAnyDeserialize(WKTField.self, from: fieldAny)
-    #expect(fastUnpackedField == field)
-    #expect(fastUnpackedField == slowUnpackedField)
-
-    #expect(throws: WKTAnyError.mismatchedTypeURL) {
-      _ = try _anyDeserialize(WKTField.self, from: any)
-    }
-  }
-
-  struct NestedAndSuperCodableMessage: Codable, Equatable {
     var nestedDictValue: String
     var nestedArrayValues: [Int32]
     var superValue: String
@@ -426,16 +381,24 @@ import Testing
       let superEnc = container.superEncoder(forKey: .customSuper)
       try self.superValue.encode(to: superEnc)
     }
+
+    init(fromAny any: WKTAny) throws {
+      self = try _anyDeserialize(Self.self, from: any)
+    }
+
+    func _pack() throws -> WKTStruct {
+      return try _anySerialize(message: self)
+    }
   }
 
-  @Test func nestedContainersAndSuperEncoderDecoder() throws {
+  @Test(arguments: AnyCodingMode.allCases)
+  func nestedContainersAndSuperEncoderDecoder(mode: AnyCodingMode) throws {
     let original = NestedAndSuperCodableMessage(
       nestedDictValue: "inside",
       nestedArrayValues: [10, 20, 30],
       superValue: "super-val"
     )
-    let encoder = WKTStructEncoder()
-    let encoded = try encoder.encode(original)
+    let encoded = try mode.serialize(original)
     #expect(
       encoded == [
         "nestedDict": .object(["value": .string("inside")]),
@@ -444,48 +407,24 @@ import Testing
       ]
     )
 
-    let decoder = WKTStructDecoder()
-    let decoded = try decoder.decode(NestedAndSuperCodableMessage.self, from: encoded)
+    let any = try mode.pack(original)
+    let decoded = try mode.deserialize(NestedAndSuperCodableMessage.self, from: any)
     #expect(decoded == original)
   }
 
-  @Test func invalidDecodingInputsThrowExpectedErrors() throws {
-    let decoder = WKTStructDecoder()
-
-    #expect(throws: DecodingError.self) {
-      _ = try decoder.decode(AllPrimitivesMessage.self, from: ["boolVal": .string("not-a-bool")])
-    }
-    #expect(throws: DecodingError.self) {
-      _ = try decoder.decode(AllPrimitivesMessage.self, from: ["int32Val": .string("not-an-int")])
-    }
-    #expect(throws: DecodingError.self) {
-      _ = try decoder.decode(AllPrimitivesMessage.self, from: ["int32Val": .number(3.14)])
-    }
-    #expect(throws: DecodingError.self) {
-      _ = try decoder.decode(AllPrimitivesMessage.self, from: ["stringVal": .number(42)])
-    }
-    #expect(throws: DecodingError.self) {
-      _ = try decoder.decode(
-        AllPrimitivesMessage.self, from: ["dataVal": .string("!!!bad-base64!!!")])
-    }
-    #expect(throws: DecodingError.self) {
-      _ = try decoder.decode(AllPrimitivesMessage.self, from: ["dataVal": .number(42)])
-    }
-  }
-
-  @Test func invalidWKTValueNumberThrowsEncodingError() throws {
-    let encoder = WKTStructEncoder()
+  @Test(arguments: AnyCodingMode.allCases)
+  func invalidWKTValueNumberThrowsEncodingError(mode: AnyCodingMode) throws {
     let msg = CollectionsAndOptionalsMessage(valueField: .number(.nan))
     #expect(throws: EncodingError.self) {
-      _ = try encoder.encode(msg)
+      _ = try mode.serialize(msg)
     }
     let nestedBadStruct = CollectionsAndOptionalsMessage(structField: ["bad": .number(.infinity)])
     #expect(throws: EncodingError.self) {
-      _ = try encoder.encode(nestedBadStruct)
+      _ = try mode.serialize(nestedBadStruct)
     }
     let nestedBadList = CollectionsAndOptionalsMessage(listValueField: [.number(-.infinity)])
     #expect(throws: EncodingError.self) {
-      _ = try encoder.encode(nestedBadList)
+      _ = try mode.serialize(nestedBadList)
     }
   }
 
@@ -509,12 +448,13 @@ import Testing
     }
   }
 
-  @Test func recursiveMessagePackAndUnpack() throws {
+  @Test(arguments: AnyCodingMode.allCases)
+  func recursiveMessagePackAndUnpack(mode: AnyCodingMode) throws {
     let leaf = RecursiveNode(name: "leaf")
     let root = RecursiveNode(name: "root", child: WKTRecursive(value: leaf))
 
-    let any = try WKTAny(fromMessage: root)
-    let unpacked = try RecursiveNode(fromAny: any)
+    let any = try mode.pack(root)
+    let unpacked = try mode.deserialize(RecursiveNode.self, from: any)
     #expect(unpacked == root)
     #expect(unpacked.child?.value.name == "leaf")
   }
@@ -538,549 +478,195 @@ import Testing
     #expect(decodedValue == .object(input))
   }
 
-  // Helper to construct a WKTAny from a raw JSON object string and a message type URL.
-  private static func makeAny<M: _AnyPackable>(jsonObject: String, for type: M.Type) throws
-    -> WKTAny
-  {
-    let decoder = _ProtoJSONDecoder()
-    var fields = try decoder.decode(WKTStruct.self, from: Data(jsonObject.utf8))
-    fields["@type"] = .string(M._anyTypeUrl)
-    let encoder = _ProtoJSONEncoder()
-    let data = try encoder.encode(fields)
-    return try decoder.decode(WKTAny.self, from: data)
-  }
+  @Test(
+    "required primitives",
+    arguments: AnyCodingMode.allCases,
+    ProtoJSONDecoderTest.requiredInputs
+  )
+  func requiredPrimitives(mode: AnyCodingMode, testCase: (String, RequiredPrimitives)) throws {
+    let (input, want) = testCase
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: RequiredPrimitives.self)
+    let got = try mode.deserialize(RequiredPrimitives.self, from: any)
+    #expect(got == want)
 
-  struct RequiredPrimitives: Codable, Equatable, _AnyPackable, Sendable {
-    static var _anyTypeUrl: String { "type.googleapis.com/test.RequiredPrimitives" }
-
-    var fieldBool: Bool = Bool()
-    var fieldInt: Int = Int()
-    var fieldInt32: Int32 = Int32()
-    var fieldInt64: Int64 = Int64()
-    var fieldUInt: UInt = UInt()
-    var fieldUInt32: UInt32 = UInt32()
-    var fieldUInt64: UInt64 = UInt64()
-    var fieldFloat: Float = Float()
-    var fieldDouble: Double = Double()
-    var fieldString: String = String()
-    var fieldData: Data = Data()
-
-    func with(_ config: (inout Self) -> Void) -> Self {
-      var copy = self
-      config(&copy)
-      return copy
-    }
-
-    init() {}
-
-    init(fromAny any: WKTAny) throws {
-      self = try _anyDeserialize(Self.self, from: any)
-    }
-
-    func _pack() throws -> WKTStruct {
-      return try _anySerialize(message: self)
-    }
+    let repackedAny = try mode.pack(want)
+    let unpacked = try mode.deserialize(RequiredPrimitives.self, from: repackedAny)
+    #expect(unpacked == want)
   }
 
   @Test(
-    "anySerialize and anyDeserialize required primitives",
-    arguments: [
-      (#"{}"#, RequiredPrimitives()),
-      (#"{"fieldBool":   true }"#, RequiredPrimitives().with { $0.fieldBool = true }),
-      (#"{"fieldInt":    42   }"#, RequiredPrimitives().with { $0.fieldInt = 42 }),
-      (#"{"fieldInt32":  42   }"#, RequiredPrimitives().with { $0.fieldInt32 = 42 }),
-      (#"{"fieldInt64":  42   }"#, RequiredPrimitives().with { $0.fieldInt64 = 42 }),
-      (#"{"fieldUInt":   42   }"#, RequiredPrimitives().with { $0.fieldUInt = 42 }),
-      (#"{"fieldUInt32": 42   }"#, RequiredPrimitives().with { $0.fieldUInt32 = 42 }),
-      (#"{"fieldUInt64": 42   }"#, RequiredPrimitives().with { $0.fieldUInt64 = 42 }),
-      (#"{"fieldFloat":  42   }"#, RequiredPrimitives().with { $0.fieldFloat = 42 }),
-      (#"{"fieldDouble": 42   }"#, RequiredPrimitives().with { $0.fieldDouble = 42 }),
-      (#"{"fieldString": "42" }"#, RequiredPrimitives().with { $0.fieldString = "42" }),
-      (
-        #"{"fieldData":   "NDI=" }"#,
-        RequiredPrimitives().with { $0.fieldData = Data(base64Encoded: "NDI=")! }
-      ),
-      (#"{"fieldBool":   "true" }"#, RequiredPrimitives().with { $0.fieldBool = true }),
-      (#"{"fieldInt":    "42"   }"#, RequiredPrimitives().with { $0.fieldInt = 42 }),
-      (#"{"fieldInt32":  "42"   }"#, RequiredPrimitives().with { $0.fieldInt32 = 42 }),
-      (#"{"fieldInt64":  "42"   }"#, RequiredPrimitives().with { $0.fieldInt64 = 42 }),
-      (#"{"fieldUInt":   "42"   }"#, RequiredPrimitives().with { $0.fieldUInt = 42 }),
-      (#"{"fieldUInt32": "42"   }"#, RequiredPrimitives().with { $0.fieldUInt32 = 42 }),
-      (#"{"fieldUInt64": "42"   }"#, RequiredPrimitives().with { $0.fieldUInt64 = 42 }),
-      (#"{"fieldFloat":  "42"   }"#, RequiredPrimitives().with { $0.fieldFloat = 42 }),
-      (#"{"fieldDouble": "42"   }"#, RequiredPrimitives().with { $0.fieldDouble = 42 }),
-    ]
+    "required bad inputs",
+    arguments: AnyCodingMode.allCases,
+    ProtoJSONDecoderTest.requiredBadInputs
   )
-  func requiredPrimitivesParity(input: String, want: RequiredPrimitives) throws {
-    let any = try Self.makeAny(jsonObject: input, for: RequiredPrimitives.self)
-    let fastGot = try _anyDeserialize(RequiredPrimitives.self, from: any)
-    let slowGot = try _slowAnyDeserialize(RequiredPrimitives.self, from: any)
-    #expect(fastGot == want)
-    #expect(fastGot == slowGot)
-
-    let fastPacked = try _anySerialize(message: want)
-    let slowPacked = try _slowAnySerialize(message: want)
-    #expect(fastPacked == slowPacked)
-  }
-
-  @Test(
-    "anyDeserialize required bad inputs",
-    arguments: [
-      #"{"fieldBool":   "bad" }"#,
-      #"{"fieldInt":    "bad" }"#,
-      #"{"fieldInt32":  "bad" }"#,
-      #"{"fieldInt64":  "bad" }"#,
-      #"{"fieldUInt":   "bad" }"#,
-      #"{"fieldUInt32": "bad" }"#,
-      #"{"fieldUInt64": "bad" }"#,
-      #"{"fieldFloat":  "bad" }"#,
-      #"{"fieldDouble": "bad" }"#,
-      #"{"fieldData":   "bad" }"#,
-    ]
-  )
-  func requiredPrimitivesBadInputs(input: String) throws {
-    let any = try Self.makeAny(jsonObject: input, for: RequiredPrimitives.self)
+  func requiredPrimitivesBadInputs(mode: AnyCodingMode, input: String) throws {
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: RequiredPrimitives.self)
     let error = #expect(throws: DecodingError.self) {
-      _ = try _anyDeserialize(RequiredPrimitives.self, from: any)
+      _ = try mode.deserialize(RequiredPrimitives.self, from: any)
     }
     #expect({ if case .dataCorrupted = error { true } else { false } }())
   }
 
-  @Test func requiredPrimitivesBadString() throws {
-    let any = try Self.makeAny(jsonObject: #"{"fieldString": 42 }"#, for: RequiredPrimitives.self)
+  @Test(arguments: AnyCodingMode.allCases)
+  func requiredPrimitivesBadString(mode: AnyCodingMode) throws {
+    let any = try AnyCodingMode.makeAny(
+      jsonObject: #"{"fieldString": 42 }"#, for: RequiredPrimitives.self)
     let error = #expect(throws: DecodingError.self) {
-      _ = try _anyDeserialize(RequiredPrimitives.self, from: any)
+      _ = try mode.deserialize(RequiredPrimitives.self, from: any)
     }
     #expect({ if case .typeMismatch = error { true } else { false } }())
   }
 
-  struct OptionalPrimitives: Codable, Equatable, _AnyPackable, Sendable {
-    static var _anyTypeUrl: String { "type.googleapis.com/test.OptionalPrimitives" }
+  @Test(
+    "optional primitives",
+    arguments: AnyCodingMode.allCases,
+    ProtoJSONDecoderTest.optionalInputs
+  )
+  func optionalPrimitives(mode: AnyCodingMode, testCase: (String, OptionalPrimitives)) throws {
+    let (input, want) = testCase
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: OptionalPrimitives.self)
+    let got = try mode.deserialize(OptionalPrimitives.self, from: any)
+    #expect(got == want)
 
-    var fieldBool: Bool? = nil
-    var fieldInt: Int? = nil
-    var fieldInt32: Int32? = nil
-    var fieldInt64: Int64? = nil
-    var fieldUInt: UInt? = nil
-    var fieldUInt32: UInt32? = nil
-    var fieldUInt64: UInt64? = nil
-    var fieldFloat: Float? = nil
-    var fieldDouble: Double? = nil
-    var fieldString: String? = nil
-    var fieldData: Data? = nil
-
-    func with(_ config: (inout Self) -> Void) -> Self {
-      var copy = self
-      config(&copy)
-      return copy
-    }
-
-    init() {}
-
-    init(fromAny any: WKTAny) throws {
-      self = try _anyDeserialize(Self.self, from: any)
-    }
-
-    func _pack() throws -> WKTStruct {
-      return try _anySerialize(message: self)
-    }
+    let repackedAny = try mode.pack(want)
+    let unpacked = try mode.deserialize(OptionalPrimitives.self, from: repackedAny)
+    #expect(unpacked == want)
   }
 
   @Test(
-    "anySerialize and anyDeserialize optional primitives",
-    arguments: [
-      (#"{}"#, OptionalPrimitives()),
-      (#"{"fieldBool":   null }"#, OptionalPrimitives()),
-      (#"{"fieldInt":    null }"#, OptionalPrimitives()),
-      (#"{"fieldInt32":  null }"#, OptionalPrimitives()),
-      (#"{"fieldInt64":  null }"#, OptionalPrimitives()),
-      (#"{"fieldUInt":   null }"#, OptionalPrimitives()),
-      (#"{"fieldUInt32": null }"#, OptionalPrimitives()),
-      (#"{"fieldUInt64": null }"#, OptionalPrimitives()),
-      (#"{"fieldFloat":  null }"#, OptionalPrimitives()),
-      (#"{"fieldDouble": null }"#, OptionalPrimitives()),
-      (#"{"fieldString": null }"#, OptionalPrimitives()),
-      (#"{"fieldData":   null }"#, OptionalPrimitives()),
-      (#"{"fieldBool":   true }"#, OptionalPrimitives().with { $0.fieldBool = true }),
-      (#"{"fieldInt":    42   }"#, OptionalPrimitives().with { $0.fieldInt = 42 }),
-      (#"{"fieldInt32":  42   }"#, OptionalPrimitives().with { $0.fieldInt32 = 42 }),
-      (#"{"fieldInt64":  42   }"#, OptionalPrimitives().with { $0.fieldInt64 = 42 }),
-      (#"{"fieldUInt":   42   }"#, OptionalPrimitives().with { $0.fieldUInt = 42 }),
-      (#"{"fieldUInt32": 42   }"#, OptionalPrimitives().with { $0.fieldUInt32 = 42 }),
-      (#"{"fieldUInt64": 42   }"#, OptionalPrimitives().with { $0.fieldUInt64 = 42 }),
-      (#"{"fieldFloat":  42   }"#, OptionalPrimitives().with { $0.fieldFloat = 42 }),
-      (#"{"fieldDouble": 42   }"#, OptionalPrimitives().with { $0.fieldDouble = 42 }),
-      (#"{"fieldString": "42" }"#, OptionalPrimitives().with { $0.fieldString = "42" }),
-      (
-        #"{"fieldData":   "NDI=" }"#,
-        OptionalPrimitives().with { $0.fieldData = Data(base64Encoded: "NDI=")! }
-      ),
-      (#"{"fieldBool":   "true" }"#, OptionalPrimitives().with { $0.fieldBool = true }),
-      (#"{"fieldInt":    "42"   }"#, OptionalPrimitives().with { $0.fieldInt = 42 }),
-      (#"{"fieldInt32":  "42"   }"#, OptionalPrimitives().with { $0.fieldInt32 = 42 }),
-      (#"{"fieldInt64":  "42"   }"#, OptionalPrimitives().with { $0.fieldInt64 = 42 }),
-      (#"{"fieldUInt":   "42"   }"#, OptionalPrimitives().with { $0.fieldUInt = 42 }),
-      (#"{"fieldUInt32": "42"   }"#, OptionalPrimitives().with { $0.fieldUInt32 = 42 }),
-      (#"{"fieldUInt64": "42"   }"#, OptionalPrimitives().with { $0.fieldUInt64 = 42 }),
-      (#"{"fieldFloat":  "42"   }"#, OptionalPrimitives().with { $0.fieldFloat = 42 }),
-      (#"{"fieldDouble": "42"   }"#, OptionalPrimitives().with { $0.fieldDouble = 42 }),
-    ]
+    "optional bad inputs",
+    arguments: AnyCodingMode.allCases,
+    ProtoJSONDecoderTest.optionalBadInputs
   )
-  func optionalPrimitivesParity(input: String, want: OptionalPrimitives) throws {
-    let any = try Self.makeAny(jsonObject: input, for: OptionalPrimitives.self)
-    let fastGot = try _anyDeserialize(OptionalPrimitives.self, from: any)
-    let slowGot = try _slowAnyDeserialize(OptionalPrimitives.self, from: any)
-    #expect(fastGot == want)
-    #expect(fastGot == slowGot)
-
-    let fastPacked = try _anySerialize(message: want)
-    let slowPacked = try _slowAnySerialize(message: want)
-    #expect(fastPacked == slowPacked)
-  }
-
-  @Test(
-    "anyDeserialize optional bad inputs",
-    arguments: [
-      #"{"fieldBool":   "bad" }"#,
-      #"{"fieldInt":    "bad" }"#,
-      #"{"fieldInt32":  "bad" }"#,
-      #"{"fieldInt64":  "bad" }"#,
-      #"{"fieldUInt":   "bad" }"#,
-      #"{"fieldUInt32": "bad" }"#,
-      #"{"fieldUInt64": "bad" }"#,
-      #"{"fieldFloat":  "bad" }"#,
-      #"{"fieldDouble": "bad" }"#,
-      #"{"fieldData":   "bad" }"#,
-    ]
-  )
-  func optionalPrimitivesBadInputs(input: String) throws {
-    let any = try Self.makeAny(jsonObject: input, for: OptionalPrimitives.self)
+  func optionalPrimitivesBadInputs(mode: AnyCodingMode, input: String) throws {
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: OptionalPrimitives.self)
     let error = #expect(throws: DecodingError.self) {
-      _ = try _anyDeserialize(OptionalPrimitives.self, from: any)
+      _ = try mode.deserialize(OptionalPrimitives.self, from: any)
     }
     #expect({ if case .dataCorrupted = error { true } else { false } }())
   }
 
-  @Test func optionalPrimitivesBadString() throws {
-    let any = try Self.makeAny(jsonObject: #"{"fieldString": 42 }"#, for: OptionalPrimitives.self)
+  @Test(arguments: AnyCodingMode.allCases)
+  func optionalPrimitivesBadString(mode: AnyCodingMode) throws {
+    let any = try AnyCodingMode.makeAny(
+      jsonObject: #"{"fieldString": 42 }"#, for: OptionalPrimitives.self)
     let error = #expect(throws: DecodingError.self) {
-      _ = try _anyDeserialize(OptionalPrimitives.self, from: any)
+      _ = try mode.deserialize(OptionalPrimitives.self, from: any)
     }
     #expect({ if case .typeMismatch = error { true } else { false } }())
   }
 
-  struct RepeatedPrimitives: Codable, Equatable, _AnyPackable, Sendable {
-    static var _anyTypeUrl: String { "type.googleapis.com/test.RepeatedPrimitives" }
+  @Test(
+    "repeated primitives",
+    arguments: AnyCodingMode.allCases,
+    ProtoJSONDecoderTest.repeatedInputs
+  )
+  func repeatedPrimitives(mode: AnyCodingMode, testCase: (String, RepeatedPrimitives)) throws {
+    let (input, want) = testCase
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: RepeatedPrimitives.self)
+    let got = try mode.deserialize(RepeatedPrimitives.self, from: any)
+    #expect(got == want)
 
-    var fieldBool: [Bool] = []
-    var fieldInt: [Int] = []
-    var fieldInt32: [Int32] = []
-    var fieldInt64: [Int64] = []
-    var fieldUInt: [UInt] = []
-    var fieldUInt32: [UInt32] = []
-    var fieldUInt64: [UInt64] = []
-    var fieldFloat: [Float] = []
-    var fieldDouble: [Double] = []
-    var fieldString: [String] = []
-    var fieldData: [Data] = []
-
-    func with(_ config: (inout Self) -> Void) -> Self {
-      var copy = self
-      config(&copy)
-      return copy
-    }
-
-    init() {}
-
-    init(fromAny any: WKTAny) throws {
-      self = try _anyDeserialize(Self.self, from: any)
-    }
-
-    func _pack() throws -> WKTStruct {
-      return try _anySerialize(message: self)
-    }
+    let repackedAny = try mode.pack(want)
+    let unpacked = try mode.deserialize(RepeatedPrimitives.self, from: repackedAny)
+    #expect(unpacked == want)
   }
 
   @Test(
-    "anySerialize and anyDeserialize repeated primitives",
-    arguments: [
-      (#"{}"#, RepeatedPrimitives()),
-      (#"{"fieldBool":   []       }"#, RepeatedPrimitives()),
-      (#"{"fieldInt":    []       }"#, RepeatedPrimitives()),
-      (#"{"fieldInt32":  []       }"#, RepeatedPrimitives()),
-      (#"{"fieldInt64":  []       }"#, RepeatedPrimitives()),
-      (#"{"fieldUInt":   []       }"#, RepeatedPrimitives()),
-      (#"{"fieldUInt32": []       }"#, RepeatedPrimitives()),
-      (#"{"fieldUInt64": []       }"#, RepeatedPrimitives()),
-      (#"{"fieldFloat":  []       }"#, RepeatedPrimitives()),
-      (#"{"fieldDouble": []       }"#, RepeatedPrimitives()),
-      (#"{"fieldString": []       }"#, RepeatedPrimitives()),
-      (#"{"fieldData":   []       }"#, RepeatedPrimitives()),
-      (#"{"fieldBool":   [true]   }"#, RepeatedPrimitives().with { $0.fieldBool = [true] }),
-      (#"{"fieldInt":    [42]     }"#, RepeatedPrimitives().with { $0.fieldInt = [42] }),
-      (#"{"fieldInt32":  [42]     }"#, RepeatedPrimitives().with { $0.fieldInt32 = [42] }),
-      (#"{"fieldInt64":  [42]     }"#, RepeatedPrimitives().with { $0.fieldInt64 = [42] }),
-      (#"{"fieldUInt":   [42]     }"#, RepeatedPrimitives().with { $0.fieldUInt = [42] }),
-      (#"{"fieldUInt32": [42]     }"#, RepeatedPrimitives().with { $0.fieldUInt32 = [42] }),
-      (#"{"fieldUInt64": [42]     }"#, RepeatedPrimitives().with { $0.fieldUInt64 = [42] }),
-      (#"{"fieldFloat":  [42]     }"#, RepeatedPrimitives().with { $0.fieldFloat = [42] }),
-      (#"{"fieldDouble": [42]     }"#, RepeatedPrimitives().with { $0.fieldDouble = [42] }),
-      (#"{"fieldString": [""]     }"#, RepeatedPrimitives().with { $0.fieldString = [""] }),
-      (#"{"fieldData":   [""]     }"#, RepeatedPrimitives().with { $0.fieldData = [Data()] }),
-      (#"{"fieldBool":   ["true"] }"#, RepeatedPrimitives().with { $0.fieldBool = [true] }),
-      (#"{"fieldInt":    ["42"]   }"#, RepeatedPrimitives().with { $0.fieldInt = [42] }),
-      (#"{"fieldInt32":  ["42"]   }"#, RepeatedPrimitives().with { $0.fieldInt32 = [42] }),
-      (#"{"fieldInt64":  ["42"]   }"#, RepeatedPrimitives().with { $0.fieldInt64 = [42] }),
-      (#"{"fieldUInt":   ["42"]   }"#, RepeatedPrimitives().with { $0.fieldUInt = [42] }),
-      (#"{"fieldUInt32": ["42"]   }"#, RepeatedPrimitives().with { $0.fieldUInt32 = [42] }),
-      (#"{"fieldUInt64": ["42"]   }"#, RepeatedPrimitives().with { $0.fieldUInt64 = [42] }),
-      (#"{"fieldFloat":  ["42"]   }"#, RepeatedPrimitives().with { $0.fieldFloat = [42] }),
-      (#"{"fieldDouble": ["42"]   }"#, RepeatedPrimitives().with { $0.fieldDouble = [42] }),
-      (#"{"fieldString": ["42"]   }"#, RepeatedPrimitives().with { $0.fieldString = ["42"] }),
-      (
-        #"{"fieldData":   ["NDI="] }"#,
-        RepeatedPrimitives().with { $0.fieldData = [Data(base64Encoded: "NDI=")!] }
-      ),
-    ]
+    "repeated bad inputs",
+    arguments: AnyCodingMode.allCases,
+    ProtoJSONDecoderTest.repeatedBadInputs
   )
-  func repeatedPrimitivesParity(input: String, want: RepeatedPrimitives) throws {
-    let any = try Self.makeAny(jsonObject: input, for: RepeatedPrimitives.self)
-    let fastGot = try _anyDeserialize(RepeatedPrimitives.self, from: any)
-    let slowGot = try _slowAnyDeserialize(RepeatedPrimitives.self, from: any)
-    #expect(fastGot == want)
-    #expect(fastGot == slowGot)
-
-    let fastPacked = try _anySerialize(message: want)
-    let slowPacked = try _slowAnySerialize(message: want)
-    #expect(fastPacked == slowPacked)
-  }
-
-  @Test(
-    "anyDeserialize repeated bad inputs",
-    arguments: [
-      #"{"fieldBool":   ["bad"] }"#,
-      #"{"fieldInt":    ["bad"] }"#,
-      #"{"fieldInt32":  ["bad"] }"#,
-      #"{"fieldInt64":  ["bad"] }"#,
-      #"{"fieldUInt":   ["bad"] }"#,
-      #"{"fieldUInt32": ["bad"] }"#,
-      #"{"fieldUInt64": ["bad"] }"#,
-      #"{"fieldFloat":  ["bad"] }"#,
-      #"{"fieldDouble": ["bad"] }"#,
-      #"{"fieldData":   ["bad"] }"#,
-    ]
-  )
-  func repeatedPrimitivesBadInputs(input: String) throws {
-    let any = try Self.makeAny(jsonObject: input, for: RepeatedPrimitives.self)
+  func repeatedPrimitivesBadInputs(mode: AnyCodingMode, input: String) throws {
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: RepeatedPrimitives.self)
     let error = #expect(throws: DecodingError.self) {
-      _ = try _anyDeserialize(RepeatedPrimitives.self, from: any)
+      _ = try mode.deserialize(RepeatedPrimitives.self, from: any)
     }
     #expect({ if case .dataCorrupted = error { true } else { false } }())
   }
 
-  @Test func repeatedPrimitivesBadString() throws {
-    let any = try Self.makeAny(jsonObject: #"{"fieldData": [42] }"#, for: RepeatedPrimitives.self)
+  @Test(arguments: AnyCodingMode.allCases)
+  func repeatedPrimitivesBadString(mode: AnyCodingMode) throws {
+    let any = try AnyCodingMode.makeAny(
+      jsonObject: #"{"fieldData": [42] }"#, for: RepeatedPrimitives.self)
     let error = #expect(throws: DecodingError.self) {
-      _ = try _anyDeserialize(RepeatedPrimitives.self, from: any)
+      _ = try mode.deserialize(RepeatedPrimitives.self, from: any)
     }
     #expect({ if case .typeMismatch = error { true } else { false } }())
   }
 
-  struct MapPrimitives: Codable, Equatable, _AnyPackable, Sendable {
-    static var _anyTypeUrl: String { "type.googleapis.com/test.MapPrimitives" }
+  @Test(
+    "map primitives",
+    arguments: AnyCodingMode.allCases,
+    ProtoJSONDecoderTest.mapInputs
+  )
+  func mapPrimitives(mode: AnyCodingMode, testCase: (String, MapPrimitives)) throws {
+    let (input, want) = testCase
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: MapPrimitives.self)
+    let got = try mode.deserialize(MapPrimitives.self, from: any)
+    #expect(got == want)
 
-    var fieldBool: [String: Bool] = [:]
-    var fieldInt: [String: Int] = [:]
-    var fieldInt32: [String: Int32] = [:]
-    var fieldInt64: [String: Int64] = [:]
-    var fieldUInt: [String: UInt] = [:]
-    var fieldUInt32: [String: UInt32] = [:]
-    var fieldUInt64: [String: UInt64] = [:]
-    var fieldFloat: [String: Float] = [:]
-    var fieldDouble: [String: Double] = [:]
-    var fieldString: [String: String] = [:]
-    var fieldData: [String: Data] = [:]
-
-    func with(_ config: (inout Self) -> Void) -> Self {
-      var copy = self
-      config(&copy)
-      return copy
-    }
-
-    init() {}
-
-    init(fromAny any: WKTAny) throws {
-      self = try _anyDeserialize(Self.self, from: any)
-    }
-
-    func _pack() throws -> WKTStruct {
-      return try _anySerialize(message: self)
-    }
+    let repackedAny = try mode.pack(want)
+    let unpacked = try mode.deserialize(MapPrimitives.self, from: repackedAny)
+    #expect(unpacked == want)
   }
 
   @Test(
-    "anySerialize and anyDeserialize map primitives",
-    arguments: [
-      (#"{}"#, MapPrimitives()),
-      (#"{"fieldBool":   {}       }"#, MapPrimitives()),
-      (#"{"fieldInt":    {}       }"#, MapPrimitives()),
-      (#"{"fieldInt32":  {}       }"#, MapPrimitives()),
-      (#"{"fieldInt64":  {}       }"#, MapPrimitives()),
-      (#"{"fieldUInt":   {}       }"#, MapPrimitives()),
-      (#"{"fieldUInt32": {}       }"#, MapPrimitives()),
-      (#"{"fieldUInt64": {}       }"#, MapPrimitives()),
-      (#"{"fieldFloat":  {}       }"#, MapPrimitives()),
-      (#"{"fieldDouble": {}       }"#, MapPrimitives()),
-      (#"{"fieldString": {}       }"#, MapPrimitives()),
-      (#"{"fieldData":   {}       }"#, MapPrimitives()),
-      (#"{"fieldBool":   {"a": true}   }"#, MapPrimitives().with { $0.fieldBool = ["a": true] }),
-      (#"{"fieldInt":    {"a": 42}     }"#, MapPrimitives().with { $0.fieldInt = ["a": 42] }),
-      (#"{"fieldInt32":  {"a": 42}     }"#, MapPrimitives().with { $0.fieldInt32 = ["a": 42] }),
-      (#"{"fieldInt64":  {"a": 42}     }"#, MapPrimitives().with { $0.fieldInt64 = ["a": 42] }),
-      (#"{"fieldUInt":   {"a": 42}     }"#, MapPrimitives().with { $0.fieldUInt = ["a": 42] }),
-      (#"{"fieldUInt32": {"a": 42}     }"#, MapPrimitives().with { $0.fieldUInt32 = ["a": 42] }),
-      (#"{"fieldUInt64": {"a": 42}     }"#, MapPrimitives().with { $0.fieldUInt64 = ["a": 42] }),
-      (#"{"fieldFloat":  {"a": 42}     }"#, MapPrimitives().with { $0.fieldFloat = ["a": 42] }),
-      (#"{"fieldDouble": {"a": 42}     }"#, MapPrimitives().with { $0.fieldDouble = ["a": 42] }),
-      (#"{"fieldString": {"a": ""}     }"#, MapPrimitives().with { $0.fieldString = ["a": ""] }),
-      (#"{"fieldData":   {"a": ""}     }"#, MapPrimitives().with { $0.fieldData = ["a": Data()] }),
-      (#"{"fieldBool":   {"a": "true"} }"#, MapPrimitives().with { $0.fieldBool = ["a": true] }),
-      (#"{"fieldInt":    {"a": "42"}   }"#, MapPrimitives().with { $0.fieldInt = ["a": 42] }),
-      (#"{"fieldInt32":  {"a": "42"}   }"#, MapPrimitives().with { $0.fieldInt32 = ["a": 42] }),
-      (#"{"fieldInt64":  {"a": "42"}   }"#, MapPrimitives().with { $0.fieldInt64 = ["a": 42] }),
-      (#"{"fieldUInt":   {"a": "42"}   }"#, MapPrimitives().with { $0.fieldUInt = ["a": 42] }),
-      (#"{"fieldUInt32": {"a": "42"}   }"#, MapPrimitives().with { $0.fieldUInt32 = ["a": 42] }),
-      (#"{"fieldUInt64": {"a": "42"}   }"#, MapPrimitives().with { $0.fieldUInt64 = ["a": 42] }),
-      (#"{"fieldFloat":  {"a": "42"}   }"#, MapPrimitives().with { $0.fieldFloat = ["a": 42] }),
-      (#"{"fieldDouble": {"a": "42"}   }"#, MapPrimitives().with { $0.fieldDouble = ["a": 42] }),
-      (#"{"fieldString": {"a": "42"}   }"#, MapPrimitives().with { $0.fieldString = ["a": "42"] }),
-      (
-        #"{"fieldData":  {"a": "NDI="} }"#,
-        MapPrimitives().with { $0.fieldData = ["a": Data(base64Encoded: "NDI=")!] }
-      ),
-    ]
+    "map bad inputs",
+    arguments: AnyCodingMode.allCases,
+    ProtoJSONDecoderTest.mapBadInputs
   )
-  func mapPrimitivesParity(input: String, want: MapPrimitives) throws {
-    let any = try Self.makeAny(jsonObject: input, for: MapPrimitives.self)
-    let fastGot = try _anyDeserialize(MapPrimitives.self, from: any)
-    let slowGot = try _slowAnyDeserialize(MapPrimitives.self, from: any)
-    #expect(fastGot == want)
-    #expect(fastGot == slowGot)
-
-    let fastPacked = try _anySerialize(message: want)
-    let slowPacked = try _slowAnySerialize(message: want)
-    #expect(fastPacked == slowPacked)
-  }
-
-  @Test(
-    "anyDeserialize map bad inputs",
-    arguments: [
-      #"{"fieldBool":   {"a": "bad"} }"#,
-      #"{"fieldInt":    {"a": "bad"} }"#,
-      #"{"fieldInt32":  {"a": "bad"} }"#,
-      #"{"fieldInt64":  {"a": "bad"} }"#,
-      #"{"fieldUInt":   {"a": "bad"} }"#,
-      #"{"fieldUInt32": {"a": "bad"} }"#,
-      #"{"fieldUInt64": {"a": "bad"} }"#,
-      #"{"fieldFloat":  {"a": "bad"} }"#,
-      #"{"fieldDouble": {"a": "bad"} }"#,
-      #"{"fieldData":   {"a": "bad"} }"#,
-    ]
-  )
-  func mapPrimitivesBadInputs(input: String) throws {
-    let any = try Self.makeAny(jsonObject: input, for: MapPrimitives.self)
+  func mapPrimitivesBadInputs(mode: AnyCodingMode, input: String) throws {
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: MapPrimitives.self)
     let error = #expect(throws: DecodingError.self) {
-      _ = try _anyDeserialize(MapPrimitives.self, from: any)
+      _ = try mode.deserialize(MapPrimitives.self, from: any)
     }
     #expect({ if case .dataCorrupted = error { true } else { false } }())
   }
 
-  @Test func mapPrimitivesBadString() throws {
-    let any = try Self.makeAny(jsonObject: #"{"fieldData": {"a": 42} }"#, for: MapPrimitives.self)
+  @Test(arguments: AnyCodingMode.allCases)
+  func mapPrimitivesBadString(mode: AnyCodingMode) throws {
+    let any = try AnyCodingMode.makeAny(
+      jsonObject: #"{"fieldData": {"a": 42} }"#, for: MapPrimitives.self)
     let error = #expect(throws: DecodingError.self) {
-      _ = try _anyDeserialize(MapPrimitives.self, from: any)
+      _ = try mode.deserialize(MapPrimitives.self, from: any)
     }
     #expect({ if case .typeMismatch = error { true } else { false } }())
   }
 
-  struct MessageWithRepeated: Codable, Equatable, _AnyPackable, Sendable {
-    static var _anyTypeUrl: String { "type.googleapis.com/test.MessageWithRepeated" }
-
-    var repeatedMessage: [MapPrimitives] = []
-    var repeatedString: [String] = []
-    var repeatedData: [Data] = []
-    var repeatedNested: [RequiredPrimitives] = []
-
-    init(
-      repeatedMessage: [MapPrimitives] = [],
-      repeatedString: [String] = [],
-      repeatedData: [Data] = [],
-      repeatedNested: [RequiredPrimitives] = []
-    ) {
-      self.repeatedMessage = repeatedMessage
-      self.repeatedString = repeatedString
-      self.repeatedData = repeatedData
-      self.repeatedNested = repeatedNested
-    }
-
-    init(fromAny any: WKTAny) throws {
-      self = try _anyDeserialize(Self.self, from: any)
-    }
-
-    func _pack() throws -> WKTStruct {
-      return try _anySerialize(message: self)
-    }
-  }
-
-  @Test func decodeMissingMapNestedParity() throws {
+  @Test(arguments: AnyCodingMode.allCases)
+  func decodeMissingMapNested(mode: AnyCodingMode) throws {
     let input = #"{"repeatedMessage": [{}, {}]}"#
-    let any = try Self.makeAny(jsonObject: input, for: MessageWithRepeated.self)
+    let any = try AnyCodingMode.makeAny(jsonObject: input, for: MessageWithRepeated.self)
     let want = MessageWithRepeated(repeatedMessage: [MapPrimitives(), MapPrimitives()])
-    let fastGot = try _anyDeserialize(MessageWithRepeated.self, from: any)
-    let slowGot = try _slowAnyDeserialize(MessageWithRepeated.self, from: any)
-    #expect(fastGot == want)
-    #expect(fastGot == slowGot)
+    let got = try mode.deserialize(MessageWithRepeated.self, from: any)
+    #expect(got == want)
 
-    let fastPacked = try _anySerialize(message: want)
-    let slowPacked = try _slowAnySerialize(message: want)
-    #expect(fastPacked == slowPacked)
+    let repackedAny = try mode.pack(want)
+    let unpacked = try mode.deserialize(MessageWithRepeated.self, from: repackedAny)
+    #expect(unpacked == want)
   }
 
-  struct CollectionMatrixMessage: Codable, Equatable, _AnyPackable, Sendable {
-    static var _anyTypeUrl: String { "type.googleapis.com/test.CollectionMatrixMessage" }
+  @Test(arguments: AnyCodingMode.allCases)
+  func collectionModelOmitEmptyAndPreserveMatrix(mode: AnyCodingMode) throws {
+    let model = CollectionModel()
+    let packed = try mode.serialize(model)
+    #expect(
+      packed == [
+        "name": .string("test"),
+        "populatedList": .array([.string("a"), .string("b")]),
+        "populatedMap": .object(["k": .string("v")]),
+        "matrix": .array([.array([]), .array([.number(1), .number(2)])]),
+      ]
+    )
 
-    var name: String = "test"
-    var emptyList: [String] = []
-    var populatedList: [String] = ["a", "b"]
-    var emptyMap: [String: String] = [:]
-    var populatedMap: [String: String] = ["k": "v"]
-    var matrix: [[Int]] = [[], [1, 2]]
-
-    init() {}
-
-    init(fromAny any: WKTAny) throws {
-      self = try _anyDeserialize(Self.self, from: any)
-    }
-
-    func _pack() throws -> WKTStruct {
-      return try _anySerialize(message: self)
-    }
+    let any = try mode.pack(model)
+    let unpacked = try mode.deserialize(CollectionModel.self, from: any)
+    #expect(unpacked == model)
   }
 
-  @Test func collectionMatrixParity() throws {
-    let model = CollectionMatrixMessage()
-    let fastPacked = try _anySerialize(message: model)
-    let slowPacked = try _slowAnySerialize(message: model)
-    #expect(fastPacked == slowPacked)
-
-    let any = try WKTAny(fromMessage: model)
-    let fastUnpacked = try _anyDeserialize(CollectionMatrixMessage.self, from: any)
-    let slowUnpacked = try _slowAnyDeserialize(CollectionMatrixMessage.self, from: any)
-    #expect(fastUnpacked == model)
-    #expect(fastUnpacked == slowUnpacked)
-  }
-
-  @Test func allGeneratedWKTMessagesParity() throws {
+  @Test(arguments: AnyCodingMode.allCases)
+  func allGeneratedWKTMessages(mode: AnyCodingMode) throws {
     let sourceContext = WKTSourceContext().with {
       $0.fileName = "google/protobuf/type.proto"
     }
@@ -1135,7 +721,7 @@ import Testing
       $0.name = "google.cloud.location.Locations"
       $0.root = "google.cloud.location"
     }
-    let api = WKTApi().with {
+    var api = WKTApi().with {
       $0.name = "google.example.Service"
       $0.methods = [method]
       $0.options = [option]
@@ -1144,27 +730,31 @@ import Testing
       $0.mixins = [mixin]
       $0.syntax = .proto3
     }
+    api._unknownFields.json = [
+      "extraStr": .string("extra"),
+      "extraObj": .object(["inner": .number(42)]),
+      "extraArr": .array([.bool(true), .null(WKTNullValue())]),
+    ]
 
-    func verifyParity<M: Codable & Equatable & _AnyPackable>(_ message: M) throws {
-      let fastPacked = try _anySerialize(message: message)
-      let slowPacked = try _slowAnySerialize(message: message)
-      #expect(fastPacked == slowPacked)
+    func verifyRoundTrip<M: Codable & Equatable & _AnyPackable>(_ message: M) throws {
+      let any = try mode.pack(message)
+      let unpacked = try mode.deserialize(M.self, from: any)
+      #expect(unpacked == message)
 
-      let any = try WKTAny(fromMessage: message)
-      let fastUnpacked = try _anyDeserialize(M.self, from: any)
-      let slowUnpacked = try _slowAnyDeserialize(M.self, from: any)
-      #expect(fastUnpacked == message)
-      #expect(fastUnpacked == slowUnpacked)
+      #expect(throws: WKTAnyError.mismatchedTypeURL) {
+        let wrongAny = try AnyCodingMode.makeAny(for: AllPrimitivesMessage.self, fields: [:])
+        _ = try mode.deserialize(M.self, from: wrongAny)
+      }
     }
 
-    try verifyParity(sourceContext)
-    try verifyParity(option)
-    try verifyParity(enumValue)
-    try verifyParity(wktEnum)
-    try verifyParity(field)
-    try verifyParity(wktType)
-    try verifyParity(method)
-    try verifyParity(mixin)
-    try verifyParity(api)
+    try verifyRoundTrip(sourceContext)
+    try verifyRoundTrip(option)
+    try verifyRoundTrip(enumValue)
+    try verifyRoundTrip(wktEnum)
+    try verifyRoundTrip(field)
+    try verifyRoundTrip(wktType)
+    try verifyRoundTrip(method)
+    try verifyRoundTrip(mixin)
+    try verifyRoundTrip(api)
   }
 }

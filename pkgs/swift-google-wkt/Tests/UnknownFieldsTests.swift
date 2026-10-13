@@ -177,15 +177,14 @@ import Testing
     #expect(roundTripped.displayName == "Updated")
     #expect(roundTripped._unknownFields == message._unknownFields)
 
-    // Verify _anySerialize and _anyDeserialize parity with _slowAnySerialize and _slowAnyDeserialize
-    let fastPacked = try _anySerialize(message: message)
-    let slowPacked = try _slowAnySerialize(message: message)
-    #expect(fastPacked == slowPacked)
-    let any = try WKTAny(fromMessage: message)
-    let fastUnpacked = try _anyDeserialize(SampleMessage.self, from: any)
-    let slowUnpacked = try _slowAnyDeserialize(SampleMessage.self, from: any)
-    #expect(fastUnpacked == message)
-    #expect(fastUnpacked == slowUnpacked)
+    // Verify _slowAnySerialize/_slowAnyDeserialize and _anySerialize/_anyDeserialize
+    for mode in AnyCodingMode.allCases {
+      let any = try mode.pack(message)
+      let unpacked = try mode.deserialize(SampleMessage.self, from: any)
+      #expect(unpacked == message)
+      #expect(unpacked.displayName == "Updated")
+      #expect(unpacked._unknownFields == message._unknownFields)
+    }
   }
 
   @Test("JSON decoding and encoding preserves unknown non-finite float fields")
@@ -221,14 +220,12 @@ import Testing
     #expect(roundTripped == message)
     #expect(roundTripped._unknownFields == message._unknownFields)
 
-    let fastPacked = try _anySerialize(message: message)
-    let slowPacked = try _slowAnySerialize(message: message)
-    #expect(fastPacked == slowPacked)
-    let any = try WKTAny(fromMessage: message)
-    let fastUnpacked = try _anyDeserialize(SampleMessage.self, from: any)
-    let slowUnpacked = try _slowAnyDeserialize(SampleMessage.self, from: any)
-    #expect(fastUnpacked == message)
-    #expect(fastUnpacked == slowUnpacked)
+    for mode in AnyCodingMode.allCases {
+      let any = try mode.pack(message)
+      let unpacked = try mode.deserialize(SampleMessage.self, from: any)
+      #expect(unpacked == message)
+      #expect(unpacked._unknownFields == message._unknownFields)
+    }
   }
 
   @Test("Missing nested message decodes to default with empty unknown fields")
@@ -239,12 +236,12 @@ import Testing
     #expect(wrapper.nested._unknownFields.json.isEmpty)
     #expect(wrapper.nested._unknownFields.proto.isEmpty)
 
-    let emptyAny = try WKTAny(fromMessage: WrapperMessage())
-    let fastWrapper = try _anyDeserialize(WrapperMessage.self, from: emptyAny)
-    let slowWrapper = try _slowAnyDeserialize(WrapperMessage.self, from: emptyAny)
-    #expect(fastWrapper == WrapperMessage())
-    #expect(fastWrapper == slowWrapper)
-    #expect(fastWrapper.nested._unknownFields.json.isEmpty)
-    #expect(fastWrapper.nested._unknownFields.proto.isEmpty)
+    let emptyAny = try AnyCodingMode.makeAny(for: WrapperMessage.self, fields: [:])
+    for mode in AnyCodingMode.allCases {
+      let decoded = try mode.deserialize(WrapperMessage.self, from: emptyAny)
+      #expect(decoded == WrapperMessage())
+      #expect(decoded.nested._unknownFields.json.isEmpty)
+      #expect(decoded.nested._unknownFields.proto.isEmpty)
+    }
   }
 }
