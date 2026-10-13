@@ -43,19 +43,8 @@ struct WKTStructEncoder {
     codingPath: [any CodingKey],
     omitEmptyCollections: Bool
   ) throws -> WKTValue {
-    if let opt = value as? any _OptionalProtocol {
-      guard let unwrapped = opt._unwrappedValue else {
-        return .null(WKTNullValue())
-      }
-      if let v = unwrapped as? Int64 {
-        return .string(String(v))
-      } else if let v = unwrapped as? UInt64 {
-        return .string(String(v))
-      } else if let v = unwrapped as? Int128 {
-        return .string(String(v))
-      } else if let v = unwrapped as? UInt128 {
-        return .string(String(v))
-      }
+    if let opt = value as? any _OptionalProtocol, opt._isNil {
+      return .null(WKTNullValue())
     }
 
     if let v = value as? WKTValue {
