@@ -62,14 +62,10 @@ struct WKTStructEncoder {
       try validateWKTValue(v, codingPath: codingPath)
       return v
     } else if let v = value as? WKTStruct {
-      for (k, entry) in v {
-        try validateWKTValue(entry, codingPath: codingPath + [_DynamicCodingKey(stringValue: k)])
-      }
+      try validateWKTValue(.object(v), codingPath: codingPath)
       return .object(v)
     } else if let v = value as? WKTListValue {
-      for (idx, entry) in v.enumerated() {
-        try validateWKTValue(entry, codingPath: codingPath + [_DynamicCodingKey(intValue: idx)!])
-      }
+      try validateWKTValue(.array(v), codingPath: codingPath)
       return .array(v)
     } else if let v = value as? Int64 {
       return .string(String(v))
@@ -138,25 +134,30 @@ struct WKTStructEncoder {
     }
   }
 
-  private static func validateWKTValue(_ value: WKTValue, codingPath: [any CodingKey]) throws {
+  private static func validateWKTValue(
+    _ value: WKTValue,
+    codingPath: @autoclosure () -> [any CodingKey]
+  ) throws {
     switch value {
     case .number(let v):
       guard v.isFinite else {
         throw EncodingError.invalidValue(
           v,
           EncodingError.Context(
-            codingPath: codingPath,
+            codingPath: codingPath(),
             debugDescription: "Value.number cannot be NaN or Infinity."
           )
         )
       }
     case .object(let dict):
       for (k, entry) in dict {
-        try validateWKTValue(entry, codingPath: codingPath + [_DynamicCodingKey(stringValue: k)])
+        try validateWKTValue(
+          entry, codingPath: codingPath() + [_DynamicCodingKey(stringValue: k)])
       }
     case .array(let list):
       for (idx, entry) in list.enumerated() {
-        try validateWKTValue(entry, codingPath: codingPath + [_DynamicCodingKey(intValue: idx)!])
+        try validateWKTValue(
+          entry, codingPath: codingPath() + [_DynamicCodingKey(intValue: idx)!])
       }
     case .null, .string, .bool:
       break
