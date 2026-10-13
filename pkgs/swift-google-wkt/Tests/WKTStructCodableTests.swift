@@ -72,11 +72,11 @@ import Testing
     }
 
     init(fromAny any: WKTAny) throws {
-      self = try _slowAnyDeserialize(Self.self, from: any)
+      self = try _anyDeserialize(Self.self, from: any)
     }
 
     func _pack() throws -> WKTStruct {
-      return try _slowAnySerialize(message: self)
+      return try _anySerialize(message: self)
     }
   }
 
@@ -264,11 +264,11 @@ import Testing
     }
 
     init(fromAny any: WKTAny) throws {
-      self = try _slowAnyDeserialize(Self.self, from: any)
+      self = try _anyDeserialize(Self.self, from: any)
     }
 
     func _pack() throws -> WKTStruct {
-      return try _slowAnySerialize(message: self)
+      return try _anySerialize(message: self)
     }
   }
 
@@ -355,19 +355,25 @@ import Testing
       "extraArr": .array([.bool(true), .null(WKTNullValue())]),
     ]
 
-    let packedStruct = try api._pack()
-    let jsonEncoder = _ProtoJSONEncoder()
-    let jsonDecoder = _ProtoJSONDecoder()
-    let expectedStruct = try jsonDecoder.decode(WKTStruct.self, from: try jsonEncoder.encode(api))
-    #expect(packedStruct == expectedStruct)
+    let fastStruct = try _anySerialize(message: api)
+    let slowStruct = try _slowAnySerialize(message: api)
+    #expect(fastStruct == slowStruct)
 
     let any = try WKTAny(fromMessage: api)
-    let unpackedApi = try WKTApi(fromAny: any)
-    #expect(unpackedApi == api)
+    let fastUnpackedApi = try _anyDeserialize(WKTApi.self, from: any)
+    let slowUnpackedApi = try _slowAnyDeserialize(WKTApi.self, from: any)
+    #expect(fastUnpackedApi == api)
+    #expect(fastUnpackedApi == slowUnpackedApi)
 
     let fieldAny = try WKTAny(fromMessage: field)
-    let unpackedField = try WKTField(fromAny: fieldAny)
-    #expect(unpackedField == field)
+    let fastUnpackedField = try _anyDeserialize(WKTField.self, from: fieldAny)
+    let slowUnpackedField = try _slowAnyDeserialize(WKTField.self, from: fieldAny)
+    #expect(fastUnpackedField == field)
+    #expect(fastUnpackedField == slowUnpackedField)
+
+    #expect(throws: WKTAnyError.mismatchedTypeURL) {
+      _ = try _anyDeserialize(WKTField.self, from: any)
+    }
   }
 
   struct NestedAndSuperCodableMessage: Codable, Equatable {
@@ -495,11 +501,11 @@ import Testing
     }
 
     init(fromAny any: WKTAny) throws {
-      self = try _slowAnyDeserialize(Self.self, from: any)
+      self = try _anyDeserialize(Self.self, from: any)
     }
 
     func _pack() throws -> WKTStruct {
-      return try _slowAnySerialize(message: self)
+      return try _anySerialize(message: self)
     }
   }
 
