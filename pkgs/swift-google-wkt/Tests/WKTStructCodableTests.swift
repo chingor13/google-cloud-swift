@@ -762,4 +762,52 @@ import Testing
     try verifyRoundTrip(mixin)
     try verifyRoundTrip(api)
   }
+
+  struct NestedCustomWKTMessage: Codable, Equatable, _AnyPackable, Sendable {
+    static var _anyTypeUrl: String { "type.googleapis.com/test.NestedCustomWKTMessage" }
+
+    var timestamp: WKTTimestamp? = nil
+    var duration: WKTDuration? = nil
+    var fieldMask: WKTFieldMask? = nil
+    var empty: WKTEmpty? = nil
+
+    init(
+      timestamp: WKTTimestamp? = nil,
+      duration: WKTDuration? = nil,
+      fieldMask: WKTFieldMask? = nil,
+      empty: WKTEmpty? = nil
+    ) {
+      self.timestamp = timestamp
+      self.duration = duration
+      self.fieldMask = fieldMask
+      self.empty = empty
+    }
+
+    init(fromAny any: WKTAny) throws {
+      self = try _anyDeserialize(Self.self, from: any)
+    }
+
+    func _pack() throws -> WKTStruct {
+      return try _anySerialize(message: self)
+    }
+  }
+
+  @Test(arguments: AnyCodingMode.allCases)
+  func nestedCustomWKTMessages(mode: AnyCodingMode) throws {
+    let message = NestedCustomWKTMessage(
+      timestamp: try WKTTimestamp(seconds: 1_700_000_000, nanos: 123_456_789),
+      duration: try WKTDuration(seconds: 60, nanos: 500_000_000),
+      fieldMask: WKTFieldMask(paths: ["user.display_name", "photo"]),
+      empty: WKTEmpty()
+    )
+    let packed = try mode.serialize(message)
+    #expect(packed["timestamp"] == .string("2023-11-14T22:13:20.123456789Z"))
+    #expect(packed["duration"] == .string("60.500s"))
+    #expect(packed["fieldMask"] == .string("user.displayName,photo"))
+    #expect(packed["empty"] == .object([:]))
+
+    let any = try mode.pack(message)
+    let unpacked = try mode.deserialize(NestedCustomWKTMessage.self, from: any)
+    #expect(unpacked == message)
+  }
 }
