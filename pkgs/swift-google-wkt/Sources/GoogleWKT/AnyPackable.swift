@@ -43,17 +43,13 @@ public func _slowAnyDeserialize<M: Decodable & _AnyPackable>(
   if M._anyTypeUrl != from._type {
     throw WKTAnyError.mismatchedTypeURL
   }
-  let encoder = _ProtoJSONEncoder()
-  let data = try encoder.encode(from.fields)
-  let decoder = _ProtoJSONDecoder()
-  return try decoder.decode(M.self, from: data)
+  let decoder = WKTStructDecoder()
+  return try decoder.decode(M.self, from: from.fields)
 }
 
 // Serializes a message of type `M` into a `WKTAny`.
 @_spi(GoogleCloudInternal)
 public func _slowAnySerialize<M: Encodable>(message: M) throws -> WKTStruct {
-  let encoder = _ProtoJSONEncoder()
-  let data = try encoder.encode(message)
-  let decoder = _ProtoJSONDecoder()
-  return try decoder.decode(WKTStruct.self, from: data)
+  let encoder = WKTStructEncoder()
+  return try encoder.encode(message)
 }
