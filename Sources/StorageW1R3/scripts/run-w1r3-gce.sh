@@ -66,6 +66,11 @@ Options:
   --read-count N               Number of reads per uploaded object (default: 3)
   --client-count N             Number of Storage clients (default: 1)
   --crc32c MODE                CRC32C mode: always, random, never (default: always)
+  --chunk-size SIZE            Fixed resumable upload chunk size (e.g. 32MiB)
+  --chunk-sizes SIZES          Candidate chunk sizes, comma-separated (e.g. 8MiB,16MiB,32MiB)
+  --min-chunk-size SIZE        Minimum chunk size for randomized range (default: 8MiB)
+  --max-chunk-size SIZE        Maximum chunk size for randomized range (default: 32MiB)
+  --chunk-size-interval SIZE   Alignment interval for randomized chunk sizes (default: 256KiB)
   --extra-args "ARGS"          Extra arguments passed to the benchmark (or baseline in comparison mode)
 
 A/B Comparison & Multi-Round Options:
@@ -142,6 +147,11 @@ MAX_OBJECT_SIZE="128KiB"
 READ_COUNT=3
 CLIENT_COUNT=1
 CRC32C="always"
+CHUNK_SIZE=""
+CHUNK_SIZES=""
+MIN_CHUNK_SIZE=""
+MAX_CHUNK_SIZE=""
+CHUNK_SIZE_INTERVAL=""
 EXTRA_ARGS=""
 COMPARE_REF=""
 COMPARE_REPO=""
@@ -181,6 +191,11 @@ while [[ $# -gt 0 ]]; do
     --read-count) READ_COUNT="$2"; shift 2 ;;
     --client-count) CLIENT_COUNT="$2"; shift 2 ;;
     --crc32c) CRC32C="$2"; shift 2 ;;
+    --chunk-size) CHUNK_SIZE="$2"; shift 2 ;;
+    --chunk-sizes) CHUNK_SIZES="$2"; shift 2 ;;
+    --min-chunk-size) MIN_CHUNK_SIZE="$2"; shift 2 ;;
+    --max-chunk-size) MAX_CHUNK_SIZE="$2"; shift 2 ;;
+    --chunk-size-interval) CHUNK_SIZE_INTERVAL="$2"; shift 2 ;;
     --extra-args) EXTRA_ARGS="$2"; shift 2 ;;
     --compare-ref) COMPARE_REF="$2"; shift 2 ;;
     --compare-repo) COMPARE_REPO="$2"; shift 2 ;;
@@ -506,6 +521,21 @@ fi
 # 4. Prepare Metadata attributes
 if [[ "${BENCHMARK_PRODUCT}" == "StorageW1R3Benchmark" && -z "${BENCHMARK_COMMAND}" ]]; then
   BASE_FLAGS="--task-count ${TASK_COUNT} --iterations ${ITERATIONS} --min-object-size ${MIN_OBJECT_SIZE} --max-object-size ${MAX_OBJECT_SIZE} --read-count ${READ_COUNT} --client-count ${CLIENT_COUNT} --crc32c ${CRC32C}"
+  if [[ -n "${CHUNK_SIZE}" ]]; then
+    BASE_FLAGS="${BASE_FLAGS} --chunk-size ${CHUNK_SIZE}"
+  fi
+  if [[ -n "${CHUNK_SIZES}" ]]; then
+    BASE_FLAGS="${BASE_FLAGS} --chunk-sizes ${CHUNK_SIZES}"
+  fi
+  if [[ -n "${MIN_CHUNK_SIZE}" ]]; then
+    BASE_FLAGS="${BASE_FLAGS} --min-chunk-size ${MIN_CHUNK_SIZE}"
+  fi
+  if [[ -n "${MAX_CHUNK_SIZE}" ]]; then
+    BASE_FLAGS="${BASE_FLAGS} --max-chunk-size ${MAX_CHUNK_SIZE}"
+  fi
+  if [[ -n "${CHUNK_SIZE_INTERVAL}" ]]; then
+    BASE_FLAGS="${BASE_FLAGS} --chunk-size-interval ${CHUNK_SIZE_INTERVAL}"
+  fi
 else
   BASE_FLAGS=""
 fi
@@ -563,6 +593,11 @@ if [[ ! -f "${STARTUP_SCRIPT}" ]]; then
 fi
 
 echo "Creating GCE VM instance '${INSTANCE_NAME}' in ${ZONE}..."
+BOOT_DISK_TYPE="pd-ssd"
+if [[ "${MACHINE_TYPE}" =~ ^c4-|^c3- ]]; then
+  BOOT_DISK_TYPE="hyperdisk-balanced"
+fi
+
 CREATE_FLAGS=(
   --project="${PROJECT_ID}"
   --zone="${ZONE}"
@@ -573,7 +608,7 @@ CREATE_FLAGS=(
   --image-family=ubuntu-2404-lts-amd64
   --image-project=ubuntu-os-cloud
   --boot-disk-size=50GB
-  --boot-disk-type=pd-ssd
+  --boot-disk-type="${BOOT_DISK_TYPE}"
   --metadata="${METADATA_STR}"
   --metadata-from-file="startup-script=${STARTUP_SCRIPT}"
   --quiet
