@@ -35,7 +35,7 @@ public protocol _AnyPackable: Sendable {
   func _pack() throws -> WKTStruct
 }
 
-// Deserializes a message of type `M` from a `WKTAny`.
+// Deserializes a message of type `M` from a `WKTAny` directly in memory using `WKTStructDecoder`.
 @_spi(GoogleCloudInternal)
 public func _anyDeserialize<M: Decodable & _AnyPackable>(
   _ type: M.Type, from: WKTAny
@@ -47,14 +47,15 @@ public func _anyDeserialize<M: Decodable & _AnyPackable>(
   return try decoder.decode(M.self, from: from.fields)
 }
 
-// Serializes a message of type `M` into a `WKTAny`.
+// Serializes a message of type `M` into a `WKTStruct` directly in memory using `WKTStructEncoder`.
 @_spi(GoogleCloudInternal)
 public func _anySerialize<M: Encodable>(message: M) throws -> WKTStruct {
   let encoder = WKTStructEncoder()
   return try encoder.encode(message)
 }
 
-// Deserializes a message of type `M` from a `WKTAny`.
+// Legacy deserialization helper that round-trips `from.fields` through UTF-8 JSON `Data`.
+// Retained for compatibility with existing generated code until it migrates to `_anyDeserialize`.
 @_spi(GoogleCloudInternal)
 public func _slowAnyDeserialize<M: Decodable & _AnyPackable>(
   _ type: M.Type, from: WKTAny
@@ -68,7 +69,8 @@ public func _slowAnyDeserialize<M: Decodable & _AnyPackable>(
   return try decoder.decode(M.self, from: data)
 }
 
-// Serializes a message of type `M` into a `WKTAny`.
+// Legacy serialization helper that round-trips `message` through UTF-8 JSON `Data`.
+// Retained for compatibility with existing generated code until it migrates to `_anySerialize`.
 @_spi(GoogleCloudInternal)
 public func _slowAnySerialize<M: Encodable>(message: M) throws -> WKTStruct {
   let encoder = _ProtoJSONEncoder()

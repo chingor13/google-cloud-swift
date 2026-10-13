@@ -16,13 +16,33 @@ import Foundation
 
 /// Encodes `Encodable` messages directly into a `WKTStruct` (`[String: WKTValue]`) in memory,
 /// applying ProtoJSON rules without intermediate UTF-8 JSON serialization.
+///
+/// `WKTAny` stores packed messages in memory as a `WKTStruct` dictionary. Previously, packing a
+/// message into `WKTAny` encoded the message to UTF-8 JSON `Data` via `_ProtoJSONEncoder` and then
+/// parsed that JSON `Data` back into a `WKTStruct` via `_ProtoJSONDecoder`. `WKTStructEncoder`
+/// eliminates that intermediate JSON serialization/parsing step by constructing the `WKTValue`
+/// tree directly while enforcing identical ProtoJSON rules:
+/// - 64-bit and 128-bit integers (`Int64`, `UInt64`, `Int128`, `UInt128`) are encoded as strings
+///   to avoid IEEE-754 `Double` precision loss.
+/// - Non-finite floating-point numbers (`NaN`, `Infinity`, `-Infinity`) are encoded as their
+///   ProtoJSON string representations.
+/// - `Data` values are encoded as base64 strings.
+/// - Non-optional empty collections (`Array`, `Dictionary`) are omitted by default in keyed
+///   containers (`omitEmptyCollections`), whereas explicitly present optional `WKTStruct?` and
+///   `WKTListValue?` fields are preserved.
 struct WKTStructEncoder {
+  /// Whether to omit empty collections encoded via non-optional `encode(_:forKey:)` in keyed
+  /// containers. Defaults to `true` to match ProtoJSON default-value omission.
   var omitEmptyCollections: Bool = true
 
   init(omitEmptyCollections: Bool = true) {
     self.omitEmptyCollections = omitEmptyCollections
   }
 
+  /// Encodes a top-level message `value` into a `WKTStruct` dictionary.
+  ///
+  /// Throws `EncodingError.invalidValue` if `value` does not encode to a JSON object (for example,
+  /// if a primitive or array is passed at the top level).
   func encode<T: Encodable>(_ value: T) throws -> WKTStruct {
     let wktValue = try Self.encodeToValue(
       value, codingPath: [], omitEmptyCollections: self.omitEmptyCollections)
@@ -38,15 +58,24 @@ struct WKTStructEncoder {
     return dict
   }
 
+  /// Converts an arbitrary `Encodable` value into a `WKTValue`.
+  ///
+  /// Known primitive types, `Data`, and existing `WKTValue` / `WKTStruct` / `WKTListValue` values
+  /// are converted directly via a fast path without allocating an `InternalStructEncoder`.
+  /// Composite types fall back to encoding into a mutable `EncodingNode` tree.
   static func encodeToValue<T: Encodable>(
     _ value: T,
     codingPath: [any CodingKey],
     omitEmptyCollections: Bool
   ) throws -> WKTValue {
+    // Handle `Optional.none` when passed through a generic `T: Encodable` context.
+    // Non-nil optionals fall through and are unwrapped by the `as?` type casts below.
     if let opt = value as? any _OptionalProtocol, opt._isNil {
       return .null(WKTNullValue())
     }
 
+    // Fast path for values that are already WKT JSON representations; we only need to verify
+    // that any embedded `.number(Double)` values are finite (NaN/Infinity are invalid in JSON).
     if let v = value as? WKTValue {
       try validateWKTValue(v, codingPath: codingPath)
       return v
@@ -57,6 +86,7 @@ struct WKTStructEncoder {
       try validateWKTValue(.array(v), codingPath: codingPath)
       return .array(v)
     } else if let v = value as? Int64 {
+      // ProtoJSON represents 64-bit and 128-bit integers as strings.
       return .string(String(v))
     } else if let v = value as? UInt64 {
       return .string(String(v))
@@ -89,9 +119,12 @@ struct WKTStructEncoder {
     } else if let v = value as? UInt32 {
       return .number(Double(v))
     } else if let v = value as? Data {
+      // ProtoJSON represents `bytes` fields as standard base64-encoded strings.
       return .string(v.base64EncodedString())
     }
 
+    // Composite `Encodable` types (generated messages, arrays, maps, custom WKT wrappers)
+    // encode into a reference-backed `EncodingNode` and then materialize into `WKTValue`.
     let node = EncodingNode()
     let encoder = InternalStructEncoder(
       node: node, codingPath: codingPath, omitEmptyCollections: omitEmptyCollections)
@@ -99,6 +132,7 @@ struct WKTStructEncoder {
     return node.toWKTValue()
   }
 
+  /// Encodes a `Double` into `.number` if finite, or `"NaN"` / `"Infinity"` / `"-Infinity"` per ProtoJSON.
   static func encodeDouble(_ value: Double) -> WKTValue {
     if value.isNaN {
       return .string("NaN")
@@ -111,6 +145,7 @@ struct WKTStructEncoder {
     }
   }
 
+  /// Encodes a `Float` into `.number` if finite, or `"NaN"` / `"Infinity"` / `"-Infinity"` per ProtoJSON.
   static func encodeFloat(_ value: Float) -> WKTValue {
     if value.isNaN {
       return .string("NaN")
@@ -123,6 +158,11 @@ struct WKTStructEncoder {
     }
   }
 
+  /// Recursively validates that no `WKTValue.number` in `value` is `NaN` or `Infinity`.
+  ///
+  /// While ProtoJSON allows `Float` and `Double` proto fields to serialize non-finite values as
+  /// strings, `google.protobuf.Value` (`WKTValue.number`) represents a raw JSON number, which
+  /// cannot be `NaN` or `Infinity`.
   private static func validateWKTValue(
     _ value: WKTValue,
     codingPath: @autoclosure () -> [any CodingKey]
@@ -154,6 +194,15 @@ struct WKTStructEncoder {
   }
 }
 
+/// Reference-type backing storage used by `InternalStructEncoder` and its encoding containers.
+///
+/// Swift's `Encoder` API requires reference semantics for in-flight containers because:
+/// 1. Generated messages may request multiple keyed containers from the same `Encoder` instance
+///    (first keyed by `CodingKeys` for known fields, then keyed by `_DynamicCodingKey` for
+///    `_unknownFields.json`), and both containers must write into the same underlying dictionary.
+/// 2. `nestedContainer`, `nestedUnkeyedContainer`, and `superEncoder` return child containers
+///    by value before the caller populates them; storing `.node(EncodingNode)` in the parent
+///    allows child mutations to be reflected when `toWKTValue()` is called at the end.
 fileprivate final class EncodingNode {
   enum Entry {
     case value(WKTValue)
@@ -361,6 +410,9 @@ fileprivate struct InternalKeyedStructEncodingContainer<K: CodingKey>:
 
   mutating func encodeIfPresent<T>(_ value: T?, forKey key: K) throws where T: Encodable {
     guard let value = value else { return }
+    // `encodeIfPresent` is used for optional fields (such as `WKTStruct?` or `WKTListValue?`).
+    // When an optional field is explicitly non-nil, we preserve it even if it is an empty `{}`
+    // or `[]`, matching `_ProtoJSONEncoder`.
     let encoded = try WKTStructEncoder.encodeToValue(
       value,
       codingPath: self.codingPath + [key],
@@ -370,6 +422,8 @@ fileprivate struct InternalKeyedStructEncodingContainer<K: CodingKey>:
   }
 
   mutating func encode<T>(_ value: T, forKey key: K) throws where T: Encodable {
+    // Non-optional repeated (`[T]`) and map (`[String: V]`) fields use `encode(_:forKey:)`.
+    // In ProtoJSON, empty repeated and map fields are omitted from the output object by default.
     if self.omitEmptyCollections {
       if let checkable = value as? any _EmptyCollectionProtocol, checkable._isEmptyCollection {
         return

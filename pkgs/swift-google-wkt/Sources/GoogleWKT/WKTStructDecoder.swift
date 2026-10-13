@@ -16,10 +16,24 @@ import Foundation
 
 /// Decodes `Decodable` messages directly from a `WKTStruct` (`[String: WKTValue]`) in memory,
 /// applying ProtoJSON rules without intermediate UTF-8 JSON serialization.
+///
+/// `WKTAny` stores packed messages in memory as a `WKTStruct` dictionary. Previously, unpacking a
+/// message from `WKTAny` encoded `from.fields` to UTF-8 JSON `Data` via `_ProtoJSONEncoder` and
+/// then decoded the target message from that `Data` via `_ProtoJSONDecoder`. `WKTStructDecoder`
+/// eliminates that intermediate JSON round-trip by walking the in-memory `WKTValue` tree directly
+/// while enforcing identical ProtoJSON decoding semantics:
+/// - Numbers and booleans may be decoded from either `.number` / `.bool` or `.string` values
+///   (including `"NaN"`, `"Infinity"`, and `"-Infinity"` for floating-point types).
+/// - Integer decoding from `.number(Double)` uses `T(exactly:)` so non-integral or out-of-bounds
+///   values fail with `DecodingError.dataCorrupted`.
+/// - `Data` values are decoded from base64 strings.
+/// - Missing keys in keyed containers fall back to `DecodeToDefault` so absent proto3 fields
+///   initialize to their default zero/empty values.
 struct WKTStructDecoder {
   init() {}
 
   func decode<T: Decodable>(_ type: T.Type, from fields: WKTStruct) throws -> T {
+    // Fast path when the target type is already `WKTStruct` or `WKTValue`.
     if type == WKTStruct.self {
       return fields as! T
     }
@@ -31,6 +45,7 @@ struct WKTStructDecoder {
   }
 }
 
+/// A `Decoder` view over a single in-memory `WKTValue` node at a given `codingPath`.
 fileprivate struct InternalValueDecoder: Decoder {
   let value: WKTValue
   let codingPath: [any CodingKey]
@@ -72,6 +87,8 @@ fileprivate struct InternalValueDecoder: Decoder {
   }
 }
 
+/// Single-value decoding container that implements ProtoJSON coercion rules (accepting both
+/// native `.bool` / `.number` values and string-encoded representations) on a `WKTValue`.
 fileprivate struct InternalSingleValueStructDecodingContainer: SingleValueDecodingContainer {
   let value: WKTValue
   let codingPath: [any CodingKey]
@@ -150,6 +167,8 @@ fileprivate struct InternalSingleValueStructDecodingContainer: SingleValueDecodi
   private func decodeInteger<T: FixedWidthInteger & LosslessStringConvertible>(
     _ type: T.Type
   ) throws -> T {
+    // ProtoJSON allows integers to be represented either as JSON numbers or as strings.
+    // `T(exactly:)` rejects fractional `Double`s (e.g. `3.14`) and values outside `T.min...T.max`.
     if case .number(let d) = self.value, let exact = T(exactly: d) {
       return exact
     }
@@ -170,6 +189,9 @@ fileprivate struct InternalSingleValueStructDecodingContainer: SingleValueDecodi
   }
 
   func decode<T: Decodable>(_ type: T.Type) throws -> T {
+    // Intercept `Data`, WKT JSON types, and primitive types so they use ProtoJSON decoding
+    // rules instead of `Foundation` / standard library `Decodable` defaults (which, for example,
+    // expect `Data` to be a JSON array of bytes or reject string-encoded numbers).
     if type == Data.self { return try self.decodeData() as! T }
     if type == WKTValue.self { return self.value as! T }
     if type == WKTStruct.self, case .object(let dict) = self.value {
@@ -198,6 +220,10 @@ fileprivate struct InternalSingleValueStructDecodingContainer: SingleValueDecodi
   }
 }
 
+/// Keyed decoding container backed by a `WKTStruct` (`[String: WKTValue]`).
+///
+/// Missing keys fall back to `DecodeToDefault` when decoded via non-optional `decode(_:forKey:)`,
+/// matching proto3 default-value semantics in `_ProtoJSONDecoder`.
 fileprivate struct InternalKeyedStructDecodingContainer<K: CodingKey>:
   KeyedDecodingContainerProtocol
 {
@@ -225,10 +251,14 @@ fileprivate struct InternalKeyedStructDecodingContainer<K: CodingKey>:
   }
 
   func decode<T: Decodable>(_ type: T.Type, forKey key: K) throws -> T {
+    // In proto3, omitted fields on the wire decode to their default value (`0`, `""`, `false`,
+    // `[]`, `[:]`, or a default-initialized nested message).
     guard let entry = self.dict[key.stringValue] else {
       let decoder = DecodeToDefault()
       return try T(from: decoder)
     }
+    // Fast paths for `Data` (base64 string) and WKT JSON types (`WKTValue`, `WKTStruct`,
+    // `WKTListValue`) to avoid re-walking the `WKTValue` subtree.
     if type == Data.self {
       return try self.decodeData(from: entry, forKey: key) as! T
     }
@@ -321,6 +351,7 @@ fileprivate struct InternalKeyedStructDecodingContainer<K: CodingKey>:
   }
 }
 
+/// Unkeyed decoding container backed by a `WKTListValue` (`[WKTValue]`).
 fileprivate struct InternalUnkeyedStructDecodingContainer: UnkeyedDecodingContainer {
   let list: WKTListValue
   let codingPath: [any CodingKey]
