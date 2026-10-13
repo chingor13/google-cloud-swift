@@ -202,6 +202,15 @@ fileprivate final class EncodingNode {
     }
   }
 
+  func childNode(forKey key: String) -> EncodingNode {
+    if case .object(let dict) = self.storage, case .node(let existing) = dict[key] {
+      return existing
+    }
+    let child = EncodingNode()
+    self.setObjectEntry(.node(child), forKey: key)
+    return child
+  }
+
   func ensureObject() {
     if case .empty = self.storage {
       self.storage = .object([:])
@@ -387,8 +396,8 @@ fileprivate struct InternalKeyedStructEncodingContainer<K: CodingKey>:
   mutating func nestedContainer<NestedKey>(keyedBy keyType: NestedKey.Type, forKey key: K)
     -> KeyedEncodingContainer<NestedKey> where NestedKey: CodingKey
   {
-    let childNode = EncodingNode(storage: .object([:]))
-    self.node.setObjectEntry(.node(childNode), forKey: key.stringValue)
+    let childNode = self.node.childNode(forKey: key.stringValue)
+    childNode.ensureObject()
     return KeyedEncodingContainer(
       InternalKeyedStructEncodingContainer<NestedKey>(
         node: childNode,
@@ -399,8 +408,8 @@ fileprivate struct InternalKeyedStructEncodingContainer<K: CodingKey>:
   }
 
   mutating func nestedUnkeyedContainer(forKey key: K) -> any UnkeyedEncodingContainer {
-    let childNode = EncodingNode(storage: .array([]))
-    self.node.setObjectEntry(.node(childNode), forKey: key.stringValue)
+    let childNode = self.node.childNode(forKey: key.stringValue)
+    childNode.ensureArray()
     return InternalUnkeyedStructEncodingContainer(
       node: childNode,
       codingPath: self.codingPath + [key],
@@ -410,8 +419,7 @@ fileprivate struct InternalKeyedStructEncodingContainer<K: CodingKey>:
 
   mutating func superEncoder() -> any Encoder {
     let superKey = _DynamicCodingKey(stringValue: "super")
-    let childNode = EncodingNode()
-    self.node.setObjectEntry(.node(childNode), forKey: superKey.stringValue)
+    let childNode = self.node.childNode(forKey: superKey.stringValue)
     return InternalStructEncoder(
       node: childNode,
       codingPath: self.codingPath + [superKey],
@@ -420,8 +428,7 @@ fileprivate struct InternalKeyedStructEncodingContainer<K: CodingKey>:
   }
 
   mutating func superEncoder(forKey key: K) -> any Encoder {
-    let childNode = EncodingNode()
-    self.node.setObjectEntry(.node(childNode), forKey: key.stringValue)
+    let childNode = self.node.childNode(forKey: key.stringValue)
     return InternalStructEncoder(
       node: childNode,
       codingPath: self.codingPath + [key],

@@ -344,6 +344,7 @@ import Testing
 
     enum NestedKeys: String, CodingKey {
       case value
+      case secondValue
     }
 
     init(nestedDictValue: String, nestedArrayValues: [Int32], superValue: String) {
@@ -356,6 +357,8 @@ import Testing
       let container = try decoder.container(keyedBy: CodingKeys.self)
       let nestedDict = try container.nestedContainer(keyedBy: NestedKeys.self, forKey: .nestedDict)
       self.nestedDictValue = try nestedDict.decode(String.self, forKey: .value)
+      let secondVal = try nestedDict.decode(String.self, forKey: .secondValue)
+      #expect(secondVal == "second")
 
       var nestedArr = try container.nestedUnkeyedContainer(forKey: .nestedArray)
       var items: [Int32] = []
@@ -370,8 +373,10 @@ import Testing
 
     func encode(to encoder: any Encoder) throws {
       var container = encoder.container(keyedBy: CodingKeys.self)
-      var nestedDict = container.nestedContainer(keyedBy: NestedKeys.self, forKey: .nestedDict)
-      try nestedDict.encode(self.nestedDictValue, forKey: .value)
+      var nestedDict1 = container.nestedContainer(keyedBy: NestedKeys.self, forKey: .nestedDict)
+      try nestedDict1.encode(self.nestedDictValue, forKey: .value)
+      var nestedDict2 = container.nestedContainer(keyedBy: NestedKeys.self, forKey: .nestedDict)
+      try nestedDict2.encode("second", forKey: .secondValue)
 
       var nestedArr = container.nestedUnkeyedContainer(forKey: .nestedArray)
       for item in self.nestedArrayValues {
@@ -401,7 +406,7 @@ import Testing
     let encoded = try mode.serialize(original)
     #expect(
       encoded == [
-        "nestedDict": .object(["value": .string("inside")]),
+        "nestedDict": .object(["value": .string("inside"), "secondValue": .string("second")]),
         "nestedArray": .array([.number(10), .number(20), .number(30)]),
         "customSuper": .string("super-val"),
       ]
