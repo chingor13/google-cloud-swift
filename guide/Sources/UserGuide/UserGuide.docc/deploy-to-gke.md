@@ -9,7 +9,6 @@
 [Getting started with Swift]: <doc:quickstart>
 [Google Cloud CLI]: https://cloud.google.com/sdk/docs/install
 [Google Kubernetes Engine]: https://cloud.google.com/kubernetes-engine/docs
-[Google Kubernetes Engine console]: https://console.cloud.google.com/kubernetes
 [Hummingbird]: https://github.com/hummingbird-project/hummingbird
 [Vertex AI Gemini API]: <doc:generate-text-using-the-vertex-ai-gemini-api>
 [Workload Identity Federation for GKE]: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
@@ -90,6 +89,9 @@ using [Application Default Credentials] via the GKE metadata server provided by
    @Snippet(path: "DeployToGKE", slice: "router")
 6. Start the HTTP server listening on the configured host and port:
    @Snippet(path: "DeployToGKE", slice: "run")
+
+[Google Kubernetes Engine console]: https://console.cloud.google.com/kubernetes
+[Workload Identity Federation for GKE]: https://cloud.google.com/kubernetes-engine/docs/how-to/workload-identity
 
 ## Containerize the application
 
@@ -285,7 +287,8 @@ context:
    ```
 
 1. Apply the manifest to your cluster and wait for the deployment to become
-   available:
+   available (GKE Autopilot may take a few minutes to provision compute capacity
+   for the first pod):
    ```bash
    kubectl apply -f deployment.yaml
    kubectl rollout status deployment/gke-gemini --timeout=5m
@@ -335,6 +338,20 @@ gcloud projects remove-iam-policy-binding "${PROJECT_ID}" \
   --role="roles/aiplatform.user" \
   --member="principal://iam.googleapis.com/projects/${PROJECT_NUMBER}/locations/global/workloadIdentityPools/${PROJECT_ID}.svc.id.goog/subject/ns/default/sa/gke-gemini-ksa" \
   --condition=None
+```
+
+If you created an IAM service account (`gke-gemini-gsa`) instead of using a
+direct `principal://` binding, remove its policy binding and delete the service
+account:
+
+```bash
+gcloud projects remove-iam-policy-binding "${PROJECT_ID}" \
+  --member="serviceAccount:gke-gemini-gsa@${PROJECT_ID}.iam.gserviceaccount.com" \
+  --role="roles/aiplatform.user" \
+  --condition=None
+
+gcloud iam service-accounts delete \
+  "gke-gemini-gsa@${PROJECT_ID}.iam.gserviceaccount.com"
 ```
 
 ## Complete Swift code

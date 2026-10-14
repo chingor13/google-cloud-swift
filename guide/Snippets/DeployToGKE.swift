@@ -71,7 +71,7 @@ struct GKEGemini {
       configuration: .init(address: .hostname(host, port: port))
     )
     try await app.runService()
-    // snippet.end [END swift_gke_run]
   }
 }
+// snippet.end [END swift_gke_run]
 // snippet.hide [END swift_gke_full]
