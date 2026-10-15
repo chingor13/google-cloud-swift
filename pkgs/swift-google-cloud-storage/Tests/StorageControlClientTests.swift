@@ -16,6 +16,7 @@ import Foundation
 import GoogleAuth
 import GoogleGax
 @testable import GoogleCloudStorage
+import Synchronization
 import Testing
 
 @Suite struct StorageControlClientTests {
@@ -130,6 +131,8 @@ import Testing
       ((ListBucketsRequest, GoogleGax.RequestOptions) async throws -> ListBucketsResponse)?
     var renameFolderHandler:
       ((RenameFolderRequest, GoogleGax.RequestOptions) async throws -> Folder)?
+    var rewriteObjectHandler:
+      ((RewriteObjectRequest, GoogleGax.RequestOptions) async throws -> RewriteResponse)?
 
     func listBuckets(
       request: ListBucketsRequest, options: GoogleGax.RequestOptions
@@ -144,6 +147,15 @@ import Testing
       request: RenameFolderRequest, options: GoogleGax.RequestOptions
     ) async throws -> Folder {
       if let handler = renameFolderHandler {
+        return try await handler(request, options)
+      }
+      throw GoogleGax.RequestError.unimplemented
+    }
+
+    func rewriteObject(
+      request: RewriteObjectRequest, options: GoogleGax.RequestOptions
+    ) async throws -> RewriteResponse {
+      if let handler = rewriteObjectHandler {
         return try await handler(request, options)
       }
       throw GoogleGax.RequestError.unimplemented
@@ -247,5 +259,244 @@ import Testing
     let folder = try await client.renameFolderPollingUntilDone(
       request: .init().with { $0.name = "projects/_/buckets/b/folders/f1" })
     #expect(folder.name == "projects/_/buckets/b/folders/f2")
+  }
+
+  @Test func rewriteObjectUntilDoneSingleStep() async throws {
+    let mock = MockStorageControl()
+    let expectedObject = Object().with {
+      $0.bucket = "projects/_/buckets/dest-bucket"
+      $0.name = "dest-obj"
+      $0.size = 1024
+    }
+    mock.rewriteObjectHandler = { req, _ in
+      #expect(req.sourceBucket == "projects/_/buckets/src-bucket")
+      #expect(req.sourceObject == "src-obj")
+      #expect(req.destinationBucket == "projects/_/buckets/dest-bucket")
+      #expect(req.destinationName == "dest-obj")
+      #expect(req.rewriteToken.isEmpty)
+      return RewriteResponse().with {
+        $0.done = true
+        $0.totalBytesRewritten = 1024
+        $0.objectSize = 1024
+        $0.resource = expectedObject
+      }
+    }
+
+    let client: any StorageControlProtocol = mock
+    let request = RewriteObjectRequest().with {
+      $0.sourceBucket = "projects/_/buckets/src-bucket"
+      $0.sourceObject = "src-obj"
+      $0.destinationBucket = "projects/_/buckets/dest-bucket"
+      $0.destinationName = "dest-obj"
+    }
+    let result = try await client.rewriteObjectUntilDone(request: request)
+    #expect(result == expectedObject)
+  }
+
+  @Test func rewriteObjectUntilDoneMultiStepAndProgress() async throws {
+    let mock = MockStorageControl()
+    let expectedObject = Object().with {
+      $0.bucket = "projects/_/buckets/dest-bucket"
+      $0.name = "dest-obj"
+      $0.size = 3000
+    }
+    let receivedTokens = Mutex<[String]>([])
+    mock.rewriteObjectHandler = { req, opts in
+      #expect(req.sourceBucket == "projects/_/buckets/src-bucket")
+      #expect(req.destinationName == "dest-obj")
+      #expect(opts.headers["x-custom"] == "test-val")
+      receivedTokens.withLock { $0.append(req.rewriteToken) }
+      switch req.rewriteToken {
+      case "":
+        return RewriteResponse().with {
+          $0.done = false
+          $0.totalBytesRewritten = 1000
+          $0.objectSize = 3000
+          $0.rewriteToken = "token-1"
+        }
+      case "token-1":
+        return RewriteResponse().with {
+          $0.done = false
+          $0.totalBytesRewritten = 2000
+          $0.objectSize = 3000
+          $0.rewriteToken = "token-2"
+        }
+      case "token-2":
+        return RewriteResponse().with {
+          $0.done = true
+          $0.totalBytesRewritten = 3000
+          $0.objectSize = 3000
+          $0.resource = expectedObject
+        }
+      default:
+        Issue.record("Unexpected rewriteToken: \(req.rewriteToken)")
+        throw GoogleGax.RequestError.unimplemented
+      }
+    }
+
+    let client: any StorageControlProtocol = mock
+    let request = RewriteObjectRequest().with {
+      $0.sourceBucket = "projects/_/buckets/src-bucket"
+      $0.sourceObject = "src-obj"
+      $0.destinationBucket = "projects/_/buckets/dest-bucket"
+      $0.destinationName = "dest-obj"
+    }
+    var options = GoogleGax.RequestOptions()
+    options.headers["x-custom"] = "test-val"
+
+    let progressBytes = Mutex<[Int64]>([])
+    let result = try await client.rewriteObjectUntilDone(
+      request: request,
+      options: options
+    ) { response in
+      progressBytes.withLock { $0.append(response.totalBytesRewritten) }
+    }
+
+    #expect(result == expectedObject)
+    #expect(receivedTokens.withLock { $0 } == ["", "token-1", "token-2"])
+    #expect(progressBytes.withLock { $0 } == [1000, 2000, 3000])
+  }
+
+  @Test func rewriteObjectProgressSequence() async throws {
+    let mock = MockStorageControl()
+    let expectedObject = Object().with { $0.name = "dest-obj" }
+    mock.rewriteObjectHandler = { req, _ in
+      if req.rewriteToken.isEmpty {
+        return RewriteResponse().with {
+          $0.done = false
+          $0.totalBytesRewritten = 512
+          $0.objectSize = 1024
+          $0.rewriteToken = "next-token"
+        }
+      } else {
+        #expect(req.rewriteToken == "next-token")
+        return RewriteResponse().with {
+          $0.done = true
+          $0.totalBytesRewritten = 1024
+          $0.objectSize = 1024
+          $0.resource = expectedObject
+        }
+      }
+    }
+
+    let client: any StorageControlProtocol = mock
+    let sequence = client.rewriteObjectProgress(
+      request: .init().with { $0.destinationName = "dest-obj" })
+    var responses: [RewriteResponse] = []
+    for try await response in sequence {
+      responses.append(response)
+    }
+    #expect(responses.count == 2)
+    #expect(!responses[0].done)
+    #expect(responses[0].totalBytesRewritten == 512)
+    #expect(responses[1].done)
+    #expect(responses[1].resource == expectedObject)
+  }
+
+  @MainActor
+  struct RewriteProgressModel {
+    let client: any StorageControlProtocol
+
+    func streamRewriteInBackground() -> Task<[Int64], any Swift.Error> {
+      let progress = client.rewriteObjectProgress(
+        request: .init().with { $0.destinationName = "dest-obj" })
+      return Task.detached {
+        var bytes: [Int64] = []
+        for try await step in progress {
+          bytes.append(step.totalBytesRewritten)
+        }
+        return bytes
+      }
+    }
+  }
+
+  @Test func rewriteObjectProgressStreamedInDetachedTaskFromMainActor() async throws {
+    let mock = MockStorageControl()
+    mock.rewriteObjectHandler = { req, _ in
+      if req.rewriteToken.isEmpty {
+        return RewriteResponse().with {
+          $0.done = false
+          $0.totalBytesRewritten = 100
+          $0.objectSize = 200
+          $0.rewriteToken = "t1"
+        }
+      } else {
+        return RewriteResponse().with {
+          $0.done = true
+          $0.totalBytesRewritten = 200
+          $0.objectSize = 200
+          $0.resource = Object().with { $0.name = "dest-obj" }
+        }
+      }
+    }
+
+    let model = RewriteProgressModel(client: mock)
+    let task = await model.streamRewriteInBackground()
+    let bytes = try await task.value
+    #expect(bytes == [100, 200])
+  }
+
+  @Test func rewriteObjectUntilDoneErrorPropagation() async throws {
+    let mock = MockStorageControl()
+    let callCount = Mutex(0)
+    mock.rewriteObjectHandler = { req, _ in
+      let current = callCount.withLock {
+        $0 += 1
+        return $0
+      }
+      if current == 1 {
+        return RewriteResponse().with {
+          $0.done = false
+          $0.rewriteToken = "token-1"
+        }
+      }
+      throw GoogleGax.RequestError.unimplemented
+    }
+
+    let client: any StorageControlProtocol = mock
+    await #expect(throws: GoogleGax.RequestError.self) {
+      _ = try await client.rewriteObjectUntilDone(request: .init())
+    }
+    #expect(callCount.withLock { $0 } == 2)
+  }
+
+  @Test func rewriteObjectUntilDoneMissingResourceThrowsMalformedResponse() async throws {
+    let mock = MockStorageControl()
+    mock.rewriteObjectHandler = { _, _ in
+      RewriteResponse().with {
+        $0.done = true
+        $0.resource = nil
+      }
+    }
+
+    let client: any StorageControlProtocol = mock
+    await #expect {
+      _ = try await client.rewriteObjectUntilDone(request: .init())
+    } throws: { error in
+      guard case GoogleGax.RequestError.malformedResponse = error else {
+        return false
+      }
+      return true
+    }
+  }
+
+  @Test func rewriteObjectEmptyTokenWhenNotDoneThrowsMalformedResponse() async throws {
+    let mock = MockStorageControl()
+    mock.rewriteObjectHandler = { _, _ in
+      RewriteResponse().with {
+        $0.done = false
+        $0.rewriteToken = ""
+      }
+    }
+
+    let client: any StorageControlProtocol = mock
+    await #expect {
+      _ = try await client.rewriteObjectUntilDone(request: .init())
+    } throws: { error in
+      guard case GoogleGax.RequestError.malformedResponse = error else {
+        return false
+      }
+      return true
+    }
   }
 }
