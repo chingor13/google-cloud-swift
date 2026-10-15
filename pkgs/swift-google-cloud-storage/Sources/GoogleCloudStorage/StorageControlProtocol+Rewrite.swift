@@ -115,19 +115,19 @@ struct RewriteObjectSequence: AsyncSequence, Sendable {
         return nil
       }
 
+      isDone = true
       let response = try await rewriteRpc(currentRequest)
       if response.done {
-        isDone = true
         return response
       }
 
       guard !response.rewriteToken.isEmpty else {
-        isDone = true
         throw GoogleGax.RequestError.malformedResponse(
           "RewriteObject in progress (done == false), but rewriteToken was empty.")
       }
 
       currentRequest.rewriteToken = response.rewriteToken
+      isDone = false
       return response
     }
   }

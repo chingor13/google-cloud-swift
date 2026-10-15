@@ -499,4 +499,24 @@ import Testing
       return true
     }
   }
+
+  @Test func rewriteObjectProgressIteratorReturnsNilAfterError() async throws {
+    let mock = MockStorageControl()
+    let callCount = Mutex(0)
+    mock.rewriteObjectHandler = { _, _ in
+      callCount.withLock { $0 += 1 }
+      throw GoogleGax.RequestError.unimplemented
+    }
+
+    let client: any StorageControlProtocol = mock
+    let sequence = client.rewriteObjectProgress(request: .init())
+    var iterator = sequence.makeAsyncIterator()
+
+    await #expect(throws: GoogleGax.RequestError.self) {
+      _ = try await iterator.next(isolation: #isolation)
+    }
+    let subsequent = try await iterator.next(isolation: #isolation)
+    #expect(subsequent == nil)
+    #expect(callCount.withLock { $0 } == 1)
+  }
 }
